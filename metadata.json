@@ -1,0 +1,7 @@
+{
+  "name": "HindiPath: FCPS Credit Prep",
+  "description": "A parent-led Hindi learning platform designed for FCPS World Language credit achievement. Features personalized study plans, AI-driven handwriting evaluation, and gamified offline activities.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
