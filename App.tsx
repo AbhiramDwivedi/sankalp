@@ -16,12 +16,13 @@ import { FlashcardsLibraryView } from './components/pages/FlashcardsLibraryView'
 import { DeckRunner } from './components/flashcards/DeckRunner';
 import { PrintSheet } from './components/flashcards/PrintSheet';
 import { TopicPackView } from './components/topic/TopicPackView';
+import { LandingView } from './components/pages/LandingView';
 import { TOPIC_PACKS_BY_ID } from './content';
 import { CAPSTONES_BY_ID } from './content/capstones';
 import { DECKS_BY_ID } from './content/flashcards';
 import type { Deck } from './content/schema';
 import { studyPlanForLevel } from './content/studyPlans';
-import { Search, PlusCircle, GraduationCap, CheckCircle2, Info } from 'lucide-react';
+import { GraduationCap, Info } from 'lucide-react';
 
 const APP_STORAGE_KEY = 'sankalpa_hindi_profiles';
 const ACTIVE_PROFILE_KEY = 'sankalpa_active_id';
@@ -198,95 +199,29 @@ const App: React.FC = () => {
     updateActiveProfile((p) => ({ ...p, selectedStudyPlanId: planId }));
   };
 
-  // ---- Profile picker (no active profile) ----
+  // ---- Landing page (no active profile) ----
   if (!activeId || !profile) {
-    const filtered = profiles.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm.toLowerCase()),
-    );
+    const handleSelectProfile = (id: string) => {
+      setActiveId(id);
+      setActiveTab('dashboard');
+      localStorage.setItem(ACTIVE_PROFILE_KEY, id);
+    };
+
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50/30 to-white flex items-center justify-center p-6">
-        <div className="max-w-4xl w-full space-y-10 animate-in fade-in zoom-in duration-700">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-orange-600 rounded-[1.5rem] flex items-center justify-center text-white font-black text-3xl shadow-2xl shadow-orange-200">
-                स
-              </div>
-              <div>
-                <h1 className="text-3xl font-black text-slate-900 tracking-tight">Sankalp Hindi</h1>
-                <p className="text-slate-500 font-semibold italic">
-                  FCPS Credit Prep · Choose a student to begin
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => setShowOnboarding(true)}
-              className="bg-orange-600 hover:bg-orange-700 text-white font-bold px-6 py-4 rounded-2xl flex items-center gap-2 shadow-lg shadow-orange-200 transition-all"
-            >
-              <PlusCircle size={20} /> Add Student
-            </button>
-          </div>
-
-          <div className="bg-white rounded-[3rem] shadow-2xl p-10 border border-slate-100">
-            <div className="relative mb-10">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300" size={24} />
-              <input
-                type="text"
-                placeholder="Find student..."
-                className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-200 rounded-3xl outline-none focus:ring-4 focus:ring-orange-100 focus:border-orange-500 transition-all text-xl font-bold"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6 max-h-[50vh] overflow-y-auto custom-scrollbar pr-4">
-              {filtered.map((p) => (
-                <div
-                  key={p.id}
-                  onClick={() => {
-                    setActiveId(p.id);
-                    setActiveTab('dashboard');
-                    localStorage.setItem(ACTIVE_PROFILE_KEY, p.id);
-                  }}
-                  className="flex items-center justify-between p-6 bg-white border-2 border-slate-100 hover:border-orange-500 rounded-[2rem] cursor-pointer transition-all group shadow-sm hover:shadow-xl hover:-translate-y-1"
-                >
-                  <div className="flex items-center gap-5">
-                    <div className="w-16 h-16 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center font-black text-2xl group-hover:bg-orange-600 group-hover:text-white transition-all shadow-inner">
-                      {p.name[0]}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-black text-slate-800">{p.name}</h3>
-                      <p className="text-sm text-slate-400 font-bold uppercase tracking-widest">
-                        {p.currentLevel}
-                      </p>
-                      <p className="text-xs font-semibold text-orange-600 mt-1">
-                        {(p.completedTopicIds || []).length} / 26 packs · {(p.completedCapstoneIds || []).length} / 10 capstones
-                      </p>
-                    </div>
-                  </div>
-                  {(p.completedTopicIds?.length || 0) > 0 && (
-                    <CheckCircle2 size={20} className="text-emerald-500 shrink-0" />
-                  )}
-                </div>
-              ))}
-              {profiles.length === 0 && (
-                <div className="col-span-2 py-20 text-center space-y-4">
-                  <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-slate-300">
-                    <GraduationCap size={40} />
-                  </div>
-                  <p className="text-slate-400 font-bold italic">
-                    No students yet. Click "Add Student" to begin.
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+      <>
+        <LandingView
+          profiles={profiles}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          onSelectProfile={handleSelectProfile}
+          onAddStudent={() => setShowOnboarding(true)}
+        />
         {showOnboarding && (
           <div className="fixed inset-0 z-[100]">
             <Onboarding onComplete={handleOnboarding} />
           </div>
         )}
-      </div>
+      </>
     );
   }
 
@@ -359,12 +294,16 @@ const App: React.FC = () => {
     );
   }
 
-  // D) First-run explainer
+  // D) First-run explainer — dismissed by the CTA inside the view OR by
+  // clicking any sidebar tab (otherwise the nav appears unresponsive).
   if (showHowThisWorks) {
     return (
       <Layout
         activeTab={activeTab}
-        setActiveTab={(t) => setActiveTab(t as Tab)}
+        setActiveTab={(t) => {
+          markHowThisWorksSeen();
+          setActiveTab(t as Tab);
+        }}
         brandingName="सङ्कल्प"
         onSwitch={handleSwitchStudent}
       >

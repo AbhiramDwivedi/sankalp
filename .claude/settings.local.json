@@ -17,7 +17,10 @@
       "Bash(npx tsc *)",
       "Bash(npx tsx *)",
       "Bash(git commit *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3002/)",
+      "Bash(curl -s http://localhost:3002/App.tsx)"
     ]
   }
 }

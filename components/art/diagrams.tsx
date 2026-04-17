@@ -85,50 +85,69 @@ const LADDER_STEPS: Array<{ bm: StampBenchmark; actfl: string; credit: 0 | 1 | 2
 ];
 
 export const RubricLadderDiagram: React.FC<RubricLadderProps> = ({ highlight = 5, className = '' }) => {
-  const stepH = 40;
+  const stepH = 52;
   const totalH = stepH * LADDER_STEPS.length + 100;
-  const stepW = 60;
+  const stepW = 210;
 
   return (
     <svg viewBox={`0 0 760 ${totalH}`} className={`w-full ${className}`} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="STAMP benchmark ladder">
       {LADDER_STEPS.map((step, i) => {
         const y = totalH - 60 - (i + 1) * stepH;
-        const w = stepW + i * 70;
+        const w = stepW + i * 48;
         const isTarget = step.bm === highlight;
         const fill = step.credit === 0 ? '#E2E8F0' : step.credit === 1 ? '#FEF3C7' : step.credit === 2 ? '#FED7AA' : '#BBF7D0';
         const stroke = isTarget ? '#EA580C' : '#CBD5E1';
         const textColor = isTarget ? '#9A3412' : '#334155';
+        const rightX = 40 + w + 14;
         return (
           <g key={step.bm}>
-            <rect x="40" y={y} width={w} height={stepH - 6} rx="6" fill={fill} stroke={stroke} strokeWidth={isTarget ? 3 : 1} />
-            <text x="54" y={y + 24} fontSize="14" fontWeight="800" fill={textColor}>
+            <rect x="40" y={y} width={w} height={stepH - 8} rx="8" fill={fill} stroke={stroke} strokeWidth={isTarget ? 3 : 1} />
+            <text x="54" y={y + 21} fontSize="14" fontWeight="800" fill={textColor}>
               B{step.bm}
             </text>
-            <text x="86" y={y + 24} fontSize="12" fontWeight="700" fill={textColor}>
+            <text x="86" y={y + 21} fontSize="12" fontWeight="700" fill={textColor}>
               {step.actfl}
             </text>
-            <text x={w + 50} y={y + 24} fontSize="11" fill="#475569" fontStyle="italic">
+
+            {/* Short description: sub-text inside the bar */}
+            <text
+              x="86"
+              y={y + 38}
+              fontSize="10"
+              fontStyle="italic"
+              fill={textColor}
+              opacity="0.75"
+            >
               {step.short}
             </text>
-            <g transform={`translate(${w + 48}, ${y - 2})`}>
+
+            {/* Credit dots: small chip to the right of the bar */}
+            <g transform={`translate(${rightX}, ${y + 22})`}>
               {[0, 1, 2].map((n) => (
                 <circle
                   key={n}
-                  cx={n * 14}
-                  cy={stepH - 16}
-                  r="5"
+                  cx={n * 11}
+                  cy={0}
+                  r="4"
                   fill={n < step.credit ? '#F59E0B' : 'none'}
                   stroke={n < step.credit ? '#F59E0B' : '#CBD5E1'}
-                  strokeWidth="1.5"
+                  strokeWidth="1.3"
                 />
               ))}
             </g>
+
+            {/* Target callout: inside the highlighted bar, right-aligned */}
             {isTarget && (
-              <g>
-                <text x={w + 60} y={y + 20} fontSize="11" fontWeight="900" fill="#EA580C">
-                  🎯 3 credits — TARGET
-                </text>
-              </g>
+              <text
+                x={40 + w - 12}
+                y={y + 21}
+                textAnchor="end"
+                fontSize="11"
+                fontWeight="900"
+                fill="#EA580C"
+              >
+                🎯 3 credits — TARGET
+              </text>
             )}
           </g>
         );
