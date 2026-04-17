@@ -22,11 +22,46 @@ Each item flows: **implementer → reviewer → (fixer if needed) → merge**. E
 1. `git checkout main && git pull --rebase origin main` — pick up manual edits to backlog, AGENT_LOG, or user's own work.
 2. Read this file. Pick up to **N unchecked items** (N from step 0) that satisfy: (a) prereqs met, (b) mutually independent (no shared files — check each brief's files against the others), (c) Tier 0 done before any product tier.
 3. **For each item, in parallel** (one message with up to N `Agent` tool calls per phase):
-   - **Phase A — Implementer subagent**: brief = the item text from this file + the Invariants section. Creates `auto/{item-id}` branch from main (e.g. `auto/0.1-check-script`), implements, runs the full gate, commits, pushes the branch. Returns: `{branch, filesChanged[], gateResults, blockers[]}`. If blockers are logged: stop for this item, log in AGENT_LOG, leave the box unchecked.
+
+   **Worktree isolation — REQUIRED when N ≥ 2.** Parallel implementers in the same working tree trample each other's untracked files and force recovery via stashes (observed in fire #2; wall-clock was no better than serial). Before launching parallel implementers, the parent creates a git worktree per item:
+
+   ```
+   # Parent runs, BEFORE launching implementer subagents in parallel:
+   mkdir -p C:\sw\sankalp-worktrees
+   git worktree add C:\sw\sankalp-worktrees\{item-id} -b auto/{item-id} origin/main
+   # Windows: junction node_modules so deps are shared with the main repo (no reinstall):
+   cmd //c "mklink /J C:\sw\sankalp-worktrees\{item-id}\node_modules C:\sw\sankalp\node_modules"
+   # Also junction .git/hooks so the pre-commit hook from 0.7 is active in the worktree:
+   # (actually git worktrees share hooks via ../../.git/hooks automatically — verify with `ls .git`)
+   ```
+
+   Each implementer is given its own worktree path in its brief and operates ONLY there. Parent's main repo checkout is untouched during implementer runs. After Phase D merge, parent removes the worktree: `git worktree remove C:\sw\sankalp-worktrees\{item-id}` and deletes the junction if still present.
+
+   For N = 1 (single-item fire), worktree is optional — the main repo is fine since there's no contention.
+
+   - **Phase A — Implementer subagent**: brief = the item text from this file + the Invariants section + the worktree path (`C:\sw\sankalp-worktrees\{item-id}`). The implementer cds into its worktree, implements, runs the full gate (inside the worktree), commits on the already-checked-out `auto/{item-id}` branch, pushes. Returns: `{branch, worktreePath, filesChanged[], gateResults, blockers[]}`. If blockers logged: stop for this item, log in AGENT_LOG, leave the box unchecked. Parent will clean up the worktree after review/merge.
    - **Phase B — Reviewer subagent** (fresh context, blind to implementer's reasoning): brief = item text + Invariants + the full diff (`git diff main...auto/{item-id}`). Checks: (1) Done-when criteria objectively met? (2) Do-not-touch boundaries respected? (3) Invariants respected? (4) No dead code, no scope creep, no unjustified deps? (5) If the item required tests/visual goldens, do they exist and are they meaningful? Returns: `{verdict: "approve" | "request_changes", comments: [{file, line, severity: "blocker"|"nit", message}]}`. Nits are advisory only — only `blocker` comments gate the merge.
    - **Phase C — (if request_changes) Fixer subagent**: brief = the review comments + the item brief + the branch. Addresses each blocker, commits on the same branch, pushes. Returns summary of fixes.
    - **Re-review**: go back to Phase B on the updated branch. Max 2 review cycles total. If the second review still has blockers: open the PR in draft state with review comments as the PR body, leave the box unchecked, log "needs human review: {link}" in AGENT_LOG.
-4. **Merge immediately on approve** — do NOT defer merges. Parent does: `git fetch origin && git checkout auto/{item-id} && git rebase origin/main` (final rebase in case main moved during review). If rebase succeeds clean: `gh pr create` with item id in title if not open, then `gh pr merge --squash --delete-branch`. Check the backlog box with commit SHA + PR number. Append an AGENT_LOG entry with `[implementer summary, review verdict, merge SHA]`. If the final rebase has conflicts: leave the PR open, log "rebase conflict — needs human attention: {PR link}" in AGENT_LOG.
+4. **Merge immediately on approve** — do NOT defer merges. Parent does the final rebase in the worktree (or main repo if no worktree was used):
+
+   ```
+   cd C:\sw\sankalp-worktrees\{item-id}   # or main repo if N was 1
+   git fetch origin
+   git rebase origin/main                  # final rebase in case main moved during review
+   git push --force-with-lease origin auto/{item-id}   # if rebase moved commits
+   ```
+
+   If rebase succeeds clean: `gh pr create` with item id in title if not open, then `gh pr merge --squash --delete-branch`. Check the backlog box with commit SHA + PR number. Append an AGENT_LOG entry with `[implementer summary, review verdict, merge SHA]`. Then clean up the worktree:
+
+   ```
+   cd C:\sw\sankalp
+   git worktree remove C:\sw\sankalp-worktrees\{item-id}
+   # Remove the node_modules junction if `git worktree remove` left it:
+   cmd //c "rmdir C:\sw\sankalp-worktrees\{item-id}\node_modules"  # if the junction survived
+   ```
+
+   If the final rebase has conflicts: leave the PR open, log "rebase conflict — needs human attention: {PR link}" in AGENT_LOG. Leave the worktree in place so the user can inspect or continue.
 
    **Hard rule**: no fire exits with an approved-but-unmerged PR. If a PR is approved, it gets merged in the same fire, period. The only reasons a PR stays open at fire exit are: unresolved blocker review comments, CI red, or unresolvable rebase conflicts — all of which get explicit AGENT_LOG entries so the user sees them.
 5. On any failure: the failing item's branch stays on remote for human inspection. Log it in AGENT_LOG with the branch name and the failure phase.
@@ -38,23 +73,28 @@ Each item flows: **implementer → reviewer → (fixer if needed) → merge**. E
 ```
 You are implementing backlog item {item id}. Item brief follows, then invariants.
 
+You have been given a dedicated git worktree at:
+  WORKTREE: {worktree path, e.g. C:\sw\sankalp-worktrees\{item-id}}
+
+This worktree is already on branch `auto/{item-id}` based on latest origin/main. Other subagents may be running in parallel in their own worktrees — do NOT cd outside your assigned worktree. Do NOT modify the main repo at C:\sw\sankalp.
+
 {full item text}
 
 INVARIANTS:
 {invariants section pasted verbatim}
 
 STEPS:
-1. git checkout main && git pull --rebase origin main   # always start fresh
-2. git checkout -b auto/{item-id}
+1. cd {worktree path}          # NEVER leave this directory
+2. Confirm: git branch --show-current should be auto/{item-id}; git status should be clean.
 3. Implement the item. Only touch files the brief authorizes.
-4. Run the gate: npx tsc --noEmit && npx tsx scripts/validate-packs.ts && npx tsx scripts/build-flashcards.ts && npx tsx scripts/credit-audit.ts. After 0.1 ships: npm run check. After 0.2: also npm run smoke. After 0.3: also npm run visual.
+4. Run the gate: `npm run check` (available after 0.1 ships — it runs tsc, validate-packs, build-flashcards, credit-audit, and smoke post-0.2, and visual post-0.3). Before 0.1 shipped, run the stages manually. Your worktree's `node_modules` is a junction to the main repo's, so all scripts work.
 5. If gate red: report the exact failure and stop. Do NOT commit.
 6. If gate green: git add only your intended files + any regenerated outputs. git commit with a single-line conventional message referencing the item id.
-7. BEFORE pushing: git fetch origin && git rebase origin/main. If conflicts, resolve only if trivial (imports, lockfiles); otherwise abort rebase, report as a blocker. This catches merge conflicts EARLY while the context is still yours.
+7. BEFORE pushing: git fetch origin && git rebase origin/main. If conflicts, resolve only if trivial (imports, lockfiles, adjacent package.json additions); otherwise abort rebase, report as a blocker.
 8. git push -u origin auto/{item-id}
-9. Return: branch name, list of files changed, gate results, any blockers encountered.
+9. Return: branch name, worktree path, list of files changed, gate results, any blockers encountered.
 
-Do NOT open a PR. Do NOT merge. Do NOT change scope. If the brief seems wrong, report it as a blocker.
+Do NOT open a PR. Do NOT merge. Do NOT change scope. Do NOT touch the main repo at C:\sw\sankalp. If the brief seems wrong, report it as a blocker.
 ```
 
 ### Reviewer brief template (parent fills in)
