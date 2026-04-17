@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Sparkles, CheckCircle2, Circle, BookOpen, Info } from 'lucide-react';
+import { Sparkles, CheckCircle2, Circle, BookOpen, Info, Eye, EyeOff } from 'lucide-react';
 import type { Level, TopicPack } from '../../content/schema';
 import { TOPIC_PACKS_BY_LEVEL } from '../../content';
+import { packsKnownAtLevel } from '../../content/studyPlans';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
 import { Callout } from '../ui/Callout';
@@ -9,6 +10,7 @@ import { PackHeroArt } from '../art/PackHeroArt';
 
 interface LibraryViewProps {
   completedIds: string[];
+  studentLevel?: string;
   onOpenTopic: (pack: TopicPack) => void;
   onOpenHowThisWorks: () => void;
 }
@@ -21,15 +23,19 @@ const levelMeta: Record<Level, { title: string; subtitle: string; tone: string }
 
 export const LibraryView: React.FC<LibraryViewProps> = ({
   completedIds,
+  studentLevel,
   onOpenTopic,
   onOpenHowThisWorks,
 }) => {
   const [filter, setFilter] = useState<'all' | 1 | 2 | 3>('all');
+  const [showKnown, setShowKnown] = useState(false);
 
+  const knownSet = new Set(packsKnownAtLevel(studentLevel));
   const levels: Level[] = filter === 'all' ? [1, 2, 3] : [filter];
 
   const totalPacks = TOPIC_PACKS_BY_LEVEL[1].length + TOPIC_PACKS_BY_LEVEL[2].length + TOPIC_PACKS_BY_LEVEL[3].length;
   const completedCount = completedIds.length;
+  const hiddenCount = knownSet.size;
 
   return (
     <div className="space-y-10 animate-in fade-in duration-500">
@@ -100,9 +106,34 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
         </div>
       </section>
 
+      {hiddenCount > 0 && (
+        <div className="flex items-center justify-between gap-4 bg-emerald-50 border-2 border-emerald-100 rounded-2xl px-5 py-4">
+          <div className="flex items-start gap-3 min-w-0">
+            <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-black text-emerald-900">
+                {hiddenCount} {hiddenCount === 1 ? 'pack is' : 'packs are'} hidden — already at your level
+              </p>
+              <p className="text-xs text-emerald-700 font-medium italic">
+                Based on {studentLevel || 'your starting level'}. You can always bring them back.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setShowKnown((v) => !v)}
+            className="shrink-0 flex items-center gap-2 px-4 py-2 bg-white border-2 border-emerald-200 hover:border-emerald-400 rounded-xl font-black text-xs uppercase tracking-widest text-emerald-800 transition-colors"
+          >
+            {showKnown ? <EyeOff size={14} /> : <Eye size={14} />}
+            {showKnown ? 'Hide again' : 'Show anyway'}
+          </button>
+        </div>
+      )}
+
       {levels.map((lvl) => {
         const meta = levelMeta[lvl];
-        const packs = TOPIC_PACKS_BY_LEVEL[lvl];
+        const packsAll = TOPIC_PACKS_BY_LEVEL[lvl];
+        const packs = showKnown ? packsAll : packsAll.filter((p) => !knownSet.has(p.id));
+        if (packs.length === 0) return null;
         return (
           <section key={lvl} className="space-y-6">
             <div>
@@ -118,6 +149,7 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
                   key={pack.id}
                   pack={pack}
                   completed={completedIds.includes(pack.id)}
+                  known={knownSet.has(pack.id)}
                   onClick={() => onOpenTopic(pack)}
                 />
               ))}
@@ -132,15 +164,18 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
 interface TopicCardProps {
   pack: TopicPack;
   completed: boolean;
+  known?: boolean;
   onClick: () => void;
 }
 
-const TopicCard: React.FC<TopicCardProps> = ({ pack, completed, onClick }) => {
+const TopicCard: React.FC<TopicCardProps> = ({ pack, completed, known, onClick }) => {
   const tokens = tokensFor(pack.themeGroup);
   return (
     <button
       onClick={onClick}
-      className="group text-left bg-white border-2 border-slate-100 hover:border-orange-400 rounded-[1.75rem] overflow-hidden shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5"
+      className={`group text-left bg-white border-2 rounded-[1.75rem] overflow-hidden shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 ${
+        known ? 'border-emerald-200 opacity-75 hover:opacity-100' : 'border-slate-100 hover:border-orange-400'
+      }`}
     >
       <div className="aspect-[2/1] relative overflow-hidden">
         <PackHeroArt pack={pack} />

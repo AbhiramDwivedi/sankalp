@@ -1,6 +1,7 @@
-import React from 'react';
-import { CheckCircle2, Clock, Flag, Star, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { CheckCircle2, Clock, Flag, Star, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { CAPSTONES, CAPSTONES_BY_TIER } from '../../content/capstones';
+import { capstonesKnownAtLevel } from '../../content/studyPlans';
 import type { Capstone } from '../../content/schema';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
@@ -8,16 +9,24 @@ import { CapstoneHeroArt } from '../art/CapstoneHeroArt';
 
 interface CapstonesLibraryViewProps {
   completedIds: string[];
+  studentLevel?: string;
   onOpenCapstone: (capstoneId: string) => void;
 }
 
 export const CapstonesLibraryView: React.FC<CapstonesLibraryViewProps> = ({
   completedIds,
+  studentLevel,
   onOpenCapstone,
 }) => {
+  const [showKnown, setShowKnown] = useState(false);
+  const knownSet = new Set(capstonesKnownAtLevel(studentLevel));
   const completedSet = new Set(completedIds);
   const total = CAPSTONES.length;
   const done = CAPSTONES.filter((c) => completedSet.has(c.id)).length;
+  const hiddenCount = knownSet.size;
+
+  const filterKnown = (list: Capstone[]) =>
+    showKnown ? list : list.filter((c) => !knownSet.has(c.id));
 
   return (
     <div className="space-y-12 animate-in fade-in duration-500">
@@ -48,12 +57,36 @@ export const CapstonesLibraryView: React.FC<CapstonesLibraryViewProps> = ({
         </div>
       </div>
 
+      {hiddenCount > 0 && (
+        <div className="flex items-center justify-between gap-4 bg-emerald-50 border-2 border-emerald-100 rounded-2xl px-5 py-4">
+          <div className="flex items-start gap-3 min-w-0">
+            <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-black text-emerald-900">
+                {hiddenCount} {hiddenCount === 1 ? 'capstone is' : 'capstones are'} hidden — at or below your level
+              </p>
+              <p className="text-xs text-emerald-700 font-medium italic">
+                Based on {studentLevel || 'your level'}. Push-tier capstones always show.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setShowKnown((v) => !v)}
+            className="shrink-0 flex items-center gap-2 px-4 py-2 bg-white border-2 border-emerald-200 hover:border-emerald-400 rounded-xl font-black text-xs uppercase tracking-widest text-emerald-800 transition-colors"
+          >
+            {showKnown ? <EyeOff size={14} /> : <Eye size={14} />}
+            {showKnown ? 'Hide again' : 'Show anyway'}
+          </button>
+        </div>
+      )}
+
       <TierGroup
         label="Core tier"
         subtitle="Benchmark 5 target · 220–280 words · earn your 3 FCPS credits"
         icon={<Flag size={20} />}
-        capstones={CAPSTONES_BY_TIER.core}
+        capstones={filterKnown(CAPSTONES_BY_TIER.core)}
         completedSet={completedSet}
+        knownSet={knownSet}
         onOpenCapstone={onOpenCapstone}
       />
 
@@ -63,6 +96,7 @@ export const CapstonesLibraryView: React.FC<CapstonesLibraryViewProps> = ({
         icon={<Star size={20} />}
         capstones={CAPSTONES_BY_TIER.push}
         completedSet={completedSet}
+        knownSet={knownSet}
         onOpenCapstone={onOpenCapstone}
       />
     </div>
@@ -75,8 +109,9 @@ const TierGroup: React.FC<{
   icon: React.ReactNode;
   capstones: Capstone[];
   completedSet: Set<string>;
+  knownSet: Set<string>;
   onOpenCapstone: (id: string) => void;
-}> = ({ label, subtitle, icon, capstones, completedSet, onOpenCapstone }) => (
+}> = ({ label, subtitle, icon, capstones, completedSet, knownSet, onOpenCapstone }) => (
   <section className="space-y-5">
     <div className="flex items-center gap-4">
       <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center">
@@ -97,6 +132,7 @@ const TierGroup: React.FC<{
             key={c.id}
             capstone={c}
             done={completedSet.has(c.id)}
+            known={knownSet.has(c.id)}
             onClick={() => onOpenCapstone(c.id)}
           />
         ))}
@@ -105,16 +141,19 @@ const TierGroup: React.FC<{
   </section>
 );
 
-const CapstoneCard: React.FC<{ capstone: Capstone; done: boolean; onClick: () => void }> = ({
+const CapstoneCard: React.FC<{ capstone: Capstone; done: boolean; known?: boolean; onClick: () => void }> = ({
   capstone,
   done,
+  known,
   onClick,
 }) => {
   const tokens = tokensFor(capstone.themeGroup);
   return (
     <button
       onClick={onClick}
-      className="group text-left bg-white rounded-[2rem] border-2 border-slate-100 hover:border-orange-400 shadow-sm hover:shadow-xl overflow-hidden transition-all hover:-translate-y-1"
+      className={`group text-left bg-white rounded-[2rem] border-2 shadow-sm hover:shadow-xl overflow-hidden transition-all hover:-translate-y-1 ${
+        known ? 'border-emerald-200 opacity-75 hover:opacity-100' : 'border-slate-100 hover:border-orange-400'
+      }`}
     >
       <div className="aspect-[3/1] relative">
         <CapstoneHeroArt capstone={capstone} />

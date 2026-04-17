@@ -242,6 +242,7 @@ const App: React.FC = () => {
         <TopicPackView
           pack={openPack}
           aiEnabled={!!profile.aiAssessmentEnabled}
+          level={profile.currentLevel}
           onBack={() => setOpenPack(null)}
           onMarkComplete={handleMarkComplete}
           onEvaluation={handleAddEvaluation}
@@ -330,6 +331,7 @@ const App: React.FC = () => {
         return (
           <LibraryView
             completedIds={profile.completedTopicIds || []}
+            studentLevel={profile.currentLevel}
             onOpenTopic={(p) => openPackById(p.id)}
             onOpenHowThisWorks={() => setShowHowThisWorks(true)}
           />
@@ -338,6 +340,7 @@ const App: React.FC = () => {
         return (
           <CapstonesLibraryView
             completedIds={profile.completedCapstoneIds || []}
+            studentLevel={profile.currentLevel}
             onOpenCapstone={openCapstoneById}
           />
         );
@@ -355,6 +358,7 @@ const App: React.FC = () => {
           <FlashcardsLibraryView
             seenIds={profile.flashcardsSeen || []}
             masteredIds={profile.flashcardsMastered || []}
+            studentLevel={profile.currentLevel}
             onOpenDeck={openDeckById}
           />
         );

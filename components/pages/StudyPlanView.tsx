@@ -25,6 +25,7 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
     currentPlan,
     profile.completedTopicIds || [],
     profile.completedCapstoneIds || [],
+    profile.currentLevel,
   );
 
   return (

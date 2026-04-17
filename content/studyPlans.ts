@@ -239,6 +239,47 @@ export const STUDY_PLANS_BY_ID: Record<string, StudyPlan> = Object.fromEntries(
   STUDY_PLANS.map((p) => [p.id, p]),
 );
 
+// Packs a student at a given level is assumed to already know — these are
+// hidden from Library, skipped by planCursor, and excluded from "next pack"
+// surfacing. The student can always opt back in via the Library "show known"
+// toggle. Mapping is intentionally conservative: Novice Mid hides only the
+// four most-basic identity packs, and it ramps up from there.
+export const PACKS_KNOWN_AT_LEVEL: Record<string, string[]> = {
+  'Novice Low': [],
+  'Novice Mid': ['L1-01-greetings', 'L1-02-descriptions-feelings', 'L1-03-family', 'L1-04-clothing-colors'],
+  'Novice High': [...ALL_L1],
+  'Intermediate Low': [...ALL_L1],
+  'Intermediate Mid': [...ALL_L1, 'L2-01-daily-routine', 'L2-02-rooms-chores', 'L2-03-food'],
+  'Intermediate High': [...ALL_L1, ...ALL_L2.slice(0, 6)],
+};
+
+export function packsKnownAtLevel(level: string | undefined): string[] {
+  if (!level) return [];
+  return PACKS_KNOWN_AT_LEVEL[level] || [];
+}
+
+export function isPackKnownAtLevel(packId: string, level: string | undefined): boolean {
+  return packsKnownAtLevel(level).includes(packId);
+}
+
+// Capstones whose core tier sits at or below the student's declared level.
+// C01 (restaurant memory) and C02 (typical Saturday) are the gentlest core
+// capstones — Intermediate Mid+ students can skip them; Intermediate High
+// students can also skip C03/C04. The push tier (C06–C10) is never hidden.
+export const CAPSTONES_KNOWN_AT_LEVEL: Record<string, string[]> = {
+  'Novice Low': [],
+  'Novice Mid': [],
+  'Novice High': [],
+  'Intermediate Low': ['C01-restaurant-memory'],
+  'Intermediate Mid': ['C01-restaurant-memory', 'C02-typical-saturday'],
+  'Intermediate High': ['C01-restaurant-memory', 'C02-typical-saturday', 'C03-festival-weekend', 'C04-neighborhood-place'],
+};
+
+export function capstonesKnownAtLevel(level: string | undefined): string[] {
+  if (!level) return [];
+  return CAPSTONES_KNOWN_AT_LEVEL[level] || [];
+}
+
 export function studyPlanForLevel(level: string): StudyPlan {
   const hit = STUDY_PLANS.find((p) => p.forLevels.includes(level as StudyPlanLevelKey));
   return hit || PLAN_FOUNDATION;
@@ -259,13 +300,15 @@ export function planCursor(
   plan: StudyPlan,
   completedTopicIds: string[],
   completedCapstoneIds: string[] = [],
+  studentLevel?: string,
 ): {
   currentWeekIndex: number;
   nextPackId: string | null;
   upcomingCapstoneIds: string[];
   isAllDone: boolean;
 } {
-  const completedSet = new Set(completedTopicIds);
+  const knownSet = new Set(packsKnownAtLevel(studentLevel));
+  const completedSet = new Set([...completedTopicIds, ...knownSet]);
   const completedCapSet = new Set(completedCapstoneIds);
   for (const w of plan.weeks) {
     const nextPack = w.packs.find((pid) => !completedSet.has(pid));

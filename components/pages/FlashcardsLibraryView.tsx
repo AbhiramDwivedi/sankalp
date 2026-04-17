@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
-import { Layers, Shuffle, ArrowRight, Flag } from 'lucide-react';
+import { Layers, Shuffle, ArrowRight, Flag, CheckCircle2, Eye, EyeOff } from 'lucide-react';
 import type { Deck, DeckKind } from '../../content/schema';
 import { DECKS, DECKS_BY_KIND, totalCards, totalMustKnow, deckProgress } from '../../content/flashcards';
+import { packsKnownAtLevel } from '../../content/studyPlans';
 import { Badge } from '../ui/Badge';
 
 interface FlashcardsLibraryViewProps {
   seenIds: string[];
   masteredIds: string[];
+  studentLevel?: string;
   onOpenDeck: (deckId: string) => void;
+}
+
+// Pack-review decks are id'd as `deck-pack-<packId>`. Derive hidden deck ids
+// from the student's known-pack list so deck visibility stays in sync with
+// the Library.
+function hiddenDeckIdsForLevel(level: string | undefined): Set<string> {
+  return new Set(packsKnownAtLevel(level).map((pid) => `deck-pack-${pid}`));
 }
 
 const kindMeta: Record<DeckKind, { label: string; color: string; order: number }> = {
@@ -22,14 +31,19 @@ const kindMeta: Record<DeckKind, { label: string; color: string; order: number }
 export const FlashcardsLibraryView: React.FC<FlashcardsLibraryViewProps> = ({
   seenIds,
   masteredIds,
+  studentLevel,
   onOpenDeck,
 }) => {
   const [filter, setFilter] = useState<DeckKind | 'all'>('all');
+  const [showKnown, setShowKnown] = useState(false);
 
   const seen = new Set<string>(seenIds);
   const mastered = new Set<string>(masteredIds);
+  const hiddenDeckSet = hiddenDeckIdsForLevel(studentLevel);
 
-  const filteredDecks = filter === 'all' ? DECKS : DECKS_BY_KIND[filter];
+  const baseDecks = filter === 'all' ? DECKS : DECKS_BY_KIND[filter];
+  const filteredDecks = showKnown ? baseDecks : baseDecks.filter((d) => !hiddenDeckSet.has(d.id));
+  const hiddenCount = DECKS.filter((d) => hiddenDeckSet.has(d.id)).length;
 
   // Sort by kind order then by title
   const sorted = [...filteredDecks].sort((a, b) => {
@@ -99,6 +113,29 @@ export const FlashcardsLibraryView: React.FC<FlashcardsLibraryViewProps> = ({
             </button>
           ))}
       </div>
+
+      {hiddenCount > 0 && (
+        <div className="flex items-center justify-between gap-4 bg-emerald-50 border-2 border-emerald-100 rounded-2xl px-5 py-4">
+          <div className="flex items-start gap-3 min-w-0">
+            <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-black text-emerald-900">
+                {hiddenCount} pack-review {hiddenCount === 1 ? 'deck is' : 'decks are'} hidden — already at your level
+              </p>
+              <p className="text-xs text-emerald-700 font-medium italic">
+                Based on {studentLevel || 'your level'}. Drill decks (connectors, muhavare, grammar, exam-prep) always show.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setShowKnown((v) => !v)}
+            className="shrink-0 flex items-center gap-2 px-4 py-2 bg-white border-2 border-emerald-200 hover:border-emerald-400 rounded-xl font-black text-xs uppercase tracking-widest text-emerald-800 transition-colors"
+          >
+            {showKnown ? <EyeOff size={14} /> : <Eye size={14} />}
+            {showKnown ? 'Hide again' : 'Show anyway'}
+          </button>
+        </div>
+      )}
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {sorted.map((d) => (

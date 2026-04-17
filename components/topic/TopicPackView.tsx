@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, Printer, Sparkles } from 'lucide-react';
 import type { TopicPack } from '../../content/schema';
 import type { EvaluationResult } from '../../types';
+import { ProficiencyLevel } from '../../types';
 import { HeroBanner } from './HeroBanner';
 import { WhyThisPack } from './WhyThisPack';
 import { LearningObjectives } from './LearningObjectives';
@@ -18,10 +19,13 @@ import { SelfCheckRubric } from './SelfCheckRubric';
 import { AiAssessmentPanel } from './AiAssessmentPanel';
 import { PaisleyDivider } from '../ui/PaisleyDivider';
 import { tokensFor } from '../ui/themeTokens';
+import { LevelLens } from './LevelLens';
+import { PackLevelIntro } from './PackLevelIntro';
 
 interface TopicPackViewProps {
   pack: TopicPack;
   aiEnabled?: boolean;
+  level?: ProficiencyLevel;
   onBack: () => void;
   onMarkComplete?: () => void;
   onEvaluation?: (result: EvaluationResult) => void;
@@ -30,6 +34,7 @@ interface TopicPackViewProps {
 export const TopicPackView: React.FC<TopicPackViewProps> = ({
   pack,
   aiEnabled = false,
+  level,
   onBack,
   onMarkComplete,
   onEvaluation,
@@ -68,41 +73,69 @@ export const TopicPackView: React.FC<TopicPackViewProps> = ({
 
       <HeroBanner pack={pack} />
 
+      <PackLevelIntro level={level} packTitleEnglish={pack.titleEnglish} />
+
       <WhyThisPack pack={pack} />
 
       <LearningObjectives objectives={pack.objectives} />
 
       <PaisleyDivider color={tokens.primaryHex} />
 
-      <VocabularyVault vocabulary={pack.vocabulary} note={pack.vocabularyNote} />
+      <LevelLens
+        tier="foundation"
+        level={level}
+        title="Vocabulary vault"
+        skimSummary={`${pack.vocabulary.length} words across ${new Set(pack.vocabulary.map(v => v.subgroup)).size} groups — expand if you want to verify.`}
+      >
+        <VocabularyVault vocabulary={pack.vocabulary} note={pack.vocabularyNote} />
+      </LevelLens>
 
       <PaisleyDivider color={tokens.primaryHex} />
 
-      <GrammarCornerstones grammar={pack.grammar} note={pack.grammarNote} />
+      <LevelLens tier="core" level={level} title="Grammar cornerstones">
+        <GrammarCornerstones grammar={pack.grammar} note={pack.grammarNote} />
+      </LevelLens>
 
       <PaisleyDivider color={tokens.primaryHex} />
 
-      <ConnectorBank connectors={pack.connectors} note={pack.connectorsNote} />
+      <LevelLens tier="core" level={level} title="Connector bank">
+        <ConnectorBank connectors={pack.connectors} note={pack.connectorsNote} />
+      </LevelLens>
 
       <PaisleyDivider color={tokens.primaryHex} />
 
-      <AnchorPassage passage={pack.anchor} note={pack.anchorNote} />
+      <LevelLens tier="core" level={level} title="Anchor passage">
+        <AnchorPassage passage={pack.anchor} note={pack.anchorNote} />
+      </LevelLens>
 
       <PaisleyDivider color={tokens.primaryHex} />
 
-      <ModelTexts texts={pack.modelTexts} note={pack.modelTextsNote} />
+      <LevelLens
+        tier="foundation"
+        level={level}
+        title="Model texts (email · sms · diary · letter)"
+        skimSummary="Four short registers of self-introduction — same facts, different politeness."
+      >
+        <ModelTexts texts={pack.modelTexts} note={pack.modelTextsNote} />
+      </LevelLens>
 
       <PaisleyDivider color={tokens.primaryHex} />
 
-      <CulturalInsights insights={pack.cultural} note={pack.culturalNote} />
+      <LevelLens tier="stretch" level={level} title="Cultural insights">
+        <CulturalInsights insights={pack.cultural} note={pack.culturalNote} />
+      </LevelLens>
 
       <PaisleyDivider color={tokens.primaryHex} />
 
-      <MuhavareCards muhavare={pack.muhavare} note={pack.muhavareNote} />
+      <LevelLens tier="stretch" level={level} title="Muhavare">
+        <MuhavareCards muhavare={pack.muhavare} note={pack.muhavareNote} />
+      </LevelLens>
 
       <PaisleyDivider color={tokens.primaryHex} />
 
-      <ModelEssays essays={pack.modelEssays} note={pack.modelEssaysNote} />
+      <LevelLens tier="core" level={level} title="Model essays">
+        <ModelEssays essays={pack.modelEssays} note={pack.modelEssaysNote} />
+      </LevelLens>
 
       <PaisleyDivider color={tokens.primaryHex} />
 
