@@ -12,17 +12,24 @@ Each item flows: **implementer → reviewer → (fixer if needed) → merge**. E
 
 ### Fire steps
 
+0. **Usage self-check** (always first). Proxies (no tool exposes my actual rate-limit remaining):
+   - How many fires have already run in this session? (≥ 2 → be conservative)
+   - How much conversation history sits behind this fire? (roughly, has there been a lot of tool output since the setup phase → be conservative)
+   - If any sense that usage is nearing 80% of a rate window: **run 1 batch of up to 2 items instead of the default**, and exit cleanly after that batch. Log the reduced-scope choice in AGENT_LOG.
+   - If unsure (no strong signal either way): default to **1 batch of up to 4 items**, exit after.
+   - Only do a SECOND batch of 4 if: (i) this is the first fire of the session OR very early in it AND (ii) batch 1 finished cleanly with no retries AND (iii) parent context still feels light. Second batch is the exception, not the norm.
+   - Better to err on small — the NEXT scheduled fire will take the unstarted items. Never try to push through an uncertain signal.
 1. `git checkout main && git pull --rebase origin main` — pick up manual edits to backlog, AGENT_LOG, or user's own work.
-2. Read this file. Pick up to **4 unchecked items** that satisfy: (a) prereqs met, (b) mutually independent (no shared files — check each brief's files against the others), (c) Tier 0 done before any product tier.
-3. **For each item, in parallel** (one message with up to 4 `Agent` tool calls per phase):
+2. Read this file. Pick up to **N unchecked items** (N from step 0) that satisfy: (a) prereqs met, (b) mutually independent (no shared files — check each brief's files against the others), (c) Tier 0 done before any product tier.
+3. **For each item, in parallel** (one message with up to N `Agent` tool calls per phase):
    - **Phase A — Implementer subagent**: brief = the item text from this file + the Invariants section. Creates `auto/{item-id}` branch from main (e.g. `auto/0.1-check-script`), implements, runs the full gate, commits, pushes the branch. Returns: `{branch, filesChanged[], gateResults, blockers[]}`. If blockers are logged: stop for this item, log in AGENT_LOG, leave the box unchecked.
    - **Phase B — Reviewer subagent** (fresh context, blind to implementer's reasoning): brief = item text + Invariants + the full diff (`git diff main...auto/{item-id}`). Checks: (1) Done-when criteria objectively met? (2) Do-not-touch boundaries respected? (3) Invariants respected? (4) No dead code, no scope creep, no unjustified deps? (5) If the item required tests/visual goldens, do they exist and are they meaningful? Returns: `{verdict: "approve" | "request_changes", comments: [{file, line, severity: "blocker"|"nit", message}]}`. Nits are advisory only — only `blocker` comments gate the merge.
    - **Phase C — (if request_changes) Fixer subagent**: brief = the review comments + the item brief + the branch. Addresses each blocker, commits on the same branch, pushes. Returns summary of fixes.
    - **Re-review**: go back to Phase B on the updated branch. Max 2 review cycles total. If the second review still has blockers: open the PR in draft state with review comments as the PR body, leave the box unchecked, log "needs human review: {link}" in AGENT_LOG.
 4. **Merge**: on approve, the parent does: `git fetch origin && git checkout auto/{item-id} && git rebase origin/main` (final rebase in case main moved during review). If rebase succeeds clean: `gh pr create` with item id in title if not open, then `gh pr merge --squash --delete-branch`. Check the backlog box with commit SHA + PR number. Append an AGENT_LOG entry with `[implementer summary, review verdict, merge SHA]`. If the final rebase has conflicts: leave the PR open, log "rebase conflict — needs human attention: {PR link}" in AGENT_LOG.
 5. On any failure: the failing item's branch stays on remote for human inspection. Log it in AGENT_LOG with the branch name and the failure phase.
-6. After all first-batch items finish: if parent context is still light and ≥4 more items are ready, do **one more batch of 4**. Otherwise commit + push any backlog/log updates to main and exit.
-7. Max 2 batches per fire. Hard stop.
+6. After the batch completes: per step 0's policy, usually exit. Only start a second batch if step 0's "second-batch exception" conditions all hold. Commit + push any BACKLOG/AGENT_LOG updates to main before exiting.
+7. Hard stop: 2 batches per fire maximum, but the DEFAULT is 1 batch. Err on the side of stopping early — stateless resumption means the next fire picks up cleanly.
 
 ### Implementer brief template (parent fills in)
 
