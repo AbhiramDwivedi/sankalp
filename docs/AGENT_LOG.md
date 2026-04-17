@@ -16,6 +16,25 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #0c (setup finalized, manual)
+**Items attempted**: BACKLOG protocol additions + cron recreation
+**Items completed**: 
+- Branch hygiene added to implementer + pre-merge steps (pull main → cut branch → rebase before push → rebase again before merge).
+- Tier 0.7 item added: husky pre-commit hook running `npm run check`.
+- Tier 0.8 item added: GitHub Actions CI (`ci.yml` for required checks + `guard.yml` as scope-creep detector for auto/* branches).
+- New "Standing authorizations" section at the top of BACKLOG.md, pairing with Invariants.
+- New local cron scheduled (id 14907011), prompt rewritten to defer fully to BACKLOG.md protocol (no conflicting directives). Cadence: 04:17, 10:17, 16:17, 22:17 EDT daily. First fire: today 16:17 EDT.
+**Items deferred**: none
+**Open questions for Abhiram**: none
+**Commits pushed**: `825ef53` (backlog protocol additions)
+**Notes**:
+- Option B (remote triggers) definitively not validated — two attempts, 8-minute waits, no observable remote execution. Reason undetermined; possibly an account-provisioning or environment-config issue outside my visibility. Falling back to Option A (local cron, session-only).
+- Local cron limitation: dies if this Claude Code session closes. If that happens, recovery is: user reopens Claude Code in C:\sw\sankalp, asks "resume the autonomous build cron". A new session will read this AGENT_LOG, see the setup state, and recreate the cron using the same prompt template.
+- User's recent pushes (`9457941` studyPlans rewrite, followed by manual work) confirmed on main. The stale do-not-touch language has been removed from BACKLOG.
+- User's added directives now encoded: branch hygiene (pull-main-first, rebase-before-push), defense-in-depth hooks (pre-commit + CI). Autonomy vs. safety balance: the reviewer agent + PR workflow + CI provides three independent layers of checks before any auto/* branch merges to main.
+
+---
+
 ## 2026-04-17 — Fire #0b (setup continued, manual)
 **Items attempted**: protocol revision + POC of remote-trigger path
 **Items completed**: BACKLOG.md protocol rewrite (branch → implementer → reviewer → fixer → PR merge), invariants updated, stale content/studyPlans.ts do-not-touch references removed (user pushed that work).
