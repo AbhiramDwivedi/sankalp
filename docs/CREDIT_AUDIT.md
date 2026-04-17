@@ -17,7 +17,7 @@ The courseware targets **STAMP Benchmark 5 (Intermediate Mid) on both Writing an
 
 The three rubric axes — **Text-Type, Language Control, Topic Coverage** — are encoded on every pack's `rationale.trains` and on every section's `TeacherNote.trains`, so the teacher can see which axis every piece of content serves.
 
-FCPS awards **3 World Language credits** at Benchmark 5. The exam vendor is Avant Assessment — STAMP 2S/WS, testing only **Writing and Speaking** — no reading or listening sections.
+FCPS awards **3 World Language credits** at Benchmark 5. The exam vendor is Avant Assessment - STAMP 2S/WS, testing only **Writing and Speaking** — no reading or listening sections.
 
 ## 2. Topic coverage matrix
 
@@ -128,11 +128,11 @@ For each way a student drops below Benchmark 5, the mitigation is present somewh
 
 If the student follows their study plan, the capstone load alone produces:
 
-- **plan-foundation** (10 weeks): 10 capstone writings
-- **plan-acceleration** (8 weeks): 10 capstone writings
-- **plan-intermediate-bridge** (6 weeks): 10 capstone writings
-- **plan-push** (4 weeks): 10 capstone writings
-- **plan-polish** (2 weeks): 10 capstone writings
+- **plan-foundation** (36 weeks): 10 capstone writings
+- **plan-acceleration** (32 weeks): 10 capstone writings
+- **plan-intermediate-bridge** (24 weeks): 10 capstone writings
+- **plan-push** (24 weeks): 10 capstone writings
+- **plan-polish** (10 weeks): 10 capstone writings
 
 Each plan additionally schedules ~2 writing prompts per topic pack, bringing total student-produced writing to well above the 15-essay floor needed for exam readiness.
 
