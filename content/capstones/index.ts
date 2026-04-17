@@ -5,13 +5,16 @@
 import type { Capstone, CapstoneIndexEntry } from '../schema';
 
 import { capstone as C01 } from './C01-restaurant-memory';
+import { capstone as C05 } from './C05-school-day';
+import { capstone as C10 } from './C10-teen-life-essay';
 
-// Capstones C02..C10 land in subsequent commits.
 // The registry auto-compacts; consumers import CAPSTONES / CAPSTONES_BY_ID.
 
 export const CAPSTONES: Capstone[] = [
   C01,
-  // C02..C10 authored in Phase B
+  C05,
+  C10,
+  // C02, C03, C04, C06, C07, C08, C09 authored in Phase B sub-agent batches
 ];
 
 export const CAPSTONES_BY_ID: Record<string, Capstone> = Object.fromEntries(
