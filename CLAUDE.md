@@ -152,3 +152,16 @@ One call: `evaluateWriting(submission, promptContext)`. Accepts `{ kind: 'text',
 ### Print design
 
 Every pack, every capstone, every flashcard deck is designed to print cleanly. `index.html` extends the print CSS with named pages, break-before/after utilities, 3-column vocab grid, duplex-aligned 8-up flashcard layout, and tear-off self-check rubrics. Test print preview on at least one L1 + one L2 + one L3 pack + one core capstone + one flashcard sheet after major changes.
+
+## Autonomous-run invariants
+
+The repository supports a scheduled autonomous build run driven by `docs/BACKLOG.md`. When any subagent is operating in that mode (branch naming: `auto/*`), it must respect these invariants. Human contributors should also follow them in spirit.
+
+- **Never edit `content/flashcards/generated.ts` by hand.** Only regenerate via `npx tsx scripts/build-flashcards.ts`, and commit the regenerated output alongside the content change that triggered it.
+- **Always regenerate flashcards after pack edits.** The generator is deterministic; a stale `generated.ts` is a merge hazard.
+- **Never change STAMP benchmark boundaries, FCPS credit thresholds, or rubric-axis definitions in `content/rubric.ts`** without explicit authorization. These are claims about the exam vendor, not design choices.
+- **Always run the full gate before declaring a task done.** After `scripts/check.ts` exists: `npm run check`. Before then: `npx tsc --noEmit && npx tsx scripts/validate-packs.ts && npx tsx scripts/build-flashcards.ts && npx tsx scripts/credit-audit.ts`. For UI tasks, additionally run smoke (`npm run smoke`) once Playwright is wired, and visual (`npm run visual`) for print-layout work.
+- **Branch-and-PR only for feature/fix work.** Direct commits to `main` are reserved for housekeeping (backlog checkbox updates, agent log entries). Branch naming for autonomous items: `auto/{item-id}`.
+- **Audit failure is a revert, not a follow-up.** If `scripts/credit-audit.ts` fails after a content change, the change is unshipped until the audit passes — even if `tsc` is green.
+- **Never skip git hooks** (`--no-verify`), **never force-push** to `main` or shared branches, **never amend published commits**.
+- **Never add dependencies** beyond what a specific backlog item's brief authorizes.
