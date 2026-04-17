@@ -34,8 +34,10 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
   const levels: Level[] = filter === 'all' ? [1, 2, 3] : [filter];
 
   const totalPacks = TOPIC_PACKS_BY_LEVEL[1].length + TOPIC_PACKS_BY_LEVEL[2].length + TOPIC_PACKS_BY_LEVEL[3].length;
-  const completedCount = completedIds.length;
   const hiddenCount = knownSet.size;
+  const relevantTotal = totalPacks - hiddenCount;
+  const completedCount = completedIds.filter((id) => !knownSet.has(id)).length;
+  const progressPct = relevantTotal ? Math.round((completedCount / relevantTotal) * 100) : 0;
 
   return (
     <div className="space-y-10 animate-in fade-in duration-500">
@@ -76,10 +78,11 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
               Library progress
             </p>
             <p className="text-4xl md:text-5xl font-black">
-              {completedCount} of {totalPacks} packs completed
+              {completedCount} of {relevantTotal} packs completed
             </p>
             <p className="text-sm text-slate-300 font-semibold italic mt-1">
-              {Math.round((completedCount / totalPacks) * 100)}% toward full exam coverage
+              {progressPct}% toward full exam coverage
+              {hiddenCount > 0 && ` · ${hiddenCount} already at your level`}
             </p>
           </div>
           <div className="flex gap-2">
@@ -101,7 +104,7 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
         <div className="w-full bg-white/10 h-3 rounded-full overflow-hidden mt-6">
           <div
             className="bg-gradient-to-r from-amber-400 to-orange-500 h-full rounded-full transition-all duration-1000"
-            style={{ width: `${(completedCount / totalPacks) * 100}%` }}
+            style={{ width: `${progressPct}%` }}
           />
         </div>
       </section>

@@ -53,11 +53,12 @@ export const FlashcardsLibraryView: React.FC<FlashcardsLibraryViewProps> = ({
     return a.title.localeCompare(b.title);
   });
 
-  const totalSeen = DECKS.reduce(
+  const relevantDecks = DECKS.filter((d) => !hiddenDeckSet.has(d.id));
+  const totalSeen = relevantDecks.reduce(
     (s, d) => s + d.cards.filter((c) => seen.has(c.id)).length,
     0,
   );
-  const totalMastered = DECKS.reduce(
+  const totalMastered = relevantDecks.reduce(
     (s, d) => s + d.cards.filter((c) => mastered.has(c.id)).length,
     0,
   );

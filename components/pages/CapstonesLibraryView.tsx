@@ -21,9 +21,9 @@ export const CapstonesLibraryView: React.FC<CapstonesLibraryViewProps> = ({
   const [showKnown, setShowKnown] = useState(false);
   const knownSet = new Set(capstonesKnownAtLevel(studentLevel));
   const completedSet = new Set(completedIds);
-  const total = CAPSTONES.length;
-  const done = CAPSTONES.filter((c) => completedSet.has(c.id)).length;
   const hiddenCount = knownSet.size;
+  const total = CAPSTONES.length - hiddenCount;
+  const done = CAPSTONES.filter((c) => completedSet.has(c.id) && !knownSet.has(c.id)).length;
 
   const filterKnown = (list: Capstone[]) =>
     showKnown ? list : list.filter((c) => !knownSet.has(c.id));
