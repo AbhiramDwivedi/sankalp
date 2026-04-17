@@ -122,7 +122,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 
 ## Tier 0 — Safeguards & tooling (BLOCKS all product work)
 
-### [ ] 0.1 — Pre-flight gate script (`scripts/check.ts`)
+### [x] 0.1 — Pre-flight gate script (`scripts/check.ts`) — merged 2026-04-17 via PR #1 (`09976c7`)
 **Brief**: Create a single TypeScript script that runs tsc → validate-packs → build-flashcards (failing if output would change but wasn't committed) → credit-audit, in that order, exiting non-zero on any failure. Add `npm run check` to `package.json` that invokes it via `npx tsx scripts/check.ts`.
 **Done when**: `npm run check` exits 0 on clean main; flipping any invariant (e.g. deleting a pack's `heroMotif`) makes it exit non-zero with a clear message naming the failing stage.
 **Do not touch**: any content files, any generator outputs.
@@ -137,7 +137,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 **Done when**: `npm run visual` passes on clean main; regenerating goldens with `--update-snapshots` is documented in AGENT_LOG.
 **Do not touch**: print styles in `index.html` (those are the subject under test; 1.3 will modify them).
 
-### [ ] 0.4 — AGENT_LOG conventions (no dependency)
+### [x] 0.4 — AGENT_LOG conventions (no dependency) — satisfied 2026-04-17 (housekeeping; file already exists with Format section + real entries)
 **Brief**: Ensure `docs/AGENT_LOG.md` exists with the documented format (date, fire id, items attempted, items completed, items deferred, open questions, commits). If missing, seed it. This is a tiny item but needs to be explicit.
 **Done when**: file exists with at least the header and first real fire's entry.
 **Do not touch**: anything else.
@@ -150,7 +150,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 **Done when**: all three commands exist as markdown files in `.claude/commands/`, each with a clear prompt that any Claude Code session can execute.
 **Do not touch**: settings.json (commands are separate).
 
-### [ ] 0.6 — CLAUDE.md invariants section (no dependency)
+### [x] 0.6 — CLAUDE.md invariants section (no dependency) — merged 2026-04-17 via PR #2 (`bc25ce9`)
 **Brief**: Append a new section to `CLAUDE.md` titled "Autonomous-run invariants" that lists the invariants from this backlog header (never edit generated.ts, always regenerate flashcards after pack edits, never change rubric constants without explicit authorization, always run the full gate before declaring done, branch-and-PR only, audit failure is a revert).
 **Done when**: section exists and is concise (<40 lines).
 **Do not touch**: existing CLAUDE.md content — only append.

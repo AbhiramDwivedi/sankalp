@@ -16,6 +16,23 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #1 (manual "fire, proceed" at ~14:50 EDT)
+**Items attempted**: 0.1, 0.4 (housekeeping), 0.6
+**Items completed**:
+- **0.1** — pre-flight gate script — PR #1 → merged as `09976c7`. Implementer flagged that `tsx` is NOT in devDependencies (contrary to brief assumption), used `npx tsx` in package.json per repo convention. Reviewer approved with 2 nits (tsx-vs-npx-tsx nit, sandbox-blocked end-to-end failure-path test nit). `npm run check` on merged main: all 4 stages pass, credit audit = GUARANTEED.
+- **0.4** — AGENT_LOG conventions — satisfied via existing file + this entry; checkbox marked housekeeping.
+- **0.6** — CLAUDE.md autonomous-run invariants section — PR #2 → merged as `bc25ce9`. 15-line append, reviewer approved with 2 nits (em-dash on one line clashes with recent em-dash-removal commit bb0458e; one BACKLOG invariant "don't improvise when blocked" not mirrored in the digest).
+**Items deferred**: 0.2, 0.3, 0.5, 0.7, 0.8 — all depend on 0.1, now unblocked. Next fire at 15:35 EDT should pick 0.2 (smoke) + 0.7 (husky hook) as independent children of 0.1 (no shared files). 0.3 + 0.5 + 0.8 wait for 0.2/0.3.
+**Open questions for Abhiram**: none
+**Commits pushed**: `09976c7` (PR #1), `bc25ce9` (PR #2), plus this housekeeping commit
+**Notes**:
+- First real fire of the autonomous run. Batch size: 2 items (conservative per step 0 self-check — moderate session-context already consumed by setup).
+- Two parallel implementers ran cleanly despite sharing the same working directory on Windows (one transient branch-switch observed and recovered; final branches intact and correctly pushed).
+- Both reviewers used the blind-review pattern and flagged genuine but non-blocking nits. The em-dash nit on CLAUDE.md is a real style consistency issue per prior commit bb0458e — can be fixed in a one-line follow-up item if Abhiram wants that rigor extended to CLAUDE.md as well (not in backlog yet; flagging here).
+- Time: implementer+reviewer parallel phase took ~3.5 minutes each (14 min of wall clock including my orchestration + merges).
+
+---
+
 ## 2026-04-17 — Fire #0c (setup finalized, manual)
 **Items attempted**: BACKLOG protocol additions + cron recreation
 **Items completed**: 
