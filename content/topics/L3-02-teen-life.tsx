@@ -15,6 +15,7 @@ export const pack: TopicPack = {
   level: 3,
   themeGroup: 'Identity',
   order: 25,
+  heroMotif: 'notebook',
   titleHindi: 'किशोर जीवन',
   titleEnglish: 'Teen Life',
   hook: 'Opinion-heavy topics in present tense — raters reward students who voice a view clearly.',

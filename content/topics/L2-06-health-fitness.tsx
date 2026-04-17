@@ -7,6 +7,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'HumanIngenuity',
   order: 18,
+  heroMotif: 'sunrise',
   titleHindi: 'स्वास्थ्य और व्यायाम',
   titleEnglish: 'Health & Fitness',
   hook: 'Modal verbs + habit vocabulary — strong fuel for opinion-and-plan essays.',

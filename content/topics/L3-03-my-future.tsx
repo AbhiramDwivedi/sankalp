@@ -13,6 +13,7 @@ export const pack: TopicPack = {
   level: 3,
   themeGroup: 'Identity',
   order: 26,
+  heroMotif: 'sunrise',
   titleHindi: 'मेरा भविष्य',
   titleEnglish: 'My Future',
   hook: 'Future tense + hypotheticals — the final piece of the three-time-frame puzzle the rubric requires.',

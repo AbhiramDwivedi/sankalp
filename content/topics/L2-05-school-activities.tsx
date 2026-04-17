@@ -13,6 +13,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'Identity',
   order: 17,
+  heroMotif: 'cricket',
   titleHindi: 'स्कूल की गतिविधियाँ',
   titleEnglish: 'School-Related Activities',
   hook: 'Clubs, field trips, sports — ideal for narrative past-tense essays, a rubric requirement at IM.',

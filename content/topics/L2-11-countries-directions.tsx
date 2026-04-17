@@ -7,6 +7,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'ModernSociety',
   order: 23,
+  heroMotif: 'temple',
   titleHindi: 'देश, नागरिकता और दिशाएँ',
   titleEnglish: 'Countries, Nationalities & Directions',
   hook: 'Postpositions (से, तक, की ओर) + country names — two essay-builder blocks in one pack.',

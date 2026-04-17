@@ -15,6 +15,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'ModernSociety',
   order: 4,
+  heroMotif: 'kurta',
   titleHindi: 'कपड़े और रंग',
   titleEnglish: 'Clothing & Colors',
   hook: 'Concrete nouns and adjectives that add texture and cultural specificity to any essay.',

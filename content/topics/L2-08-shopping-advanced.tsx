@@ -7,6 +7,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'ModernSociety',
   order: 20,
+  heroMotif: 'bazaar',
   titleHindi: 'ख़रीदारी (स्तर 2)',
   titleEnglish: 'Shopping (Level 2)',
   hook: 'Comparison, opinion, online vs mall — Level-2 shopping is where the student learns to argue, not just list.',

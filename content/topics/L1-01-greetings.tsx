@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'Identity',
   order: 1,
+  heroMotif: 'namaste',
   titleHindi: 'अभिवादन और परिचय',
   titleEnglish: 'Greetings & Introductions',
   hook: 'The first words any essay opens with — and the cheapest way to sound fluent.',

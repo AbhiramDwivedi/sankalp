@@ -5,6 +5,7 @@ import { TOPIC_PACKS_BY_LEVEL } from '../../content';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
 import { Callout } from '../ui/Callout';
+import { PackHeroArt } from '../art/PackHeroArt';
 
 interface LibraryViewProps {
   completedIds: string[];
@@ -136,24 +137,14 @@ interface TopicCardProps {
 
 const TopicCard: React.FC<TopicCardProps> = ({ pack, completed, onClick }) => {
   const tokens = tokensFor(pack.themeGroup);
-  const [imageOk, setImageOk] = useState(true);
-  const src = `/topics/hero-${pack.id}.jpg`;
   return (
     <button
       onClick={onClick}
       className="group text-left bg-white border-2 border-slate-100 hover:border-orange-400 rounded-[1.75rem] overflow-hidden shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5"
     >
-      <div className={`aspect-[2/1] ${tokens.heroGradient} relative overflow-hidden`}>
-        {imageOk && (
-          <img
-            src={src}
-            alt=""
-            aria-hidden
-            onError={() => setImageOk(false)}
-            className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-luminosity"
-          />
-        )}
-        <div className={`absolute inset-0 ${tokens.heroGradient} opacity-80 mix-blend-multiply`} />
+      <div className="aspect-[2/1] relative overflow-hidden">
+        <PackHeroArt pack={pack} />
+        <div className="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-transparent" />
         <div className="relative z-10 h-full p-5 flex flex-col justify-between text-white">
           <div className="flex items-center justify-between">
             <Badge tone="amber" size="xs" className="bg-white/20 text-white border-white/30">

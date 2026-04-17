@@ -1,47 +1,68 @@
 import React from 'react';
-import { CheckCircle2, Flame, Target, ArrowRight, BookOpen } from 'lucide-react';
+import { CheckCircle2, Flame, Target, ArrowRight, BookOpen, Flag, Calendar } from 'lucide-react';
 import type { StudentProfile } from '../../types';
 import type { TopicPack } from '../../content/schema';
 import { TOPIC_PACKS, nextPackAfter, getPack } from '../../content';
+import { CAPSTONES, getCapstone } from '../../content/capstones';
+import { getStudyPlan, studyPlanForLevel, planCursor } from '../../content/studyPlans';
 import { TARGET_BENCHMARK, FCPS_CREDIT_SUMMARY, RUBRIC_AXES } from '../../content/rubric';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
+import { PackHeroArt } from '../art/PackHeroArt';
+import { CapstoneHeroArt } from '../art/CapstoneHeroArt';
 
 interface DashboardViewProps {
   profile: StudentProfile;
   onOpenTopic: (pack: TopicPack) => void;
+  onOpenCapstone: (capstoneId: string) => void;
   onOpenLibrary: () => void;
+  onOpenCapstonesTab: () => void;
+  onOpenPlanTab: () => void;
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
   profile,
   onOpenTopic,
+  onOpenCapstone,
   onOpenLibrary,
+  onOpenCapstonesTab,
+  onOpenPlanTab,
 }) => {
-  const completed = profile.completedTopicIds || [];
-  const total = TOPIC_PACKS.length;
-  const pct = total ? Math.round((completed.length / total) * 100) : 0;
+  const completedPacks = profile.completedTopicIds || [];
+  const completedCaps = profile.completedCapstoneIds || [];
+  const totalPacks = TOPIC_PACKS.length;
+  const totalCaps = CAPSTONES.length;
+  const pct = totalPacks ? Math.round((completedPacks.length / totalPacks) * 100) : 0;
 
-  // Pick the next pack to work on: either the in-progress one, or the pack
-  // immediately after the last completed one, or the very first.
+  // Resolve plan
+  const plan =
+    getStudyPlan(profile.selectedStudyPlanId) || studyPlanForLevel(profile.currentLevel);
+  const cursor = planCursor(plan, completedPacks, completedCaps);
+
+  // Next pack: prefer plan cursor; fall back to in-progress or first-uncomplete.
   let nextPack: TopicPack | undefined;
-  if (profile.inProgressTopicId) {
-    nextPack = getPack(profile.inProgressTopicId);
-  }
-  if (!nextPack && completed.length) {
-    const last = completed[completed.length - 1];
+  if (cursor.nextPackId) nextPack = getPack(cursor.nextPackId);
+  if (!nextPack && profile.inProgressTopicId) nextPack = getPack(profile.inProgressTopicId);
+  if (!nextPack && completedPacks.length) {
+    const last = completedPacks[completedPacks.length - 1];
     nextPack = nextPackAfter(last) || undefined;
   }
   if (!nextPack) nextPack = TOPIC_PACKS[0];
 
-  // Readiness heuristic: weight packs by level.
+  // Upcoming capstone
+  const upcomingCapstone =
+    cursor.upcomingCapstoneIds.length > 0 ? getCapstone(cursor.upcomingCapstoneIds[0]) : undefined;
+
+  // Readiness heuristic
   const weights = { 1: 1, 2: 1.5, 3: 2 } as const;
-  const earned = completed.reduce((s, id) => {
+  const earned = completedPacks.reduce((s, id) => {
     const p = getPack(id);
     return s + (p ? weights[p.level] : 0);
   }, 0);
   const possible = TOPIC_PACKS.reduce((s, p) => s + weights[p.level], 0);
-  const readiness = Math.round((earned / possible) * 100);
+  const packsReadiness = earned / possible;
+  const capsReadiness = completedCaps.length / totalCaps;
+  const readiness = Math.round(((packsReadiness * 0.6) + (capsReadiness * 0.4)) * 100);
 
   const readinessLabel =
     readiness < 25
@@ -66,14 +87,23 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             {profile.currentLevel} · Target: Intermediate-Mid (3 credits)
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           <div className="bg-white border-2 border-slate-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
             <div className="w-10 h-10 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center">
               <Flame size={18} />
             </div>
             <div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">Completed</p>
-              <p className="text-xl font-black text-slate-900">{completed.length} / {total}</p>
+              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">Packs</p>
+              <p className="text-xl font-black text-slate-900">{completedPacks.length} / {totalPacks}</p>
+            </div>
+          </div>
+          <div className="bg-white border-2 border-slate-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
+            <div className="w-10 h-10 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center">
+              <Flag size={18} />
+            </div>
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">Capstones</p>
+              <p className="text-xl font-black text-slate-900">{completedCaps.length} / {totalCaps}</p>
             </div>
           </div>
           <div className="bg-slate-900 border-2 border-slate-800 rounded-2xl p-4 text-white flex items-center gap-3 shadow-xl">
@@ -88,7 +118,30 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       </header>
 
-      {/* Progress */}
+      {/* This week in your plan */}
+      <section className="bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-orange-200 rounded-[2rem] p-8 shadow-sm">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-3">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-orange-500 mb-1">
+              {plan.titleEnglish} · Week {cursor.currentWeekIndex}
+            </p>
+            <p className="text-2xl md:text-3xl font-black text-slate-900">
+              {cursor.isAllDone
+                ? 'You have completed this plan 🎉'
+                : plan.weeks.find((w) => w.weekIndex === cursor.currentWeekIndex)?.focus}
+            </p>
+            <p className="text-sm text-slate-600 italic mt-1 max-w-2xl">{plan.headline}</p>
+          </div>
+          <button
+            onClick={onOpenPlanTab}
+            className="text-sm font-black text-orange-600 hover:text-orange-800 flex items-center gap-2"
+          >
+            See full plan <ArrowRight size={16} />
+          </button>
+        </div>
+      </section>
+
+      {/* Progress bar */}
       <section className="bg-white border-2 border-slate-100 rounded-[2rem] p-8 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4">
           <div>
@@ -115,11 +168,47 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Next pack */}
-        <div className="lg:col-span-2">
-          <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-3">
-            Next pack
+        <div className="lg:col-span-2 space-y-6">
+          <p className="text-xs font-black uppercase tracking-widest text-slate-500">
+            Next pack in your plan
           </p>
-          {nextPack && <NextPackCard pack={nextPack} onClick={() => onOpenTopic(nextPack)} />}
+          {nextPack && <NextPackCard pack={nextPack} onClick={() => onOpenTopic(nextPack!)} />}
+
+          {upcomingCapstone && (
+            <>
+              <p className="text-xs font-black uppercase tracking-widest text-slate-500 pt-2">
+                Capstone this week
+              </p>
+              <button
+                onClick={() => onOpenCapstone(upcomingCapstone.id)}
+                className="w-full text-left bg-white border-2 border-slate-100 hover:border-amber-400 rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all"
+              >
+                <div className="aspect-[3/1] relative">
+                  <CapstoneHeroArt capstone={upcomingCapstone} />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent" />
+                  <div className="relative z-10 h-full p-6 flex items-end text-white">
+                    <p className="font-hindi-display text-3xl font-black drop-shadow">
+                      {upcomingCapstone.titleHindi}
+                    </p>
+                  </div>
+                </div>
+                <div className="p-6 flex items-center justify-between gap-4">
+                  <div className="flex-1 space-y-1">
+                    <Badge tone="amber" size="xs">
+                      Capstone {upcomingCapstone.order} · {upcomingCapstone.tier}
+                    </Badge>
+                    <h3 className="text-xl font-black text-slate-900">
+                      {upcomingCapstone.titleEnglish}
+                    </h3>
+                    <p className="text-sm text-slate-500 italic leading-relaxed">
+                      {upcomingCapstone.hook}
+                    </p>
+                  </div>
+                  <ArrowRight size={24} className="text-slate-400 shrink-0" />
+                </div>
+              </button>
+            </>
+          )}
         </div>
 
         {/* Rubric at a glance */}
@@ -156,6 +245,25 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               ))}
             </div>
           </div>
+
+          <div className="grid grid-cols-2 gap-3 mt-4">
+            <button
+              onClick={onOpenCapstonesTab}
+              className="p-4 bg-white border-2 border-slate-100 hover:border-amber-400 rounded-2xl text-left transition-all hover:-translate-y-0.5"
+            >
+              <Flag size={18} className="text-amber-600 mb-1" />
+              <p className="font-black text-slate-900 text-sm">Capstones</p>
+              <p className="text-[10px] text-slate-500">{completedCaps.length}/{totalCaps}</p>
+            </button>
+            <button
+              onClick={onOpenPlanTab}
+              className="p-4 bg-white border-2 border-slate-100 hover:border-indigo-400 rounded-2xl text-left transition-all hover:-translate-y-0.5"
+            >
+              <Calendar size={18} className="text-indigo-600 mb-1" />
+              <p className="font-black text-slate-900 text-sm">My plan</p>
+              <p className="text-[10px] text-slate-500">Wk {cursor.currentWeekIndex} of {plan.durationWeeks}</p>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -164,23 +272,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
 const NextPackCard: React.FC<{ pack: TopicPack; onClick: () => void }> = ({ pack, onClick }) => {
   const tokens = tokensFor(pack.themeGroup);
-  const [imageOk, setImageOk] = React.useState(true);
   return (
     <button
       onClick={onClick}
       className="group w-full text-left bg-white border-2 border-slate-100 hover:border-orange-400 rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all"
     >
-      <div className={`aspect-[3/1] ${tokens.heroGradient} relative overflow-hidden`}>
-        {imageOk && (
-          <img
-            src={`/topics/hero-${pack.id}.jpg`}
-            alt=""
-            aria-hidden
-            onError={() => setImageOk(false)}
-            className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-luminosity"
-          />
-        )}
-        <div className={`absolute inset-0 ${tokens.heroGradient} opacity-80 mix-blend-multiply`} />
+      <div className="aspect-[3/1] relative overflow-hidden">
+        <PackHeroArt pack={pack} />
+        <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent" />
         <div className="relative z-10 h-full p-6 flex items-end text-white">
           <p className="font-hindi-display text-3xl font-black drop-shadow">{pack.titleHindi}</p>
         </div>

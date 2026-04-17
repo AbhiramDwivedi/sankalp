@@ -2,10 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { ProficiencyLevel } from '../types';
 import { PROFICIENCY_ORDER, AVANT_RUBRIC_SUMMARY, calculateRecommendedDate } from '../constants';
-import { Calendar, User, Trophy, ArrowRight, Clock } from 'lucide-react';
+import { studyPlanForLevel } from '../content/studyPlans';
+import { Calendar, User, Trophy, ArrowRight, Clock, Flag, Target } from 'lucide-react';
 
 interface OnboardingProps {
-  onComplete: (data: { name: string; level: ProficiencyLevel; examDate: string }) => void;
+  onComplete: (data: {
+    name: string;
+    level: ProficiencyLevel;
+    examDate: string;
+    selectedStudyPlanId: string;
+  }) => void;
 }
 
 export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
@@ -13,20 +19,22 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
   const [formData, setFormData] = useState({
     name: '',
     level: ProficiencyLevel.NOVICE_LOW,
-    examDate: ''
+    examDate: '',
   });
 
   // Calculate recommended date whenever level changes
   useEffect(() => {
-    setFormData(prev => ({ ...prev, examDate: calculateRecommendedDate(prev.level) }));
+    setFormData((prev) => ({ ...prev, examDate: calculateRecommendedDate(prev.level) }));
   }, [formData.level]);
+
+  const matchedPlan = studyPlanForLevel(formData.level);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (step < 3) {
       setStep(step + 1);
     } else {
-      onComplete(formData);
+      onComplete({ ...formData, selectedStudyPlanId: matchedPlan.id });
     }
   };
 
@@ -35,8 +43,8 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
       <div className="bg-white rounded-[3rem] shadow-2xl max-w-xl w-full p-8 md:p-12 border border-orange-100">
         <div className="flex justify-between mb-10">
           {[1, 2, 3].map((s) => (
-            <div 
-              key={s} 
+            <div
+              key={s}
               className={`h-2 flex-1 mx-1 rounded-full transition-all duration-500 ${s <= step ? 'bg-orange-600 shadow-sm' : 'bg-slate-100'}`}
             />
           ))}
@@ -71,10 +79,12 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                 <Trophy size={40} />
               </div>
               <h2 className="text-4xl font-black text-slate-900 mb-3 tracking-tight">Current Level</h2>
-              <p className="text-slate-500 mb-8 font-medium">Select the starting point. This adjusts the preparation speed automatically.</p>
+              <p className="text-slate-500 mb-8 font-medium">
+                Select the starting point. Your plan and the pack you start on both adjust to match.
+              </p>
               <div className="space-y-3 max-h-[45vh] overflow-y-auto pr-3 custom-scrollbar">
                 {PROFICIENCY_ORDER.map((lvl) => (
-                  <label 
+                  <label
                     key={lvl}
                     className={`flex items-start gap-4 p-5 border-2 rounded-[1.5rem] cursor-pointer transition-all ${
                       formData.level === lvl ? 'border-orange-600 bg-orange-50/50 shadow-lg shadow-orange-100' : 'border-slate-100 hover:border-slate-300'
@@ -102,24 +112,47 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
               <div className="w-20 h-20 bg-green-100 rounded-[2rem] flex items-center justify-center text-green-600 mb-8 shadow-inner">
                 <Calendar size={40} />
               </div>
-              <h2 className="text-4xl font-black text-slate-900 mb-3 tracking-tight">The Big Day</h2>
-              <p className="text-slate-500 mb-10 font-medium">The FCPS exam happens every November. Based on <strong>{formData.level}</strong> level, here is a doable plan:</p>
-              
-              <div className="bg-orange-50 border border-orange-200 rounded-3xl p-8 space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-orange-600 shadow-sm"><Clock size={24}/></div>
-                  <div>
-                    <p className="text-xs font-black text-orange-400 uppercase tracking-widest">Recommended Readiness</p>
-                    <p className="text-xl font-black text-slate-900">{new Date(formData.examDate).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}</p>
+              <h2 className="text-4xl font-black text-slate-900 mb-3 tracking-tight">Your Plan</h2>
+              <p className="text-slate-500 mb-6 font-medium">
+                Based on your level, here's the study plan that gets you to Benchmark 5 (3 FCPS credits).
+              </p>
+
+              <div className="bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200 rounded-3xl p-6 space-y-4 mb-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center text-white shrink-0">
+                    <Flag size={22} />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[10px] font-black text-orange-500 uppercase tracking-widest">Recommended</p>
+                    <p className="text-lg font-black text-slate-900">{matchedPlan.titleEnglish}</p>
+                    <p className="text-sm text-slate-600 italic leading-relaxed">{matchedPlan.headline}</p>
                   </div>
                 </div>
-                
-                <div className="space-y-3">
-                   <label className="block text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Manual Date Adjustment</label>
-                   <input
+                <div className="flex items-center gap-3 pt-2 border-t border-orange-200/60">
+                  <Target size={16} className="text-orange-600" />
+                  <p className="text-xs font-bold text-slate-600">
+                    <span className="font-black text-slate-900">{matchedPlan.durationWeeks}-week</span> plan ·
+                    Starts at: {matchedPlan.weeks[0]?.packs[0] || 'Capstones only'} ·
+                    Ends with timed Mock Exams
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-orange-50 border border-orange-200 rounded-3xl p-6 space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-orange-600 shadow-sm"><Clock size={18}/></div>
+                  <div>
+                    <p className="text-xs font-black text-orange-400 uppercase tracking-widest">Recommended Readiness</p>
+                    <p className="text-lg font-black text-slate-900">{new Date(formData.examDate).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}</p>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Exam date (adjustable)</label>
+                  <input
                     required
                     type="date"
-                    className="w-full px-6 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 outline-none transition-all font-bold"
+                    className="w-full px-5 py-3 bg-white border border-slate-200 rounded-xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 outline-none transition-all font-bold text-sm"
                     value={formData.examDate}
                     onChange={(e) => setFormData({ ...formData, examDate: e.target.value })}
                   />
@@ -132,7 +165,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
             type="submit"
             className="w-full bg-orange-600 hover:bg-orange-700 text-white font-black py-5 rounded-[1.5rem] flex items-center justify-center gap-3 transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-orange-200"
           >
-            {step === 3 ? "Generate Curriculum" : "Continue"}
+            {step === 3 ? 'Start this plan' : 'Continue'}
             <ArrowRight size={24} />
           </button>
         </form>

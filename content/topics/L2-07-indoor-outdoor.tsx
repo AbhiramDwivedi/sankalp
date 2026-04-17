@@ -7,6 +7,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'HumanIngenuity',
   order: 19,
+  heroMotif: 'cricket',
   titleHindi: 'अंदर और बाहर की गतिविधियाँ',
   titleEnglish: 'Indoor & Outdoor Activities',
   hook: 'Binary comparisons — "when it rains, otherwise..." — train conditional frames the rubric rewards.',

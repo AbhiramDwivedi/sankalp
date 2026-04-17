@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'ModernSociety',
   order: 10,
+  heroMotif: 'rickshaw',
   titleHindi: 'जगहें और यातायात',
   titleEnglish: 'Cities, Places, Activities & Transportation',
   hook: 'Postpositions (से, तक, में, पर, के पास) get their first workout here — grammar gold, and a natural fit for daily-commute and weekend-trip essays.',

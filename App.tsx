@@ -1,26 +1,33 @@
 
 import React, { useState, useEffect } from 'react';
 import { StudentProfile, ProficiencyLevel, EvaluationResult, migrateProfile } from './types';
-import type { TopicPack } from './content/schema';
+import type { TopicPack, Capstone } from './content/schema';
 import { Onboarding } from './components/Onboarding';
 import { Layout } from './components/Layout';
 import { LibraryView } from './components/pages/LibraryView';
 import { DashboardView } from './components/pages/DashboardView';
 import { HowThisWorksView } from './components/pages/HowThisWorksView';
 import { RubricReferenceView } from './components/pages/RubricReferenceView';
+import { StudyPlanView } from './components/pages/StudyPlanView';
+import { CapstonesLibraryView } from './components/pages/CapstonesLibraryView';
+import { CapstoneView } from './components/capstone/CapstoneView';
 import { TopicPackView } from './components/topic/TopicPackView';
+import { TOPIC_PACKS_BY_ID } from './content';
+import { CAPSTONES_BY_ID } from './content/capstones';
+import { studyPlanForLevel } from './content/studyPlans';
 import { Search, PlusCircle, GraduationCap, CheckCircle2, Info } from 'lucide-react';
 
 const APP_STORAGE_KEY = 'sankalpa_hindi_profiles';
 const ACTIVE_PROFILE_KEY = 'sankalpa_active_id';
 
-type Tab = 'dashboard' | 'library' | 'rubric' | 'settings';
+type Tab = 'dashboard' | 'library' | 'capstones' | 'flashcards' | 'plan' | 'rubric' | 'settings';
 
 const App: React.FC = () => {
   const [profiles, setProfiles] = useState<StudentProfile[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [openPack, setOpenPack] = useState<TopicPack | null>(null);
+  const [openCapstone, setOpenCapstone] = useState<Capstone | null>(null);
   const [showHowThisWorks, setShowHowThisWorks] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -61,7 +68,12 @@ const App: React.FC = () => {
     saveAllProfiles(updated);
   };
 
-  const handleOnboarding = (data: { name: string; level: ProficiencyLevel; examDate: string }) => {
+  const handleOnboarding = (data: {
+    name: string;
+    level: ProficiencyLevel;
+    examDate: string;
+    selectedStudyPlanId: string;
+  }) => {
     const newProfile: StudentProfile = {
       id: crypto.randomUUID(),
       name: data.name,
@@ -69,9 +81,13 @@ const App: React.FC = () => {
       startDate: new Date().toISOString(),
       examDate: data.examDate,
       completedTopicIds: [],
+      completedCapstoneIds: [],
+      flashcardsSeen: [],
+      flashcardsMastered: [],
       evaluations: {},
       aiAssessmentEnabled: false,
       howThisWorksSeen: false,
+      selectedStudyPlanId: data.selectedStudyPlanId,
     };
     const updated = [...profiles, newProfile];
     saveAllProfiles(updated);
@@ -87,6 +103,7 @@ const App: React.FC = () => {
     localStorage.removeItem(ACTIVE_PROFILE_KEY);
     setActiveTab('dashboard');
     setOpenPack(null);
+    setOpenCapstone(null);
   };
 
   const handleMarkComplete = () => {
@@ -97,6 +114,16 @@ const App: React.FC = () => {
       inProgressTopicId: undefined,
     }));
     setOpenPack(null);
+  };
+
+  const handleMarkCapstoneComplete = () => {
+    if (!openCapstone) return;
+    updateActiveProfile((p) => ({
+      ...p,
+      completedCapstoneIds: Array.from(new Set([...(p.completedCapstoneIds || []), openCapstone.id])),
+      inProgressCapstoneId: undefined,
+    }));
+    setOpenCapstone(null);
   };
 
   const handleAddEvaluation = (result: EvaluationResult) => {
@@ -111,6 +138,26 @@ const App: React.FC = () => {
   const markHowThisWorksSeen = () => {
     updateActiveProfile((p) => ({ ...p, howThisWorksSeen: true }));
     setShowHowThisWorks(false);
+  };
+
+  const openPackById = (packId: string) => {
+    const p = TOPIC_PACKS_BY_ID[packId];
+    if (!p) return;
+    setOpenCapstone(null);
+    setOpenPack(p);
+    updateActiveProfile((pr) => ({ ...pr, inProgressTopicId: p.id }));
+  };
+
+  const openCapstoneById = (capstoneId: string) => {
+    const c = CAPSTONES_BY_ID[capstoneId];
+    if (!c) return;
+    setOpenPack(null);
+    setOpenCapstone(c);
+    updateActiveProfile((pr) => ({ ...pr, inProgressCapstoneId: c.id }));
+  };
+
+  const handleSelectPlan = (planId: string) => {
+    updateActiveProfile((p) => ({ ...p, selectedStudyPlanId: planId }));
   };
 
   // ---- Profile picker (no active profile) ----
@@ -174,7 +221,7 @@ const App: React.FC = () => {
                         {p.currentLevel}
                       </p>
                       <p className="text-xs font-semibold text-orange-600 mt-1">
-                        {(p.completedTopicIds || []).length} / 26 packs
+                        {(p.completedTopicIds || []).length} / 26 packs · {(p.completedCapstoneIds || []).length} / 10 capstones
                       </p>
                     </div>
                   </div>
@@ -205,6 +252,9 @@ const App: React.FC = () => {
     );
   }
 
+  // Auto-adopt a default study plan for profiles that never got one.
+  const ensuredPlan = profile.selectedStudyPlanId || studyPlanForLevel(profile.currentLevel).id;
+
   // ---- Main app (active profile) ----
 
   // A) Topic pack overlay
@@ -227,7 +277,27 @@ const App: React.FC = () => {
     );
   }
 
-  // B) First-run explainer
+  // B) Capstone overlay
+  if (openCapstone) {
+    return (
+      <Layout
+        activeTab={activeTab}
+        setActiveTab={(t) => setActiveTab(t as Tab)}
+        brandingName="सङ्कल्प"
+        onSwitch={handleSwitchStudent}
+      >
+        <CapstoneView
+          capstone={openCapstone}
+          isCompleted={(profile.completedCapstoneIds || []).includes(openCapstone.id)}
+          onBack={() => setOpenCapstone(null)}
+          onMarkComplete={handleMarkCapstoneComplete}
+          onOpenPack={openPackById}
+        />
+      </Layout>
+    );
+  }
+
+  // C) First-run explainer
   if (showHowThisWorks) {
     return (
       <Layout
@@ -241,30 +311,56 @@ const App: React.FC = () => {
     );
   }
 
-  // C) Tab content
+  // D) Tab content
   const renderTab = () => {
     switch (activeTab) {
       case 'dashboard':
         return (
           <DashboardView
-            profile={profile}
-            onOpenTopic={(p) => {
-              setOpenPack(p);
-              updateActiveProfile((pr) => ({ ...pr, inProgressTopicId: p.id }));
-            }}
+            profile={{ ...profile, selectedStudyPlanId: ensuredPlan }}
+            onOpenTopic={(p) => openPackById(p.id)}
+            onOpenCapstone={(cid) => openCapstoneById(cid)}
             onOpenLibrary={() => setActiveTab('library')}
+            onOpenCapstonesTab={() => setActiveTab('capstones')}
+            onOpenPlanTab={() => setActiveTab('plan')}
           />
         );
       case 'library':
         return (
           <LibraryView
             completedIds={profile.completedTopicIds || []}
-            onOpenTopic={(p) => {
-              setOpenPack(p);
-              updateActiveProfile((pr) => ({ ...pr, inProgressTopicId: p.id }));
-            }}
+            onOpenTopic={(p) => openPackById(p.id)}
             onOpenHowThisWorks={() => setShowHowThisWorks(true)}
           />
+        );
+      case 'capstones':
+        return (
+          <CapstonesLibraryView
+            completedIds={profile.completedCapstoneIds || []}
+            onOpenCapstone={openCapstoneById}
+          />
+        );
+      case 'plan':
+        return (
+          <StudyPlanView
+            profile={{ ...profile, selectedStudyPlanId: ensuredPlan }}
+            onSelectPlan={handleSelectPlan}
+            onOpenPack={openPackById}
+            onOpenCapstone={openCapstoneById}
+          />
+        );
+      case 'flashcards':
+        return (
+          <div className="max-w-3xl mx-auto text-center py-20 space-y-5">
+            <div className="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full mx-auto flex items-center justify-center">
+              <GraduationCap size={40} />
+            </div>
+            <h2 className="text-3xl font-black text-slate-900">Flashcards coming next</h2>
+            <p className="text-slate-500 italic">
+              Pack, theme, connector, muhavara, and exam-prep decks — printable as 8-up cut sheets.
+              This tab will light up in Phase C of the build.
+            </p>
+          </div>
         );
       case 'rubric':
         return <RubricReferenceView onBack={() => setActiveTab('dashboard')} />;

@@ -12,6 +12,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'Identity',
   order: 14,
+  heroMotif: 'family',
   titleHindi: 'घर के कमरे और कार्य',
   titleEnglish: 'Rooms of the House & Household Chores',
   hook: 'Concrete nouns plus action verbs — high-yield vocabulary for descriptive essays and obligation sentences.',

@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'ModernSociety',
   order: 12,
+  heroMotif: 'thali',
   titleHindi: 'रेस्तराँ और खाना',
   titleEnglish: 'Restaurants & Food',
   hook: 'Culturally rich, vocabulary-dense, naturally uses connectors and past/present tenses — the ideal FCPS essay topic.',

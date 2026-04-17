@@ -1,9 +1,12 @@
-// Structural validator for the topic pack library.
-// Run: `npx tsx scripts/validate-packs.ts` (or via node after build).
+// Structural validator for the content library — topic packs, capstones,
+// study plans, and (when present) flashcard decks.
+// Run: `npx tsx scripts/validate-packs.ts`.
 // Exits non-zero on any structural violation.
 
-import { TOPIC_PACKS } from '../content';
-import type { TopicPack } from '../content/schema';
+import { TOPIC_PACKS, TOPIC_PACKS_BY_ID } from '../content';
+import { CAPSTONES } from '../content/capstones';
+import { STUDY_PLANS } from '../content/studyPlans';
+import type { Capstone, StudyPlan, TopicPack } from '../content/schema';
 
 interface Issue {
   pack: string;
@@ -125,14 +128,117 @@ function validatePack(p: TopicPack) {
   }
 }
 
+function validateCapstone(c: Capstone) {
+  const prefix = `capstone:${c.id}`;
+  if (!c.promptHindi || !c.promptEnglish) push(prefix, 'error', 'prompt', 'missing');
+  if (!c.whyThisCapstone || c.whyThisCapstone.length < 50) {
+    push(prefix, 'error', 'whyThisCapstone', 'missing or too short');
+  }
+  if (c.draws.length < 3) push(prefix, 'error', 'draws', `only ${c.draws.length}, need ≥3`);
+  c.draws.forEach((d, i) => {
+    if (!TOPIC_PACKS_BY_ID[d.packId]) {
+      push(prefix, 'error', `draws[${i}]`, `unknown packId ${d.packId}`);
+    }
+    if (!d.note || d.note.length < 10) {
+      push(prefix, 'warn', `draws[${i}].note`, 'short or missing');
+    }
+  });
+
+  if (c.status === 'stub') return;
+
+  if (c.versions.length !== 3) {
+    push(prefix, 'error', 'versions', `have ${c.versions.length}, need exactly 3`);
+  }
+  const labels = c.versions.map((v) => v.label);
+  if (!labels.includes('novice') || !labels.includes('intermediateMid') || !labels.includes('push')) {
+    push(prefix, 'error', 'versions.label', 'need novice + intermediateMid + push');
+  }
+
+  c.versions.forEach((v, i) => {
+    const wc = countWords(v.hindi);
+    if (v.label === 'novice' && (wc < 90 || wc > 170)) {
+      push(prefix, 'warn', `versions[${i}] novice`, `${wc} Hindi words, target 110-150`);
+    }
+    if (v.label === 'intermediateMid') {
+      const min = c.tier === 'core' ? 200 : 260;
+      const max = c.tier === 'core' ? 300 : 360;
+      if (wc < min || wc > max) {
+        push(prefix, 'warn', `versions[${i}] IM`, `${wc} Hindi words, target ${min}-${max}`);
+      }
+    }
+    if (v.label === 'push' && wc < 260) {
+      push(prefix, 'warn', `versions[${i}] push`, `${wc} Hindi words, target 280-360`);
+    }
+    if (v.tensesUsed.length < 1) push(prefix, 'error', `versions[${i}].tensesUsed`, 'empty');
+    if (v.label === 'intermediateMid' && v.tensesUsed.length < 2) {
+      push(prefix, 'error', `versions[${i}]`, 'IM version must use ≥2 tenses');
+    }
+    if (v.label === 'intermediateMid' && v.connectorsUsed.length < 3) {
+      push(prefix, 'error', `versions[${i}]`, 'IM version must use ≥3 connectors');
+    }
+  });
+
+  // Annotations
+  const paras = [0, 1, 2];
+  paras.forEach((pi) => {
+    const hits = c.annotations.filter((a) => a.paragraphIndex === pi);
+    if (hits.length < 3) {
+      push(prefix, 'warn', `annotations p${pi}`, `only ${hits.length}, aim for ≥3`);
+    }
+  });
+
+  // Verdict
+  if (!c.verdict) push(prefix, 'error', 'verdict', 'missing');
+  else {
+    if (c.tier === 'core' && c.verdict.predictedBenchmark < 5) {
+      push(prefix, 'error', 'verdict.predictedBenchmark', `core capstone must target ≥5 (got ${c.verdict.predictedBenchmark})`);
+    }
+    if ((c.verdict.whyItPasses?.length || 0) < 3) {
+      push(prefix, 'warn', 'verdict.whyItPasses', 'aim for 4-5 reasons');
+    }
+  }
+
+  if (c.readerQuestions.length < 5) {
+    push(prefix, 'warn', 'readerQuestions', `only ${c.readerQuestions.length}, aim for 5`);
+  }
+  if (!c.teacherNote?.why || c.teacherNote.why.length < 30) {
+    push(prefix, 'error', 'teacherNote.why', 'missing or too short');
+  }
+  if (!c.teacherNote?.trains?.length) {
+    push(prefix, 'error', 'teacherNote.trains', 'empty');
+  }
+}
+
+function validateStudyPlan(sp: StudyPlan) {
+  const prefix = `plan:${sp.id}`;
+  if (sp.weeks.length !== sp.durationWeeks) {
+    push(prefix, 'warn', 'weeks', `${sp.weeks.length} weeks vs durationWeeks=${sp.durationWeeks}`);
+  }
+  sp.weeks.forEach((w) => {
+    w.packs.forEach((pid) => {
+      if (!TOPIC_PACKS_BY_ID[pid]) {
+        push(prefix, 'error', `week ${w.weekIndex}.packs`, `unknown packId ${pid}`);
+      }
+    });
+    (w.capstones || []).forEach((cid) => {
+      if (!CAPSTONES.find((c) => c.id === cid)) {
+        push(prefix, 'warn', `week ${w.weekIndex}.capstones`, `unknown capstone ${cid} (OK during Phase B)`);
+      }
+    });
+  });
+}
+
 TOPIC_PACKS.forEach(validatePack);
+CAPSTONES.forEach(validateCapstone);
+STUDY_PLANS.forEach(validateStudyPlan);
 
 const errors = issues.filter((i) => i.severity === 'error');
 const warns = issues.filter((i) => i.severity === 'warn');
 const shippedCount = TOPIC_PACKS.filter((p) => p.status === 'shipped').length;
 const stubCount = TOPIC_PACKS.filter((p) => p.status === 'stub').length;
+const shippedCaps = CAPSTONES.filter((c) => c.status === 'shipped').length;
 
-console.log(`\nPack library validation — ${TOPIC_PACKS.length} total (${shippedCount} shipped, ${stubCount} stubs)`);
+console.log(`\nContent validation — ${TOPIC_PACKS.length} packs (${shippedCount} shipped, ${stubCount} stubs) · ${CAPSTONES.length} capstones (${shippedCaps} shipped) · ${STUDY_PLANS.length} study plans`);
 console.log(`Errors: ${errors.length} · Warnings: ${warns.length}\n`);
 
 const byPack = new Map<string, Issue[]>();

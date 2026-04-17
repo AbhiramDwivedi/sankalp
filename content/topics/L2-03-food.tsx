@@ -15,6 +15,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'ModernSociety',
   order: 15,
+  heroMotif: 'thali',
   titleHindi: 'खाना और व्यंजन',
   titleEnglish: 'Food (Level 2 Deep Dive)',
   hook: 'Level 2 moves beyond ordering — it teaches the student to describe cooking a dish, compare regional cuisines, and state opinions about food. Opinions + comparisons are where IM essays are made.',

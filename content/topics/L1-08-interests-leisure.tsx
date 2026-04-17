@@ -7,6 +7,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'Identity',
   order: 8,
+  heroMotif: 'cricket',
   titleHindi: 'रुचियाँ और मनोरंजन',
   titleEnglish: 'Interests & Leisure Activities',
   hook: '"What do you like?" is a guaranteed prompt. Arrive with five connected sentences, not five words.',

@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'ModernSociety',
   order: 11,
+  heroMotif: 'bazaar',
   titleHindi: 'बाज़ार और ख़रीदारी',
   titleEnglish: 'Shopping',
   hook: 'Transactional Hindi — polite requests, numbers, prices. Dense, practical, easy essay territory.',

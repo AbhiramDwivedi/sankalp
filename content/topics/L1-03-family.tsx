@@ -15,6 +15,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'Identity',
   order: 3,
+  heroMotif: 'family',
   titleHindi: 'मेरा परिवार',
   titleEnglish: 'My Family',
   hook: "FCPS's single most predictable essay topic — and a natural playground for past, present, and future tense.",

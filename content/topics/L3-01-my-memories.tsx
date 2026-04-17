@@ -18,6 +18,7 @@ export const pack: TopicPack = {
   level: 3,
   themeGroup: 'Identity',
   order: 24,
+  heroMotif: 'notebook',
   titleHindi: 'मेरी यादें',
   titleEnglish: 'My Memories',
   hook: 'Past tense narrative competence is THE gate to Intermediate-Mid. This pack is the gate key.',

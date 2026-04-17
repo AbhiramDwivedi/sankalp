@@ -15,6 +15,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'Identity',
   order: 7,
+  heroMotif: 'books',
   titleHindi: 'कक्षाएँ और स्कूल की चीज़ें',
   titleEnglish: 'Classes, Schedules & Supplies',
   hook: 'School vocabulary is the second-most-likely FCPS essay prompt. Own subjects, supplies, and the weekly schedule, and half the Level-1 prompt bank is solved.',

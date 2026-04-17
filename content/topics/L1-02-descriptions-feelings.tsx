@@ -15,6 +15,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'Identity',
   order: 2,
+  heroMotif: 'family',
   titleHindi: 'विवरण और भावनाएँ',
   titleEnglish: 'Descriptions, Personality, Feelings & Emotions',
   hook: 'Adjectives turn a list into a portrait — the shortest route from Novice to connected sentences.',

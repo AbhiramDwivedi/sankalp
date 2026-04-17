@@ -7,6 +7,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'ModernSociety',
   order: 22,
+  heroMotif: 'suitcase',
   titleHindi: 'यात्रा की योजनाएँ',
   titleEnglish: 'Travel Plans & Activities',
   hook: 'Future tense + "if...then" conditionals — unavoidable on any travel prompt.',

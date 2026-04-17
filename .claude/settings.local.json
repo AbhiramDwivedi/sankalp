@@ -13,7 +13,9 @@
       "WebFetch(domain:www.avantassessment.com)",
       "WebFetch(domain:www.oregon.gov)",
       "Bash(python -c \"import pypdf\")",
-      "Bash(pdftotext -layout webfetch-1776388433875-l8bhli.pdf stamp_content.txt)"
+      "Bash(pdftotext -layout webfetch-1776388433875-l8bhli.pdf stamp_content.txt)",
+      "Bash(npx tsc *)",
+      "Bash(npx tsx *)"
     ]
   }
 }

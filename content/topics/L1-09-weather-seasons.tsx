@@ -15,6 +15,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'Identity',
   order: 9,
+  heroMotif: 'umbrella',
   titleHindi: 'मौसम और ऋतुएँ',
   titleEnglish: 'Weather & Seasons',
   hook: 'Seasons force tense variety — summers were hot, winters will be cold, it is raining now.',

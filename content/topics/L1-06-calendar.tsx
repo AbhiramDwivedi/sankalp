@@ -7,6 +7,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'Identity',
   order: 6,
+  heroMotif: 'clock',
   titleHindi: 'दिन, महीने और कैलेंडर',
   titleEnglish: 'Days, Months & Calendar',
   hook: 'Temporal vocabulary is the raw material for time-frame shifts — the Intermediate-Mid lever.',

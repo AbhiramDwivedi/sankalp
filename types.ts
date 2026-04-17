@@ -81,6 +81,13 @@ export interface StudentProfile {
   aiAssessmentEnabled?: boolean;
   howThisWorksSeen?: boolean;
 
+  // Capstones + study plan + flashcards (second-phase additions):
+  selectedStudyPlanId?: string;
+  completedCapstoneIds?: string[];
+  inProgressCapstoneId?: string;
+  flashcardsSeen?: string[];
+  flashcardsMastered?: string[];
+
   // Legacy fields (kept optional so old localStorage records still parse):
   plan?: Unit[];
   completedLessonIds?: string[];
@@ -103,6 +110,11 @@ export function migrateProfile(raw: any): StudentProfile {
     evaluations: raw.evaluations || {},
     aiAssessmentEnabled: raw.aiAssessmentEnabled ?? false,
     howThisWorksSeen: raw.howThisWorksSeen ?? false,
+    selectedStudyPlanId: raw.selectedStudyPlanId,
+    completedCapstoneIds: Array.isArray(raw.completedCapstoneIds) ? raw.completedCapstoneIds : [],
+    inProgressCapstoneId: raw.inProgressCapstoneId,
+    flashcardsSeen: Array.isArray(raw.flashcardsSeen) ? raw.flashcardsSeen : [],
+    flashcardsMastered: Array.isArray(raw.flashcardsMastered) ? raw.flashcardsMastered : [],
     plan: raw.plan,
     completedLessonIds: raw.completedLessonIds,
     generatedMaterials: raw.generatedMaterials,

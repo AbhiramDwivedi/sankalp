@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'Identity',
   order: 16,
+  heroMotif: 'books',
   titleHindi: 'स्कूल की दिनचर्या',
   titleEnglish: 'Classes & School Routines',
   hook: 'The school day is a ready-made three-paragraph scaffold: morning, classes with opinions, closing bell with a reflection. Perfect for Benchmark 5.',

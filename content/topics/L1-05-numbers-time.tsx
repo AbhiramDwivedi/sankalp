@@ -7,6 +7,7 @@ export const pack: TopicPack = {
   level: 1,
   themeGroup: 'Identity',
   order: 5,
+  heroMotif: 'clock',
   titleHindi: 'गिनती और समय',
   titleEnglish: 'Numbers & Time',
   hook: 'Raters notice when a student says "बजकर पाँच मिनट" instead of "five past" — cheap rubric points.',

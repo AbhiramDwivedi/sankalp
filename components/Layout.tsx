@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BookOpen, Settings, Home, Users, ClipboardList } from 'lucide-react';
+import { BookOpen, Settings, Home, Users, ClipboardList, Flag, Calendar, Layers } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -20,6 +20,9 @@ export const Layout: React.FC<LayoutProps> = ({
   const navItems = [
     { id: 'dashboard', icon: <Home size={20} />, label: 'Dashboard' },
     { id: 'library', icon: <BookOpen size={20} />, label: 'Library' },
+    { id: 'capstones', icon: <Flag size={20} />, label: 'Capstones' },
+    { id: 'flashcards', icon: <Layers size={20} />, label: 'Flashcards' },
+    { id: 'plan', icon: <Calendar size={20} />, label: 'Plan' },
     { id: 'rubric', icon: <ClipboardList size={20} />, label: 'Rubric' },
     { id: 'settings', icon: <Settings size={20} />, label: 'Settings' },
   ];

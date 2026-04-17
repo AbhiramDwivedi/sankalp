@@ -13,6 +13,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'ModernSociety',
   order: 21,
+  heroMotif: 'diya',
   titleHindi: 'विशेष अवसर और त्योहार',
   titleEnglish: 'Special Events & Festivals',
   hook: 'Festival essays let students show past, present, and future tenses in one piece — the Text-Type 5 sweet spot.',

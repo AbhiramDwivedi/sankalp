@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   level: 2,
   themeGroup: 'Identity',
   order: 13,
+  heroMotif: 'sunrise',
   titleHindi: 'दैनिक दिनचर्या',
   titleEnglish: 'Daily Routine',
   hook: 'Sequence verbs + time markers — the fastest path from NH to IM paragraphs.',
