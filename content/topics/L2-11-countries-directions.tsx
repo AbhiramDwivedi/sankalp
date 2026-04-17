@@ -217,6 +217,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Home to school',
       prompt: 'अपने घर से अपने स्कूल (या किसी पसंदीदा जगह) तक का रास्ता तीन अनुच्छेदों में बताइए। भारत और अमेरिका के रास्तों की तुलना भी कीजिए।',
       novice: 'मेरा स्कूल पास है। मैं बस से जाता हूँ।',
       intermediateMid:
@@ -250,6 +251,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'India vs USA',
       prompt: 'भारत और अमेरिका (या अपने वर्तमान देश) की तुलना तीन अनुच्छेदों में कीजिए। भौगोलिक स्थिति, भाषा, और संस्कृति पर लिखिए।',
       novice: 'भारत अच्छा है। अमेरिका भी अच्छा है।',
       intermediateMid:

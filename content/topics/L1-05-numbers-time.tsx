@@ -310,6 +310,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'A typical Monday',
       prompt:
         'अपने एक सामान्य सोमवार के बारे में तीन अनुच्छेदों में लिखो। बताओ कि तुम किस समय क्या करते हो। (Write three paragraphs about a typical Monday of yours. Describe what you do at what time.)',
       novice: 'मैं सात बजे उठता हूँ। मैं स्कूल जाता हूँ। मैं रात को सोता हूँ।',
@@ -344,6 +345,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Tomorrow\'s plan',
       prompt:
         'कल के कार्यक्रम के बारे में तीन अनुच्छेदों में लिखिए। आप किस समय क्या करेंगे, और क्यों? (Write three paragraphs about tomorrow\'s plan. What will you do at what time, and why?)',
       novice: 'कल मैं उठूँगा। मैं स्कूल जाऊँगा। मैं खेलूँगा।',

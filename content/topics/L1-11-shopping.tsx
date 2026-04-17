@@ -337,6 +337,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Last shopping trip',
       prompt:
         'अपनी पिछली ख़रीदारी के अनुभव के बारे में तीन अनुच्छेदों में लिखो। बताओ कि तुम कहाँ गए, क्या ख़रीदा, और कितने पैसे लगे। (Write three paragraphs about your last shopping experience. Describe where you went, what you bought, and how much money it cost.)',
       novice:
@@ -373,6 +374,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Diwali shopping',
       prompt:
         'दिवाली की ख़रीदारी के बारे में अपने परिवार के साथ अपने अनुभव को तीन अनुच्छेदों में वर्णित करो। (Describe in three paragraphs your experience of Diwali shopping with your family.)',
       novice:

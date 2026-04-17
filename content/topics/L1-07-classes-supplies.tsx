@@ -321,6 +321,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'A school day',
       prompt:
         'अपने स्कूल के एक साधारण दिन के बारे में तीन अनुच्छेदों में लिखो। अपनी समय-सारिणी, अपने पसंदीदा विषय, और अपने बैग की चीज़ों का उल्लेख करो। (Write three paragraphs about a typical day at your school. Mention your schedule, your favorite subject, and the things in your bag.)',
       novice:
@@ -357,6 +358,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Favorite teacher',
       prompt:
         'अपने पसंदीदा विषय और अध्यापक के बारे में तीन अनुच्छेदों में लिखो। कल की एक याद, रोज़ की कक्षा, और आने वाली परीक्षा का उल्लेख करो। (Write three paragraphs about your favorite subject and teacher. Mention a memory from yesterday, your everyday class, and an upcoming test.)',
       novice:

@@ -318,6 +318,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Family meal',
       prompt: 'अपने परिवार के एक यादगार खाने के बारे में तीन अनुच्छेदों में लिखो। (Write in three paragraphs about a memorable family meal.)',
       novice:
         'मुझे खाना पसंद है। मेरी माँ अच्छी है। दाल अच्छी है।',
@@ -352,6 +353,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Restaurant outing',
       prompt:
         'एक रेस्तराँ में अपने दोस्त के साथ खाने के अनुभव को तीन अनुच्छेदों में लिखो। (In three paragraphs, describe an experience of eating at a restaurant with your friend.)',
       novice: 'हम रेस्तराँ गए। खाना अच्छा था। हम घर आए।',

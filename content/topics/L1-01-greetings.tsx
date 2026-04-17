@@ -323,6 +323,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Introduce yourself',
       prompt:
         'अपने आप का परिचय तीन अनुच्छेदों में दीजिए। अपना नाम, परिवार, और रुचियाँ बताइए। (In three paragraphs, introduce yourself. Tell us your name, family, and interests.)',
       novice: 'मेरा नाम अमन। मैं छात्र। अच्छा।',
@@ -358,6 +359,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Meeting a friend',
       prompt:
         'अपने स्कूल के एक नए दोस्त से मुलाक़ात का वर्णन तीन अनुच्छेदों में कीजिए। कब और कहाँ मिले, क्या बात की, और आगे क्या करेंगे — यह बताइए। (In three paragraphs, describe meeting a new friend at school. Tell when and where you met, what you talked about, and what you will do next.)',
       novice: 'मेरा दोस्त अच्छा। हम मिले। अच्छा लगा।',

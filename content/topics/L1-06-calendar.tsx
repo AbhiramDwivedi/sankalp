@@ -311,6 +311,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'A typical week',
       prompt:
         'अपने एक आम हफ़्ते के बारे में तीन अनुच्छेदों में लिखिए। बताइए कि आप हर दिन क्या करते हैं, आपको कौन-सा दिन सबसे अच्छा लगता है, और अगले हफ़्ते आप क्या करना चाहते हैं। (Write three paragraphs about a typical week of yours. Say what you do each day, which day you like best, and what you want to do next week.)',
       novice:
@@ -346,6 +347,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Favorite season',
       prompt:
         'अपने पसंदीदा महीने या मौसम के बारे में तीन अनुच्छेदों में लिखिए। बताइए कि वह महीना कब आता है, उसमें क्या होता है, और आपने पिछले साल उसमें क्या किया। (Write three paragraphs about your favorite month or season. Say when it comes, what happens in it, and what you did in it last year.)',
       novice:

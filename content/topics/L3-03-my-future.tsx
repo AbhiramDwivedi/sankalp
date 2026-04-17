@@ -334,6 +334,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Ten years from now',
       prompt:
         'दस साल बाद आप क्या करेंगे? तीन अनुच्छेदों में लिखिए — आपका बचपन का सपना, आज की तैयारी, और भविष्य की योजना। (What will you be doing ten years from now? Write in three paragraphs — your childhood dream, today\'s preparation, and future plan.)',
       novice: 'मैं डॉक्टर बनूँगा। मैं पढ़ता हूँ। बहुत अच्छा।',
@@ -371,6 +372,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Choosing a career',
       prompt:
         'अगर आपको अपना करियर चुनने की पूरी आज़ादी मिले, तो आप क्या बनेंगे और क्यों? तीन अनुच्छेदों में लिखिए। (If you had complete freedom to choose your career, what would you become and why? Write in three paragraphs.)',
       novice: 'मैं कलाकार बनूँगा। अच्छा लगता है। बस।',

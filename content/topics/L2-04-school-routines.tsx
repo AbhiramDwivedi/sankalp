@@ -338,6 +338,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'A typical day',
       prompt:
         'अपने स्कूल के एक सामान्य दिन के बारे में तीन अनुच्छेदों में लिखिए। बताइए कि आपको कौन-सा विषय पसंद है और क्यों।  (Write three paragraphs about a typical day at your school. Tell which subject you like and why.)',
       novice:
@@ -374,6 +375,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Exam day',
       prompt:
         'अपने जीवन के एक यादगार परीक्षा के दिन के बारे में तीन अनुच्छेदों में लिखिए। बताइए कि आपने कैसे तैयारी की, परीक्षा कैसी रही, और परिणाम से आपने क्या सीखा।  (Write three paragraphs about a memorable exam day in your life. Tell how you prepared, how the exam went, and what you learned from the result.)',
       novice: 'परीक्षा थी। मैं पढ़ा। नंबर अच्छे थे।',

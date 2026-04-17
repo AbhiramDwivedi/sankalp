@@ -334,6 +334,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Daily route',
       prompt:
         'अपने रोज़ के रास्ते और एक याद्दाश्त-भरी यात्रा के बारे में तीन अनुच्छेदों में लिखिए। (Write three paragraphs about your daily route and one memorable trip.)',
       novice:
@@ -371,6 +372,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Special place',
       prompt:
         'अपने शहर में एक ख़ास जगह तक पहुँचने का रास्ता और वहाँ क्या करते हैं, तीन अनुच्छेदों में बताइए। (In three paragraphs, describe the route to a special place in your city and what you do there.)',
       novice: 'मैं पार्क जाता हूँ। पार्क अच्छा है। मैं खेलता हूँ।',

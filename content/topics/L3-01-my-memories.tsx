@@ -348,6 +348,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'A childhood memory',
       prompt: 'अपनी बचपन की सबसे यादगार याद के बारे में तीन अनुच्छेदों में लिखिए। (Write in three paragraphs about the most memorable memory from your childhood.)',
       novice: 'मेरा बचपन अच्छा था। मेरी दादी अच्छी थी। मुझे खुशी थी।',
       intermediateMid:
@@ -384,6 +385,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'A family memory',
       prompt:
         'अपने परिवार की किसी एक ख़ास याद के बारे में तीन अनुच्छेदों में लिखिए — कौन था, क्या हुआ, और आपको आज भी क्यों याद है। (Write in three paragraphs about one special memory of your family — who was there, what happened, and why you still remember it.)',
       novice: 'मेरा परिवार अच्छा है। हम भारत गए। हमें मज़ा आया।',

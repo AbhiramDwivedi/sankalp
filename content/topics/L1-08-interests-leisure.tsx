@@ -309,6 +309,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Favorite activities',
       prompt: 'आपको क्या करना पसंद है? अपनी तीन पसंदीदा गतिविधियों के बारे में तीन अनुच्छेदों में लिखिए। (What do you like to do? Write three paragraphs about your three favorite activities.)',
       novice: 'मुझे क्रिकेट पसंद है। गाने अच्छे हैं। मैं खेलता हूँ।',
       intermediateMid:
@@ -343,6 +344,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'A fun day out',
       prompt:
         'अपने परिवार और दोस्तों के साथ बिताए एक मज़ेदार समय के बारे में तीन अनुच्छेदों में लिखिए। बताइए कि आपने क्या किया और क्यों अच्छा लगा। (Write three paragraphs about a fun time spent with family and friends. Describe what you did and why it felt good.)',
       novice: 'हम पार्क गए। हमने खेला। अच्छा था।',

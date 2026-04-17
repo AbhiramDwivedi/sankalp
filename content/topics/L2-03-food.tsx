@@ -335,6 +335,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Cooking with elder',
       prompt: 'अपने परिवार के किसी बुज़ुर्ग के साथ खाना बनाने के अनुभव को तीन अनुच्छेदों में लिखिए। (In three paragraphs, write about the experience of cooking with an elder in your family.)',
       novice:
         'मैंने दादी के साथ खाना बनाया। खाना अच्छा था। मुझे पसंद है।',
@@ -370,6 +371,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'North vs south',
       prompt:
         'भारत के किन्हीं दो प्रांतीय व्यंजनों की तुलना कीजिए, और बताइए आप कौन सा ज़्यादा पसंद करते हैं — तीन अनुच्छेदों में। (Compare any two regional cuisines of India, and say which you prefer more — in three paragraphs.)',
       novice:

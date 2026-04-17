@@ -321,6 +321,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'A memorable activity',
       prompt: 'अपने स्कूल की किसी यादगार गतिविधि के बारे में तीन अनुच्छेदों में लिखो। (Write three paragraphs about a memorable activity at your school.)',
       novice:
         'मुझे स्कूल पसंद है। हमने मैच खेला। हम जीते।',
@@ -356,6 +357,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'School picnic',
       prompt:
         'अपनी स्कूल की किसी शैक्षिक यात्रा या पिकनिक के बारे में तीन अनुच्छेदों में लिखो। (Write three paragraphs about an educational trip or picnic your school went on.)',
       novice: 'हम यात्रा पर गए। खाना अच्छा था। हम घर आए।',

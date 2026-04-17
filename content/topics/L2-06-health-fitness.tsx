@@ -328,6 +328,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'My fitness routine',
       prompt:
         'अपनी सेहत का ध्यान रखने के लिए आप क्या करते हैं? तीन अनुच्छेदों में लिखिए। (What do you do to take care of your health? Write in three paragraphs.)',
       novice:
@@ -363,6 +364,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Student health (opinion)',
       prompt:
         'क्या आजकल के छात्र अपनी सेहत का पर्याप्त ध्यान रखते हैं? अपनी राय तीन अनुच्छेदों में दीजिए। (Do today\'s students take enough care of their health? Give your opinion in three paragraphs.)',
       novice: 'छात्र बीमार हैं। फ़ोन बुरा है। व्यायाम अच्छा है।',

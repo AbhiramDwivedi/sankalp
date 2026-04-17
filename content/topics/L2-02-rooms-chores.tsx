@@ -313,6 +313,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Rooms & chores',
       prompt: 'अपने घर के कमरों और घर में काम कैसे बँटे हैं, इसके बारे में तीन अनुच्छेदों में लिखिए। (Write three paragraphs about the rooms of your house and how chores are divided.)',
       novice:
         'मेरा घर अच्छा है। माँ काम करती है। मैं कमरा साफ़ करता हूँ।',
@@ -348,6 +349,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Saturday chores',
       prompt:
         'पिछले शनिवार आपने घर में क्या-क्या काम किया और इस शनिवार क्या करेंगे? तीन अनुच्छेदों में लिखिए। (What chores did you do last Saturday, and what will you do this Saturday? Write three paragraphs.)',
       novice:

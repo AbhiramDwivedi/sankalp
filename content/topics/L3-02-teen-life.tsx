@@ -336,6 +336,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Teen challenges',
       prompt:
         'किशोर जीवन का सबसे बड़ा चैलेंज क्या है? अपनी राय तीन अनुच्छेदों में लिखो। (What is the biggest challenge of teen life? Write your opinion in three paragraphs.)',
       novice:
@@ -372,6 +373,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Social media',
       prompt:
         'किशोरों के जीवन में सोशल मीडिया की क्या भूमिका होनी चाहिए? अपनी राय तीन अनुच्छेदों में लिखो। (What should be the role of social media in teenagers\' lives? Write your opinion in three paragraphs.)',
       novice:

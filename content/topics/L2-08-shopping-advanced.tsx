@@ -200,6 +200,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Online vs market',
       prompt: 'ऑनलाइन ख़रीदारी और बाज़ार की तुलना तीन अनुच्छेदों में कीजिए। अपनी राय दीजिए और उदाहरण दीजिए।',
       novice: 'ऑनलाइन अच्छा है। बाज़ार भी ठीक है।',
       intermediateMid:
@@ -233,6 +234,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Festival shopping',
       prompt: 'त्योहारी ख़रीदारी पर अपने अनुभव का वर्णन तीन अनुच्छेदों में कीजिए। कोई समस्या भी शामिल कीजिए।',
       novice: 'मैंने कपड़े ख़रीदे। अच्छे थे। मुझे मज़ा आया।',
       intermediateMid:

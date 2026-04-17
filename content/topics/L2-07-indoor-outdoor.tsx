@@ -196,6 +196,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Weekend activities',
       prompt: 'अपने सप्ताहांत की गतिविधियों के बारे में तीन अनुच्छेदों में लिखिए। बताइए अगर मौसम अच्छा हो तो आप क्या करते हैं, और अगर बारिश हो तो क्या।',
       novice: 'मैं क्रिकेट खेलता हूँ। बारिश में टीवी देखता हूँ।',
       intermediateMid:
@@ -228,6 +229,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Indoor vs outdoor',
       prompt: 'इनडोर और आउटडोर गतिविधियों में आपकी क्या पसंद है? तीन अनुच्छेदों में तुलना कीजिए।',
       novice: 'मुझे बाहर अच्छा लगता है। अंदर भी ठीक है।',
       intermediateMid:

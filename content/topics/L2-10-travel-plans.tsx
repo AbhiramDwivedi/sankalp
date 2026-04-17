@@ -312,6 +312,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Next vacation',
       prompt:
         'अपने परिवार की अगली छुट्टी की योजना के बारे में तीन अनुच्छेदों में लिखिए। बताइए कि आप कहाँ जाएँगे, क्यों, और वहाँ क्या करेंगे। (Write three paragraphs about your family\'s next vacation plan. Explain where you will go, why, and what you will do there.)',
       novice:
@@ -348,6 +349,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Showing India',
       prompt:
         'अगर आपको अपने किसी दोस्त को भारत में एक जगह दिखानी हो, तो आप कहाँ ले जाएँगे और क्यों? तीन अनुच्छेदों में लिखिए। (If you had to show a friend one place in India, where would you take them and why? Write in three paragraphs.)',
       novice:

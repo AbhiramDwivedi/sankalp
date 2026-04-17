@@ -320,6 +320,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Family portrait',
       prompt: 'अपने परिवार के बारे में तीन अनुच्छेदों में लिखिए। बताइए कि आपके परिवार में कौन-कौन है, आप साथ क्या करते हैं, और आगे आप क्या करना चाहेंगे। (Write three paragraphs about your family. Describe who is in your family, what you do together, and what you would like to do in the future.)',
       novice: 'मेरा परिवार अच्छा है। मेरी माँ है। मेरे पिताजी हैं।',
       intermediateMid:
@@ -355,6 +356,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'A family day',
       prompt:
         'अपने परिवार के किसी एक यादगार दिन के बारे में तीन अनुच्छेदों में लिखिए — क्या हुआ, आपको कैसा लगा, और आप उस दिन को फिर से क्यों जीना चाहेंगे। (In three paragraphs, describe one memorable day with your family — what happened, how you felt, and why you would like to relive it.)',
       novice: 'एक दिन हम गाँव गए। सब अच्छा था। हम ख़ुश थे।',

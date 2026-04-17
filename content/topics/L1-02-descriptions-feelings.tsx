@@ -320,6 +320,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Best friend',
       prompt:
         'अपने सबसे अच्छे दोस्त के बारे में तीन अनुच्छेदों में लिखो। उसका रूप, स्वभाव, और वह आपको कैसा महसूस कराता/कराती है। (Write three paragraphs about your best friend: appearance, personality, and how they make you feel.)',
       novice:
@@ -355,6 +356,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Family member',
       prompt:
         'अपने परिवार के एक सदस्य का वर्णन तीन अनुच्छेदों में कीजिए। उनका रूप, स्वभाव, और आप उनसे कुछ क्यों सीखते हैं। (Describe a family member in three paragraphs: appearance, personality, and why you learn from them.)',
       novice:

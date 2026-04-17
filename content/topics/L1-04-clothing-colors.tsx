@@ -332,6 +332,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'Wedding outfit',
       prompt:
         'अपने परिवार में किसी शादी के लिए तैयार होने के बारे में तीन अनुच्छेदों में लिखिए। बताइए कि आपने क्या पहना, क्यों पहना, और वह दिन कैसा रहा। (Write three paragraphs about getting ready for a wedding in your family. Describe what you wore, why, and how the day went.)',
       novice: 'मेरे भाई की शादी थी। मैंने कपड़े पहने। अच्छा दिन था।',
@@ -367,6 +368,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Festival outfit',
       prompt:
         'दिवाली या होली जैसे किसी त्योहार के दिन आप क्या पहनते हैं? तीन अनुच्छेदों में बताइए — कपड़े, रंग, और क्यों। (What do you wear on a festival day like Diwali or Holi? Explain in three paragraphs — clothes, colors, and why.)',
       novice: 'दिवाली पर मैं कुर्ता पहनता हूँ। रंग अच्छा है। मुझे दिवाली पसंद है।',
