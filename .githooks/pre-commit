@@ -1,0 +1,12 @@
+#!/bin/sh
+# Pre-commit hook: runs the full gate before allowing a commit.
+# Bypass in emergencies only: git commit --no-verify
+# Subagents must NEVER use --no-verify.
+
+echo "pre-commit: running npm run check..."
+if ! npm run check --silent; then
+  echo ""
+  echo "pre-commit: npm run check failed. Fix the issues above, then retry."
+  echo "Emergency bypass (humans only, never subagents): git commit --no-verify"
+  exit 1
+fi
