@@ -48,7 +48,7 @@ export const RubricReferenceView: React.FC<RubricReferenceViewProps> = ({ onBack
               <td className="p-3 text-slate-700 align-top max-w-xs">{b.textType}</td>
               <td className="p-3 text-slate-700 align-top max-w-xs">{b.languageControl}</td>
               <td className="p-3 font-black text-slate-900 align-top">
-                {b.creditCount === 0 ? '—' : b.creditCount}
+                {b.creditCount === 0 ? '-' : b.creditCount}
                 {b.benchmark === TARGET_BENCHMARK && (
                   <div className="mt-1">
                     <Badge tone="green" size="xs">TARGET</Badge>

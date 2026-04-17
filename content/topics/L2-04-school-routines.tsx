@@ -19,12 +19,12 @@ export const pack: TopicPack = {
   titleEnglish: 'Classes & School Routines',
   hook: 'The school day is a ready-made three-paragraph scaffold: morning, classes with opinions, closing bell with a reflection. Perfect for Benchmark 5.',
   heroPrompt: composeHeroPrompt(
-    'A stylized Indian school-day timeline — a morning assembly courtyard with a flag, a classroom with a chalkboard and rows of desks, a playground with a cricket bat leaning on a bench, and a library nook with open notebooks, all linked by soft arrows in kurta-orange and teal',
+    'A stylized Indian school-day timeline - a morning assembly courtyard with a flag, a classroom with a chalkboard and rows of desks, a playground with a cricket bat leaning on a bench, and a library nook with open notebooks, all linked by soft arrows in kurta-orange and teal',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Classes and School Routines (FCPS Level 2 — Student Life)',
+      'Classes and School Routines (FCPS Level 2 - Student Life)',
       'Extends L1-07 (Classes, Schedules & Supplies) from naming objects into opinions and comparisons',
       'Feeds L2-05 (School Activities) with shared routine vocabulary',
     ],
@@ -112,21 +112,21 @@ export const pack: TopicPack = {
     why:
       'L1-07 teaches objects (किताब, कक्षा). This list pushes to the next rung: routines, opinions, comparisons, exams, and the people-dynamics raters expect at Intermediate-Mid. Every word shows up in the anchor, model texts, or model essays. Learn the 30, and a school-topic prompt becomes unmissable Topic-Coverage.',
     trains: ['TopicCoverage'],
-    examLink: 'STAMP Topic Coverage: "vocabulary specific to the theme." FCPS L2 rubric explicitly names "Student Life — classes, schedules, routines" as a target domain.',
+    examLink: 'STAMP Topic Coverage: "vocabulary specific to the theme." FCPS L2 rubric explicitly names "Student Life - classes, schedules, routines" as a target domain.',
   },
 
   grammar: [
     {
       title: 'Causal opinions with मुझे ___ पसंद है, क्योंकि ___',
       rule:
-        'A single opinion sentence is Novice-Mid. Attaching क्योंकि + a full clause turns it into Intermediate-Mid. The subject of the क्योंकि-clause must carry a verb (मुश्किल है, रोचक होता है — not just an adjective floating).',
+        'A single opinion sentence is Novice-Mid. Attaching क्योंकि + a full clause turns it into Intermediate-Mid. The subject of the क्योंकि-clause must carry a verb (मुश्किल है, रोचक होता है - not just an adjective floating).',
       examples: [
         { hindi: 'मुझे हिंदी पसंद है, क्योंकि यह विषय रोचक है।', transliteration: 'mujhe hindi pasand hai, kyonki yah vishay rochak hai.', english: 'I like Hindi, because this subject is interesting.' },
         { hindi: 'मुझे गणित पसंद नहीं है, क्योंकि सवाल मेरी समझ में नहीं आते।', transliteration: 'mujhe ganit pasand nahin hai, kyonki savaal meri samajh mein nahin aate.', english: "I don't like math, because the questions don't come into my understanding." },
         { hindi: 'मुझे विज्ञान अच्छा लगता है, क्योंकि अध्यापिका अच्छे से समझाती हैं।', transliteration: 'mujhe vigyaan achchha lagta hai, kyonki adhyaapika achchhe se samjhaati hain.', english: 'I like science, because the teacher explains well.' },
       ],
       pitfall:
-        'Students often drop the verb after क्योंकि and write "क्योंकि रोचक" — incomplete clause. The rubric reads this as a word-list, not a sentence.',
+        'Students often drop the verb after क्योंकि and write "क्योंकि रोचक" - incomplete clause. The rubric reads this as a word-list, not a sentence.',
       whyItMatters:
         'Benchmark 5 requires "connected sentences with groupings of ideas." A क्योंकि-clause is the cleanest way to prove you can connect two ideas. One such sentence per paragraph and Text-Type stabilizes at 5.',
     },
@@ -140,7 +140,7 @@ export const pack: TopicPack = {
         { hindi: 'अंग्रेज़ी से हिंदी मुझे ज़्यादा रोचक लगती है।', transliteration: 'angrezi se hindi mujhe zyaada rochak lagti hai.', english: 'Hindi feels more interesting to me than English. (feminine agreement: हिंदी → लगती)' },
       ],
       pitfall:
-        'Reversing to "हिंदी से गणित ज़्यादा आसान" accidentally says "math is easier than Hindi" — the opposite meaning. The item AFTER से is the baseline; the item before the adjective is the one being judged.',
+        'Reversing to "हिंदी से गणित ज़्यादा आसान" accidentally says "math is easier than Hindi" - the opposite meaning. The item AFTER से is the baseline; the item before the adjective is the one being judged.',
       whyItMatters:
         'Comparison is an Intermediate-Mid hallmark on the STAMP rubric. Two clean comparisons in an essay push both Language Control and Text-Type upward at the same time.',
     },
@@ -161,14 +161,14 @@ export const pack: TopicPack = {
     {
       title: 'Stating opinions with मुझे लगता है कि ___',
       rule:
-        'To express a personal judgment (not a fact), open the clause with मुझे लगता है कि — "it seems to me that." Everything after कि is a complete sentence.',
+        'To express a personal judgment (not a fact), open the clause with मुझे लगता है कि - "it seems to me that." Everything after कि is a complete sentence.',
       examples: [
         { hindi: 'मुझे लगता है कि हिंदी सबसे रोचक विषय है।', transliteration: 'mujhe lagta hai ki hindi sabse rochak vishay hai.', english: 'I think that Hindi is the most interesting subject.' },
         { hindi: 'मुझे लगता है कि परीक्षाएँ बहुत ज़रूरी हैं।', transliteration: 'mujhe lagta hai ki pareekshaayen bahut zaroori hain.', english: 'I think that exams are very necessary.' },
         { hindi: 'मुझे लगता है कि अनुशासन से सफलता मिलती है।', transliteration: 'mujhe lagta hai ki anushaasan se safalta milti hai.', english: 'I think that success comes from discipline.' },
       ],
       pitfall:
-        'Writing "मैं लगता है" is wrong — the construction requires मुझे (dative "to me"), not मैं (nominative). Think of it as "it seems TO ME."',
+        'Writing "मैं लगता है" is wrong - the construction requires मुझे (dative "to me"), not मैं (nominative). Think of it as "it seems TO ME."',
       whyItMatters:
         'Intermediate-Mid essays need reflective closings. मुझे लगता है कि is the single most reliable opener for a final-paragraph reflection that raters mark as "generalizes beyond the event."',
     },
@@ -192,7 +192,7 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'पहले / फिर / इसके बाद scaffold the morning-to-evening flow. क्योंकि / इसलिए / लेकिन carry the opinions and contrasts the topic demands. जब ... तब links a repeating routine to its trigger. इसके अलावा stacks evidence. मुझे लगता है कि anchors the reflective closing. Nine connectors — use four to six per essay.',
+      'पहले / फिर / इसके बाद scaffold the morning-to-evening flow. क्योंकि / इसलिए / लेकिन carry the opinions and contrasts the topic demands. जब ... तब links a repeating routine to its trigger. इसके अलावा stacks evidence. मुझे लगता है कि anchors the reflective closing. Nine connectors - use four to six per essay.',
     trains: ['TextType'],
   },
 
@@ -205,18 +205,18 @@ export const pack: TopicPack = {
     english:
       'Every morning I wake up at seven and, after putting on my uniform, go to school. First we do the morning prayer in the ground, then the first period begins. I like Hindi the best, because the teacher explains every lesson very well. Hindi feels easier to me than math, but I work hard in math too. When the bell rings, then we eat in the recess and chat with classmates. After this is playtime, which is the most fun. Yesterday we had our science exam, so I memorized all night. Finally, dismissal happens at three. I think that school is not only a place of study, but also teaches friendship and discipline.',
     highlights: [
-      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors move the reader from 7 AM to 3 PM. Sentences cannot be reordered — Text-Type 5 signal.' },
+      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors move the reader from 7 AM to 3 PM. Sentences cannot be reordered - Text-Type 5 signal.' },
       { term: 'क्योंकि / लेकिन / इसलिए', note: 'Three reasoning connectors thread opinion, contrast, and consequence. Raters mark this as "connected ideas."' },
-      { term: 'गणित से हिंदी ज़्यादा आसान लगती है', note: 'X से Y ज़्यादा construction — a comparison, not a list. This is the level-2 lift over L1-07.' },
-      { term: 'कल ... परीक्षा थी / मैंने याद किया', note: 'Past tense with correct ने-construction (मैंने याद किया) — proves tense control mid-paragraph.' },
-      { term: 'मुझे लगता है कि ... सिर्फ़ ... बल्कि ... भी', note: 'Reflective closing with "not only ... but also" — the most reliable Benchmark-5 finisher.' },
-      { term: 'सुबह की प्रार्थना / वर्दी / अनुशासन', note: 'Three culturally specific Indian-school markers — Topic Coverage lift.' },
+      { term: 'गणित से हिंदी ज़्यादा आसान लगती है', note: 'X से Y ज़्यादा construction - a comparison, not a list. This is the level-2 lift over L1-07.' },
+      { term: 'कल ... परीक्षा थी / मैंने याद किया', note: 'Past tense with correct ने-construction (मैंने याद किया) - proves tense control mid-paragraph.' },
+      { term: 'मुझे लगता है कि ... सिर्फ़ ... बल्कि ... भी', note: 'Reflective closing with "not only ... but also" - the most reliable Benchmark-5 finisher.' },
+      { term: 'सुबह की प्रार्थना / वर्दी / अनुशासन', note: 'Three culturally specific Indian-school markers - Topic Coverage lift.' },
     ],
     comprehensionQuestions: [
       { q: 'At what time does the narrator wake up?', a: 'सात बजे (seven o\'clock).' },
       { q: 'What happens in the maidaan before classes begin?', a: 'सुबह की प्रार्थना (the morning prayer / assembly).' },
       { q: 'Which subject does the narrator like best, and why?', a: 'हिंदी, क्योंकि the अध्यापिका explains every lesson very well.' },
-      { q: 'According to the narrator, is Hindi easier or harder than math?', a: 'Easier — "गणित से हिंदी ज़्यादा आसान लगती है."' },
+      { q: 'According to the narrator, is Hindi easier or harder than math?', a: 'Easier - "गणित से हिंदी ज़्यादा आसान लगती है."' },
       { q: 'What happened the day before the passage is set?', a: 'A विज्ञान (science) परीक्षा, which she studied all night for.' },
       { q: 'Identify two sequence connectors and one reasoning connector in the passage.', a: 'Sequence: पहले, फिर, इसके बाद, अंत में (any two). Reasoning: क्योंकि, लेकिन, or इसलिए.' },
       { q: 'What is the narrator\'s reflective claim about school in the closing sentence?', a: 'School is not only a place of study, but also teaches friendship and discipline (दोस्ती और अनुशासन).' },
@@ -224,7 +224,7 @@ export const pack: TopicPack = {
   },
   anchorNote: {
     why:
-      'This passage is a template for every school-topic essay in this pack. It shifts across past (कल परीक्षा थी), present habitual (उठती हूँ, जाती हूँ), and implied future (the reflective claim). Read it three times. The student\'s own essay should have this density — four sequence connectors, three reasoning connectors, one comparison, one reflection.',
+      'This passage is a template for every school-topic essay in this pack. It shifts across past (कल परीक्षा थी), present habitual (उठती हूँ, जाती हूँ), and implied future (the reflective claim). Read it three times. The student\'s own essay should have this density - four sequence connectors, three reasoning connectors, one comparison, one reflection.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -263,11 +263,11 @@ export const pack: TopicPack = {
       kind: 'announcement',
       title: 'सूचना पट्ट · Notice Board',
       hindi:
-        'सभी छात्रों को सूचित किया जाता है कि सोमवार से वार्षिक परीक्षाएँ शुरू होंगी। समय-सारणी सूचना पट्ट पर लगी है। कृपया वर्दी में, और ठीक ८ बजे आएँ। देर से आने वालों को परीक्षा-हॉल में प्रवेश नहीं मिलेगा। — प्राचार्य',
+        'सभी छात्रों को सूचित किया जाता है कि सोमवार से वार्षिक परीक्षाएँ शुरू होंगी। समय-सारणी सूचना पट्ट पर लगी है। कृपया वर्दी में, और ठीक ८ बजे आएँ। देर से आने वालों को परीक्षा-हॉल में प्रवेश नहीं मिलेगा। - प्राचार्य',
       transliteration:
-        'sabhi chhaatron ko soochit kiya jaata hai ki somvaar se vaarshik pareekshaayen shuru hongi. samay-saarni soochna patt par lagi hai. kripaya vardee mein, aur theek 8 baje aayen. der se aane vaalon ko pareeksha-haal mein pravesh nahin milega. — Praachaarya',
+        'sabhi chhaatron ko soochit kiya jaata hai ki somvaar se vaarshik pareekshaayen shuru hongi. samay-saarni soochna patt par lagi hai. kripaya vardee mein, aur theek 8 baje aayen. der se aane vaalon ko pareeksha-haal mein pravesh nahin milega. - Praachaarya',
       english:
-        "All students are informed that the annual exams will begin from Monday. The timetable is on the notice board. Please come in uniform, and at exactly 8 AM. Those arriving late will not be allowed entry into the exam hall. — Principal",
+        "All students are informed that the annual exams will begin from Monday. The timetable is on the notice board. Please come in uniform, and at exactly 8 AM. Those arriving late will not be allowed entry into the exam hall. - Principal",
     },
   ],
   modelTextsNote: {
@@ -280,37 +280,37 @@ export const pack: TopicPack = {
     {
       title: 'Morning Assembly (सुबह की प्रार्थना)',
       body:
-        'Most Indian schools begin the day with the whole school gathered in the maidaan — national anthem, a prayer, and announcements from the principal. Mentioning सुबह की प्रार्थना instantly anchors an essay in an Indian (not generic Western) school.',
+        'Most Indian schools begin the day with the whole school gathered in the maidaan - national anthem, a prayer, and announcements from the principal. Mentioning सुबह की प्रार्थना instantly anchors an essay in an Indian (not generic Western) school.',
       emoji: '🙏',
     },
     {
       title: 'The Uniform as Equalizer',
       body:
-        'Students from every economic background wear the same vardee — often navy-and-white or khaki. The uniform is discussed openly as a tool of equality and discipline, not fashion. A sentence like "हम सब वर्दी में बराबर दिखते हैं" reads as authentically Indian.',
+        'Students from every economic background wear the same vardee - often navy-and-white or khaki. The uniform is discussed openly as a tool of equality and discipline, not fashion. A sentence like "हम सब वर्दी में बराबर दिखते हैं" reads as authentically Indian.',
       emoji: '👕',
     },
     {
       title: 'Teacher Respect (गुरु-शिष्य परंपरा)',
       body:
-        'Students stand up when a teacher enters, call them गुरुजी / अध्यापिका जी, and do not interrupt. This respect-register shows up in writing as polite plurals (अध्यापिका समझाती हैं — plural verb for singular teacher).',
+        'Students stand up when a teacher enters, call them गुरुजी / अध्यापिका जी, and do not interrupt. This respect-register shows up in writing as polite plurals (अध्यापिका समझाती हैं - plural verb for singular teacher).',
       emoji: '🙇',
     },
     {
       title: 'Exam Pressure is a Shared Story',
       body:
-        'Board exams (बोर्ड की परीक्षा) in class 10 and 12 are a national ritual — families fast, neighbors ask about results, newspapers publish toppers. An essay that acknowledges this pressure ("परीक्षा के दिनों में पूरा घर शांत रहता है") reads as lived experience, not textbook Hindi.',
+        'Board exams (बोर्ड की परीक्षा) in class 10 and 12 are a national ritual - families fast, neighbors ask about results, newspapers publish toppers. An essay that acknowledges this pressure ("परीक्षा के दिनों में पूरा घर शांत रहता है") reads as lived experience, not textbook Hindi.',
       emoji: '📚',
     },
     {
       title: 'Chalkboard + Notebook, Not Laptop',
       body:
-        "Most Indian classrooms still run on a चॉक-बोर्ड (chalkboard) and हस्तलिखित नोट्स (handwritten notes) — not Chromebooks. If you are writing about an Indian school, keep the tech low. If you are writing about your FCPS school, name the difference — raters notice.",
+        "Most Indian classrooms still run on a चॉक-बोर्ड (chalkboard) and हस्तलिखित नोट्स (handwritten notes) - not Chromebooks. If you are writing about an Indian school, keep the tech low. If you are writing about your FCPS school, name the difference - raters notice.",
       emoji: '📓',
     },
   ],
   culturalNote: {
     why:
-      'One specific Indian-school detail — morning prayer, uniform equality, teacher-plural-respect, or board-exam pressure — lifts a school essay out of the generic pile. Raters reading 40 school essays in a row remember the one that mentioned the maidaan assembly. Pick one detail; plant it in paragraph two.',
+      'One specific Indian-school detail - morning prayer, uniform equality, teacher-plural-respect, or board-exam pressure - lifts a school essay out of the generic pile. Raters reading 40 school essays in a row remember the one that mentioned the maidaan assembly. Pick one detail; plant it in paragraph two.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -332,7 +332,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Both idioms fit school essays naturally: one for the star-student trope, one for a punishing exam. Drop ONE into your essay — idioms signal register mastery, but two feel performative and raters notice.',
+      'Both idioms fit school essays naturally: one for the star-student trope, one for a punishing exam. Drop ONE into your essay - idioms signal register mastery, but two feel performative and raters notice.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -344,16 +344,16 @@ export const pack: TopicPack = {
       novice:
         'मेरा स्कूल अच्छा है। मुझे हिंदी पसंद है। हम खेलते हैं।',
       intermediateMid:
-        'मैं हर सुबह सात बजे उठती हूँ और वर्दी पहनकर स्कूल जाती हूँ। पहले हम मैदान में सुबह की प्रार्थना करते हैं, फिर पहला घंटा शुरू होता है। हमारी समय-सारणी में छह विषय हैं — हिंदी, गणित, विज्ञान, इतिहास, अंग्रेज़ी और खेल। जब घंटी बजती है, तब हम एक कक्षा से दूसरी में जाते हैं।\n\nमुझे हिंदी सबसे अच्छी लगती है, क्योंकि हमारी अध्यापिका हर पाठ बहुत अच्छे से समझाती हैं और रोचक कहानियाँ भी बताती हैं। गणित से हिंदी मुझे ज़्यादा आसान लगती है, लेकिन मैं गणित में भी मेहनत करती हूँ, इसलिए परिणाम ठीक आता है। मध्यांतर में मैं सहपाठियों के साथ खाना खाती हूँ और बातें करती हूँ।\n\nमुझे लगता है कि स्कूल सिर्फ़ पढ़ाई की जगह नहीं है, बल्कि दोस्ती और अनुशासन भी सिखाता है। अगले महीने हमारी परीक्षा होगी, इसलिए मैं रोज़ एक घंटा ज़्यादा पढ़ूँगी। मुझे उम्मीद है कि इस बार मुझे अच्छे नंबर मिलेंगे।',
+        'मैं हर सुबह सात बजे उठती हूँ और वर्दी पहनकर स्कूल जाती हूँ। पहले हम मैदान में सुबह की प्रार्थना करते हैं, फिर पहला घंटा शुरू होता है। हमारी समय-सारणी में छह विषय हैं - हिंदी, गणित, विज्ञान, इतिहास, अंग्रेज़ी और खेल। जब घंटी बजती है, तब हम एक कक्षा से दूसरी में जाते हैं।\n\nमुझे हिंदी सबसे अच्छी लगती है, क्योंकि हमारी अध्यापिका हर पाठ बहुत अच्छे से समझाती हैं और रोचक कहानियाँ भी बताती हैं। गणित से हिंदी मुझे ज़्यादा आसान लगती है, लेकिन मैं गणित में भी मेहनत करती हूँ, इसलिए परिणाम ठीक आता है। मध्यांतर में मैं सहपाठियों के साथ खाना खाती हूँ और बातें करती हूँ।\n\nमुझे लगता है कि स्कूल सिर्फ़ पढ़ाई की जगह नहीं है, बल्कि दोस्ती और अनुशासन भी सिखाता है। अगले महीने हमारी परीक्षा होगी, इसलिए मैं रोज़ एक घंटा ज़्यादा पढ़ूँगी। मुझे उम्मीद है कि इस बार मुझे अच्छे नंबर मिलेंगे।',
       annotations: [
         { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर', note: 'Two sequence connectors in one sentence lock the morning timeline.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'वर्दी, सुबह की प्रार्थना, समय-सारणी, घंटी', note: 'Four L2-specific school terms — none of these appear in L1-07. Topic Coverage signal.' },
-        { paragraphIndex: 0, kind: 'structure', highlight: 'जब घंटी बजती है, तब हम ... जाते हैं', note: 'जब-तब routine clause — linking trigger and action in one sentence.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'वर्दी, सुबह की प्रार्थना, समय-सारणी, घंटी', note: 'Four L2-specific school terms - none of these appear in L1-07. Topic Coverage signal.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'जब घंटी बजती है, तब हम ... जाते हैं', note: 'जब-तब routine clause - linking trigger and action in one sentence.' },
         { paragraphIndex: 1, kind: 'connector', highlight: 'क्योंकि ... इसलिए', note: 'Causal + consequence. Opinion with a full reason attached, not a stand-alone claim.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'गणित से हिंदी मुझे ज़्यादा आसान लगती है', note: 'X से Y ज़्यादा comparison with feminine agreement (लगती) — clean Language Control.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... बल्कि ... भी', note: 'Not-only-but-also — the Intermediate-Mid reflective closer.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले महीने ... पढ़ूँगी / मिलेंगे', note: 'Future tense enters in paragraph 3 — three time frames in 140 words = Benchmark 5.' },
-        { paragraphIndex: 2, kind: 'cultural', highlight: 'अनुशासन भी सिखाता है', note: 'Generalizes the school-as-character-builder trope — authentically Indian framing.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'गणित से हिंदी मुझे ज़्यादा आसान लगती है', note: 'X से Y ज़्यादा comparison with feminine agreement (लगती) - clean Language Control.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... बल्कि ... भी', note: 'Not-only-but-also - the Intermediate-Mid reflective closer.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले महीने ... पढ़ूँगी / मिलेंगे', note: 'Future tense enters in paragraph 3 - three time frames in 140 words = Benchmark 5.' },
+        { paragraphIndex: 2, kind: 'cultural', highlight: 'अनुशासन भी सिखाता है', note: 'Generalizes the school-as-character-builder trope - authentically Indian framing.' },
       ],
       wordCount: 142,
       tenseUsed: ['past', 'present', 'future'],
@@ -362,9 +362,9 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs with a clear shift: routine → opinion → reflection. Sentences cannot be reordered — Text-Type 5 confirmed.',
+          'Three cohesive paragraphs with a clear shift: routine → opinion → reflection. Sentences cannot be reordered - Text-Type 5 confirmed.',
           'Eight distinct connectors used correctly across 142 words. Far above the three-connector threshold.',
-          'Present (उठती हूँ), present-habitual (बजती है ... जाते हैं), and future (पढ़ूँगी, मिलेंगे) all appear — satisfies "some control of past, present, future" for IM.',
+          'Present (उठती हूँ), present-habitual (बजती है ... जाते हैं), and future (पढ़ूँगी, मिलेंगे) all appear - satisfies "some control of past, present, future" for IM.',
           'Gender agreement holds: वर्दी (f) पहनकर, हिंदी (f) ... आसान लगती (f) है, स्कूल (m) ... सिखाता (m) है. Language Control stabilizes at Average+.',
           'Culturally anchored details (सुबह की प्रार्थना, वर्दी, मध्यांतर, अनुशासन) make this read as an Indian school, not a generic one.',
         ],
@@ -383,13 +383,13 @@ export const pack: TopicPack = {
         'पिछले साल हमारी विज्ञान की वार्षिक परीक्षा थी। पाठ जटिल था, इसलिए मैंने एक हफ़्ते पहले से तैयारी शुरू कर दी। पहले मैंने अध्यापिका के नोट्स पढ़े, फिर हर अध्याय याद किया, और इसके बाद पुराने पर्चे हल किए। जब मेरी समझ में कोई सवाल नहीं आता था, तब मैं अपनी सहपाठी नीलम को फ़ोन करती थी और वह मुझे अच्छे से समझाती थी।\n\nपरीक्षा के दिन मैंने ठीक समय पर वर्दी पहनी और आठ बजे स्कूल पहुँची। जब मैंने पर्चा खोला, तब दिल ज़ोर-ज़ोर से धड़क रहा था। लेकिन ज़्यादातर सवाल आसान थे, सिर्फ़ दो सवाल थोड़े मुश्किल थे। मैंने ध्यान से हर उत्तर लिखा और अंत में पूरा पर्चा एक बार फिर से पढ़ा।\n\nदो हफ़्ते बाद परिणाम आया और मुझे ९२ नंबर मिले। प्राचार्य ने सभा में मुझे प्रमाणपत्र भी दिया। मुझे लगता है कि मेहनत कभी बेकार नहीं जाती। अगली परीक्षा में भी मैं इसी तरह तैयारी करूँगी, क्योंकि अनुशासन से ही सफलता मिलती है।',
       annotations: [
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले साल ... थी / मैंने शुरू कर दी', note: 'Past frame opens immediately with the perfective ने-construction. Anchors tense early.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... इसके बाद', note: 'Three sequence connectors for the preparation phase — clean staged reasoning.' },
-        { paragraphIndex: 0, kind: 'structure', highlight: 'जब ... नहीं आता था, तब मैं ... करती थी', note: 'जब-तब with habitual imperfect ("whenever I didn\'t get it, I used to call") — a subtle tense that raters reward.' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'पर्चा, सवाल, उत्तर, ध्यान से', note: 'Exam-specific vocabulary clustered in one paragraph — Topic Coverage.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'ज़्यादातर ... आसान थे, सिर्फ़ दो ... मुश्किल थे', note: 'Contrast via quantifier pair (most/only two) — Intermediate-Mid shading.' },
-        { paragraphIndex: 2, kind: 'cultural', highlight: 'प्राचार्य ने सभा में प्रमाणपत्र दिया', note: 'Authentic Indian-school moment — the public recognition at assembly.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'मैं इसी तरह तैयारी करूँगी', note: 'Future-tense closing — three time frames covered.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'मुझे लगता है कि मेहनत कभी बेकार नहीं जाती', note: 'Reflective generalization — the textbook Benchmark-5 closer.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... इसके बाद', note: 'Three sequence connectors for the preparation phase - clean staged reasoning.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'जब ... नहीं आता था, तब मैं ... करती थी', note: 'जब-तब with habitual imperfect ("whenever I didn\'t get it, I used to call") - a subtle tense that raters reward.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'पर्चा, सवाल, उत्तर, ध्यान से', note: 'Exam-specific vocabulary clustered in one paragraph - Topic Coverage.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'ज़्यादातर ... आसान थे, सिर्फ़ दो ... मुश्किल थे', note: 'Contrast via quantifier pair (most/only two) - Intermediate-Mid shading.' },
+        { paragraphIndex: 2, kind: 'cultural', highlight: 'प्राचार्य ने सभा में प्रमाणपत्र दिया', note: 'Authentic Indian-school moment - the public recognition at assembly.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'मैं इसी तरह तैयारी करूँगी', note: 'Future-tense closing - three time frames covered.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'मुझे लगता है कि मेहनत कभी बेकार नहीं जाती', note: 'Reflective generalization - the textbook Benchmark-5 closer.' },
       ],
       wordCount: 148,
       tenseUsed: ['past', 'present', 'future'],
@@ -398,22 +398,22 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Sustained past narrative through two paragraphs with consistent ने-construction (मैंने पढ़े, हल किए, लिखा, पहुँची) — Language Control above Average.',
+          'Sustained past narrative through two paragraphs with consistent ने-construction (मैंने पढ़े, हल किए, लिखा, पहुँची) - Language Control above Average.',
           'Eight connectors in 148 words, spanning sequence, time-clause, and reasoning. Text-Type 5 locked.',
           'Three time frames: past exam memory, present reflection (मेहनत कभी बेकार नहीं जाती), future commitment (करूँगी). The rubric\'s time-frame requirement is decisively met.',
-          'Exam-specific vocabulary (पर्चा, वार्षिक परीक्षा, प्रमाणपत्र, ९२ नंबर, सभा) distinct from the first essay — proves range within the same pack.',
-          'Reflective closing generalizes beyond the event (अनुशासन से ही सफलता मिलती है) — exactly the move raters flag as "Intermediate-Mid and above."',
+          'Exam-specific vocabulary (पर्चा, वार्षिक परीक्षा, प्रमाणपत्र, ९२ नंबर, सभा) distinct from the first essay - proves range within the same pack.',
+          'Reflective closing generalizes beyond the event (अनुशासन से ही सफलता मिलती है) - exactly the move raters flag as "Intermediate-Mid and above."',
         ],
         gotchas: [
           'If the student writes "मैं पढ़ा" (dropping ने in past transitive), Language Control drops one band immediately.',
-          'If all three paragraphs stay in the past — no present reflection, no future — the essay caps at Benchmark 4 no matter how fluent the Hindi.',
+          'If all three paragraphs stay in the past - no present reflection, no future - the essay caps at Benchmark 4 no matter how fluent the Hindi.',
         ],
       },
     },
   ],
   modelEssaysNote: {
     why:
-      'Essay 1 handles the standard "describe a school day" prompt; Essay 2 handles the narrative exam-day memory. Together they show the two angles FCPS Student-Life prompts take. Do not memorize the essays — memorize the sentence shapes and plug in your own facts.',
+      'Essay 1 handles the standard "describe a school day" prompt; Essay 2 handles the narrative exam-day memory. Together they show the two angles FCPS Student-Life prompts take. Do not memorize the essays - memorize the sentence shapes and plug in your own facts.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -431,7 +431,7 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'एक यादगार परीक्षा के दिन के बारे में तीन अनुच्छेदों में लिखिए। तैयारी, परीक्षा-हॉल का अनुभव, और परिणाम — तीनों पर बात कीजिए।',
+        'एक यादगार परीक्षा के दिन के बारे में तीन अनुच्छेदों में लिखिए। तैयारी, परीक्षा-हॉल का अनुभव, और परिणाम - तीनों पर बात कीजिए।',
       english:
         'Write three paragraphs about a memorable exam day. Cover preparation, the experience in the exam hall, and the result.',
       hint: {

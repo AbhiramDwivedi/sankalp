@@ -10,15 +10,15 @@ export const pack: TopicPack = {
   heroMotif: 'clock',
   titleHindi: 'गिनती और समय',
   titleEnglish: 'Numbers & Time',
-  hook: 'Raters notice when a student says "बजकर पाँच मिनट" instead of "five past" — cheap rubric points.',
+  hook: 'Raters notice when a student says "बजकर पाँच मिनट" instead of "five past" - cheap rubric points.',
   heroPrompt: composeHeroPrompt(
     'An oversized brass clock face with Devanagari numerals, surrounded by hourglasses, calendar pages, and sundial shapes, cream background',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Numbers and Time (FCPS Level 1 — School Life)',
-      'Daily routines and schedules (FCPS Level 1 — School Life)',
+      'Numbers and Time (FCPS Level 1 - School Life)',
+      'Daily routines and schedules (FCPS Level 1 - School Life)',
       'Bridges into Daily Schedule essays (FCPS Level 2) where time markers drive cohesion',
     ],
     trains: ['LanguageControl', 'TextType', 'TopicCoverage'],
@@ -32,7 +32,7 @@ export const pack: TopicPack = {
     positionOnArc: 'foundations',
     estimatedTime: '75 min reading + 30 min essay',
     ifSkippedRisk:
-      'Almost every FCPS Level 1 prompt — daily routine, school day, weekend plan — rewards clean time expressions. Without this pack the student falls back to "I do this, I do that" with no clock phrases, capping Text-Type at Intermediate-Low.',
+      'Almost every FCPS Level 1 prompt - daily routine, school day, weekend plan - rewards clean time expressions. Without this pack the student falls back to "I do this, I do that" with no clock phrases, capping Text-Type at Intermediate-Low.',
   },
 
   objectives: [
@@ -41,7 +41,7 @@ export const pack: TopicPack = {
       trains: ['TopicCoverage'],
     },
     {
-      text: 'State the time four ways — पूरे घंटे, सवा, साढ़े, पौने — without hesitation.',
+      text: 'State the time four ways - पूरे घंटे, सवा, साढ़े, पौने - without hesitation.',
       trains: ['LanguageControl', 'TopicCoverage'],
     },
     {
@@ -100,7 +100,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 27 items are the exact set a student needs to speak about any daily schedule in Hindi. Miss सवा / साढ़े / पौने and your essay defaults to "eight o\'clock, nine o\'clock" — raters notice the repetition and cap Topic Coverage at Average.',
+      'These 27 items are the exact set a student needs to speak about any daily schedule in Hindi. Miss सवा / साढ़े / पौने and your essay defaults to "eight o\'clock, nine o\'clock" - raters notice the repetition and cap Topic Coverage at Average.',
     trains: ['TopicCoverage', 'LanguageControl'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },
@@ -109,7 +109,7 @@ export const pack: TopicPack = {
     {
       title: 'Telling time with बजे, बजकर, and बजने में',
       rule:
-        'The hour uses बजे (masculine plural adverbial). For "X:15" say "सवा X बजे". For "X:30" say "साढ़े X बजे" — EXCEPT 1:30 = डेढ़ बजे and 2:30 = ढाई बजे (no साढ़े). For "X:45" say "पौने (X+1) बजे". For exact minutes, use "X बजकर Y मिनट".',
+        'The hour uses बजे (masculine plural adverbial). For "X:15" say "सवा X बजे". For "X:30" say "साढ़े X बजे" - EXCEPT 1:30 = डेढ़ बजे and 2:30 = ढाई बजे (no साढ़े). For "X:45" say "पौने (X+1) बजे". For exact minutes, use "X बजकर Y मिनट".',
       examples: [
         { hindi: 'अभी सात बजे हैं।', transliteration: 'abhi saat baje hain.', english: 'It is 7:00 right now.' },
         { hindi: 'साढ़े छह बजे बस आती है।', transliteration: 'saadhe chhah baje bas aati hai.', english: 'The bus comes at 6:30.' },
@@ -117,7 +117,7 @@ export const pack: TopicPack = {
         { hindi: 'चार बजकर बीस मिनट हुए हैं।', transliteration: 'chaar bajkar bees minat hue hain.', english: 'It is 4:20.' },
       ],
       pitfall:
-        'Students regularly say "साढ़े एक बजे" or "साढ़े दो बजे" — both are wrong. 1:30 is डेढ़ बजे and 2:30 is ढाई बजे. These two forms are the most-tested "gotcha" in Hindi time.',
+        'Students regularly say "साढ़े एक बजे" or "साढ़े दो बजे" - both are wrong. 1:30 is डेढ़ बजे and 2:30 is ढाई बजे. These two forms are the most-tested "gotcha" in Hindi time.',
       whyItMatters:
         'One correct use of सवा, साढ़े, or पौने in an essay signals Language Control above Novice-High. Three correct uses within three paragraphs nails Intermediate-Mid.',
     },
@@ -131,14 +131,14 @@ export const pack: TopicPack = {
         { hindi: 'मेरे पास तीन किताबें हैं।', transliteration: 'mere paas teen kitaaben hain.', english: 'I have three books.' },
       ],
       pitfall:
-        'Writing "पाँच लड़का" (singular noun after a plural number) is the single most common error on number prompts. Also watch "तीन किताब" — must be किताबें.',
+        'Writing "पाँच लड़का" (singular noun after a plural number) is the single most common error on number prompts. Also watch "तीन किताब" - must be किताबें.',
       whyItMatters:
         'Number–noun agreement errors are instantly visible to raters. Three clean agreements = Language Control at Average; three errors = Low.',
     },
     {
       title: 'Time-of-day phrase + clock phrase order',
       rule:
-        'In Hindi the time-of-day word (सुबह, दोपहर, शाम, रात) comes BEFORE the clock phrase, and it does NOT take a postposition. So: "सुबह सात बजे", not "सुबह के सात बजे" or "सुबह में सात बजे". When the whole expression itself is the time-when of another event, you can optionally add को: "सुबह सात बजे को मैं उठती हूँ" — but most speakers drop को for hourly times.',
+        'In Hindi the time-of-day word (सुबह, दोपहर, शाम, रात) comes BEFORE the clock phrase, and it does NOT take a postposition. So: "सुबह सात बजे", not "सुबह के सात बजे" or "सुबह में सात बजे". When the whole expression itself is the time-when of another event, you can optionally add को: "सुबह सात बजे को मैं उठती हूँ" - but most speakers drop को for hourly times.',
       examples: [
         { hindi: 'सुबह सात बजे मैं स्कूल जाती हूँ।', transliteration: 'subah saat baje main school jaati hoon.', english: 'I go to school at 7 in the morning.' },
         { hindi: 'दोपहर के बारह बजे हम लंच करते हैं।', transliteration: 'dopahar ke baarah baje hum lunch karte hain.', english: 'We have lunch at 12 noon.' },
@@ -173,14 +173,14 @@ export const pack: TopicPack = {
   anchor: {
     title: 'मेरा सोमवार · My Monday',
     hindi:
-      'मेरा सोमवार बहुत व्यस्त होता है। पहले मैं सुबह साढ़े छह बजे उठती हूँ और मुँह धोती हूँ। फिर सात बजे मैं नाश्ता करती हूँ — आमतौर पर पराठा और एक गिलास दूध। पौने आठ बजे मेरी स्कूल बस आती है, इसलिए मुझे जल्दी तैयार होना पड़ता है। स्कूल में पहला पीरियड हिंदी का है और तीसरा पीरियड गणित का। दोपहर के बारह बजे लंच होता है, लेकिन आज मुझे ज़्यादा भूख नहीं थी। इसके बाद सवा तीन बजे छुट्टी होती है और मैं घर लौटती हूँ। शाम को पाँच बजे मैं हिंदी पढ़ती हूँ, क्योंकि शुक्रवार को मेरा टेस्ट है। अंत में रात दस बजे मैं सो जाती हूँ। सोमवार थका देता है, पर मुझे अच्छा भी लगता है।',
+      'मेरा सोमवार बहुत व्यस्त होता है। पहले मैं सुबह साढ़े छह बजे उठती हूँ और मुँह धोती हूँ। फिर सात बजे मैं नाश्ता करती हूँ - आमतौर पर पराठा और एक गिलास दूध। पौने आठ बजे मेरी स्कूल बस आती है, इसलिए मुझे जल्दी तैयार होना पड़ता है। स्कूल में पहला पीरियड हिंदी का है और तीसरा पीरियड गणित का। दोपहर के बारह बजे लंच होता है, लेकिन आज मुझे ज़्यादा भूख नहीं थी। इसके बाद सवा तीन बजे छुट्टी होती है और मैं घर लौटती हूँ। शाम को पाँच बजे मैं हिंदी पढ़ती हूँ, क्योंकि शुक्रवार को मेरा टेस्ट है। अंत में रात दस बजे मैं सो जाती हूँ। सोमवार थका देता है, पर मुझे अच्छा भी लगता है।',
     transliteration:
-      'mera somvaar bahut vyast hota hai. pahle main subah saadhe chhah baje uthti hoon aur munh dhoti hoon. phir saat baje main naashta karti hoon — aamtaur par paraatha aur ek gilaas doodh. paune aath baje meri school bus aati hai, isliye mujhe jaldi taiyaar hona padta hai. school mein pahla period hindi ka hai aur teesra period ganit ka. dopahar ke baarah baje lunch hota hai, lekin aaj mujhe zyaada bhookh nahi thi. iske baad sava teen baje chhutti hoti hai aur main ghar lautti hoon. shaam ko paanch baje main hindi padhti hoon, kyonki shukravaar ko mera test hai. ant mein raat das baje main so jaati hoon. somvaar thaka deta hai, par mujhe achchha bhi lagta hai.',
+      'mera somvaar bahut vyast hota hai. pahle main subah saadhe chhah baje uthti hoon aur munh dhoti hoon. phir saat baje main naashta karti hoon - aamtaur par paraatha aur ek gilaas doodh. paune aath baje meri school bus aati hai, isliye mujhe jaldi taiyaar hona padta hai. school mein pahla period hindi ka hai aur teesra period ganit ka. dopahar ke baarah baje lunch hota hai, lekin aaj mujhe zyaada bhookh nahi thi. iske baad sava teen baje chhutti hoti hai aur main ghar lautti hoon. shaam ko paanch baje main hindi padhti hoon, kyonki shukravaar ko mera test hai. ant mein raat das baje main so jaati hoon. somvaar thaka deta hai, par mujhe achchha bhi lagta hai.',
     english:
-      'My Monday is very busy. First, I wake up at 6:30 in the morning and wash my face. Then at 7 I have breakfast — usually a paratha and a glass of milk. At 7:45 my school bus comes, so I have to get ready quickly. At school, the first period is Hindi and the third period is math. At 12 noon there is lunch, but today I was not very hungry. After this, at 3:15 school ends and I return home. In the evening at 5 I study Hindi, because on Friday I have a test. Finally at 10 at night I go to sleep. Monday tires me out, but I also like it.',
+      'My Monday is very busy. First, I wake up at 6:30 in the morning and wash my face. Then at 7 I have breakfast - usually a paratha and a glass of milk. At 7:45 my school bus comes, so I have to get ready quickly. At school, the first period is Hindi and the third period is math. At 12 noon there is lunch, but today I was not very hungry. After this, at 3:15 school ends and I return home. In the evening at 5 I study Hindi, because on Friday I have a test. Finally at 10 at night I go to sleep. Monday tires me out, but I also like it.',
     highlights: [
       { term: 'साढ़े छह / पौने आठ / सवा तीन', note: 'Three different clock-phrase builders in one paragraph. This is exactly what separates Intermediate-Mid from Novice-High on time prompts.' },
-      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Full sequence scaffold — four time connectors carry the reader across a whole day.' },
+      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Full sequence scaffold - four time connectors carry the reader across a whole day.' },
       { term: 'सुबह / दोपहर / शाम / रात', note: 'All four times of day appear, each paired correctly with a number + बजे.' },
       { term: 'पहला पीरियड / तीसरा पीरियड', note: 'Ordinals in context. Shows the student can go beyond cardinal numbers.' },
       { term: 'क्योंकि / लेकिन', note: 'Reasoning connectors give the narrative a "why," lifting Text-Type.' },
@@ -191,12 +191,12 @@ export const pack: TopicPack = {
       { q: 'At what exact time does the school bus arrive?', a: 'पौने आठ बजे (7:45).' },
       { q: 'Which period is Hindi and which is math?', a: 'पहला पीरियड हिंदी, तीसरा पीरियड गणित (1st is Hindi, 3rd is math).' },
       { q: 'Why does she study Hindi in the evening?', a: 'क्योंकि शुक्रवार को उसका टेस्ट है (because her test is on Friday).' },
-      { q: 'Pick one time-connector and explain its role.', a: 'Any of पहले / फिर / इसके बाद / अंत में — each moves the narrative forward in time.' },
+      { q: 'Pick one time-connector and explain its role.', a: 'Any of पहले / फिर / इसके बाद / अंत में - each moves the narrative forward in time.' },
     ],
   },
   anchorNote: {
     why:
-      'This anchor is a working model of a Benchmark-5 time-topic essay compressed into one paragraph. Notice how every sentence has BOTH a time marker AND an action — that pattern is the whole trick to scoring Intermediate-Mid on daily-schedule prompts.',
+      'This anchor is a working model of a Benchmark-5 time-topic essay compressed into one paragraph. Notice how every sentence has BOTH a time marker AND an action - that pattern is the whole trick to scoring Intermediate-Mid on daily-schedule prompts.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -205,11 +205,11 @@ export const pack: TopicPack = {
       kind: 'schedule',
       title: 'मेरा स्कूल का समय · My School Schedule',
       hindi:
-        'सोमवार\n८:०० बजे — पहला पीरियड (हिंदी)\n९:०० बजे — दूसरा पीरियड (अंग्रेज़ी)\n१०:०० बजे — तीसरा पीरियड (गणित)\nसवा ११ बजे — खेल\nसाढ़े १२ बजे — लंच\n१:१५ बजे — विज्ञान\nसवा ३ बजे — छुट्टी',
+        'सोमवार\n८:०० बजे - पहला पीरियड (हिंदी)\n९:०० बजे - दूसरा पीरियड (अंग्रेज़ी)\n१०:०० बजे - तीसरा पीरियड (गणित)\nसवा ११ बजे - खेल\nसाढ़े १२ बजे - लंच\n१:१५ बजे - विज्ञान\nसवा ३ बजे - छुट्टी',
       transliteration:
-        'somvaar | 8:00 — pahla period (hindi) | 9:00 — doosra period (angrezi) | 10:00 — teesra period (ganit) | sava 11 baje — khel | saadhe 12 baje — lunch | 1:15 baje — vigyaan | sava 3 baje — chhutti',
+        'somvaar | 8:00 - pahla period (hindi) | 9:00 - doosra period (angrezi) | 10:00 - teesra period (ganit) | sava 11 baje - khel | saadhe 12 baje - lunch | 1:15 baje - vigyaan | sava 3 baje - chhutti',
       english:
-        'Monday · 8:00 — 1st period (Hindi) · 9:00 — 2nd period (English) · 10:00 — 3rd period (Math) · 11:15 — PE · 12:30 — Lunch · 1:15 — Science · 3:15 — Dismissal',
+        'Monday · 8:00 - 1st period (Hindi) · 9:00 - 2nd period (English) · 10:00 - 3rd period (Math) · 11:15 - PE · 12:30 - Lunch · 1:15 - Science · 3:15 - Dismissal',
     },
     {
       kind: 'diary',
@@ -244,13 +244,13 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'Schedule, diary, SMS, and announcement cover the four registers a time-topic student must imitate: formal list, personal reflection, casual chat, and public notice. Every one of them pins a specific clock phrase to a specific event — that pairing is the craft.',
+      'Schedule, diary, SMS, and announcement cover the four registers a time-topic student must imitate: formal list, personal reflection, casual chat, and public notice. Every one of them pins a specific clock phrase to a specific event - that pairing is the craft.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
   cultural: [
     {
-      title: 'IST — भारतीय मानक समय',
+      title: 'IST - भारतीय मानक समय',
       body:
         'India runs on a single time zone, IST (UTC+5:30), from Gujarat to Arunachal Pradesh. When a student writes "भारत में अभी रात के नौ बज रहे हैं", they show awareness that India does not split time zones like the U.S.',
       emoji: '🕰️',
@@ -270,7 +270,7 @@ export const pack: TopicPack = {
     {
       title: 'The "Indian Stretchable Time" Joke',
       body:
-        'Indians joke about "IST = Indian Stretchable Time" — meaning people often arrive 15–30 minutes late to social events. Weddings, parties, and family dinners rarely start exactly on time, though offices and schools do.',
+        'Indians joke about "IST = Indian Stretchable Time" - meaning people often arrive 15–30 minutes late to social events. Weddings, parties, and family dinners rarely start exactly on time, though offices and schools do.',
       emoji: '⏰',
     },
     {
@@ -282,7 +282,7 @@ export const pack: TopicPack = {
   ],
   culturalNote: {
     why:
-      'Time is a place where Hindi and English diverge in texture — Hindi speakers anchor time to meals, prayers, and sunrise as often as to the clock. A single authentic marker ("चाय के बाद", "सूर्योदय के समय") separates the essay from a direct English translation and nudges Topic Coverage upward.',
+      'Time is a place where Hindi and English diverge in texture - Hindi speakers anchor time to meals, prayers, and sunrise as often as to the clock. A single authentic marker ("चाय के बाद", "सूर्योदय के समय") separates the essay from a direct English translation and nudges Topic Coverage upward.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -290,7 +290,7 @@ export const pack: TopicPack = {
     {
       phrase: 'वक़्त की क़ीमत',
       literal: 'the price of time',
-      meaning: 'The value of time — used to emphasize not wasting it.',
+      meaning: 'The value of time - used to emphasize not wasting it.',
       example: 'बड़े लोग कहते हैं कि वक़्त की क़ीमत पहचानो।',
       exampleEnglish: 'Elders say: recognize the value of time.',
     },
@@ -304,7 +304,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Both idioms sit naturally in a time-topic essay. "वक़्त की क़ीमत" fits a reflective closing; "नौ दो ग्यारह होना" fits a narrative moment (bell rang, everyone ran). One idiom per essay is plenty — two is showing off.',
+      'Both idioms sit naturally in a time-topic essay. "वक़्त की क़ीमत" fits a reflective closing; "नौ दो ग्यारह होना" fits a narrative moment (bell rang, everyone ran). One idiom per essay is plenty - two is showing off.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -315,15 +315,15 @@ export const pack: TopicPack = {
         'अपने एक सामान्य सोमवार के बारे में तीन अनुच्छेदों में लिखो। बताओ कि तुम किस समय क्या करते हो। (Write three paragraphs about a typical Monday of yours. Describe what you do at what time.)',
       novice: 'मैं सात बजे उठता हूँ। मैं स्कूल जाता हूँ। मैं रात को सोता हूँ।',
       intermediateMid:
-        'मेरा सोमवार बहुत व्यस्त होता है। पहले मैं सुबह साढ़े छह बजे उठती हूँ और तैयार होती हूँ। फिर सात बजे मैं माँ के साथ नाश्ता करती हूँ — आमतौर पर एक पराठा और एक गिलास दूध। पौने आठ बजे मेरी बस आती है, इसलिए मुझे बहुत जल्दी तैयार होना पड़ता है।\n\nस्कूल में पहला पीरियड हिंदी का है और तीसरा पीरियड गणित का। दोपहर के बारह बजे लंच होता है। पिछले सोमवार को मैं लंच भूल गई थी, लेकिन मेरी दोस्त ने मुझे अपनी रोटी दी, क्योंकि वह बहुत अच्छी है। इसके बाद सवा तीन बजे छुट्टी होती है।\n\nशाम को पाँच बजे मैं हिंदी पढ़ती हूँ और अंत में रात दस बजे सो जाती हूँ। अगले सोमवार मैं और जल्दी उठूँगी, क्योंकि मेरी माँ कहती हैं कि वक़्त की क़ीमत पहचाननी चाहिए। सोमवार थका देता है, पर मुझे अच्छा भी लगता है।',
+        'मेरा सोमवार बहुत व्यस्त होता है। पहले मैं सुबह साढ़े छह बजे उठती हूँ और तैयार होती हूँ। फिर सात बजे मैं माँ के साथ नाश्ता करती हूँ - आमतौर पर एक पराठा और एक गिलास दूध। पौने आठ बजे मेरी बस आती है, इसलिए मुझे बहुत जल्दी तैयार होना पड़ता है।\n\nस्कूल में पहला पीरियड हिंदी का है और तीसरा पीरियड गणित का। दोपहर के बारह बजे लंच होता है। पिछले सोमवार को मैं लंच भूल गई थी, लेकिन मेरी दोस्त ने मुझे अपनी रोटी दी, क्योंकि वह बहुत अच्छी है। इसके बाद सवा तीन बजे छुट्टी होती है।\n\nशाम को पाँच बजे मैं हिंदी पढ़ती हूँ और अंत में रात दस बजे सो जाती हूँ। अगले सोमवार मैं और जल्दी उठूँगी, क्योंकि मेरी माँ कहती हैं कि वक़्त की क़ीमत पहचाननी चाहिए। सोमवार थका देता है, पर मुझे अच्छा भी लगता है।',
       annotations: [
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'साढ़े छह / पौने आठ', note: 'Two non-trivial clock phrases in the opening — signals time control immediately.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'साढ़े छह / पौने आठ', note: 'Two non-trivial clock phrases in the opening - signals time control immediately.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'पहले / फिर / इसलिए', note: 'Three sequence + reasoning connectors in three sentences. Text-Type lift.' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'पहला पीरियड / तीसरा पीरियड', note: 'Ordinal adjectives with gender agreement — more advanced than plain cardinals.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'पहला पीरियड / तीसरा पीरियड', note: 'Ordinal adjectives with gender agreement - more advanced than plain cardinals.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले सोमवार को ... भूल गई थी', note: 'Past-perfective slides in beside present habitual. This tense mix inside one paragraph is the Intermediate-Mid signature.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'लेकिन / क्योंकि', note: 'Contrast + reason within a single sentence — reads as connected, not listed.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'लेकिन / क्योंकि', note: 'Contrast + reason within a single sentence - reads as connected, not listed.' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले सोमवार मैं और जल्दी उठूँगी', note: 'Future tense arrives in the closing. Three time frames in 130 words = clean Benchmark 5.' },
-        { paragraphIndex: 2, kind: 'idiom', highlight: 'वक़्त की क़ीमत पहचाननी चाहिए', note: 'Idiom used reflectively, not as decoration — Text-Type bonus.' },
+        { paragraphIndex: 2, kind: 'idiom', highlight: 'वक़्त की क़ीमत पहचाननी चाहिए', note: 'Idiom used reflectively, not as decoration - Text-Type bonus.' },
       ],
       wordCount: 132,
       tenseUsed: ['past', 'present', 'future'],
@@ -332,11 +332,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three clock-phrase builders appear (साढ़े, पौने, सवा) in just 132 words — this directly signals "control of time expressions" that STAMP raters check for.',
+          'Three clock-phrase builders appear (साढ़े, पौने, सवा) in just 132 words - this directly signals "control of time expressions" that STAMP raters check for.',
           'All three tenses used: present habitual (उठती हूँ), past perfective (भूल गई थी), and future (उठूँगी). Satisfies IM rubric requirement of "some control of past, present, and future".',
-          'Seven distinct connectors, each placed to do actual work — पहले/फिर/इसके बाद/अंत में chain the day; क्योंकि/लेकिन/इसलिए supply reasoning.',
-          'Gender agreement clean across all verbs (उठती हूँ, करती हूँ, भूल गई थी) — feminine narrator sustained end to end.',
-          'Idiom वक़्त की क़ीमत lands in a reflective closing, not randomly — a textbook Benchmark-5 move.',
+          'Seven distinct connectors, each placed to do actual work - पहले/फिर/इसके बाद/अंत में chain the day; क्योंकि/लेकिन/इसलिए supply reasoning.',
+          'Gender agreement clean across all verbs (उठती हूँ, करती हूँ, भूल गई थी) - feminine narrator sustained end to end.',
+          'Idiom वक़्त की क़ीमत lands in a reflective closing, not randomly - a textbook Benchmark-5 move.',
         ],
         gotchas: [
           'Switching to masculine verb endings mid-essay (उठता हूँ after committing to feminine) drops Language Control to Low instantly.',
@@ -352,13 +352,13 @@ export const pack: TopicPack = {
       intermediateMid:
         'कल मंगलवार है और मेरा दिन बहुत खास होगा, क्योंकि शाम को मेरी छोटी बहन का जन्मदिन है। पहले मैं सुबह पौने छह बजे उठूँगा। इतनी जल्दी इसलिए, क्योंकि मुझे उसके लिए एक कार्ड बनाना है। फिर सात बजे मैं नाश्ता करूँगा और पौने आठ की बस पकड़ूँगा।\n\nस्कूल में पहला पीरियड गणित का है, लेकिन मैं पूरे दिन घड़ी देखता रहूँगा। दोपहर के साढ़े बारह बजे लंच होगा और सवा तीन बजे छुट्टी। पिछले साल जब मेरी बहन का जन्मदिन था, तब मैं स्कूल से देर से लौटा था, इसलिए इस बार मैं सीधे घर जाऊँगा।\n\nशाम साढ़े छह बजे हम केक काटेंगे और अंत में रात नौ बजे तक घर के सब लोग गाने गाएँगे। मुझे लगता है कि यह मेरा सबसे अच्छा मंगलवार होगा, क्योंकि परिवार के साथ बिताया हुआ समय वक़्त की सबसे बड़ी क़ीमत है।',
       annotations: [
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'कल ... होगा ... उठूँगा', note: 'Future tense anchored in the first sentence — the essay commits to a time frame.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'कल ... होगा ... उठूँगा', note: 'Future tense anchored in the first sentence - the essay commits to a time frame.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि / पहले / फिर', note: 'Reason + sequence in three consecutive sentences.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'पौने छह / पौने आठ', note: 'Two uses of पौने in different hours — proves the form is understood, not memorized.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'पौने छह / पौने आठ', note: 'Two uses of पौने in different hours - proves the form is understood, not memorized.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले साल जब ... तब ... लौटा था', note: 'Past-perfect slides inside a future-oriented essay. Three time frames confirmed.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'जब ... तब / इसलिए', note: '"When-then" construction paired with consequence — Intermediate-Mid hallmark.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'जब ... तब / इसलिए', note: '"When-then" construction paired with consequence - Intermediate-Mid hallmark.' },
         { paragraphIndex: 2, kind: 'structure', highlight: 'मुझे लगता है कि ... वक़्त की सबसे बड़ी क़ीमत है', note: 'Reflective closing generalizes beyond the event. Text-Type 5.' },
-        { paragraphIndex: 2, kind: 'idiom', highlight: 'वक़्त की क़ीमत', note: 'Idiom used to close the essay — reads as register mastery.' },
+        { paragraphIndex: 2, kind: 'idiom', highlight: 'वक़्त की क़ीमत', note: 'Idiom used to close the essay - reads as register mastery.' },
       ],
       wordCount: 142,
       tenseUsed: ['past', 'present', 'future'],
@@ -367,14 +367,14 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Future-dominant essay that still weaves in a past-perfect "पिछले साल ... लौटा था" — hits the three-tense rubric cleanly.',
-          'Six distinct time expressions (पौने छह, सात, पौने आठ, साढ़े बारह, सवा तीन, साढ़े छह, नौ) — Topic Coverage is saturated without ever repeating a form.',
+          'Future-dominant essay that still weaves in a past-perfect "पिछले साल ... लौटा था" - hits the three-tense rubric cleanly.',
+          'Six distinct time expressions (पौने छह, सात, पौने आठ, साढ़े बारह, सवा तीन, साढ़े छह, नौ) - Topic Coverage is saturated without ever repeating a form.',
           'जब ... तब + इसलिए inside the middle paragraph shows sentence-level complexity that raters flag as Intermediate-Mid.',
-          'Closing generalizes with an idiom (वक़्त की क़ीमत) rather than repeating facts — Text-Type lift.',
-          'Masculine narrator sustained throughout (उठूँगा, जाऊँगा, लौटा था) — Language Control consistent.',
+          'Closing generalizes with an idiom (वक़्त की क़ीमत) rather than repeating facts - Text-Type lift.',
+          'Masculine narrator sustained throughout (उठूँगा, जाऊँगा, लौटा था) - Language Control consistent.',
         ],
         gotchas: [
-          'Dropping the ने in "पिछले साल ... लौटा था" is wrong if the verb were transitive. लौटना is intransitive so मैं लौटा is correct — but students often overapply ने.',
+          'Dropping the ने in "पिछले साल ... लौटा था" is wrong if the verb were transitive. लौटना is intransitive so मैं लौटा is correct - but students often overapply ने.',
           'Switching "पौने छह" to "साढ़े पाँच" mid-essay changes the time entirely. Builders are not interchangeable: always compute from the correct anchor hour.',
         ],
       },
@@ -382,7 +382,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Two full model essays at Benchmark 5 — one habit-based, one plan-based. Between them the student sees present-habitual, past-perfective, past-perfect, and simple-future all deployed with clock phrases. Practice by copying these by hand first, then substituting your own times and reasons.',
+      'Two full model essays at Benchmark 5 - one habit-based, one plan-based. Between them the student sees present-habitual, past-perfective, past-perfect, and simple-future all deployed with clock phrases. Practice by copying these by hand first, then substituting your own times and reasons.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -423,7 +423,7 @@ export const pack: TopicPack = {
   ],
   promptsNote: {
     why:
-      'Each prompt is engineered for tense variety: habitual (present), narrative (past), and planning (future). The hints are guardrails — if your draft does not use at least three of the listed connectors and three of the listed clock phrases, revise before submitting.',
+      'Each prompt is engineered for tense variety: habitual (present), narrative (past), and planning (future). The hints are guardrails - if your draft does not use at least three of the listed connectors and three of the listed clock phrases, revise before submitting.',
     trains: ['TextType'],
   },
 

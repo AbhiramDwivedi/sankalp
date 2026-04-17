@@ -16,15 +16,15 @@ export const pack: TopicPack = {
   heroMotif: 'sunrise',
   titleHindi: 'मेरा भविष्य',
   titleEnglish: 'My Future',
-  hook: 'Future tense + hypotheticals — the final piece of the three-time-frame puzzle the rubric requires.',
+  hook: 'Future tense + hypotheticals - the final piece of the three-time-frame puzzle the rubric requires.',
   heroPrompt: composeHeroPrompt(
     'A dawn horizon seen through a window frame, a graduation cap silhouette, a distant city skyline at sunrise, a tree whose roots form a compass rose, open notebook with aspirations sketched in Devanagari',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'My Future (FCPS Level 3 — Identity, Aspirations & Goals)',
-      'Careers and professions (FCPS Level 3 — Future Plans)',
+      'My Future (FCPS Level 3 - Identity, Aspirations & Goals)',
+      'Careers and professions (FCPS Level 3 - Future Plans)',
       'Hypothetical and conditional reasoning (FCPS Level 3 stretch)',
     ],
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
@@ -38,7 +38,7 @@ export const pack: TopicPack = {
     positionOnArc: 'pushing-to-IM',
     estimatedTime: '100 min reading + 40 min essay',
     ifSkippedRisk:
-      'Future tense is the one time-frame Benchmark 5 explicitly names and that students most often drop. Skipping this pack leaves essays stuck at Intermediate-Low (2 credits) no matter how good the past/present writing is — raters will cap the score.',
+      'Future tense is the one time-frame Benchmark 5 explicitly names and that students most often drop. Skipping this pack leaves essays stuck at Intermediate-Low (2 credits) no matter how good the past/present writing is - raters will cap the score.',
   },
 
   objectives: [
@@ -115,7 +115,7 @@ export const pack: TopicPack = {
     {
       title: 'Simple future tense (मैं ... करूँगा / करूँगी)',
       rule:
-        'The simple future is formed by adding -ऊँगा/-ऊँगी (first person), -ओगे/-ओगी (second person familiar), -एगा/-एगी (third person singular), -एँगे/-एँगी (third person plural / आप). The ending agrees with the subject\'s gender and number — this is where most errors happen.',
+        'The simple future is formed by adding -ऊँगा/-ऊँगी (first person), -ओगे/-ओगी (second person familiar), -एगा/-एगी (third person singular), -एँगे/-एँगी (third person plural / आप). The ending agrees with the subject\'s gender and number - this is where most errors happen.',
       examples: [
         { hindi: 'मैं डॉक्टर बनूँगा।', transliteration: 'main doctor banoonga.', english: 'I will become a doctor. (m)' },
         { hindi: 'मैं डॉक्टर बनूँगी।', transliteration: 'main doctor banoongi.', english: 'I will become a doctor. (f)' },
@@ -123,7 +123,7 @@ export const pack: TopicPack = {
         { hindi: 'हम सब मिलकर भारत जाएँगे।', transliteration: 'hum sab milkar bhaarat jaaenge.', english: 'We will all go to India together.' },
       ],
       pitfall:
-        'A female narrator writing "मैं बनूँगा" instead of "मैं बनूँगी" is the most common tense error on this topic. Inconsistency — switching gender mid-essay — is worse than picking the wrong one.',
+        'A female narrator writing "मैं बनूँगा" instead of "मैं बनूँगी" is the most common tense error on this topic. Inconsistency - switching gender mid-essay - is worse than picking the wrong one.',
       whyItMatters:
         'Benchmark 5 explicitly requires "some control of past, present, and future time frames." One correctly conjugated future-tense sentence unlocks the third time frame the rubric counts.',
     },
@@ -144,7 +144,7 @@ export const pack: TopicPack = {
     {
       title: 'Subjunctive after चाहता हूँ कि / आशा है कि',
       rule:
-        'When expressing a wish, hope, or desire about someone else, Hindi uses the subjunctive (the bare stem + -ए/-ऊँ endings, NOT the indicative future). "मैं चाहता हूँ कि वह डॉक्टर बने" — not "बनेगा."',
+        'When expressing a wish, hope, or desire about someone else, Hindi uses the subjunctive (the bare stem + -ए/-ऊँ endings, NOT the indicative future). "मैं चाहता हूँ कि वह डॉक्टर बने" - not "बनेगा."',
       examples: [
         { hindi: 'मैं चाहता हूँ कि मेरा परिवार हमेशा खुश रहे।', transliteration: 'main chaahta hoon ki mera parivaar hamesha khush rahe.', english: 'I want my family to always stay happy.' },
         { hindi: 'माँ चाहती हैं कि मैं इंजीनियर बनूँ।', transliteration: 'maa chaahti hain ki main engineer banoon.', english: 'Mother wants me to become an engineer.' },
@@ -153,7 +153,7 @@ export const pack: TopicPack = {
       pitfall:
         'Using the indicative future (बनेगा, जाएगा) inside a कि-clause after चाहना sounds like a native-speaker error. It still communicates, but raters flag it under Language Control.',
       whyItMatters:
-        'The subjunctive lets the student express parental expectations and personal hopes — the two themes FCPS future-topic prompts reward. Without it, the essay flattens into bare declaratives.',
+        'The subjunctive lets the student express parental expectations and personal hopes - the two themes FCPS future-topic prompts reward. Without it, the essay flattens into bare declaratives.',
     },
     {
       title: 'Tense bridging: past → present → future in one essay',
@@ -172,7 +172,7 @@ export const pack: TopicPack = {
   ],
   grammarNote: {
     why:
-      'Future tense is mechanical — learn the four endings, learn गender agreement, learn the अगर...तो frame, and you have 80% of what the topic demands. The subjunctive adds the final 20%. These four rules, practiced together, move an Intermediate-Low essay to Intermediate-Mid.',
+      'Future tense is mechanical - learn the four endings, learn गender agreement, learn the अगर...तो frame, and you have 80% of what the topic demands. The subjunctive adds the final 20%. These four rules, practiced together, move an Intermediate-Low essay to Intermediate-Mid.',
     trains: ['LanguageControl', 'TextType'],
   },
 
@@ -189,7 +189,7 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'This is the IM-push connector set. अगर ... तो is the single most important one for this topic — it lets you hypothesize without leaving Hindi. हालाँकि and मेरा मानना है कि let you structure argument-style reasoning about parental pressure vs. personal dreams. सिर्फ़ ... नहीं बल्कि ... भी is the Intermediate-Mid signature move and must appear at least once in each essay.',
+      'This is the IM-push connector set. अगर ... तो is the single most important one for this topic - it lets you hypothesize without leaving Hindi. हालाँकि and मेरा मानना है कि let you structure argument-style reasoning about parental pressure vs. personal dreams. सिर्फ़ ... नहीं बल्कि ... भी is the Intermediate-Mid signature move and must appear at least once in each essay.',
     trains: ['TextType'],
   },
 
@@ -202,11 +202,11 @@ export const pack: TopicPack = {
     english:
       'When I was small, I used to watch my father help patients at the hospital. I used to feel that this work was very difficult, but also very important. Today I study biology in high school and put in two extra hours of hard work every day, because my goal is to become a doctor.\n\nTen years from now I will finish my studies at the University of Virginia. If I get good marks, then I will go to India and open a clinic in a small village there. I believe that good medical care should be available not only in cities, but also in villages. Although this path will not be easy, I will not give up, because this is what my parents have taught me.',
     highlights: [
-      { term: 'जब मैं छोटा था ... आज ... दस साल बाद', note: 'Three time anchors in three paragraphs — past, present, future. This is the exact structure the rubric rewards.' },
+      { term: 'जब मैं छोटा था ... आज ... दस साल बाद', note: 'Three time anchors in three paragraphs - past, present, future. This is the exact structure the rubric rewards.' },
       { term: 'अगर ... तो ... जाऊँगा / खोलूँगा', note: 'Conditional + future in the same sentence. Complex structure signal.' },
       { term: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: 'The Intermediate-Mid signature connector. Notice how it carries the moral reasoning.' },
       { term: 'हालाँकि ... मैं हार नहीं मानूँगा', note: 'Concessive clause + determined future. Shows argument structure, not just description.' },
-      { term: 'गाँव में क्लिनिक खोलूँगा', note: 'India-specific cultural anchor — rural service as a personal value. Lifts Topic Coverage.' },
+      { term: 'गाँव में क्लिनिक खोलूँगा', note: 'India-specific cultural anchor - rural service as a personal value. Lifts Topic Coverage.' },
     ],
     comprehensionQuestions: [
       { q: 'What did the narrator watch in childhood?', a: 'Their father helping patients at the hospital (अपने पिताजी को अस्पताल में मरीज़ों की मदद करते).' },
@@ -215,12 +215,12 @@ export const pack: TopicPack = {
       { q: 'What condition is attached to the India trip?', a: 'If the narrator gets good marks (अगर मुझे अच्छे अंक मिलेंगे).' },
       { q: 'What does the narrator want to do in India?', a: 'Open a clinic in a small village.' },
       { q: 'What belief closes the first future paragraph?', a: 'Good medical care should be available not only in cities, but also in villages.' },
-      { q: 'Identify the concessive connector and the phrase that follows it.', a: 'हालाँकि — "although this path will not be easy, I will not give up."' },
+      { q: 'Identify the concessive connector and the phrase that follows it.', a: 'हालाँकि - "although this path will not be easy, I will not give up."' },
     ],
   },
   anchorNote: {
     why:
-      'This passage is a living demo of the three-tense bridge. Read it aloud three times noticing the tense every sentence is in. Then try to write a parallel paragraph about your own future — same shape, different content. The shape is half the battle.',
+      'This passage is a living demo of the three-tense bridge. Read it aloud three times noticing the tense every sentence is in. Then try to write a parallel paragraph about your own future - same shape, different content. The shape is half the battle.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -239,21 +239,21 @@ export const pack: TopicPack = {
       kind: 'diary',
       title: 'फ़ैसले का दिन · Decision Day',
       hindi:
-        'आज पिताजी ने पूछा कि मैं क्या बनना चाहता हूँ। मैंने कहा — कलाकार। वे चुप हो गए। माँ ने कहा कि अगर मैं मेहनत करूँगा, तो वे साथ देंगी। मुझे लगता है कि सपना सिर्फ़ मेरा नहीं, बल्कि पूरे परिवार का फ़ैसला है।',
+        'आज पिताजी ने पूछा कि मैं क्या बनना चाहता हूँ। मैंने कहा - कलाकार। वे चुप हो गए। माँ ने कहा कि अगर मैं मेहनत करूँगा, तो वे साथ देंगी। मुझे लगता है कि सपना सिर्फ़ मेरा नहीं, बल्कि पूरे परिवार का फ़ैसला है।',
       transliteration:
-        'aaj pitaji ne poochha ki main kya banna chaahta hoon. maine kaha — kalaakaar. ve chup ho gaye. maa ne kaha ki agar main mehnat karoonga, to ve saath dengi. mujhe lagta hai ki sapna sirf mera nahin, balki poore parivaar ka faisla hai.',
+        'aaj pitaji ne poochha ki main kya banna chaahta hoon. maine kaha - kalaakaar. ve chup ho gaye. maa ne kaha ki agar main mehnat karoonga, to ve saath dengi. mujhe lagta hai ki sapna sirf mera nahin, balki poore parivaar ka faisla hai.',
       english:
-        'Today Father asked what I want to become. I said — artist. He went quiet. Mother said that if I work hard, she will stand with me. I feel that a dream is not just mine, but a decision for the whole family.',
+        'Today Father asked what I want to become. I said - artist. He went quiet. Mother said that if I work hard, she will stand with me. I feel that a dream is not just mine, but a decision for the whole family.',
     },
     {
       kind: 'announcement',
       title: 'कॉलेज खुला दिवस · College Open Day',
       hindi:
-        'वर्जीनिया टेक खुला दिवस\nशनिवार, १५ अक्टूबर\nइंजीनियरिंग, चिकित्सा, और कला — तीनों विभाग\nअगर आप भविष्य की योजना बना रहे हैं, तो ज़रूर आइए\nमाता-पिता भी आमंत्रित हैं।',
+        'वर्जीनिया टेक खुला दिवस\nशनिवार, १५ अक्टूबर\nइंजीनियरिंग, चिकित्सा, और कला - तीनों विभाग\nअगर आप भविष्य की योजना बना रहे हैं, तो ज़रूर आइए\nमाता-पिता भी आमंत्रित हैं।',
       transliteration:
-        'virginia tech khula divas, shanivaar, 15 october. engineering, chikitsa, aur kala — teenon vibhaag. agar aap bhavishya ki yojna bana rahe hain, to zaroor aaiye. maata-pita bhi aamantrit hain.',
+        'virginia tech khula divas, shanivaar, 15 october. engineering, chikitsa, aur kala - teenon vibhaag. agar aap bhavishya ki yojna bana rahe hain, to zaroor aaiye. maata-pita bhi aamantrit hain.',
       english:
-        'Virginia Tech Open Day — Saturday, October 15. Engineering, medicine, and art — all three departments. If you are planning your future, please come. Parents are also invited.',
+        'Virginia Tech Open Day - Saturday, October 15. Engineering, medicine, and art - all three departments. If you are planning your future, please come. Parents are also invited.',
     },
     {
       kind: 'email',
@@ -268,7 +268,7 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'A letter to one\'s future self, a diary entry about a hard family conversation, a college-open-day announcement, and a respectful email to a teacher — these four registers together show how Hindi handles future-tense reasoning in personal, private, public, and formal modes. Imitate the ONE that matches your prompt.',
+      'A letter to one\'s future self, a diary entry about a hard family conversation, a college-open-day announcement, and a respectful email to a teacher - these four registers together show how Hindi handles future-tense reasoning in personal, private, public, and formal modes. Imitate the ONE that matches your prompt.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -276,7 +276,7 @@ export const pack: TopicPack = {
     {
       title: 'The Engineer-Doctor-Lawyer Triangle',
       body:
-        'In many Indian families, parents still treat engineering, medicine, and law as the three "safe" careers. Naming this openly in an essay — "पिताजी चाहते हैं कि मैं इंजीनियर बनूँ, लेकिन मेरा सपना कलाकार बनना है" — is both honest and culturally specific. Raters reward the honesty.',
+        'In many Indian families, parents still treat engineering, medicine, and law as the three "safe" careers. Naming this openly in an essay - "पिताजी चाहते हैं कि मैं इंजीनियर बनूँ, लेकिन मेरा सपना कलाकार बनना है" - is both honest and culturally specific. Raters reward the honesty.',
       emoji: '🎓',
     },
     {
@@ -294,19 +294,19 @@ export const pack: TopicPack = {
     {
       title: 'Dreams vs. Parental Expectations',
       body:
-        'Hindi writers handle the tension between अपना सपना and माता-पिता का सपना by RECONCILING rather than REJECTING — the essay-winning move is to show how you will honor both. A pure rebellion narrative reads young; a negotiation narrative reads mature.',
+        'Hindi writers handle the tension between अपना सपना and माता-पिता का सपना by RECONCILING rather than REJECTING - the essay-winning move is to show how you will honor both. A pure rebellion narrative reads young; a negotiation narrative reads mature.',
       emoji: '⚖️',
     },
     {
       title: 'Returning to India',
       body:
-        'Among diaspora students, the "return" arc — study in America, serve in India — is a recognizable and respected essay frame. Mentioning a specific region (बिहार का गाँव, राजस्थान का स्कूल) rather than just "India" reads as genuine knowledge, not symbolism.',
+        'Among diaspora students, the "return" arc - study in America, serve in India - is a recognizable and respected essay frame. Mentioning a specific region (बिहार का गाँव, राजस्थान का स्कूल) rather than just "India" reads as genuine knowledge, not symbolism.',
       emoji: '🇮🇳',
     },
   ],
   culturalNote: {
     why:
-      'The "my future" essay is where culture shows through most. A bland "I will be successful" paragraph reads as a Google-translated placeholder. Plant ONE of these five anchors — the engineer/doctor expectation, service to parents, education-first, dream-vs-expectation tension, or the return-to-India arc — and Topic Coverage jumps.',
+      'The "my future" essay is where culture shows through most. A bland "I will be successful" paragraph reads as a Google-translated placeholder. Plant ONE of these five anchors - the engineer/doctor expectation, service to parents, education-first, dream-vs-expectation tension, or the return-to-India arc - and Topic Coverage jumps.',
     trains: ['TopicCoverage', 'TextType'],
   },
 
@@ -328,7 +328,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Both idioms are directly about aspiration, so they land naturally inside this topic\'s prompts. Use ONE, not both — an Intermediate-Mid essay reads better with one well-placed idiom than with two stacked ones. Place it in the closing paragraph for maximum effect.',
+      'Both idioms are directly about aspiration, so they land naturally inside this topic\'s prompts. Use ONE, not both - an Intermediate-Mid essay reads better with one well-placed idiom than with two stacked ones. Place it in the closing paragraph for maximum effect.',
     trains: ['TextType'],
   },
 
@@ -336,20 +336,20 @@ export const pack: TopicPack = {
     {
       shortLabel: 'Ten years from now',
       prompt:
-        'दस साल बाद आप क्या करेंगे? तीन अनुच्छेदों में लिखिए — आपका बचपन का सपना, आज की तैयारी, और भविष्य की योजना। (What will you be doing ten years from now? Write in three paragraphs — your childhood dream, today\'s preparation, and future plan.)',
+        'दस साल बाद आप क्या करेंगे? तीन अनुच्छेदों में लिखिए - आपका बचपन का सपना, आज की तैयारी, और भविष्य की योजना। (What will you be doing ten years from now? Write in three paragraphs - your childhood dream, today\'s preparation, and future plan.)',
       novice: 'मैं डॉक्टर बनूँगा। मैं पढ़ता हूँ। बहुत अच्छा।',
       intermediateMid:
-        'बचपन में मुझे हमेशा आसमान के तारे देखना अच्छा लगता था। जब मैं दस साल का था, तब पिताजी ने मुझे एक छोटा टेलिस्कोप लाकर दिया। उस रात से मेरा एक ही सपना है — वैज्ञानिक बनकर अंतरिक्ष में नई खोज करना।\n\nआज मैं हाई स्कूल के अंतिम वर्ष में हूँ। मैं रोज़ भौतिकी और गणित पढ़ता हूँ, क्योंकि मेरा लक्ष्य एमआईटी या कैलटेक में दाख़िला लेना है। मेरे माता-पिता चाहते हैं कि मैं इंजीनियर बनूँ, हालाँकि मैंने उन्हें समझाया है कि विज्ञान सिर्फ़ एक पेशा नहीं, बल्कि मेरा जुनून भी है।\n\nदस साल बाद मैं किसी बड़ी प्रयोगशाला में काम करूँगा। अगर मेरी मेहनत रंग लाएगी, तो मैं भारत के छात्रों के लिए मुफ़्त विज्ञान कक्षाएँ शुरू करूँगा। मेरा मानना है कि ज्ञान बाँटने से बढ़ता है। मुझे आशा है कि एक दिन मैं अपने सपने साकार करूँगा और अपने माता-पिता को गर्व महसूस कराऊँगा।',
+        'बचपन में मुझे हमेशा आसमान के तारे देखना अच्छा लगता था। जब मैं दस साल का था, तब पिताजी ने मुझे एक छोटा टेलिस्कोप लाकर दिया। उस रात से मेरा एक ही सपना है - वैज्ञानिक बनकर अंतरिक्ष में नई खोज करना।\n\nआज मैं हाई स्कूल के अंतिम वर्ष में हूँ। मैं रोज़ भौतिकी और गणित पढ़ता हूँ, क्योंकि मेरा लक्ष्य एमआईटी या कैलटेक में दाख़िला लेना है। मेरे माता-पिता चाहते हैं कि मैं इंजीनियर बनूँ, हालाँकि मैंने उन्हें समझाया है कि विज्ञान सिर्फ़ एक पेशा नहीं, बल्कि मेरा जुनून भी है।\n\nदस साल बाद मैं किसी बड़ी प्रयोगशाला में काम करूँगा। अगर मेरी मेहनत रंग लाएगी, तो मैं भारत के छात्रों के लिए मुफ़्त विज्ञान कक्षाएँ शुरू करूँगा। मेरा मानना है कि ज्ञान बाँटने से बढ़ता है। मुझे आशा है कि एक दिन मैं अपने सपने साकार करूँगा और अपने माता-पिता को गर्व महसूस कराऊँगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'बचपन में ... जब मैं दस साल का था', note: 'Past-imperfective opens the essay — anchors childhood memory cleanly.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'बचपन में ... जब मैं दस साल का था', note: 'Past-imperfective opens the essay - anchors childhood memory cleanly.' },
         { paragraphIndex: 0, kind: 'cultural', highlight: 'पिताजी ने मुझे एक छोटा टेलिस्कोप लाकर दिया', note: 'Specific memory, not generic "I loved science." Lifts Topic Coverage.' },
         { paragraphIndex: 0, kind: 'vocab', highlight: 'सपना ... वैज्ञानिक बनकर', note: 'Aspiration noun + career noun + compound verb in one sentence.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'आज ... पढ़ता हूँ', note: 'Present-habitual anchors paragraph two — second time frame established.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'आज ... पढ़ता हूँ', note: 'Present-habitual anchors paragraph two - second time frame established.' },
         { paragraphIndex: 1, kind: 'connector', highlight: 'हालाँकि ... बल्कि ... भी', note: 'Concessive + not-only-but-also. Two Intermediate-Mid connectors in one paragraph.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'चाहते हैं कि मैं इंजीनियर बनूँ', note: 'Subjunctive after चाहना — correctly uses बनूँ, not बनूँगा.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'चाहते हैं कि मैं इंजीनियर बनूँ', note: 'Subjunctive after चाहना - correctly uses बनूँ, not बनूँगा.' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'दस साल बाद ... करूँगा', note: 'Future tense arrives in paragraph three. Third time frame locked.' },
         { paragraphIndex: 2, kind: 'connector', highlight: 'अगर ... तो ... शुरू करूँगा', note: 'Conditional + future. Complex-structure signal raters explicitly reward.' },
-        { paragraphIndex: 2, kind: 'idiom', highlight: 'सपने साकार करना', note: 'Aspiration idiom placed in closing — one is plenty.' },
+        { paragraphIndex: 2, kind: 'idiom', highlight: 'सपने साकार करना', note: 'Aspiration idiom placed in closing - one is plenty.' },
       ],
       wordCount: 142,
       tenseUsed: ['past', 'present', 'future'],
@@ -358,16 +358,16 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three paragraphs each anchored to a different time frame (बचपन में / आज / दस साल बाद) — meets Benchmark 5 "some control of past, present, and future" requirement head-on.',
+          'Three paragraphs each anchored to a different time frame (बचपन में / आज / दस साल बाद) - meets Benchmark 5 "some control of past, present, and future" requirement head-on.',
           'Five distinct connectors including two Intermediate-Mid signatures (हालाँकि, सिर्फ़...बल्कि...भी). Text-Type 5 confirmed.',
           'Subjunctive used correctly: "चाहते हैं कि मैं इंजीनियर बनूँ" (not बनूँगा). This is the exact grammar point that separates IM from IL on the rubric.',
           'Conditional अगर ... तो in paragraph three pairs future + future correctly, adding a complex structure raters bump Language Control for.',
-          'Cultural specifics — parental career expectation, return-service to Indian students — elevate Topic Coverage above generic "I want to be a scientist."',
+          'Cultural specifics - parental career expectation, return-service to Indian students - elevate Topic Coverage above generic "I want to be a scientist."',
         ],
         gotchas: [
           'A female narrator must write करूँगी / पढ़ूँगी / बनूँगी etc. throughout. Switching gender mid-essay drops Language Control to Low.',
           'If the student writes "मैं चाहते हूँ कि मैं बनूँगा" (wrong subject agreement AND indicative inside कि-clause), the whole subjunctive clause unravels.',
-          'Replacing the idiom with a generic "मैं सफल हूँगा" weakens the closing — one idiom is a cheap, reliable lift.',
+          'Replacing the idiom with a generic "मैं सफल हूँगा" weakens the closing - one idiom is a cheap, reliable lift.',
         ],
       },
     },
@@ -381,12 +381,12 @@ export const pack: TopicPack = {
       annotations: [
         { paragraphIndex: 0, kind: 'cultural', highlight: 'भारतीय परिवार ... करियर का फ़ैसला अक्सर माता-पिता करते हैं', note: 'India-specific cultural setup in sentence one. Topic Coverage signal immediately.' },
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'बचपन से मुझे कहा गया', note: 'Past-passive voice. Unusual and high-credit structure.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'अगर मुझे पूरी आज़ादी मिले, तो मैं एक लेखिका बनूँगी', note: 'Conditional with subjunctive in if-clause, future in then-clause — matches the prompt perfectly.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'अगर मुझे पूरी आज़ादी मिले, तो मैं एक लेखिका बनूँगी', note: 'Conditional with subjunctive in if-clause, future in then-clause - matches the prompt perfectly.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'आजकल ... लिखती हूँ', note: 'Present paragraph, consistent feminine forms (लिखती, हटूँगी).' },
         { paragraphIndex: 1, kind: 'structure', highlight: 'सिर्फ़ एक शौक़ नहीं, बल्कि एक ज़िम्मेदारी भी', note: 'Not-only-but-also carries the moral argument. Text-Type 5 move.' },
         { paragraphIndex: 1, kind: 'connector', highlight: 'हालाँकि ... पीछे नहीं हटूँगी', note: 'Concessive + determined future closes the present paragraph with tension.' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'दस साल बाद ... लिखूँगी', note: 'Future tense paragraph. Feminine forms sustained throughout (खोलूँगी, छुऊँगी, जाऊँगी).' },
-        { paragraphIndex: 2, kind: 'connector', highlight: 'अगर मेरी पहली किताब चलेगी, तो', note: 'Second अगर...तो construction — shows this is not a memorized phrase but a learned structure.' },
+        { paragraphIndex: 2, kind: 'connector', highlight: 'अगर मेरी पहली किताब चलेगी, तो', note: 'Second अगर...तो construction - shows this is not a memorized phrase but a learned structure.' },
         { paragraphIndex: 2, kind: 'idiom', highlight: 'आसमान छुऊँगी', note: 'Aspiration idiom placed in closing, conjugated in feminine first-person future. Perfect landing.' },
       ],
       wordCount: 168,
@@ -396,11 +396,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Feminine first-person agreement is sustained perfectly across 168 words — पली-बढ़ी, लिखती, बनूँगी, हटूँगी, खोलूँगी, छुऊँगी. Language Control reads as High.',
+          'Feminine first-person agreement is sustained perfectly across 168 words - पली-बढ़ी, लिखती, बनूँगी, हटूँगी, खोलूँगी, छुऊँगी. Language Control reads as High.',
           'Seven distinct connectors, including TWO different अगर...तो conditionals. Raters see this as structural fluency, not memorization.',
           'The prompt asks a hypothetical; the essay opens with real constraints (parental expectation), pivots through the hypothetical (अगर मुझे आज़ादी मिले), and lands on a concrete future plan. That arc is exactly what Text-Type 5 describes.',
           'Cultural specifics are layered: family career-choice culture, feminine voice speaking about freedom, service to rural girls. Topic Coverage elevated beyond generic.',
-          'The closing idiom आसमान छुऊँगी is correctly conjugated in feminine first-person future — one idiom, one gender error would have undone the whole essay, and this student nails it.',
+          'The closing idiom आसमान छुऊँगी is correctly conjugated in feminine first-person future - one idiom, one gender error would have undone the whole essay, and this student nails it.',
         ],
         gotchas: [
           'If the student had written "लिखता हूँ" in paragraph two after "पली-बढ़ी" in paragraph one, the gender inconsistency alone would drop the essay to Benchmark 4.',
@@ -453,13 +453,13 @@ export const pack: TopicPack = {
   ],
   promptsNote: {
     why:
-      'Prompt 1 is the default FCPS "ten years" question — every student must be able to answer this cold. Prompt 2 forces the parental-expectation culture into the essay, which is where most students gain or lose Topic Coverage points. Prompt 3 is a pure hypothetical, practicing अगर...तो at maximum load. Do all three.',
+      'Prompt 1 is the default FCPS "ten years" question - every student must be able to answer this cold. Prompt 2 forces the parental-expectation culture into the essay, which is where most students gain or lose Topic Coverage points. Prompt 3 is a pure hypothetical, practicing अगर...तो at maximum load. Do all three.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
   rubricNote: {
     why:
-      'For this topic, self-grade with one extra question: "Did I actually use the future tense — correctly conjugated — at least five times?" If the answer is fewer than five, the essay has not earned Benchmark 5 regardless of how polished the past/present paragraphs are. Future tense is the scoring lever on this pack.',
+      'For this topic, self-grade with one extra question: "Did I actually use the future tense - correctly conjugated - at least five times?" If the answer is fewer than five, the essay has not earned Benchmark 5 regardless of how polished the past/present paragraphs are. Future tense is the scoring lever on this pack.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 

@@ -27,7 +27,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Minimal. Recognizable only with significant context.',
     credit: 'NoneYet',
     creditCount: 0,
-    inOneLine: 'Scattered words — no credit yet.',
+    inOneLine: 'Scattered words - no credit yet.',
   },
   {
     benchmark: 2,
@@ -36,7 +36,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Highly formulaic; errors frequent outside memorized chunks.',
     credit: 'NoneYet',
     creditCount: 0,
-    inOneLine: 'Memorized chunks — still no credit.',
+    inOneLine: 'Memorized chunks - still no credit.',
   },
   {
     benchmark: 3,
@@ -45,7 +45,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Emerging sentence construction; heavy reliance on formulaic expressions.',
     credit: 'NoviceHigh_1cr',
     creditCount: 1,
-    inOneLine: 'Simple sentences — earns 1 FCPS credit.',
+    inOneLine: 'Simple sentences - earns 1 FCPS credit.',
   },
   {
     benchmark: 4,
@@ -54,7 +54,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Control is uneven; preparatory phrases/adverbial enhancements appear but stand independently.',
     credit: 'IntermediateLow_2cr',
     creditCount: 2,
-    inOneLine: 'Strings of sentences — earns 2 FCPS credits.',
+    inOneLine: 'Strings of sentences - earns 2 FCPS credits.',
   },
   {
     benchmark: 5,
@@ -63,7 +63,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Comprehensible across the whole response; some control of past, present, and future time frames.',
     credit: 'IntermediateMid_3cr',
     creditCount: 3,
-    inOneLine: 'Connected sentences with time frames — earns 3 FCPS credits. 🎯 TARGET.',
+    inOneLine: 'Connected sentences with time frames - earns 3 FCPS credits. 🎯 TARGET.',
   },
   {
     benchmark: 6,
@@ -72,7 +72,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Generally accurate across simple time frames; some emerging complex structures.',
     credit: 'IntermediateMid_3cr',
     creditCount: 3,
-    inOneLine: 'Cohesive paragraphs — still 3 credits (cap).',
+    inOneLine: 'Cohesive paragraphs - still 3 credits (cap).',
   },
   {
     benchmark: 7,
@@ -81,7 +81,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Good control of major time frames; some circumlocution on complex topics.',
     credit: 'IntermediateMid_3cr',
     creditCount: 3,
-    inOneLine: 'Advanced narration — 3 credits (cap).',
+    inOneLine: 'Advanced narration - 3 credits (cap).',
   },
   {
     benchmark: 8,
@@ -90,7 +90,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Strong accuracy across major time frames; can handle some abstract topics.',
     credit: 'IntermediateMid_3cr',
     creditCount: 3,
-    inOneLine: 'Advanced-mid discourse — 3 credits (cap).',
+    inOneLine: 'Advanced-mid discourse - 3 credits (cap).',
   },
 ];
 
@@ -183,7 +183,7 @@ export const FCPS_CREDIT_SUMMARY = [
 
 export const EXAM_FACTS = {
   examName: 'FCPS World Language Credit by Exam (Hindi)',
-  testVendor: 'Avant Assessment — STAMP 2S/WS',
+  testVendor: 'Avant Assessment - STAMP 2S/WS',
   sections: [
     {
       name: 'Writing',

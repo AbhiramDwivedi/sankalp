@@ -10,15 +10,15 @@ export const pack: TopicPack = {
   heroMotif: 'clock',
   titleHindi: 'दिन, महीने और कैलेंडर',
   titleEnglish: 'Days, Months & Calendar',
-  hook: 'Temporal vocabulary is the raw material for time-frame shifts — the Intermediate-Mid lever.',
+  hook: 'Temporal vocabulary is the raw material for time-frame shifts - the Intermediate-Mid lever.',
   heroPrompt: composeHeroPrompt(
-    'A stylized calendar page with Hindi month names, marigold garlands draped at the corners, seasonal motifs — monsoon clouds, winter mist, summer sun — flowing across',
+    'A stylized calendar page with Hindi month names, marigold garlands draped at the corners, seasonal motifs - monsoon clouds, winter mist, summer sun - flowing across',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Days, Months, and Calendar (FCPS Level 1 — School Life)',
-      'Daily and weekly routines (FCPS Level 1 — School Life)',
+      'Days, Months, and Calendar (FCPS Level 1 - School Life)',
+      'Daily and weekly routines (FCPS Level 1 - School Life)',
       'Bridges into Weather and Seasons (FCPS Level 1) through seasonal vocabulary',
     ],
     trains: ['LanguageControl', 'TextType', 'TopicCoverage'],
@@ -32,7 +32,7 @@ export const pack: TopicPack = {
     positionOnArc: 'foundations',
     estimatedTime: '75 min reading + 30 min essay',
     ifSkippedRisk:
-      'Without the calendar vocabulary bank and the पिछले/इस/अगले frame, the student cannot signal past/present/future reliably. Every FCPS Benchmark-5 essay demands visible tense shifts — skip this pack and the student stalls at Intermediate-Low (2 credits) no matter how rich the topic vocabulary is.',
+      'Without the calendar vocabulary bank and the पिछले/इस/अगले frame, the student cannot signal past/present/future reliably. Every FCPS Benchmark-5 essay demands visible tense shifts - skip this pack and the student stalls at Intermediate-Low (2 credits) no matter how rich the topic vocabulary is.',
   },
 
   objectives: [
@@ -68,7 +68,7 @@ export const pack: TopicPack = {
     { hindi: 'शनिवार', transliteration: 'shanivaar', english: 'Saturday', exampleHindi: 'शनिवार को मैं देर से उठता हूँ।', exampleEnglish: 'On Saturday I wake up late.', emoji: '🛌', partOfSpeech: 'noun', subgroup: 'Days' },
     { hindi: 'रविवार', transliteration: 'ravivaar', english: 'Sunday', exampleHindi: 'रविवार को हमारा परिवार साथ खाना खाता है।', exampleEnglish: 'On Sunday our family eats together.', emoji: '🍽️', partOfSpeech: 'noun', subgroup: 'Days' },
 
-    // Gregorian months (selective — the ones students actually use in essays)
+    // Gregorian months (selective - the ones students actually use in essays)
     { hindi: 'जनवरी', transliteration: 'janvari', english: 'January', exampleHindi: 'जनवरी में बहुत ठंड पड़ती है।', exampleEnglish: 'It is very cold in January.', emoji: '❄️', partOfSpeech: 'noun', subgroup: 'Months (Gregorian)' },
     { hindi: 'मार्च', transliteration: 'march', english: 'March', exampleHindi: 'मार्च में हमारी परीक्षा होती है।', exampleEnglish: 'Our exam is in March.', emoji: '📝', partOfSpeech: 'noun', subgroup: 'Months (Gregorian)' },
     { hindi: 'मई', transliteration: 'mai', english: 'May', exampleHindi: 'मई में गर्मी की छुट्टियाँ शुरू होती हैं।', exampleEnglish: 'Summer vacation starts in May.', emoji: '🌞', partOfSpeech: 'noun', subgroup: 'Months (Gregorian)' },
@@ -101,16 +101,16 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 29 entries are the minimum calendar bank the student needs to talk about any schedule, routine, holiday, or plan. Every day and every season appears in the reading sample or a model essay — memorize this list first and the rest of the pack becomes a fill-in-the-blank.',
+      'These 29 entries are the minimum calendar bank the student needs to talk about any schedule, routine, holiday, or plan. Every day and every season appears in the reading sample or a model essay - memorize this list first and the rest of the pack becomes a fill-in-the-blank.',
     trains: ['TopicCoverage'],
-    examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?" — School Life routines require day/month/season precision.',
+    examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?" - School Life routines require day/month/season precision.',
   },
 
   grammar: [
     {
       title: 'Placing an event on a specific day or date: "दिन को" / "तारीख़ को"',
       rule:
-        'To say "on Monday" or "on the 5th of May," attach the postposition को to the day or the date. Pattern: [day/date] + को + [rest of sentence]. This को does NOT change the verb — it just pins the event in time.',
+        'To say "on Monday" or "on the 5th of May," attach the postposition को to the day or the date. Pattern: [day/date] + को + [rest of sentence]. This को does NOT change the verb - it just pins the event in time.',
       examples: [
         { hindi: 'सोमवार को मेरी हिंदी की कक्षा है।', transliteration: 'somvaar ko meri hindi ki kakshaa hai.', english: 'I have Hindi class on Monday.' },
         { hindi: '5 मई को मेरा जन्मदिन है।', transliteration: '5 mai ko mera janmadin hai.', english: 'My birthday is on May 5.' },
@@ -131,9 +131,9 @@ export const pack: TopicPack = {
         { hindi: 'अगले महीने हम दादी के घर जाएँगे।', transliteration: 'agle maheene hum daadi ke ghar jaayenge.', english: 'Next month we will go to Grandma\'s house. (future)' },
       ],
       pitfall:
-        'Writing "पिछला हफ़्ता" instead of "पिछले हफ़्ते" is the classic slip — the adjective must agree with the oblique noun. Also, students often pick the right time word but forget to change the verb tense to match.',
+        'Writing "पिछला हफ़्ता" instead of "पिछले हफ़्ते" is the classic slip - the adjective must agree with the oblique noun. Also, students often pick the right time word but forget to change the verb tense to match.',
       whyItMatters:
-        'Intermediate-Mid requires visible shifts across past, present, and future. This one construction — पिछले / इस / अगले — is the fastest way to put three time frames on paper in a single essay.',
+        'Intermediate-Mid requires visible shifts across past, present, and future. This one construction - पिछले / इस / अगले - is the fastest way to put three time frames on paper in a single essay.',
     },
     {
       title: 'Relative time adverbs कल / परसों and reading them from context',
@@ -147,12 +147,12 @@ export const pack: TopicPack = {
       pitfall:
         'If the student uses कल but keeps the verb in the present tense, the reader cannot tell whether the event already happened or is upcoming. Raters mark this as Language Control breakdown.',
       whyItMatters:
-        'Benchmark-5 explicitly credits "some control of past, present, and future time frames." Pairing कल with the correct verb form is the smallest unit where that control shows up — and the easiest place to lose the point.',
+        'Benchmark-5 explicitly credits "some control of past, present, and future time frames." Pairing कल with the correct verb form is the smallest unit where that control shows up - and the easiest place to lose the point.',
     },
   ],
   grammarNote: {
     why:
-      'These three constructions — को for specific dates, पिछले/इस/अगले for tense frames, and कल/परसों with correct verb aspect — account for nearly every time-reference sentence a Benchmark-5 essay on routine or schedule needs. Drill them until they are automatic; the rest of the grammar is just vocabulary swapping.',
+      'These three constructions - को for specific dates, पिछले/इस/अगले for tense frames, and कल/परसों with correct verb aspect - account for nearly every time-reference sentence a Benchmark-5 essay on routine or schedule needs. Drill them until they are automatic; the rest of the grammar is just vocabulary swapping.',
     trains: ['LanguageControl', 'TextType'],
   },
 
@@ -167,7 +167,7 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'A week-description essay is fundamentally a sequence: पहले सोमवार को ..., फिर मंगलवार को ..., इसके बाद बुधवार को ..., अंत में रविवार को .... Add क्योंकि and लेकिन for the "why" and "contrast" raters reward, and इसलिए to tie a reason to a plan. Seven connectors is plenty at Level 1 — depth over breadth.',
+      'A week-description essay is fundamentally a sequence: पहले सोमवार को ..., फिर मंगलवार को ..., इसके बाद बुधवार को ..., अंत में रविवार को .... Add क्योंकि and लेकिन for the "why" and "contrast" raters reward, and इसलिए to tie a reason to a plan. Seven connectors is plenty at Level 1 - depth over breadth.',
     trains: ['TextType'],
   },
 
@@ -180,9 +180,9 @@ export const pack: TopicPack = {
     english:
       'My week is very busy, but I like it. First, on Monday I wake up early, because Hindi class is in the morning. Then on Tuesday and Wednesday there are sports and music classes at school. On Thursday I go to the library with my sister. On Friday school ends early, so in the evening we eat pizza outside. Saturday and Sunday are the weekend. On Saturday our family goes to the market. On Sunday we wake up late and have breakfast together. Last Sunday Grandma had come, and next Sunday we will go to the temple. Finally, every Sunday I finish my homework.',
     highlights: [
-      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors pin a seven-day schedule to a clean structure. The sentences cannot be rearranged — that is Text-Type 5.' },
-      { term: 'सोमवार को / गुरुवार को / रविवार को', note: 'Specific-day placement with को used five times in one passage — the construction students most need to internalize.' },
-      { term: 'पिछले रविवार को ... अगले रविवार को', note: 'Past-frame and future-frame in consecutive sentences — the Intermediate-Mid tense-shift move in its purest form.' },
+      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors pin a seven-day schedule to a clean structure. The sentences cannot be rearranged - that is Text-Type 5.' },
+      { term: 'सोमवार को / गुरुवार को / रविवार को', note: 'Specific-day placement with को used five times in one passage - the construction students most need to internalize.' },
+      { term: 'पिछले रविवार को ... अगले रविवार को', note: 'Past-frame and future-frame in consecutive sentences - the Intermediate-Mid tense-shift move in its purest form.' },
       { term: 'क्योंकि / इसलिए / लेकिन', note: 'Reasoning connectors add the "why" and "contrast" layer on top of the time sequence.' },
       { term: 'सप्ताहांत (शनिवार और रविवार)', note: 'Indian 6-day school week reality: Saturday is often a half/full school day, so the 2-day weekend is cultural, not universal.' },
     ],
@@ -206,15 +206,15 @@ export const pack: TopicPack = {
       kind: 'schedule',
       title: 'मेरा साप्ताहिक कार्यक्रम · My Weekly Schedule',
       hindi:
-        'सोमवार — हिंदी की कक्षा (सुबह 8 बजे)\nमंगलवार — गणित का टेस्ट\nबुधवार — संगीत की कक्षा\nगुरुवार — पुस्तकालय (शाम 4 बजे)\nशुक्रवार — फ़ुटबॉल की प्रैक्टिस\nशनिवार — परिवार के साथ बाज़ार\nरविवार — देर से नाश्ता और होमवर्क',
+        'सोमवार - हिंदी की कक्षा (सुबह 8 बजे)\nमंगलवार - गणित का टेस्ट\nबुधवार - संगीत की कक्षा\nगुरुवार - पुस्तकालय (शाम 4 बजे)\nशुक्रवार - फ़ुटबॉल की प्रैक्टिस\nशनिवार - परिवार के साथ बाज़ार\nरविवार - देर से नाश्ता और होमवर्क',
       transliteration:
-        'somvaar — hindi ki kakshaa (subah 8 baje) | mangalvaar — ganit ka test | budhvaar — sangeet ki kakshaa | guruvaar — pustakalaya (shaam 4 baje) | shukravaar — football ki practice | shanivaar — parivaar ke saath baazaar | ravivaar — der se naashta aur homework',
+        'somvaar - hindi ki kakshaa (subah 8 baje) | mangalvaar - ganit ka test | budhvaar - sangeet ki kakshaa | guruvaar - pustakalaya (shaam 4 baje) | shukravaar - football ki practice | shanivaar - parivaar ke saath baazaar | ravivaar - der se naashta aur homework',
       english:
-        'Monday — Hindi class (8 a.m.) · Tuesday — Math test · Wednesday — Music class · Thursday — Library (4 p.m.) · Friday — Football practice · Saturday — Market with family · Sunday — Late breakfast and homework',
+        'Monday - Hindi class (8 a.m.) · Tuesday - Math test · Wednesday - Music class · Thursday - Library (4 p.m.) · Friday - Football practice · Saturday - Market with family · Sunday - Late breakfast and homework',
     },
     {
       kind: 'diary',
-      title: 'मेरी डायरी — शुक्रवार · My Diary — Friday',
+      title: 'मेरी डायरी - शुक्रवार · My Diary - Friday',
       hindi:
         'आज शुक्रवार है। स्कूल जल्दी ख़त्म हुआ, इसलिए मैं और अरुण पार्क गए। कल शनिवार है, लेकिन कल भी स्कूल है, क्योंकि हमारे स्कूल में महीने के पहले शनिवार को कक्षा होती है। परसों रविवार को हम दादी के घर जाएँगे।',
       transliteration:
@@ -226,11 +226,11 @@ export const pack: TopicPack = {
       kind: 'announcement',
       title: 'स्कूल की सूचना · School Notice',
       hindi:
-        'प्रिय छात्रों, अगले सोमवार, 11 मई को स्कूल बंद रहेगा, क्योंकि उस दिन स्थानीय चुनाव है। मंगलवार 12 मई को सामान्य कक्षाएँ होंगी। कृपया अपना होमवर्क समय पर पूरा कीजिए। — प्रधानाचार्य',
+        'प्रिय छात्रों, अगले सोमवार, 11 मई को स्कूल बंद रहेगा, क्योंकि उस दिन स्थानीय चुनाव है। मंगलवार 12 मई को सामान्य कक्षाएँ होंगी। कृपया अपना होमवर्क समय पर पूरा कीजिए। - प्रधानाचार्य',
       transliteration:
-        'priy chhaatron, agle somvaar, 11 mai ko school band rahega, kyonki us din sthaaneey chunaav hai. mangalvaar 12 mai ko saamaanya kakshaayen hongi. kripaya apna homework samay par pooraa keejiye. — pradhaanaachaarya',
+        'priy chhaatron, agle somvaar, 11 mai ko school band rahega, kyonki us din sthaaneey chunaav hai. mangalvaar 12 mai ko saamaanya kakshaayen hongi. kripaya apna homework samay par pooraa keejiye. - pradhaanaachaarya',
       english:
-        'Dear students, next Monday, May 11, school will be closed, because there is a local election that day. On Tuesday, May 12, regular classes will be held. Please finish your homework on time. — Principal',
+        'Dear students, next Monday, May 11, school will be closed, because there is a local election that day. On Tuesday, May 12, regular classes will be held. Please finish your homework on time. - Principal',
     },
     {
       kind: 'sms',
@@ -245,7 +245,7 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'A schedule, a diary page, a school notice, and a birthday text — four different registers (listing, personal, formal, casual) that all share the same day/month/date machinery. Raters reward the student who can swing between these registers in the same essay.',
+      'A schedule, a diary page, a school notice, and a birthday text - four different registers (listing, personal, formal, casual) that all share the same day/month/date machinery. Raters reward the student who can swing between these registers in the same essay.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -259,7 +259,7 @@ export const pack: TopicPack = {
     {
       title: 'Six Seasons, Not Four',
       body:
-        'The Indian ऋतुचक्र (wheel of seasons) has six — वसंत, ग्रीष्म, वर्षा, शरद, हेमंत, शिशिर — not the Western four. Varsha (monsoon) in particular has no English one-word equivalent; calling it "rainy season" in an English translation but वर्षा ऋतु in Hindi is authentic.',
+        'The Indian ऋतुचक्र (wheel of seasons) has six - वसंत, ग्रीष्म, वर्षा, शरद, हेमंत, शिशिर - not the Western four. Varsha (monsoon) in particular has no English one-word equivalent; calling it "rainy season" in an English translation but वर्षा ऋतु in Hindi is authentic.',
       emoji: '🌦️',
     },
     {
@@ -271,13 +271,13 @@ export const pack: TopicPack = {
     {
       title: 'Shravan Mondays and Fasting',
       body:
-        'The lunar month of श्रावण (July–August) is dedicated to Shiva. Every Monday of Shravan — सोमवार व्रत — is traditionally a fast day. Pairing a day-of-the-week sentence with a month-specific custom is a Topic-Coverage and Text-Type double-score.',
+        'The lunar month of श्रावण (July–August) is dedicated to Shiva. Every Monday of Shravan - सोमवार व्रत - is traditionally a fast day. Pairing a day-of-the-week sentence with a month-specific custom is a Topic-Coverage and Text-Type double-score.',
       emoji: '🪔',
     },
     {
       title: 'Phalgun and the Colors of Holi',
       body:
-        'The lunar month फाल्गुन ends with होली, the festival of colors (Feb-end / March). Writing "फाल्गुन के अंत में होली आती है" is more precise and culturally grounded than "Holi is in March" — same meaning, far better rubric signal.',
+        'The lunar month फाल्गुन ends with होली, the festival of colors (Feb-end / March). Writing "फाल्गुन के अंत में होली आती है" is more precise and culturally grounded than "Holi is in March" - same meaning, far better rubric signal.',
       emoji: '🎨',
     },
   ],
@@ -292,15 +292,15 @@ export const pack: TopicPack = {
       phrase: 'नौ दिन चले अढ़ाई कोस',
       literal: 'walked two and a half kos in nine days',
       meaning: 'To make very slow progress; to take far too long to finish something.',
-      example: 'यह होमवर्क तुमने एक हफ़्ते में भी नहीं किया — नौ दिन चले अढ़ाई कोस!',
-      exampleEnglish: 'You could not finish this homework even in a week — such slow progress!',
+      example: 'यह होमवर्क तुमने एक हफ़्ते में भी नहीं किया - नौ दिन चले अढ़ाई कोस!',
+      exampleEnglish: 'You could not finish this homework even in a week - such slow progress!',
     },
     {
       phrase: 'ईद का चाँद होना',
       literal: 'to be the Eid moon',
       meaning: 'To appear very rarely; to be seen only once in a long while.',
-      example: 'तुम तो ईद का चाँद हो गए हो — पिछले महीने से मिले ही नहीं!',
-      exampleEnglish: 'You have become like the Eid moon — we have not met since last month!',
+      example: 'तुम तो ईद का चाँद हो गए हो - पिछले महीने से मिले ही नहीं!',
+      exampleEnglish: 'You have become like the Eid moon - we have not met since last month!',
     },
   ],
   muhavareNote: {
@@ -319,12 +319,12 @@ export const pack: TopicPack = {
       intermediateMid:
         'मेरा हफ़्ता बहुत व्यस्त होता है, लेकिन मुझे यह पसंद है। पहले सोमवार को मैं जल्दी उठता हूँ, क्योंकि सुबह हिंदी की कक्षा होती है। फिर मंगलवार और बुधवार को स्कूल में खेल और संगीत होते हैं। गुरुवार को मैं पुस्तकालय जाता हूँ और शुक्रवार को फ़ुटबॉल की प्रैक्टिस होती है।\n\nशनिवार और रविवार सप्ताहांत होते हैं। शनिवार को हमारा परिवार बाज़ार जाता है, लेकिन रविवार को हम देर से उठते हैं और साथ में नाश्ता करते हैं। पिछले रविवार को दादी हमारे घर आई थीं, और उन्होंने मेरे लिए मीठा बनाया। मुझे रविवार सबसे अच्छा लगता है, क्योंकि उस दिन पूरा परिवार साथ होता है।\n\nअगले हफ़्ते मैं थोड़ा अलग करना चाहता हूँ। अगले शनिवार को मैं अपने दोस्त के जन्मदिन पर जाऊँगा, और अंत में रविवार को मैं सुबह जल्दी उठकर अपना होमवर्क पूरा करूँगा। इसलिए अगला हफ़्ता भी व्यस्त लेकिन मज़ेदार रहेगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले / फिर', note: 'Two sequence connectors open the schedule — pure Text-Type scaffolding.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'सोमवार को / मंगलवार और बुधवार को / गुरुवार को / शुक्रवार को', note: 'Four "day + को" placements in one paragraph — the exact construction the grammar note drills.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि', note: 'Adds the "why" — reasoning connector beside the time sequence.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले / फिर', note: 'Two sequence connectors open the schedule - pure Text-Type scaffolding.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'सोमवार को / मंगलवार और बुधवार को / गुरुवार को / शुक्रवार को', note: 'Four "day + को" placements in one paragraph - the exact construction the grammar note drills.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि', note: 'Adds the "why" - reasoning connector beside the time sequence.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले रविवार को दादी आई थीं', note: 'Past perfect frame explicitly named with पिछले. Second time frame secured.' },
-        { paragraphIndex: 1, kind: 'cultural', highlight: 'पूरा परिवार साथ होता है', note: 'Sunday-as-family-day — culturally grounded, Topic-Coverage lift.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले शनिवार को ... जाऊँगा / पूरा करूँगा', note: 'Future frame arrives with अगले + future-tense verbs — third time frame in 140 words.' },
+        { paragraphIndex: 1, kind: 'cultural', highlight: 'पूरा परिवार साथ होता है', note: 'Sunday-as-family-day - culturally grounded, Topic-Coverage lift.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले शनिवार को ... जाऊँगा / पूरा करूँगा', note: 'Future frame arrives with अगले + future-tense verbs - third time frame in 140 words.' },
         { paragraphIndex: 2, kind: 'connector', highlight: 'अंत में / इसलिए', note: 'Closing connectors bring the essay to a clean landing.' },
       ],
       wordCount: 138,
@@ -334,15 +334,15 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs that cannot be rearranged — the Monday-to-Friday paragraph, the weekend paragraph, and the next-week paragraph each do distinct work. Text-Type 5 confirmed.',
-          'Past (आई थीं, बनाया), present (उठता हूँ, जाता हूँ, होता है), and future (जाऊँगा, करूँगा, रहेगा) all present in 138 words — satisfies the rubric\'s "some control of major time frames."',
-          'The "दिन + को" construction is used correctly seven times with different days — Language Control stabilizes clearly at Average.',
-          'Six different connectors (पहले, फिर, क्योंकि, लेकिन, इसलिए, अंत में) spread across the essay — explicit cohesion, well above threshold.',
+          'Three cohesive paragraphs that cannot be rearranged - the Monday-to-Friday paragraph, the weekend paragraph, and the next-week paragraph each do distinct work. Text-Type 5 confirmed.',
+          'Past (आई थीं, बनाया), present (उठता हूँ, जाता हूँ, होता है), and future (जाऊँगा, करूँगा, रहेगा) all present in 138 words - satisfies the rubric\'s "some control of major time frames."',
+          'The "दिन + को" construction is used correctly seven times with different days - Language Control stabilizes clearly at Average.',
+          'Six different connectors (पहले, फिर, क्योंकि, लेकिन, इसलिए, अंत में) spread across the essay - explicit cohesion, well above threshold.',
           'Concrete cultural detail (दादी का मीठा, पूरा परिवार साथ) lifts Topic Coverage above a generic "I do homework on Sunday" response.',
         ],
         gotchas: [
           'If the student writes "पिछला रविवार" (instead of "पिछले रविवार को"), the time-frame construction breaks and Language Control drops.',
-          'Dropping the को in "सोमवार मैं उठता हूँ" would make the sentence read as a topic label — a recurring Level-1 error.',
+          'Dropping the को in "सोमवार मैं उठता हूँ" would make the sentence read as a topic label - a recurring Level-1 error.',
         ],
       },
     },
@@ -355,14 +355,14 @@ export const pack: TopicPack = {
       intermediateMid:
         'मेरा सबसे पसंदीदा महीना जुलाई है, क्योंकि जुलाई में भारत में वर्षा ऋतु शुरू होती है। श्रावण महीना भी इसी समय आता है, और हर सोमवार को कई लोग व्रत रखते हैं। जुलाई में स्कूल की गर्मी की छुट्टियाँ ख़त्म होती हैं, लेकिन ठंडी हवा और बारिश की वजह से मुझे स्कूल जाना अच्छा लगता है।\n\nइस महीने में आकाश अक्सर बादलों से भरा रहता है। पहले हल्की बूँदें गिरती हैं, फिर तेज़ बारिश होती है, और अंत में एक ठंडी शाम हो जाती है। मेरी माँ गरम पकौड़े और चाय बनाती हैं, इसलिए हम सब खिड़की के पास बैठकर बारिश देखते हैं।\n\nपिछले साल जुलाई में हम अपने गाँव गए थे। वहाँ 15 जुलाई को बहुत तेज़ बारिश हुई और खेतों में पानी भर गया। मैंने अपने चचेरे भाई के साथ कागज़ की नावें बनाईं। अगले साल भी मैं ज़रूर गाँव जाऊँगा, क्योंकि वर्षा ऋतु का असली मज़ा वहीं आता है।',
       annotations: [
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'जुलाई / वर्षा ऋतु / श्रावण महीना', note: 'Gregorian month, Indian season, AND Hindu lunar month in the opening sentence — heavy Topic-Coverage lift.' },
-        { paragraphIndex: 0, kind: 'cultural', highlight: 'हर सोमवार को कई लोग व्रत रखते हैं', note: 'Shravan-Monday fasting ritual — the cultural insight from this pack used in context.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'जुलाई / वर्षा ऋतु / श्रावण महीना', note: 'Gregorian month, Indian season, AND Hindu lunar month in the opening sentence - heavy Topic-Coverage lift.' },
+        { paragraphIndex: 0, kind: 'cultural', highlight: 'हर सोमवार को कई लोग व्रत रखते हैं', note: 'Shravan-Monday fasting ritual - the cultural insight from this pack used in context.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि / लेकिन', note: 'Reasoning + contrast inside the opener.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'पहले ... फिर ... अंत में', note: 'Three sequence connectors describe one rainstorm — scene micro-structure at Benchmark-5 level.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'इसलिए', note: 'Consequence link — rain → pakoras and tea.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'पहले ... फिर ... अंत में', note: 'Three sequence connectors describe one rainstorm - scene micro-structure at Benchmark-5 level.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'इसलिए', note: 'Consequence link - rain → pakoras and tea.' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'पिछले साल जुलाई में ... गए थे / हुई / भर गया', note: 'Past-tense frame announced with पिछले साल and sustained across three verbs.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: '15 जुलाई को बहुत तेज़ बारिश हुई', note: 'Specific date placement with को — the grammar rule shown in real use.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल भी मैं ज़रूर गाँव जाऊँगा', note: 'Future frame seals the essay — three time frames on one page.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: '15 जुलाई को बहुत तेज़ बारिश हुई', note: 'Specific date placement with को - the grammar rule shown in real use.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल भी मैं ज़रूर गाँव जाऊँगा', note: 'Future frame seals the essay - three time frames on one page.' },
       ],
       wordCount: 147,
       tenseUsed: ['past', 'present', 'future'],
@@ -371,9 +371,9 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs with distinct jobs — definition of the month, sensory present-tense scene, past-year memory closing into a future plan. Text-Type 5 requirement met.',
-          'Names जुलाई (Gregorian), वर्षा ऋतु (Indian season), AND श्रावण (Hindu lunar month) — Topic Coverage is unusually dense for a Level-1 essay.',
-          'Date placement with को (15 जुलाई को) used correctly inside the past narrative — shows the grammar rule internalized.',
+          'Three cohesive paragraphs with distinct jobs - definition of the month, sensory present-tense scene, past-year memory closing into a future plan. Text-Type 5 requirement met.',
+          'Names जुलाई (Gregorian), वर्षा ऋतु (Indian season), AND श्रावण (Hindu lunar month) - Topic Coverage is unusually dense for a Level-1 essay.',
+          'Date placement with को (15 जुलाई को) used correctly inside the past narrative - shows the grammar rule internalized.',
           'Six different connectors across three time frames; पिछले साल and अगले साल anchor the tense shift for the rater.',
           'Cultural specifics (श्रावण व्रत, पकौड़े-चाय in the rain, कागज़ की नावें) raise the essay well above a generic "I like rain" response.',
         ],
@@ -386,7 +386,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Two fully-worked essays show the same toolkit — day/date postposition को, पिछले/इस/अगले tense frames, sequence connectors — doing two different jobs (weekly routine, favorite month). Study which sentences the annotations tag as "tense-shift" — those are the rubric-visible moves. Reproduce that pattern on any prompt.',
+      'Two fully-worked essays show the same toolkit - day/date postposition को, पिछले/इस/अगले tense frames, sequence connectors - doing two different jobs (weekly routine, favorite month). Study which sentences the annotations tag as "tense-shift" - those are the rubric-visible moves. Reproduce that pattern on any prompt.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 

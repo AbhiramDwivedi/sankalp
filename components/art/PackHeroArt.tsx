@@ -1,4 +1,4 @@
-// PackHeroArt — composes a full hero illustration for a topic pack, built
+// PackHeroArt - composes a full hero illustration for a topic pack, built
 // from the pack's themeGroup (color palette) + heroMotif (illustrated scene).
 // All SVG, no external image files. Safe for print.
 
@@ -64,14 +64,14 @@ export const PackHeroArt: React.FC<PackHeroArtProps> = ({ pack, className = '' }
       {/* Soft radial glow top-right */}
       <ellipse cx="1050" cy="-60" rx="420" ry="320" fill="rgba(255,255,255,0.18)" />
 
-      {/* Primary motif — large right-side scene */}
+      {/* Primary motif - large right-side scene */}
       <g transform="translate(720, 120) scale(1.6)">
         <g opacity="0.9">
           <Motif color="#ffffff" accent="rgba(255,255,255,0.55)" />
         </g>
       </g>
 
-      {/* Secondary motif — small accent top-left */}
+      {/* Secondary motif - small accent top-left */}
       <g transform="translate(70, 60) scale(0.55)" opacity="0.55">
         <SecondaryMotif color="#ffffff" accent="rgba(255,255,255,0.4)" />
       </g>

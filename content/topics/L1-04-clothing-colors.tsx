@@ -3,7 +3,7 @@ import { composeHeroPrompt } from '../imagePrompts';
 import { pickConnectors } from '../connectors';
 
 // -----------------------------------------------------------------------------
-// L1-04 Clothing & Colors — कपड़े और रंग
+// L1-04 Clothing & Colors - कपड़े और रंग
 // Foundations pack: trains adjective + noun gender/number agreement, the
 // single highest-leverage Language Control drill at Level 1. Color words sit
 // naturally beside clothing nouns and expose the student to ा/ी/े endings
@@ -20,21 +20,21 @@ export const pack: TopicPack = {
   titleEnglish: 'Clothing & Colors',
   hook: 'Concrete nouns and adjectives that add texture and cultural specificity to any essay.',
   heroPrompt: composeHeroPrompt(
-    'A rack of colorful Indian garments — kurta, saree, dupatta — arranged like a paint palette against a terracotta wall, brass hangers',
+    'A rack of colorful Indian garments - kurta, saree, dupatta - arranged like a paint palette against a terracotta wall, brass hangers',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Clothing and Colors (FCPS Level 1 — Personal & Family Life)',
-      'Describing People and Self (FCPS Level 1) — what I am wearing today',
-      'Celebrations and Festivals (FCPS Level 1) — bridges into wedding/Diwali attire',
+      'Clothing and Colors (FCPS Level 1 - Personal & Family Life)',
+      'Describing People and Self (FCPS Level 1) - what I am wearing today',
+      'Celebrations and Festivals (FCPS Level 1) - bridges into wedding/Diwali attire',
     ],
     trains: ['LanguageControl', 'TopicCoverage', 'TextType'],
     afterThisPackStudentCan: [
       'Name at least 10 Indian and Western garments with correct gender in Hindi.',
       'Apply color adjectives (लाल, नीला, पीला) with correct ा/ी/े endings for noun gender and number.',
       'Use पहनना (to wear) vs लगाना (to apply) correctly in a 3-paragraph essay.',
-      'Describe what was worn at a past event, what is worn daily, and what will be bought — in three tense frames.',
+      'Describe what was worn at a past event, what is worn daily, and what will be bought - in three tense frames.',
       'Add one culturally specific garment detail (शेरवानी for a wedding, केसरिया for Diwali) to lift Topic Coverage.',
     ],
     positionOnArc: 'foundations',
@@ -108,7 +108,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 30 words cover the narrow set FCPS clothing prompts keep pulling from — garments, colors, three describers, and two verbs the student will confuse (पहनना vs लगाना). Every adjective here is ा-ending so the student drills gender agreement on every single example.',
+      'These 30 words cover the narrow set FCPS clothing prompts keep pulling from - garments, colors, three describers, and two verbs the student will confuse (पहनना vs लगाना). Every adjective here is ा-ending so the student drills gender agreement on every single example.',
     trains: ['TopicCoverage', 'LanguageControl'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },
@@ -122,7 +122,7 @@ export const pack: TopicPack = {
         { hindi: 'काला कुर्ता नया है।', transliteration: 'kaala kurta naya hai.', english: 'The black kurta is new. (m.sg)' },
         { hindi: 'काली साड़ी सुंदर है।', transliteration: 'kaali saari sundar hai.', english: 'The black saree is beautiful. (f.sg)' },
         { hindi: 'काले जूते पुराने हैं।', transliteration: 'kaale joote puraane hain.', english: 'The black shoes are old. (m.pl)' },
-        { hindi: 'लाल साड़ी और लाल कुर्ता — रंग एक, रूप अलग।', transliteration: 'laal saari aur laal kurta — rang ek, roop alag.', english: 'Red saree and red kurta — same color word, different nouns. (लाल is invariant)' },
+        { hindi: 'लाल साड़ी और लाल कुर्ता - रंग एक, रूप अलग।', transliteration: 'laal saari aur laal kurta - rang ek, roop alag.', english: 'Red saree and red kurta - same color word, different nouns. (लाल is invariant)' },
       ],
       pitfall:
         'Writing "काला साड़ी" (masculine adjective on feminine noun) or "काला जूते" (singular on plural) is the single most-graded error at L1. Every color essay produces a handful of these if the student does not drill the ा/ी/े triad.',
@@ -139,7 +139,7 @@ export const pack: TopicPack = {
         { hindi: 'ठंड है, इसलिए मैंने जैकेट पहनी है।', transliteration: 'thand hai, isliye maine jaiket pahni hai.', english: "It's cold, so I have put on a jacket." },
       ],
       pitfall:
-        'Students often write "बिंदी पहनी" — wrong. Bindi is applied, not worn. The raters mark this in Language Control every time.',
+        'Students often write "बिंदी पहनी" - wrong. Bindi is applied, not worn. The raters mark this in Language Control every time.',
       whyItMatters:
         'Choosing the right verb for wear-vs-apply is exactly the kind of precise lexical choice that pushes Language Control from Low to Average. It is a small edit with a large rubric payoff.',
     },
@@ -153,7 +153,7 @@ export const pack: TopicPack = {
         { hindi: 'मेरे जूते भाई के जूतों से नए हैं।', transliteration: 'mere joote bhai ke jooton se naye hain.', english: "My shoes are newer than my brother's shoes." },
       ],
       pitfall:
-        'Students copy English word-order and write "यह है अच्छा उससे" — ungrammatical. The से chunk must come before the adjective.',
+        'Students copy English word-order and write "यह है अच्छा उससे" - ungrammatical. The से chunk must come before the adjective.',
       whyItMatters:
         'Comparison is an Intermediate-Mid signal: a rubric rater specifically looks for whether the student can compare and contrast. One correct से comparison inside a clothing essay nudges Text-Type upward.',
     },
@@ -169,7 +169,7 @@ export const pack: TopicPack = {
       pitfall:
         'Using यह with a plural verb ("यह जूते हैं") breaks agreement. Plural shoes take ये: "ये जूते हैं।"',
       whyItMatters:
-        'Demonstratives are short, high-frequency words — getting them right is low effort, high Language Control signal. Getting them wrong in every paragraph flags inconsistency.',
+        'Demonstratives are short, high-frequency words - getting them right is low effort, high Language Control signal. Getting them wrong in every paragraph flags inconsistency.',
     },
   ],
   grammarNote: {
@@ -201,24 +201,24 @@ export const pack: TopicPack = {
     english:
       "Last month was my cousin's wedding. First we all went to the market and bought new clothes. I wore a golden sherwani, and my sister chose a red saree, because red is considered auspicious at weddings. Mother took a yellow dupatta and Father a white kurta-pyjama. Besides this, my little sister also applied mehndi on her hands.\n\nOn the wedding day we got ready early in the morning. Then we went to the groom's house. The groom looked very handsome, but his shoes were a little tight, so he was laughing. In the end, we danced a lot and ate sweets. This is a day I will always remember.",
     highlights: [
-      { term: 'सुनहरी शेरवानी / लाल साड़ी / पीला दुपट्टा', note: 'Three color+garment pairs in one sentence — each with correct gender ending. Language Control showcase.' },
+      { term: 'सुनहरी शेरवानी / लाल साड़ी / पीला दुपट्टा', note: 'Three color+garment pairs in one sentence - each with correct gender ending. Language Control showcase.' },
       { term: 'पहनी / लगाई', note: 'पहनना is used for the sherwani (worn on the body), लगाना for mehndi (applied). Exactly the verb distinction this pack drills.' },
       { term: 'क्योंकि / लेकिन / इसलिए / इसके अलावा', note: 'Four connectors scaffold the cause-effect and contrast moves that push Text-Type to 5.' },
-      { term: 'पिछले महीने ... याद रहेगा', note: 'Past-tense frame at the start, future-tense closer at the end — the two-tense shift raters look for.' },
+      { term: 'पिछले महीने ... याद रहेगा', note: 'Past-tense frame at the start, future-tense closer at the end - the two-tense shift raters look for.' },
       { term: 'शादी में लाल रंग शुभ', note: 'Cultural specific: red is auspicious for Indian weddings. One sentence, but it lifts Topic Coverage above generic "good color" answers.' },
     ],
     comprehensionQuestions: [
       { q: 'Whose wedding was it?', a: 'चचेरे भाई की (the narrator’s cousin’s).' },
       { q: 'What did the narrator wear, and what did the sister wear?', a: 'The narrator wore a सुनहरी शेरवानी (golden sherwani); the sister chose a लाल साड़ी (red saree).' },
       { q: 'Why did the sister choose red?', a: 'क्योंकि शादी में लाल रंग शुभ माना जाता है (because red is considered auspicious at weddings).' },
-      { q: 'What did the little sister apply? Which verb is used?', a: 'मेहँदी — applied with लगाना, not पहनना.' },
+      { q: 'What did the little sister apply? Which verb is used?', a: 'मेहँदी - applied with लगाना, not पहनना.' },
       { q: 'Why was the groom laughing?', a: 'उसके जूते थोड़े तंग थे (his shoes were a little tight).' },
       { q: 'Identify one connector used in the second paragraph and explain its function.', a: 'Any of फिर (then, sequence), लेकिन (but, contrast), इसलिए (so, consequence), or अंत में (finally, closing).' },
     ],
   },
   anchorNote: {
     why:
-      'This anchor models what a Benchmark-5 wedding essay looks like. Every color adjective inflects correctly, पहनना and लगाना are both used in context, and two time frames (past + future) are set. Read it aloud three times before attempting a prompt — the सुनहरी/लाल/पीला/सफ़ेद sentence-shapes should start to feel automatic.',
+      'This anchor models what a Benchmark-5 wedding essay looks like. Every color adjective inflects correctly, पहनना and लगाना are both used in context, and two time frames (past + future) are set. Read it aloud three times before attempting a prompt - the सुनहरी/लाल/पीला/सफ़ेद sentence-shapes should start to feel automatic.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -231,7 +231,7 @@ export const pack: TopicPack = {
       transliteration:
         'didi! kal shaadi ke liye maine neeli kameez li hai, par paint thodi tang hai 😅 tumhaari gulaabi saari taiyaar hai kya? mehndi kab lagaaogi?',
       english:
-        "Sis! I got a blue shirt for the wedding tomorrow, but the pants are a little tight 😅 — is your pink saree ready? When will you apply mehndi?",
+        "Sis! I got a blue shirt for the wedding tomorrow, but the pants are a little tight 😅 - is your pink saree ready? When will you apply mehndi?",
     },
     {
       kind: 'diary',
@@ -257,16 +257,16 @@ export const pack: TopicPack = {
       kind: 'poster',
       title: 'त्योहार का पोस्टर · Festival Poster',
       hindi:
-        'होली मिलन — रविवार शाम 5 बजे\n🎨 कृपया सफ़ेद कपड़े पहनकर आइए\n🌈 रंग, मिठाई और संगीत\nसबका स्वागत है!',
+        'होली मिलन - रविवार शाम 5 बजे\n🎨 कृपया सफ़ेद कपड़े पहनकर आइए\n🌈 रंग, मिठाई और संगीत\nसबका स्वागत है!',
       transliteration:
-        'holi milan — ravivaar shaam 5 baje | kripaya safed kapde pahankar aaiye | rang, mithaai aur sangeet | sabka svaagat hai!',
+        'holi milan - ravivaar shaam 5 baje | kripaya safed kapde pahankar aaiye | rang, mithaai aur sangeet | sabka svaagat hai!',
       english:
-        'Holi Meet — Sunday 5 PM · Please come wearing white clothes · Colors, sweets, and music · All are welcome!',
+        'Holi Meet - Sunday 5 PM · Please come wearing white clothes · Colors, sweets, and music · All are welcome!',
     },
   ],
   modelTextsNote: {
     why:
-      'SMS shows casual register, diary shows personal narration, review shows evaluative language, and the poster shows a public-notice register. Together they expose the student to four different ways clothing vocabulary shows up in real Hindi — not just one textbook pattern.',
+      'SMS shows casual register, diary shows personal narration, review shows evaluative language, and the poster shows a public-notice register. Together they expose the student to four different ways clothing vocabulary shows up in real Hindi - not just one textbook pattern.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -274,23 +274,23 @@ export const pack: TopicPack = {
     {
       title: 'Red = Auspicious, White = Purity',
       body:
-        'Indian brides traditionally wear red or deep pink — the color symbolizes auspiciousness and prosperity. White, on the other hand, is reserved for Holi (to show the colors) or for mourning in many regions. A bride in white would be startling; a mourner in red would be inappropriate. Getting this right in an essay signals cultural fluency.',
+        'Indian brides traditionally wear red or deep pink - the color symbolizes auspiciousness and prosperity. White, on the other hand, is reserved for Holi (to show the colors) or for mourning in many regions. A bride in white would be startling; a mourner in red would be inappropriate. Getting this right in an essay signals cultural fluency.',
       emoji: '🔴',
     },
     {
-      title: 'Saffron (केसरिया) — More Than a Color',
+      title: 'Saffron (केसरिया) - More Than a Color',
       body:
-        'The top band of the Indian flag is केसरिया. It represents courage and sacrifice, and it appears on many festival garments — especially during Diwali and Navratri. Writing "मैंने केसरिया कुर्ता पहना" instantly reads as more authentic than "मैंने नारंगी कुर्ता पहना".',
+        'The top band of the Indian flag is केसरिया. It represents courage and sacrifice, and it appears on many festival garments - especially during Diwali and Navratri. Writing "मैंने केसरिया कुर्ता पहना" instantly reads as more authentic than "मैंने नारंगी कुर्ता पहना".',
       emoji: '🟧',
     },
     {
       title: 'Holi: White In, Colors Out',
       body:
-        'On Holi morning everyone wears a simple सफ़ेद कुर्ता or old white clothes. By afternoon they are covered in गुलाल — pink, green, yellow powder. Mentioning this before-and-after arc makes a Holi essay richer without needing any extra vocabulary.',
+        'On Holi morning everyone wears a simple सफ़ेद कुर्ता or old white clothes. By afternoon they are covered in गुलाल - pink, green, yellow powder. Mentioning this before-and-after arc makes a Holi essay richer without needing any extra vocabulary.',
       emoji: '🌈',
     },
     {
-      title: 'Wedding Dress Code — by Role',
+      title: 'Wedding Dress Code - by Role',
       body:
         'Groom = शेरवानी (often cream or सुनहरी). Bride = red or maroon लहंगा / साड़ी. Groom’s side often wears coordinated colors; bride’s side another. Guests avoid white (looks like mourning) and black (looks like sadness). Knowing these roles lets you describe any wedding scene in three sentences.',
       emoji: '💒',
@@ -304,7 +304,7 @@ export const pack: TopicPack = {
   ],
   culturalNote: {
     why:
-      'Raters on Hindi essays will have read a hundred "I wore a red shirt" answers. One sentence about why the bride wears red, or what saffron represents, or the white-to-colors arc of Holi, separates a Benchmark-5 essay from a Benchmark-3 one — no extra grammar required.',
+      'Raters on Hindi essays will have read a hundred "I wore a red shirt" answers. One sentence about why the bride wears red, or what saffron represents, or the white-to-colors arc of Holi, separates a Benchmark-5 essay from a Benchmark-3 one - no extra grammar required.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -320,13 +320,13 @@ export const pack: TopicPack = {
       phrase: 'अपना रंग दिखाना',
       literal: 'to show one’s own color',
       meaning: 'To reveal one’s true nature (often negative, or sometimes surprising).',
-      example: 'नई जैकेट ने एक बारिश में ही अपना रंग दिखा दिया — रंग निकल गया।',
-      exampleEnglish: 'The new jacket showed its true nature in one rain — the color ran.',
+      example: 'नई जैकेट ने एक बारिश में ही अपना रंग दिखा दिया - रंग निकल गया।',
+      exampleEnglish: 'The new jacket showed its true nature in one rain - the color ran.',
     },
   ],
   muhavareNote: {
     why:
-      'Both idioms use the literal word रंग (color), so they slot naturally into a clothing essay without feeling forced. One idiom, well-placed, reads as register mastery. Two in one essay is overkill — pick whichever fits the mood.',
+      'Both idioms use the literal word रंग (color), so they slot naturally into a clothing essay without feeling forced. One idiom, well-placed, reads as register mastery. Two in one essay is overkill - pick whichever fits the mood.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -341,11 +341,11 @@ export const pack: TopicPack = {
       annotations: [
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले महीने', note: 'Past frame anchored in the first sentence.' },
         { paragraphIndex: 0, kind: 'vocab', highlight: 'सुनहरी शेरवानी / लाल साड़ी / सफ़ेद कुर्ता-पायजामा', note: 'Three color+garment pairs, each with correct gender agreement (f/f/m). Pure Language Control.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'पहनी ... लगाई', note: 'पहनना used for the sherwani, लगाना for mehndi — the precise verb distinction this pack trains.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'पहनी ... लगाई', note: 'पहनना used for the sherwani, लगाना for mehndi - the precise verb distinction this pack trains.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि / इसके अलावा', note: 'Reason + addition in one paragraph; raters read this as Intermediate-Mid connectedness.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'लेकिन / इसलिए', note: 'Contrast + consequence — the "why he was laughing" scaffold.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'लेकिन / इसलिए', note: 'Contrast + consequence - the "why he was laughing" scaffold.' },
         { paragraphIndex: 1, kind: 'cultural', highlight: 'मिठाई खाई / नाचे', note: 'Specific wedding customs, not generic "we enjoyed".' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल ... खरीदूँगा ... लूँगा', note: 'Future tense arrives in the closing — three time frames in 140 words = clean Benchmark 5.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल ... खरीदूँगा ... लूँगा', note: 'Future tense arrives in the closing - three time frames in 140 words = clean Benchmark 5.' },
         { paragraphIndex: 2, kind: 'vocab', highlight: 'केसरिया कुर्ता ... काले जूते', note: 'Invariant adjective (केसरिया) beside inflected adjective (काले, m.pl). Shows the student controls both patterns.' },
       ],
       wordCount: 140,
@@ -355,14 +355,14 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs — sentences cannot be rearranged without breaking the day’s narrative. Text-Type 5 requirement met.',
-          'Uses past (पहनी, खरीदे, नाचे), present (लग रहा था, लगता है), and future (खरीदूँगा, लूँगा) in 140 words — clean three-tense control for IM.',
+          'Three cohesive paragraphs - sentences cannot be rearranged without breaking the day’s narrative. Text-Type 5 requirement met.',
+          'Uses past (पहनी, खरीदे, नाचे), present (लग रहा था, लगता है), and future (खरीदूँगा, लूँगा) in 140 words - clean three-tense control for IM.',
           'Color-gender agreement is flawless: सुनहरी शेरवानी (f), लाल साड़ी (f), सफ़ेद कुर्ता (m), काले जूते (m.pl). Language Control stabilizes at Average or High.',
-          'पहनना vs लगाना is used correctly — सहेरवानी is पहनी, मेहँदी is लगाई. This precise lexical choice is exactly what the rubric rewards.',
+          'पहनना vs लगाना is used correctly - सहेरवानी is पहनी, मेहँदी is लगाई. This precise lexical choice is exactly what the rubric rewards.',
           'Cultural specific (sherwani, mehndi, wedding red/gold) raises Topic Coverage above "nice clothes, nice day" responses.',
         ],
         gotchas: [
-          'If the student slips into "मेहँदी पहनी", Language Control drops — mehndi is applied (लगाई), not worn.',
+          'If the student slips into "मेहँदी पहनी", Language Control drops - mehndi is applied (लगाई), not worn.',
           'If the essay collapses all three paragraphs into one block with no paragraph break, Text-Type drops to 4 even with the same words.',
         ],
       },
@@ -370,19 +370,19 @@ export const pack: TopicPack = {
     {
       shortLabel: 'Festival outfit',
       prompt:
-        'दिवाली या होली जैसे किसी त्योहार के दिन आप क्या पहनते हैं? तीन अनुच्छेदों में बताइए — कपड़े, रंग, और क्यों। (What do you wear on a festival day like Diwali or Holi? Explain in three paragraphs — clothes, colors, and why.)',
+        'दिवाली या होली जैसे किसी त्योहार के दिन आप क्या पहनते हैं? तीन अनुच्छेदों में बताइए - कपड़े, रंग, और क्यों। (What do you wear on a festival day like Diwali or Holi? Explain in three paragraphs - clothes, colors, and why.)',
       novice: 'दिवाली पर मैं कुर्ता पहनता हूँ। रंग अच्छा है। मुझे दिवाली पसंद है।',
       intermediateMid:
         'हर साल दिवाली पर हमारे घर में सब लोग नए कपड़े पहनते हैं। मैं आमतौर पर केसरिया कुर्ता और सफ़ेद पायजामा पहनता हूँ, क्योंकि ये रंग त्योहार पर शुभ माने जाते हैं। मेरी माँ लाल साड़ी पहनती हैं और सुनहरे गहने लगाती हैं। मेरी छोटी बहन गुलाबी सलवार-कमीज़ चुनती है, और हाथों पर मेहँदी भी लगाती है।\n\nपिछले साल हम दिवाली से एक हफ़्ता पहले बाज़ार गए थे। वहाँ बहुत भीड़ थी, लेकिन रंग-बिरंगे कपड़े देखकर बहुत अच्छा लगा। मैंने एक नया कुर्ता खरीदा, जो मेरे पुराने कुर्ते से चमकीला था। पिताजी ने कहा कि त्योहार पर पुराने कपड़े अच्छे नहीं लगते, इसलिए नए कपड़े ज़रूरी हैं।\n\nइस साल मैं एक नीली जैकेट भी लूँगा, क्योंकि दिवाली के बाद सर्दी शुरू हो जाती है। मुझे लगता है कि कपड़े सिर्फ़ कपड़े नहीं हैं, बल्कि त्योहार की खुशी का एक हिस्सा हैं।',
       annotations: [
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पहनते हैं / पहनता हूँ / पहनती हैं', note: 'Habitual present across three subjects — shows controlled conjugation.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पहनते हैं / पहनता हूँ / पहनती हैं', note: 'Habitual present across three subjects - shows controlled conjugation.' },
         { paragraphIndex: 0, kind: 'vocab', highlight: 'केसरिया कुर्ता / लाल साड़ी / गुलाबी सलवार-कमीज़', note: 'Three culturally anchored color+garment pairs. Mix of invariant (केसरिया, गुलाबी) and inflected (लाल). Topic Coverage lift.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'पहनता / पहनती / लगाती', note: 'पहनना for clothes, लगाना for mehndi + jewellery — both verbs in one paragraph.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'पहनता / पहनती / लगाती', note: 'पहनना for clothes, लगाना for mehndi + jewellery - both verbs in one paragraph.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले साल ... गए थे ... खरीदा', note: 'Past-perfective shift mid-essay; anchors the second paragraph in past time.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'नया कुर्ता, जो मेरे पुराने कुर्ते से चमकीला था', note: 'Relative clause + comparative "से" — an Intermediate-Mid hallmark.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'नया कुर्ता, जो मेरे पुराने कुर्ते से चमकीला था', note: 'Relative clause + comparative "से" - an Intermediate-Mid hallmark.' },
         { paragraphIndex: 1, kind: 'cultural', highlight: 'त्योहार पर पुराने कपड़े अच्छे नहीं लगते', note: 'Specific cultural reasoning, not generic "festivals are nice".' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'इस साल ... लूँगा', note: 'Future arrives in the closing — third time frame sealed.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: '"Not only but also" — a reliable Benchmark-5 closing move.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'इस साल ... लूँगा', note: 'Future arrives in the closing - third time frame sealed.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: '"Not only but also" - a reliable Benchmark-5 closing move.' },
       ],
       wordCount: 147,
       tenseUsed: ['past', 'present', 'future'],
@@ -391,9 +391,9 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Past (खरीदा, गए थे), habitual present (पहनते हैं), and future (लूँगा) all present in 147 words — satisfies IM "some control of major time frames".',
+          'Past (खरीदा, गए थे), habitual present (पहनते हैं), and future (लूँगा) all present in 147 words - satisfies IM "some control of major time frames".',
           'Comparative "मेरे पुराने कुर्ते से चमकीला" is exactly the kind of comparison raters check for at Benchmark 5.',
-          'सिर्फ़ ... बल्कि ... भी closes the essay with reflection — a Text-Type signal IM students rarely use.',
+          'सिर्फ़ ... बल्कि ... भी closes the essay with reflection - a Text-Type signal IM students rarely use.',
           'Every color agrees: केसरिया कुर्ता (invariant + m), सफ़ेद पायजामा (invariant + m), लाल साड़ी (invariant + f), गुलाबी सलवार-कमीज़ (invariant + f), नीली जैकेट (inflected + f). Zero agreement errors.',
           'Cultural reasoning ("त्योहार पर पुराने कपड़े अच्छे नहीं लगते") is concrete and India-rooted, not generic.',
         ],
@@ -406,7 +406,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Two fully-worked model essays — one narrative (wedding), one reflective (festival habit). Study both until the color+garment+verb patterns feel automatic. The verdict cards show exactly which sentences tick which rubric boxes; raters think in those boxes, and so should you.',
+      'Two fully-worked model essays - one narrative (wedding), one reflective (festival habit). Study both until the color+garment+verb patterns feel automatic. The verdict cards show exactly which sentences tick which rubric boxes; raters think in those boxes, and so should you.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -447,7 +447,7 @@ export const pack: TopicPack = {
   ],
   promptsNote: {
     why:
-      'Each prompt is the exact FCPS shape: three cohesive paragraphs, personal or hypothetical experience, enough scope for two or three tenses. The hint strip is not "the answer" — it is the target set of connectors, vocabulary, and tenses the student should hit to land at Benchmark 5.',
+      'Each prompt is the exact FCPS shape: three cohesive paragraphs, personal or hypothetical experience, enough scope for two or three tenses. The hint strip is not "the answer" - it is the target set of connectors, vocabulary, and tenses the student should hit to land at Benchmark 5.',
     trains: ['TextType'],
   },
 

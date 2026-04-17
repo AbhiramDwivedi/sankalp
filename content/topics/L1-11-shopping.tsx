@@ -3,9 +3,9 @@ import { composeHeroPrompt } from '../imagePrompts';
 import { pickConnectors } from '../connectors';
 
 // -----------------------------------------------------------------------------
-// SHOPPING (बाज़ार और ख़रीदारी) — FCPS Level 1, Community Life
+// SHOPPING (बाज़ार और ख़रीदारी) - FCPS Level 1, Community Life
 // Transactional Hindi is dense: polite requests, numbers, prices, quantities,
-// bargaining. Ideal FCPS essay territory — naturally fits past (a shopping
+// bargaining. Ideal FCPS essay territory - naturally fits past (a shopping
 // memory), present (habitual shopping), and future (plans for what to buy).
 // -----------------------------------------------------------------------------
 
@@ -17,29 +17,29 @@ export const pack: TopicPack = {
   heroMotif: 'bazaar',
   titleHindi: 'बाज़ार और ख़रीदारी',
   titleEnglish: 'Shopping',
-  hook: 'Transactional Hindi — polite requests, numbers, prices. Dense, practical, easy essay territory.',
+  hook: 'Transactional Hindi - polite requests, numbers, prices. Dense, practical, easy essay territory.',
   heroPrompt: composeHeroPrompt(
     "A bustling Indian bazaar stall piled with spices in brass bowls, fabrics hanging, a vendor's hand weighing produce on a balance, warm ochre light",
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Shopping (FCPS Level 1 — Community Life)',
+      'Shopping (FCPS Level 1 - Community Life)',
       'Markets, stores, and transactions (FCPS Level 1)',
-      'Numbers, prices, and polite requests (FCPS Level 1 — Language Functions)',
+      'Numbers, prices, and polite requests (FCPS Level 1 - Language Functions)',
     ],
     trains: ['TopicCoverage', 'LanguageControl', 'TextType'],
     afterThisPackStudentCan: [
       'Describe a shopping trip in three connected paragraphs with prices and quantities',
       'Ask about prices politely using कितने का / कितनी की and answer with rupee amounts',
       'Use comparatives सस्ता / महँगा / ज़्यादा / कम to contrast two shops or items',
-      'Mention at least one cultural specific — मोल-भाव, सब्ज़ी मंडी, UPI, त्योहार की ख़रीदारी',
+      'Mention at least one cultural specific - मोल-भाव, सब्ज़ी मंडी, UPI, त्योहार की ख़रीदारी',
       'Sustain gender agreement across feminine shopping nouns (दुकान, कीमत, सब्ज़ी) and masculine ones (बाज़ार, पैसे, दाम)',
     ],
     positionOnArc: 'building',
     estimatedTime: '90 min reading + 30 min essay',
     ifSkippedRisk:
-      'Shopping, markets, and transactional prompts come up in almost every FCPS Level-1 test set. Without this vocabulary the student defaults to "मैंने एक चीज़ ख़रीदी" over and over — flat Topic Coverage and no connector opportunities.',
+      'Shopping, markets, and transactional prompts come up in almost every FCPS Level-1 test set. Without this vocabulary the student defaults to "मैंने एक चीज़ ख़रीदी" over and over - flat Topic Coverage and no connector opportunities.',
   },
 
   objectives: [
@@ -60,7 +60,7 @@ export const pack: TopicPack = {
       trains: ['LanguageControl', 'TextType'],
     },
     {
-      text: 'Add one cultural specific — bargaining (मोल-भाव), a festival-season market, or paying by UPI — to lift Topic Coverage.',
+      text: 'Add one cultural specific - bargaining (मोल-भाव), a festival-season market, or paying by UPI - to lift Topic Coverage.',
       trains: ['TopicCoverage', 'TextType'],
     },
   ],
@@ -111,7 +111,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 32 words cover the four boxes every shopping essay must check: place, item, money, and transaction verb. Every word here shows up in the anchor, a model text, or a model essay — learn this list first and Topic Coverage is guaranteed.',
+      'These 32 words cover the four boxes every shopping essay must check: place, item, money, and transaction verb. Every word here shows up in the anchor, a model text, or a model essay - learn this list first and Topic Coverage is guaranteed.',
     trains: ['TopicCoverage'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },
@@ -128,14 +128,14 @@ export const pack: TopicPack = {
         { hindi: 'ये सब्ज़ियाँ कितनी की हैं?', transliteration: 'ye sabziyaan kitni ki hain?', english: 'How much are these vegetables? (f.pl)' },
       ],
       pitfall:
-        'Students often freeze "कितने का" and use it for everything, producing "यह किताब कितने का है?" — a gender mismatch raters flag immediately.',
+        'Students often freeze "कितने का" and use it for everything, producing "यह किताब कितने का है?" - a gender mismatch raters flag immediately.',
       whyItMatters:
         'Price questions are the highest-frequency transactional move in any shopping essay. Getting the gender wrong on the question word four times in one essay drops Language Control straight to Low.',
     },
     {
       title: 'Polite requests: कृपया + quantity + noun + दीजिए',
       rule:
-        'To ask a vendor for something politely, use कृपया + quantity + item + दीजिए/दे दीजिए. This is the register FCPS rewards. Avoid casual "मुझे दो" in essays — it reads as Novice.',
+        'To ask a vendor for something politely, use कृपया + quantity + item + दीजिए/दे दीजिए. This is the register FCPS rewards. Avoid casual "मुझे दो" in essays - it reads as Novice.',
       examples: [
         { hindi: 'कृपया एक किलो टमाटर दीजिए।', transliteration: 'kripaya ek kilo tamaatar deejiye.', english: 'Please give one kilo of tomatoes.' },
         { hindi: 'कृपया आधा किलो आलू दे दीजिए।', transliteration: 'kripaya aadha kilo aaloo de deejiye.', english: 'Please give half a kilo of potatoes.' },
@@ -156,14 +156,14 @@ export const pack: TopicPack = {
         { hindi: 'आज कीमत कल से ज़्यादा है।', transliteration: 'aaj keemat kal se zyaada hai.', english: 'Today the price is more than yesterday.' },
       ],
       pitfall:
-        'Forgetting the से marker ("यह दुकान माल सस्ती है") or using the wrong gender ("यह दुकान ... सस्ता है") — both errors confuse meaning.',
+        'Forgetting the से marker ("यह दुकान माल सस्ती है") or using the wrong gender ("यह दुकान ... सस्ता है") - both errors confuse meaning.',
       whyItMatters:
         'Comparatives are an Intermediate-Mid discourse move. One comparison sentence per essay signals the rater that the student can handle more than simple listing.',
     },
     {
       title: 'Past transitive with ने: "मैंने ... ख़रीदा/ख़रीदी/ख़रीदे/ख़रीदीं"',
       rule:
-        'To narrate a past shopping trip — required for Intermediate-Mid — use मैंने/हमने + object + perfective verb. The verb agrees in gender AND number with the OBJECT, not the subject.',
+        'To narrate a past shopping trip - required for Intermediate-Mid - use मैंने/हमने + object + perfective verb. The verb agrees in gender AND number with the OBJECT, not the subject.',
       examples: [
         { hindi: 'मैंने एक किताब ख़रीदी।', transliteration: 'maine ek kitaab khareedi.', english: 'I bought a book. (f.sg object)' },
         { hindi: 'मैंने दो आम ख़रीदे।', transliteration: 'maine do aam khareede.', english: 'I bought two mangoes. (m.pl object)' },
@@ -177,7 +177,7 @@ export const pack: TopicPack = {
   ],
   grammarNote: {
     why:
-      'These four rules account for most errors on shopping essays. Nail the price question, the polite request, one comparative, and one past ने-construction, and Language Control stabilizes at Average — enough for Intermediate-Mid.',
+      'These four rules account for most errors on shopping essays. Nail the price question, the polite request, one comparative, and one past ने-construction, and Language Control stabilizes at Average - enough for Intermediate-Mid.',
     trains: ['LanguageControl'],
   },
 
@@ -191,7 +191,7 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'पहले / फिर / इसके बाद structures a shopping trip chronologically — exactly how FCPS prompts frame the task. क्योंकि gives the reason ("because the mangoes were fresh"), लेकिन adds contrast ("but they were expensive"), and इसलिए draws the consequence ("so we only bought half a kilo"). Six STARTER connectors are plenty for Benchmark 5 on this topic.',
+      'पहले / फिर / इसके बाद structures a shopping trip chronologically - exactly how FCPS prompts frame the task. क्योंकि gives the reason ("because the mangoes were fresh"), लेकिन adds contrast ("but they were expensive"), and इसलिए draws the consequence ("so we only bought half a kilo"). Six STARTER connectors are plenty for Benchmark 5 on this topic.',
     trains: ['TextType'],
   },
 
@@ -204,26 +204,26 @@ export const pack: TopicPack = {
     english:
       'Every Saturday, Mother and I go to the vegetable market. First we leave home with a cloth bag, because Mother does not like plastic. The market is very crowded, but fresh vegetables are cheap there. Mother asks, "Brother, how much are the tomatoes?" The shopkeeper says, "Forty rupees a kilo." Then Mother bargains a little and we get one kilo for thirty-five rupees. After this we also buy half a kilo of potatoes and a dozen bananas. In the end the shopkeeper gives us some green coriander for free, so Mother smiles. We pay by UPI and return home carrying the heavy bag.',
     highlights: [
-      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors scaffold the whole trip. Sentences cannot be rearranged — that is Text-Type 5.' },
+      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors scaffold the whole trip. Sentences cannot be rearranged - that is Text-Type 5.' },
       { term: 'क्योंकि / लेकिन / इसलिए', note: 'Three reasoning connectors add the cause, contrast, and consequence raters reward.' },
       { term: 'टमाटर कितने के हैं? / चालीस रुपये किलो', note: 'Authentic price-question with m.pl agreement, plus a realistic rupee answer. Topic Coverage at its best.' },
-      { term: 'मोल-भाव / UPI / कपड़े का थैला', note: 'Three cultural specifics in one paragraph — bargaining, digital payment, and anti-plastic bag use. Raters love this density.' },
-      { term: 'एक किलो / आधा किलो / एक दर्जन', note: 'Three different quantity expressions in one passage — rare and rubric-rewarding.' },
+      { term: 'मोल-भाव / UPI / कपड़े का थैला', note: 'Three cultural specifics in one paragraph - bargaining, digital payment, and anti-plastic bag use. Raters love this density.' },
+      { term: 'एक किलो / आधा किलो / एक दर्जन', note: 'Three different quantity expressions in one passage - rare and rubric-rewarding.' },
     ],
     comprehensionQuestions: [
       { q: 'When do Mother and the narrator go to the market?', a: 'हर शनिवार को (every Saturday).' },
       { q: 'Why do they take a cloth bag?', a: 'क्योंकि माँ प्लास्टिक पसंद नहीं करतीं (because Mother does not like plastic).' },
       { q: 'What was the first price the shopkeeper quoted for tomatoes?', a: 'चालीस रुपये किलो (forty rupees a kilo).' },
-      { q: 'What price did Mother finally pay for one kilo of tomatoes?', a: 'पैंतीस रुपये (thirty-five rupees) — after bargaining.' },
+      { q: 'What price did Mother finally pay for one kilo of tomatoes?', a: 'पैंतीस रुपये (thirty-five rupees) - after bargaining.' },
       { q: 'Name three items they bought.', a: 'एक किलो टमाटर, आधा किलो आलू, और एक दर्जन केले (one kilo tomatoes, half a kilo potatoes, a dozen bananas).' },
       { q: 'What did the shopkeeper give for free?', a: 'थोड़ा हरा धनिया (a little green coriander).' },
       { q: 'How did they pay?', a: 'UPI से (by UPI).' },
-      { q: 'Identify one connector and explain what it does.', a: 'Any of पहले, फिर, इसके बाद, अंत में, क्योंकि, लेकिन, इसलिए — each links ideas in time or reasoning.' },
+      { q: 'Identify one connector and explain what it does.', a: 'Any of पहले, फिर, इसके बाद, अंत में, क्योंकि, लेकिन, इसलिए - each links ideas in time or reasoning.' },
     ],
   },
   anchorNote: {
     why:
-      'This anchor is a template shopping essay. It hits every box: four sequence connectors, three reasoning connectors, price questions, bargaining, cultural markers, and three quantity expressions — all in 110 words. Read it aloud three times before writing a prompt; the sentence shapes will start to feel automatic.',
+      'This anchor is a template shopping essay. It hits every box: four sequence connectors, three reasoning connectors, price questions, bargaining, cultural markers, and three quantity expressions - all in 110 words. Read it aloud three times before writing a prompt; the sentence shapes will start to feel automatic.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -234,7 +234,7 @@ export const pack: TopicPack = {
       hindi:
         'आलू - ₹30 किलो\nटमाटर - ₹40 किलो\nप्याज़ - ₹35 किलो\nहरी मिर्च - ₹80 किलो\nधनिया - ₹10 गड्डी\nकेले - ₹50 दर्जन\nसेब - ₹180 किलो\nआम - ₹120 किलो\nUPI स्वीकार है ✅',
       transliteration:
-        'aaloo — 30 kilo | tamaatar — 40 kilo | pyaaz — 35 kilo | hari mirch — 80 kilo | dhaniya — 10 gaddi | kele — 50 darjan | seb — 180 kilo | aam — 120 kilo | UPI sveekaar hai',
+        'aaloo - 30 kilo | tamaatar - 40 kilo | pyaaz - 35 kilo | hari mirch - 80 kilo | dhaniya - 10 gaddi | kele - 50 darjan | seb - 180 kilo | aam - 120 kilo | UPI sveekaar hai',
       english:
         'Potatoes ₹30/kg · Tomatoes ₹40/kg · Onions ₹35/kg · Green chilies ₹80/kg · Coriander ₹10/bunch · Bananas ₹50/dozen · Apples ₹180/kg · Mangoes ₹120/kg · UPI accepted',
     },
@@ -262,30 +262,30 @@ export const pack: TopicPack = {
       kind: 'review',
       title: 'ऑनलाइन समीक्षा · Online Review',
       hindi:
-        'शर्मा जी की दुकान बहुत अच्छी है। सब्ज़ियाँ ताज़ी होती हैं और दाम उचित हैं। दुकानदार मुस्कुराकर बात करते हैं और थोड़ा मोल-भाव भी मान लेते हैं। UPI भी स्वीकार है। मंडी से नज़दीक — ज़रूर जाइए। ⭐⭐⭐⭐⭐',
+        'शर्मा जी की दुकान बहुत अच्छी है। सब्ज़ियाँ ताज़ी होती हैं और दाम उचित हैं। दुकानदार मुस्कुराकर बात करते हैं और थोड़ा मोल-भाव भी मान लेते हैं। UPI भी स्वीकार है। मंडी से नज़दीक - ज़रूर जाइए। ⭐⭐⭐⭐⭐',
       transliteration:
-        'sharma ji ki dukaan bahut achchhi hai. sabziyaan taazi hoti hain aur daam uchit hain. dukaandaar muskuraakar baat karte hain aur thoda mol-bhaav bhi maan lete hain. UPI bhi sveekaar hai. mandi se nazdeek — zaroor jaaiye. paanch taare.',
+        'sharma ji ki dukaan bahut achchhi hai. sabziyaan taazi hoti hain aur daam uchit hain. dukaandaar muskuraakar baat karte hain aur thoda mol-bhaav bhi maan lete hain. UPI bhi sveekaar hai. mandi se nazdeek - zaroor jaaiye. paanch taare.',
       english:
-        "Sharma ji's shop is very good. The vegetables are fresh and the prices are fair. The shopkeeper speaks with a smile and even accepts a little bargaining. UPI is accepted too. Close to the market — definitely go. Five stars.",
+        "Sharma ji's shop is very good. The vegetables are fresh and the prices are fair. The shopkeeper speaks with a smile and even accepts a little bargaining. UPI is accepted too. Close to the market - definitely go. Five stars.",
     },
   ],
   modelTextsNote: {
     why:
-      'A price list, a parent-message, a festival diary entry, and a shop review — four different registers the student may need to imitate. Each uses the same core vocabulary but shifts in tone, showing that Hindi does not sound the same in every situation.',
+      'A price list, a parent-message, a festival diary entry, and a shop review - four different registers the student may need to imitate. Each uses the same core vocabulary but shifts in tone, showing that Hindi does not sound the same in every situation.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
   cultural: [
     {
-      title: 'मोल-भाव — Bargaining is Expected',
+      title: 'मोल-भाव - Bargaining is Expected',
       body:
-        'In local markets and sabzi mandis, a small amount of polite bargaining is normal and expected — not rude. A vendor quotes a slightly high price, the customer counter-offers, and they meet in the middle. Malls and supermarkets are fixed-price (MRP). Mentioning मोल-भाव in an essay signals real cultural fluency.',
+        'In local markets and sabzi mandis, a small amount of polite bargaining is normal and expected - not rude. A vendor quotes a slightly high price, the customer counter-offers, and they meet in the middle. Malls and supermarkets are fixed-price (MRP). Mentioning मोल-भाव in an essay signals real cultural fluency.',
       emoji: '💬',
     },
     {
       title: 'The Brass Balance (तराज़ू)',
       body:
-        'Street vendors still weigh vegetables on a simple two-pan brass balance (तराज़ू) with iron weights — not a digital scale. The image of the vendor adding a handful of extra chilies to "make weight" is iconic and sensory.',
+        'Street vendors still weigh vegetables on a simple two-pan brass balance (तराज़ू) with iron weights - not a digital scale. The image of the vendor adding a handful of extra chilies to "make weight" is iconic and sensory.',
       emoji: '⚖️',
     },
     {
@@ -297,19 +297,19 @@ export const pack: TopicPack = {
     {
       title: 'Festival Shopping Rush',
       body:
-        'Before Diwali, Eid, Rakhi, or Karva Chauth, markets are packed into the night. Families shop for sweets, clothes, gifts, and decorations. Essays about त्योहार की ख़रीदारी (festival shopping) almost write themselves — crowd, lights, bargaining, a final bill that shocks everyone.',
+        'Before Diwali, Eid, Rakhi, or Karva Chauth, markets are packed into the night. Families shop for sweets, clothes, gifts, and decorations. Essays about त्योहार की ख़रीदारी (festival shopping) almost write themselves - crowd, lights, bargaining, a final bill that shocks everyone.',
       emoji: '🪔',
     },
     {
       title: 'Free Dhaniya as Goodwill',
       body:
-        'A loyal sabzi vendor will toss a free bunch of हरा धनिया (coriander) or a couple of मिर्च (chilies) into your bag as a thank-you gesture. This tiny detail — "दुकानदार ने धनिया मुफ़्त दे दिया" — reads as extremely authentic to raters.',
+        'A loyal sabzi vendor will toss a free bunch of हरा धनिया (coriander) or a couple of मिर्च (chilies) into your bag as a thank-you gesture. This tiny detail - "दुकानदार ने धनिया मुफ़्त दे दिया" - reads as extremely authentic to raters.',
       emoji: '🌿',
     },
   ],
   culturalNote: {
     why:
-      'Shopping essays are easy to make generic ("I went to the store and bought things"). A concrete Indian detail — bargaining, a brass balance, UPI payment, a free bunch of coriander — lifts the essay out of that pile instantly. Zero grammar cost, pure Text-Type and Topic Coverage gain.',
+      'Shopping essays are easy to make generic ("I went to the store and bought things"). A concrete Indian detail - bargaining, a brass balance, UPI payment, a free bunch of coriander - lifts the essay out of that pile instantly. Zero grammar cost, pure Text-Type and Topic Coverage gain.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -324,14 +324,14 @@ export const pack: TopicPack = {
     {
       phrase: 'जेब ढीली होना',
       literal: "one's pocket becoming loose",
-      meaning: 'To have to spend a lot of money — wallet-lightening.',
+      meaning: 'To have to spend a lot of money - wallet-lightening.',
       example: 'माल में एक साड़ी ख़रीदते ही मेरी जेब ढीली हो गई।',
       exampleEnglish: 'The moment I bought a saree at the mall, my pocket got loose.',
     },
   ],
   muhavareNote: {
     why:
-      'Both idioms are money-themed and fit shopping essays naturally. One well-placed idiom inside a past-tense narrative reads as register mastery. Two in one essay is overkill — pick one per response.',
+      'Both idioms are money-themed and fit shopping essays naturally. One well-placed idiom inside a past-tense narrative reads as register mastery. Two in one essay is overkill - pick one per response.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -345,14 +345,14 @@ export const pack: TopicPack = {
       intermediateMid:
         'पिछले शनिवार को मैं और माँ सब्ज़ी मंडी गए। पहले हमने कपड़े का थैला लिया, क्योंकि माँ प्लास्टिक पसंद नहीं करतीं। मंडी में बहुत भीड़ थी, लेकिन सब्ज़ियाँ ताज़ी और सस्ती थीं।\n\nमाँ ने दुकानदार से पूछा, "भैया, टमाटर कितने के हैं?" दुकानदार ने कहा, "चालीस रुपये किलो।" फिर माँ ने थोड़ा मोल-भाव किया, इसलिए हमें पैंतीस रुपये में एक किलो मिला। इसके बाद हमने आधा किलो आलू और एक दर्जन केले भी ख़रीदे। अंत में दुकानदार ने मुफ़्त में हरा धनिया दे दिया।\n\nकुल मिलाकर हमने दो सौ रुपये ख़र्च किए और मैंने UPI से पैसे दिए। मुझे लगता है कि मंडी में ख़रीदारी करना माल से अच्छा है, क्योंकि यहाँ सब कुछ ताज़ा मिलता है। अगले हफ़्ते मैं अकेले जाऊँगा और पहली बार ख़ुद मोल-भाव करूँगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले शनिवार को', note: 'Opens in past tense — anchors one time frame from the first sentence.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले / क्योंकि / लेकिन', note: 'Three connectors in the opening paragraph — immediate Text-Type signal.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले शनिवार को', note: 'Opens in past tense - anchors one time frame from the first sentence.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले / क्योंकि / लेकिन', note: 'Three connectors in the opening paragraph - immediate Text-Type signal.' },
         { paragraphIndex: 0, kind: 'vocab', highlight: 'कपड़े का थैला / सब्ज़ियाँ ताज़ी', note: 'Specific items with correct gender agreement (थैला m., सब्ज़ियाँ f.pl).' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'टमाटर कितने के हैं? / चालीस रुपये किलो', note: 'Authentic price question with m.pl agreement, realistic answer — peak Topic Coverage.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'टमाटर कितने के हैं? / चालीस रुपये किलो', note: 'Authentic price question with m.pl agreement, realistic answer - peak Topic Coverage.' },
         { paragraphIndex: 1, kind: 'connector', highlight: 'फिर / इसलिए / इसके बाद / अंत में', note: 'Four sequence connectors in one paragraph structure the transaction.' },
-        { paragraphIndex: 1, kind: 'cultural', highlight: 'मोल-भाव / मुफ़्त में धनिया', note: 'Two cultural specifics — bargaining and the free coriander gesture.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'मंडी में ख़रीदारी करना माल से अच्छा है', note: 'Comparative with से — an Intermediate-Mid discourse move.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले हफ़्ते ... जाऊँगा / करूँगा', note: 'Future tense arrives in the closing — three time frames in one essay = clean Benchmark 5.' },
+        { paragraphIndex: 1, kind: 'cultural', highlight: 'मोल-भाव / मुफ़्त में धनिया', note: 'Two cultural specifics - bargaining and the free coriander gesture.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'मंडी में ख़रीदारी करना माल से अच्छा है', note: 'Comparative with से - an Intermediate-Mid discourse move.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले हफ़्ते ... जाऊँगा / करूँगा', note: 'Future tense arrives in the closing - three time frames in one essay = clean Benchmark 5.' },
       ],
       wordCount: 138,
       tenseUsed: ['past', 'present', 'future'],
@@ -361,9 +361,9 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs where sentences cannot be rearranged — Text-Type 5 met.',
-          'Uses past (गए, ख़रीदे, दिए), present (मिलता है, अच्छा है), and future (जाऊँगा, करूँगा) within 138 words — satisfies "some control of major time frames" for IM.',
-          'Seven distinct connectors deployed correctly — far above the three-connector threshold raters look for.',
+          'Three cohesive paragraphs where sentences cannot be rearranged - Text-Type 5 met.',
+          'Uses past (गए, ख़रीदे, दिए), present (मिलता है, अच्छा है), and future (जाऊँगा, करूँगा) within 138 words - satisfies "some control of major time frames" for IM.',
+          'Seven distinct connectors deployed correctly - far above the three-connector threshold raters look for.',
           'Gender agreement is clean across both genders: कपड़े का थैला (m), सब्ज़ियाँ ताज़ी (f.pl), हरा धनिया (m), एक किलो (m). Language Control stabilizes at Average or High.',
           'Concrete cultural details (मोल-भाव, UPI, मुफ़्त धनिया, कपड़े का थैला) push Topic Coverage above generic shopping answers.',
         ],
@@ -380,17 +380,17 @@ export const pack: TopicPack = {
       novice:
         'हम बाज़ार गए। हमने मिठाई ख़रीदी। दिवाली अच्छी थी।',
       intermediateMid:
-        'पिछले साल दिवाली से एक हफ़्ते पहले, हमारा पूरा परिवार माल गया। वहाँ बहुत भीड़ थी, क्योंकि सब लोग त्योहार की ख़रीदारी कर रहे थे। चारों तरफ़ लाइटें जल रही थीं और हर दुकान के बाहर लंबी कतारें थीं।\n\nपहले माँ ने अपने लिए एक नई साड़ी चुनी, जो थोड़ी महँगी थी लेकिन बहुत सुंदर थी। फिर मैंने अपने छोटे भाई के लिए एक खिलौना और पिताजी के लिए एक कमीज़ ख़रीदी। इसके बाद हम मिठाई की दुकान गए और दो किलो मिठाई ली। अंत में जब पिताजी ने बिल देखा, तो उनकी जेब ढीली हो गई — लगभग पाँच हज़ार रुपये!\n\nमुझे लगता है कि दिवाली पर लोग पानी की तरह पैसा बहाते हैं, लेकिन परिवार की ख़ुशी सबसे ज़रूरी है। अगले साल मैं अपने जेब-ख़र्च से पिताजी को एक छोटा-सा तोहफ़ा ज़रूर ख़रीदूँगा।',
+        'पिछले साल दिवाली से एक हफ़्ते पहले, हमारा पूरा परिवार माल गया। वहाँ बहुत भीड़ थी, क्योंकि सब लोग त्योहार की ख़रीदारी कर रहे थे। चारों तरफ़ लाइटें जल रही थीं और हर दुकान के बाहर लंबी कतारें थीं।\n\nपहले माँ ने अपने लिए एक नई साड़ी चुनी, जो थोड़ी महँगी थी लेकिन बहुत सुंदर थी। फिर मैंने अपने छोटे भाई के लिए एक खिलौना और पिताजी के लिए एक कमीज़ ख़रीदी। इसके बाद हम मिठाई की दुकान गए और दो किलो मिठाई ली। अंत में जब पिताजी ने बिल देखा, तो उनकी जेब ढीली हो गई - लगभग पाँच हज़ार रुपये!\n\nमुझे लगता है कि दिवाली पर लोग पानी की तरह पैसा बहाते हैं, लेकिन परिवार की ख़ुशी सबसे ज़रूरी है। अगले साल मैं अपने जेब-ख़र्च से पिताजी को एक छोटा-सा तोहफ़ा ज़रूर ख़रीदूँगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले साल दिवाली से एक हफ़्ते पहले', note: 'Precise past time marker — opens the past frame cleanly.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि', note: 'Explains the crowd — cause connector early.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले साल दिवाली से एक हफ़्ते पहले', note: 'Precise past time marker - opens the past frame cleanly.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि', note: 'Explains the crowd - cause connector early.' },
         { paragraphIndex: 0, kind: 'cultural', highlight: 'लाइटें जल रही थीं / लंबी कतारें', note: 'Sensory, specific Diwali-market detail, not generic.' },
         { paragraphIndex: 1, kind: 'connector', highlight: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors structure the shopping trip chronologically.' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'एक नई साड़ी / एक खिलौना / एक कमीज़ / दो किलो मिठाई', note: 'Four specific items with correct gender and a quantity — Topic Coverage dense.' },
-        { paragraphIndex: 1, kind: 'idiom', highlight: 'जेब ढीली हो गई', note: 'Shopping-idiom placed inside the narrative, not appended — Intermediate-Mid move.' },
-        { paragraphIndex: 2, kind: 'idiom', highlight: 'पानी की तरह पैसा बहाते हैं', note: 'Second idiom used as generalization — reflective closing.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल ... ख़रीदूँगा', note: 'Future tense in the closing — third time frame sealed.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'परिवार की ख़ुशी सबसे ज़रूरी है', note: 'Reflective generalization — raters specifically reward this discourse move.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'एक नई साड़ी / एक खिलौना / एक कमीज़ / दो किलो मिठाई', note: 'Four specific items with correct gender and a quantity - Topic Coverage dense.' },
+        { paragraphIndex: 1, kind: 'idiom', highlight: 'जेब ढीली हो गई', note: 'Shopping-idiom placed inside the narrative, not appended - Intermediate-Mid move.' },
+        { paragraphIndex: 2, kind: 'idiom', highlight: 'पानी की तरह पैसा बहाते हैं', note: 'Second idiom used as generalization - reflective closing.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल ... ख़रीदूँगा', note: 'Future tense in the closing - third time frame sealed.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'परिवार की ख़ुशी सबसे ज़रूरी है', note: 'Reflective generalization - raters specifically reward this discourse move.' },
       ],
       wordCount: 142,
       tenseUsed: ['past', 'present', 'future'],
@@ -399,14 +399,14 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Seven connectors used across three paragraphs, including the "जब ... तो" construction — Text-Type 5 confirmed.',
-          'Past (गए, चुनी, ख़रीदी), present (बहाते हैं, ज़रूरी है), and future (ख़रीदूँगा) all appear — three time frames in 142 words.',
-          'Both idioms (जेब ढीली / पानी की तरह पैसा बहाना) placed inside narrative context, not as list items — Language Control high.',
-          'Specific items, specific rupee amount (पाँच हज़ार), specific festival — Topic Coverage extremely dense.',
-          'Reflective closing (परिवार की ख़ुशी सबसे ज़रूरी है) generalizes beyond the event — Intermediate-Mid hallmark.',
+          'Seven connectors used across three paragraphs, including the "जब ... तो" construction - Text-Type 5 confirmed.',
+          'Past (गए, चुनी, ख़रीदी), present (बहाते हैं, ज़रूरी है), and future (ख़रीदूँगा) all appear - three time frames in 142 words.',
+          'Both idioms (जेब ढीली / पानी की तरह पैसा बहाना) placed inside narrative context, not as list items - Language Control high.',
+          'Specific items, specific rupee amount (पाँच हज़ार), specific festival - Topic Coverage extremely dense.',
+          'Reflective closing (परिवार की ख़ुशी सबसे ज़रूरी है) generalizes beyond the event - Intermediate-Mid hallmark.',
         ],
         gotchas: [
-          'Using two idioms sometimes reads as overreach — one would still earn Benchmark 5.',
+          'Using two idioms sometimes reads as overreach - one would still earn Benchmark 5.',
           'If the student forgets ने on "माँ ने साड़ी चुनी" (writes "माँ चुनी"), Language Control drops to Low.',
         ],
       },
@@ -414,7 +414,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Two fully-worked model essays at Intermediate-Mid — a weekend sabzi-mandi trip and a Diwali mall trip. Study them until you can reproduce the sentence shapes without looking. The verdict cards show exactly which rubric boxes each sentence ticks.',
+      'Two fully-worked model essays at Intermediate-Mid - a weekend sabzi-mandi trip and a Diwali mall trip. Study them until you can reproduce the sentence shapes without looking. The verdict cards show exactly which rubric boxes each sentence ticks.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -443,9 +443,9 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'अगर आपको अपनी ख़ुद की एक छोटी दुकान खोलनी हो, तो वह कैसी होगी? तीन अनुच्छेदों में लिखिए — क्या बेचेंगे, कीमत कैसी रखेंगे, और ग्राहकों से कैसे व्यवहार करेंगे।',
+        'अगर आपको अपनी ख़ुद की एक छोटी दुकान खोलनी हो, तो वह कैसी होगी? तीन अनुच्छेदों में लिखिए - क्या बेचेंगे, कीमत कैसी रखेंगे, और ग्राहकों से कैसे व्यवहार करेंगे।',
       english:
-        'If you were to open your own small shop, what would it be like? Write three paragraphs — what you would sell, how you would price it, and how you would treat customers.',
+        'If you were to open your own small shop, what would it be like? Write three paragraphs - what you would sell, how you would price it, and how you would treat customers.',
       hint: {
         connectors: ['अगर... तो', 'क्योंकि', 'इसलिए'],
         vocab: ['दुकान', 'बेचना', 'सस्ता', 'दुकानदार', 'UPI'],

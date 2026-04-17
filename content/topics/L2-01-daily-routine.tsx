@@ -3,7 +3,7 @@ import { composeHeroPrompt } from '../imagePrompts';
 import { pickConnectors } from '../connectors';
 
 // -----------------------------------------------------------------------------
-// Daily Routine (दैनिक दिनचर्या) — L2-01
+// Daily Routine (दैनिक दिनचर्या) - L2-01
 // Forces sequence verbs + time markers: the fastest path from Novice-High
 // paragraph stubs to true Intermediate-Mid connected prose. Time-of-day
 // vocabulary, habitual present, past/future tense shifts around one day.
@@ -17,14 +17,14 @@ export const pack: TopicPack = {
   heroMotif: 'sunrise',
   titleHindi: 'दैनिक दिनचर्या',
   titleEnglish: 'Daily Routine',
-  hook: 'Sequence verbs + time markers — the fastest path from NH to IM paragraphs.',
+  hook: 'Sequence verbs + time markers - the fastest path from NH to IM paragraphs.',
   heroPrompt: composeHeroPrompt(
-    'A round wall clock as compass, with arrows pointing outward to tiny scenes: a steaming cup of morning chai beside a folded newspaper, a child tying school-shoe laces, an afternoon study desk with a notebook and pencil, a cricket bat leaning against a doorframe in evening light, a bedside lamp over an open storybook — warm morning-to-night palette',
+    'A round wall clock as compass, with arrows pointing outward to tiny scenes: a steaming cup of morning chai beside a folded newspaper, a child tying school-shoe laces, an afternoon study desk with a notebook and pencil, a cricket bat leaning against a doorframe in evening light, a bedside lamp over an open storybook - warm morning-to-night palette',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Daily Routine (FCPS Level 2 — Home Life)',
+      'Daily Routine (FCPS Level 2 - Home Life)',
       'Home Life and family schedules (FCPS Level 2)',
       'Bridges into School Life (FCPS Level 2) via the school-day portion of the routine',
     ],
@@ -34,7 +34,7 @@ export const pack: TopicPack = {
       'Switch between habitual present ("मैं रोज़ ... करता हूँ") and narrated past ("कल मैंने ... किया")',
       'Use clock times (सात बजे, साढ़े आठ बजे) and frequency adverbs (हमेशा, अक्सर, कभी-कभी) accurately',
       'Build जब ... तब ... clauses to link two actions in time',
-      'Include a culturally specific detail — morning chai, joint-family breakfast, evening tuition — to lift Topic Coverage',
+      'Include a culturally specific detail - morning chai, joint-family breakfast, evening tuition - to lift Topic Coverage',
     ],
     positionOnArc: 'building',
     estimatedTime: '90 min reading + 30 min essay',
@@ -110,7 +110,7 @@ export const pack: TopicPack = {
     why:
       'These 28 entries are the exact lexical set an FCPS "describe your daily routine" prompt pulls from. Eight routine verbs + six time-of-day nouns + five clock-time phrases + four frequency adverbs is enough to build a 150-word essay without repetition. Every item reappears in the reading sample, model texts, or essays below.',
     trains: ['TopicCoverage', 'LanguageControl'],
-    examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?" — daily-routine prompts expect time words and routine verbs densely.',
+    examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?" - daily-routine prompts expect time words and routine verbs densely.',
   },
 
   grammar: [
@@ -124,7 +124,7 @@ export const pack: TopicPack = {
         { hindi: 'हम सब साथ नाश्ता करते हैं।', transliteration: 'hum sab saath naashta karte hain.', english: 'We all have breakfast together.' },
       ],
       pitfall:
-        'Many students drop हूँ / है / हैं and write just "मैं उठता" — that sounds incomplete. Others mix "करता है" with "मैं" (wrong person). The auxiliary must match the subject: मैं हूँ, तुम हो, वह है, हम हैं.',
+        'Many students drop हूँ / है / हैं and write just "मैं उठता" - that sounds incomplete. Others mix "करता है" with "मैं" (wrong person). The auxiliary must match the subject: मैं हूँ, तुम हो, वह है, हम हैं.',
       whyItMatters:
         'The entire daily-routine essay runs on habitual present. One broken conjugation is forgivable; a pattern of broken ones caps Language Control at Low and drops the essay to Benchmark 3 or 4.',
     },
@@ -138,7 +138,7 @@ export const pack: TopicPack = {
         { hindi: 'मैं ग्यारह बजे तक सो जाता हूँ।', transliteration: 'main gyaarah baje tak so jaata hoon.', english: 'I fall asleep by 11 o\'clock.' },
       ],
       pitfall:
-        'Students write "सात बजा" (wrong — बजे is the standard oblique time marker) or write times in English digits in a Hindi essay. Keep both the hour and बजे in Devanagari.',
+        'Students write "सात बजा" (wrong - बजे is the standard oblique time marker) or write times in English digits in a Hindi essay. Keep both the hour and बजे in Devanagari.',
       whyItMatters:
         'Clock-time expressions are the concrete detail that turns a Novice "I wake up" into an Intermediate-Mid "I wake up at 6:30." That specificity is a Topic-Coverage lift and a Text-Type lift at once.',
     },
@@ -152,16 +152,16 @@ export const pack: TopicPack = {
         { hindi: 'जब मैं छोटा था, तब मैं दादी के साथ सोता था।', transliteration: 'jab main chhota tha, tab main daadi ke saath sota tha.', english: 'When I was small, I used to sleep beside Grandma.' },
       ],
       pitfall:
-        'Writing जब without a matching तब / तो / comma-pause is a common fragment. Also, keep the tense of the two clauses aligned — "जब (present) ... तब (past)" almost always reads as an error.',
+        'Writing जब without a matching तब / तो / comma-pause is a common fragment. Also, keep the tense of the two clauses aligned - "जब (present) ... तब (past)" almost always reads as an error.',
       whyItMatters:
-        'जब ... तब is the single Intermediate-Mid structure that most cleanly signals "I can link two events in one sentence." Raters treat it as a Text-Type 5 marker — "ideas grouped, cannot be rearranged."',
+        'जब ... तब is the single Intermediate-Mid structure that most cleanly signals "I can link two events in one sentence." Raters treat it as a Text-Type 5 marker - "ideas grouped, cannot be rearranged."',
     },
     {
       title: 'Past-tense routine with ने + perfective, intransitive vs transitive',
       rule:
         'To shift from habitual present to yesterday\'s actions, use perfective past. Intransitive motion verbs (उठना, जाना, सोना) take no ने: "मैं उठा / उठी". Transitive verbs (करना, खाना, पढ़ना, बनाना) take ने: "मैंने नाश्ता किया / मैंने किताब पढ़ी". With ने, the verb agrees with the OBJECT, not the subject.',
       examples: [
-        { hindi: 'कल मैं सात बजे उठी।', transliteration: 'kal main saat baje uthi.', english: 'Yesterday I (f) got up at 7. (intransitive — no ने)' },
+        { hindi: 'कल मैं सात बजे उठी।', transliteration: 'kal main saat baje uthi.', english: 'Yesterday I (f) got up at 7. (intransitive - no ने)' },
         { hindi: 'कल मैंने नाश्ता किया और स्कूल गयी।', transliteration: 'kal maine naashta kiya aur school gayi.', english: 'Yesterday I had breakfast and went to school. (mixed: ने for किया, no ने for गयी)' },
         { hindi: 'शाम को मैंने होमवर्क किया, फिर क्रिकेट खेला।', transliteration: 'shaam ko maine homework kiya, phir cricket khela.', english: 'In the evening I did homework, then played cricket.' },
       ],
@@ -173,7 +173,7 @@ export const pack: TopicPack = {
   ],
   grammarNote: {
     why:
-      'These four rules cover 90% of the grammar a daily-routine essay actually demands. Conjugating habitual present cleanly, attaching बजे to clock times, linking clauses with जब...तब, and handling ने in one past sentence — master these and the rubric\'s Language Control axis stabilizes at Average or High.',
+      'These four rules cover 90% of the grammar a daily-routine essay actually demands. Conjugating habitual present cleanly, attaching बजे to clock times, linking clauses with जब...तब, and handling ने in one past sentence - master these and the rubric\'s Language Control axis stabilizes at Average or High.',
     trains: ['LanguageControl'],
   },
 
@@ -189,24 +189,24 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'पहले / फिर / इसके बाद / अंत में is the four-beat sequence scaffold that turns a list of routine sentences into a paragraph. जब...तब links two actions in one sentence — that alone is a Benchmark-5 signal. क्योंकि / लेकिन / इसलिए add reasoning for why the routine looks the way it does. Drill these eight until they appear without conscious effort.',
+      'पहले / फिर / इसके बाद / अंत में is the four-beat sequence scaffold that turns a list of routine sentences into a paragraph. जब...तब links two actions in one sentence - that alone is a Benchmark-5 signal. क्योंकि / लेकिन / इसलिए add reasoning for why the routine looks the way it does. Drill these eight until they appear without conscious effort.',
     trains: ['TextType'],
   },
 
   anchor: {
     title: 'एक मंगलवार · A Tuesday',
     hindi:
-      'मेरी दिनचर्या आम तौर पर एक जैसी रहती है, लेकिन मंगलवार सबसे व्यस्त दिन होता है। पहले मेरा अलार्म साढ़े छह बजे बजता है और मैं तुरंत उठ जाती हूँ। इसके बाद मैं नहाकर तैयार होती हूँ, क्योंकि स्कूल की बस सवा आठ बजे आती है। फिर माँ के साथ मैं रसोई में जाती हूँ और हम दोनों गरम नाश्ता करते हैं — आलू पराठा और दही। दादी इस समय अपनी सुबह की चाय पीती हैं और हमें आशीर्वाद देती हैं। दोपहर को मैं स्कूल में पढ़ती हूँ, और तीन बजे घर लौटती हूँ। जब मैं घर पहुँचती हूँ, तब माँ मेरे लिए दोपहर का खाना तैयार रखती हैं। शाम को मैं दो घंटे होमवर्क करती हूँ, फिर दोस्तों के साथ पार्क में खेलती हूँ। अंत में रात को पूरा परिवार साथ बैठकर खाना खाता है, और मैं दस बजे सो जाती हूँ। यह मेरा सामान्य मंगलवार है।',
+      'मेरी दिनचर्या आम तौर पर एक जैसी रहती है, लेकिन मंगलवार सबसे व्यस्त दिन होता है। पहले मेरा अलार्म साढ़े छह बजे बजता है और मैं तुरंत उठ जाती हूँ। इसके बाद मैं नहाकर तैयार होती हूँ, क्योंकि स्कूल की बस सवा आठ बजे आती है। फिर माँ के साथ मैं रसोई में जाती हूँ और हम दोनों गरम नाश्ता करते हैं - आलू पराठा और दही। दादी इस समय अपनी सुबह की चाय पीती हैं और हमें आशीर्वाद देती हैं। दोपहर को मैं स्कूल में पढ़ती हूँ, और तीन बजे घर लौटती हूँ। जब मैं घर पहुँचती हूँ, तब माँ मेरे लिए दोपहर का खाना तैयार रखती हैं। शाम को मैं दो घंटे होमवर्क करती हूँ, फिर दोस्तों के साथ पार्क में खेलती हूँ। अंत में रात को पूरा परिवार साथ बैठकर खाना खाता है, और मैं दस बजे सो जाती हूँ। यह मेरा सामान्य मंगलवार है।',
     transliteration:
-      'meri dincharya aam taur par ek jaisi rahti hai, lekin mangalvaar sabse vyast din hota hai. pahle mera alarm saadhe chhah baje bajta hai aur main turant uth jaati hoon. iske baad main nahaakar taiyaar hoti hoon, kyonki school ki bus savaa aath baje aati hai. phir maa ke saath main rasoi mein jaati hoon aur hum dono garam naashta karte hain — aaloo paraatha aur dahi. daadi is samay apni subah ki chaay peeti hain aur humein aasheervaad deti hain. dopahar ko main school mein padhti hoon, aur teen baje ghar lautti hoon. jab main ghar pahunchti hoon, tab maa mere liye dopahar ka khaana taiyaar rakhti hain. shaam ko main do ghante homework karti hoon, phir doston ke saath park mein khelti hoon. ant mein raat ko poora parivaar saath baithkar khaana khaata hai, aur main das baje so jaati hoon. yah mera saamaanya mangalvaar hai.',
+      'meri dincharya aam taur par ek jaisi rahti hai, lekin mangalvaar sabse vyast din hota hai. pahle mera alarm saadhe chhah baje bajta hai aur main turant uth jaati hoon. iske baad main nahaakar taiyaar hoti hoon, kyonki school ki bus savaa aath baje aati hai. phir maa ke saath main rasoi mein jaati hoon aur hum dono garam naashta karte hain - aaloo paraatha aur dahi. daadi is samay apni subah ki chaay peeti hain aur humein aasheervaad deti hain. dopahar ko main school mein padhti hoon, aur teen baje ghar lautti hoon. jab main ghar pahunchti hoon, tab maa mere liye dopahar ka khaana taiyaar rakhti hain. shaam ko main do ghante homework karti hoon, phir doston ke saath park mein khelti hoon. ant mein raat ko poora parivaar saath baithkar khaana khaata hai, aur main das baje so jaati hoon. yah mera saamaanya mangalvaar hai.',
     english:
-      'My routine usually stays the same, but Tuesday is the busiest day. First, my alarm rings at 6:30 and I get up immediately. After this I bathe and get ready, because the school bus comes at 8:15. Then I go with Mother to the kitchen and we both have a hot breakfast — aloo paratha and yogurt. At this time, Grandmother drinks her morning tea and blesses us. In the afternoon I study at school, and I return home at 3. When I reach home, Mother has lunch ready for me. In the evening I do homework for two hours, then I play with friends in the park. Finally at night the whole family sits and eats together, and I fall asleep at ten. This is my normal Tuesday.',
+      'My routine usually stays the same, but Tuesday is the busiest day. First, my alarm rings at 6:30 and I get up immediately. After this I bathe and get ready, because the school bus comes at 8:15. Then I go with Mother to the kitchen and we both have a hot breakfast - aloo paratha and yogurt. At this time, Grandmother drinks her morning tea and blesses us. In the afternoon I study at school, and I return home at 3. When I reach home, Mother has lunch ready for me. In the evening I do homework for two hours, then I play with friends in the park. Finally at night the whole family sits and eats together, and I fall asleep at ten. This is my normal Tuesday.',
     highlights: [
-      { term: 'पहले / इसके बाद / फिर / अंत में', note: 'Four sequence connectors stitch the day into one unbroken paragraph — sentences cannot be reordered, which is exactly what Text-Type 5 looks like.' },
+      { term: 'पहले / इसके बाद / फिर / अंत में', note: 'Four sequence connectors stitch the day into one unbroken paragraph - sentences cannot be reordered, which is exactly what Text-Type 5 looks like.' },
       { term: 'साढ़े छह बजे / सवा आठ बजे / तीन बजे / दस बजे', note: 'Four clock-time anchors give the essay specificity. This level of detail separates Intermediate-Mid from Novice-High.' },
-      { term: 'जब मैं घर पहुँचती हूँ, तब माँ ...', note: 'जब...तब clause linking two simultaneous actions — a classic IM marker the rubric explicitly rewards.' },
-      { term: 'गरम नाश्ता (m) / दादी की चाय (f) / सुबह की चाय (f)', note: 'Gender agreement sustained across multiple nouns in one paragraph — clean Language Control signal.' },
-      { term: 'आलू पराठा, दही, दादी का आशीर्वाद', note: 'Three culturally specific items in one breakfast scene — huge Topic-Coverage lift over generic "I eat breakfast."' },
+      { term: 'जब मैं घर पहुँचती हूँ, तब माँ ...', note: 'जब...तब clause linking two simultaneous actions - a classic IM marker the rubric explicitly rewards.' },
+      { term: 'गरम नाश्ता (m) / दादी की चाय (f) / सुबह की चाय (f)', note: 'Gender agreement sustained across multiple nouns in one paragraph - clean Language Control signal.' },
+      { term: 'आलू पराठा, दही, दादी का आशीर्वाद', note: 'Three culturally specific items in one breakfast scene - huge Topic-Coverage lift over generic "I eat breakfast."' },
     ],
     comprehensionQuestions: [
       { q: 'At what time does the narrator\'s alarm ring?', a: 'साढ़े छह बजे (6:30 a.m.).' },
@@ -229,11 +229,11 @@ export const pack: TopicPack = {
       kind: 'schedule',
       title: 'मेरी दैनिक समय-सारिणी · My Daily Schedule',
       hindi:
-        '६:३० — उठना और मुँह धोना\n६:४५ — दादी के साथ योग\n७:१५ — नहाना और तैयार होना\n७:४५ — नाश्ता (परांठा + चाय)\n८:१५ — स्कूल की बस\n३:०० — स्कूल से लौटना\n४:०० — होमवर्क\n६:०० — पार्क में क्रिकेट\n८:०० — रात का खाना\n१०:०० — सो जाना',
+        '६:३० - उठना और मुँह धोना\n६:४५ - दादी के साथ योग\n७:१५ - नहाना और तैयार होना\n७:४५ - नाश्ता (परांठा + चाय)\n८:१५ - स्कूल की बस\n३:०० - स्कूल से लौटना\n४:०० - होमवर्क\n६:०० - पार्क में क्रिकेट\n८:०० - रात का खाना\n१०:०० - सो जाना',
       transliteration:
-        '6:30 — uthna aur munh dhona | 6:45 — daadi ke saath yog | 7:15 — nahaana aur taiyaar hona | 7:45 — naashta (paraatha + chaay) | 8:15 — school ki bus | 3:00 — school se lautna | 4:00 — homework | 6:00 — park mein cricket | 8:00 — raat ka khaana | 10:00 — so jaana',
+        '6:30 - uthna aur munh dhona | 6:45 - daadi ke saath yog | 7:15 - nahaana aur taiyaar hona | 7:45 - naashta (paraatha + chaay) | 8:15 - school ki bus | 3:00 - school se lautna | 4:00 - homework | 6:00 - park mein cricket | 8:00 - raat ka khaana | 10:00 - so jaana',
       english:
-        '6:30 — wake up & wash face · 6:45 — yoga with Grandma · 7:15 — bathe & get ready · 7:45 — breakfast (paratha + tea) · 8:15 — school bus · 3:00 — return from school · 4:00 — homework · 6:00 — cricket in the park · 8:00 — dinner · 10:00 — go to sleep',
+        '6:30 - wake up & wash face · 6:45 - yoga with Grandma · 7:15 - bathe & get ready · 7:45 - breakfast (paratha + tea) · 8:15 - school bus · 3:00 - return from school · 4:00 - homework · 6:00 - cricket in the park · 8:00 - dinner · 10:00 - go to sleep',
     },
     {
       kind: 'diary',
@@ -294,7 +294,7 @@ export const pack: TopicPack = {
     {
       title: 'After-School Tuition',
       body:
-        'For many Indian teens, school does not end at 3 p.m. — शाम की ट्यूशन (evening tuition) in math, science, or Hindi runs 5–7 p.m. at a neighbor\'s house or coaching center. This is a uniquely Indian routine element; raters notice it.',
+        'For many Indian teens, school does not end at 3 p.m. - शाम की ट्यूशन (evening tuition) in math, science, or Hindi runs 5–7 p.m. at a neighbor\'s house or coaching center. This is a uniquely Indian routine element; raters notice it.',
       emoji: '📚',
     },
     {
@@ -306,7 +306,7 @@ export const pack: TopicPack = {
   ],
   culturalNote: {
     why:
-      'A rater who has read fifty "I wake up, I eat, I study, I sleep" essays is waiting for one concrete Indian-home detail. Chai, yoga, joint-family breakfast, tuition, balcony evenings — pick ONE of these per essay and drop it in without explanation. That is how Text-Type and Topic-Coverage lift at the same time.',
+      'A rater who has read fifty "I wake up, I eat, I study, I sleep" essays is waiting for one concrete Indian-home detail. Chai, yoga, joint-family breakfast, tuition, balcony evenings - pick ONE of these per essay and drop it in without explanation. That is how Text-Type and Topic-Coverage lift at the same time.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -315,8 +315,8 @@ export const pack: TopicPack = {
       phrase: 'सुबह का भूला शाम को घर आ जाए',
       literal: 'one who is lost in the morning comes home by evening',
       meaning: 'It is never too late to correct a mistake and return to the right path.',
-      example: 'जब मैंने अपनी गलती मानी, तो दादी ने कहा — "सुबह का भूला शाम को घर आ जाए, तो उसे भूला नहीं कहते।"',
-      exampleEnglish: 'When I admitted my mistake, Grandma said — "One who is lost in the morning and comes home by evening is not called lost."',
+      example: 'जब मैंने अपनी गलती मानी, तो दादी ने कहा - "सुबह का भूला शाम को घर आ जाए, तो उसे भूला नहीं कहते।"',
+      exampleEnglish: 'When I admitted my mistake, Grandma said - "One who is lost in the morning and comes home by evening is not called lost."',
     },
     {
       phrase: 'दिन-रात एक करना',
@@ -328,7 +328,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Both idioms literally reference time-of-day — they slot naturally into a daily-routine essay without feeling forced. One, not two, per essay is plenty; raters reward register mastery, not idiom density.',
+      'Both idioms literally reference time-of-day - they slot naturally into a daily-routine essay without feeling forced. One, not two, per essay is plenty; raters reward register mastery, not idiom density.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -339,14 +339,14 @@ export const pack: TopicPack = {
         'अपनी दैनिक दिनचर्या के बारे में तीन अनुच्छेदों में लिखिए। सुबह, दोपहर और शाम के बारे में बताइए। (Write in three paragraphs about your daily routine. Describe morning, afternoon, and evening.)',
       novice: 'मैं उठता हूँ। मैं खाता हूँ। मैं सोता हूँ।',
       intermediateMid:
-        'मेरी दिनचर्या आम तौर पर व्यस्त रहती है, लेकिन मुझे अपनी आदतें बहुत पसंद हैं। पहले मैं रोज़ साढ़े छह बजे उठती हूँ और मुँह धोकर दादी के साथ थोड़ा योग करती हूँ। इसके बाद मैं नहाती हूँ, तैयार होती हूँ, और माँ के साथ गरम नाश्ता करती हूँ — आम तौर पर आलू पराठा और दही। सवा आठ बजे मेरी स्कूल की बस आ जाती है।\n\nदोपहर को मैं स्कूल में पढ़ती हूँ, और तीन बजे घर लौटती हूँ। जब मैं घर पहुँचती हूँ, तब माँ दोपहर का खाना तैयार रखती हैं, क्योंकि मुझे बहुत भूख लगती है। खाने के बाद मैं आधे घंटे आराम करती हूँ, फिर होमवर्क शुरू करती हूँ। कभी-कभी अगर टेस्ट होता है, तो मैं शाम की ट्यूशन भी जाती हूँ।\n\nशाम को दोस्तों के साथ पार्क में क्रिकेट खेलना मेरा पसंदीदा हिस्सा है। अंत में रात को पूरा परिवार साथ बैठकर खाना खाता है, और मैं दस बजे सो जाती हूँ। कल रविवार है, इसलिए मैं देर से उठूँगी और पूरे दिन अपनी पसंदीदा किताब पढ़ूँगी।',
+        'मेरी दिनचर्या आम तौर पर व्यस्त रहती है, लेकिन मुझे अपनी आदतें बहुत पसंद हैं। पहले मैं रोज़ साढ़े छह बजे उठती हूँ और मुँह धोकर दादी के साथ थोड़ा योग करती हूँ। इसके बाद मैं नहाती हूँ, तैयार होती हूँ, और माँ के साथ गरम नाश्ता करती हूँ - आम तौर पर आलू पराठा और दही। सवा आठ बजे मेरी स्कूल की बस आ जाती है।\n\nदोपहर को मैं स्कूल में पढ़ती हूँ, और तीन बजे घर लौटती हूँ। जब मैं घर पहुँचती हूँ, तब माँ दोपहर का खाना तैयार रखती हैं, क्योंकि मुझे बहुत भूख लगती है। खाने के बाद मैं आधे घंटे आराम करती हूँ, फिर होमवर्क शुरू करती हूँ। कभी-कभी अगर टेस्ट होता है, तो मैं शाम की ट्यूशन भी जाती हूँ।\n\nशाम को दोस्तों के साथ पार्क में क्रिकेट खेलना मेरा पसंदीदा हिस्सा है। अंत में रात को पूरा परिवार साथ बैठकर खाना खाता है, और मैं दस बजे सो जाती हूँ। कल रविवार है, इसलिए मैं देर से उठूँगी और पूरे दिन अपनी पसंदीदा किताब पढ़ूँगी।',
       annotations: [
-        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले / इसके बाद', note: 'Two sequence connectors open the morning — the reader cannot rearrange these sentences.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले / इसके बाद', note: 'Two sequence connectors open the morning - the reader cannot rearrange these sentences.' },
         { paragraphIndex: 0, kind: 'vocab', highlight: 'साढ़े छह बजे / सवा आठ बजे', note: 'Two precise clock times. Specificity lifts Topic Coverage above generic "in the morning."' },
-        { paragraphIndex: 0, kind: 'cultural', highlight: 'दादी के साथ योग / आलू पराठा और दही', note: 'Two culturally specific details in the first paragraph — Intermediate-Mid territory right away.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'जब मैं घर पहुँचती हूँ, तब माँ ...', note: 'जब...तब construction linking two actions — a textbook Benchmark-5 signal.' },
+        { paragraphIndex: 0, kind: 'cultural', highlight: 'दादी के साथ योग / आलू पराठा और दही', note: 'Two culturally specific details in the first paragraph - Intermediate-Mid territory right away.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'जब मैं घर पहुँचती हूँ, तब माँ ...', note: 'जब...तब construction linking two actions - a textbook Benchmark-5 signal.' },
         { paragraphIndex: 1, kind: 'connector', highlight: 'क्योंकि / फिर / अगर...तो', note: 'Three connectors in one paragraph: reasoning, sequence, conditional. Text-Type well above threshold.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अंत में ... सो जाती हूँ / कल रविवार है ... उठूँगी ... पढ़ूँगी', note: 'Shifts from habitual present to future in the closing — two time frames sealed inside one paragraph.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अंत में ... सो जाती हूँ / कल रविवार है ... उठूँगी ... पढ़ूँगी', note: 'Shifts from habitual present to future in the closing - two time frames sealed inside one paragraph.' },
         { paragraphIndex: 2, kind: 'structure', highlight: 'अंत में रात को पूरा परिवार साथ बैठकर खाना खाता है', note: 'Compound conjunct verb (बैठकर) shows an IM-level structural move beyond simple sentences.' },
       ],
       wordCount: 142,
@@ -356,11 +356,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three clearly organized paragraphs (morning, afternoon, evening) that cannot be rearranged — Text-Type 5 satisfied.',
-          'Uses nine distinct connectors (पहले, इसके बाद, क्योंकि, जब...तब, फिर, अगर...तो, अंत में, इसलिए, लेकिन) — far above the 3-connector threshold for IM.',
-          'Clock-time precision (साढ़े छह बजे, सवा आठ बजे, तीन बजे, दस बजे) + frequency adverbs (रोज़, आम तौर पर, कभी-कभी) — Topic-Coverage signal is very strong.',
-          'Habitual present is sustained accurately across 15+ verbs, then a clean shift to future (उठूँगी, पढ़ूँगी) in the closing — satisfies the "some control of major time frames" rubric line.',
-          'Two culturally specific details (दादी के साथ योग, आलू पराठा और दही, शाम की ट्यूशन) — raters register this as authentic, not textbook.',
+          'Three clearly organized paragraphs (morning, afternoon, evening) that cannot be rearranged - Text-Type 5 satisfied.',
+          'Uses nine distinct connectors (पहले, इसके बाद, क्योंकि, जब...तब, फिर, अगर...तो, अंत में, इसलिए, लेकिन) - far above the 3-connector threshold for IM.',
+          'Clock-time precision (साढ़े छह बजे, सवा आठ बजे, तीन बजे, दस बजे) + frequency adverbs (रोज़, आम तौर पर, कभी-कभी) - Topic-Coverage signal is very strong.',
+          'Habitual present is sustained accurately across 15+ verbs, then a clean shift to future (उठूँगी, पढ़ूँगी) in the closing - satisfies the "some control of major time frames" rubric line.',
+          'Two culturally specific details (दादी के साथ योग, आलू पराठा और दही, शाम की ट्यूशन) - raters register this as authentic, not textbook.',
         ],
         gotchas: [
           'If a male student writes उठती हूँ / लौटती हूँ (feminine endings), Language Control drops to Low and pulls the essay to Benchmark 4.',
@@ -375,15 +375,15 @@ export const pack: TopicPack = {
         'कल आपने क्या किया, और कल आप क्या करेंगे? तीन अनुच्छेदों में अपने परिवार की भूमिका भी बताइए। (What did you do yesterday, and what will you do tomorrow? In three paragraphs, also describe your family\'s role.)',
       novice: 'कल मैं स्कूल गया। आज मैं पढ़ूँगा। कल छुट्टी है।',
       intermediateMid:
-        'कल सोमवार था और मेरा दिन हमेशा की तरह शुरू हुआ। मैं सात बजे उठा, लेकिन मैं थोड़ा थका हुआ था, क्योंकि रविवार रात को मैं देर से सोया। मैंने जल्दी-जल्दी नाश्ता किया — माँ ने पोहा बनाया था — और स्कूल की बस पकड़ी। स्कूल में हिंदी का टेस्ट था, इसलिए दोपहर की छुट्टी में मैंने अपनी किताब दोहराई।\n\nशाम को जब मैं घर लौटा, तब दादी ने मेरे लिए चाय और बिस्कुट तैयार रखे थे। हम दोनों बालकनी में बैठकर थोड़ी देर बातें करते रहे। यह मेरी रोज़ की आदत है — दादी के साथ चाय पीना। फिर मैंने दो घंटे होमवर्क किया, रात का खाना खाया, और दस बजे सो गया।\n\nआज मंगलवार है और मेरा दिन व्यस्त रहेगा। सुबह स्कूल, दोपहर को ट्यूशन, और शाम को पिताजी मुझे बाज़ार ले जाएँगे। अगर समय बचेगा, तो हम साथ क्रिकेट मैच भी देखेंगे। मुझे लगता है कि अच्छी दिनचर्या और प्यारा परिवार, दोनों मिलकर हर दिन को खास बना देते हैं।',
+        'कल सोमवार था और मेरा दिन हमेशा की तरह शुरू हुआ। मैं सात बजे उठा, लेकिन मैं थोड़ा थका हुआ था, क्योंकि रविवार रात को मैं देर से सोया। मैंने जल्दी-जल्दी नाश्ता किया - माँ ने पोहा बनाया था - और स्कूल की बस पकड़ी। स्कूल में हिंदी का टेस्ट था, इसलिए दोपहर की छुट्टी में मैंने अपनी किताब दोहराई।\n\nशाम को जब मैं घर लौटा, तब दादी ने मेरे लिए चाय और बिस्कुट तैयार रखे थे। हम दोनों बालकनी में बैठकर थोड़ी देर बातें करते रहे। यह मेरी रोज़ की आदत है - दादी के साथ चाय पीना। फिर मैंने दो घंटे होमवर्क किया, रात का खाना खाया, और दस बजे सो गया।\n\nआज मंगलवार है और मेरा दिन व्यस्त रहेगा। सुबह स्कूल, दोपहर को ट्यूशन, और शाम को पिताजी मुझे बाज़ार ले जाएँगे। अगर समय बचेगा, तो हम साथ क्रिकेट मैच भी देखेंगे। मुझे लगता है कि अच्छी दिनचर्या और प्यारा परिवार, दोनों मिलकर हर दिन को खास बना देते हैं।',
       annotations: [
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'कल सोमवार था / मैं सात बजे उठा / मैंने जल्दी-जल्दी नाश्ता किया', note: 'Opens in clean past tense with correct ने usage (मैंने किया) vs no-ने (मैं उठा). Language-Control anchor.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'लेकिन / क्योंकि / इसलिए', note: 'Three reasoning connectors in one paragraph — contrast, cause, consequence — Text-Type 5 signal.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'जब मैं घर लौटा, तब दादी ने ... रखे थे', note: 'जब...तब + past-perfect (रखे थे). Two linked past actions — an Intermediate-Mid marker.' },
-        { paragraphIndex: 1, kind: 'cultural', highlight: 'दादी के साथ चाय पीना / बालकनी में बैठकर बातें', note: 'Two culturally specific Indian-home details — Topic-Coverage lift.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'लेकिन / क्योंकि / इसलिए', note: 'Three reasoning connectors in one paragraph - contrast, cause, consequence - Text-Type 5 signal.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'जब मैं घर लौटा, तब दादी ने ... रखे थे', note: 'जब...तब + past-perfect (रखे थे). Two linked past actions - an Intermediate-Mid marker.' },
+        { paragraphIndex: 1, kind: 'cultural', highlight: 'दादी के साथ चाय पीना / बालकनी में बैठकर बातें', note: 'Two culturally specific Indian-home details - Topic-Coverage lift.' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'आज मंगलवार है / दिन व्यस्त रहेगा / बाज़ार ले जाएँगे / देखेंगे', note: 'Full switch into future tense in paragraph 3. With para 1 = past and para 2 = mixed past+habitual, essay clearly demonstrates three time frames.' },
-        { paragraphIndex: 2, kind: 'connector', highlight: 'अगर समय बचेगा, तो ... देखेंगे', note: 'Conditional future (अगर...तो) — a structure raters specifically flag as Benchmark-5.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'अच्छी दिनचर्या और प्यारा परिवार, दोनों मिलकर ... बना देते हैं', note: 'Reflective closing generalizes beyond the narrated events — Text-Type lift.' },
+        { paragraphIndex: 2, kind: 'connector', highlight: 'अगर समय बचेगा, तो ... देखेंगे', note: 'Conditional future (अगर...तो) - a structure raters specifically flag as Benchmark-5.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'अच्छी दिनचर्या और प्यारा परिवार, दोनों मिलकर ... बना देते हैं', note: 'Reflective closing generalizes beyond the narrated events - Text-Type lift.' },
       ],
       wordCount: 138,
       tenseUsed: ['past', 'present', 'future'],
@@ -394,13 +394,13 @@ export const pack: TopicPack = {
         whyItPasses: [
           'All three time frames present and clearly signaled: paragraph 1 = past (उठा, खाया, किया, पकड़ी), paragraph 2 = past + habitual present (रोज़ की आदत है), paragraph 3 = future (रहेगा, जाएँगे, देखेंगे). This is the flagship IM rubric requirement.',
           'ने usage is correct on every transitive past verb (मैंने नाश्ता किया, मैंने होमवर्क किया, मैंने किताब दोहराई) and absent on intransitives (मैं उठा, मैं लौटा, मैं सोया). Language Control stabilizes at High.',
-          'Six different connectors used, including the conditional अगर...तो and the linking जब...तब — both explicit Benchmark-5 markers.',
-          'Cultural specificity (पोहा, दादी के साथ चाय, बालकनी में बातें, ट्यूशन, क्रिकेट मैच) — five distinct India-rooted details, no textbook generics.',
-          'Reflective closing ("अच्छी दिनचर्या और प्यारा परिवार, दोनों मिलकर ...") moves from narration to generalization — a structural move rubrics specifically reward.',
+          'Six different connectors used, including the conditional अगर...तो and the linking जब...तब - both explicit Benchmark-5 markers.',
+          'Cultural specificity (पोहा, दादी के साथ चाय, बालकनी में बातें, ट्यूशन, क्रिकेट मैच) - five distinct India-rooted details, no textbook generics.',
+          'Reflective closing ("अच्छी दिनचर्या और प्यारा परिवार, दोनों मिलकर ...") moves from narration to generalization - a structural move rubrics specifically reward.',
         ],
         gotchas: [
           'If the student writes "मैं नाश्ता किया" (dropping ने), Language Control drops one descriptor.',
-          'If the student mixes feminine endings in one paragraph and masculine in another, inconsistency — not choice — pulls the rubric down.',
+          'If the student mixes feminine endings in one paragraph and masculine in another, inconsistency - not choice - pulls the rubric down.',
           'The idiom दिन-रात एक करना could be added to paragraph 1 for a stronger register signal, but its absence does not prevent Benchmark 5.',
         ],
       },
@@ -408,14 +408,14 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Essay 1 shows a present-tense routine with a small future extension — the safer path to Benchmark 5. Essay 2 shows past + present + future woven across three paragraphs — the higher-confidence path. Study them until you can reproduce the sentence shapes. The verdict cards tell you exactly which rubric boxes each sentence ticks.',
+      'Essay 1 shows a present-tense routine with a small future extension - the safer path to Benchmark 5. Essay 2 shows past + present + future woven across three paragraphs - the higher-confidence path. Study them until you can reproduce the sentence shapes. The verdict cards tell you exactly which rubric boxes each sentence ticks.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
   prompts: [
     {
       hindi:
-        'अपनी एक सामान्य स्कूल के दिन की दिनचर्या को तीन अनुच्छेदों में लिखिए। सुबह, दोपहर और शाम — तीनों समयों के बारे में बताइए।',
+        'अपनी एक सामान्य स्कूल के दिन की दिनचर्या को तीन अनुच्छेदों में लिखिए। सुबह, दोपहर और शाम - तीनों समयों के बारे में बताइए।',
       english:
         'Write your typical school-day routine in three paragraphs. Describe morning, afternoon, and evening.',
       hint: {
@@ -449,7 +449,7 @@ export const pack: TopicPack = {
   ],
   promptsNote: {
     why:
-      'Prompt 1 stays in habitual present — safest target for a first-draft Benchmark-5 essay. Prompt 2 forces a past-tense narration of one day plus habitual reference, hitting two time frames. Prompt 3 forces comparison (जबकि, लेकिन) AND future tense — the highest-ceiling prompt of the three. Work through all three in order.',
+      'Prompt 1 stays in habitual present - safest target for a first-draft Benchmark-5 essay. Prompt 2 forces a past-tense narration of one day plus habitual reference, hitting two time frames. Prompt 3 forces comparison (जबकि, लेकिन) AND future tense - the highest-ceiling prompt of the three. Work through all three in order.',
     trains: ['TextType'],
   },
 

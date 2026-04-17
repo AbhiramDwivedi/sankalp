@@ -6,7 +6,7 @@ import { pickConnectors } from '../connectors';
 // L1-10 · Cities, Places, Activities & Transportation (जगहें और यातायात)
 // Postposition-first pack: से, तक, में, पर, के पास, के सामने get their first
 // serious workout. Vocabulary spans cities, everyday places, transport modes,
-// and direction words — the community-life cluster FCPS L1 prompts love.
+// and direction words - the community-life cluster FCPS L1 prompts love.
 // -----------------------------------------------------------------------------
 
 export const pack: TopicPack = {
@@ -17,14 +17,14 @@ export const pack: TopicPack = {
   heroMotif: 'rickshaw',
   titleHindi: 'जगहें और यातायात',
   titleEnglish: 'Cities, Places, Activities & Transportation',
-  hook: 'Postpositions (से, तक, में, पर, के पास) get their first workout here — grammar gold, and a natural fit for daily-commute and weekend-trip essays.',
+  hook: 'Postpositions (से, तक, में, पर, के पास) get their first workout here - grammar gold, and a natural fit for daily-commute and weekend-trip essays.',
   heroPrompt: composeHeroPrompt(
     'A stylized Indian cityscape with an auto-rickshaw, a bicycle, a Mumbai local train, and a Delhi metro arranged like a board-game route, terracotta rooftops in the distance, a temple dome and a small park on one side, warm morning light',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Cities, Places, Activities, and Transportation (FCPS Level 1 — Community Life)',
+      'Cities, Places, Activities, and Transportation (FCPS Level 1 - Community Life)',
       'Daily routines involving travel to school and work (FCPS Level 1)',
       'Bridges into Travel and Vacations (FCPS Level 2) by introducing source-destination patterns early',
     ],
@@ -107,7 +107,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 28 words cover the three vocabulary clusters FCPS commute/travel prompts pull from: transport modes, neighborhood places, and city names. Every word appears in the anchor, a model text, or a model essay — nothing is decorative.',
+      'These 28 words cover the three vocabulary clusters FCPS commute/travel prompts pull from: transport modes, neighborhood places, and city names. Every word appears in the anchor, a model text, or a model essay - nothing is decorative.',
     trains: ['TopicCoverage'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },
@@ -116,7 +116,7 @@ export const pack: TopicPack = {
     {
       title: 'Postpositions of location: में, पर, के पास, के सामने',
       rule:
-        'Hindi uses postpositions (after the noun) instead of prepositions. For location: में = inside, पर = on / at (a point), के पास = near, के सामने = in front of. Pick the one that matches the actual spatial relationship — getting this right is half of Language Control on a location essay.',
+        'Hindi uses postpositions (after the noun) instead of prepositions. For location: में = inside, पर = on / at (a point), के पास = near, के सामने = in front of. Pick the one that matches the actual spatial relationship - getting this right is half of Language Control on a location essay.',
       examples: [
         { hindi: 'किताब बैग में है।', transliteration: 'kitaab baig mein hai.', english: 'The book is in the bag.' },
         { hindi: 'हम स्टेशन पर मिले।', transliteration: 'hum steshan par mile.', english: 'We met at the station.' },
@@ -124,7 +124,7 @@ export const pack: TopicPack = {
         { hindi: 'अस्पताल बैंक के सामने है।', transliteration: 'aspataal baink ke saamne hai.', english: 'The hospital is in front of the bank.' },
       ],
       pitfall:
-        'Students often use में for everything ("स्टेशन में मिले") when they mean "at the station" — that needs पर. में is only for being INSIDE something enclosed.',
+        'Students often use में for everything ("स्टेशन में मिले") when they mean "at the station" - that needs पर. में is only for being INSIDE something enclosed.',
       whyItMatters:
         'One wrong postposition can make a sentence locate a person inside a building they are really standing in front of. The STAMP rubric flags this under Language Control as a breakdown in meaning, capping the score at Intermediate-Low.',
     },
@@ -138,14 +138,14 @@ export const pack: TopicPack = {
         { hindi: 'सुबह नौ से शाम चार तक स्कूल चलता है।', transliteration: 'subah nau se shaam chaar tak school chalta hai.', english: 'School runs from 9 AM to 4 PM.' },
       ],
       pitfall:
-        'The transport mode also takes से (बस से, ट्रेन से), so one sentence can have से twice. Do not drop the second से — it signals HOW you travelled, not WHERE you came from.',
+        'The transport mode also takes से (बस से, ट्रेन से), so one sentence can have से twice. Do not drop the second से - it signals HOW you travelled, not WHERE you came from.',
       whyItMatters:
         'X से Y तक is the signature Intermediate-Mid frame for motion. A rater who sees two correctly formed source-destination sentences in one essay will mark Language Control at Average or higher almost automatically.',
     },
     {
-      title: 'Transport "से" — the instrumental use',
+      title: 'Transport "से" - the instrumental use',
       rule:
-        'To say "by bus / by train / by car", use the transport noun + से. "पैदल" (on foot) is the one exception — it is an adverb and takes NO से. Never say "कार से से" or "पैदल से".',
+        'To say "by bus / by train / by car", use the transport noun + से. "पैदल" (on foot) is the one exception - it is an adverb and takes NO से. Never say "कार से से" or "पैदल से".',
       examples: [
         { hindi: 'हम मेट्रो से दफ़्तर जाते हैं।', transliteration: 'hum metro se daftar jaate hain.', english: 'We go to the office by metro.' },
         { hindi: 'छोटी बहन साइकिल से स्कूल जाती है।', transliteration: 'chhoti bahan saaikil se school jaati hai.', english: 'Younger sister goes to school by bicycle.' },
@@ -201,16 +201,16 @@ export const pack: TopicPack = {
     english:
       'I live in Delhi. Our home is on a quiet lane, near the school. First, I wake up at seven in the morning, then I have breakfast. After this I go to school by bus. The school is about three kilometres from home, so going on foot is difficult. The bus stops in front of the station.\n\nLast Saturday, my family went to Agra. We went from Delhi to Agra by train, because there was too much traffic on the road. After reaching Agra, we took an auto-rickshaw and toured the Taj Mahal. In the end we came back to Delhi in the evening. It was a short but very nice trip.',
     highlights: [
-      { term: 'घर ... स्कूल के पास / बस स्टेशन के सामने', note: 'Two different location postpositions (के पास, के सामने) in one paragraph — shows Language Control.' },
-      { term: 'बस से स्कूल जाता हूँ / ट्रेन से गए', note: 'Transport से twice — present habitual and past perfective side by side.' },
+      { term: 'घर ... स्कूल के पास / बस स्टेशन के सामने', note: 'Two different location postpositions (के पास, के सामने) in one paragraph - shows Language Control.' },
+      { term: 'बस से स्कूल जाता हूँ / ट्रेन से गए', note: 'Transport से twice - present habitual and past perfective side by side.' },
       { term: 'दिल्ली से आगरा तक', note: 'The signature X से Y तक frame, planted in paragraph 2 for contrast with the daily commute.' },
-      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors scaffold two paragraphs — this is Text-Type 5 shape.' },
+      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors scaffold two paragraphs - this is Text-Type 5 shape.' },
       { term: 'क्योंकि / इसलिए / लेकिन', note: 'Three reasoning connectors across the passage add the "why" raters reward.' },
       { term: 'पिछले शनिवार को ... वापस दिल्ली आए', note: 'Past-tense trip narrated cleanly with motion verbs (गया, गए, आए).' },
     ],
     comprehensionQuestions: [
       { q: 'Where does the narrator live?', a: 'दिल्ली में, स्कूल के पास एक शांत गली में.' },
-      { q: 'How does the narrator go to school, and why not on foot?', a: 'बस से — स्कूल लगभग तीन किलोमीटर दूर है, इसलिए पैदल जाना मुश्किल है.' },
+      { q: 'How does the narrator go to school, and why not on foot?', a: 'बस से - स्कूल लगभग तीन किलोमीटर दूर है, इसलिए पैदल जाना मुश्किल है.' },
       { q: 'Where does the bus stop?', a: 'स्टेशन के सामने.' },
       { q: 'When did the family go to Agra and by what means?', a: 'पिछले शनिवार को, दिल्ली से आगरा तक ट्रेन से.' },
       { q: 'Why did they take the train and not the road?', a: 'क्योंकि सड़क पर बहुत भीड़ थी.' },
@@ -220,7 +220,7 @@ export const pack: TopicPack = {
   },
   anchorNote: {
     why:
-      'This anchor deliberately fuses two FCPS-favourite sub-prompts into one passage: a habitual commute (paragraph 1, present) and a specific past trip (paragraph 2, past). That is the exact shape the model essays push students toward. Read it aloud three times — the postposition patterns will start to feel automatic.',
+      'This anchor deliberately fuses two FCPS-favourite sub-prompts into one passage: a habitual commute (paragraph 1, present) and a specific past trip (paragraph 2, past). That is the exact shape the model essays push students toward. Read it aloud three times - the postposition patterns will start to feel automatic.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -231,9 +231,9 @@ export const pack: TopicPack = {
       hindi:
         'सोमवार – बस से स्कूल\nमंगलवार – बस से स्कूल\nबुधवार – पिताजी कार से छोड़ते हैं\nगुरुवार – बस से स्कूल\nशुक्रवार – बस से स्कूल\nशनिवार – साइकिल से पार्क\nरविवार – पैदल मंदिर',
       transliteration:
-        'somvaar — bas se school | mangalvaar — bas se school | budhvaar — pitaji kaar se chhodte hain | guruvaar — bas se school | shukravaar — bas se school | shanivaar — saaikil se paark | ravivaar — paidal mandir',
+        'somvaar - bas se school | mangalvaar - bas se school | budhvaar - pitaji kaar se chhodte hain | guruvaar - bas se school | shukravaar - bas se school | shanivaar - saaikil se paark | ravivaar - paidal mandir',
       english:
-        'Monday — bus to school · Tuesday — bus to school · Wednesday — father drops me by car · Thursday — bus to school · Friday — bus to school · Saturday — bicycle to the park · Sunday — on foot to the temple',
+        'Monday - bus to school · Tuesday - bus to school · Wednesday - father drops me by car · Thursday - bus to school · Friday - bus to school · Saturday - bicycle to the park · Sunday - on foot to the temple',
     },
     {
       kind: 'sms',
@@ -268,7 +268,7 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'A weekly schedule, a casual SMS, a station notice, and a diary entry — four registers, four uses of the same postposition set. Seeing से / तक / में / पर / के पास re-used across formal and informal texts cements the patterns better than any drill sheet.',
+      'A weekly schedule, a casual SMS, a station notice, and a diary entry - four registers, four uses of the same postposition set. Seeing से / तक / में / पर / के पास re-used across formal and informal texts cements the patterns better than any drill sheet.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -280,7 +280,7 @@ export const pack: TopicPack = {
       emoji: '🛺',
     },
     {
-      title: 'The Mumbai Local — a City Inside a Train',
+      title: 'The Mumbai Local - a City Inside a Train',
       body:
         'Mumbai\'s local trains carry more than 7 million people a day. There are separate compartments for women, for first class, and for luggage. Saying "मुंबई की लोकल में बहुत भीड़ होती है" is a dense, authentic detail that raters reward under Topic Coverage.',
       emoji: '🚆',
@@ -294,19 +294,19 @@ export const pack: TopicPack = {
     {
       title: 'Small-Town Bicycle Culture',
       body:
-        'In towns like Allahabad, Ujjain, and Varanasi, the bicycle is still the commuter\'s vehicle — students, teachers, and milk-sellers all ride. Mentioning "मेरे दादाजी के गाँव में सब साइकिल से चलते हैं" ties modern transport to family memory.',
+        'In towns like Allahabad, Ujjain, and Varanasi, the bicycle is still the commuter\'s vehicle - students, teachers, and milk-sellers all ride. Mentioning "मेरे दादाजी के गाँव में सब साइकिल से चलते हैं" ties modern transport to family memory.',
       emoji: '🚲',
     },
     {
       title: 'The Indian Family Road Trip',
       body:
-        'A family car trip comes with its own ritual: packed पूरी-सब्ज़ी, a stop at a dhaba, antakshari (song-chain game) to pass the time. Naming any one of these — "हमने रास्ते में अंताक्षरी खेली" — anchors the essay in real Indian life.',
+        'A family car trip comes with its own ritual: packed पूरी-सब्ज़ी, a stop at a dhaba, antakshari (song-chain game) to pass the time. Naming any one of these - "हमने रास्ते में अंताक्षरी खेली" - anchors the essay in real Indian life.',
       emoji: '🚗',
     },
   ],
   culturalNote: {
     why:
-      'Transport essays written without cultural specifics all read the same ("I went by bus, it was good"). The five items above each give the student a short, ready-made phrase to insert — auto bargaining, Mumbai local crowding, metro etiquette, cycle culture, antakshari on a drive — that separates their essay from the pile for pure Text-Type and Topic-Coverage lift.',
+      'Transport essays written without cultural specifics all read the same ("I went by bus, it was good"). The five items above each give the student a short, ready-made phrase to insert - auto bargaining, Mumbai local crowding, metro etiquette, cycle culture, antakshari on a drive - that separates their essay from the pile for pure Text-Type and Topic-Coverage lift.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -316,7 +316,7 @@ export const pack: TopicPack = {
       literal: 'for the road to be clear',
       meaning: 'For the path / way to be open; for obstacles to clear.',
       example: 'परीक्षा ख़त्म हुई, अब मेरे लिए रास्ता साफ़ है।',
-      exampleEnglish: 'The exam is over — now the way is clear for me.',
+      exampleEnglish: 'The exam is over - now the way is clear for me.',
     },
     {
       phrase: 'पैर जमाना',
@@ -328,7 +328,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Both idioms are travel- and place-themed, so they fit a commute or relocation essay without feeling pasted in. One idiom, correctly placed in a Benchmark-5 essay, is a register-mastery signal — two is overkill.',
+      'Both idioms are travel- and place-themed, so they fit a commute or relocation essay without feeling pasted in. One idiom, correctly placed in a Benchmark-5 essay, is a register-mastery signal - two is overkill.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -342,15 +342,15 @@ export const pack: TopicPack = {
       intermediateMid:
         'मैं दिल्ली में रहता हूँ, और हमारा घर एक पार्क के पास है। पहले मैं सुबह सात बजे उठता हूँ, फिर नाश्ता करता हूँ और बस से स्कूल जाता हूँ। स्कूल घर से लगभग तीन किलोमीटर दूर है, इसलिए पैदल जाना मुश्किल है। बस स्टेशन के सामने रुकती है, और मेरा स्कूल वहाँ से दाएँ है।\n\nपिछले शनिवार को मेरा परिवार आगरा गया। हम दिल्ली से आगरा तक ट्रेन से गए, क्योंकि सड़क पर बहुत भीड़ थी। स्टेशन पर पहुँचकर हमने एक ऑटो रिक्शा लिया। ऑटो वाले ने पहले ज़्यादा दाम माँगे, लेकिन पिताजी ने मीटर से चलने को कहा। इसके बाद हम ताजमहल घूमे।\n\nमुझे लगता है कि रोज़ का रास्ता और एक यात्रा, दोनों ज़रूरी हैं। अगले महीने हम जयपुर जाएँगे और वहाँ कार से घूमेंगे। अंत में, मैं सीखा कि शहर से शहर तक जाना सिर्फ़ यात्रा नहीं, बल्कि एक नई कहानी भी है।',
       annotations: [
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'पार्क के पास / स्टेशन के सामने / वहाँ से दाएँ', note: 'Three different location postpositions in one paragraph — clean Language Control signal.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... इसलिए', note: 'Time and reason connectors stacked — classic Intermediate-Mid sequencing.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'पार्क के पास / स्टेशन के सामने / वहाँ से दाएँ', note: 'Three different location postpositions in one paragraph - clean Language Control signal.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... इसलिए', note: 'Time and reason connectors stacked - classic Intermediate-Mid sequencing.' },
         { paragraphIndex: 0, kind: 'structure', highlight: 'बस से स्कूल जाता हूँ', note: 'Transport-से used in the signature present-habitual commute frame.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले शनिवार को ... ट्रेन से गए', note: 'Switch to past-perfective with motion verb. Tense shift is obvious and controlled.' },
         { paragraphIndex: 1, kind: 'structure', highlight: 'दिल्ली से आगरा तक', note: 'The signature X से Y तक frame.' },
-        { paragraphIndex: 1, kind: 'cultural', highlight: 'मीटर से चलने को कहा', note: 'Auto-rickshaw bargaining detail — authentic cultural specific.' },
+        { paragraphIndex: 1, kind: 'cultural', highlight: 'मीटर से चलने को कहा', note: 'Auto-rickshaw bargaining detail - authentic cultural specific.' },
         { paragraphIndex: 1, kind: 'idiom', highlight: 'ज़्यादा दाम माँगे ... मीटर से चलने को कहा', note: 'Real-world Hindi register used in a narrative, not as a drill.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले महीने ... जाएँगे ... घूमेंगे', note: 'Future tense arrives in the closing — three time frames sealed.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ यात्रा नहीं, बल्कि एक नई कहानी भी', note: 'Not-only-but-also structure — Intermediate-Mid hallmark, closing reflection.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले महीने ... जाएँगे ... घूमेंगे', note: 'Future tense arrives in the closing - three time frames sealed.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ यात्रा नहीं, बल्कि एक नई कहानी भी', note: 'Not-only-but-also structure - Intermediate-Mid hallmark, closing reflection.' },
       ],
       wordCount: 142,
       tenseUsed: ['past', 'present', 'future'],
@@ -359,14 +359,14 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three paragraphs, three time frames — present habitual commute, past Saturday trip, future Jaipur plan. Text-Type 5 criteria met.',
+          'Three paragraphs, three time frames - present habitual commute, past Saturday trip, future Jaipur plan. Text-Type 5 criteria met.',
           'Five distinct postpositions used correctly (में, के पास, से, तक, पर, के सामने). Raters stabilize Language Control at Average or High.',
-          'Transport-से appears four times in natural sentences (बस से, ट्रेन से, ऑटो रिक्शा, कार से) — dense Topic Coverage.',
-          'The auto-rickshaw bargaining line ("मीटर से चलने को कहा") is a concrete cultural specific — pure Text-Type lift.',
+          'Transport-से appears four times in natural sentences (बस से, ट्रेन से, ऑटो रिक्शा, कार से) - dense Topic Coverage.',
+          'The auto-rickshaw bargaining line ("मीटर से चलने को कहा") is a concrete cultural specific - pure Text-Type lift.',
           'Not-only-but-also closing ("सिर्फ़ यात्रा नहीं, बल्कि एक नई कहानी भी") is an Intermediate-Mid structural hallmark.',
         ],
         gotchas: [
-          'A student who writes "स्कूल में जाता हूँ" (wrong — needs no postposition with motion verb to a destination noun in this construction; or uses direct form) may drop Language Control.',
+          'A student who writes "स्कूल में जाता हूँ" (wrong - needs no postposition with motion verb to a destination noun in this construction; or uses direct form) may drop Language Control.',
           'Confusing के पास (near) and के सामने (in front of) flips meaning and counts as a Language-Control error.',
         ],
       },
@@ -380,12 +380,12 @@ export const pack: TopicPack = {
         'मेरे शहर दिल्ली में एक बड़ा पार्क है, जिसका नाम "लोधी गार्डन" है। यह मेरे घर से लगभग पाँच किलोमीटर दूर है। मैं वहाँ हर रविवार जाता हूँ, क्योंकि वहाँ बहुत शांति मिलती है।\n\nघर से पार्क तक जाने के लिए पहले मैं मेट्रो लेता हूँ। मेट्रो स्टेशन हमारे घर के पास है, इसलिए मैं पैदल स्टेशन तक जाता हूँ। फिर जोर बाग़ स्टेशन पर उतरकर मैं दाएँ मुड़ता हूँ, सीधा चलता हूँ, और पार्क के सामने पहुँच जाता हूँ। पिछले रविवार को मैं और मेरी बहन वहाँ गए। हमने पार्क में साइकिल चलाई और एक पेड़ के नीचे बैठकर किताबें पढ़ीं।\n\nमुझे लगता है कि शहर में एक ख़ास जगह होना ज़रूरी है। अगले महीने मैं वहाँ अपने दोस्तों को भी ले जाऊँगा। अंत में, मैं कहूँगा कि यह जगह सिर्फ़ एक पार्क नहीं, बल्कि मेरे हफ़्ते का सबसे अच्छा हिस्सा है।',
       annotations: [
         { paragraphIndex: 0, kind: 'vocab', highlight: 'घर से ... पाँच किलोमीटर दूर', note: 'Distance-from frame using से. Natural Language Control anchor.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि वहाँ बहुत शांति मिलती है', note: 'Early reason clause sets the emotional stakes — Text-Type lift.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'घर से पार्क तक', note: 'X से Y तक deployed as the paragraph opener — the pack\'s signature frame.' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'दाएँ मुड़ता हूँ, सीधा चलता हूँ, पार्क के सामने', note: 'Direction-giving chain — three direction words in two sentences. Dense Topic Coverage.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले रविवार को ... साइकिल चलाई ... पढ़ीं', note: 'Past perfective with correct feminine plural agreement (पढ़ीं) — Language Control signal.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले महीने ... ले जाऊँगा', note: 'Future tense appears naturally in the closing — third time frame locked in.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ एक पार्क नहीं, बल्कि ... सबसे अच्छा हिस्सा', note: 'Reflective not-only-but-also closing — Intermediate-Mid hallmark.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि वहाँ बहुत शांति मिलती है', note: 'Early reason clause sets the emotional stakes - Text-Type lift.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'घर से पार्क तक', note: 'X से Y तक deployed as the paragraph opener - the pack\'s signature frame.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'दाएँ मुड़ता हूँ, सीधा चलता हूँ, पार्क के सामने', note: 'Direction-giving chain - three direction words in two sentences. Dense Topic Coverage.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले रविवार को ... साइकिल चलाई ... पढ़ीं', note: 'Past perfective with correct feminine plural agreement (पढ़ीं) - Language Control signal.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले महीने ... ले जाऊँगा', note: 'Future tense appears naturally in the closing - third time frame locked in.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ एक पार्क नहीं, बल्कि ... सबसे अच्छा हिस्सा', note: 'Reflective not-only-but-also closing - Intermediate-Mid hallmark.' },
       ],
       wordCount: 138,
       tenseUsed: ['past', 'present', 'future'],
@@ -394,9 +394,9 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Present-habitual paragraph 1 + past-perfective paragraph 2 + future paragraph 3 — three time frames in 138 words. Benchmark 5 shape.',
-          'Direction-giving chain (दाएँ मुड़ता हूँ, सीधा चलता हूँ, के सामने) uses three pack vocabulary items in one sequence — Topic Coverage boost.',
-          'Past perfective पढ़ीं with correct feminine plural agreement (for किताबें) — the kind of fine detail that pushes Language Control to Average or High.',
+          'Present-habitual paragraph 1 + past-perfective paragraph 2 + future paragraph 3 - three time frames in 138 words. Benchmark 5 shape.',
+          'Direction-giving chain (दाएँ मुड़ता हूँ, सीधा चलता हूँ, के सामने) uses three pack vocabulary items in one sequence - Topic Coverage boost.',
+          'Past perfective पढ़ीं with correct feminine plural agreement (for किताबें) - the kind of fine detail that pushes Language Control to Average or High.',
           'Closing "सिर्फ़ ... बल्कि ... भी" is the reflective IM structure raters consistently reward.',
         ],
         gotchas: [
@@ -408,7 +408,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Both essays braid a habitual commute with a past trip and a future plan — the exact three-time-frame structure the rubric rewards. Study the annotations until you can reproduce the postposition patterns (से / तक / के पास / के सामने / पर) without thinking.',
+      'Both essays braid a habitual commute with a past trip and a future plan - the exact three-time-frame structure the rubric rewards. Study the annotations until you can reproduce the postposition patterns (से / तक / के पास / के सामने / पर) without thinking.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -426,7 +426,7 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'एक यादगार यात्रा के बारे में तीन अनुच्छेदों में लिखिए। आप कहाँ से कहाँ तक गए, किस साधन से, और वहाँ क्या देखा या किया — सब बताइए।',
+        'एक यादगार यात्रा के बारे में तीन अनुच्छेदों में लिखिए। आप कहाँ से कहाँ तक गए, किस साधन से, और वहाँ क्या देखा या किया - सब बताइए।',
       english:
         'Write three paragraphs about a memorable trip. Say where you went from and to, by what means, and what you saw or did there.',
       hint: {
@@ -437,9 +437,9 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'अगर आप अगले साल भारत के किसी शहर में घूमने जाएँगे, तो कौन सा शहर चुनेंगे और क्यों? तीन अनुच्छेदों में लिखिए — शहर, साधन, और वहाँ क्या करेंगे।',
+        'अगर आप अगले साल भारत के किसी शहर में घूमने जाएँगे, तो कौन सा शहर चुनेंगे और क्यों? तीन अनुच्छेदों में लिखिए - शहर, साधन, और वहाँ क्या करेंगे।',
       english:
-        'If you were to visit an Indian city next year, which one would you choose and why? Write three paragraphs — the city, the transport, and what you would do there.',
+        'If you were to visit an Indian city next year, which one would you choose and why? Write three paragraphs - the city, the transport, and what you would do there.',
       hint: {
         connectors: ['अगर... तो', 'क्योंकि', 'इसलिए', 'अंत में'],
         vocab: ['दिल्ली', 'मुंबई', 'जयपुर', 'हवाई जहाज़', 'मेट्रो', 'घूमना'],

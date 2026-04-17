@@ -26,11 +26,11 @@ import { RubricAxisTags } from '../topic/RubricAxisTag';
 import { ParagraphScaffoldDiagram } from '../art/diagrams';
 
 // -----------------------------------------------------------------------------
-// CapstoneViewV2 — capstone page IA, mirrors the topic-pack 4-tab pattern
+// CapstoneViewV2 - capstone page IA, mirrors the topic-pack 4-tab pattern
 // but collapses to 3 tabs since capstones have no vocab/grammar to look up.
-//   1. Study   — orientation: outcomes, action steps, source packs
-//   2. Write   — the prompt + 3 tier essays (sub-tabs) + comprehension Qs
-//   3. Teacher — verdict card, teacher note, paragraph annotations
+//   1. Study   - orientation: outcomes, action steps, source packs
+//   2. Write   - the prompt + 3 tier essays (sub-tabs) + comprehension Qs
+//   3. Teacher - verdict card, teacher note, paragraph annotations
 // -----------------------------------------------------------------------------
 
 type TabKey = 'study' | 'write' | 'teacher';
@@ -359,7 +359,7 @@ const SourcePacks: React.FC<{
         <div>
           <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Source packs</p>
           <p className="font-black text-slate-900 text-lg">
-            {draws.length} topic packs feed this capstone — open one if you need a refresher
+            {draws.length} topic packs feed this capstone - open one if you need a refresher
           </p>
         </div>
       </div>
@@ -428,7 +428,7 @@ const WriteTab: React.FC<{ capstone: Capstone }> = ({ capstone }) => {
             <div className="flex items-center gap-3 pt-4 border-t border-orange-200/60">
               <Clock size={18} className="text-orange-700" />
               <p className="text-sm font-bold text-slate-700">
-                Mock Exam sitting — set a {capstone.mockExamMinutes}-minute timer. No notes. No dictionary.
+                Mock Exam sitting - set a {capstone.mockExamMinutes}-minute timer. No notes. No dictionary.
               </p>
             </div>
           )}

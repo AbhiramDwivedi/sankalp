@@ -15,7 +15,7 @@ const safeJsonParse = (text: string) => {
 };
 
 // Assessment is the only AI call retained. Inputs: either a pasted/typed essay
-// (preferred — matches exam typing interface) or a handwritten image.
+// (preferred - matches exam typing interface) or a handwritten image.
 export type WritingSubmission =
   | { kind: 'text'; text: string }
   | { kind: 'image'; data: string };

@@ -9,7 +9,7 @@ export enum ProficiencyLevel {
 }
 
 // ---------------------------------------------------------------------------
-// Legacy material/lesson types — kept for older localStorage profiles only.
+// Legacy material/lesson types - kept for older localStorage profiles only.
 // New content flows through content/schema.ts TopicPack. Do not extend these.
 // ---------------------------------------------------------------------------
 
@@ -54,7 +54,7 @@ export interface Unit {
 }
 
 // ---------------------------------------------------------------------------
-// Active student profile — static-content era.
+// Active student profile - static-content era.
 // ---------------------------------------------------------------------------
 
 export interface EvaluationResult {

@@ -86,7 +86,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
         />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 md:py-20 lg:py-24 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-          {/* Left — text */}
+          {/* Left - text */}
           <div className="space-y-7 animate-in fade-in duration-700">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-orange-600 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-orange-200">
@@ -112,7 +112,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
 
             <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-xl">
               A complete prep course for the Avant{' '}
-              <strong className="text-slate-900">STAMP 2S</strong> exam —{' '}
+              <strong className="text-slate-900">STAMP 2S</strong> exam -{' '}
               {TOPIC_PACKS.length} topic packs, {CAPSTONES.length} capstones,{' '}
               {totalCards().toLocaleString()} flashcards. Target:{' '}
               <strong className="text-slate-900">Benchmark 5 (Intermediate-Mid)</strong>.
@@ -146,7 +146,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
             </div>
           </div>
 
-          {/* Right — motif collage */}
+          {/* Right - motif collage */}
           <div className="relative h-[440px] sm:h-[520px] md:h-[580px] animate-in fade-in zoom-in duration-700">
             {/* Warm backdrop card */}
             <div className="absolute inset-4 md:inset-8 rounded-[3.5rem] bg-gradient-to-br from-orange-400 via-amber-400 to-rose-300 shadow-2xl shadow-orange-200/50 overflow-hidden">
@@ -155,28 +155,28 @@ export const LandingView: React.FC<LandingViewProps> = ({
               </div>
             </div>
 
-            {/* Center — Namaste */}
+            {/* Center - Namaste */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-square z-10">
               <div className="w-full h-full bg-white/95 rounded-[2.5rem] p-6 md:p-8 shadow-2xl rotate-2 backdrop-blur-sm border border-white/60">
                 <MotifNamaste color="#ea580c" accent="#f59e0b" />
               </div>
             </div>
 
-            {/* Top-right — Diya on dark */}
+            {/* Top-right - Diya on dark */}
             <div className="absolute top-4 right-0 md:top-6 md:right-4 w-28 md:w-36 aspect-square z-20 -rotate-6">
               <div className="w-full h-full bg-slate-900 rounded-3xl p-3 md:p-4 shadow-xl">
                 <MotifDiya color="#fbbf24" accent="#f59e0b" />
               </div>
             </div>
 
-            {/* Bottom-left — Books */}
+            {/* Bottom-left - Books */}
             <div className="absolute bottom-4 left-0 md:bottom-6 md:left-2 w-28 md:w-36 aspect-square z-20 rotate-6">
               <div className="w-full h-full bg-emerald-600 rounded-3xl p-3 md:p-4 shadow-xl">
                 <MotifBooks color="#ffffff" accent="#a7f3d0" />
               </div>
             </div>
 
-            {/* Bottom-right — Temple */}
+            {/* Bottom-right - Temple */}
             <div className="absolute bottom-2 right-6 md:bottom-4 md:right-14 w-24 md:w-32 aspect-square z-20 rotate-3">
               <div className="w-full h-full bg-indigo-600 rounded-3xl p-3 md:p-4 shadow-xl">
                 <MotifTemple color="#ffffff" accent="#c7d2fe" />
@@ -203,7 +203,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
           </h2>
           <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed">
             Not a generic Hindi course. Every page is engineered around the FCPS Credit-by-Exam
-            path — the exam you actually take, the rubric you're actually scored against.
+            path - the exam you actually take, the rubric you're actually scored against.
           </p>
         </header>
 
@@ -211,7 +211,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
           <PromiseCard
             icon={<ClipboardList size={28} strokeWidth={2.5} />}
             eyebrow="What you're prepping for"
-            headline="Avant STAMP 2S — Writing + Speaking only"
+            headline="Avant STAMP 2S - Writing + Speaking only"
             body="Two sections, ~2 hours total. No reading, no listening. FCPS only grades what you produce, so we only train what gets graded."
             tone="blue"
           />
@@ -219,7 +219,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
             icon={<Award size={28} strokeWidth={2.5} />}
             eyebrow="What you walk away with"
             headline="Benchmark 5 = 3 FCPS credits"
-            body="Intermediate-Mid proficiency on both Writing and Speaking. The full 3-credit ceiling FCPS awards — no halfway prize."
+            body="Intermediate-Mid proficiency on both Writing and Speaking. The full 3-credit ceiling FCPS awards - no halfway prize."
             tone="emerald"
             highlight
           />
@@ -227,7 +227,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
             icon={<BookOpen size={28} strokeWidth={2.5} />}
             eyebrow="How we get there"
             headline="Pack → Capstone → Mock exam"
-            body={`${STUDY_PLANS.length} named study plans, 2 to 12 months depending on starting level. About 30 minutes daily — short enough to keep.`}
+            body={`${STUDY_PLANS.length} named study plans, 2 to 12 months depending on starting level. About 30 minutes daily - short enough to keep.`}
             tone="orange"
           />
         </div>
@@ -251,7 +251,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
                 Every claim on this page is backed by content in the library.
               </h2>
               <p className="text-slate-300 text-base md:text-lg font-medium leading-relaxed">
-                Live counts pulled from the shipping registry — not a marketing number, not a
+                Live counts pulled from the shipping registry - not a marketing number, not a
                 roadmap promise.
               </p>
             </div>
@@ -269,7 +269,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
                   "The 3-credit outcome is the expected one, not the hoped-for one."
                 </p>
                 <p className="text-slate-400 text-sm italic mt-2">
-                  — from the shipping credit audit, regenerated every build.
+                  - from the shipping credit audit, regenerated every build.
                 </p>
               </div>
               <div className="shrink-0 inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 rounded-full px-5 py-2.5 text-sm font-black text-emerald-200">
@@ -439,7 +439,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
 
       <footer className="max-w-7xl mx-auto px-6 lg:px-12 py-10 text-center">
         <p className="text-xs text-slate-400 font-semibold tracking-wide">
-          सङ्कल्प · Sankalp Hindi — a home-built prep kit for the FCPS World Language Credit Exam.
+          सङ्कल्प · Sankalp Hindi - a home-built prep kit for the FCPS World Language Credit Exam.
         </p>
       </footer>
     </div>

@@ -164,7 +164,7 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
                       Packs this week
                     </p>
                     {w.packs.length === 0 ? (
-                      <p className="text-sm italic text-slate-400">No new packs — capstones only.</p>
+                      <p className="text-sm italic text-slate-400">No new packs - capstones only.</p>
                     ) : (
                       <ul className="space-y-1">
                         {w.packs.map((pid) => {

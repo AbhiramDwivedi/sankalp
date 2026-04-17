@@ -2,7 +2,7 @@
 // Any card that matches one of these rules is promoted to priority 'must-know'
 // regardless of the automatic classification.
 
-// Grammar essentials — hand-authored mini-lessons that appear as flashcards in
+// Grammar essentials - hand-authored mini-lessons that appear as flashcards in
 // the grammar-essentials deck. These are the 25 Hindi control points that,
 // if the student masters them, land the essay in Benchmark 5.
 
@@ -33,7 +33,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     back: {
       english: 'Adjective ending, verb ending, and sometimes possessive pronoun.',
       example: 'बड़ा लड़का खाता है (m) · बड़ी लड़की खाती है (f)',
-      note: 'In the same sentence, one mistake cascades — getting the noun wrong usually breaks both the adjective and the verb.',
+      note: 'In the same sentence, one mistake cascades - getting the noun wrong usually breaks both the adjective and the verb.',
     },
     priority: 'must-know',
   },
@@ -54,7 +54,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     back: {
       english: 'का + masc sing, की + fem (any number), के + masc plural or before postposition.',
       example: 'राम का भाई · राम की बहन · राम के दोस्त',
-      note: 'This also encodes gender agreement — the possessive agrees with what is owned, not the owner.',
+      note: 'This also encodes gender agreement - the possessive agrees with what is owned, not the owner.',
     },
     priority: 'must-know',
   },
@@ -124,7 +124,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     title: 'Polite imperative (-इए)',
     front: { prompt: 'How do you politely say "Please sit"?' },
     back: {
-      english: 'Verb stem + इए (formal) — कीजिए / बैठिए / बताइए.',
+      english: 'Verb stem + इए (formal) - कीजिए / बैठिए / बताइए.',
       example: 'कृपया बैठिए। · कृपया बताइए कि आप कौन हैं।',
       note: 'Use in dialogue within essays to show register awareness.',
     },
@@ -135,7 +135,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     title: 'जब ... तब',
     front: { prompt: 'Translate: "When I arrived, the sun was setting."' },
     back: {
-      english: 'Pattern: जब [clause 1], तब [clause 2]. A dependent clause — sentences cannot be rearranged.',
+      english: 'Pattern: जब [clause 1], तब [clause 2]. A dependent clause - sentences cannot be rearranged.',
       example: 'जब मैं पहुँचा, तब सूरज ढल रहा था।',
       note: 'This is the single biggest Intermediate-Low → Intermediate-Mid discriminator.',
     },
@@ -146,7 +146,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     title: 'Reported speech with कि',
     front: { prompt: 'How do you say "She said that she was tired"?' },
     back: {
-      english: 'Direct pattern: वह ने कहा कि ... — no tense shift, unlike English.',
+      english: 'Direct pattern: वह ने कहा कि ... - no tense shift, unlike English.',
       example: 'उसने कहा कि वह थकी हुई है।',
       note: 'Using reported speech once in an essay lifts the text-type ceiling.',
     },
@@ -157,7 +157,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     title: 'मुझे लगता है कि',
     front: { prompt: 'How do you start an opinion sentence?' },
     back: {
-      english: '"I think / I feel that..." — the single safest way to open a reflective closing paragraph.',
+      english: '"I think / I feel that..." - the single safest way to open a reflective closing paragraph.',
       example: 'मुझे लगता है कि यह दिन मुझे याद रहेगा।',
     },
     priority: 'must-know',
@@ -167,7 +167,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     title: 'मेरा मानना है कि',
     front: { prompt: 'How do you open a stronger opinion statement?' },
     back: {
-      english: '"My view is that..." — more formal than मुझे लगता है. Good for opinion essays.',
+      english: '"My view is that..." - more formal than मुझे लगता है. Good for opinion essays.',
       example: 'मेरा मानना है कि संतुलन सबसे ज़रूरी है।',
     },
     priority: 'must-know',
@@ -217,7 +217,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     title: 'इसके अलावा (moreover)',
     front: { prompt: 'How do you add another point?' },
     back: {
-      english: '"Besides this / moreover" — use to build a paragraph to 4+ sentences.',
+      english: '"Besides this / moreover" - use to build a paragraph to 4+ sentences.',
       example: 'इसके अलावा, मुझे गाना भी पसंद है।',
     },
     priority: 'core',
@@ -227,7 +227,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     title: 'सिर्फ़ ... नहीं, बल्कि ... भी',
     front: { prompt: 'How do you say "not only X but also Y"?' },
     back: {
-      english: 'Correlative construction — raises register considerably.',
+      english: 'Correlative construction - raises register considerably.',
       example: 'सिर्फ़ मुझे नहीं, बल्कि मेरी बहन को भी यह फ़िल्म पसंद है।',
       note: 'Using this once in an essay signals push-tier language control.',
     },
@@ -238,7 +238,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     title: 'एक ओर ... दूसरी ओर',
     front: { prompt: 'How do you structure a two-sided argument?' },
     back: {
-      english: '"On one hand ... on the other hand" — formal discourse marker pair. Benchmark-6 register.',
+      english: '"On one hand ... on the other hand" - formal discourse marker pair. Benchmark-6 register.',
       example: 'एक ओर पढ़ाई का बोझ है, दूसरी ओर परिवार की उम्मीदें।',
     },
     priority: 'core',
@@ -260,7 +260,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     front: { prompt: 'When do you use अपना instead of मेरा?' },
     back: {
       english: 'अपना = "own" (reflexive, refers back to the subject). मेरा = fixed "my". Use अपना when the possessor is the subject of the sentence.',
-      example: 'मैं अपनी माँ से मिला। (reflexive — correct) · ❌ मैं मेरी माँ से मिला।',
+      example: 'मैं अपनी माँ से मिला। (reflexive - correct) · ❌ मैं मेरी माँ से मिला।',
     },
     priority: 'must-know',
   },
@@ -269,7 +269,7 @@ export const GRAMMAR_ESSENTIALS: GrammarEssentialCard[] = [
     title: '-ते ही (as soon as)',
     front: { prompt: 'How do you say "as soon as the bell rang"?' },
     back: {
-      english: 'Verb stem + -ते ही — "as soon as X happens". Non-finite clause; syntactic variety for IM+.',
+      english: 'Verb stem + -ते ही - "as soon as X happens". Non-finite clause; syntactic variety for IM+.',
       example: 'घंटी बजते ही हम बाहर भागे।',
     },
     priority: 'core',

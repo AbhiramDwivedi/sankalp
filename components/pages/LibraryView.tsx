@@ -16,9 +16,9 @@ interface LibraryViewProps {
 }
 
 const levelMeta: Record<Level, { title: string; subtitle: string; tone: string }> = {
-  1: { title: 'Level 1 — Foundations', subtitle: 'FCPS Year 1 topics. Get comfortable producing simple sentences.', tone: 'text-orange-700' },
-  2: { title: 'Level 2 — Building Paragraphs', subtitle: 'FCPS Year 2 topics. Shift into connected paragraphs and time frames.', tone: 'text-emerald-700' },
-  3: { title: 'Level 3 — Pushing to Intermediate-Mid', subtitle: 'The stretch topics that lift a 2-credit essay to 3 credits.', tone: 'text-indigo-700' },
+  1: { title: 'Level 1 - Foundations', subtitle: 'FCPS Year 1 topics. Get comfortable producing simple sentences.', tone: 'text-orange-700' },
+  2: { title: 'Level 2 - Building Paragraphs', subtitle: 'FCPS Year 2 topics. Shift into connected paragraphs and time frames.', tone: 'text-emerald-700' },
+  3: { title: 'Level 3 - Pushing to Intermediate-Mid', subtitle: 'The stretch topics that lift a 2-credit essay to 3 credits.', tone: 'text-indigo-700' },
 };
 
 export const LibraryView: React.FC<LibraryViewProps> = ({
@@ -115,7 +115,7 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
             <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-black text-emerald-900">
-                {hiddenCount} {hiddenCount === 1 ? 'pack is' : 'packs are'} hidden — already at your level
+                {hiddenCount} {hiddenCount === 1 ? 'pack is' : 'packs are'} hidden - already at your level
               </p>
               <p className="text-xs text-emerald-700 font-medium italic">
                 Based on {studentLevel || 'your starting level'}. You can always bring them back.

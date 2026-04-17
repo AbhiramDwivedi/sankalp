@@ -65,7 +65,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
         </div>
         <Callout kind="info" title="There is no reading or listening section">
           Unlike the full STAMP 4S test, FCPS only grades Writing and Speaking. That means
-          this app focuses entirely on producing output — the reading material here exists
+          this app focuses entirely on producing output - the reading material here exists
           to teach the student to write and speak well.
         </Callout>
       </div>
@@ -188,7 +188,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
                   <td className="p-3 font-semibold text-slate-700">{b.actflLabel}</td>
                   <td className="p-3 text-slate-600 italic">{b.inOneLine}</td>
                   <td className="p-3 font-black text-slate-900">
-                    {b.creditCount === 0 ? '—' : b.creditCount}
+                    {b.creditCount === 0 ? '-' : b.creditCount}
                   </td>
                 </tr>
               );
@@ -232,7 +232,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
         </li>
         <li className="leading-relaxed">
           <strong>Optional AI grading.</strong> Enable it in Settings if you want a second
-          opinion. The teacher can also grade by hand — both work.
+          opinion. The teacher can also grade by hand - both work.
         </li>
       </ol>
     </section>

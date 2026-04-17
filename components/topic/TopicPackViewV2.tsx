@@ -39,15 +39,15 @@ import { TARGET_BENCHMARK } from '../../content/rubric';
 import { RubricAxisTags } from './RubricAxisTag';
 
 // -----------------------------------------------------------------------------
-// TopicPackViewV2 — pack page IA.
+// TopicPackViewV2 - pack page IA.
 //
 // Splits a pack into 4 audience-shaped tabs:
-//   1. Study     — sequenced action steps, every "go do X" is a real button
-//   2. Reference — vocab / grammar / connectors / idioms / cultural / model texts
+//   1. Study     - sequenced action steps, every "go do X" is a real button
+//   2. Reference - vocab / grammar / connectors / idioms / cultural / model texts
 //                  rendered as lookups, no marketing prose
-//   3. Write     — reading sample + 2 model essays (sub-tabs) + writing prompts
+//   3. Write     - reading sample + 2 model essays (sub-tabs) + writing prompts
 //                  + AI assessment. Verdict cards are NOT shown here.
-//   4. Teacher   — rationale, all teacher notes, verdict cards, self-check rubric
+//   4. Teacher   - rationale, all teacher notes, verdict cards, self-check rubric
 //
 // Print: all four tabs render sequentially regardless of selection.
 // -----------------------------------------------------------------------------
@@ -140,7 +140,7 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
 
       <HeroBanner pack={pack} />
 
-      {/* Tab bar — sticky on desktop, scrollable on mobile */}
+      {/* Tab bar - sticky on desktop, scrollable on mobile */}
       <div className="sticky top-0 z-20 -mx-2 px-2 py-3 bg-white/90 backdrop-blur-md border-b border-slate-100 no-print">
         <div className="flex gap-1 md:gap-2 overflow-x-auto" role="tablist" aria-label="Pack sections">
           {TABS.map((t) => {
@@ -214,7 +214,7 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
 };
 
 // =============================================================================
-// TAB 1 — STUDY  (the action plan)
+// TAB 1 - STUDY  (the action plan)
 // =============================================================================
 
 interface StudyTabProps {
@@ -237,7 +237,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ pack, goTo }) => {
     {
       n: 1,
       title: 'Read the reading sample out loud',
-      body: `One short paragraph titled "${pack.anchor.title}". Read it twice — once for meaning, once for sentence shapes.`,
+      body: `One short paragraph titled "${pack.anchor.title}". Read it twice - once for meaning, once for sentence shapes.`,
       cta: 'Open reading',
       minutes: '~10 min',
       onClick: () => goTo('write', 'anchor-passage'),
@@ -253,7 +253,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ pack, goTo }) => {
     {
       n: 3,
       title: `Skim ${pack.vocabulary.length} vocabulary words and ${pack.connectors.length} connectors`,
-      body: 'Reference-style — look up, do not memorise the list. The same words come back inside the model essays.',
+      body: 'Reference-style - look up, do not memorise the list. The same words come back inside the model essays.',
       cta: 'Open vocabulary',
       minutes: '~15 min',
       onClick: () => goTo('reference', 'ref-vocab'),
@@ -360,7 +360,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ pack, goTo }) => {
 };
 
 // =============================================================================
-// TAB 2 — REFERENCE  (lookups, no marketing prose)
+// TAB 2 - REFERENCE  (lookups, no marketing prose)
 // =============================================================================
 
 const ReferenceTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
@@ -471,7 +471,7 @@ const RefGrammar: React.FC<{ grammar: GrammarRule[] }> = ({ grammar }) => (
                 {ex.hindi}
               </DevanagariText>
               <span className="block text-xs italic text-slate-500 mt-0.5">
-                {ex.transliteration} — {ex.english}
+                {ex.transliteration} - {ex.english}
               </span>
             </li>
           ))}
@@ -567,7 +567,7 @@ const RefModelTexts: React.FC<{ texts: ModelText[] }> = ({ texts }) => (
 );
 
 // =============================================================================
-// TAB 3 — WRITE  (anchor + essays + prompts; verdict cards moved to Teacher)
+// TAB 3 - WRITE  (anchor + essays + prompts; verdict cards moved to Teacher)
 // =============================================================================
 
 interface WriteTabProps {
@@ -584,7 +584,7 @@ const WriteTab: React.FC<WriteTabProps> = ({ pack, aiEnabled, onEvaluation }) =>
     <section className="space-y-14">
       {/* Reading sample */}
       <div id="anchor-passage" className="scroll-mt-32 space-y-5">
-        <RefHeader id="anchor-header" eyebrow={pack.anchor.title} title="Reading sample — the model to imitate" />
+        <RefHeader id="anchor-header" eyebrow={pack.anchor.title} title="Reading sample - the model to imitate" />
         <div className="bg-gradient-to-br from-orange-50/50 to-amber-50/50 border-2 border-orange-100 rounded-[2.5rem] p-10 md:p-14 relative print:break-inside-avoid">
           <div className="absolute top-6 left-6 text-orange-200 font-black text-7xl opacity-40" aria-hidden>"</div>
           <DevanagariText as="p" size="xl" weight="bold" display className="text-slate-900 leading-[2.1] relative z-10 mb-10">
@@ -606,7 +606,7 @@ const WriteTab: React.FC<WriteTabProps> = ({ pack, aiEnabled, onEvaluation }) =>
               {pack.anchor.highlights.map((h, i) => (
                 <li key={i} className="text-sm flex items-start gap-3">
                   <span className="font-hindi font-black text-orange-700 shrink-0">{h.term}</span>
-                  <span className="text-slate-500">—</span>
+                  <span className="text-slate-500">-</span>
                   <span className="text-slate-700 font-medium">{h.note}</span>
                 </li>
               ))}
@@ -632,7 +632,7 @@ const WriteTab: React.FC<WriteTabProps> = ({ pack, aiEnabled, onEvaluation }) =>
         )}
       </div>
 
-      {/* Model essays — sub-tabbed */}
+      {/* Model essays - sub-tabbed */}
       <div id="model-essays" className="scroll-mt-32 space-y-6">
         <RefHeader
           id="essays-header"
@@ -676,7 +676,7 @@ const WriteTab: React.FC<WriteTabProps> = ({ pack, aiEnabled, onEvaluation }) =>
         {openAiFor !== null && onEvaluation && pack.prompts[openAiFor] && (
           <div className="my-4">
             <AiAssessmentPanel
-              promptContext={`${pack.titleEnglish} — Prompt: ${pack.prompts[openAiFor].english}`}
+              promptContext={`${pack.titleEnglish} - Prompt: ${pack.prompts[openAiFor].english}`}
               onResult={onEvaluation}
             />
           </div>
@@ -756,7 +756,7 @@ const ModelEssayBody: React.FC<{ essay: ModelEssay; idx: number }> = ({ essay, i
 
       <div className="p-8 md:p-10 border-b-4 border-dashed border-slate-100">
         <p className="text-[10px] font-black uppercase tracking-[0.25em] text-rose-600 mb-3">
-          Before — Novice version
+          Before - Novice version
         </p>
         <DevanagariText as="p" size="sm" weight="medium" className="text-slate-500 italic leading-relaxed line-through decoration-rose-200 decoration-2">
           {essay.novice}
@@ -775,7 +775,7 @@ const ModelEssayBody: React.FC<{ essay: ModelEssay; idx: number }> = ({ essay, i
                 {anns.length > 0 && (
                   <aside className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 self-start">
                     <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-                      Paragraph {pi + 1} — what to notice
+                      Paragraph {pi + 1} - what to notice
                     </p>
                     {anns.map((a, ai) => (
                       <div key={ai} className="flex items-start gap-2.5">
@@ -846,7 +846,7 @@ const PromptCard: React.FC<{
 );
 
 // =============================================================================
-// TAB 4 — TEACHER  (rationale, all teacher notes, verdict cards, self-check)
+// TAB 4 - TEACHER  (rationale, all teacher notes, verdict cards, self-check)
 // =============================================================================
 
 const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
@@ -914,7 +914,7 @@ const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
             <RubricAxisTags axes={r.trains} size="sm" />
             <p className="text-xs text-slate-500 italic mt-3 leading-relaxed">
               Mastering these axes at Benchmark {TARGET_BENCHMARK} earns the student
-              Intermediate-Mid — which maps to 3 FCPS credits.
+              Intermediate-Mid - which maps to 3 FCPS credits.
             </p>
           </div>
         </div>

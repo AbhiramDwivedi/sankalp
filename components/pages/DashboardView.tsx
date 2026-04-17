@@ -66,12 +66,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   const readinessLabel =
     readiness < 25
-      ? 'Early — keep building L1 foundations.'
+      ? 'Early - keep building L1 foundations.'
       : readiness < 50
-      ? 'On track — solid Novice High output emerging.'
+      ? 'On track - solid Novice High output emerging.'
       : readiness < 75
-      ? 'Nearing Intermediate-Low — 2 credits realistic.'
-      : 'Approaching Intermediate-Mid — 3 credits within reach.';
+      ? 'Nearing Intermediate-Low - 2 credits realistic.'
+      : 'Approaching Intermediate-Mid - 3 credits within reach.';
 
   return (
     <div className="space-y-10 animate-in fade-in duration-500">

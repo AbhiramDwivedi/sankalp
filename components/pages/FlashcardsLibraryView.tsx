@@ -121,7 +121,7 @@ export const FlashcardsLibraryView: React.FC<FlashcardsLibraryViewProps> = ({
             <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-black text-emerald-900">
-                {hiddenCount} pack-review {hiddenCount === 1 ? 'deck is' : 'decks are'} hidden — already at your level
+                {hiddenCount} pack-review {hiddenCount === 1 ? 'deck is' : 'decks are'} hidden - already at your level
               </p>
               <p className="text-xs text-emerald-700 font-medium italic">
                 Based on {studentLevel || 'your level'}. Drill decks (connectors, muhavare, grammar, exam-prep) always show.

@@ -10,16 +10,16 @@ export const pack: TopicPack = {
   heroMotif: 'temple',
   titleHindi: 'देश, नागरिकता और दिशाएँ',
   titleEnglish: 'Countries, Nationalities & Directions',
-  hook: 'Postpositions (से, तक, की ओर) + country names — two essay-builder blocks in one pack.',
+  hook: 'Postpositions (से, तक, की ओर) + country names - two essay-builder blocks in one pack.',
   heroPrompt: composeHeroPrompt(
     'A stylized world map with the Indian subcontinent centered, a compass rose at the top, flight paths arcing between India and the USA, soft earthy palette with gold inlay borders',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Countries and Nationalities (FCPS Level 2 — Vacation & Travel)',
-      'Asking For and Giving Directions (FCPS Level 2 — Vacation & Travel)',
-      'Cultural comparison between India and the US (FCPS Level 2 — Identity / Modern Society)',
+      'Countries and Nationalities (FCPS Level 2 - Vacation & Travel)',
+      'Asking For and Giving Directions (FCPS Level 2 - Vacation & Travel)',
+      'Cultural comparison between India and the US (FCPS Level 2 - Identity / Modern Society)',
     ],
     trains: ['LanguageControl', 'TextType', 'TopicCoverage'],
     afterThisPackStudentCan: [
@@ -100,7 +100,7 @@ export const pack: TopicPack = {
         { hindi: 'हम घर से स्कूल तक पैदल चलते हैं।', transliteration: 'hum ghar se school tak paidal chalte hain.', english: 'We walk from home to school on foot.' },
         { hindi: 'भारत से अमेरिका तक का सफ़र लंबा है।', transliteration: 'bhaarat se amerika tak kaa safar lamba hai.', english: 'The journey from India to America is long.' },
       ],
-      pitfall: 'Swapping से and तक is a common error — "मैं तक जाता हूँ" is meaningless. The source always takes से.',
+      pitfall: 'Swapping से and तक is a common error - "मैं तक जाता हूँ" is meaningless. The source always takes से.',
       whyItMatters: 'The X से Y तक pattern is the single cleanest way to express motion in Hindi. Using it correctly twice in an essay demonstrates exactly the "preparatory phrases" feature the rubric rewards at Intermediate-Mid.',
     },
     {
@@ -111,7 +111,7 @@ export const pack: TopicPack = {
         { hindi: 'कश्मीर भारत के सबसे उत्तर में है।', transliteration: 'kashmeer bhaarat ke sabse uttar mein hai.', english: 'Kashmir is in the farthest north of India.' },
         { hindi: 'अमेरिका भारत के पश्चिम में है।', transliteration: 'amerika bhaarat ke pashchim mein hai.', english: 'America is to the west of India.' },
       ],
-      pitfall: 'Using the nominative case ("भारत के" not "भारत का") is easy to get wrong — के is required because a postposition (में) follows.',
+      pitfall: 'Using the nominative case ("भारत के" not "भारत का") is easy to get wrong - के is required because a postposition (में) follows.',
       whyItMatters: 'Direction phrases are often the difference between an essay that reads like a list of facts and one that paints a map. Raters credit spatial reasoning.',
     },
     {
@@ -132,7 +132,7 @@ export const pack: TopicPack = {
 
   connectors: pickConnectors(['pahle','phir','iskeBaad','antMein','kyonki','lekin','isliye','jabTab']),
   connectorsNote: {
-    why: 'Direction-giving is naturally sequential — पहले / फिर / इसके बाद / अंत में scaffold the route. The contrast connectors (लेकिन, जबकि) come in when comparing two countries or two routes.',
+    why: 'Direction-giving is naturally sequential - पहले / फिर / इसके बाद / अंत में scaffold the route. The contrast connectors (लेकिन, जबकि) come in when comparing two countries or two routes.',
     trains: ['TextType'],
   },
 
@@ -142,21 +142,21 @@ export const pack: TopicPack = {
     transliteration: 'hamaara ghar Virginia mein hai, aur yahaan se hamaara Hindu mandir paanch kilomeetar door hai. pahle meri maa gaadi baahar nikaalti hain. phir hum mukhya sadak par aate hain aur daayen mudte hain. iske baad hum seedha do meel jaate hain, jab tak ek bada chauraaha nahin aata. chauraahe par hum baayen mudte hain aur pul paar karte hain. ant mein mandir pahaadi ke oopar dikhta hai. bhaarat mein mandir har mohalle mein hota tha, lekin yahaan amerika mein hamein gaadi se jaana padta hai. phir bhi, jab hum vahaan pahunchte hain aur ghanti bajti hai, tab aisa lagta hai ki hum bhaarat mein hi hain. yah doori raaste ki hai, man ki nahin.',
     english: 'Our house is in Virginia, and from here our Hindu temple is five kilometers away. First my mother takes the car out. Then we come to the main road and turn right. After this we go straight for two miles, until a big crossing arrives. At the crossing we turn left and cross a bridge. Finally the temple appears on top of a hill. In India there used to be a temple in every neighborhood, but here in America we have to go by car. Even so, when we arrive there and the bell rings, it feels as if we are in India itself. This distance is of the road, not of the heart.',
     highlights: [
-      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors scaffold the route — textbook Text-Type 5.' },
-      { term: 'दाएँ मुड़ते हैं / बाएँ मुड़ते हैं / सीधा जाते हैं / पार करते हैं', note: 'Four direction verbs — complete route vocabulary in one paragraph.' },
+      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors scaffold the route - textbook Text-Type 5.' },
+      { term: 'दाएँ मुड़ते हैं / बाएँ मुड़ते हैं / सीधा जाते हैं / पार करते हैं', note: 'Four direction verbs - complete route vocabulary in one paragraph.' },
       { term: 'भारत में ... लेकिन ... अमेरिका में', note: 'Cross-country comparison built into the route narrative.' },
-      { term: 'यह दूरी रास्ते की है, मन की नहीं', note: 'Reflective closing — the IM hallmark reflective move.' },
+      { term: 'यह दूरी रास्ते की है, मन की नहीं', note: 'Reflective closing - the IM hallmark reflective move.' },
     ],
     comprehensionQuestions: [
       { q: 'How far is the temple from the narrator\'s house?', a: 'पाँच किलोमीटर / five kilometers.' },
-      { q: 'List the four direction verbs used in the passage.', a: 'मुड़ते हैं (twice — दाएँ and बाएँ), जाते हैं (सीधा), पार करते हैं (cross).' },
+      { q: 'List the four direction verbs used in the passage.', a: 'मुड़ते हैं (twice - दाएँ and बाएँ), जाते हैं (सीधा), पार करते हैं (cross).' },
       { q: 'What is different between temples in India and in America, according to the narrator?', a: 'In India there was a temple in every neighborhood; in America they have to go by car.' },
       { q: 'Find one sequence connector and one contrast connector.', a: 'Sequence: पहले / फिर / इसके बाद / अंत में. Contrast: लेकिन / फिर भी.' },
       { q: 'What does the narrator mean by "यह दूरी रास्ते की है, मन की नहीं"?', a: 'The physical distance exists, but emotionally they still feel connected to India.' },
     ],
   },
   anchorNote: {
-    why: 'This anchor weaves route-giving (practical directions) with cross-country comparison (India vs America diaspora context) in one passage — exactly the shape a Level-2 direction essay should take.',
+    why: 'This anchor weaves route-giving (practical directions) with cross-country comparison (India vs America diaspora context) in one passage - exactly the shape a Level-2 direction essay should take.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -164,23 +164,23 @@ export const pack: TopicPack = {
     {
       kind: 'sign',
       title: 'रास्ते का साइनबोर्ड',
-      hindi: 'आगे दो किलोमीटर — दाहिने मुड़िए — सरकारी अस्पताल। धीरे चलिए।',
-      transliteration: 'aage do kilomeetar — daahine mudiye — sarkaari aspataal. dheere chaliye.',
-      english: 'Two kilometers ahead — turn right — government hospital. Drive slowly.',
+      hindi: 'आगे दो किलोमीटर - दाहिने मुड़िए - सरकारी अस्पताल। धीरे चलिए।',
+      transliteration: 'aage do kilomeetar - daahine mudiye - sarkaari aspataal. dheere chaliye.',
+      english: 'Two kilometers ahead - turn right - government hospital. Drive slowly.',
     },
     {
       kind: 'sms',
       title: 'दोस्त को पता',
-      hindi: 'यार, मेट्रो स्टेशन से निकलकर बाएँ जाना। फिर दो सौ मीटर सीधा। मेरा घर पीले रंग का है — पार्क के सामने।',
-      transliteration: 'yaar, metro station se niklakar baayen jaana. phir do sau meter seedha. mera ghar peele rang ka hai — park ke saamne.',
-      english: 'Dude, after leaving the metro station go left. Then 200 meters straight. My house is yellow — in front of the park.',
+      hindi: 'यार, मेट्रो स्टेशन से निकलकर बाएँ जाना। फिर दो सौ मीटर सीधा। मेरा घर पीले रंग का है - पार्क के सामने।',
+      transliteration: 'yaar, metro station se niklakar baayen jaana. phir do sau meter seedha. mera ghar peele rang ka hai - park ke saamne.',
+      english: 'Dude, after leaving the metro station go left. Then 200 meters straight. My house is yellow - in front of the park.',
     },
     {
       kind: 'letter',
       title: 'चाचा को पत्र',
-      hindi: 'प्रिय चाचा जी, नमस्ते। आप भारत से अमेरिका कब आ रहे हैं? हमारा नया घर पुराने घर से पाँच मील दक्षिण में है। आप हवाई अड्डे से टैक्सी लीजिएगा — ड्राइवर को "मेपल स्ट्रीट" का पता दे दीजिएगा।',
-      transliteration: 'priya chaacha ji, namaste. aap bhaarat se amerika kab aa rahe hain? hamaara naya ghar puraane ghar se paanch meel dakshin mein hai. aap havai adde se taxi leejiyega — driver ko "Maple Street" ka pataa de deejiyega.',
-      english: 'Dear Uncle, namaste. When are you coming from India to America? Our new house is five miles south of the old house. Please take a taxi from the airport — give the driver the "Maple Street" address.',
+      hindi: 'प्रिय चाचा जी, नमस्ते। आप भारत से अमेरिका कब आ रहे हैं? हमारा नया घर पुराने घर से पाँच मील दक्षिण में है। आप हवाई अड्डे से टैक्सी लीजिएगा - ड्राइवर को "मेपल स्ट्रीट" का पता दे दीजिएगा।',
+      transliteration: 'priya chaacha ji, namaste. aap bhaarat se amerika kab aa rahe hain? hamaara naya ghar puraane ghar se paanch meel dakshin mein hai. aap havai adde se taxi leejiyega - driver ko "Maple Street" ka pataa de deejiyega.',
+      english: 'Dear Uncle, namaste. When are you coming from India to America? Our new house is five miles south of the old house. Please take a taxi from the airport - give the driver the "Maple Street" address.',
     },
     {
       kind: 'announcement',
@@ -198,8 +198,8 @@ export const pack: TopicPack = {
   cultural: [
     { title: 'India\'s compass: geographic shorthand', body: 'Indians often describe regions by direction: उत्तर भारत (wheat, roti, harsh winters), दक्षिण भारत (rice, dosa, coastal). Using these terms reads as cultural literacy.', emoji: '🧭' },
     { title: 'Temples as landmarks', body: 'Even outside India, the Hindu temple is often a family\'s weekend anchor. Giving directions "to the temple" reads instantly for an Indian diaspora essay.', emoji: '🛕' },
-    { title: 'Streets don\'t have names (in India)', body: 'In many Indian cities, directions are given by landmarks, not street names — "बैंक के सामने, लाल बिल्डिंग, पहले माले पर". This shapes how Hindi direction-giving works.', emoji: '🏢' },
-    { title: 'Weekend Hindi class', body: 'Many US-born Indian kids attend Saturday Hindi classes at temples or community centers — a small diaspora detail that anchors an essay in lived experience.', emoji: '📚' },
+    { title: 'Streets don\'t have names (in India)', body: 'In many Indian cities, directions are given by landmarks, not street names - "बैंक के सामने, लाल बिल्डिंग, पहले माले पर". This shapes how Hindi direction-giving works.', emoji: '🏢' },
+    { title: 'Weekend Hindi class', body: 'Many US-born Indian kids attend Saturday Hindi classes at temples or community centers - a small diaspora detail that anchors an essay in lived experience.', emoji: '📚' },
   ],
   culturalNote: {
     why: 'Direction essays from a diaspora student feel authentic when they combine Indian cultural landmarks (temples, compass-region references) with the American geography the student actually navigates.',
@@ -223,13 +223,13 @@ export const pack: TopicPack = {
       intermediateMid:
         'मेरा घर वर्जीनिया के एक छोटे शहर में है, और मेरा स्कूल घर से लगभग तीन मील दूर है। पहले मैं घर से निकलकर मुख्य सड़क पर आता हूँ, फिर दाएँ मुड़कर सीधा जाता हूँ। दो चौराहों के बाद मुझे एक पुल पार करना पड़ता है। अंत में स्कूल बाएँ हाथ पर पीले रंग की इमारत के रूप में दिखता है।\n\nपिछले साल हम भारत गए थे और मैंने देखा कि वहाँ के रास्ते बहुत अलग हैं। दादाजी का गाँव छोटा था, इसलिए वहाँ हर चीज़ पैदल की दूरी पर थी। मंदिर घर के ठीक सामने था, स्कूल बाज़ार के पीछे। कोई भी रास्ता पाँच मिनट से ज़्यादा नहीं लगता था।\n\nमुझे लगता है कि दोनों जगहों की अपनी सुंदरता है। अमेरिका में गाड़ी से जाना पड़ता है, जबकि भारत में पैदल चलकर हर किसी से मुलाक़ात हो जाती है। अगले साल जब मैं फिर भारत जाऊँगा, तो मैं अपनी बहन को वह गलियाँ ज़रूर दिखाऊँगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले / फिर / अंत में', note: 'Three sequence connectors scaffold the route — Text-Type 5 signal.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'दाएँ मुड़कर / सीधा / बाएँ हाथ पर', note: 'Four direction terms in four sentences — Topic Coverage density.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'गए थे / देखा / था / लगता था', note: 'Paragraph shifts to past-perfective + past-habitual — rubric-rewarded shift.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले / फिर / अंत में', note: 'Three sequence connectors scaffold the route - Text-Type 5 signal.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'दाएँ मुड़कर / सीधा / बाएँ हाथ पर', note: 'Four direction terms in four sentences - Topic Coverage density.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'गए थे / देखा / था / लगता था', note: 'Paragraph shifts to past-perfective + past-habitual - rubric-rewarded shift.' },
         { paragraphIndex: 1, kind: 'cultural', highlight: 'दादाजी का गाँव / मंदिर / बाज़ार', note: 'India-specific landmarks, not "a place" or "a store".' },
-        { paragraphIndex: 2, kind: 'connector', highlight: 'जबकि', note: 'Discourse-level contrast — an IM register marker.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'जाऊँगा / दिखाऊँगा', note: 'Future closer — third time frame sealed.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'दोनों जगहों की अपनी सुंदरता है', note: 'Reflective synthesis — not description but a personal thesis.' },
+        { paragraphIndex: 2, kind: 'connector', highlight: 'जबकि', note: 'Discourse-level contrast - an IM register marker.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'जाऊँगा / दिखाऊँगा', note: 'Future closer - third time frame sealed.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'दोनों जगहों की अपनी सुंदरता है', note: 'Reflective synthesis - not description but a personal thesis.' },
       ],
       wordCount: 148,
       tenseUsed: ['past', 'present', 'future'],
@@ -238,8 +238,8 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Six distinct connectors including "जबकि" — discourse-level contrast marker raters specifically credit.',
-          'Four direction terms + three sequence connectors in paragraph 1 — textbook route narrative.',
+          'Six distinct connectors including "जबकि" - discourse-level contrast marker raters specifically credit.',
+          'Four direction terms + three sequence connectors in paragraph 1 - textbook route narrative.',
           'Three time frames cleanly separated by paragraph: present route → past visit → future plan.',
           'Diaspora-specific comparison (Virginia vs village) grounds the essay in lived experience.',
           'Reflective synthesis closing ("दोनों की अपनी सुंदरता है") elevates from description to argument.',
@@ -255,14 +255,14 @@ export const pack: TopicPack = {
       prompt: 'भारत और अमेरिका (या अपने वर्तमान देश) की तुलना तीन अनुच्छेदों में कीजिए। भौगोलिक स्थिति, भाषा, और संस्कृति पर लिखिए।',
       novice: 'भारत अच्छा है। अमेरिका भी अच्छा है।',
       intermediateMid:
-        'भारत और अमेरिका — दो अलग महाद्वीप, दो अलग दुनिया। भौगोलिक रूप से, भारत एशिया के दक्षिण में है, जबकि अमेरिका पश्चिम में है। दोनों देशों के बीच समय का अंतर लगभग दस घंटे का है। मेरे दादा-दादी भारत में रहते हैं, और हम अमेरिका में।\n\nभाषा की बात करें, तो भारत में बाईस से ज़्यादा आधिकारिक भाषाएँ हैं, जबकि अमेरिका में ज़्यादातर अंग्रेज़ी चलती है। मेरे घर में हम हिंदी बोलते हैं, लेकिन स्कूल में अंग्रेज़ी। इसलिए मैं एक ऐसी दुनिया में बड़ा हो रहा हूँ जहाँ दो भाषाएँ साथ-साथ रहती हैं।\n\nमुझे लगता है कि दोनों देशों की अपनी ताक़त है। भारत मुझे परंपरा और रिश्ते सिखाता है, जबकि अमेरिका अवसर और खुलापन देता है। अगले साल अगर मौक़ा मिला, तो मैं दोनों जगह के बीच कुछ ऐसा करना चाहूँगा जिसमें दोनों के अच्छे पहलू एक साथ हों।',
+        'भारत और अमेरिका - दो अलग महाद्वीप, दो अलग दुनिया। भौगोलिक रूप से, भारत एशिया के दक्षिण में है, जबकि अमेरिका पश्चिम में है। दोनों देशों के बीच समय का अंतर लगभग दस घंटे का है। मेरे दादा-दादी भारत में रहते हैं, और हम अमेरिका में।\n\nभाषा की बात करें, तो भारत में बाईस से ज़्यादा आधिकारिक भाषाएँ हैं, जबकि अमेरिका में ज़्यादातर अंग्रेज़ी चलती है। मेरे घर में हम हिंदी बोलते हैं, लेकिन स्कूल में अंग्रेज़ी। इसलिए मैं एक ऐसी दुनिया में बड़ा हो रहा हूँ जहाँ दो भाषाएँ साथ-साथ रहती हैं।\n\nमुझे लगता है कि दोनों देशों की अपनी ताक़त है। भारत मुझे परंपरा और रिश्ते सिखाता है, जबकि अमेरिका अवसर और खुलापन देता है। अगले साल अगर मौक़ा मिला, तो मैं दोनों जगह के बीच कुछ ऐसा करना चाहूँगा जिसमें दोनों के अच्छे पहलू एक साथ हों।',
       annotations: [
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'महाद्वीप / दक्षिण / पश्चिम', note: 'Geographic vocabulary used precisely — Topic Coverage signal.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'जबकि', note: 'Contrast connector twice — discourse density.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'भाषा की बात करें, तो', note: 'Topic-shift opener — a sophisticated discourse marker.' },
-        { paragraphIndex: 1, kind: 'cultural', highlight: 'बाईस ... आधिकारिक भाषाएँ', note: 'Accurate India fact — raters reward specificity over "many languages".' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'दोनों देशों की अपनी ताक़त है', note: 'Balanced synthesis — the hallmark reflective IM move.' },
-        { paragraphIndex: 2, kind: 'connector', highlight: 'अगर ... तो', note: 'Conditional future — third time frame.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'महाद्वीप / दक्षिण / पश्चिम', note: 'Geographic vocabulary used precisely - Topic Coverage signal.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'जबकि', note: 'Contrast connector twice - discourse density.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'भाषा की बात करें, तो', note: 'Topic-shift opener - a sophisticated discourse marker.' },
+        { paragraphIndex: 1, kind: 'cultural', highlight: 'बाईस ... आधिकारिक भाषाएँ', note: 'Accurate India fact - raters reward specificity over "many languages".' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'दोनों देशों की अपनी ताक़त है', note: 'Balanced synthesis - the hallmark reflective IM move.' },
+        { paragraphIndex: 2, kind: 'connector', highlight: 'अगर ... तो', note: 'Conditional future - third time frame.' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'सिखाता है / देता है / चाहूँगा', note: 'Present-habitual beside future-desiderative.' },
       ],
       wordCount: 147,
@@ -273,8 +273,8 @@ export const pack: TopicPack = {
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
           'Three-part comparison structure (geography / language / culture) mirrors a classic IM thesis shape.',
-          '"जबकि" used three times at discourse level — a Benchmark-5 marker raters look for.',
-          'Specific factual content ("बाईस से ज़्यादा भाषाएँ") — raters reward accuracy over generality.',
+          '"जबकि" used three times at discourse level - a Benchmark-5 marker raters look for.',
+          'Specific factual content ("बाईस से ज़्यादा भाषाएँ") - raters reward accuracy over generality.',
           'Balanced synthesis closing names both countries\' strengths rather than picking a winner.',
           'Conditional future closer adds the third time frame.',
         ],

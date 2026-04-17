@@ -16,14 +16,14 @@ export const pack: TopicPack = {
   heroMotif: 'cricket',
   titleHindi: 'स्कूल की गतिविधियाँ',
   titleEnglish: 'School-Related Activities',
-  hook: 'Clubs, field trips, sports — ideal for narrative past-tense essays, a rubric requirement at IM.',
+  hook: 'Clubs, field trips, sports - ideal for narrative past-tense essays, a rubric requirement at IM.',
   heroPrompt: composeHeroPrompt(
-    'A school bulletin board collage — a small cricket trophy on a wooden desk, a blue science-fair ribbon, a tabla and a harmonium, a drama mask, a painted palette, a pinned photo of students holding a banner — all pinned with colourful washi tape',
+    'A school bulletin board collage - a small cricket trophy on a wooden desk, a blue science-fair ribbon, a tabla and a harmonium, a drama mask, a painted palette, a pinned photo of students holding a banner - all pinned with colourful washi tape',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'School-Related Activities (FCPS Level 2 — Student Life)',
+      'School-Related Activities (FCPS Level 2 - Student Life)',
       'Clubs, sports teams, and after-school programs (FCPS Level 2)',
       'Field trips and school events (FCPS Level 2)',
     ],
@@ -114,9 +114,9 @@ export const pack: TopicPack = {
 
   grammar: [
     {
-      title: 'Past perfective with ने — event narration',
+      title: 'Past perfective with ने - event narration',
       rule:
-        'To narrate a specific past event (the heart of a school-activity essay), use the ने construction with the perfective verb. The subject takes ने, and the verb agrees with the direct OBJECT in gender and number — not the subject.',
+        'To narrate a specific past event (the heart of a school-activity essay), use the ने construction with the perfective verb. The subject takes ने, and the verb agrees with the direct OBJECT in gender and number - not the subject.',
       examples: [
         { hindi: 'हमने मैच जीता।', transliteration: 'humne match jeeta.', english: 'We won the match. (match = masc. sg.)' },
         { hindi: 'टीम ने दूसरी टीम को हराया।', transliteration: 'team ne doosri team ko haraaya.', english: 'The team beat the other team. (ko blocks agreement → default masc.)' },
@@ -138,23 +138,23 @@ export const pack: TopicPack = {
         { hindi: 'हमारी टीम रोज़ अभ्यास करती थी, इसलिए हमने फ़ाइनल जीता।', transliteration: 'hamaari team roz abhyaas karti thi, isliye humne final jeeta.', english: 'Our team used to practise every day, so we won the final.' },
       ],
       pitfall:
-        'Students often flatten both into present ("हम हर साल मनाते हैं") — that costs the past-tense frame the rubric specifically checks for. The tell-tale markers हर साल / रोज़ / अक्सर want मनाते थे / करते थे, not मनाते हैं / करते हैं.',
+        'Students often flatten both into present ("हम हर साल मनाते हैं") - that costs the past-tense frame the rubric specifically checks for. The tell-tale markers हर साल / रोज़ / अक्सर want मनाते थे / करते थे, not मनाते हैं / करते हैं.',
       whyItMatters:
         'The STAMP rubric at Benchmark 5 wants "some control of past, present, and future". Using both habitual-past AND event-past shows the rater that past is not a single word but a tense system the student controls.',
     },
     {
-      title: 'Participation frames — भाग लेना / हिस्सा लेना / शामिल होना',
+      title: 'Participation frames - भाग लेना / हिस्सा लेना / शामिल होना',
       rule:
         'Three idiomatic ways to say "took part". All take the event as a noun + में. भाग / हिस्सा are masculine, so with ने the verb reads भाग लिया / हिस्सा लिया (not ली).',
       examples: [
         { hindi: 'मैंने नाटक में भाग लिया।', transliteration: 'maine naatak mein bhaag liya.', english: 'I took part in the play.' },
         { hindi: 'कई छात्रों ने विज्ञान मेले में हिस्सा लिया।', transliteration: 'kai chhaatron ne vigyaan mele mein hissa liya.', english: 'Many students took part in the science fair.' },
-        { hindi: 'मेरी बहन सांस्कृतिक कार्यक्रम में शामिल हुई।', transliteration: 'meri bahan saanskritik kaaryakram mein shaamil hui.', english: 'My sister joined / was part of the cultural program. (शामिल होना is intransitive — no ने!)' },
+        { hindi: 'मेरी बहन सांस्कृतिक कार्यक्रम में शामिल हुई।', transliteration: 'meri bahan saanskritik kaaryakram mein shaamil hui.', english: 'My sister joined / was part of the cultural program. (शामिल होना is intransitive - no ने!)' },
       ],
       pitfall:
-        'शामिल होना is INTRANSITIVE (like जाना, आना) — no ने. Writing "मैंने शामिल हुआ" is wrong; write "मैं शामिल हुआ/हुई". Meanwhile भाग / हिस्सा लेना IS transitive — use ने.',
+        'शामिल होना is INTRANSITIVE (like जाना, आना) - no ने. Writing "मैंने शामिल हुआ" is wrong; write "मैं शामिल हुआ/हुई". Meanwhile भाग / हिस्सा लेना IS transitive - use ने.',
       whyItMatters:
-        'These three phrases will appear in almost every school-activity essay. Getting ने right on two of them and NOT using ने on the third demonstrates real control — exactly the "Average" Language Control rubric descriptor.',
+        'These three phrases will appear in almost every school-activity essay. Getting ने right on two of them and NOT using ने on the third demonstrates real control - exactly the "Average" Language Control rubric descriptor.',
     },
   ],
   grammarNote: {
@@ -175,7 +175,7 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'For event narration, पहले / फिर / इसके बाद / अंत में scaffold the timeline. जब ... तब anchors a specific moment inside the event. क्योंकि / इसलिए / लेकिन supply the why, the consequence, and the twist — the three moves that turn a list of sentences into a narrative.',
+      'For event narration, पहले / फिर / इसके बाद / अंत में scaffold the timeline. जब ... तब anchors a specific moment inside the event. क्योंकि / इसलिए / लेकिन supply the why, the consequence, and the twist - the three moves that turn a list of sentences into a narrative.',
     trains: ['TextType'],
   },
 
@@ -188,20 +188,20 @@ export const pack: TopicPack = {
     english:
       'Last year sports day was celebrated with great fanfare at our school. First the principal hoisted the flag, then all the teams came onto the field. I was the captain of my class cricket team, and we used to practise for an hour every evening. So we were very well prepared. When the match started, the opposing team batted first. They scored well, but our bowling was strong. After this, our innings came. I scored thirty runs and we won the match on the final ball. In the end the principal gave us a shining trophy and certificates. The whole auditorium echoed with applause. That day was the most memorable day for me.',
     highlights: [
-      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors scaffold the whole event from flag to trophy — classic Text-Type 5.' },
-      { term: 'करते थे vs. बनाए / जीता', note: 'Past-habitual (अभ्यास करते थे) sits inside a past-perfective narrative — exactly the tense mixture raters check for.' },
+      { term: 'पहले / फिर / इसके बाद / अंत में', note: 'Four sequence connectors scaffold the whole event from flag to trophy - classic Text-Type 5.' },
+      { term: 'करते थे vs. बनाए / जीता', note: 'Past-habitual (अभ्यास करते थे) sits inside a past-perfective narrative - exactly the tense mixture raters check for.' },
       { term: 'मैंने ... बनाए / हमने ... जीता', note: 'Two ने constructions with correct object agreement. Clean Language Control signal.' },
-      { term: 'प्रधानाचार्य, ट्रॉफ़ी, प्रमाणपत्र, तालियाँ', note: 'Four topic-specific event nouns in one sentence — Topic Coverage boost without padding.' },
+      { term: 'प्रधानाचार्य, ट्रॉफ़ी, प्रमाणपत्र, तालियाँ', note: 'Four topic-specific event nouns in one sentence - Topic Coverage boost without padding.' },
       { term: 'झंडा फहराया', note: 'Culturally specific: Indian school events begin with flag-hoisting. Authenticity lifts Topic Coverage.' },
     ],
     comprehensionQuestions: [
       { q: 'When did this sports day happen?', a: 'पिछले साल (last year).' },
-      { q: 'What did the principal do first?', a: 'उन्होंने झंडा फहराया — he hoisted the flag.' },
-      { q: 'What role did the narrator play on the cricket team?', a: 'कप्तान — captain.' },
-      { q: 'How much did the team practise?', a: 'हर शाम एक घंटा — one hour every evening (past-habitual).' },
-      { q: 'Which team batted first?', a: 'सामने की टीम — the opposing team.' },
+      { q: 'What did the principal do first?', a: 'उन्होंने झंडा फहराया - he hoisted the flag.' },
+      { q: 'What role did the narrator play on the cricket team?', a: 'कप्तान - captain.' },
+      { q: 'How much did the team practise?', a: 'हर शाम एक घंटा - one hour every evening (past-habitual).' },
+      { q: 'Which team batted first?', a: 'सामने की टीम - the opposing team.' },
       { q: 'How many runs did the narrator score?', a: 'तीस रन.' },
-      { q: 'What did the team receive at the end?', a: 'ट्रॉफ़ी और प्रमाणपत्र — trophy and certificates.' },
+      { q: 'What did the team receive at the end?', a: 'ट्रॉफ़ी और प्रमाणपत्र - trophy and certificates.' },
       { q: 'Find one past-habitual verb and one past-perfective verb.', a: 'Habitual: अभ्यास करते थे. Perfective: हमने जीता / मैंने बनाए.' },
     ],
   },
@@ -216,11 +216,11 @@ export const pack: TopicPack = {
       kind: 'announcement',
       title: 'सूचना पट्ट · Noticeboard',
       hindi:
-        'सूचना: कल प्रातः 8:00 बजे विज्ञान मेला सभागार में होगा। सभी क्लब अपने मॉडल सुबह 7:30 तक लगा दें। पुरस्कार वितरण 12:00 बजे होगा। प्रधानाचार्य जी मुख्य अतिथि होंगे। — विज्ञान क्लब प्रभारी',
+        'सूचना: कल प्रातः 8:00 बजे विज्ञान मेला सभागार में होगा। सभी क्लब अपने मॉडल सुबह 7:30 तक लगा दें। पुरस्कार वितरण 12:00 बजे होगा। प्रधानाचार्य जी मुख्य अतिथि होंगे। - विज्ञान क्लब प्रभारी',
       transliteration:
-        'soochna: kal praatah 8:00 baje vigyaan mela sabhaagaar mein hoga. sabhi club apne model subah 7:30 tak laga dein. puraskaar vitaran 12:00 baje hoga. pradhaanaachaarya ji mukhya atithi honge. — vigyaan club prabhaari',
+        'soochna: kal praatah 8:00 baje vigyaan mela sabhaagaar mein hoga. sabhi club apne model subah 7:30 tak laga dein. puraskaar vitaran 12:00 baje hoga. pradhaanaachaarya ji mukhya atithi honge. - vigyaan club prabhaari',
       english:
-        'Notice: Tomorrow at 8:00 a.m. the Science Fair will be held in the auditorium. All clubs must set up their models by 7:30 a.m. Prize distribution will be at 12:00. The Principal will be the chief guest. — Science Club In-Charge',
+        'Notice: Tomorrow at 8:00 a.m. the Science Fair will be held in the auditorium. All clubs must set up their models by 7:30 a.m. Prize distribution will be at 12:00. The Principal will be the chief guest. - Science Club In-Charge',
     },
     {
       kind: 'diary',
@@ -255,7 +255,7 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'A noticeboard (formal school register), a diary entry (personal past narrative), a poster (schedule-style), and an SMS (casual) — four registers the student may be asked to imitate. Each shows specific school-activity vocabulary behaving differently across formality levels.',
+      'A noticeboard (formal school register), a diary entry (personal past narrative), a poster (schedule-style), and an SMS (casual) - four registers the student may be asked to imitate. Each shows specific school-activity vocabulary behaving differently across formality levels.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -263,7 +263,7 @@ export const pack: TopicPack = {
     {
       title: 'Annual Day (वार्षिक समारोह)',
       body:
-        'Every Indian school holds one big annual function — dances, a play, speeches, a chief guest, and prize distribution, usually stretching from 5 p.m. to nearly 10 p.m. Referencing it ("हमारा वार्षिक समारोह दिसंबर में होता है") signals authentic school experience.',
+        'Every Indian school holds one big annual function - dances, a play, speeches, a chief guest, and prize distribution, usually stretching from 5 p.m. to nearly 10 p.m. Referencing it ("हमारा वार्षिक समारोह दिसंबर में होता है") signals authentic school experience.',
       emoji: '🎉',
     },
     {
@@ -275,7 +275,7 @@ export const pack: TopicPack = {
     {
       title: 'Science Fair (विज्ञान प्रदर्शनी)',
       body:
-        'A half-day event where students set up working models — solar cookers, DC motors, volcanoes. Judges (usually teachers or an outside विशेषज्ञ) walk table to table. The best model wins a प्रमाणपत्र and sometimes goes to a district-level fair.',
+        'A half-day event where students set up working models - solar cookers, DC motors, volcanoes. Judges (usually teachers or an outside विशेषज्ञ) walk table to table. The best model wins a प्रमाणपत्र and sometimes goes to a district-level fair.',
       emoji: '🔬',
     },
     {
@@ -293,7 +293,7 @@ export const pack: TopicPack = {
   ],
   culturalNote: {
     why:
-      'A school-activity essay without one India-specific hook ("tricolour", "चार घर", "सांस्कृतिक कार्यक्रम") reads like a template. One concrete cultural marker — even a single phrase — shifts Topic Coverage from generic to authentic without costing grammar risk.',
+      'A school-activity essay without one India-specific hook ("tricolour", "चार घर", "सांस्कृतिक कार्यक्रम") reads like a template. One concrete cultural marker - even a single phrase - shifts Topic Coverage from generic to authentic without costing grammar risk.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -315,7 +315,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'चार चाँद लगाना fits event-performance essays (annual day, cultural program) like a glove. मन लगाकर suits preparation or practice descriptions. Use ONE per essay — a single well-placed idiom reads as register mastery, two reads as showing off.',
+      'चार चाँद लगाना fits event-performance essays (annual day, cultural program) like a glove. मन लगाकर suits preparation or practice descriptions. Use ONE per essay - a single well-placed idiom reads as register mastery, two reads as showing off.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -329,13 +329,13 @@ export const pack: TopicPack = {
         'पिछले साल हमारे स्कूल में खेल दिवस बड़े उत्साह से मनाया गया। मैं अपनी कक्षा की क्रिकेट टीम का कप्तान था। हम रोज़ शाम को एक घंटा अभ्यास करते थे, क्योंकि हम ट्रॉफ़ी जीतना चाहते थे। इसलिए पूरी टीम ने मन लगाकर तैयारी की।\n\nजब मैच शुरू हुआ, तब सामने की टीम ने पहले बल्लेबाज़ी की। उन्होंने अच्छे रन बनाए, लेकिन हमारी गेंदबाज़ी मज़बूत थी। इसके बाद हमारी पारी आई। मैंने तीस रन बनाए और हमने आख़िरी गेंद पर मैच जीता। अंत में प्रधानाचार्य ने हमें चमकती हुई ट्रॉफ़ी और प्रमाणपत्र दिए।\n\nवह दिन मेरे लिए सबसे यादगार था। आज भी जब मैं वह ट्रॉफ़ी देखता हूँ, मुझे बहुत गर्व होता है। अगले साल मैं विज्ञान मेले में भी भाग लूँगा।',
       annotations: [
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले साल ... मनाया गया', note: 'Past perfective (passive) opens the essay with a clean time anchor.' },
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'हम रोज़ ... अभ्यास करते थे', note: 'Past-habitual for the build-up — exactly the rubric-rewarded tense mixture.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि / इसलिए', note: 'Reason + consequence in adjacent sentences — Text-Type lift.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'हम रोज़ ... अभ्यास करते थे', note: 'Past-habitual for the build-up - exactly the rubric-rewarded tense mixture.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि / इसलिए', note: 'Reason + consequence in adjacent sentences - Text-Type lift.' },
         { paragraphIndex: 0, kind: 'idiom', highlight: 'मन लगाकर', note: 'One school-appropriate muhavara placed naturally, not appended.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'जब ... तब / इसके बाद / लेकिन', note: 'Three connectors scaffold the match narrative — sentences cannot be rearranged.' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'बल्लेबाज़ी / गेंदबाज़ी / रन / पारी', note: 'Topic-specific cricket nouns — Topic Coverage far above "we played a match".' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'मैंने ... बनाए / हमने ... जीता', note: 'Two ने constructions with correct object agreement in one paragraph — Language Control signal.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'देखता हूँ / अगले साल ... भाग लूँगा', note: 'Present-reflection + future commitment — third time frame secured.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'जब ... तब / इसके बाद / लेकिन', note: 'Three connectors scaffold the match narrative - sentences cannot be rearranged.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'बल्लेबाज़ी / गेंदबाज़ी / रन / पारी', note: 'Topic-specific cricket nouns - Topic Coverage far above "we played a match".' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'मैंने ... बनाए / हमने ... जीता', note: 'Two ने constructions with correct object agreement in one paragraph - Language Control signal.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'देखता हूँ / अगले साल ... भाग लूँगा', note: 'Present-reflection + future commitment - third time frame secured.' },
       ],
       wordCount: 126,
       tenseUsed: ['past', 'present', 'future'],
@@ -345,13 +345,13 @@ export const pack: TopicPack = {
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
           'Three time frames controlled within 126 words: past-habitual (अभ्यास करते थे), past-perfective (हमने जीता), present (देखता हूँ), future (भाग लूँगा). IM rubric for "control of major time frames" is met.',
-          'Six distinct connectors used correctly — well above the 3-connector threshold for Text-Type 5.',
-          'Two ने constructions (मैंने ... बनाए, हमने ... जीता) show perfective-with-object-agreement control — the single biggest Language Control differentiator at this level.',
+          'Six distinct connectors used correctly - well above the 3-connector threshold for Text-Type 5.',
+          'Two ने constructions (मैंने ... बनाए, हमने ... जीता) show perfective-with-object-agreement control - the single biggest Language Control differentiator at this level.',
           'Topic-specific cricket vocabulary (बल्लेबाज़ी, गेंदबाज़ी, पारी, रन, ट्रॉफ़ी, प्रमाणपत्र) makes the response unmistakably on-topic.',
           'Reflective closing (आज भी ... गर्व होता है) signals Intermediate-Mid abstraction beyond mere event reporting.',
         ],
         gotchas: [
-          'Writing "हम जीते" instead of "हमने जीता" drops Language Control immediately — always use ने for past transitive verbs.',
+          'Writing "हम जीते" instead of "हमने जीता" drops Language Control immediately - always use ने for past transitive verbs.',
           'If the student wrote everything in present ("हम खेलते हैं, जीतते हैं"), the essay would cap at Benchmark 4 despite identical vocabulary.',
         ],
       },
@@ -364,13 +364,13 @@ export const pack: TopicPack = {
       intermediateMid:
         'पिछले नवंबर में हमारी कक्षा की एक शैक्षिक यात्रा आगरा गई थी। हम सुबह छह बजे स्कूल से निकले और दोपहर तक ताज महल पहुँचे। पहले गाइड ने हमें इतिहास बताया, फिर हमने पूरा महल देखा। गाइड की बातें सुनकर मेरा मन खुश हो गया, क्योंकि मुझे इतिहास बहुत पसंद है।\n\nइसके बाद टीचर हमें पास के एक बगीचे में ले गए। वहाँ हमने पिकनिक की और साथ में समोसे और लस्सी खाए-पिए। कुछ बच्चों ने गाने गाए, कुछ ने तस्वीरें लीं। मैंने और मेरी सहेली ने एक छोटा वीडियो बनाया। लेकिन शाम को बस में सब बहुत थक गए थे।\n\nवापस घर लौटने पर मैंने माँ को पूरी यात्रा सुनाई। आज भी वह दिन मुझे याद है। अगले साल हमारी यात्रा जयपुर जाएगी, और मैं फिर से भाग लूँगी।',
       annotations: [
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले नवंबर में ... गई थी', note: 'Past perfect opens the narrative — a sophisticated past anchor.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले नवंबर में ... गई थी', note: 'Past perfect opens the narrative - a sophisticated past anchor.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... क्योंकि', note: 'Sequence + reason packed in one paragraph.' },
         { paragraphIndex: 0, kind: 'vocab', highlight: 'शैक्षिक यात्रा / गाइड / इतिहास', note: 'Trip-specific vocabulary, not generic "we went somewhere".' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'हमने ... खाए-पिए / गाने गाए / तस्वीरें लीं', note: 'Four past-perfective verbs with correct object agreement (खाए-पिए masc pl, गाए masc pl, तस्वीरें लीं fem pl) — Language Control showcase.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'लेकिन', note: 'Contrast breaks monotony — keeps Text-Type from flattening.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'याद है / जाएगी / भाग लूँगी', note: 'Present + future in the closing — three time frames sealed.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'आज भी वह दिन मुझे याद है', note: 'Reflective generalization — Intermediate-Mid move.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'हमने ... खाए-पिए / गाने गाए / तस्वीरें लीं', note: 'Four past-perfective verbs with correct object agreement (खाए-पिए masc pl, गाए masc pl, तस्वीरें लीं fem pl) - Language Control showcase.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'लेकिन', note: 'Contrast breaks monotony - keeps Text-Type from flattening.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'याद है / जाएगी / भाग लूँगी', note: 'Present + future in the closing - three time frames sealed.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'आज भी वह दिन मुझे याद है', note: 'Reflective generalization - Intermediate-Mid move.' },
       ],
       wordCount: 138,
       tenseUsed: ['past', 'present', 'future'],
@@ -379,14 +379,14 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Four past-perfective verbs in paragraph 2 with correct object-gender agreement (खाए, पिए, गाए, लीं) — the exact feature raters scan for at IM.',
+          'Four past-perfective verbs in paragraph 2 with correct object-gender agreement (खाए, पिए, गाए, लीं) - the exact feature raters scan for at IM.',
           'Three time frames (past, present-reflection, future) are each anchored by explicit time markers: पिछले नवंबर, आज भी, अगले साल.',
           'Topic-specific trip vocabulary (शैक्षिक यात्रा, ताज महल, गाइड, पिकनिक, समोसे, लस्सी) keeps Topic Coverage dense throughout.',
           'The reflective-close pattern (याद है → future plan) is exactly the structural move Benchmark 5 essays use to avoid ending mid-event.',
-          'Consistent feminine narrator voice (भाग लूँगी, मेरी सहेली) — inner Language Control consistency.',
+          'Consistent feminine narrator voice (भाग लूँगी, मेरी सहेली) - inner Language Control consistency.',
         ],
         gotchas: [
-          'Mixing "मैं गया" and "मैंने किया" for a female narrator drops Language Control fast — keep gender consistent across all verbs.',
+          'Mixing "मैं गया" and "मैंने किया" for a female narrator drops Language Control fast - keep gender consistent across all verbs.',
           'Dropping the future sentence (अगले साल ... जाएगी) would cut the essay to two time frames and likely drop to Benchmark 4.',
         ],
       },
@@ -394,7 +394,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Two event-narrative model essays — one sports, one trip — that both hit the rubric\'s must-haves: past-perfective with correct object agreement, past-habitual for build-up, a present-reflection turn, and a future-tense close. Study the verdict cards; raters think in those boxes.',
+      'Two event-narrative model essays - one sports, one trip - that both hit the rubric\'s must-haves: past-perfective with correct object agreement, past-habitual for build-up, a present-reflection turn, and a future-tense close. Study the verdict cards; raters think in those boxes.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -423,9 +423,9 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'अपनी स्कूल की एक यादगार शैक्षिक यात्रा या पिकनिक के बारे में तीन अनुच्छेदों में लिखिए — कहाँ गए, वहाँ क्या किया, और अगले साल कहाँ जाना चाहेंगे।',
+        'अपनी स्कूल की एक यादगार शैक्षिक यात्रा या पिकनिक के बारे में तीन अनुच्छेदों में लिखिए - कहाँ गए, वहाँ क्या किया, और अगले साल कहाँ जाना चाहेंगे।',
       english:
-        'Write three paragraphs about a memorable educational trip or picnic — where you went, what you did there, and where you would like to go next year.',
+        'Write three paragraphs about a memorable educational trip or picnic - where you went, what you did there, and where you would like to go next year.',
       hint: {
         connectors: ['पहले', 'फिर', 'इसके बाद', 'अंत में'],
         vocab: ['शैक्षिक यात्रा', 'पिकनिक', 'भ्रमण', 'तस्वीर', 'यादगार'],
@@ -435,13 +435,13 @@ export const pack: TopicPack = {
   ],
   promptsNote: {
     why:
-      'Each prompt is shaped to demand past-perfective narration plus at least one other tense — exactly the Benchmark 5 target. The hint strip names the language goals for the essay, not the answer: the student should use those connectors and vocab items but build the content themselves.',
+      'Each prompt is shaped to demand past-perfective narration plus at least one other tense - exactly the Benchmark 5 target. The hint strip names the language goals for the essay, not the answer: the student should use those connectors and vocab items but build the content themselves.',
     trains: ['TextType'],
   },
 
   rubricNote: {
     why:
-      'Self-grade every essay you write in this pack against the STAMP rubric. If your essay lacks a ने-construction past-perfective verb, a past-habitual sentence, or a future-tense closing — go back and add them BEFORE moving on. These three features are what push school-activity essays from Benchmark 4 (2 credits) to Benchmark 5 (3 credits).',
+      'Self-grade every essay you write in this pack against the STAMP rubric. If your essay lacks a ने-construction past-perfective verb, a past-habitual sentence, or a future-tense closing - go back and add them BEFORE moving on. These three features are what push school-activity essays from Benchmark 4 (2 credits) to Benchmark 5 (3 credits).',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 

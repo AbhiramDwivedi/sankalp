@@ -3,7 +3,7 @@ import { composeHeroPrompt } from '../imagePrompts';
 import { pickConnectors } from '../connectors';
 
 // -----------------------------------------------------------------------------
-// L2-09 — Special Events & Festivals (विशेष अवसर और त्योहार)
+// L2-09 - Special Events & Festivals (विशेष अवसर और त्योहार)
 // Festival essays are the Text-Type 5 sweet spot: past (last Diwali),
 // present (this year), and future (next year) land naturally in one piece.
 // -----------------------------------------------------------------------------
@@ -16,24 +16,24 @@ export const pack: TopicPack = {
   heroMotif: 'diya',
   titleHindi: 'विशेष अवसर और त्योहार',
   titleEnglish: 'Special Events & Festivals',
-  hook: 'Festival essays let students show past, present, and future tenses in one piece — the Text-Type 5 sweet spot.',
+  hook: 'Festival essays let students show past, present, and future tenses in one piece - the Text-Type 5 sweet spot.',
   heroPrompt: composeHeroPrompt(
     'A Diwali scene with a bright kolam-style rangoli on the floor, a row of clay diyas glowing along the threshold, sparklers in the hands of two children, a plate of mithai and marigold garlands on a brass tray, a family silhouette on the rooftop under a sky lit with soft fireworks',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Special Events (FCPS Level 2 — Leisure Time)',
+      'Special Events (FCPS Level 2 - Leisure Time)',
       'Festivals and Celebrations (FCPS Level 2)',
-      'Family and community gatherings (bridges to FCPS Level 2 — Home Life)',
+      'Family and community gatherings (bridges to FCPS Level 2 - Home Life)',
     ],
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
     afterThisPackStudentCan: [
       'Narrate one completed festival in past perfective with correct ने-constructions.',
-      'Describe what their family does every year in habitual present, then shift to a future plan for next year — in the same essay.',
+      'Describe what their family does every year in habitual present, then shift to a future plan for next year - in the same essay.',
       'Name at least eight Indian festivals and three festival-specific objects (दीया, रंगोली, राखी) without searching.',
       'Use a conditional (अगर ... तो मनाएँगे) and a relative clause (जिस दिन) in a single paragraph.',
-      'Add one culturally specific practice — diya-lighting order, sheer korma, rakhi tying — that separates the essay from generic responses.',
+      'Add one culturally specific practice - diya-lighting order, sheer korma, rakhi tying - that separates the essay from generic responses.',
     ],
     positionOnArc: 'pushing-to-IM',
     estimatedTime: '90 min reading + 45 min essay',
@@ -47,7 +47,7 @@ export const pack: TopicPack = {
       trains: ['TopicCoverage'],
     },
     {
-      text: 'Write a 3-paragraph essay that uses past, present, AND future — each anchored by a time marker (पिछले साल, हर साल, अगले साल).',
+      text: 'Write a 3-paragraph essay that uses past, present, AND future - each anchored by a time marker (पिछले साल, हर साल, अगले साल).',
       trains: ['TextType', 'LanguageControl'],
     },
     {
@@ -59,7 +59,7 @@ export const pack: TopicPack = {
       trains: ['TextType'],
     },
     {
-      text: 'Name one festival-specific cultural practice (rangoli design, rakhi thread, sheer korma) per essay — not just "we celebrate and eat sweets".',
+      text: 'Name one festival-specific cultural practice (rangoli design, rakhi thread, sheer korma) per essay - not just "we celebrate and eat sweets".',
       trains: ['TopicCoverage', 'TextType'],
     },
   ],
@@ -107,7 +107,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'This 31-word set is curated so a student can write about any major Indian festival — Diwali, Holi, Rakhi, Eid — without reaching for a dictionary. The time markers (पिछले साल / इस साल / अगले साल) are load-bearing: they are what let the essay span three tenses without sounding forced.',
+      'This 31-word set is curated so a student can write about any major Indian festival - Diwali, Holi, Rakhi, Eid - without reaching for a dictionary. The time markers (पिछले साल / इस साल / अगले साल) are load-bearing: they are what let the essay span three tenses without sounding forced.',
     trains: ['TopicCoverage'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },
@@ -116,7 +116,7 @@ export const pack: TopicPack = {
     {
       title: 'Past perfective with ने (हमने मनाया, दादी ने बनाया)',
       rule:
-        'To narrate what people DID at a festival, use the ने-construction. The subject takes ने, and the verb agrees with the gender/number of the OBJECT — not the subject. This is the single most common structure in festival essays.',
+        'To narrate what people DID at a festival, use the ने-construction. The subject takes ने, and the verb agrees with the gender/number of the OBJECT - not the subject. This is the single most common structure in festival essays.',
       examples: [
         { hindi: 'हमने दिवाली मनाई।', transliteration: 'humne divaali manaayi.', english: 'We celebrated Diwali. (दिवाली is feminine → manaayi)' },
         { hindi: 'दादी ने शीर-कोरमा बनाया।', transliteration: 'daadi ne sheer-korma banaaya.', english: 'Grandmother made sheer korma. (शीर-कोरमा masc. → banaaya)' },
@@ -124,9 +124,9 @@ export const pack: TopicPack = {
         { hindi: 'बहन ने राखी बाँधी।', transliteration: 'bahen ne raakhi baandhi.', english: 'Sister tied the rakhi. (राखी fem. → baandhi)' },
       ],
       pitfall:
-        'Writing "हम दिवाली मनाए" or "हम दिवाली मनाया" skips the ने and mismatches gender. Both errors show up in Language Control immediately. The verb should NOT agree with हम — it should agree with दिवाली.',
+        'Writing "हम दिवाली मनाए" or "हम दिवाली मनाया" skips the ने and mismatches gender. Both errors show up in Language Control immediately. The verb should NOT agree with हम - it should agree with दिवाली.',
       whyItMatters:
-        'The ने-construction is the diagnostic the rater uses to check whether the student controls past transitive. Get it right three times in one essay and Language Control moves from "Low" to "Average" — exactly the step from 2 to 3 credits.',
+        'The ने-construction is the diagnostic the rater uses to check whether the student controls past transitive. Get it right three times in one essay and Language Control moves from "Low" to "Average" - exactly the step from 2 to 3 credits.',
     },
     {
       title: 'Habitual past (हम हर साल मनाते थे)',
@@ -152,7 +152,7 @@ export const pack: TopicPack = {
         { hindi: 'अगर भैया घर आएगा, तो मैं उसे राखी बाँधूँगी।', transliteration: 'agar bhaiya ghar aayega, to main use raakhi baandhoongi.', english: 'If brother comes home, I will tie rakhi on him.' },
       ],
       pitfall:
-        'Dropping तो is the most common error ("अगर दादी आएँगी, हम मनाएँगे"). The sentence still parses but sounds half-finished to a Hindi ear — raters mark this as "inconsistent control".',
+        'Dropping तो is the most common error ("अगर दादी आएँगी, हम मनाएँगे"). The sentence still parses but sounds half-finished to a Hindi ear - raters mark this as "inconsistent control".',
       whyItMatters:
         'Intermediate-Mid explicitly requires "some control of major time frames." A single well-formed अगर ... तो sentence in the final paragraph is the most efficient way to tick the future-frame box.',
     },
@@ -189,7 +189,7 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'A festival essay naturally breaks into three beats — preparation, celebration, reflection. पहले / फिर / इसके बाद / अंत में scaffold those beats exactly. क्योंकि and इसलिए carry the "why we do this" cultural reasoning that lifts Topic Coverage. जब ... तब is reserved for the childhood-memory sentence almost every strong festival essay uses.',
+      'A festival essay naturally breaks into three beats - preparation, celebration, reflection. पहले / फिर / इसके बाद / अंत में scaffold those beats exactly. क्योंकि and इसलिए carry the "why we do this" cultural reasoning that lifts Topic Coverage. जब ... तब is reserved for the childhood-memory sentence almost every strong festival essay uses.',
     trains: ['TextType'],
   },
 
@@ -204,16 +204,16 @@ export const pack: TopicPack = {
     highlights: [
       { term: 'पिछले साल ... इस साल ... अगले साल', note: 'The anchor opens with पिछले साल and pivots; a festival essay always benefits from these three time anchors, even if only two appear.' },
       { term: 'माँ और दीदी ने ... बनाई / दादी ने ... बनाए / पिताजी ने ... जलाया', note: 'Four correct ने-constructions in one passage, each with the verb agreeing with the OBJECT. This is what clean Language Control looks like.' },
-      { term: 'जब अँधेरा हुआ, तब ...', note: 'The जब ... तब pivot between afternoon preparation and evening celebration — the single most useful Text-Type connector for festival narration.' },
+      { term: 'जब अँधेरा हुआ, तब ...', note: 'The जब ... तब pivot between afternoon preparation and evening celebration - the single most useful Text-Type connector for festival narration.' },
       { term: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: 'Reflective closing. "Not only X but also Y" is a Benchmark-5 hallmark because it generalizes past the specific event.' },
       { term: 'आँगन / रंगोली / दीये / पटाखे / फुलझड़ियाँ', note: 'Five festival-specific nouns, none of which are generic. Raters register cultural specificity here.' },
     ],
     comprehensionQuestions: [
       { q: 'Who made the rangoli, and where?', a: 'माँ and दीदी made it at the door (दरवाज़े पर).' },
-      { q: 'What did Grandmother prepare, and why "every year"?', a: 'मिठाई and नमकीन — क्योंकि वह हर साल यही करती हैं (because she does this every year — a family tradition).' },
+      { q: 'What did Grandmother prepare, and why "every year"?', a: 'मिठाई and नमकीन - क्योंकि वह हर साल यही करती हैं (because she does this every year - a family tradition).' },
       { q: 'Identify the moment when afternoon shifts to evening.', a: 'The जब अँधेरा हुआ, तब पिताजी ने पहला दीया जलाया clause.' },
       { q: 'What did the little brother like and dislike?', a: 'He was scared of पटाखे but loved फुलझड़ियाँ (sparklers).' },
-      { q: 'What does the narrator reflect at the end?', a: 'Diwali is सिर्फ़ रोशनी का त्योहार नहीं, बल्कि परिवार के साथ होने का त्योहार भी है — not only the festival of lights but also of being with family.' },
+      { q: 'What does the narrator reflect at the end?', a: 'Diwali is सिर्फ़ रोशनी का त्योहार नहीं, बल्कि परिवार के साथ होने का त्योहार भी है - not only the festival of lights but also of being with family.' },
       { q: 'Name three connectors used in this passage.', a: 'Any three of पहले, फिर, क्योंकि, जब ... तब, इसके बाद, लेकिन, अंत में, बल्कि.' },
       { q: 'Point to two ने-sentences and identify the objects.', a: 'माँ और दीदी ने रंगोली (f) बनाई; पिताजी ने दीया (m) जलाया.' },
     ],
@@ -259,11 +259,11 @@ export const pack: TopicPack = {
       kind: 'sms',
       title: 'दोस्त को ईद का संदेश · Eid Message to a Friend',
       hindi:
-        'ईद मुबारक! 🌙\nकल हमारे घर आओ ना — अम्मी शीर-कोरमा बना रही हैं और छोटे भाई ने पूरा घर सजाया है। शाम सात बजे ठीक रहेगा?',
+        'ईद मुबारक! 🌙\nकल हमारे घर आओ ना - अम्मी शीर-कोरमा बना रही हैं और छोटे भाई ने पूरा घर सजाया है। शाम सात बजे ठीक रहेगा?',
       transliteration:
-        'eed mubaarak!\nkal hamaare ghar aao na — ammi sheer-korma bana rahi hain aur chhote bhai ne poora ghar sajaaya hai. shaam saat baje theek rahega?',
+        'eed mubaarak!\nkal hamaare ghar aao na - ammi sheer-korma bana rahi hain aur chhote bhai ne poora ghar sajaaya hai. shaam saat baje theek rahega?',
       english:
-        'Eid Mubarak!\nCome over to our place tomorrow — Mom is making sheer korma and my little brother has decorated the whole house. Would 7 PM work?',
+        'Eid Mubarak!\nCome over to our place tomorrow - Mom is making sheer korma and my little brother has decorated the whole house. Would 7 PM work?',
     },
     {
       kind: 'poster',
@@ -278,7 +278,7 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'Five registers — intimate letter, community announcement, private diary, casual SMS, public poster — on the same topic domain. The student who can copy these shapes has the range raters are looking for when they score Text-Type beyond "one-register monotone".',
+      'Five registers - intimate letter, community announcement, private diary, casual SMS, public poster - on the same topic domain. The student who can copy these shapes has the range raters are looking for when they score Text-Type beyond "one-register monotone".',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -286,7 +286,7 @@ export const pack: TopicPack = {
     {
       title: 'The Diya Order Matters',
       body:
-        'In many households, the eldest male lights the first diya at the threshold, then family members light diyas outward across the courtyard and balcony. Mentioning who lit first (पिताजी ने पहला दीया जलाया) is a single sentence that signals deep cultural knowledge — far more specific than "we lit diyas".',
+        'In many households, the eldest male lights the first diya at the threshold, then family members light diyas outward across the courtyard and balcony. Mentioning who lit first (पिताजी ने पहला दीया जलाया) is a single sentence that signals deep cultural knowledge - far more specific than "we lit diyas".',
       emoji: '🪔',
     },
     {
@@ -298,13 +298,13 @@ export const pack: TopicPack = {
     {
       title: 'Rakhi is a Protection Promise',
       body:
-        'The rakhi thread is not a gift — it is a request for lifelong protection. The brother traditionally gives a return gift (नेग) and promises to look after the sister. Writing "भैया ने वादा किया" (brother promised) captures this in a single phrase.',
+        'The rakhi thread is not a gift - it is a request for lifelong protection. The brother traditionally gives a return gift (नेग) and promises to look after the sister. Writing "भैया ने वादा किया" (brother promised) captures this in a single phrase.',
       emoji: '🪢',
     },
     {
       title: 'Eid = Sheer Korma + Eidi',
       body:
-        'Sheer korma (vermicelli milk pudding with dates and dry fruits) is the signature Eid dish, cooked from dawn. Children receive ईदी — small cash gifts from elders. Name either item in your essay and Topic Coverage jumps above "we ate sweets".',
+        'Sheer korma (vermicelli milk pudding with dates and dry fruits) is the signature Eid dish, cooked from dawn. Children receive ईदी - small cash gifts from elders. Name either item in your essay and Topic Coverage jumps above "we ate sweets".',
       emoji: '🌙',
     },
     {
@@ -316,7 +316,7 @@ export const pack: TopicPack = {
   ],
   culturalNote: {
     why:
-      'Raters have read a thousand "festivals are happy and colorful" essays. What separates Benchmark 5 is one concrete, specific practice — who lights the first diya, the Holi two-day sequence, sheer korma on Eid, the rakhi protection promise. Pick one per essay. Do not list all of them.',
+      'Raters have read a thousand "festivals are happy and colorful" essays. What separates Benchmark 5 is one concrete, specific practice - who lights the first diya, the Holi two-day sequence, sheer korma on Eid, the rakhi protection promise. Pick one per essay. Do not list all of them.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -352,12 +352,12 @@ export const pack: TopicPack = {
         'पिछले साल दिवाली हमारे गाँव में मनाई गई थी। दादी ने सुबह से रसोई में गुझिया और मठरी बनाईं, और माँ ने दरवाज़े पर एक बड़ी रंगोली बनाई। शाम को जब अँधेरा हुआ, तब पिताजी ने पहला दीया जलाया और उसके बाद हम सबने मिलकर पूरे आँगन में दीये रखे। मेरे छोटे भाई को पटाखों से थोड़ा डर लगा, लेकिन फुलझड़ियाँ उसे बहुत पसंद आईं।\n\nइस साल हम शहर में हैं और दादी गाँव में रह गईं, इसलिए माहौल थोड़ा अलग है। हम हर साल की तरह रंगोली बनाते हैं और दीये जलाते हैं, लेकिन दादी की बनाई गुझिया की खुशबू रसोई से नहीं आ रही। माँ ने आज उनसे फ़ोन पर बात की और उनकी रेसिपी लिखी, क्योंकि वह भी यही स्वाद चाहती हैं।\n\nअगले साल अगर दादी की तबीयत ठीक रही, तो हम ज़रूर गाँव जाएँगे और उनके साथ दिवाली मनाएँगे। मुझे लगता है कि त्योहार सिर्फ़ दीये और मिठाई का नाम नहीं, बल्कि उन लोगों का नाम भी है जिनके साथ हम उन्हें मनाते हैं।',
       annotations: [
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले साल ... मनाई गई थी', note: 'Opens in past perfective passive. Anchors the first tense immediately.' },
-        { paragraphIndex: 0, kind: 'structure', highlight: 'दादी ने ... बनाईं / माँ ने ... बनाई / पिताजी ने ... जलाया', note: 'Three ne-constructions in one paragraph, each with correct object agreement — this is the Language Control signal raters specifically check for.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'दादी ने ... बनाईं / माँ ने ... बनाई / पिताजी ने ... जलाया', note: 'Three ne-constructions in one paragraph, each with correct object agreement - this is the Language Control signal raters specifically check for.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'जब अँधेरा हुआ, तब ... और उसके बाद', note: 'जब ... तब pivot + sequencing connector in a single sentence.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'इस साल हम शहर में हैं ... माँ ने फ़ोन पर बात की', note: 'Present habitual sits next to past perfective inside one paragraph — textbook Intermediate-Mid tense interleaving.' },
-        { paragraphIndex: 1, kind: 'cultural', highlight: 'दादी की बनाई गुझिया की खुशबू', note: 'Sensory, specific cultural detail — far above "we miss Grandma".' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'इस साल हम शहर में हैं ... माँ ने फ़ोन पर बात की', note: 'Present habitual sits next to past perfective inside one paragraph - textbook Intermediate-Mid tense interleaving.' },
+        { paragraphIndex: 1, kind: 'cultural', highlight: 'दादी की बनाई गुझिया की खुशबू', note: 'Sensory, specific cultural detail - far above "we miss Grandma".' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल अगर ... तो ... जाएँगे', note: 'Conditional + future closes the third time frame cleanly. Benchmark 5 sealed.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: 'Reflective not-only-but-also generalizes beyond the event — a Benchmark-5 hallmark.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: 'Reflective not-only-but-also generalizes beyond the event - a Benchmark-5 hallmark.' },
       ],
       wordCount: 148,
       tenseUsed: ['past', 'present', 'future'],
@@ -366,11 +366,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three time frames anchored by explicit markers — पिछले साल (past), इस साल (present), अगले साल (future) — exactly the "some control of major time frames" the IM rubric asks for.',
+          'Three time frames anchored by explicit markers - पिछले साल (past), इस साल (present), अगले साल (future) - exactly the "some control of major time frames" the IM rubric asks for.',
           'Four correct ने-sentences across the essay (दादी ने बनाईं, माँ ने बनाई, पिताजी ने जलाया, माँ ने बात की). Language Control at Average or above.',
           'Seven distinct connectors including the high-value pair जब ... तब and the conditional अगर ... तो. Text-Type 5 confirmed.',
           'Sensory cultural detail (दादी की बनाई गुझिया की खुशबू) and intergenerational specificity lift Topic Coverage above generic "we ate sweets" essays.',
-          'Reflective closing generalizes the event ("त्योहार ... उन लोगों का नाम भी है जिनके साथ ...") — a Benchmark-5 signature move.',
+          'Reflective closing generalizes the event ("त्योहार ... उन लोगों का नाम भी है जिनके साथ ...") - a Benchmark-5 signature move.',
         ],
         gotchas: [
           'If the student writes "दादी ने गुझिया बनाया" (masculine agreement on feminine object), Language Control drops to Low.',
@@ -384,16 +384,16 @@ export const pack: TopicPack = {
         'किसी एक त्योहार या विशेष अवसर (जन्मदिन, शादी, ईद, होली, रक्षाबंधन) के बारे में तीन अनुच्छेदों में लिखिए। बताइए कि बचपन में आप उसे कैसे मनाते थे, अब कैसे मनाते हैं, और अगर आप दूर होंगे तो क्या करेंगे।',
       novice: 'होली अच्छी है। हम रंग खेलते हैं। मज़ा आता है।',
       intermediateMid:
-        'जब मैं छोटी थी, तब हम हर साल अपने मोहल्ले में होली मनाते थे। सुबह पहले बच्चे गुब्बारों में रंग भरते थे, फिर सब छत पर चढ़कर एक-दूसरे पर रंग डालते थे। दादी हमारे लिए गरम-गरम गुझिया और ठंडाई बनाती थीं, क्योंकि होली बिना गुझिया के अधूरी लगती है। उस उम्र में रंगों से डर नहीं लगता था — बस उत्साह और शोर था।\n\nअब मैं बड़ी हो गई हूँ और हम अमेरिका में रहते हैं, इसलिए होली वैसी नहीं होती। इस साल हमने अपने भारतीय दोस्तों को घर पर बुलाया और आँगन में थोड़ा रंग खेला। माँ ने गुझिया बनाने की कोशिश की, लेकिन बाज़ार का मैदा वैसा नहीं था जैसा गाँव में मिलता था। फिर भी सबने मिलकर बहुत हँसी-मज़ाक किया और पुराने गाने गाए।\n\nअगले साल अगर मेरी पढ़ाई की छुट्टियाँ मिलेंगी, तो मैं ज़रूर भारत जाऊँगी और अपनी बहन के साथ असली होली मनाऊँगी। मेरा मानना है कि त्योहार हमें सिर्फ़ खुशी नहीं देते, बल्कि हमें हमारी जड़ों से जोड़े रखते हैं।',
+        'जब मैं छोटी थी, तब हम हर साल अपने मोहल्ले में होली मनाते थे। सुबह पहले बच्चे गुब्बारों में रंग भरते थे, फिर सब छत पर चढ़कर एक-दूसरे पर रंग डालते थे। दादी हमारे लिए गरम-गरम गुझिया और ठंडाई बनाती थीं, क्योंकि होली बिना गुझिया के अधूरी लगती है। उस उम्र में रंगों से डर नहीं लगता था - बस उत्साह और शोर था।\n\nअब मैं बड़ी हो गई हूँ और हम अमेरिका में रहते हैं, इसलिए होली वैसी नहीं होती। इस साल हमने अपने भारतीय दोस्तों को घर पर बुलाया और आँगन में थोड़ा रंग खेला। माँ ने गुझिया बनाने की कोशिश की, लेकिन बाज़ार का मैदा वैसा नहीं था जैसा गाँव में मिलता था। फिर भी सबने मिलकर बहुत हँसी-मज़ाक किया और पुराने गाने गाए।\n\nअगले साल अगर मेरी पढ़ाई की छुट्टियाँ मिलेंगी, तो मैं ज़रूर भारत जाऊँगी और अपनी बहन के साथ असली होली मनाऊँगी। मेरा मानना है कि त्योहार हमें सिर्फ़ खुशी नहीं देते, बल्कि हमें हमारी जड़ों से जोड़े रखते हैं।',
       annotations: [
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'जब मैं छोटी थी, तब हम ... मनाते थे', note: 'Habitual past opens the essay. This is the single cleanest way to establish "childhood" as a tense zone distinct from "now".' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... क्योंकि', note: 'Three connectors in one paragraph — sequential + causal cohesion.' },
-        { paragraphIndex: 0, kind: 'cultural', highlight: 'दादी ... गुझिया और ठंडाई बनाती थीं', note: 'Festival-specific food items in habitual past — Topic Coverage + Language Control together.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... क्योंकि', note: 'Three connectors in one paragraph - sequential + causal cohesion.' },
+        { paragraphIndex: 0, kind: 'cultural', highlight: 'दादी ... गुझिया और ठंडाई बनाती थीं', note: 'Festival-specific food items in habitual past - Topic Coverage + Language Control together.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'अब मैं बड़ी हो गई हूँ ... हमने ... बुलाया', note: 'Present state + past perfective (हमने बुलाया, माँ ने कोशिश की) inside one paragraph.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'जैसा गाँव में मिलता था', note: 'Relative/comparative construction — a complex structure raters listen for.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'जैसा गाँव में मिलता था', note: 'Relative/comparative construction - a complex structure raters listen for.' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल अगर ... तो ... जाऊँगी', note: 'Conditional future closes the third time frame.' },
         { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: 'Reflective closing generalizes the event. Benchmark 5 signature.' },
-        { paragraphIndex: 2, kind: 'idiom', highlight: 'हमें हमारी जड़ों से जोड़े रखते हैं', note: 'Register-appropriate figurative expression — not a forced idiom, but reads as idiomatic.' },
+        { paragraphIndex: 2, kind: 'idiom', highlight: 'हमें हमारी जड़ों से जोड़े रखते हैं', note: 'Register-appropriate figurative expression - not a forced idiom, but reads as idiomatic.' },
       ],
       wordCount: 142,
       tenseUsed: ['past', 'present', 'future'],
@@ -402,11 +402,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three distinct tense zones anchored by जब मैं छोटी थी (habitual past), अब (present), अगले साल (future) — textbook Intermediate-Mid tense layout.',
-          'Habitual past (मनाते थे, बनाती थीं, डर नहीं लगता था) is maintained for a full paragraph before shifting to present — raters register this as "control of past time frame".',
+          'Three distinct tense zones anchored by जब मैं छोटी थी (habitual past), अब (present), अगले साल (future) - textbook Intermediate-Mid tense layout.',
+          'Habitual past (मनाते थे, बनाती थीं, डर नहीं लगता था) is maintained for a full paragraph before shifting to present - raters register this as "control of past time frame".',
           'Nine distinct connectors across the essay, including the high-value जब ... तब, अगर ... तो, and सिर्फ़ ... बल्कि भी. Text-Type 5 easily confirmed.',
           'Cultural specificity (ठंडाई, गुझिया, gaon-vs-foreign-flour contrast) and register-appropriate reflective closing both lift Topic Coverage.',
-          'Gender agreement consistent with a feminine narrator (छोटी थी, बड़ी हो गई, जाऊँगी) — Language Control stable.',
+          'Gender agreement consistent with a feminine narrator (छोटी थी, बड़ी हो गई, जाऊँगी) - Language Control stable.',
         ],
         gotchas: [
           'Switching mid-essay from feminine to masculine self-reference (e.g. writing जाऊँगा after छोटी थी) would drop Language Control to Low immediately.',
@@ -417,7 +417,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Each model essay explicitly stages the three tenses in three paragraphs — past (what happened / what we used to do), present (what is different now), future (what we will do). Copy this structural template. If your draft essay does not have at least one time marker per paragraph, rewrite before submitting.',
+      'Each model essay explicitly stages the three tenses in three paragraphs - past (what happened / what we used to do), present (what is different now), future (what we will do). Copy this structural template. If your draft essay does not have at least one time marker per paragraph, rewrite before submitting.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -464,7 +464,7 @@ export const pack: TopicPack = {
 
   rubricNote: {
     why:
-      'Festival essays are where the three rubric axes pull in the same direction — festival vocabulary fuels Topic Coverage, time markers fuel Text-Type, and the ने-construction fuels Language Control. Self-grade each draft: if you cannot point to a sentence per axis, the essay is not Benchmark 5 yet.',
+      'Festival essays are where the three rubric axes pull in the same direction - festival vocabulary fuels Topic Coverage, time markers fuel Text-Type, and the ने-construction fuels Language Control. Self-grade each draft: if you cannot point to a sentence per axis, the essay is not Benchmark 5 yet.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 

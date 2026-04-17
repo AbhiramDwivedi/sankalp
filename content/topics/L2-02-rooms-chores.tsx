@@ -15,16 +15,16 @@ export const pack: TopicPack = {
   heroMotif: 'family',
   titleHindi: 'घर के कमरे और कार्य',
   titleEnglish: 'Rooms of the House & Household Chores',
-  hook: 'Concrete nouns plus action verbs — high-yield vocabulary for descriptive essays and obligation sentences.',
+  hook: 'Concrete nouns plus action verbs - high-yield vocabulary for descriptive essays and obligation sentences.',
   heroPrompt: composeHeroPrompt(
-    'A cutaway view of a middle-class Indian home with each room labelled by activity — kitchen with steaming pot, living room with a ceiling fan, bedroom with a bed and lamp, balcony with drying laundry, a tulsi plant on the angan',
+    'A cutaway view of a middle-class Indian home with each room labelled by activity - kitchen with steaming pot, living room with a ceiling fan, bedroom with a bed and lamp, balcony with drying laundry, a tulsi plant on the angan',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Rooms of the House and Household Chores (FCPS Level 2 — Home Life)',
-      'Daily Routines at Home (FCPS Level 2 — Home Life)',
-      'Family Roles and Responsibilities (FCPS Level 2 — Home Life)',
+      'Rooms of the House and Household Chores (FCPS Level 2 - Home Life)',
+      'Daily Routines at Home (FCPS Level 2 - Home Life)',
+      'Family Roles and Responsibilities (FCPS Level 2 - Home Life)',
     ],
     trains: ['TopicCoverage', 'LanguageControl', 'TextType'],
     afterThisPackStudentCan: [
@@ -58,7 +58,7 @@ export const pack: TopicPack = {
       trains: ['TextType'],
     },
     {
-      text: 'Include one cultural specific — Diwali cleaning, a maid/didi, a shared courtyard — to lift Topic Coverage.',
+      text: 'Include one cultural specific - Diwali cleaning, a maid/didi, a shared courtyard - to lift Topic Coverage.',
       trains: ['TopicCoverage', 'TextType'],
     },
   ],
@@ -101,14 +101,14 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 30 words cover every room, the furniture and appliances you will actually write about, and the six chores FCPS Home Life prompts pull from. Learn them with their gender (रसोई f, कमरा m, मेज़ f, पंखा m) — gender is where students lose Language Control points on this topic.',
+      'These 30 words cover every room, the furniture and appliances you will actually write about, and the six chores FCPS Home Life prompts pull from. Learn them with their gender (रसोई f, कमरा m, मेज़ f, पंखा m) - gender is where students lose Language Control points on this topic.',
     trains: ['TopicCoverage', 'LanguageControl'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },
 
   grammar: [
     {
-      title: 'Location postpositions — में, पर, के पास, के बीच',
+      title: 'Location postpositions - में, पर, के पास, के बीच',
       rule:
         'Hindi location words follow the noun (unlike English prepositions). में = in (enclosed space); पर = on (surface); के पास = near; के बीच = between / in the middle of. The noun before में / पर / के पास / के बीच stays in the oblique case (कमरे में, not कमरा में).',
       examples: [
@@ -120,7 +120,7 @@ export const pack: TopicPack = {
       pitfall:
         'Forgetting the oblique (writing "कमरा में" instead of "कमरे में") is the single most common mistake when describing a home. Raters notice it on the first sentence.',
       whyItMatters:
-        'Location sentences are the backbone of any "describe your home" essay. If the postpositions are wrong, the whole first paragraph reads as broken — Language Control drops to Low and caps the essay at Intermediate-Low (2 credits).',
+        'Location sentences are the backbone of any "describe your home" essay. If the postpositions are wrong, the whole first paragraph reads as broken - Language Control drops to Low and caps the essay at Intermediate-Low (2 credits).',
     },
     {
       title: 'Obligation with मुझे ... करना पड़ता है',
@@ -132,12 +132,12 @@ export const pack: TopicPack = {
         { hindi: 'इस रविवार मुझे पूरे घर की सफ़ाई करनी पड़ेगी।', transliteration: 'is ravivaar mujhe poore ghar ki safaai karni padegi.', english: 'This Sunday I will have to clean the whole house. (future, feminine agreement with सफ़ाई)' },
       ],
       pitfall:
-        'Students often write "मैं बिस्तर लगाना पड़ता है" — this is ungrammatical. The subject of पड़ना is the CHORE (the thing falling on you); the person takes को.',
+        'Students often write "मैं बिस्तर लगाना पड़ता है" - this is ungrammatical. The subject of पड़ना is the CHORE (the thing falling on you); the person takes को.',
       whyItMatters:
-        'One well-formed "पड़ता है / पड़ा / पड़ेगा" sentence per paragraph delivers all three time frames the Intermediate-Mid rubric requires — a reliable shortcut to Benchmark 5.',
+        'One well-formed "पड़ता है / पड़ा / पड़ेगा" sentence per paragraph delivers all three time frames the Intermediate-Mid rubric requires - a reliable shortcut to Benchmark 5.',
     },
     {
-      title: 'Dividing chores — मैं ... करता हूँ, मेरा भाई ... करता है',
+      title: 'Dividing chores - मैं ... करता हूँ, मेरा भाई ... करता है',
       rule:
         'When you split chores across family members, use parallel clauses joined by लेकिन or जबकि. Keep the verb tense identical across clauses and make sure each subject gets its own correctly-agreeing verb.',
       examples: [
@@ -181,11 +181,11 @@ export const pack: TopicPack = {
     english:
       'Our house is not very big, but the four of us live comfortably in it. Downstairs there is one kitchen, one living room, and one small bathroom. Upstairs there are two bedrooms and one balcony. Mother has planted a tulsi plant on the balcony. First, in the morning Mother and Grandmother cook in the kitchen. Then I make my bed and wash the dishes. My younger brother throws out the trash, because he is the youngest. In the evening we all clean the living room together. On Saturday, Father washes clothes in the washing machine, while Mother dries the clothes in the courtyard. Finally, on Sunday the whole family sits on the terrace and drinks tea. So the work is shared in our house, and no one gets tired.',
     highlights: [
-      { term: 'नीचे ... ऊपर', note: 'Two-level spatial frame before listing rooms — a clean Text-Type opener.' },
+      { term: 'नीचे ... ऊपर', note: 'Two-level spatial frame before listing rooms - a clean Text-Type opener.' },
       { term: 'बालकनी में / बैठक की / छत पर', note: 'Three different location postpositions in a single passage, all in the oblique case. Language Control signal.' },
-      { term: 'पहले / फिर / अंत में / इसलिए', note: 'Four connectors sequence the chore-routine and close with a reason — exactly what raters look for.' },
-      { term: 'जबकि', note: 'Parallel clauses for chore-splitting: मैं ... जबकि माँ ... — Intermediate-Mid hallmark.' },
-      { term: 'तुलसी का पौधा', note: 'Specific cultural anchor — lifts Topic Coverage with a single noun.' },
+      { term: 'पहले / फिर / अंत में / इसलिए', note: 'Four connectors sequence the chore-routine and close with a reason - exactly what raters look for.' },
+      { term: 'जबकि', note: 'Parallel clauses for chore-splitting: मैं ... जबकि माँ ... - Intermediate-Mid hallmark.' },
+      { term: 'तुलसी का पौधा', note: 'Specific cultural anchor - lifts Topic Coverage with a single noun.' },
     ],
     comprehensionQuestions: [
       { q: 'How many rooms are downstairs?', a: 'Three: रसोई, बैठक, and बाथरूम.' },
@@ -193,13 +193,13 @@ export const pack: TopicPack = {
       { q: 'Who throws out the trash, and why?', a: 'The youngest brother, क्योंकि वह सबसे छोटा है.' },
       { q: 'Which day do the parents wash clothes?', a: 'शनिवार (Saturday).' },
       { q: 'What does the family do on Sunday?', a: 'The whole family sits on the chhat (terrace) and drinks tea.' },
-      { q: 'Identify the sentence that uses जबकि and explain what it does.', a: '"पिताजी वॉशिंग मशीन में कपड़े धोते हैं, जबकि माँ आँगन में कपड़े सुखाती हैं" — parallels two chores happening at the same time, one per parent.' },
+      { q: 'Identify the sentence that uses जबकि and explain what it does.', a: '"पिताजी वॉशिंग मशीन में कपड़े धोते हैं, जबकि माँ आँगन में कपड़े सुखाती हैं" - parallels two chores happening at the same time, one per parent.' },
       { q: 'What is the final conclusion of the passage?', a: 'Work is shared (बँटा हुआ है), so no one gets tired.' },
     ],
   },
   anchorNote: {
     why:
-      'This anchor is a direct model of what a passing Intermediate-Mid essay on home and chores looks like. It opens with a two-level spatial description, narrates a routine with four connectors, splits chores with जबकि, and closes with a reason. Study the sentence shapes — these are the shapes the student must reproduce.',
+      'This anchor is a direct model of what a passing Intermediate-Mid essay on home and chores looks like. It opens with a two-level spatial description, narrates a routine with four connectors, splits chores with जबकि, and closes with a reason. Study the sentence shapes - these are the shapes the student must reproduce.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -208,15 +208,15 @@ export const pack: TopicPack = {
       kind: 'schedule',
       title: 'साप्ताहिक कार्य-सूची · Weekly Chore Chart',
       hindi:
-        'सोमवार — मैं: बिस्तर लगाना, बर्तन धोना\nमंगलवार — भाई: कचरा फेंकना\nबुधवार — माँ: खाना बनाना\nगुरुवार — पिताजी: बालकनी की सफ़ाई\nशुक्रवार — दादी: झाड़ू लगाना\nशनिवार — सब मिलकर: वॉशिंग मशीन में कपड़े\nरविवार — छुट्टी · आराम',
+        'सोमवार - मैं: बिस्तर लगाना, बर्तन धोना\nमंगलवार - भाई: कचरा फेंकना\nबुधवार - माँ: खाना बनाना\nगुरुवार - पिताजी: बालकनी की सफ़ाई\nशुक्रवार - दादी: झाड़ू लगाना\nशनिवार - सब मिलकर: वॉशिंग मशीन में कपड़े\nरविवार - छुट्टी · आराम',
       transliteration:
-        'somvaar — main: bistar lagaana, bartan dhona | mangalvaar — bhai: kachra phenkna | budhvaar — maa: khaana banaana | guruvaar — pitaji: balcony ki safaai | shukravaar — daadi: jhaadoo lagaana | shanivaar — sab milkar: washing machine mein kapde | ravivaar — chhutti, aaraam',
+        'somvaar - main: bistar lagaana, bartan dhona | mangalvaar - bhai: kachra phenkna | budhvaar - maa: khaana banaana | guruvaar - pitaji: balcony ki safaai | shukravaar - daadi: jhaadoo lagaana | shanivaar - sab milkar: washing machine mein kapde | ravivaar - chhutti, aaraam',
       english:
-        'Monday — Me: make the bed, wash dishes · Tuesday — Brother: throw out trash · Wednesday — Mother: cook · Thursday — Father: clean the balcony · Friday — Grandmother: sweep · Saturday — Everyone together: clothes in the washing machine · Sunday — Holiday, rest.',
+        'Monday - Me: make the bed, wash dishes · Tuesday - Brother: throw out trash · Wednesday - Mother: cook · Thursday - Father: clean the balcony · Friday - Grandmother: sweep · Saturday - Everyone together: clothes in the washing machine · Sunday - Holiday, rest.',
     },
     {
       kind: 'diary',
-      title: 'मेरी डायरी — दिवाली की सफ़ाई · My Diary — Diwali Cleaning',
+      title: 'मेरी डायरी - दिवाली की सफ़ाई · My Diary - Diwali Cleaning',
       hindi:
         'आज दिवाली से पहले वाला शनिवार है। सुबह से हम सब घर की सफ़ाई कर रहे हैं। मुझे अलमारी साफ़ करनी पड़ी, क्योंकि माँ ने कहा। भाई ने छत पर झाड़ू लगाई। अंत में पिताजी ने बालकनी में दिए रखे। थकान बहुत है, लेकिन घर एकदम चमक रहा है।',
       transliteration:
@@ -238,16 +238,16 @@ export const pack: TopicPack = {
       kind: 'announcement',
       title: 'सोसाइटी की सूचना · Housing Society Notice',
       hindi:
-        'सूचना: सोमवार को पूरी सोसाइटी में पानी की टंकी की सफ़ाई होगी। कृपया सुबह नौ बजे से पहले अपने घर में पानी भर लें। बाथरूम और रसोई में पानी आधे दिन तक नहीं आएगा। असुविधा के लिए खेद है। — प्रबंधन',
+        'सूचना: सोमवार को पूरी सोसाइटी में पानी की टंकी की सफ़ाई होगी। कृपया सुबह नौ बजे से पहले अपने घर में पानी भर लें। बाथरूम और रसोई में पानी आधे दिन तक नहीं आएगा। असुविधा के लिए खेद है। - प्रबंधन',
       transliteration:
-        'soochna: somvaar ko poori society mein paani ki tanki ki safaai hogi. kripaya subah nau baje se pahle apne ghar mein paani bhar len. bathroom aur rasoi mein paani aadhe din tak nahin aaega. asuvidha ke liye khed hai. — prabandhan',
+        'soochna: somvaar ko poori society mein paani ki tanki ki safaai hogi. kripaya subah nau baje se pahle apne ghar mein paani bhar len. bathroom aur rasoi mein paani aadhe din tak nahin aaega. asuvidha ke liye khed hai. - prabandhan',
       english:
-        'Notice: On Monday the water tanks will be cleaned throughout the entire society. Please fill water in your home before 9 a.m. Water will not come in the bathroom and kitchen for half the day. We regret the inconvenience. — Management',
+        'Notice: On Monday the water tanks will be cleaned throughout the entire society. Please fill water in your home before 9 a.m. Water will not come in the bathroom and kitchen for half the day. We regret the inconvenience. - Management',
     },
   ],
   modelTextsNote: {
     why:
-      'A chore chart, a diary entry, a quick SMS, and a formal society notice — four registers tied to home life. Each uses the same base vocabulary but different sentence shapes, so the student sees that "घर" Hindi ranges from casual to formal.',
+      'A chore chart, a diary entry, a quick SMS, and a formal society notice - four registers tied to home life. Each uses the same base vocabulary but different sentence shapes, so the student sees that "घर" Hindi ranges from casual to formal.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -255,13 +255,13 @@ export const pack: TopicPack = {
     {
       title: 'Joint-Family Chore Sharing',
       body:
-        'In many Indian homes, grandparents, parents, and children divide chores by age and tradition — दादी often supervises the kitchen, mother cooks, children wash dishes or fetch water. Writing "हमारे घर में काम बँटा हुआ है" with one example per person is an instant Topic-Coverage lift.',
+        'In many Indian homes, grandparents, parents, and children divide chores by age and tradition - दादी often supervises the kitchen, mother cooks, children wash dishes or fetch water. Writing "हमारे घर में काम बँटा हुआ है" with one example per person is an instant Topic-Coverage lift.',
       emoji: '👪',
     },
     {
       title: 'Diwali Cleaning (दिवाली की सफ़ाई)',
       body:
-        'Before Diwali, families do a deep clean — every cupboard emptied, every room mopped, fresh paint on the walls. It is a multi-day ritual, not a chore. One line about "दिवाली से पहले घर की सफ़ाई" places the essay firmly in Indian cultural time.',
+        'Before Diwali, families do a deep clean - every cupboard emptied, every room mopped, fresh paint on the walls. It is a multi-day ritual, not a chore. One line about "दिवाली से पहले घर की सफ़ाई" places the essay firmly in Indian cultural time.',
       emoji: '🪔',
     },
     {
@@ -271,7 +271,7 @@ export const pack: TopicPack = {
       emoji: '🧹',
     },
     {
-      title: 'The आँगन — Open Courtyard',
+      title: 'The आँगन - Open Courtyard',
       body:
         'Traditional Indian homes, especially in smaller cities and villages, have an open inner courtyard (आँगन) where clothes dry, children play, and families sit on summer evenings. Even when a modern flat has no आँगन, the word itself signals home warmth.',
       emoji: '🌿',
@@ -279,13 +279,13 @@ export const pack: TopicPack = {
     {
       title: 'Tulsi on the Balcony',
       body:
-        'A तुलसी (holy basil) plant on the balcony or near the entrance is an almost universal marker of a Hindu home. One sentence — "बालकनी में माँ का तुलसी का पौधा है" — packs cultural specificity without requiring complex grammar.',
+        'A तुलसी (holy basil) plant on the balcony or near the entrance is an almost universal marker of a Hindu home. One sentence - "बालकनी में माँ का तुलसी का पौधा है" - packs cultural specificity without requiring complex grammar.',
       emoji: '🪴',
     },
   ],
   culturalNote: {
     why:
-      'Raters reading 200 Hindi essays on "describe your home" see "घर बड़ा है, घर अच्छा है" on repeat. A tulsi plant, a Diwali clean, a didi, an आँगन — any one of these specifics separates your essay from the pile. That is pure Text-Type and Topic-Coverage lift.',
+      'Raters reading 200 Hindi essays on "describe your home" see "घर बड़ा है, घर अच्छा है" on repeat. A tulsi plant, a Diwali clean, a didi, an आँगन - any one of these specifics separates your essay from the pile. That is pure Text-Type and Topic-Coverage lift.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -294,20 +294,20 @@ export const pack: TopicPack = {
       phrase: 'घर का भेदी लंका ढाए',
       literal: 'The insider of the house brings down Lanka',
       meaning: 'A secret known to an insider can destroy even a strong household.',
-      example: 'भाई की बात सुनकर माँ नाराज़ हो गईं — घर का भेदी लंका ढाए।',
-      exampleEnglish: 'Hearing brother tell on us, mother got angry — an insider can bring the whole house down.',
+      example: 'भाई की बात सुनकर माँ नाराज़ हो गईं - घर का भेदी लंका ढाए।',
+      exampleEnglish: 'Hearing brother tell on us, mother got angry - an insider can bring the whole house down.',
     },
     {
       phrase: 'घर की मुर्गी दाल बराबर',
       literal: 'The home chicken equals daal (is treated as common)',
       meaning: "What's available at home is undervalued; people crave what they don't have.",
-      example: 'माँ का खाना सबसे अच्छा है, लेकिन हम बाहर जाना चाहते हैं — घर की मुर्गी दाल बराबर।',
-      exampleEnglish: "Mother's food is the best, but we want to go out — the home chicken is treated like ordinary daal.",
+      example: 'माँ का खाना सबसे अच्छा है, लेकिन हम बाहर जाना चाहते हैं - घर की मुर्गी दाल बराबर।',
+      exampleEnglish: "Mother's food is the best, but we want to go out - the home chicken is treated like ordinary daal.",
     },
   ],
   muhavareNote: {
     why:
-      'Both idioms are home-centric and widely understood. Drop one — and only one — into an essay about your home and raters read it as register mastery. Two is showing off; one is plenty.',
+      'Both idioms are home-centric and widely understood. Drop one - and only one - into an essay about your home and raters read it as register mastery. Two is showing off; one is plenty.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -320,13 +320,13 @@ export const pack: TopicPack = {
       intermediateMid:
         'मेरा घर बहुत बड़ा नहीं है, लेकिन हमारे लिए पूरा है। नीचे एक रसोई, एक बैठक, और एक बाथरूम है। ऊपर दो बेडरूम और एक छोटी बालकनी है। बालकनी में माँ ने तुलसी का पौधा लगाया है। बैठक में एक सोफ़ा, दो कुर्सियाँ और एक टीवी है, और मेज़ पर हमेशा किताबें रहती हैं।\n\nहमारे घर में काम बँटा हुआ है। पहले सुबह माँ और दादी रसोई में खाना बनाती हैं। फिर मुझे अपना बिस्तर लगाना पड़ता है और बर्तन धोने पड़ते हैं। मेरा छोटा भाई कचरा फेंकता है, जबकि पिताजी शाम को बालकनी की सफ़ाई करते हैं। शनिवार को पूरा परिवार मिलकर वॉशिंग मशीन में कपड़े डालता है, क्योंकि यह सबसे भारी काम है।\n\nपिछली दिवाली हमें पूरे घर की सफ़ाई करनी पड़ी, और तीन दिन लगे। इसलिए इस बार मैं पहले से योजना बनाऊँगा। मुझे लगता है कि जब हर कोई थोड़ा-थोड़ा काम करता है, तो घर साफ़ भी रहता है और कोई थकता नहीं।',
       annotations: [
-        { paragraphIndex: 0, kind: 'structure', highlight: 'नीचे ... ऊपर', note: 'Two-level spatial frame — tells the reader this is a structured description, not a list.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'नीचे ... ऊपर', note: 'Two-level spatial frame - tells the reader this is a structured description, not a list.' },
         { paragraphIndex: 0, kind: 'vocab', highlight: 'सोफ़ा, कुर्सियाँ, टीवी, मेज़', note: 'Four furniture items with correct gender and plural agreement.' },
-        { paragraphIndex: 0, kind: 'cultural', highlight: 'तुलसी का पौधा', note: 'Single cultural specific in paragraph 1 — Topic Coverage win.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'पहले ... फिर ... जबकि ... क्योंकि', note: 'Four connectors in one paragraph — clean Text-Type 5.' },
+        { paragraphIndex: 0, kind: 'cultural', highlight: 'तुलसी का पौधा', note: 'Single cultural specific in paragraph 1 - Topic Coverage win.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'पहले ... फिर ... जबकि ... क्योंकि', note: 'Four connectors in one paragraph - clean Text-Type 5.' },
         { paragraphIndex: 1, kind: 'structure', highlight: 'मुझे ... पड़ता है / पड़ते हैं', note: 'Obligation frame used twice with gender agreement on the chore (बिस्तर m, बर्तन m pl).' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'पिछली दिवाली ... करनी पड़ी / बनाऊँगा / करता है', note: 'Past, future, and present-habitual in a single paragraph — three time frames sealed.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'मुझे लगता है कि ... तो ... भी ... और ...', note: 'Reflective closing generalizes beyond the household — an IM hallmark.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'पिछली दिवाली ... करनी पड़ी / बनाऊँगा / करता है', note: 'Past, future, and present-habitual in a single paragraph - three time frames sealed.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'मुझे लगता है कि ... तो ... भी ... और ...', note: 'Reflective closing generalizes beyond the household - an IM hallmark.' },
       ],
       wordCount: 138,
       tenseUsed: ['past', 'present', 'future'],
@@ -335,9 +335,9 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three fully cohesive paragraphs that cannot be rearranged — Text-Type 5 met cleanly.',
-          'Six distinct connectors (पहले, फिर, लेकिन, जबकि, क्योंकि, इसलिए) — well above the 3-connector threshold for Intermediate-Mid.',
-          'All three time frames in paragraph 3 (पड़ी past, बनाऊँगा future, करता है present) — satisfies the rubric\'s "some control of past, present, and future."',
+          'Three fully cohesive paragraphs that cannot be rearranged - Text-Type 5 met cleanly.',
+          'Six distinct connectors (पहले, फिर, लेकिन, जबकि, क्योंकि, इसलिए) - well above the 3-connector threshold for Intermediate-Mid.',
+          'All three time frames in paragraph 3 (पड़ी past, बनाऊँगा future, करता है present) - satisfies the rubric\'s "some control of past, present, and future."',
           'Gender is controlled across the whole essay: तुलसी का पौधा (m), छोटी बालकनी (f), बिस्तर (m), बर्तन (m pl). Language Control stays at Average or higher.',
           'Cultural specifics (तुलसी, पिछली दिवाली, साझा वॉशिंग मशीन) lift Topic Coverage above the generic "my house is big" baseline.',
         ],
@@ -358,11 +358,11 @@ export const pack: TopicPack = {
         'पिछले शनिवार सुबह मुझे जल्दी उठना पड़ा, क्योंकि हमारे घर में बहुत काम था। पहले मैंने अपना बिस्तर लगाया, फिर बाथरूम की सफ़ाई की। इसके बाद माँ के साथ रसोई में बर्तन धोए। भाई ने छत पर झाड़ू लगाई, जबकि पिताजी वॉशिंग मशीन में कपड़े डाल रहे थे।\n\nदोपहर तक हम सब थक गए थे, लेकिन घर एकदम चमक रहा था। हम बैठक में सोफ़े पर बैठे और पंखे के नीचे आराम किया। माँ ने सबके लिए चाय बनाई। उस पल मुझे लगा कि जब पूरा परिवार मिलकर काम करता है, तो काम आधा हो जाता है।\n\nइस शनिवार भी बहुत काम होगा, क्योंकि अगले हफ़्ते दिवाली है। मुझे अलमारी साफ़ करनी पड़ेगी और पुराने कपड़े निकालने होंगे। इसके अलावा, मैं बालकनी में दिए भी रखूँगा। अंत में हम सब मिलकर घर को सजाएँगे। मुझे यह दिन हर साल सबसे अच्छा लगता है।',
       annotations: [
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले शनिवार ... उठना पड़ा / लगाया / की / धोए', note: 'Past frame established immediately with four past-perfective verbs in correct gender.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... इसके बाद ... जबकि', note: 'Four sequence + parallel connectors in a single paragraph — textbook Text-Type 5.' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'बैठक में सोफ़े पर ... पंखे के नीचे', note: 'Three location postpositions (में, पर, के नीचे) in oblique case — Language Control signal.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'जब ... तो ... आधा हो जाता है', note: 'Reflective generalization mid-essay — lifts Text-Type.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'होगा / पड़ेगी / रखूँगा / सजाएँगे', note: 'Four future verbs in one paragraph — the third time frame is unambiguous.' },
-        { paragraphIndex: 2, kind: 'cultural', highlight: 'अगले हफ़्ते दिवाली ... बालकनी में दिए', note: 'Cultural specific tied into the future plan — Topic Coverage + Text-Type.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... इसके बाद ... जबकि', note: 'Four sequence + parallel connectors in a single paragraph - textbook Text-Type 5.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'बैठक में सोफ़े पर ... पंखे के नीचे', note: 'Three location postpositions (में, पर, के नीचे) in oblique case - Language Control signal.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'जब ... तो ... आधा हो जाता है', note: 'Reflective generalization mid-essay - lifts Text-Type.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'होगा / पड़ेगी / रखूँगा / सजाएँगे', note: 'Four future verbs in one paragraph - the third time frame is unambiguous.' },
+        { paragraphIndex: 2, kind: 'cultural', highlight: 'अगले हफ़्ते दिवाली ... बालकनी में दिए', note: 'Cultural specific tied into the future plan - Topic Coverage + Text-Type.' },
         { paragraphIndex: 2, kind: 'connector', highlight: 'इसके अलावा / अंत में', note: 'Closing connectors escalate the essay toward its final statement.' },
       ],
       wordCount: 148,
@@ -372,10 +372,10 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Eight distinct connectors used — comfortably above the 3-connector minimum, and used in correct contexts (sequence + parallel + reason + closing).',
-          'Past-perfective cluster in paragraph 1 (लगाया, की, धोए, लगाई) shows controlled transitive past — a Language Control high point.',
-          'Future cluster in paragraph 3 (होगा, पड़ेगी, रखूँगा, सजाएँगे) with gender agreement — past-present-future triangle complete.',
-          'Two reflective generalizations ("जब परिवार मिलकर ... तो काम आधा हो जाता है" and "मुझे यह दिन हर साल सबसे अच्छा लगता है") — Text-Type 5 signature.',
+          'Eight distinct connectors used - comfortably above the 3-connector minimum, and used in correct contexts (sequence + parallel + reason + closing).',
+          'Past-perfective cluster in paragraph 1 (लगाया, की, धोए, लगाई) shows controlled transitive past - a Language Control high point.',
+          'Future cluster in paragraph 3 (होगा, पड़ेगी, रखूँगा, सजाएँगे) with gender agreement - past-present-future triangle complete.',
+          'Two reflective generalizations ("जब परिवार मिलकर ... तो काम आधा हो जाता है" and "मुझे यह दिन हर साल सबसे अच्छा लगता है") - Text-Type 5 signature.',
           'Cultural specificity (दिवाली, अलमारी की सफ़ाई, बालकनी में दिए) avoids the generic "I cleaned the house" baseline.',
         ],
         gotchas: [
@@ -388,7 +388,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Two fully-worked essays at Intermediate-Mid. The first is a steady-state description ("how chores are divided"); the second is a two-tense narrative ("last Saturday vs. this Saturday"). Between them the student sees both FCPS patterns — the "describe" prompt and the "compare time frames" prompt.',
+      'Two fully-worked essays at Intermediate-Mid. The first is a steady-state description ("how chores are divided"); the second is a two-tense narrative ("last Saturday vs. this Saturday"). Between them the student sees both FCPS patterns - the "describe" prompt and the "compare time frames" prompt.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -429,7 +429,7 @@ export const pack: TopicPack = {
   ],
   promptsNote: {
     why:
-      'Three prompts in the exact FCPS shape. Prompt 1 is descriptive (present tense, location postpositions). Prompt 2 forces parallel-clause chore splitting. Prompt 3 forces past + future + present — the full Intermediate-Mid triangle. Pick the one that stretches you most.',
+      'Three prompts in the exact FCPS shape. Prompt 1 is descriptive (present tense, location postpositions). Prompt 2 forces parallel-clause chore splitting. Prompt 3 forces past + future + present - the full Intermediate-Mid triangle. Pick the one that stretches you most.',
     trains: ['TextType'],
   },
 

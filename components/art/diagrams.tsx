@@ -1,4 +1,4 @@
-// Explainer diagrams — hand-authored SVG/TSX teaching aids that appear
+// Explainer diagrams - hand-authored SVG/TSX teaching aids that appear
 // throughout the app (grammar sections, rubric page, capstones). All
 // deterministic, theme-aware, and printable.
 
@@ -6,7 +6,7 @@ import React from 'react';
 import type { StampBenchmark } from '../../content/schema';
 
 // ---------------------------------------------------------------------------
-// TenseTimelineDiagram — past / present / future horizontal bar with
+// TenseTimelineDiagram - past / present / future horizontal bar with
 // example verb endings and sentences. Teaches "one essay = many tenses".
 // ---------------------------------------------------------------------------
 
@@ -56,7 +56,7 @@ export const TenseTimelineDiagram: React.FC<{ className?: string }> = ({ classNa
 
     {/* Reader hint */}
     <text x="400" y="240" textAnchor="middle" fill="#0F172A" fontSize="13" fontWeight="700">
-      A Benchmark-5 essay moves through at least two of these zones — not all three, just more than one.
+      A Benchmark-5 essay moves through at least two of these zones - not all three, just more than one.
     </text>
     <text x="400" y="260" textAnchor="middle" fill="#64748B" fontSize="11" fontStyle="italic">
       Staying in one zone alone caps your score at Intermediate-Low (2 credits).
@@ -65,7 +65,7 @@ export const TenseTimelineDiagram: React.FC<{ className?: string }> = ({ classNa
 );
 
 // ---------------------------------------------------------------------------
-// RubricLadderDiagram — 8-step stairway. Highlights Benchmark 5 as target.
+// RubricLadderDiagram - 8-step stairway. Highlights Benchmark 5 as target.
 // ---------------------------------------------------------------------------
 
 interface RubricLadderProps {
@@ -146,14 +146,14 @@ export const RubricLadderDiagram: React.FC<RubricLadderProps> = ({ highlight = 5
                 fontWeight="900"
                 fill="#EA580C"
               >
-                🎯 3 credits — TARGET
+                🎯 3 credits - TARGET
               </text>
             )}
           </g>
         );
       })}
       <text x="40" y={totalH - 20} fontSize="12" fill="#64748B" fontWeight="700">
-        FCPS credit ladder — reach Benchmark 5 on writing AND speaking for the full 3 credits.
+        FCPS credit ladder - reach Benchmark 5 on writing AND speaking for the full 3 credits.
       </text>
       <text x="40" y={24} fontSize="13" fontWeight="900" fill="#0F172A">
         STAMP benchmarks · FCPS Hindi Credit by Exam
@@ -163,7 +163,7 @@ export const RubricLadderDiagram: React.FC<RubricLadderProps> = ({ highlight = 5
 };
 
 // ---------------------------------------------------------------------------
-// ParagraphScaffoldDiagram — three stacked boxes: P1 setup, P2 middle,
+// ParagraphScaffoldDiagram - three stacked boxes: P1 setup, P2 middle,
 // P3 close. Connector callouts between them.
 // ---------------------------------------------------------------------------
 
@@ -213,7 +213,7 @@ export const ParagraphScaffoldDiagram: React.FC<{ className?: string }> = ({ cla
 );
 
 // ---------------------------------------------------------------------------
-// NeConstructionDiagram — subject + ने + object + verb (agrees w/ object).
+// NeConstructionDiagram - subject + ने + object + verb (agrees w/ object).
 // ---------------------------------------------------------------------------
 
 export const NeConstructionDiagram: React.FC<{ className?: string }> = ({ className = '' }) => (
@@ -241,7 +241,7 @@ export const NeConstructionDiagram: React.FC<{ className?: string }> = ({ classN
     </g>
 
     <text x="400" y="160" textAnchor="middle" fontSize="14" fontWeight="700" fill="#0F172A">
-      Ram ate rotis — "रोटियाँ" (feminine plural) forces "खाईं" not "खाया".
+      Ram ate rotis - "रोटियाँ" (feminine plural) forces "खाईं" not "खाया".
     </text>
     <text x="400" y="186" textAnchor="middle" fontSize="12" fill="#64748B" fontStyle="italic">
       In the perfective past, transitive verbs take ने on the subject. The verb agrees with the OBJECT, not the subject.
@@ -256,7 +256,7 @@ export const NeConstructionDiagram: React.FC<{ className?: string }> = ({ classN
 );
 
 // ---------------------------------------------------------------------------
-// GenderAgreementDiagram — noun gender → adjective ending → verb ending.
+// GenderAgreementDiagram - noun gender → adjective ending → verb ending.
 // ---------------------------------------------------------------------------
 
 export const GenderAgreementDiagram: React.FC<{ className?: string }> = ({ className = '' }) => (
@@ -271,7 +271,7 @@ export const GenderAgreementDiagram: React.FC<{ className?: string }> = ({ class
       <text x="60" y="30" fontSize="13" fontWeight="900" fill="#1E3A8A">Masculine (पुल्लिंग)</text>
       <text x="60" y="60" fontSize="16" fontWeight="800" fill="#0F172A">बड़ा लड़का अच्छा खाना खाता है।</text>
       <text x="60" y="80" fontSize="11" fill="#475569" fontStyle="italic">
-        बड़ा (m. adj) · लड़का (m. noun) · खाता (m. verb) — all ending in -ा.
+        बड़ा (m. adj) · लड़का (m. noun) · खाता (m. verb) - all ending in -ा.
       </text>
     </g>
 
@@ -281,14 +281,14 @@ export const GenderAgreementDiagram: React.FC<{ className?: string }> = ({ class
       <text x="60" y="30" fontSize="13" fontWeight="900" fill="#831843">Feminine (स्त्रीलिंग)</text>
       <text x="60" y="60" fontSize="16" fontWeight="800" fill="#0F172A">बड़ी लड़की अच्छी रोटी खाती है।</text>
       <text x="60" y="80" fontSize="11" fill="#475569" fontStyle="italic">
-        बड़ी (f. adj) · लड़की (f. noun) · खाती (f. verb) — all ending in -ी.
+        बड़ी (f. adj) · लड़की (f. noun) · खाती (f. verb) - all ending in -ी.
       </text>
     </g>
   </svg>
 );
 
 // ---------------------------------------------------------------------------
-// RubricAxisTriangle — three-axis balance: TextType, LanguageControl,
+// RubricAxisTriangle - three-axis balance: TextType, LanguageControl,
 // TopicCoverage. Shows what a B5 essay looks like across all three.
 // ---------------------------------------------------------------------------
 

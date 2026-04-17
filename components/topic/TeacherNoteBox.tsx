@@ -25,7 +25,7 @@ export const TeacherNoteBox: React.FC<TeacherNoteBoxProps> = ({
         <div className="flex items-center gap-2 text-amber-900">
           <GraduationCap size={16} strokeWidth={2.5} />
           <span className="text-[10px] font-black uppercase tracking-[0.25em]">
-            Teacher Note — Why This Section
+            Teacher Note - Why This Section
           </span>
         </div>
         {open ? (
@@ -39,7 +39,7 @@ export const TeacherNoteBox: React.FC<TeacherNoteBoxProps> = ({
       <div className="hidden print:flex items-center gap-2 text-amber-900 mb-1">
         <GraduationCap size={14} />
         <span className="text-[9px] font-black uppercase tracking-[0.25em]">
-          Teacher Note — Why This Section
+          Teacher Note - Why This Section
         </span>
       </div>
 

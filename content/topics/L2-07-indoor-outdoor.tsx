@@ -10,14 +10,14 @@ export const pack: TopicPack = {
   heroMotif: 'cricket',
   titleHindi: 'अंदर और बाहर की गतिविधियाँ',
   titleEnglish: 'Indoor & Outdoor Activities',
-  hook: 'Binary comparisons — "when it rains, otherwise..." — train conditional frames the rubric rewards.',
+  hook: 'Binary comparisons - "when it rains, otherwise..." - train conditional frames the rubric rewards.',
   heroPrompt: composeHeroPrompt(
     'A split illustration: one half indoor with a carrom board and a steaming cup of chai; the other half outdoor with a kite in the sky and children playing cricket, warm marigold light across both halves',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Indoor and Outdoor Activities (FCPS Level 2 — Leisure Time)',
+      'Indoor and Outdoor Activities (FCPS Level 2 - Leisure Time)',
       'Free time and weekend choices (FCPS Level 2)',
       'Weather-linked activity selection (bridges to L1-09 seasons)',
     ],
@@ -27,12 +27,12 @@ export const pack: TopicPack = {
       'Build an अगर ... तो conditional tying weather to an activity choice',
       'Name at least 6 indoor pastimes and 6 outdoor activities with correct gender',
       'Shift between habitual present (रोज़, अक्सर), past weekend narrative, and a future plan in 3 paragraphs',
-      'Include one culturally specific Indian pastime — carrom, kite-flying on Makar Sankranti, kabaddi — to lift Topic Coverage',
+      'Include one culturally specific Indian pastime - carrom, kite-flying on Makar Sankranti, kabaddi - to lift Topic Coverage',
     ],
     positionOnArc: 'building',
     estimatedTime: '90 min reading + 30 min essay',
     ifSkippedRisk:
-      'Leisure-time prompts require the student to choose between options and justify the choice. Without this pack, the student writes "I play cricket" and stops — no comparison, no conditional, Benchmark 4 ceiling (2 credits).',
+      'Leisure-time prompts require the student to choose between options and justify the choice. Without this pack, the student writes "I play cricket" and stops - no comparison, no conditional, Benchmark 4 ceiling (2 credits).',
   },
 
   objectives: [
@@ -77,7 +77,7 @@ export const pack: TopicPack = {
     { hindi: 'खाली समय', transliteration: 'khaali samay', english: 'free time', exampleHindi: 'मेरे खाली समय में मैं चित्र बनाती हूँ।', exampleEnglish: 'In my free time I draw.', emoji: '⏰', partOfSpeech: 'phrase', subgroup: 'Social' },
   ],
   vocabularyNote: {
-    why: 'A balanced set — six indoor, six outdoor, three weather-ties, three social contexts. Essays about choice need both halves of the pair plus the condition that selects between them.',
+    why: 'A balanced set - six indoor, six outdoor, three weather-ties, three social contexts. Essays about choice need both halves of the pair plus the condition that selects between them.',
     trains: ['TopicCoverage', 'LanguageControl'],
   },
 
@@ -99,38 +99,38 @@ export const pack: TopicPack = {
         { hindi: 'मुझे क्रिकेट से ज़्यादा बैडमिंटन पसंद है।', transliteration: 'mujhe cricket se zyaada badminton pasand hai.', english: 'I like badminton more than cricket.' },
         { hindi: 'मैं टीवी से कम किताबें पढ़ता हूँ।', transliteration: 'main TV se kam kitaabein padhta hoon.', english: 'I read books less than I watch TV.' },
       ],
-      pitfall: 'Dropping the से word — "ज़्यादा बैडमिंटन पसंद है" — makes the comparison disappear.',
+      pitfall: 'Dropping the से word - "ज़्यादा बैडमिंटन पसंद है" - makes the comparison disappear.',
       whyItMatters: 'Comparative structures are one of the "grouped ideas" signals raters use to push an essay from Intermediate-Low to Intermediate-Mid.',
     },
   ],
   grammarNote: {
-    why: 'The two grammar moves in this pack — conditional अगर ... तो and comparatives — are each worth one full rubric tick. Practice both until they feel automatic.',
+    why: 'The two grammar moves in this pack - conditional अगर ... तो and comparatives - are each worth one full rubric tick. Practice both until they feel automatic.',
     trains: ['LanguageControl'],
   },
 
   connectors: pickConnectors(['pahle','phir','kyonki','lekin','isliye','iskeAlawa','jabTab','agarTo','mujheLagta']),
   connectorsNote: {
-    why: 'अगर ... तो and जब ... तब are the headline moves for this pack — they give the student two different ways to tie weather or time to an activity choice.',
+    why: 'अगर ... तो and जब ... तब are the headline moves for this pack - they give the student two different ways to tie weather or time to an activity choice.',
     trains: ['TextType'],
   },
 
   anchor: {
     title: 'मेरे सप्ताहांत की दो दुनिया · My Weekend\'s Two Worlds',
-    hindi: 'मेरे सप्ताहांत की दो दुनिया होती हैं। अगर मौसम अच्छा रहता है, तो मैं सुबह दोस्तों के साथ पार्क में क्रिकेट खेलने चला जाता हूँ। धूप में हम घंटों खेलते हैं, फिर चाट खाकर घर लौटते हैं। लेकिन अगर बारिश होती है, तो सब कुछ बदल जाता है। हम घर के अंदर बैठकर कैरम खेलते हैं, या दादाजी के साथ शतरंज की बिसात बिछाते हैं। मुझे लगता है कि दोनों तरह के दिन अच्छे हैं, क्योंकि अंदर और बाहर — दोनों जगहों की अपनी ख़ुशियाँ हैं। पिछले हफ़्ते तो दोनों हुआ: शनिवार को धूप, रविवार को झमाझम बारिश। अंत में मैंने तय किया — मौसम कैसा भी हो, अच्छा वक़्त बनाना मेरे हाथ में है।',
-    transliteration: 'mere saptaahant ki do duniya hoti hain. agar mausam achchha rahta hai, to main subah doston ke saath park mein cricket khelne chala jaata hoon. dhoop mein hum ghanton khelte hain, phir chaat khaakar ghar lautte hain. lekin agar baarish hoti hai, to sab kuchh badal jaata hai. hum ghar ke andar baithkar carrom khelte hain, ya daadaaji ke saath shatranj ki bisaat bichhaate hain. mujhe lagta hai ki dono tarah ke din achchhe hain, kyonki andar aur baahar — dono jagahon ki apni khushiyaan hain. pichhle hafte to dono hua: shanivaar ko dhoop, ravivaar ko jhamaajham baarish. ant mein maine tay kiya — mausam kaisa bhi ho, achchha vaqt banaana mere haath mein hai.',
-    english: 'My weekends have two worlds. If the weather is good, I go to the park in the morning to play cricket with friends. We play for hours in the sun, then eat chaat and return home. But if it rains, everything changes. We sit indoors and play carrom, or set up the chess board with Grandpa. I think both kinds of days are good, because both indoors and outdoors have their own joys. Last week, both happened: sunshine on Saturday, pouring rain on Sunday. In the end, I decided — whatever the weather, making a good time is in my hands.',
+    hindi: 'मेरे सप्ताहांत की दो दुनिया होती हैं। अगर मौसम अच्छा रहता है, तो मैं सुबह दोस्तों के साथ पार्क में क्रिकेट खेलने चला जाता हूँ। धूप में हम घंटों खेलते हैं, फिर चाट खाकर घर लौटते हैं। लेकिन अगर बारिश होती है, तो सब कुछ बदल जाता है। हम घर के अंदर बैठकर कैरम खेलते हैं, या दादाजी के साथ शतरंज की बिसात बिछाते हैं। मुझे लगता है कि दोनों तरह के दिन अच्छे हैं, क्योंकि अंदर और बाहर - दोनों जगहों की अपनी ख़ुशियाँ हैं। पिछले हफ़्ते तो दोनों हुआ: शनिवार को धूप, रविवार को झमाझम बारिश। अंत में मैंने तय किया - मौसम कैसा भी हो, अच्छा वक़्त बनाना मेरे हाथ में है।',
+    transliteration: 'mere saptaahant ki do duniya hoti hain. agar mausam achchha rahta hai, to main subah doston ke saath park mein cricket khelne chala jaata hoon. dhoop mein hum ghanton khelte hain, phir chaat khaakar ghar lautte hain. lekin agar baarish hoti hai, to sab kuchh badal jaata hai. hum ghar ke andar baithkar carrom khelte hain, ya daadaaji ke saath shatranj ki bisaat bichhaate hain. mujhe lagta hai ki dono tarah ke din achchhe hain, kyonki andar aur baahar - dono jagahon ki apni khushiyaan hain. pichhle hafte to dono hua: shanivaar ko dhoop, ravivaar ko jhamaajham baarish. ant mein maine tay kiya - mausam kaisa bhi ho, achchha vaqt banaana mere haath mein hai.',
+    english: 'My weekends have two worlds. If the weather is good, I go to the park in the morning to play cricket with friends. We play for hours in the sun, then eat chaat and return home. But if it rains, everything changes. We sit indoors and play carrom, or set up the chess board with Grandpa. I think both kinds of days are good, because both indoors and outdoors have their own joys. Last week, both happened: sunshine on Saturday, pouring rain on Sunday. In the end, I decided - whatever the weather, making a good time is in my hands.',
     highlights: [
-      { term: 'अगर ... तो × 2', note: 'Two conditionals in one passage — the rubric\'s textbook Benchmark-5 move.' },
+      { term: 'अगर ... तो × 2', note: 'Two conditionals in one passage - the rubric\'s textbook Benchmark-5 move.' },
       { term: 'पहले ... फिर ... अंत में', note: 'Three sequence connectors binding the narrative.' },
       { term: 'दोनों तरह के दिन', note: 'Comparison structure names both halves of the indoor/outdoor pair.' },
-      { term: 'मौसम कैसा भी हो', note: 'Subjunctive "whatever the weather may be" — an IM-register reflective move.' },
+      { term: 'मौसम कैसा भी हो', note: 'Subjunctive "whatever the weather may be" - an IM-register reflective move.' },
     ],
     comprehensionQuestions: [
       { q: 'What does the narrator do when the weather is good?', a: 'Goes to the park with friends to play cricket.' },
       { q: 'Name two indoor activities they mention.', a: 'Carrom and chess.' },
       { q: 'Who plays chess with the narrator?', a: 'Grandpa (दादाजी).' },
       { q: 'What did last Saturday and Sunday contrast?', a: 'Saturday was sunny; Sunday was pouring rain.' },
-      { q: 'Identify one conditional sentence and explain its structure.', a: 'अगर मौसम अच्छा रहता है, तो मैं ... चला जाता हूँ। — Condition in first clause, consequence (habitual present) in second.' },
+      { q: 'Identify one conditional sentence and explain its structure.', a: 'अगर मौसम अच्छा रहता है, तो मैं ... चला जाता हूँ। - Condition in first clause, consequence (habitual present) in second.' },
       { q: 'What lesson does the narrator end on?', a: 'Making a good time is in one\'s own hands, regardless of weather.' },
     ],
   },
@@ -142,14 +142,14 @@ export const pack: TopicPack = {
   modelTexts: [
     {
       kind: 'diary',
-      title: 'डायरी — रविवार की शाम',
+      title: 'डायरी - रविवार की शाम',
       hindi: 'आज धूप इतनी तेज़ थी कि हम दोपहर तक ही बाहर रह सके। शाम को अचानक बादल छा गए। इसलिए हमने पार्क से लौटकर कैरम खेला। अंत में माँ ने गरम पकौड़े बनाए।',
       transliteration: 'aaj dhoop itni tez thi ki hum dopahar tak hi baahar rah sake. shaam ko achaanak baadal chha gaye. isliye hamne park se lautkar carrom khela. ant mein maa ne garam pakaude banaaye.',
       english: 'Today the sun was so intense that we could only stay out till noon. In the evening, clouds suddenly gathered. So after returning from the park, we played carrom. Finally, Mother made hot pakoras.',
     },
     {
       kind: 'announcement',
-      title: 'स्कूल की सूचना — खेल दिवस',
+      title: 'स्कूल की सूचना - खेल दिवस',
       hindi: 'सभी छात्रों को सूचित किया जाता है कि अगर शुक्रवार को बारिश नहीं हुई, तो खेल दिवस मैदान में होगा। अगर बारिश हुई, तो कार्यक्रम इनडोर स्टेडियम में होगा।',
       transliteration: 'sabhi chhaatron ko soochit kiya jaata hai ki agar shukravaar ko baarish nahin hui, to khel divas maidaan mein hoga. agar baarish hui, to kaaryakram indoor stadium mein hoga.',
       english: 'All students are informed that if it does not rain on Friday, Sports Day will be in the ground. If it rains, the program will be in the indoor stadium.',
@@ -170,14 +170,14 @@ export const pack: TopicPack = {
     },
   ],
   modelTextsNote: {
-    why: 'Four registers — diary, official announcement, casual SMS, online review — all around the same indoor/outdoor choice. Shows the student how the same subject sounds in different text-types.',
+    why: 'Four registers - diary, official announcement, casual SMS, online review - all around the same indoor/outdoor choice. Shows the student how the same subject sounds in different text-types.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
   cultural: [
-    { title: 'Carrom is a household classic', body: 'Carrom boards are a fixture in middle-class Indian homes — played across generations on rainy afternoons and weekend evenings.', emoji: '⚫' },
+    { title: 'Carrom is a household classic', body: 'Carrom boards are a fixture in middle-class Indian homes - played across generations on rainy afternoons and weekend evenings.', emoji: '⚫' },
     { title: 'Kite-flying has a calendar', body: 'January\'s Makar Sankranti is the day for kites in North India and Gujarat. Writing about पतंग उड़ाना without Sankranti reads less authentic.', emoji: '🪁' },
-    { title: 'Cricket ≠ only outdoor', body: 'Gali cricket (street cricket) bridges indoor and outdoor — neighborhoods play in courtyards with tennis balls. Acknowledging this scores Topic Coverage.', emoji: '🏏' },
+    { title: 'Cricket ≠ only outdoor', body: 'Gali cricket (street cricket) bridges indoor and outdoor - neighborhoods play in courtyards with tennis balls. Acknowledging this scores Topic Coverage.', emoji: '🏏' },
     { title: 'Chai is an indoor ritual', body: 'Rain outside → chai and pakoras inside. The pairing is cultural shorthand.', emoji: '🍵' },
   ],
   culturalNote: {
@@ -186,8 +186,8 @@ export const pack: TopicPack = {
   },
 
   muhavare: [
-    { phrase: 'घर की मुर्ग़ी दाल बराबर', literal: 'the home hen is equal to daal', meaning: 'What is close at hand is taken for granted.', example: 'पार्क हमारे पास है, पर हम कभी नहीं जाते — घर की मुर्ग़ी दाल बराबर।', exampleEnglish: 'The park is right here, but we never go — we take what\'s close for granted.' },
-    { phrase: 'चार दिन की चाँदनी', literal: 'four days of moonlight', meaning: 'Short-lived pleasure.', example: 'सर्दी की धूप तो चार दिन की चाँदनी होती है — जब मिले, पूरा इस्तेमाल करो।', exampleEnglish: 'Winter sunshine is a short-lived pleasure — use it fully when you get it.' },
+    { phrase: 'घर की मुर्ग़ी दाल बराबर', literal: 'the home hen is equal to daal', meaning: 'What is close at hand is taken for granted.', example: 'पार्क हमारे पास है, पर हम कभी नहीं जाते - घर की मुर्ग़ी दाल बराबर।', exampleEnglish: 'The park is right here, but we never go - we take what\'s close for granted.' },
+    { phrase: 'चार दिन की चाँदनी', literal: 'four days of moonlight', meaning: 'Short-lived pleasure.', example: 'सर्दी की धूप तो चार दिन की चाँदनी होती है - जब मिले, पूरा इस्तेमाल करो।', exampleEnglish: 'Winter sunshine is a short-lived pleasure - use it fully when you get it.' },
   ],
   muhavareNote: {
     why: 'Both idioms map to the indoor/outdoor choice naturally. One well-placed idiom in an essay signals Intermediate-Mid register.',
@@ -200,14 +200,14 @@ export const pack: TopicPack = {
       prompt: 'अपने सप्ताहांत की गतिविधियों के बारे में तीन अनुच्छेदों में लिखिए। बताइए अगर मौसम अच्छा हो तो आप क्या करते हैं, और अगर बारिश हो तो क्या।',
       novice: 'मैं क्रिकेट खेलता हूँ। बारिश में टीवी देखता हूँ।',
       intermediateMid:
-        'मेरे सप्ताहांत का कार्यक्रम मौसम पर निर्भर करता है। अगर सुबह धूप निकलती है, तो मैं अपने दोस्तों के साथ पास के पार्क में क्रिकेट खेलने जाता हूँ। हम दो घंटे खेलते हैं, फिर चाट खाकर घर लौटते हैं।\n\nलेकिन अगर बारिश हो रही होती है, तो सब कुछ बदल जाता है। पिछले रविवार को झमाझम बारिश हुई थी, इसलिए हमने घर में कैरम खेला। दादाजी ने भी हिस्सा लिया और एक ही बार में पाँच सिक्के डाले। सब ख़ूब हँसे।\n\nमुझे लगता है कि दोनों दिन अच्छे होते हैं, क्योंकि अंदर और बाहर — हर जगह की अपनी ख़ुशी है। अगले शनिवार अगर मौसम साफ़ रहा, तो मैं पतंग उड़ाना सीखूँगा। मेरा भाई कहता है, वह मुझे ज़रूर सिखाएगा।',
+        'मेरे सप्ताहांत का कार्यक्रम मौसम पर निर्भर करता है। अगर सुबह धूप निकलती है, तो मैं अपने दोस्तों के साथ पास के पार्क में क्रिकेट खेलने जाता हूँ। हम दो घंटे खेलते हैं, फिर चाट खाकर घर लौटते हैं।\n\nलेकिन अगर बारिश हो रही होती है, तो सब कुछ बदल जाता है। पिछले रविवार को झमाझम बारिश हुई थी, इसलिए हमने घर में कैरम खेला। दादाजी ने भी हिस्सा लिया और एक ही बार में पाँच सिक्के डाले। सब ख़ूब हँसे।\n\nमुझे लगता है कि दोनों दिन अच्छे होते हैं, क्योंकि अंदर और बाहर - हर जगह की अपनी ख़ुशी है। अगले शनिवार अगर मौसम साफ़ रहा, तो मैं पतंग उड़ाना सीखूँगा। मेरा भाई कहता है, वह मुझे ज़रूर सिखाएगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'connector', highlight: 'अगर ... तो', note: 'Conditional opens the essay — establishes choice logic from sentence one.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'अगर ... तो', note: 'Conditional opens the essay - establishes choice logic from sentence one.' },
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'निकलती है / जाता हूँ / लौटते हैं', note: 'Habitual present used consistently for the "sunshine" routine.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'हुई थी / खेला / डाले', note: 'Paragraph shifts entirely to past tense for a specific memory — textbook time-frame switch.' },
-        { paragraphIndex: 1, kind: 'cultural', highlight: 'दादाजी ... कैरम', note: 'Intergenerational carrom — a specific cultural image raters recognize.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'हुई थी / खेला / डाले', note: 'Paragraph shifts entirely to past tense for a specific memory - textbook time-frame switch.' },
+        { paragraphIndex: 1, kind: 'cultural', highlight: 'दादाजी ... कैरम', note: 'Intergenerational carrom - a specific cultural image raters recognize.' },
         { paragraphIndex: 2, kind: 'connector', highlight: 'क्योंकि / अगर ... तो', note: 'Reason + conditional. Second conditional seals the third time frame (future).' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'सीखूँगा / सिखाएगा', note: 'Two future forms close the essay — three time frames locked in.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'सीखूँगा / सिखाएगा', note: 'Two future forms close the essay - three time frames locked in.' },
       ],
       wordCount: 126,
       tenseUsed: ['past', 'present', 'future'],
@@ -216,11 +216,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Two अगर ... तो conditionals in one essay — the rubric\'s textbook Benchmark-5 structure marker.',
+          'Two अगर ... तो conditionals in one essay - the rubric\'s textbook Benchmark-5 structure marker.',
           'Clean three-paragraph time-frame shift: habitual present → past anecdote → future plan.',
-          'Five distinct connectors used — well above the Intermediate-Mid threshold.',
+          'Five distinct connectors used - well above the Intermediate-Mid threshold.',
           'Cultural specific (दादाजी + कैरम intergenerational image) lifts Topic Coverage above generic "I play games" responses.',
-          'Reflective closing (दोनों दिन अच्छे होते हैं, क्योंकि...) generalizes beyond the events — an IM hallmark.',
+          'Reflective closing (दोनों दिन अच्छे होते हैं, क्योंकि...) generalizes beyond the events - an IM hallmark.',
         ],
         gotchas: [
           'Mixing tenses in the अगर ... तो clauses (e.g., past condition + future consequence without reason) would drop Language Control.',
@@ -233,13 +233,13 @@ export const pack: TopicPack = {
       prompt: 'इनडोर और आउटडोर गतिविधियों में आपकी क्या पसंद है? तीन अनुच्छेदों में तुलना कीजिए।',
       novice: 'मुझे बाहर अच्छा लगता है। अंदर भी ठीक है।',
       intermediateMid:
-        'मुझे इनडोर और आउटडोर दोनों गतिविधियाँ पसंद हैं, लेकिन अलग-अलग कारणों से। जब मौसम सुहावना होता है, तब मैं बाहर दौड़ने जाता हूँ, क्योंकि ताज़ी हवा से मन हल्का हो जाता है। बैडमिंटन और साइकिल चलाना भी मेरी पसंद हैं।\n\nदूसरी तरफ़, जब ठंड या बारिश होती है, तब अंदर की दुनिया ज़्यादा अच्छी लगती है। मैं शतरंज खेलता हूँ या कोई अच्छी किताब पढ़ता हूँ। पिछली सर्दी में मैंने दस किताबें पढ़ीं — यह मेरा सबसे अच्छा अनुभव था।\n\nमुझे लगता है कि सिर्फ़ बाहर ही नहीं, बल्कि अंदर भी ज़िंदगी सीखने का मौक़ा देती है। इसलिए अगले साल मैं एक नया इनडोर शौक़ — तबला — सीखूँगा। इस तरह मौसम चाहे कैसा भी हो, मेरे पास कुछ न कुछ करने को होगा।',
+        'मुझे इनडोर और आउटडोर दोनों गतिविधियाँ पसंद हैं, लेकिन अलग-अलग कारणों से। जब मौसम सुहावना होता है, तब मैं बाहर दौड़ने जाता हूँ, क्योंकि ताज़ी हवा से मन हल्का हो जाता है। बैडमिंटन और साइकिल चलाना भी मेरी पसंद हैं।\n\nदूसरी तरफ़, जब ठंड या बारिश होती है, तब अंदर की दुनिया ज़्यादा अच्छी लगती है। मैं शतरंज खेलता हूँ या कोई अच्छी किताब पढ़ता हूँ। पिछली सर्दी में मैंने दस किताबें पढ़ीं - यह मेरा सबसे अच्छा अनुभव था।\n\nमुझे लगता है कि सिर्फ़ बाहर ही नहीं, बल्कि अंदर भी ज़िंदगी सीखने का मौक़ा देती है। इसलिए अगले साल मैं एक नया इनडोर शौक़ - तबला - सीखूँगा। इस तरह मौसम चाहे कैसा भी हो, मेरे पास कुछ न कुछ करने को होगा।',
       annotations: [
         { paragraphIndex: 0, kind: 'connector', highlight: 'जब ... तब / क्योंकि', note: 'Temporal + causal connectors establish the outdoor logic.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'बैडमिंटन / साइकिल चलाना / दौड़ना', note: 'Three distinct outdoor items — topic coverage.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'दूसरी तरफ़', note: '"On the other hand" — a paragraph-level contrast marker that raters recognize as IM register.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'बैडमिंटन / साइकिल चलाना / दौड़ना', note: 'Three distinct outdoor items - topic coverage.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'दूसरी तरफ़', note: '"On the other hand" - a paragraph-level contrast marker that raters recognize as IM register.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'खेलता हूँ / पढ़ीं / था', note: 'Paragraph moves from present habit to past achievement within three sentences.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... बल्कि ... भी', note: 'Not-only-but-also construction — a hallmark IM reflective move.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... बल्कि ... भी', note: 'Not-only-but-also construction - a hallmark IM reflective move.' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'सीखूँगा / होगा', note: 'Future closer seals the third time frame.' },
       ],
       wordCount: 134,
@@ -249,11 +249,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Paragraph-level contrast with "दूसरी तरफ़" — a sophisticated discourse marker raters specifically credit.',
+          'Paragraph-level contrast with "दूसरी तरफ़" - a sophisticated discourse marker raters specifically credit.',
           'Six distinct connectors including the "सिर्फ़ ... बल्कि ... भी" IM hallmark.',
           'Three time frames spread across three paragraphs with clean transitions.',
           'Concrete past achievement (दस किताबें पढ़ीं) anchors the essay in specific detail, not generalities.',
-          'Forward-looking closing with a specific future plan (तबला सीखूँगा) — reflective IM move.',
+          'Forward-looking closing with a specific future plan (तबला सीखूँगा) - reflective IM move.',
         ],
         gotchas: [
           'Dropping "सिर्फ़ ... बल्कि ... भी" would lose one of the essay\'s Text-Type 5 markers.',
@@ -285,12 +285,12 @@ export const pack: TopicPack = {
     },
   ],
   promptsNote: {
-    why: 'Three shapes — comparison, conditional, and past narrative — that together cover every FCPS leisure prompt angle. The student who can handle all three has indoor/outdoor essays locked.',
+    why: 'Three shapes - comparison, conditional, and past narrative - that together cover every FCPS leisure prompt angle. The student who can handle all three has indoor/outdoor essays locked.',
     trains: ['TextType'],
   },
 
   rubricNote: {
-    why: 'Grade every weekend essay with the self-check. If you did not use at least one अगर ... तो and one comparison, you are at Intermediate-Low, not Mid — go back and add them.',
+    why: 'Grade every weekend essay with the self-check. If you did not use at least one अगर ... तो and one comparison, you are at Intermediate-Low, not Mid - go back and add them.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 

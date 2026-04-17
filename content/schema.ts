@@ -155,7 +155,7 @@ export interface EssayAnnotation {
 }
 
 export interface ModelEssay {
-  /** Short tab label (2–4 words) — what makes this essay different from its sibling. */
+  /** Short tab label (2–4 words) - what makes this essay different from its sibling. */
   shortLabel?: string;
   prompt: string;
   novice: string;
@@ -235,7 +235,7 @@ export interface TopicIndexEntry {
 }
 
 // ---------------------------------------------------------------------------
-// Capstone essays — cross-topic, multi-paragraph writing pieces that integrate
+// Capstone essays - cross-topic, multi-paragraph writing pieces that integrate
 // vocabulary and structure from 3–5 topic packs. A student reaches each
 // capstone after completing its contributing packs; capstones rehearse the
 // exam-style performance (not a sub-skill).
@@ -309,7 +309,7 @@ export interface CapstoneIndexEntry {
 }
 
 // ---------------------------------------------------------------------------
-// Study plans — map a declared ProficiencyLevel to a weekly schedule of packs
+// Study plans - map a declared ProficiencyLevel to a weekly schedule of packs
 // and capstones. Consumed by Onboarding, Dashboard (next-pack resolution),
 // and StudyPlanView (printable schedule).
 // ---------------------------------------------------------------------------
@@ -343,7 +343,7 @@ export interface StudyPlan {
 }
 
 // ---------------------------------------------------------------------------
-// Flashcards — generated from pack/capstone content for drill. See
+// Flashcards - generated from pack/capstone content for drill. See
 // content/flashcards/* and scripts/build-flashcards.ts.
 // ---------------------------------------------------------------------------
 

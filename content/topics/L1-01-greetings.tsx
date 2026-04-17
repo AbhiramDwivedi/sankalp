@@ -3,7 +3,7 @@ import { composeHeroPrompt } from '../imagePrompts';
 import { pickConnectors } from '../connectors';
 
 // -----------------------------------------------------------------------------
-// L1-01 — Greetings & Introductions (अभिवादन और परिचय)
+// L1-01 - Greetings & Introductions (अभिवादन और परिचय)
 // The first words of every essay and every speaking prompt. A student who
 // can self-introduce in multiple registers (formal/informal, present/past/
 // future hooks) sounds fluent from sentence one.
@@ -17,16 +17,16 @@ export const pack: TopicPack = {
   heroMotif: 'namaste',
   titleHindi: 'अभिवादन और परिचय',
   titleEnglish: 'Greetings & Introductions',
-  hook: 'The first words any essay opens with — and the cheapest way to sound fluent.',
+  hook: 'The first words any essay opens with - and the cheapest way to sound fluent.',
   heroPrompt: composeHeroPrompt(
     'Two silhouetted students meeting on a school courtyard in the morning, hands joined in namaste, soft marigold sunrise',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Greetings and Introductions (FCPS Level 1 — Personal & Family Life)',
+      'Greetings and Introductions (FCPS Level 1 - Personal & Family Life)',
       'Personal information: name, age, school, city (FCPS Level 1)',
-      'Feeds every later topic — every essay opens with a self-introduction move',
+      'Feeds every later topic - every essay opens with a self-introduction move',
     ],
     trains: ['LanguageControl', 'TextType', 'TopicCoverage'],
     afterThisPackStudentCan: [
@@ -39,7 +39,7 @@ export const pack: TopicPack = {
     positionOnArc: 'foundations',
     estimatedTime: '60 min reading + 30 min essay',
     ifSkippedRisk:
-      'Every FCPS writing and speaking prompt begins with the student introducing themselves. Skipping this pack means the opening lines of every essay are shaky — raters form their first impression in the first two sentences, and a wobble there caps the whole response at Novice-High.',
+      'Every FCPS writing and speaking prompt begins with the student introducing themselves. Skipping this pack means the opening lines of every essay are shaky - raters form their first impression in the first two sentences, and a wobble there caps the whole response at Novice-High.',
   },
 
   objectives: [
@@ -60,7 +60,7 @@ export const pack: TopicPack = {
       trains: ['LanguageControl'],
     },
     {
-      text: 'Choose आप vs तुम appropriately — teacher/elder/stranger = आप, classmate/sibling = तुम.',
+      text: 'Choose आप vs तुम appropriately - teacher/elder/stranger = आप, classmate/sibling = तुम.',
       trains: ['LanguageControl', 'TextType'],
     },
   ],
@@ -111,7 +111,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 29 entries are the precise set that FCPS opening prompts ("Introduce yourself", "Describe your family") pull from again and again. Every item appears in the reading sample or one of the model essays. Master this list and the first 3–4 sentences of any essay become automatic — which is exactly where raters form their first impression.',
+      'These 29 entries are the precise set that FCPS opening prompts ("Introduce yourself", "Describe your family") pull from again and again. Every item appears in the reading sample or one of the model essays. Master this list and the first 3–4 sentences of any essay become automatic - which is exactly where raters form their first impression.',
     trains: ['TopicCoverage', 'LanguageControl'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?" Greetings + self-intro vocab opens every FCPS prompt.',
   },
@@ -128,7 +128,7 @@ export const pack: TopicPack = {
         { hindi: 'हम सब दोस्त हैं।', transliteration: 'hum sab dost hain.', english: 'We are all friends. (1st plural)' },
       ],
       pitfall:
-        'Students often drop the copula ("मेरा नाम आर्यन") or use the wrong form ("मैं है" — wrong, should be "मैं हूँ"). Both errors are instantly visible to raters.',
+        'Students often drop the copula ("मेरा नाम आर्यन") or use the wrong form ("मैं है" - wrong, should be "मैं हूँ"). Both errors are instantly visible to raters.',
       whyItMatters:
         'होना is the single most frequent verb in any introduction. Every correct copula = one clean sentence; every wrong one = one error in Language Control. Three wrong copulas in a row and the rubric caps at Novice-High (1 credit) regardless of vocabulary.',
     },
@@ -137,8 +137,8 @@ export const pack: TopicPack = {
       rule:
         'Hindi encodes respect in the pronoun. Use आप for teachers, elders, strangers, and in FCPS essays (default). Use तुम for peers, classmates, younger siblings. तू is very intimate/rude and should NEVER appear in an essay. Verbs agree: आप हैं / करते हैं, तुम हो / करते हो, तू है / करता है.',
       examples: [
-        { hindi: 'नमस्ते सर, आप कैसे हैं?', transliteration: 'namaste sir, aap kaise hain?', english: 'Namaste sir, how are you? (to teacher — आप)' },
-        { hindi: 'अरे अमित, तुम कैसे हो?', transliteration: 'are amit, tum kaise ho?', english: 'Hey Amit, how are you? (to friend — तुम)' },
+        { hindi: 'नमस्ते सर, आप कैसे हैं?', transliteration: 'namaste sir, aap kaise hain?', english: 'Namaste sir, how are you? (to teacher - आप)' },
+        { hindi: 'अरे अमित, तुम कैसे हो?', transliteration: 'are amit, tum kaise ho?', english: 'Hey Amit, how are you? (to friend - तुम)' },
         { hindi: 'आपका नाम क्या है?', transliteration: 'aapka naam kya hai?', english: 'What is your name? (polite)' },
         { hindi: 'तुम्हारा नाम क्या है?', transliteration: 'tumhaara naam kya hai?', english: 'What is your name? (informal)' },
       ],
@@ -159,12 +159,12 @@ export const pack: TopicPack = {
       pitfall:
         'Writing "मेरा माँ" or "मेरी नाम" is the #1 introduction error. माँ is feminine (→ मेरी माँ) and नाम is masculine (→ मेरा नाम).',
       whyItMatters:
-        'Because possessives appear in every single introduction sentence, getting this wrong is a high-frequency error. Correct agreement across 5–6 possessives in one essay signals "sustained control" — the Intermediate-Mid threshold.',
+        'Because possessives appear in every single introduction sentence, getting this wrong is a high-frequency error. Correct agreement across 5–6 possessives in one essay signals "sustained control" - the Intermediate-Mid threshold.',
     },
   ],
   grammarNote: {
     why:
-      'These three rules — copula होना, register choice, and possessive agreement — cover roughly 90% of all errors on introduction essays. Drilling these first unlocks the opening move of every other FCPS topic. Fix these and Language Control stabilizes at Average, which is all Intermediate-Mid requires.',
+      'These three rules - copula होना, register choice, and possessive agreement - cover roughly 90% of all errors on introduction essays. Drilling these first unlocks the opening move of every other FCPS topic. Fix these and Language Control stabilizes at Average, which is all Intermediate-Mid requires.',
     trains: ['LanguageControl'],
   },
 
@@ -178,38 +178,38 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'A Level-1 starter set: पहले, फिर, इसके बाद sequence a self-introduction cleanly (name → school → family). क्योंकि lets the student justify a preference ("I like Hindi because..."); लेकिन contrasts two facts ("I live in Fairfax, but I was born in Delhi"). Five connectors is the minimum to reach Text-Type 5 — use three in one essay and the rubric rewards you.',
+      'A Level-1 starter set: पहले, फिर, इसके बाद sequence a self-introduction cleanly (name → school → family). क्योंकि lets the student justify a preference ("I like Hindi because..."); लेकिन contrasts two facts ("I live in Fairfax, but I was born in Delhi"). Five connectors is the minimum to reach Text-Type 5 - use three in one essay and the rubric rewards you.',
     trains: ['TextType'],
   },
 
   anchor: {
     title: 'नए स्कूल में पहला दिन · First Day at a New School',
     hindi:
-      'नमस्ते सर, मेरा नाम अर्जुन शर्मा है। मैं दसवीं कक्षा का नया छात्र हूँ। पहले मैं दिल्ली के एक स्कूल में पढ़ता था, लेकिन अब मेरा परिवार फ़ेयरफ़ैक्स आ गया है, क्योंकि मेरे पिताजी को यहाँ नौकरी मिली। मेरी उम्र पंद्रह साल है। मेरे परिवार में चार लोग हैं — पिताजी, माँ, मेरी छोटी बहन, और मैं। मुझे हिंदी और गणित बहुत पसंद हैं। इसके बाद मैं अपने नए दोस्तों से मिलना चाहता हूँ। आपसे मिलकर बहुत खुशी हुई। धन्यवाद सर।',
+      'नमस्ते सर, मेरा नाम अर्जुन शर्मा है। मैं दसवीं कक्षा का नया छात्र हूँ। पहले मैं दिल्ली के एक स्कूल में पढ़ता था, लेकिन अब मेरा परिवार फ़ेयरफ़ैक्स आ गया है, क्योंकि मेरे पिताजी को यहाँ नौकरी मिली। मेरी उम्र पंद्रह साल है। मेरे परिवार में चार लोग हैं - पिताजी, माँ, मेरी छोटी बहन, और मैं। मुझे हिंदी और गणित बहुत पसंद हैं। इसके बाद मैं अपने नए दोस्तों से मिलना चाहता हूँ। आपसे मिलकर बहुत खुशी हुई। धन्यवाद सर।',
     transliteration:
-      'namaste sir, mera naam arjun sharma hai. main dasvin kakshaa ka naya chhaatr hoon. pahle main dilli ke ek school mein padhta tha, lekin ab mera parivaar fairfax aa gaya hai, kyonki mere pitaji ko yahaan naukri mili. meri umr pandrah saal hai. mere parivaar mein chaar log hain — pitaji, maa, meri chhoti bahan, aur main. mujhe hindi aur ganit bahut pasand hain. iske baad main apne naye doston se milna chahta hoon. aapse milkar bahut khushi hui. dhanyavaad sir.',
+      'namaste sir, mera naam arjun sharma hai. main dasvin kakshaa ka naya chhaatr hoon. pahle main dilli ke ek school mein padhta tha, lekin ab mera parivaar fairfax aa gaya hai, kyonki mere pitaji ko yahaan naukri mili. meri umr pandrah saal hai. mere parivaar mein chaar log hain - pitaji, maa, meri chhoti bahan, aur main. mujhe hindi aur ganit bahut pasand hain. iske baad main apne naye doston se milna chahta hoon. aapse milkar bahut khushi hui. dhanyavaad sir.',
     english:
-      "Namaste sir, my name is Arjun Sharma. I am a new student in the tenth grade. Earlier I used to study in a school in Delhi, but now my family has come to Fairfax, because my father got a job here. My age is fifteen years. There are four people in my family — Father, Mother, my younger sister, and me. I like Hindi and mathematics very much. After this, I want to meet my new friends. It has been a great pleasure to meet you. Thank you, sir.",
+      "Namaste sir, my name is Arjun Sharma. I am a new student in the tenth grade. Earlier I used to study in a school in Delhi, but now my family has come to Fairfax, because my father got a job here. My age is fifteen years. There are four people in my family - Father, Mother, my younger sister, and me. I like Hindi and mathematics very much. After this, I want to meet my new friends. It has been a great pleasure to meet you. Thank you, sir.",
     highlights: [
-      { term: 'नमस्ते सर … आप / धन्यवाद सर', note: 'Polite register sustained from opening to closing — one of the clearest Language Control signals raters look for.' },
+      { term: 'नमस्ते सर … आप / धन्यवाद सर', note: 'Polite register sustained from opening to closing - one of the clearest Language Control signals raters look for.' },
       { term: 'पहले … लेकिन … क्योंकि … इसके बाद', note: 'Four different connectors stitch past, present-contrast, cause, and future into one paragraph. Text-Type 5 shape.' },
       { term: 'मेरा नाम / मेरी उम्र / मेरे परिवार', note: 'All three possessive genders (masc. sing., fem., masc. plural/oblique) used correctly in one passage.' },
-      { term: 'पढ़ता था / आ गया है / मिलना चाहता हूँ', note: 'Habitual past + present perfect + future desire — three time frames, the IM threshold.' },
-      { term: 'आपसे मिलकर खुशी हुई', note: 'Stock closing — memorize this exact phrase, it works in every introduction.' },
+      { term: 'पढ़ता था / आ गया है / मिलना चाहता हूँ', note: 'Habitual past + present perfect + future desire - three time frames, the IM threshold.' },
+      { term: 'आपसे मिलकर खुशी हुई', note: 'Stock closing - memorize this exact phrase, it works in every introduction.' },
     ],
     comprehensionQuestions: [
       { q: 'What is the speaker\'s name and grade?', a: 'अर्जुन शर्मा, दसवीं कक्षा (Arjun Sharma, tenth grade).' },
       { q: 'Where did Arjun study before, and where does he live now?', a: 'पहले दिल्ली में, अब फ़ेयरफ़ैक्स में (earlier in Delhi, now in Fairfax).' },
       { q: 'Why did the family move?', a: 'क्योंकि पिताजी को नौकरी मिली (because Father got a job there).' },
-      { q: 'How many people are in his family? Name them.', a: 'चार — पिताजी, माँ, छोटी बहन, और अर्जुन.' },
+      { q: 'How many people are in his family? Name them.', a: 'चार - पिताजी, माँ, छोटी बहन, और अर्जुन.' },
       { q: 'Which two subjects does Arjun like?', a: 'हिंदी और गणित (Hindi and Mathematics).' },
-      { q: 'Identify one polite-register marker in the passage.', a: 'नमस्ते सर / आप / धन्यवाद / जी — any of these.' },
+      { q: 'Identify one polite-register marker in the passage.', a: 'नमस्ते सर / आप / धन्यवाद / जी - any of these.' },
       { q: 'Which connector sets up the reason for moving?', a: 'क्योंकि (because).' },
     ],
   },
   anchorNote: {
     why:
-      'This anchor is a model first-day introduction at Intermediate-Mid — polite register throughout, three time frames, four connectors, clean possessives. The student\'s OUTPUT in every writing prompt should mirror this INPUT. Read aloud three times before writing; the opening sentences should start to feel automatic.',
+      'This anchor is a model first-day introduction at Intermediate-Mid - polite register throughout, three time frames, four connectors, clean possessives. The student\'s OUTPUT in every writing prompt should mirror this INPUT. Read aloud three times before writing; the opening sentences should start to feel automatic.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -257,7 +257,7 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'An email, an SMS, a diary page, and a pen-friend letter — four registers of self-introduction. Each shows the same core facts (name, age, school/city, family) wrapped in a different level of politeness. Students learn here that the FACTS stay constant; only the REGISTER changes.',
+      'An email, an SMS, a diary page, and a pen-friend letter - four registers of self-introduction. Each shows the same core facts (name, age, school/city, family) wrapped in a different level of politeness. Students learn here that the FACTS stay constant; only the REGISTER changes.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -265,13 +265,13 @@ export const pack: TopicPack = {
     {
       title: 'Namaste with Folded Hands',
       body:
-        'The traditional greeting is palms pressed together at chest height with a slight bow — "नमस्ते". Handshakes are common in offices and with Western-educated adults, but namaste is the safe, respectful default with elders, teachers, and strangers. Mentioning "हाथ जोड़कर नमस्ते किया" in an essay is an easy cultural-detail point.',
+        'The traditional greeting is palms pressed together at chest height with a slight bow - "नमस्ते". Handshakes are common in offices and with Western-educated adults, but namaste is the safe, respectful default with elders, teachers, and strangers. Mentioning "हाथ जोड़कर नमस्ते किया" in an essay is an easy cultural-detail point.',
       emoji: '🙏',
     },
     {
       title: 'The जी Suffix',
       body:
-        'Adding जी after a name or title (शर्मा जी, सर जी, माँ जी) adds respect. Using it in an essay — "मेरे शिक्षक शर्मा जी हैं" — signals that the student understands Hindi politeness layers. Missing it with elders reads as rude.',
+        'Adding जी after a name or title (शर्मा जी, सर जी, माँ जी) adds respect. Using it in an essay - "मेरे शिक्षक शर्मा जी हैं" - signals that the student understands Hindi politeness layers. Missing it with elders reads as rude.',
       emoji: '🎎',
     },
     {
@@ -283,19 +283,19 @@ export const pack: TopicPack = {
     {
       title: 'आप Is the Default for Strangers',
       body:
-        'Unlike English "you", Hindi forces a respect choice every time you address someone. First-meeting, always use आप. Shifting to तुम happens only after the other person signals it is okay — usually with a smile and "तुम कहकर बात करो (just call me tum)". Never use तू with someone you have just met.',
+        'Unlike English "you", Hindi forces a respect choice every time you address someone. First-meeting, always use आप. Shifting to तुम happens only after the other person signals it is okay - usually with a smile and "तुम कहकर बात करो (just call me tum)". Never use तू with someone you have just met.',
       emoji: '🎩',
     },
     {
       title: 'मिलकर खुशी हुई',
       body:
-        '"आपसे मिलकर खुशी हुई" ("pleased to have met you") is the universal polite closing at the end of an introduction. It translates across regions and generations. Memorize this exact phrase — it closes introductions the way "nice to meet you" does in English, and raters recognize it immediately.',
+        '"आपसे मिलकर खुशी हुई" ("pleased to have met you") is the universal polite closing at the end of an introduction. It translates across regions and generations. Memorize this exact phrase - it closes introductions the way "nice to meet you" does in English, and raters recognize it immediately.',
       emoji: '😊',
     },
   ],
   culturalNote: {
     why:
-      'FCPS raters have seen thousands of "My name is X. I am Y years old." intros. One concrete cultural marker — हाथ जोड़कर नमस्ते, a जी, a correct time-of-day greeting — lifts the essay instantly from generic to authentic. That is a pure Topic-Coverage + Text-Type boost at no grammar cost.',
+      'FCPS raters have seen thousands of "My name is X. I am Y years old." intros. One concrete cultural marker - हाथ जोड़कर नमस्ते, a जी, a correct time-of-day greeting - lifts the essay instantly from generic to authentic. That is a pure Topic-Coverage + Text-Type boost at no grammar cost.',
     trains: ['TopicCoverage', 'TextType'],
   },
 
@@ -317,7 +317,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Both idioms relate directly to meeting and knowing people. Sliding one into a self-introduction essay — "मेरी उनसे अभी-अभी जान-पहचान हुई है" — reads as register mastery without risk. One idiom per essay is plenty.',
+      'Both idioms relate directly to meeting and knowing people. Sliding one into a self-introduction essay - "मेरी उनसे अभी-अभी जान-पहचान हुई है" - reads as register mastery without risk. One idiom per essay is plenty.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -328,15 +328,15 @@ export const pack: TopicPack = {
         'अपने आप का परिचय तीन अनुच्छेदों में दीजिए। अपना नाम, परिवार, और रुचियाँ बताइए। (In three paragraphs, introduce yourself. Tell us your name, family, and interests.)',
       novice: 'मेरा नाम अमन। मैं छात्र। अच्छा।',
       intermediateMid:
-        'नमस्ते, मेरा नाम अमन वर्मा है और मैं पंद्रह साल का हूँ। मैं फ़ेयरफ़ैक्स हाई स्कूल की दसवीं कक्षा में पढ़ता हूँ। पहले मेरा परिवार भारत में रहता था, लेकिन अब हम अमेरिका में रहते हैं, क्योंकि मेरे पिताजी को यहाँ एक अच्छी नौकरी मिली।\n\nमेरे परिवार में चार लोग हैं — पिताजी, माँ, मेरी छोटी बहन, और मैं। मेरी माँ शिक्षिका हैं और मेरे पिताजी इंजीनियर हैं। हम सब साथ खाना खाते हैं और हिंदी में बात करते हैं। इसके बाद मेरी बहन और मैं होमवर्क करते हैं।\n\nमुझे हिंदी, गणित, और क्रिकेट बहुत पसंद हैं। मैं रोज़ शाम को अपने दोस्तों के साथ खेलता हूँ। अगले साल मैं भारत जाऊँगा और अपने दादा-दादी से मिलूँगा। आपसे मिलकर बहुत खुशी हुई।',
+        'नमस्ते, मेरा नाम अमन वर्मा है और मैं पंद्रह साल का हूँ। मैं फ़ेयरफ़ैक्स हाई स्कूल की दसवीं कक्षा में पढ़ता हूँ। पहले मेरा परिवार भारत में रहता था, लेकिन अब हम अमेरिका में रहते हैं, क्योंकि मेरे पिताजी को यहाँ एक अच्छी नौकरी मिली।\n\nमेरे परिवार में चार लोग हैं - पिताजी, माँ, मेरी छोटी बहन, और मैं। मेरी माँ शिक्षिका हैं और मेरे पिताजी इंजीनियर हैं। हम सब साथ खाना खाते हैं और हिंदी में बात करते हैं। इसके बाद मेरी बहन और मैं होमवर्क करते हैं।\n\nमुझे हिंदी, गणित, और क्रिकेट बहुत पसंद हैं। मैं रोज़ शाम को अपने दोस्तों के साथ खेलता हूँ। अगले साल मैं भारत जाऊँगा और अपने दादा-दादी से मिलूँगा। आपसे मिलकर बहुत खुशी हुई।',
       annotations: [
-        { paragraphIndex: 0, kind: 'structure', highlight: 'नमस्ते, मेरा नाम … है और मैं … हूँ', note: 'Textbook polite opener — two copulas (है / हूँ) in one sentence, both correct.' },
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पहले रहता था, लेकिन अब रहते हैं', note: 'Habitual past beside present — clean past/present contrast in one sentence.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'नमस्ते, मेरा नाम … है और मैं … हूँ', note: 'Textbook polite opener - two copulas (है / हूँ) in one sentence, both correct.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पहले रहता था, लेकिन अब रहते हैं', note: 'Habitual past beside present - clean past/present contrast in one sentence.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'पहले … लेकिन … क्योंकि', note: 'Three connectors in three clauses. Text-Type 5 cohesion.' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'शिक्षिका / इंजीनियर', note: 'Feminine शिक्षिका matches माँ — gender agreement across professions, a Language Control win.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'इसके बाद', note: 'Sequencer organizes the family routine — not just listing, but ordering.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल मैं भारत जाऊँगा', note: 'Future tense arrives in the closing — three time frames (past, present, future) sealed.' },
-        { paragraphIndex: 2, kind: 'cultural', highlight: 'आपसे मिलकर बहुत खुशी हुई', note: 'Stock polite closing — recognized instantly by raters.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'शिक्षिका / इंजीनियर', note: 'Feminine शिक्षिका matches माँ - gender agreement across professions, a Language Control win.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'इसके बाद', note: 'Sequencer organizes the family routine - not just listing, but ordering.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल मैं भारत जाऊँगा', note: 'Future tense arrives in the closing - three time frames (past, present, future) sealed.' },
+        { paragraphIndex: 2, kind: 'cultural', highlight: 'आपसे मिलकर बहुत खुशी हुई', note: 'Stock polite closing - recognized instantly by raters.' },
       ],
       wordCount: 121,
       tenseUsed: ['past', 'present', 'future'],
@@ -345,11 +345,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs with clear topic per paragraph (self → family → interests & future). Sentences cannot be rearranged — the Text-Type 5 litmus test.',
+          'Three cohesive paragraphs with clear topic per paragraph (self → family → interests & future). Sentences cannot be rearranged - the Text-Type 5 litmus test.',
           'All three time frames present: रहता था (past habitual), रहते हैं / खेलता हूँ (present), जाऊँगा (future). Satisfies "some control of major time frames" for IM.',
-          'Four different connectors (पहले, लेकिन, क्योंकि, इसके बाद) — above the 3-connector threshold raters reward.',
-          'Possessive agreement clean throughout: मेरा नाम (m), मेरी बहन (f), मेरे पिताजी (m plural) — no gender slips.',
-          'Polite register sustained from नमस्ते through आपसे मिलकर खुशी हुई — signals Language Control at Average or above.',
+          'Four different connectors (पहले, लेकिन, क्योंकि, इसके बाद) - above the 3-connector threshold raters reward.',
+          'Possessive agreement clean throughout: मेरा नाम (m), मेरी बहन (f), मेरे पिताजी (m plural) - no gender slips.',
+          'Polite register sustained from नमस्ते through आपसे मिलकर खुशी हुई - signals Language Control at Average or above.',
         ],
         gotchas: [
           'If the student writes "मेरा माँ" or "मेरी नाम" anywhere, Language Control drops to Low immediately.',
@@ -361,18 +361,18 @@ export const pack: TopicPack = {
     {
       shortLabel: 'Meeting a friend',
       prompt:
-        'अपने स्कूल के एक नए दोस्त से मुलाक़ात का वर्णन तीन अनुच्छेदों में कीजिए। कब और कहाँ मिले, क्या बात की, और आगे क्या करेंगे — यह बताइए। (In three paragraphs, describe meeting a new friend at school. Tell when and where you met, what you talked about, and what you will do next.)',
+        'अपने स्कूल के एक नए दोस्त से मुलाक़ात का वर्णन तीन अनुच्छेदों में कीजिए। कब और कहाँ मिले, क्या बात की, और आगे क्या करेंगे - यह बताइए। (In three paragraphs, describe meeting a new friend at school. Tell when and where you met, what you talked about, and what you will do next.)',
       novice: 'मेरा दोस्त अच्छा। हम मिले। अच्छा लगा।',
       intermediateMid:
         'पिछले सोमवार को सुबह स्कूल में मेरी एक नए छात्र से मुलाक़ात हुई। वह मेरी ही कक्षा में है। पहले मैंने उसे देखा और कहा, "नमस्ते, मेरा नाम ईशा है। आपका नाम क्या है?" उसने मुस्कुराकर जवाब दिया, "नमस्ते, मैं आर्यन हूँ।"\n\nइसके बाद हम दोनों ने बहुत बातें कीं। आर्यन पहले न्यू यॉर्क में रहता था, लेकिन अब वह फ़ेयरफ़ैक्स में रहता है, क्योंकि उसके पिताजी का तबादला हुआ है। उसे भी हिंदी और क्रिकेट पसंद हैं। जब मैंने यह सुना, तो मुझे बहुत खुशी हुई।\n\nअंत में हमने एक-दूसरे का नंबर लिया और कहा, "फिर मिलेंगे।" कल हम लंच साथ खाएँगे और हिंदी के होमवर्क पर बात करेंगे। मुझे लगता है कि आर्यन मेरा अच्छा दोस्त बनेगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले सोमवार को … मुलाक़ात हुई', note: 'Opens with a specific past marker — raters love this anchor.' },
-        { paragraphIndex: 0, kind: 'idiom', highlight: 'मुलाक़ात हुई', note: 'Muhavara from this pack used in context — one per essay is plenty.' },
-        { paragraphIndex: 0, kind: 'structure', highlight: 'Direct quotation "नमस्ते, मेरा नाम ईशा है।"', note: 'Embedded quoted speech — an Intermediate-Mid complexity marker.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पहले रहता था, लेकिन अब रहता है', note: 'Past-habitual / present contrast — same structure as Essay 1, transferable.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'इसके बाद … क्योंकि … जब … तो', note: 'Four connectors in two sentences — dense cohesion, Text-Type 5.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'कल हम लंच साथ खाएँगे … बनेगा', note: 'Future tense closes the essay — third time frame sealed.' },
-        { paragraphIndex: 2, kind: 'cultural', highlight: 'फिर मिलेंगे', note: 'Stock farewell — polite register held from "नमस्ते" all the way to the close.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले सोमवार को … मुलाक़ात हुई', note: 'Opens with a specific past marker - raters love this anchor.' },
+        { paragraphIndex: 0, kind: 'idiom', highlight: 'मुलाक़ात हुई', note: 'Muhavara from this pack used in context - one per essay is plenty.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'Direct quotation "नमस्ते, मेरा नाम ईशा है।"', note: 'Embedded quoted speech - an Intermediate-Mid complexity marker.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पहले रहता था, लेकिन अब रहता है', note: 'Past-habitual / present contrast - same structure as Essay 1, transferable.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'इसके बाद … क्योंकि … जब … तो', note: 'Four connectors in two sentences - dense cohesion, Text-Type 5.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'कल हम लंच साथ खाएँगे … बनेगा', note: 'Future tense closes the essay - third time frame sealed.' },
+        { paragraphIndex: 2, kind: 'cultural', highlight: 'फिर मिलेंगे', note: 'Stock farewell - polite register held from "नमस्ते" all the way to the close.' },
       ],
       wordCount: 119,
       tenseUsed: ['past', 'present', 'future'],
@@ -381,23 +381,23 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Narrative opens in the past (मुलाक़ात हुई), develops in present (पसंद हैं, रहता है), closes in future (खाएँगे, बनेगा) — three time frames inside 128 words.',
-          'Direct quoted dialogue ("नमस्ते, मेरा नाम ईशा है।") is an explicit Intermediate-Mid complexity marker — shows the student can embed speech.',
+          'Narrative opens in the past (मुलाक़ात हुई), develops in present (पसंद हैं, रहता है), closes in future (खाएँगे, बनेगा) - three time frames inside 128 words.',
+          'Direct quoted dialogue ("नमस्ते, मेरा नाम ईशा है।") is an explicit Intermediate-Mid complexity marker - shows the student can embed speech.',
           'Four connectors, each doing different work (sequence, cause, contrast, time-when). That variety is what separates 4 from 5.',
           'Register choice is consistent: आप / आपका in first meeting, softened to हम / एक-दूसरे once the characters become friends. Rater reads this as nuanced control.',
-          'Muhavara मुलाक़ात हुई placed inside narrative, not tacked on — exactly how Intermediate-Mid students use idioms.',
+          'Muhavara मुलाक़ात हुई placed inside narrative, not tacked on - exactly how Intermediate-Mid students use idioms.',
         ],
         gotchas: [
           'If the student mixes "तुम्हारा नाम" with "नमस्ते" on first meeting, register drops to Low.',
           'Losing gender agreement on possessives inside the dialogue (e.g. "मेरी नाम") undoes the credit earned by the rest.',
-          'A one-paragraph version of this story, however pretty, would score Benchmark 4 (Intermediate-Low, 2 credits) — paragraph break is the IM/IL line.',
+          'A one-paragraph version of this story, however pretty, would score Benchmark 4 (Intermediate-Low, 2 credits) - paragraph break is the IM/IL line.',
         ],
       },
     },
   ],
   modelEssaysNote: {
     why:
-      'Two fully-worked Intermediate-Mid introduction essays. Essay 1 is the "present yourself" shape — the universal opener. Essay 2 is the "narrate a first meeting" shape — the same vocabulary wrapped in past narrative. Memorize the sentence shapes; the verdict cards show exactly which rubric boxes each sentence ticks.',
+      'Two fully-worked Intermediate-Mid introduction essays. Essay 1 is the "present yourself" shape - the universal opener. Essay 2 is the "narrate a first meeting" shape - the same vocabulary wrapped in past narrative. Memorize the sentence shapes; the verdict cards show exactly which rubric boxes each sentence ticks.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -415,7 +415,7 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'अपने स्कूल के पहले दिन का वर्णन तीन अनुच्छेदों में कीजिए। आप किससे मिले, क्या बात की, और क्या महसूस किया — यह बताइए।',
+        'अपने स्कूल के पहले दिन का वर्णन तीन अनुच्छेदों में कीजिए। आप किससे मिले, क्या बात की, और क्या महसूस किया - यह बताइए।',
       english:
         'Describe your first day at school in three paragraphs. Tell whom you met, what you talked about, and how you felt.',
       hint: {

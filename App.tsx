@@ -295,7 +295,7 @@ const App: React.FC = () => {
     );
   }
 
-  // D) First-run explainer — dismissed by the CTA inside the view OR by
+  // D) First-run explainer - dismissed by the CTA inside the view OR by
   // clicking any sidebar tab (otherwise the nav appears unresponsive).
   if (showHowThisWorks) {
     return (

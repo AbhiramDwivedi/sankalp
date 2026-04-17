@@ -10,16 +10,16 @@ export const pack: TopicPack = {
   heroMotif: 'bazaar',
   titleHindi: 'ख़रीदारी (स्तर 2)',
   titleEnglish: 'Shopping (Level 2)',
-  hook: 'Comparison, opinion, online vs mall — Level-2 shopping is where the student learns to argue, not just list.',
+  hook: 'Comparison, opinion, online vs mall - Level-2 shopping is where the student learns to argue, not just list.',
   heroPrompt: composeHeroPrompt(
     'A mall escalator scene with shoppers carrying branded bags from different boutiques, a food court visible, a mobile phone screen showing an online shopping cart in the foreground, cream and sage palette',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Shopping (FCPS Level 2 — Leisure Time; Level-2 deep dive)',
+      'Shopping (FCPS Level 2 - Leisure Time; Level-2 deep dive)',
       'Consumer opinions and comparisons (FCPS Level 2)',
-      'Online versus in-person shopping (FCPS Level 2 — contemporary life)',
+      'Online versus in-person shopping (FCPS Level 2 - contemporary life)',
     ],
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
     afterThisPackStudentCan: [
@@ -80,7 +80,7 @@ export const pack: TopicPack = {
     { hindi: 'विश्वास', transliteration: 'vishvaas', english: 'trust', exampleHindi: 'मुझे ऑफ़लाइन दुकानदारों पर ज़्यादा विश्वास है।', exampleEnglish: 'I trust offline shopkeepers more.', emoji: '🤝', partOfSpeech: 'noun', subgroup: 'Opinion' },
   ],
   vocabularyNote: {
-    why: 'Level-2 shopping vocabulary focuses on comparison, opinion, and online nuance — the three axes Level-2 prompts now require. L1-11 covers transactional basics; this pack layers the opinion register on top.',
+    why: 'Level-2 shopping vocabulary focuses on comparison, opinion, and online nuance - the three axes Level-2 prompts now require. L1-11 covers transactional basics; this pack layers the opinion register on top.',
     trains: ['TopicCoverage'],
   },
 
@@ -93,7 +93,7 @@ export const pack: TopicPack = {
         { hindi: 'यह मॉल सबसे बड़ा है।', transliteration: 'yah mall sabse bada hai.', english: 'This mall is the biggest. (m.sg)' },
         { hindi: 'ये कपड़े सबसे अच्छे हैं।', transliteration: 'ye kapde sabse achchhe hain.', english: 'These clothes are the best. (m.pl)' },
       ],
-      pitfall: 'Dropping the agreement after सबसे — "यह दुकान सबसे सस्ता" — is the most common error.',
+      pitfall: 'Dropping the agreement after सबसे - "यह दुकान सबसे सस्ता" - is the most common error.',
       whyItMatters: 'Superlatives are one of the "complex structures emerging" signals the rubric credits at Intermediate-Mid. A clean सबसे used three times in an essay is a visible benchmark marker.',
     },
     {
@@ -114,19 +114,19 @@ export const pack: TopicPack = {
 
   connectors: pickConnectors(['kyonki','lekin','isliye','iskeAlawa','agarTo','mujheLagta','sirfNahiBalki','halaanki']),
   connectorsNote: {
-    why: 'This connector set shifts from sequence (L1 shopping) to reasoning. मुझे लगता है कि, सिर्फ़...बल्कि भी, हालाँकि — each is a discourse-level marker raters reward.',
+    why: 'This connector set shifts from sequence (L1 shopping) to reasoning. मुझे लगता है कि, सिर्फ़...बल्कि भी, हालाँकि - each is a discourse-level marker raters reward.',
     trains: ['TextType'],
   },
 
   anchor: {
     title: 'माँ का बाज़ार, मेरा ऐप · Mom\'s Market, My App',
-    hindi: 'मेरे घर में ख़रीदारी के दो तरीक़े हैं। माँ हमेशा बाज़ार जाती हैं, क्योंकि उनका मानना है कि सब्ज़ियाँ छूकर देखना ज़रूरी है। हालाँकि मैं इसकी इज़्ज़त करता हूँ, लेकिन मैं अक्सर फ़ोन पर ऑनलाइन ख़रीदारी करता हूँ। पिछले हफ़्ते मैंने एक स्पीकर ख़रीदा था, जो दो दिन में घर पहुँच गया। उसमें पच्चीस प्रतिशत की छूट भी थी। मेरी राय में, ऑनलाइन और बाज़ार, दोनों के अपने फ़ायदे हैं। बाज़ार से विश्वास और बात-चीत मिलती है, जबकि ऐप से समय और छूट मिलती है। सिर्फ़ एक विकल्प चुनने की ज़रूरत नहीं — दोनों को मिलाकर चलना ज़्यादा बेहतर है। यही हमारे परिवार का नियम बन गया है।',
-    transliteration: 'mere ghar mein khareedaari ke do tareeqe hain. maa hamesha baazaar jaati hain, kyonki unka maanna hai ki sabziyaan chhookar dekhna zaroori hai. haalaanki main iski izzat karta hoon, lekin main aksar phone par online khareedaari karta hoon. pichhle hafte maine ek speaker khareeda tha, jo do din mein ghar pahunch gaya. us mein pachchees pratishat ki chhoot bhi thi. meri raay mein, online aur baazaar, dono ke apne faayde hain. baazaar se vishvaas aur baat-cheet milti hai, jabki app se samay aur chhoot milti hai. sirf ek vikalp chunne ki zaroorat nahin — dono ko milaakar chalna zyaada behtar hai. yahi hamaare parivaar ka niyam ban gaya hai.',
-    english: 'In my home there are two ways of shopping. Mother always goes to the market, because she believes that vegetables must be touched and seen. Although I respect this, I often shop online on the phone. Last week I bought a speaker which arrived home in two days. It even had a 25 percent discount. In my opinion, online and the market both have their advantages. The market gives trust and conversation, while the app gives time and discounts. There is no need to choose just one option — combining both is better. That has become our family\'s rule.',
+    hindi: 'मेरे घर में ख़रीदारी के दो तरीक़े हैं। माँ हमेशा बाज़ार जाती हैं, क्योंकि उनका मानना है कि सब्ज़ियाँ छूकर देखना ज़रूरी है। हालाँकि मैं इसकी इज़्ज़त करता हूँ, लेकिन मैं अक्सर फ़ोन पर ऑनलाइन ख़रीदारी करता हूँ। पिछले हफ़्ते मैंने एक स्पीकर ख़रीदा था, जो दो दिन में घर पहुँच गया। उसमें पच्चीस प्रतिशत की छूट भी थी। मेरी राय में, ऑनलाइन और बाज़ार, दोनों के अपने फ़ायदे हैं। बाज़ार से विश्वास और बात-चीत मिलती है, जबकि ऐप से समय और छूट मिलती है। सिर्फ़ एक विकल्प चुनने की ज़रूरत नहीं - दोनों को मिलाकर चलना ज़्यादा बेहतर है। यही हमारे परिवार का नियम बन गया है।',
+    transliteration: 'mere ghar mein khareedaari ke do tareeqe hain. maa hamesha baazaar jaati hain, kyonki unka maanna hai ki sabziyaan chhookar dekhna zaroori hai. haalaanki main iski izzat karta hoon, lekin main aksar phone par online khareedaari karta hoon. pichhle hafte maine ek speaker khareeda tha, jo do din mein ghar pahunch gaya. us mein pachchees pratishat ki chhoot bhi thi. meri raay mein, online aur baazaar, dono ke apne faayde hain. baazaar se vishvaas aur baat-cheet milti hai, jabki app se samay aur chhoot milti hai. sirf ek vikalp chunne ki zaroorat nahin - dono ko milaakar chalna zyaada behtar hai. yahi hamaare parivaar ka niyam ban gaya hai.',
+    english: 'In my home there are two ways of shopping. Mother always goes to the market, because she believes that vegetables must be touched and seen. Although I respect this, I often shop online on the phone. Last week I bought a speaker which arrived home in two days. It even had a 25 percent discount. In my opinion, online and the market both have their advantages. The market gives trust and conversation, while the app gives time and discounts. There is no need to choose just one option - combining both is better. That has become our family\'s rule.',
     highlights: [
-      { term: 'हालाँकि ... लेकिन', note: 'Concession + contrast in one sentence — IM-register structure.' },
-      { term: 'जबकि', note: 'Discourse-level "whereas" — the paragraph-level contrast marker.' },
-      { term: 'मेरी राय में', note: 'Opinion opens a paragraph — raters mark this as "argumentation" not "description".' },
+      { term: 'हालाँकि ... लेकिन', note: 'Concession + contrast in one sentence - IM-register structure.' },
+      { term: 'जबकि', note: 'Discourse-level "whereas" - the paragraph-level contrast marker.' },
+      { term: 'मेरी राय में', note: 'Opinion opens a paragraph - raters mark this as "argumentation" not "description".' },
       { term: 'सिर्फ़ ... नहीं', note: 'Not-only move sets up the synthesis closing.' },
     ],
     comprehensionQuestions: [
@@ -146,7 +146,7 @@ export const pack: TopicPack = {
   modelTexts: [
     {
       kind: 'review',
-      title: 'ऑनलाइन रिव्यू — कानों के हेडफ़ोन',
+      title: 'ऑनलाइन रिव्यू - कानों के हेडफ़ोन',
       hindi: 'पाँच में से चार तारे। सुविधा बहुत अच्छी है, डिलीवरी जल्दी आई। हालाँकि साउंड उम्मीद से थोड़ा कम था, फिर भी कीमत के लिहाज़ से यह सबसे अच्छा विकल्प है।',
       transliteration: 'paanch mein se chaar taare. suvidha bahut achchhi hai, delivery jaldi aayi. haalaanki saund ummeed se thoda kam tha, phir bhi keemat ke lihaaz se yah sabse achchha vikalp hai.',
       english: 'Four out of five stars. Convenience was great, delivery came fast. Although the sound was slightly below expectations, for the price this is still the best option.',
@@ -161,16 +161,16 @@ export const pack: TopicPack = {
     {
       kind: 'sms',
       title: 'दोस्त को संदेश',
-      hindi: 'अरे यार, Flipkart पर Big Billion sale शुरू हो गई है। अभी देख लो — पिछले साल से भी बड़ी छूट है। मैं तो एक बैग ले रहा हूँ 😎',
-      transliteration: 'are yaar, Flipkart par Big Billion sale shuru ho gayi hai. abhi dekh lo — pichhle saal se bhi badi chhoot hai. main to ek bag le raha hoon.',
-      english: 'Hey dude, the Flipkart Big Billion sale has started. Check now — the discount is even bigger than last year. I\'m taking a bag.',
+      hindi: 'अरे यार, Flipkart पर Big Billion sale शुरू हो गई है। अभी देख लो - पिछले साल से भी बड़ी छूट है। मैं तो एक बैग ले रहा हूँ 😎',
+      transliteration: 'are yaar, Flipkart par Big Billion sale shuru ho gayi hai. abhi dekh lo - pichhle saal se bhi badi chhoot hai. main to ek bag le raha hoon.',
+      english: 'Hey dude, the Flipkart Big Billion sale has started. Check now - the discount is even bigger than last year. I\'m taking a bag.',
     },
     {
       kind: 'poster',
       title: 'मॉल का पोस्टर',
-      hindi: 'विशाल दिवाली सेल — हर चीज़ पर 30% से 70% तक की छूट! यूपीआई से अतिरिक्त 5% बचत। 20 अक्टूबर से शुरू।',
-      transliteration: 'vishaal divaali sale — har cheez par 30% se 70% tak ki chhoot! UPI se atirikta 5% bachat. 20 oktoobar se shuru.',
-      english: 'Huge Diwali Sale — 30% to 70% off on everything! Additional 5% savings with UPI. Starts October 20.',
+      hindi: 'विशाल दिवाली सेल - हर चीज़ पर 30% से 70% तक की छूट! यूपीआई से अतिरिक्त 5% बचत। 20 अक्टूबर से शुरू।',
+      transliteration: 'vishaal divaali sale - har cheez par 30% se 70% tak ki chhoot! UPI se atirikta 5% bachat. 20 oktoobar se shuru.',
+      english: 'Huge Diwali Sale - 30% to 70% off on everything! Additional 5% savings with UPI. Starts October 20.',
     },
   ],
   modelTextsNote: {
@@ -180,9 +180,9 @@ export const pack: TopicPack = {
 
   cultural: [
     { title: 'Big Billion Day and Great Indian Sale', body: 'Flipkart\'s Big Billion Day and Amazon\'s Great Indian Sale are the year\'s two big e-commerce events, timed around Diwali. Referencing either reads as current and authentic.', emoji: '🛒' },
-    { title: 'UPI is the default', body: 'QR-code UPI payments (PhonePe, GPay, Paytm) are ubiquitous — even at small vegetable stalls. Writing that a grandmother "यूपीआई से पेमेंट करती हैं" is very believable today.', emoji: '💳' },
-    { title: 'Bargaining is alive in markets, not malls', body: 'मोल-भाव happens at street markets and sabzi मंडी but not in malls. Use the right term for the setting — raters notice.', emoji: '🤝' },
-    { title: 'Returns culture is still developing', body: 'Major online retailers have easy returns; local shops rarely do. The contrast is a good essay angle — "how shopping has changed".', emoji: '↩️' },
+    { title: 'UPI is the default', body: 'QR-code UPI payments (PhonePe, GPay, Paytm) are ubiquitous - even at small vegetable stalls. Writing that a grandmother "यूपीआई से पेमेंट करती हैं" is very believable today.', emoji: '💳' },
+    { title: 'Bargaining is alive in markets, not malls', body: 'मोल-भाव happens at street markets and sabzi मंडी but not in malls. Use the right term for the setting - raters notice.', emoji: '🤝' },
+    { title: 'Returns culture is still developing', body: 'Major online retailers have easy returns; local shops rarely do. The contrast is a good essay angle - "how shopping has changed".', emoji: '↩️' },
   ],
   culturalNote: {
     why: 'Level-2 shopping essays feel current when they reference Big Billion Day, UPI, and modern return practices. These anchor the essay in 2020s India, not a generic timeless bazaar.',
@@ -204,15 +204,15 @@ export const pack: TopicPack = {
       prompt: 'ऑनलाइन ख़रीदारी और बाज़ार की तुलना तीन अनुच्छेदों में कीजिए। अपनी राय दीजिए और उदाहरण दीजिए।',
       novice: 'ऑनलाइन अच्छा है। बाज़ार भी ठीक है।',
       intermediateMid:
-        'आजकल हमारे देश में दो तरह की ख़रीदारी चलती है — ऑनलाइन और बाज़ार में। मेरी राय में, दोनों के अपने फ़ायदे और नुक़सान हैं। ऑनलाइन ख़रीदारी की सबसे बड़ी सुविधा यह है कि हम घर बैठे सब कुछ मँगवा सकते हैं, और डिलीवरी भी जल्दी आ जाती है।\n\nदूसरी तरफ़, बाज़ार की अपनी बात है। पिछले महीने मैं माँ के साथ सब्ज़ी मंडी गया था। वहाँ हमने फलों को छूकर देखा और दुकानदार से बातें कीं। उस अनुभव में जो गर्मी थी, वह किसी ऐप पर नहीं मिल सकती।\n\nमुझे लगता है कि दोनों तरीक़े ज़रूरी हैं, क्योंकि कुछ चीज़ें ऑनलाइन बेहतर हैं, जबकि कुछ सिर्फ़ बाज़ार में ही मिलती हैं। अगले साल दिवाली पर अगर Big Billion Day पर बड़ी छूट होगी, तो मैं गैजेट ऑनलाइन ख़रीदूँगा, लेकिन कपड़े तो बाज़ार से ही लूँगा।',
+        'आजकल हमारे देश में दो तरह की ख़रीदारी चलती है - ऑनलाइन और बाज़ार में। मेरी राय में, दोनों के अपने फ़ायदे और नुक़सान हैं। ऑनलाइन ख़रीदारी की सबसे बड़ी सुविधा यह है कि हम घर बैठे सब कुछ मँगवा सकते हैं, और डिलीवरी भी जल्दी आ जाती है।\n\nदूसरी तरफ़, बाज़ार की अपनी बात है। पिछले महीने मैं माँ के साथ सब्ज़ी मंडी गया था। वहाँ हमने फलों को छूकर देखा और दुकानदार से बातें कीं। उस अनुभव में जो गर्मी थी, वह किसी ऐप पर नहीं मिल सकती।\n\nमुझे लगता है कि दोनों तरीक़े ज़रूरी हैं, क्योंकि कुछ चीज़ें ऑनलाइन बेहतर हैं, जबकि कुछ सिर्फ़ बाज़ार में ही मिलती हैं। अगले साल दिवाली पर अगर Big Billion Day पर बड़ी छूट होगी, तो मैं गैजेट ऑनलाइन ख़रीदूँगा, लेकिन कपड़े तो बाज़ार से ही लूँगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'structure', highlight: 'मेरी राय में', note: 'Opinion opens the essay — not description, argumentation.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'मेरी राय में', note: 'Opinion opens the essay - not description, argumentation.' },
         { paragraphIndex: 0, kind: 'vocab', highlight: 'सुविधा / डिलीवरी', note: 'Level-2 specific vocabulary, not L1 "मैंने एक चीज़ ख़रीदी".' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'दूसरी तरफ़', note: 'Paragraph-level contrast marker — IM discourse move.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'दूसरी तरफ़', note: 'Paragraph-level contrast marker - IM discourse move.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'गया था / देखा / कीं', note: 'Past-perfective sustained across three verbs in one paragraph.' },
-        { paragraphIndex: 2, kind: 'connector', highlight: 'क्योंकि / जबकि', note: 'Reason + contrast in a single sentence — discourse density.' },
-        { paragraphIndex: 2, kind: 'cultural', highlight: 'Big Billion Day', note: 'India-specific sale event — current cultural marker.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'ख़रीदूँगा / लूँगा', note: 'Future closer — third time frame locked.' },
+        { paragraphIndex: 2, kind: 'connector', highlight: 'क्योंकि / जबकि', note: 'Reason + contrast in a single sentence - discourse density.' },
+        { paragraphIndex: 2, kind: 'cultural', highlight: 'Big Billion Day', note: 'India-specific sale event - current cultural marker.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'ख़रीदूँगा / लूँगा', note: 'Future closer - third time frame locked.' },
       ],
       wordCount: 146,
       tenseUsed: ['past', 'present', 'future'],
@@ -221,11 +221,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Opens with an opinion statement and supports it with reasons — argumentation, not description.',
-          'Six distinct connectors including "दूसरी तरफ़" and "जबकि" — advanced discourse markers raters flag.',
+          'Opens with an opinion statement and supports it with reasons - argumentation, not description.',
+          'Six distinct connectors including "दूसरी तरफ़" and "जबकि" - advanced discourse markers raters flag.',
           'Three time frames cleanly separated across three paragraphs.',
           'Current cultural specific (Big Billion Day + UPI pattern) grounds the essay in 2020s India.',
-          'Balanced synthesis closing — both sides acknowledged, personal choice stated.',
+          'Balanced synthesis closing - both sides acknowledged, personal choice stated.',
         ],
         gotchas: [
           'Dropping the opinion opener would drop the essay to description mode and cap at Benchmark 4.',
@@ -242,11 +242,11 @@ export const pack: TopicPack = {
       annotations: [
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'की / मँगवाया / ख़रीदीं / ली', note: 'Four perfective pasts with correct ने-construction and gender agreement.' },
         { paragraphIndex: 0, kind: 'vocab', highlight: 'छूट / ऑनलाइन', note: 'Festival-sale vocabulary specific to L2.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'समस्या ... शिकायत ... नया ... वापस', note: 'Problem-resolution narrative arc — an IM hallmark.' },
-        { paragraphIndex: 1, kind: 'cultural', highlight: 'यूपीआई', note: 'Modern payment context — current, authentic.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'समस्या ... शिकायत ... नया ... वापस', note: 'Problem-resolution narrative arc - an IM hallmark.' },
+        { paragraphIndex: 1, kind: 'cultural', highlight: 'यूपीआई', note: 'Modern payment context - current, authentic.' },
         { paragraphIndex: 2, kind: 'connector', highlight: 'हालाँकि / क्योंकि', note: 'Concession + reason in adjacent sentences.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... बल्कि ... भी', note: 'Reflective closing — the IM register marker.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'मँगवाऊँगा', note: 'Future closer — third time frame.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... बल्कि ... भी', note: 'Reflective closing - the IM register marker.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'मँगवाऊँगा', note: 'Future closer - third time frame.' },
       ],
       wordCount: 138,
       tenseUsed: ['past', 'present', 'future'],
@@ -258,7 +258,7 @@ export const pack: TopicPack = {
           'Problem-resolution arc in paragraph 2 is a specifically named IM narrative structure.',
           'Clean past-perfective ने construction across four verbs with correct gender agreement (साड़ियाँ ख़रीदीं = f.pl).',
           'Modern cultural markers (UPI, online return flow) ground the essay in current India.',
-          'Reflective closing with "सिर्फ़ ... बल्कि ... भी" — the IM register signature move.',
+          'Reflective closing with "सिर्फ़ ... बल्कि ... भी" - the IM register signature move.',
           'Future closer anchors the third time frame even inside a past-dominant essay.',
         ],
         gotchas: [
@@ -279,7 +279,7 @@ export const pack: TopicPack = {
     { hindi: 'अगर आपके पास दस हज़ार रुपये हों तो आप क्या ख़रीदेंगे और क्यों? तीन अनुच्छेदों में लिखिए।', english: 'If you had ten thousand rupees, what would you buy and why? Write in three paragraphs.', hint: { connectors: ['अगर... तो', 'क्योंकि', 'इसके अलावा'], vocab: ['सबसे अच्छा', 'महँगा', 'ज़रूरी'], tenses: ['future'] } },
   ],
   promptsNote: {
-    why: 'Three shapes — comparison, festival narrative with problem, hypothetical spending — together cover every FCPS Level-2 shopping prompt angle.',
+    why: 'Three shapes - comparison, festival narrative with problem, hypothetical spending - together cover every FCPS Level-2 shopping prompt angle.',
     trains: ['TextType'],
   },
 

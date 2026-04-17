@@ -18,16 +18,16 @@ export const pack: TopicPack = {
   heroMotif: 'family',
   titleHindi: 'मेरा परिवार',
   titleEnglish: 'My Family',
-  hook: "FCPS's single most predictable essay topic — and a natural playground for past, present, and future tense.",
+  hook: "FCPS's single most predictable essay topic - and a natural playground for past, present, and future tense.",
   heroPrompt: composeHeroPrompt(
-    'A multi-generational Indian family silhouetted around a courtyard at dusk — grandparents seated on a charpai, parents standing near a tulsi plant, two children running with a kite, brass lamps lit, warm indigo sky',
+    'A multi-generational Indian family silhouetted around a courtyard at dusk - grandparents seated on a charpai, parents standing near a tulsi plant, two children running with a kite, brass lamps lit, warm indigo sky',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Family Members (FCPS Level 1 — Personal & Family Life)',
-      'Describing People (FCPS Level 1 — Personal Identification)',
-      'Daily Routines with family (FCPS Level 1 — Home Life bridge)',
+      'Family Members (FCPS Level 1 - Personal & Family Life)',
+      'Describing People (FCPS Level 1 - Personal Identification)',
+      'Daily Routines with family (FCPS Level 1 - Home Life bridge)',
     ],
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
     afterThisPackStudentCan: [
@@ -40,12 +40,12 @@ export const pack: TopicPack = {
     positionOnArc: 'foundations',
     estimatedTime: '90 min reading + 30 min essay',
     ifSkippedRisk:
-      'Family appears on virtually every FCPS writing and speaking prompt set — "describe your family," "a family memory," "a family celebration." Skipping this pack leaves the student without the possessive patterns (मेरा/मेरी/मेरे) and respectful verb forms those prompts demand. The student will write about food or school well but freeze on the family prompt.',
+      'Family appears on virtually every FCPS writing and speaking prompt set - "describe your family," "a family memory," "a family celebration." Skipping this pack leaves the student without the possessive patterns (मेरा/मेरी/मेरे) and respectful verb forms those prompts demand. The student will write about food or school well but freeze on the family prompt.',
   },
 
   objectives: [
     {
-      text: 'Name at least 12 family relations in Hindi — immediate and extended — without hesitation.',
+      text: 'Name at least 12 family relations in Hindi - immediate and extended - without hesitation.',
       trains: ['TopicCoverage'],
     },
     {
@@ -61,7 +61,7 @@ export const pack: TopicPack = {
       trains: ['TextType'],
     },
     {
-      text: 'Include at least one India-rooted cultural specific — joint family, जी suffix, foot-touching, a shared festival — to lift Topic Coverage above generic responses.',
+      text: 'Include at least one India-rooted cultural specific - joint family, जी suffix, foot-touching, a shared festival - to lift Topic Coverage above generic responses.',
       trains: ['TopicCoverage', 'TextType'],
     },
   ],
@@ -124,7 +124,7 @@ export const pack: TopicPack = {
         { hindi: 'मेरे पिताजी इंजीनियर हैं।', transliteration: 'mere pitaji injeeniyar hain.', english: 'My father is an engineer. (respectful plural → मेरे, not मेरा)' },
       ],
       pitfall:
-        'Writing "मेरा पिताजी" (masculine singular) is the single most common error on family essays. पिताजी takes the respectful plural, so it is मेरे पिताजी — always. Same for मेरी माँ (feminine) never "मेरा माँ".',
+        'Writing "मेरा पिताजी" (masculine singular) is the single most common error on family essays. पिताजी takes the respectful plural, so it is मेरे पिताजी - always. Same for मेरी माँ (feminine) never "मेरा माँ".',
       whyItMatters:
         'Possessive agreement shows up in almost every sentence of a family essay. Consistent correctness here lifts Language Control to "Average" or higher; consistent errors cap it at "Low" and drop the essay to Intermediate-Low (2 credits).',
     },
@@ -138,14 +138,14 @@ export const pack: TopicPack = {
         { hindi: 'माँ ने आज खीर बनाई।', transliteration: 'maa ne aaj kheer banaayi.', english: 'Mother made kheer today. (object-based agreement in past; subject still honored through context)' },
       ],
       pitfall:
-        'Writing "पिताजी जाता है" sounds instantly wrong to a Hindi reader — like saying "my father goes, yo." It signals the student does not know register. Raters read this as a Language Control slip AND a cultural mismatch.',
+        'Writing "पिताजी जाता है" sounds instantly wrong to a Hindi reader - like saying "my father goes, yo." It signals the student does not know register. Raters read this as a Language Control slip AND a cultural mismatch.',
       whyItMatters:
-        'The honorific plural is a register signal. When a rater sees three elders referred to with correct plural verbs in one essay, they mentally log "uses target-language norms" — a Text-Type lift on top of Language Control. Two features for the price of one rule.',
+        'The honorific plural is a register signal. When a rater sees three elders referred to with correct plural verbs in one essay, they mentally log "uses target-language norms" - a Text-Type lift on top of Language Control. Two features for the price of one rule.',
     },
     {
       title: 'Three time frames in a family essay',
       rule:
-        'Intermediate-Mid requires "some control of past, present, and future." A family essay lends itself naturally: past (a memory with a grandparent), present (what the family does daily), future (plans together). Use time markers — बचपन में (in childhood), आजकल (these days), अगले साल (next year) — to signal each shift.',
+        'Intermediate-Mid requires "some control of past, present, and future." A family essay lends itself naturally: past (a memory with a grandparent), present (what the family does daily), future (plans together). Use time markers - बचपन में (in childhood), आजकल (these days), अगले साल (next year) - to signal each shift.',
       examples: [
         { hindi: 'बचपन में मैं अपने नाना के साथ खेलता था।', transliteration: 'bachpan mein main apne naana ke saath khelta tha.', english: 'In childhood I used to play with my maternal grandfather. (past habitual)' },
         { hindi: 'आजकल हम सब साथ खाना खाते हैं।', transliteration: 'aajkal hum sab saath khaana khaate hain.', english: 'These days we all eat together. (present)' },
@@ -159,7 +159,7 @@ export const pack: TopicPack = {
   ],
   grammarNote: {
     why:
-      'These three rules — possessive agreement, honorific plural for elders, and three time frames — together fix about 85% of the errors I see on family essays. Nail them and the rubric\'s Language Control dimension stabilizes at "Average," which combined with even moderate vocabulary is enough for Intermediate-Mid.',
+      'These three rules - possessive agreement, honorific plural for elders, and three time frames - together fix about 85% of the errors I see on family essays. Nail them and the rubric\'s Language Control dimension stabilizes at "Average," which combined with even moderate vocabulary is enough for Intermediate-Mid.',
     trains: ['LanguageControl', 'TextType'],
   },
 
@@ -176,7 +176,7 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'Family essays are naturally temporal — "first we do X, then Y, finally Z." The sequence पहले / फिर / इसके बाद / अंत में scaffolds a full day or a full event. क्योंकि and इसलिए add the "why we love them" the rubric rewards; जब... तब is the go-to for pulling in a childhood memory ("when I was small, grandfather used to...").',
+      'Family essays are naturally temporal - "first we do X, then Y, finally Z." The sequence पहले / फिर / इसके बाद / अंत में scaffolds a full day or a full event. क्योंकि and इसलिए add the "why we love them" the rubric rewards; जब... तब is the go-to for pulling in a childhood memory ("when I was small, grandfather used to...").',
     trains: ['TextType'],
   },
 
@@ -191,22 +191,22 @@ export const pack: TopicPack = {
     highlights: [
       { term: 'मेरे पिताजी / मेरी माँ / मेरे दादा', note: 'Four possessives in four sentences, each agreeing correctly. This is the single most important pattern in a family essay.' },
       { term: 'काम करते हैं / पढ़ाती हैं / रहते हैं', note: 'Respectful plural verbs for every elder. Never जाता है for पिताजी.' },
-      { term: 'पहले / फिर / अंत में / क्योंकि / इसलिए', note: 'Five connectors scaffold the paragraph. Sentences cannot be rearranged — that is Text-Type 5.' },
-      { term: 'आँगन / दादी की चाय / पुरानी कहानियाँ', note: 'Concrete cultural details — not "we sit and talk" but a specific courtyard scene.' },
+      { term: 'पहले / फिर / अंत में / क्योंकि / इसलिए', note: 'Five connectors scaffold the paragraph. Sentences cannot be rearranged - that is Text-Type 5.' },
+      { term: 'आँगन / दादी की चाय / पुरानी कहानियाँ', note: 'Concrete cultural details - not "we sit and talk" but a specific courtyard scene.' },
       { term: 'मेरा परिवार ही मेरी सबसे बड़ी ख़ुशी है', note: 'Reflective closing. Intermediate-Mid essays almost always generalize beyond the event in the last sentence.' },
     ],
     comprehensionQuestions: [
-      { q: 'How many people live in the narrator\'s house, roughly?', a: 'At least six — parents, grandparents, narrator, and younger sister. A joint family.' },
+      { q: 'How many people live in the narrator\'s house, roughly?', a: 'At least six - parents, grandparents, narrator, and younger sister. A joint family.' },
       { q: 'What do the parents do for work?', a: 'पिताजी काम बैंक में करते हैं; माँ एक स्कूल में हिंदी पढ़ाती हैं।' },
-      { q: 'What happens on Sunday evenings?', a: 'सब आँगन में बैठते हैं — दादी चाय बनाती हैं, पिताजी कहानियाँ सुनाते हैं, माँ गाना गाती हैं।' },
+      { q: 'What happens on Sunday evenings?', a: 'सब आँगन में बैठते हैं - दादी चाय बनाती हैं, पिताजी कहानियाँ सुनाते हैं, माँ गाना गाती हैं।' },
       { q: 'Why does the younger sister sit with Grandfather?', a: 'क्योंकि वह दादा की सबसे प्यारी है।' },
       { q: 'Identify two connectors in the passage and explain what each does.', a: 'पहले / फिर / अंत में sequence the evening; क्योंकि gives a reason; इसलिए gives a consequence.' },
-      { q: 'Find one respectful plural verb and its singular subject.', a: 'Any of पिताजी काम करते हैं, माँ पढ़ाती हैं, दादा-दादी रहते हैं, माँ गाती हैं — each is one person with a plural verb.' },
+      { q: 'Find one respectful plural verb and its singular subject.', a: 'Any of पिताजी काम करते हैं, माँ पढ़ाती हैं, दादा-दादी रहते हैं, माँ गाती हैं - each is one person with a plural verb.' },
     ],
   },
   anchorNote: {
     why:
-      'This anchor is a model of what a passing Intermediate-Mid family essay sounds like. The student\'s OUTPUT should mirror this INPUT. Read it aloud three times before attempting a prompt — the possessive patterns and respectful verb forms will start to feel automatic. Notice that every single elder in the passage gets a plural verb.',
+      'This anchor is a model of what a passing Intermediate-Mid family essay sounds like. The student\'s OUTPUT should mirror this INPUT. Read it aloud three times before attempting a prompt - the possessive patterns and respectful verb forms will start to feel automatic. Notice that every single elder in the passage gets a plural verb.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -215,11 +215,11 @@ export const pack: TopicPack = {
       kind: 'diary',
       title: 'मेरी डायरी का एक पन्ना · A Page From My Diary',
       hindi:
-        'आज दादी का जन्मदिन था। सुबह से माँ रसोई में थीं और पिताजी फूल लाए। शाम को पूरा परिवार आया — चाचा, चाची, बुआ, सब। दादी बहुत खुश हुईं। मैंने उन्हें एक कार्ड दिया जिस पर मैंने "आप सबसे प्यारी हैं" लिखा था।',
+        'आज दादी का जन्मदिन था। सुबह से माँ रसोई में थीं और पिताजी फूल लाए। शाम को पूरा परिवार आया - चाचा, चाची, बुआ, सब। दादी बहुत खुश हुईं। मैंने उन्हें एक कार्ड दिया जिस पर मैंने "आप सबसे प्यारी हैं" लिखा था।',
       transliteration:
-        'aaj daadi ka janmadin tha. subah se maa rasoi mein theen aur pitaji phool laaye. shaam ko poora parivaar aaya — chacha, chachi, bua, sab. daadi bahut khush hueen. maine unhen ek card diya jis par maine "aap sabse pyaari hain" likha tha.',
+        'aaj daadi ka janmadin tha. subah se maa rasoi mein theen aur pitaji phool laaye. shaam ko poora parivaar aaya - chacha, chachi, bua, sab. daadi bahut khush hueen. maine unhen ek card diya jis par maine "aap sabse pyaari hain" likha tha.',
       english:
-        "Today was Grandmother's birthday. From morning Mother was in the kitchen and Father brought flowers. In the evening the whole family came — uncle, aunt, father's sister, everyone. Grandmother was very happy. I gave her a card on which I had written \"You are the dearest of all.\"",
+        "Today was Grandmother's birthday. From morning Mother was in the kitchen and Father brought flowers. In the evening the whole family came - uncle, aunt, father's sister, everyone. Grandmother was very happy. I gave her a card on which I had written \"You are the dearest of all.\"",
     },
     {
       kind: 'sms',
@@ -245,16 +245,16 @@ export const pack: TopicPack = {
       kind: 'announcement',
       title: 'पारिवारिक समारोह · Family Gathering Announcement',
       hindi:
-        'सूचना: अगले शनिवार को शाम छह बजे हमारे घर पर दादा-दादी की पचासवीं सालगिरह है। सभी रिश्तेदारों से अनुरोध है कि समय पर पहुँचें। खाने में थाली और मिठाई होगी। कृपया तोहफ़े न लाएँ — आपकी उपस्थिति ही काफ़ी है।',
+        'सूचना: अगले शनिवार को शाम छह बजे हमारे घर पर दादा-दादी की पचासवीं सालगिरह है। सभी रिश्तेदारों से अनुरोध है कि समय पर पहुँचें। खाने में थाली और मिठाई होगी। कृपया तोहफ़े न लाएँ - आपकी उपस्थिति ही काफ़ी है।',
       transliteration:
-        'soochana: agle shanivaar ko shaam chhah baje hamaare ghar par dada-daadi ki pachaasvin saalgirah hai. sabhi rishtedaaron se anurodh hai ki samay par pahunchen. khaane mein thaali aur mithaai hogi. kripaya tohfe na laayen — aapki upasthiti hi kaafi hai.',
+        'soochana: agle shanivaar ko shaam chhah baje hamaare ghar par dada-daadi ki pachaasvin saalgirah hai. sabhi rishtedaaron se anurodh hai ki samay par pahunchen. khaane mein thaali aur mithaai hogi. kripaya tohfe na laayen - aapki upasthiti hi kaafi hai.',
       english:
-        "Notice: Next Saturday at 6 PM our grandparents' 50th anniversary will be celebrated at our home. All relatives are requested to arrive on time. Thali and sweets will be served. Please do not bring gifts — your presence is enough.",
+        "Notice: Next Saturday at 6 PM our grandparents' 50th anniversary will be celebrated at our home. All relatives are requested to arrive on time. Thali and sweets will be served. Please do not bring gifts - your presence is enough.",
     },
   ],
   modelTextsNote: {
     why:
-      'Diary, SMS, letter, announcement — four different registers around one topic. The student sees that Hindi does not sound the same when writing to a grandmother (formal, with जी) versus a brother (casual, with emojis). Register awareness is a Text-Type signal on its own.',
+      'Diary, SMS, letter, announcement - four different registers around one topic. The student sees that Hindi does not sound the same when writing to a grandmother (formal, with जी) versus a brother (casual, with emojis). Register awareness is a Text-Type signal on its own.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -262,7 +262,7 @@ export const pack: TopicPack = {
     {
       title: 'Joint Families (संयुक्त परिवार)',
       body:
-        'Many Indian households include grandparents, parents, children, and sometimes an uncle\'s family under one roof. Writing "हम एक संयुक्त परिवार में रहते हैं" instantly gives you six people to describe — a Topic-Coverage goldmine the nuclear-family framing cannot match.',
+        'Many Indian households include grandparents, parents, children, and sometimes an uncle\'s family under one roof. Writing "हम एक संयुक्त परिवार में रहते हैं" instantly gives you six people to describe - a Topic-Coverage goldmine the nuclear-family framing cannot match.',
       emoji: '🏡',
     },
     {
@@ -280,7 +280,7 @@ export const pack: TopicPack = {
     {
       title: 'Foot-Touching (पैर छूना)',
       body:
-        'Touching an elder\'s feet on arrival or before a big moment (exam, journey, festival) is a common Indian gesture of respect. Dropping one sentence — "मैंने पिताजी के पैर छुए" — reads as real cultural knowledge, not a textbook phrase.',
+        'Touching an elder\'s feet on arrival or before a big moment (exam, journey, festival) is a common Indian gesture of respect. Dropping one sentence - "मैंने पिताजी के पैर छुए" - reads as real cultural knowledge, not a textbook phrase.',
       emoji: '🦶',
     },
     {
@@ -292,7 +292,7 @@ export const pack: TopicPack = {
   ],
   culturalNote: {
     why:
-      'FCPS raters have seen hundreds of "I love my mother, she is good" essays. A concrete cultural detail — the joint family, the जी suffix, the foot-touching, a festival — instantly separates the essay from the pile. That is a pure Text-Type + Topic-Coverage boost at no grammar cost.',
+      'FCPS raters have seen hundreds of "I love my mother, she is good" essays. A concrete cultural detail - the joint family, the जी suffix, the foot-touching, a festival - instantly separates the essay from the pile. That is a pure Text-Type + Topic-Coverage boost at no grammar cost.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -314,7 +314,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Family-rooted idioms are a perfect fit for family essays. One idiom placed mid-paragraph reads as register mastery. Two is overkill in a 125-word essay — pick the one that fits the sentence and let it land.',
+      'Family-rooted idioms are a perfect fit for family essays. One idiom placed mid-paragraph reads as register mastery. Two is overkill in a 125-word essay - pick the one that fits the sentence and let it land.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -326,14 +326,14 @@ export const pack: TopicPack = {
       intermediateMid:
         'मेरा परिवार एक संयुक्त परिवार है। मेरे पिताजी एक अस्पताल में डॉक्टर हैं और मेरी माँ एक शिक्षिका हैं। मेरे दादा और दादी भी हमारे साथ रहते हैं, इसलिए हमारा घर हमेशा कहानियों और हँसी से भरा रहता है। मेरी एक छोटी बहन भी है जिसका नाम रिया है। वह बहुत शांत और प्यारी है।\n\nबचपन में दादाजी मुझे हर रात पुरानी कहानियाँ सुनाते थे और दादी मेरे लिए गरम खीर बनाती थीं। आजकल हम सब रविवार को साथ खाना खाते हैं, क्योंकि हफ़्ते में वही एक दिन होता है जब सब घर पर होते हैं। पिताजी को तीखा खाना पसंद है, लेकिन दादी को हल्का खाना अच्छा लगता है, इसलिए माँ दो तरह की सब्ज़ी बनाती हैं।\n\nअगली गर्मी की छुट्टियों में हम सब गाँव जाएँगे, जहाँ मेरे नाना-नानी रहते हैं। मुझे लगता है कि मेरा परिवार सिर्फ़ मेरा घर नहीं, बल्कि मेरी सबसे बड़ी ताक़त भी है।',
       annotations: [
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'संयुक्त परिवार', note: 'Cultural-specific phrase in sentence one — instant Topic-Coverage lift.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'संयुक्त परिवार', note: 'Cultural-specific phrase in sentence one - instant Topic-Coverage lift.' },
         { paragraphIndex: 0, kind: 'structure', highlight: 'मेरे पिताजी ... हैं / मेरी माँ ... हैं / मेरे दादा ... रहते हैं', note: 'Three possessives agreeing correctly and three respectful plural verbs in one paragraph.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'इसलिए', note: 'Consequence connector ties the living arrangement to the "full house" image.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'बचपन में ... सुनाते थे / आजकल ... खाते हैं', note: 'Past habitual beside present habitual with explicit time markers — textbook IM move.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'बचपन में ... सुनाते थे / आजकल ... खाते हैं', note: 'Past habitual beside present habitual with explicit time markers - textbook IM move.' },
         { paragraphIndex: 1, kind: 'connector', highlight: 'क्योंकि / लेकिन / इसलिए', note: 'Three reasoning connectors in one paragraph. Text-Type 5 confirmed.' },
         { paragraphIndex: 1, kind: 'cultural', highlight: 'दादी की खीर / माँ दो तरह की सब्ज़ी', note: 'Specific family customs, not generic "we eat food."' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगली गर्मी की छुट्टियों में ... जाएँगे', note: 'Future frame arrives in closing — past + present + future triangle complete.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: 'Not-only-but-also construction — an Intermediate-Mid hallmark.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगली गर्मी की छुट्टियों में ... जाएँगे', note: 'Future frame arrives in closing - past + present + future triangle complete.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: 'Not-only-but-also construction - an Intermediate-Mid hallmark.' },
       ],
       wordCount: 149,
       tenseUsed: ['past', 'present', 'future'],
@@ -342,35 +342,35 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs that cannot be rearranged — past memory, present routine, future plan — meets the Text-Type 5 structural requirement.',
-          'Uses past habitual (सुनाते थे, बनाती थीं), present (रहते हैं, खाते हैं), and future (जाएँगे) in 133 words — satisfies "some control of major time frames" for Intermediate-Mid.',
+          'Three cohesive paragraphs that cannot be rearranged - past memory, present routine, future plan - meets the Text-Type 5 structural requirement.',
+          'Uses past habitual (सुनाते थे, बनाती थीं), present (रहते हैं, खाते हैं), and future (जाएँगे) in 133 words - satisfies "some control of major time frames" for Intermediate-Mid.',
           'Possessive agreement is clean across seven family nouns: मेरे पिताजी, मेरी माँ, मेरे दादा, मेरी दादी, मेरी बहन, मेरे नाना-नानी. Language Control stabilizes at Average or High.',
-          'Every elder gets a respectful plural verb — पिताजी हैं, माँ हैं, दादा-दादी रहते हैं, दादाजी सुनाते थे. Register mastery signal.',
+          'Every elder gets a respectful plural verb - पिताजी हैं, माँ हैं, दादा-दादी रहते हैं, दादाजी सुनाते थे. Register mastery signal.',
           'Concrete cultural detail (संयुक्त परिवार, दादी की खीर, गाँव में नाना-नानी) lifts Topic Coverage above generic "I love my family" responses.',
         ],
         gotchas: [
           'If the student writes "मेरा पिताजी" instead of "मेरे पिताजी," Language Control drops a full band in a single word.',
           'Using "जाता है" for पिताजी or माँ reads as a register break and a grammar error at once.',
-          'A one-paragraph version of the same content drops to Benchmark 4 despite identical vocabulary — keep the three-paragraph shape.',
+          'A one-paragraph version of the same content drops to Benchmark 4 despite identical vocabulary - keep the three-paragraph shape.',
         ],
       },
     },
     {
       shortLabel: 'A family day',
       prompt:
-        'अपने परिवार के किसी एक यादगार दिन के बारे में तीन अनुच्छेदों में लिखिए — क्या हुआ, आपको कैसा लगा, और आप उस दिन को फिर से क्यों जीना चाहेंगे। (In three paragraphs, describe one memorable day with your family — what happened, how you felt, and why you would like to relive it.)',
+        'अपने परिवार के किसी एक यादगार दिन के बारे में तीन अनुच्छेदों में लिखिए - क्या हुआ, आपको कैसा लगा, और आप उस दिन को फिर से क्यों जीना चाहेंगे। (In three paragraphs, describe one memorable day with your family - what happened, how you felt, and why you would like to relive it.)',
       novice: 'एक दिन हम गाँव गए। सब अच्छा था। हम ख़ुश थे।',
       intermediateMid:
-        'पिछली दिवाली का दिन मेरे परिवार का सबसे यादगार दिन था। उस सुबह माँ और दादी ने मिलकर रंगोली बनाई और पिताजी ने पूरे घर में दीये लगाए। मेरी छोटी बहन रिया ने नए कपड़े पहने और दादी के पैर छुए, क्योंकि हमारे परिवार में यही परंपरा है।\n\nशाम को चाचा, चाची और मेरी बुआ भी आ गए। जब सब लोग आँगन में इकट्ठा हुए, तब दादाजी ने एक पुरानी कहानी सुनाई और हम सब हँसते रहे। माँ ने थाली में खीर, पूरी और आलू की सब्ज़ी परोसी। मेरी बहन ने सबसे पहले मिठाई उठा ली, और उसे देखकर मेरी दादी की आँखों में आँसू आ गए — ख़ुशी के आँसू।\n\nमुझे लगता है कि अगले साल भी हम सब इसी तरह साथ मिलेंगे, क्योंकि मेरा परिवार ही मेरी असली दिवाली है। अगर मुझे एक दिन फिर से जीना हो, तो मैं वही शाम दोबारा चुनूँगा।',
+        'पिछली दिवाली का दिन मेरे परिवार का सबसे यादगार दिन था। उस सुबह माँ और दादी ने मिलकर रंगोली बनाई और पिताजी ने पूरे घर में दीये लगाए। मेरी छोटी बहन रिया ने नए कपड़े पहने और दादी के पैर छुए, क्योंकि हमारे परिवार में यही परंपरा है।\n\nशाम को चाचा, चाची और मेरी बुआ भी आ गए। जब सब लोग आँगन में इकट्ठा हुए, तब दादाजी ने एक पुरानी कहानी सुनाई और हम सब हँसते रहे। माँ ने थाली में खीर, पूरी और आलू की सब्ज़ी परोसी। मेरी बहन ने सबसे पहले मिठाई उठा ली, और उसे देखकर मेरी दादी की आँखों में आँसू आ गए - ख़ुशी के आँसू।\n\nमुझे लगता है कि अगले साल भी हम सब इसी तरह साथ मिलेंगे, क्योंकि मेरा परिवार ही मेरी असली दिवाली है। अगर मुझे एक दिन फिर से जीना हो, तो मैं वही शाम दोबारा चुनूँगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछली दिवाली का दिन', note: 'Opens in past tense with a specific time marker — anchors the frame.' },
-        { paragraphIndex: 0, kind: 'cultural', highlight: 'रंगोली / दीये / दादी के पैर छुए', note: 'Three India-rooted details in one paragraph — this is what separates a Benchmark 5 essay from a Benchmark 3 one.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि', note: 'Causal connector ties the foot-touching to a family tradition — not a random detail.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'जब ... तब ... सुनाई / हँसते रहे', note: 'When-then construction plus a past continuous — raters love this pattern.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछली दिवाली का दिन', note: 'Opens in past tense with a specific time marker - anchors the frame.' },
+        { paragraphIndex: 0, kind: 'cultural', highlight: 'रंगोली / दीये / दादी के पैर छुए', note: 'Three India-rooted details in one paragraph - this is what separates a Benchmark 5 essay from a Benchmark 3 one.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि', note: 'Causal connector ties the foot-touching to a family tradition - not a random detail.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'जब ... तब ... सुनाई / हँसते रहे', note: 'When-then construction plus a past continuous - raters love this pattern.' },
         { paragraphIndex: 1, kind: 'idiom', highlight: 'आँखों में आँसू आ गए', note: 'Idiomatic expression placed inside the narrative, not tacked on.' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'खीर, पूरी, आलू की सब्ज़ी', note: 'Three specific food items — Topic Coverage lift even in a family essay.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल ... मिलेंगे / अगर ... तो ... चुनूँगा', note: 'Future plus conditional future in the closing — third time frame sealed cleanly.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'मेरा परिवार ही मेरी असली दिवाली है', note: 'Reflective metaphorical closing — Text-Type lift.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'खीर, पूरी, आलू की सब्ज़ी', note: 'Three specific food items - Topic Coverage lift even in a family essay.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल ... मिलेंगे / अगर ... तो ... चुनूँगा', note: 'Future plus conditional future in the closing - third time frame sealed cleanly.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'मेरा परिवार ही मेरी असली दिवाली है', note: 'Reflective metaphorical closing - Text-Type lift.' },
       ],
       wordCount: 145,
       tenseUsed: ['past', 'present', 'future'],
@@ -381,13 +381,13 @@ export const pack: TopicPack = {
         whyItPasses: [
           'Rich cultural texture (Diwali, rangoli, diyas, foot-touching, khir-puri) gives the rater specific nouns to tick off on the Topic-Coverage axis.',
           'Three time frames land cleanly: past narrative (बनाई, लगाए, सुनाई), present reflection (मेरा परिवार ही मेरी असली दिवाली है), and future conditional (मिलेंगे, चुनूँगा).',
-          'Idiom आँखों में आँसू आ गए is embedded mid-narrative, not appended — this is how Intermediate-Mid writers use idioms.',
+          'Idiom आँखों में आँसू आ गए is embedded mid-narrative, not appended - this is how Intermediate-Mid writers use idioms.',
           'Respectful plural verbs sustained across दादा, दादी, पिताजी, माँ. Language Control signal is strong.',
-          'Reflective closing ("अगर मुझे एक दिन फिर से जीना हो, तो मैं वही शाम दोबारा चुनूँगा") generalizes beyond the event — a hallmark of Benchmark 5.',
+          'Reflective closing ("अगर मुझे एक दिन फिर से जीना हो, तो मैं वही शाम दोबारा चुनूँगा") generalizes beyond the event - a hallmark of Benchmark 5.',
         ],
         gotchas: [
           'If the student writes "दादा ने पैर छुए" (grandfather touched feet, reversed direction), the whole cultural detail inverts and raters notice.',
-          'Using "मैं गयी" as a male narrator (or vice versa) still breaks Language Control — pick one and stay consistent.',
+          'Using "मैं गयी" as a male narrator (or vice versa) still breaks Language Control - pick one and stay consistent.',
           'Padding the Diwali paragraph with five more food items without a verb would tip the essay into list-mode and cap it at Benchmark 4.',
         ],
       },
@@ -395,7 +395,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Two fully-worked model essays at Intermediate-Mid. Study them until you can reproduce the sentence shapes without looking. The verdict cards show exactly which rubric boxes each sentence ticks — raters think in these boxes, and so should you. Notice how both essays end with a reflective sentence that generalizes beyond the event; this is the single most copyable move.',
+      'Two fully-worked model essays at Intermediate-Mid. Study them until you can reproduce the sentence shapes without looking. The verdict cards show exactly which rubric boxes each sentence ticks - raters think in these boxes, and so should you. Notice how both essays end with a reflective sentence that generalizes beyond the event; this is the single most copyable move.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -413,9 +413,9 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'अपने परिवार के साथ बिताए हुए एक ख़ास दिन के बारे में तीन अनुच्छेदों में लिखिए — वह दिन क्यों ख़ास था, उस दिन क्या हुआ, और आपको कैसा लगा।',
+        'अपने परिवार के साथ बिताए हुए एक ख़ास दिन के बारे में तीन अनुच्छेदों में लिखिए - वह दिन क्यों ख़ास था, उस दिन क्या हुआ, और आपको कैसा लगा।',
       english:
-        'Write three paragraphs about a special day you spent with your family — why it was special, what happened, and how you felt.',
+        'Write three paragraphs about a special day you spent with your family - why it was special, what happened, and how you felt.',
       hint: {
         connectors: ['जब... तब', 'लेकिन', 'अंत में'],
         vocab: ['त्योहार', 'दादी', 'मिठाई', 'परिवार', 'ख़ुशी'],
@@ -424,9 +424,9 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'अगले साल आप अपने परिवार के साथ क्या करना चाहेंगे? तीन अनुच्छेदों में लिखिए — कहाँ जाएँगे, क्या करेंगे, और यह क्यों महत्वपूर्ण है।',
+        'अगले साल आप अपने परिवार के साथ क्या करना चाहेंगे? तीन अनुच्छेदों में लिखिए - कहाँ जाएँगे, क्या करेंगे, और यह क्यों महत्वपूर्ण है।',
       english:
-        'What would you like to do with your family next year? Write three paragraphs — where you will go, what you will do, and why it is important.',
+        'What would you like to do with your family next year? Write three paragraphs - where you will go, what you will do, and why it is important.',
       hint: {
         connectors: ['अगर... तो', 'इसके अलावा', 'सिर्फ़... बल्कि भी'],
         vocab: ['गाँव', 'छुट्टी', 'नाना-नानी', 'साथ', 'यादगार'],

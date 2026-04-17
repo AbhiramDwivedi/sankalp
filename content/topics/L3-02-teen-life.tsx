@@ -3,7 +3,7 @@ import { composeHeroPrompt } from '../imagePrompts';
 import { pickConnectors } from '../connectors';
 
 // -----------------------------------------------------------------------------
-// L3-02 Teen Life — किशोर जीवन
+// L3-02 Teen Life - किशोर जीवन
 // Opinion-heavy, present-tense-dominant stretch pack. The pedagogical goal is
 // to train the student to voice a clear view on personal topics (pressure,
 // friendship, phones, parents, dreams) using opinion markers and
@@ -18,14 +18,14 @@ export const pack: TopicPack = {
   heroMotif: 'notebook',
   titleHindi: 'किशोर जीवन',
   titleEnglish: 'Teen Life',
-  hook: 'Opinion-heavy topics in present tense — raters reward students who voice a view clearly.',
+  hook: 'Opinion-heavy topics in present tense - raters reward students who voice a view clearly.',
   heroPrompt: composeHeroPrompt(
     'A notebook open with Devanagari journal entries, earbuds coiled beside it, a smartphone screen faintly glowing, in a warm bedroom scene',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Teen Life (FCPS Level 3 — Identity)',
+      'Teen Life (FCPS Level 3 - Identity)',
       'Friendship and Peer Relationships (FCPS Level 3)',
       'School Life and Academic Pressure (FCPS Level 3)',
       'Social Media and Technology in Daily Life (FCPS Level 3)',
@@ -41,7 +41,7 @@ export const pack: TopicPack = {
     positionOnArc: 'pushing-to-IM',
     estimatedTime: '90 min reading + 45 min essay',
     ifSkippedRisk:
-      'FCPS Level 3 writing prompts routinely ask "what do you think" about friendship, school, or social media. A student who has not practiced opinion registers writes a description instead of an argument — raters cap that at Intermediate-Low (2 credits). This pack is the opinion-register drill.',
+      'FCPS Level 3 writing prompts routinely ask "what do you think" about friendship, school, or social media. A student who has not practiced opinion registers writes a description instead of an argument - raters cap that at Intermediate-Low (2 credits). This pack is the opinion-register drill.',
   },
 
   objectives: [
@@ -110,7 +110,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 28 words are the exact set FCPS Level 3 "what do you think about teen life" prompts recycle. Opinion nouns (राय, दबाव, उम्मीदें) and feeling nouns (तनाव, आत्मविश्वास, गर्व) carry the argument; opinion verbs (सहमत होना, सोचना) unlock the register. Learn this list before the connectors — connectors without vocabulary make empty sentences.',
+      'These 28 words are the exact set FCPS Level 3 "what do you think about teen life" prompts recycle. Opinion nouns (राय, दबाव, उम्मीदें) and feeling nouns (तनाव, आत्मविश्वास, गर्व) carry the argument; opinion verbs (सहमत होना, सोचना) unlock the register. Learn this list before the connectors - connectors without vocabulary make empty sentences.',
     trains: ['TopicCoverage'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },
@@ -119,7 +119,7 @@ export const pack: TopicPack = {
     {
       title: 'Opinion markers: मुझे लगता है कि / मेरा मानना है कि / मेरी राय में',
       rule:
-        'Start an opinion sentence with one of three markers. मुझे लगता है कि ("I think that") is softest and most common. मेरा मानना है कि ("I believe that") is firmer — use when you will defend the claim. मेरी राय में ("in my opinion") is most formal and works well as an essay opener.',
+        'Start an opinion sentence with one of three markers. मुझे लगता है कि ("I think that") is softest and most common. मेरा मानना है कि ("I believe that") is firmer - use when you will defend the claim. मेरी राय में ("in my opinion") is most formal and works well as an essay opener.',
       examples: [
         { hindi: 'मुझे लगता है कि दोस्ती सबसे महत्वपूर्ण है।', transliteration: 'mujhe lagta hai ki dosti sabse mahatvapoorn hai.', english: 'I think that friendship is the most important.' },
         { hindi: 'मेरा मानना है कि सोशल मीडिया से ज़्यादा नुकसान होता है।', transliteration: 'mera maanna hai ki social media se zyaada nuksaan hota hai.', english: 'I believe that social media causes more harm.' },
@@ -128,7 +128,7 @@ export const pack: TopicPack = {
       pitfall:
         'Dropping कि after लगता है / मानना है produces a truncated sentence that raters read as Novice. Always include the कि clause: subject + क्या + है.',
       whyItMatters:
-        'The STAMP Text-Type 5 descriptor requires "groupings of ideas" — opinion markers frame a grouping. One marker in the first sentence plus a reason clause immediately lifts Text-Type above Intermediate-Low.',
+        'The STAMP Text-Type 5 descriptor requires "groupings of ideas" - opinion markers frame a grouping. One marker in the first sentence plus a reason clause immediately lifts Text-Type above Intermediate-Low.',
     },
     {
       title: 'Agreement-level verbs: सहमत होना / असहमत होना',
@@ -156,7 +156,7 @@ export const pack: TopicPack = {
       pitfall:
         'Students put से बेहतर on the wrong side of the comparison (e.g., "मोबाइल किताबों से बेहतर" when they mean the reverse). Rule: the noun that comes first is the one that "wins".',
       whyItMatters:
-        'Comparison is an Intermediate-Mid hallmark — raters look for it explicitly. One clean comparison sentence + one जबकि contrast puts the essay safely at Benchmark 5 on Text-Type.',
+        'Comparison is an Intermediate-Mid hallmark - raters look for it explicitly. One clean comparison sentence + one जबकि contrast puts the essay safely at Benchmark 5 on Text-Type.',
     },
     {
       title: 'Reason-plus-opinion chains with क्योंकि + इसलिए',
@@ -169,12 +169,12 @@ export const pack: TopicPack = {
       pitfall:
         'Stringing क्योंकि ... क्योंकि ... क्योंकि without इसलिए or हालाँकि flattens the paragraph. Vary the connectors.',
       whyItMatters:
-        'The rubric says "sentences cannot be rearranged without altering meaning" for Benchmark 5. A reason-chain literally cannot be rearranged — this construction is the surest route to Text-Type 5.',
+        'The rubric says "sentences cannot be rearranged without altering meaning" for Benchmark 5. A reason-chain literally cannot be rearranged - this construction is the surest route to Text-Type 5.',
     },
   ],
   grammarNote: {
     why:
-      'These four rules convert a descriptive Level 2 essay into an opinion Level 3 essay. The student already knows present tense from earlier packs — here we add the register that makes raters mark "takes a clear position". Every FCPS Level 3 prompt on this topic expects the opinion move.',
+      'These four rules convert a descriptive Level 2 essay into an opinion Level 3 essay. The student already knows present tense from earlier packs - here we add the register that makes raters mark "takes a clear position". Every FCPS Level 3 prompt on this topic expects the opinion move.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -204,25 +204,25 @@ export const pack: TopicPack = {
     english:
       "I think that the hardest part of teen life is pressure. Every day the burden of studies, homework, and coaching feels very heavy. Parents' expectations are fair in their own way, but sometimes they increase our anxiety. So many teenagers can't sleep properly at night. Although my teachers say that pressure is part of life, I still believe that we also need time for ourselves. On the other hand, the best part of teen life is friendship. Whereas family is our identity, friends are our freedom. In my opinion, a true friend is not just a play companion, but also a witness to our dreams. That is why I cherish every moment spent with my friends.",
     highlights: [
-      { term: 'मुझे लगता है कि / मेरा मानना है कि / मेरी राय में', note: 'Three different opinion markers in one passage — the Level 3 register signature. Raters read this as "student takes a position repeatedly".' },
+      { term: 'मुझे लगता है कि / मेरा मानना है कि / मेरी राय में', note: 'Three different opinion markers in one passage - the Level 3 register signature. Raters read this as "student takes a position repeatedly".' },
       { term: 'क्योंकि, इसलिए, हालाँकि, जबकि', note: 'A four-connector reason-chain that cannot be rearranged. This is the exact shape Text-Type 5 describes.' },
-      { term: 'सिर्फ़ ... बल्कि ... भी', note: 'Not-only-but-also structure — widens the claim about friendship from functional to meaningful.' },
-      { term: 'कोचिंग, माता-पिता की उम्मीदें', note: 'Indian-specific cultural texture — coaching culture and parental expectations are the FCPS Level 3 teen-life stereotype done right.' },
-      { term: 'चिंता (f) / दबाव (m) / आत्मविश्वास (m)', note: 'Feeling-nouns used with correct gender — one of the toughest agreement zones in teen-life vocabulary.' },
+      { term: 'सिर्फ़ ... बल्कि ... भी', note: 'Not-only-but-also structure - widens the claim about friendship from functional to meaningful.' },
+      { term: 'कोचिंग, माता-पिता की उम्मीदें', note: 'Indian-specific cultural texture - coaching culture and parental expectations are the FCPS Level 3 teen-life stereotype done right.' },
+      { term: 'चिंता (f) / दबाव (m) / आत्मविश्वास (m)', note: 'Feeling-nouns used with correct gender - one of the toughest agreement zones in teen-life vocabulary.' },
     ],
     comprehensionQuestions: [
-      { q: 'What does the writer call the hardest part of teen life?', a: 'दबाव (pressure) — the daily burden of studies, homework, and coaching.' },
-      { q: 'Why, according to the writer, do parental expectations sometimes become a problem?', a: 'वे हमारी चिंता को बढ़ा देती हैं — they increase the teenager\'s anxiety.' },
+      { q: 'What does the writer call the hardest part of teen life?', a: 'दबाव (pressure) - the daily burden of studies, homework, and coaching.' },
+      { q: 'Why, according to the writer, do parental expectations sometimes become a problem?', a: 'वे हमारी चिंता को बढ़ा देती हैं - they increase the teenager\'s anxiety.' },
       { q: 'What do the teachers say about pressure, and does the writer agree?', a: 'शिक्षक कहते हैं कि दबाव ज़िंदगी का हिस्सा है. The writer partly agrees but still believes teens need time for themselves.' },
-      { q: 'What does the writer call the best part of teen life, and why?', a: 'दोस्ती (friendship) — because friends represent freedom and are "witnesses to our dreams."' },
+      { q: 'What does the writer call the best part of teen life, and why?', a: 'दोस्ती (friendship) - because friends represent freedom and are "witnesses to our dreams."' },
       { q: 'Identify one contrast the passage makes using जबकि.', a: 'जबकि परिवार हमारी पहचान है, दोस्त हमारी आज़ादी हैं। (Family is identity, whereas friends are freedom.)' },
-      { q: 'Pick any opinion marker used in the passage and explain its role.', a: 'मुझे लगता है कि / मेरा मानना है कि / मेरी राय में — each signals that the following sentence is the writer\'s opinion, not a fact.' },
+      { q: 'Pick any opinion marker used in the passage and explain its role.', a: 'मुझे लगता है कि / मेरा मानना है कि / मेरी राय में - each signals that the following sentence is the writer\'s opinion, not a fact.' },
       { q: 'What Indian-specific detail grounds the essay in teen life here, not abroad?', a: 'The mention of कोचिंग and माता-पिता की उम्मीदें reflects the Indian academic-pressure context.' },
     ],
   },
   anchorNote: {
     why:
-      'The anchor is 133 words — right in the sweet spot for an Intermediate-Mid essay on this topic. Notice that every paragraph begins with an opinion marker, every claim has a reason, and the essay admits a counter-point (हालाँकि) before concluding. Read it three times out loud; the opinion rhythm is the whole lesson.',
+      'The anchor is 133 words - right in the sweet spot for an Intermediate-Mid essay on this topic. Notice that every paragraph begins with an opinion marker, every claim has a reason, and the essay admits a counter-point (हालाँकि) before concluding. Read it three times out loud; the opinion rhythm is the whole lesson.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -270,7 +270,7 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'Four registers — personal diary, casual SMS, formal email, public post — each asking the student to carry an opinion. Notice how the opinion markers shift: मेरा मानना है in the email (formal), मुझे लगता है in the post (public), a plain claim in the diary (private). Register-awareness is a Text-Type 5 signal.',
+      'Four registers - personal diary, casual SMS, formal email, public post - each asking the student to carry an opinion. Notice how the opinion markers shift: मेरा मानना है in the email (formal), मुझे लगता है in the post (public), a plain claim in the diary (private). Register-awareness is a Text-Type 5 signal.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -278,19 +278,19 @@ export const pack: TopicPack = {
     {
       title: 'Board Exam Fever',
       body:
-        'Class 10 and Class 12 "board exams" are treated as life-defining moments in India. Whole households rearrange around them — no weddings, quiet TVs, special pooja visits. Dropping a mention of बोर्ड की परीक्षा signals you understand how Indian teenage time is organized.',
+        'Class 10 and Class 12 "board exams" are treated as life-defining moments in India. Whole households rearrange around them - no weddings, quiet TVs, special pooja visits. Dropping a mention of बोर्ड की परीक्षा signals you understand how Indian teenage time is organized.',
       emoji: '📝',
     },
     {
       title: 'Coaching Culture',
       body:
-        'For most urban Indian teens, school ends at 2 p.m. and "coaching" — private tutoring for IIT-JEE, NEET, or board prep — runs until 8 p.m. The word कोचिंग in an essay immediately locates the writer in the real Indian teen experience, not an abstract one.',
+        'For most urban Indian teens, school ends at 2 p.m. and "coaching" - private tutoring for IIT-JEE, NEET, or board prep - runs until 8 p.m. The word कोचिंग in an essay immediately locates the writer in the real Indian teen experience, not an abstract one.',
       emoji: '📖',
     },
     {
       title: 'Joint vs. Nuclear Family Dynamics',
       body:
-        'In a joint family, a teenager navigates opinions from parents, grandparents, and uncles/aunts. In a nuclear family, the voice pair narrows to just parents but can intensify. Either framing is authentic — saying संयुक्त परिवार or एकल परिवार in one sentence lifts Topic Coverage.',
+        'In a joint family, a teenager navigates opinions from parents, grandparents, and uncles/aunts. In a nuclear family, the voice pair narrows to just parents but can intensify. Either framing is authentic - saying संयुक्त परिवार or एकल परिवार in one sentence lifts Topic Coverage.',
       emoji: '👨‍👩‍👧‍👦',
     },
     {
@@ -302,13 +302,13 @@ export const pack: TopicPack = {
     {
       title: 'Phones, Cricket, and Beyond',
       body:
-        'Indian teens bond over the same three things — their phones, cricket, and filmy music — but a growing number are adding K-pop, gaming, and Instagram reels to the list. Naming a specific interest (not just "I like music") gives the essay texture.',
+        'Indian teens bond over the same three things - their phones, cricket, and filmy music - but a growing number are adding K-pop, gaming, and Instagram reels to the list. Naming a specific interest (not just "I like music") gives the essay texture.',
       emoji: '🏏',
     },
   ],
   culturalNote: {
     why:
-      'Indian teen life is culturally very specific — coaching, board exams, joint families, engineer-or-doctor defaults. A student who writes "I study a lot and I feel pressure" gets Topic Coverage Low. A student who writes "कोचिंग के बाद मेरे पास बहुत कम समय रहता है" gets it Average or High. These five insights give you the specific details to slip into the essay.',
+      'Indian teen life is culturally very specific - coaching, board exams, joint families, engineer-or-doctor defaults. A student who writes "I study a lot and I feel pressure" gets Topic Coverage Low. A student who writes "कोचिंग के बाद मेरे पास बहुत कम समय रहता है" gets it Average or High. These five insights give you the specific details to slip into the essay.',
     trains: ['TopicCoverage', 'TextType'],
   },
 
@@ -330,7 +330,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Two muhavare that suit the aspiration/annoyance polarity of teen essays: आसमान छूना for dreams, नाक में दम करना for irritations. One muhavara per essay is plenty — two in one essay reads as overdone. Pick the one that fits your argument.',
+      'Two muhavare that suit the aspiration/annoyance polarity of teen essays: आसमान छूना for dreams, नाक में दम करना for irritations. One muhavara per essay is plenty - two in one essay reads as overdone. Pick the one that fits your argument.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -344,14 +344,14 @@ export const pack: TopicPack = {
       intermediateMid:
         'मेरी राय में, किशोर जीवन का सबसे बड़ा चैलेंज पढ़ाई का दबाव है। हर दिन स्कूल के बाद हम कोचिंग जाते हैं और रात को देर तक होमवर्क करते हैं। माता-पिता की उम्मीदें भी बहुत ज़्यादा हैं, क्योंकि वे चाहते हैं कि हम इंजीनियर या डॉक्टर बनें।\n\nपिछले महीने मेरी बोर्ड की तैयारी शुरू हुई और तब से मेरा तनाव बहुत बढ़ गया। एक रात मैं सो नहीं पाया, इसलिए मैंने अपने पिताजी से बात की। उन्होंने कहा कि नंबर ज़रूरी हैं, लेकिन सेहत उससे भी ज़रूरी है। उस दिन मुझे लगा कि मैं अकेला नहीं हूँ।\n\nहालाँकि दबाव कभी खत्म नहीं होगा, फिर भी मेरा मानना है कि हमें खुद पर भरोसा रखना चाहिए। अगले साल मैं अपने सपने के लिए मेहनत करूँगा, लेकिन साथ ही अपने दोस्तों और परिवार के लिए भी समय निकालूँगा। सिर्फ़ पढ़ाई नहीं, बल्कि खुशी भी ज़िंदगी का हिस्सा है।',
       annotations: [
-        { paragraphIndex: 0, kind: 'structure', highlight: 'मेरी राय में', note: 'Essay opens with a formal opinion marker — immediately signals Level 3 register to the rater.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'कोचिंग, होमवर्क, बोर्ड, इंजीनियर या डॉक्टर', note: 'Four Indian-specific teen references in one paragraph — Topic Coverage High.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि', note: 'Reason clause follows the opinion — this is the basic opinion-plus-reason shape.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'मेरी राय में', note: 'Essay opens with a formal opinion marker - immediately signals Level 3 register to the rater.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'कोचिंग, होमवर्क, बोर्ड, इंजीनियर या डॉक्टर', note: 'Four Indian-specific teen references in one paragraph - Topic Coverage High.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'क्योंकि', note: 'Reason clause follows the opinion - this is the basic opinion-plus-reason shape.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले महीने ... शुरू हुई ... मैंने बात की', note: 'Past-tense personal example anchoring the abstract claim. The rubric explicitly rewards this move.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'इसलिए / लेकिन', note: 'Two reasoning connectors in a single paragraph — the reason-chain the rubric requires.' },
-        { paragraphIndex: 2, kind: 'connector', highlight: 'हालाँकि ... फिर भी', note: 'Counter-point acknowledged before conclusion — an Intermediate-Mid hallmark.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल ... मेहनत करूँगा ... निकालूँगा', note: 'Future tense closes the essay — three time frames in 135 words, clean Benchmark 5.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ पढ़ाई नहीं, बल्कि खुशी भी', note: 'Not-only-but-also closing generalization — raters read this as "student makes a reasoned conclusion".' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'इसलिए / लेकिन', note: 'Two reasoning connectors in a single paragraph - the reason-chain the rubric requires.' },
+        { paragraphIndex: 2, kind: 'connector', highlight: 'हालाँकि ... फिर भी', note: 'Counter-point acknowledged before conclusion - an Intermediate-Mid hallmark.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल ... मेहनत करूँगा ... निकालूँगा', note: 'Future tense closes the essay - three time frames in 135 words, clean Benchmark 5.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ पढ़ाई नहीं, बल्कि खुशी भी', note: 'Not-only-but-also closing generalization - raters read this as "student makes a reasoned conclusion".' },
       ],
       wordCount: 135,
       tenseUsed: ['past', 'present', 'future'],
@@ -360,10 +360,10 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Essay opens with मेरी राय में and sustains opinion register across all three paragraphs — raters mark "takes a clear position" without hesitation.',
-          'Uses past (शुरू हुई, मैंने बात की), present (चाहते हैं, मानना है), and future (करूँगा, निकालूँगा) within 135 words — satisfies the rubric\'s "some control of past, present, and future" for IM.',
-          'Seven distinct connectors/opinion markers (क्योंकि, इसलिए, लेकिन, हालाँकि, मेरी राय में, मेरा मानना है कि, बल्कि) — well above the Text-Type 5 threshold.',
-          'Personal example (the conversation with father) grounds the abstract claim — a direct Intermediate-Mid move.',
+          'Essay opens with मेरी राय में and sustains opinion register across all three paragraphs - raters mark "takes a clear position" without hesitation.',
+          'Uses past (शुरू हुई, मैंने बात की), present (चाहते हैं, मानना है), and future (करूँगा, निकालूँगा) within 135 words - satisfies the rubric\'s "some control of past, present, and future" for IM.',
+          'Seven distinct connectors/opinion markers (क्योंकि, इसलिए, लेकिन, हालाँकि, मेरी राय में, मेरा मानना है कि, बल्कि) - well above the Text-Type 5 threshold.',
+          'Personal example (the conversation with father) grounds the abstract claim - a direct Intermediate-Mid move.',
           'Cultural specifics (कोचिंग, बोर्ड, इंजीनियर या डॉक्टर) lift Topic Coverage above generic teen-angst answers.',
         ],
         gotchas: [
@@ -379,13 +379,13 @@ export const pack: TopicPack = {
       novice:
         'सोशल मीडिया अच्छा है। मोबाइल पर दोस्त मिलते हैं। मैं पसंद करता हूँ।',
       intermediateMid:
-        'मुझे लगता है कि सोशल मीडिया किशोरों के जीवन का एक ज़रूरी हिस्सा है, लेकिन इसका सीमित इस्तेमाल होना चाहिए। एक ओर, यह दोस्तों से जोड़ता है और दुनिया भर की जानकारी देता है। जबकि दूसरी ओर, इस पर ज़्यादा समय बिताने से हमारी पढ़ाई और सेहत दोनों पर असर पड़ता है।\n\nपिछले साल मेरे एक दोस्त ने पूरी रात रीलें देखीं और अगले दिन परीक्षा में थक गया। उसने मुझे बताया कि उसे खुद पर गुस्सा आया, क्योंकि उसने वक़्त बर्बाद कर दिया। उस दिन से मैंने खुद तय किया कि रात नौ बजे के बाद मैं फ़ोन नहीं छूऊँगा।\n\nमेरा मानना है कि सोशल मीडिया हमारा दोस्त है, दुश्मन नहीं — बस इस्तेमाल सही होना चाहिए। हालाँकि मेरे कई दोस्त असहमत हैं, फिर भी मेरी राय में, सिर्फ़ लाइक्स नहीं, बल्कि असली बातचीत भी ज़रूरी है। अगर हम सीमा तय करेंगे, तो आत्मविश्वास और दोस्ती दोनों बचेंगे।',
+        'मुझे लगता है कि सोशल मीडिया किशोरों के जीवन का एक ज़रूरी हिस्सा है, लेकिन इसका सीमित इस्तेमाल होना चाहिए। एक ओर, यह दोस्तों से जोड़ता है और दुनिया भर की जानकारी देता है। जबकि दूसरी ओर, इस पर ज़्यादा समय बिताने से हमारी पढ़ाई और सेहत दोनों पर असर पड़ता है।\n\nपिछले साल मेरे एक दोस्त ने पूरी रात रीलें देखीं और अगले दिन परीक्षा में थक गया। उसने मुझे बताया कि उसे खुद पर गुस्सा आया, क्योंकि उसने वक़्त बर्बाद कर दिया। उस दिन से मैंने खुद तय किया कि रात नौ बजे के बाद मैं फ़ोन नहीं छूऊँगा।\n\nमेरा मानना है कि सोशल मीडिया हमारा दोस्त है, दुश्मन नहीं - बस इस्तेमाल सही होना चाहिए। हालाँकि मेरे कई दोस्त असहमत हैं, फिर भी मेरी राय में, सिर्फ़ लाइक्स नहीं, बल्कि असली बातचीत भी ज़रूरी है। अगर हम सीमा तय करेंगे, तो आत्मविश्वास और दोस्ती दोनों बचेंगे।',
       annotations: [
-        { paragraphIndex: 0, kind: 'structure', highlight: 'मुझे लगता है कि ... लेकिन', note: 'Balanced thesis — opinion plus a qualifier in sentence one. Raters recognize this as a Level 3 move.' },
-        { paragraphIndex: 0, kind: 'connector', highlight: 'एक ओर ... जबकि दूसरी ओर', note: 'On-one-hand/on-the-other-hand scaffold — one of the clearest Text-Type 5 signals.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले साल ... देखीं ... थक गया ... बताया', note: 'Past-tense anecdote supporting the claim — exactly the "personal experience" FCPS prompts ask for.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'मुझे लगता है कि ... लेकिन', note: 'Balanced thesis - opinion plus a qualifier in sentence one. Raters recognize this as a Level 3 move.' },
+        { paragraphIndex: 0, kind: 'connector', highlight: 'एक ओर ... जबकि दूसरी ओर', note: 'On-one-hand/on-the-other-hand scaffold - one of the clearest Text-Type 5 signals.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले साल ... देखीं ... थक गया ... बताया', note: 'Past-tense anecdote supporting the claim - exactly the "personal experience" FCPS prompts ask for.' },
         { paragraphIndex: 1, kind: 'connector', highlight: 'क्योंकि / इसलिए', note: 'Classical reason-chain inside the anecdote. Sentences cannot be rearranged.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'नहीं छूऊँगा', note: 'Future tense arrives mid-essay, not just in the closing — adds tense variety.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'नहीं छूऊँगा', note: 'Future tense arrives mid-essay, not just in the closing - adds tense variety.' },
         { paragraphIndex: 2, kind: 'connector', highlight: 'हालाँकि ... फिर भी', note: 'Counter-point admitted before conclusion.' },
         { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ लाइक्स नहीं, बल्कि असली बातचीत भी', note: 'Not-only-but-also closes with a memorable line.' },
         { paragraphIndex: 2, kind: 'connector', highlight: 'अगर ... तो', note: 'Conditional future seals the third time frame and makes the closing feel argued.' },
@@ -397,10 +397,10 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Balanced thesis ("ज़रूरी है, लेकिन सीमित इस्तेमाल होना चाहिए") lets the essay argue in two directions — a strong Text-Type 5 move.',
-          'Nine distinct connectors/opinion markers used correctly across three paragraphs — far above the rubric threshold.',
-          'Past-tense anecdote (the friend who watched reels all night) is concrete and plausible, not abstract — raters consistently reward this pattern.',
-          'Three time frames are woven throughout, not bunched in one paragraph — a sign of real tense control, not a rehearsed ending.',
+          'Balanced thesis ("ज़रूरी है, लेकिन सीमित इस्तेमाल होना चाहिए") lets the essay argue in two directions - a strong Text-Type 5 move.',
+          'Nine distinct connectors/opinion markers used correctly across three paragraphs - far above the rubric threshold.',
+          'Past-tense anecdote (the friend who watched reels all night) is concrete and plausible, not abstract - raters consistently reward this pattern.',
+          'Three time frames are woven throughout, not bunched in one paragraph - a sign of real tense control, not a rehearsed ending.',
           'Closing conditional (अगर ... तो) plus the सिर्फ़...बल्कि...भी structure gives the essay a memorable last line.',
         ],
         gotchas: [
@@ -412,7 +412,7 @@ export const pack: TopicPack = {
   ],
   modelEssaysNote: {
     why:
-      'Both model essays argue — they do not just describe. Study the opening sentences: each states a position in the first line. Study the middle paragraphs: each grounds the position in a past-tense personal example. Study the closings: each admits a counter-point with हालाँकि before concluding with a memorable line. Reproducing this three-move shape — Claim, Example, Reasoned Conclusion — is the core skill of this pack.',
+      'Both model essays argue - they do not just describe. Study the opening sentences: each states a position in the first line. Study the middle paragraphs: each grounds the position in a past-tense personal example. Study the closings: each admits a counter-point with हालाँकि before concluding with a memorable line. Reproducing this three-move shape - Claim, Example, Reasoned Conclusion - is the core skill of this pack.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -453,7 +453,7 @@ export const pack: TopicPack = {
   ],
   promptsNote: {
     why:
-      'All three prompts force an opinion — they start with "आपकी राय में", "क्या ... हो गई है", or "सबसे ज़रूरी". A descriptive answer cannot satisfy these prompts. Use the hint strip to pre-load the four connectors and five vocab items you will use before you start writing; that way the essay flows instead of stalling.',
+      'All three prompts force an opinion - they start with "आपकी राय में", "क्या ... हो गई है", or "सबसे ज़रूरी". A descriptive answer cannot satisfy these prompts. Use the hint strip to pre-load the four connectors and five vocab items you will use before you start writing; that way the essay flows instead of stalling.',
     trains: ['TextType'],
   },
 

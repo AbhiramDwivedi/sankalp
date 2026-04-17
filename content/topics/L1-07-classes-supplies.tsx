@@ -4,7 +4,7 @@ import { pickConnectors } from '../connectors';
 
 // -----------------------------------------------------------------------------
 // L1-07 · Classes, Schedules & Supplies
-// Foundations pack — the second-most-frequent FCPS L1 essay theme after
+// Foundations pack - the second-most-frequent FCPS L1 essay theme after
 // family/self. Teaches topic possessives (X का/की/के ...), schedule phrases
 // (सोमवार को ...), and "मेरा सबसे अच्छा विषय ___ है क्योंकि ..." scaffold that
 // unlocks an instant Benchmark-5 paragraph.
@@ -20,14 +20,14 @@ export const pack: TopicPack = {
   titleEnglish: 'Classes, Schedules & Supplies',
   hook: 'School vocabulary is the second-most-likely FCPS essay prompt. Own subjects, supplies, and the weekly schedule, and half the Level-1 prompt bank is solved.',
   heroPrompt: composeHeroPrompt(
-    "An Indian student's wooden desk seen from above — open notebook with faint Devanagari, two pencils, a sharpener, a geometry box, a blue water bottle, a cloth school bag hanging on the chair, a green chalkboard in the background with a wiped-clean surface, morning light slanting in",
+    "An Indian student's wooden desk seen from above - open notebook with faint Devanagari, two pencils, a sharpener, a geometry box, a blue water bottle, a cloth school bag hanging on the chair, a green chalkboard in the background with a wiped-clean surface, morning light slanting in",
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Classes, Schedules, and Supplies (FCPS Level 1 — School Life)',
-      'Daily routine at school (FCPS Level 1 — School Life)',
-      'Favorite subject / favorite teacher (FCPS Level 1 — School Life)',
+      'Classes, Schedules, and Supplies (FCPS Level 1 - School Life)',
+      'Daily routine at school (FCPS Level 1 - School Life)',
+      'Favorite subject / favorite teacher (FCPS Level 1 - School Life)',
     ],
     trains: ['TopicCoverage', 'TextType', 'LanguageControl'],
     afterThisPackStudentCan: [
@@ -109,7 +109,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 30 words cover every noun and verb a student needs for the "school day" and "favorite subject" prompts. Each appears in the anchor, model texts, or one of the model essays — learn the list first and Topic Coverage is already locked in before the student writes a word.',
+      'These 30 words cover every noun and verb a student needs for the "school day" and "favorite subject" prompts. Each appears in the anchor, model texts, or one of the model essays - learn the list first and Topic Coverage is already locked in before the student writes a word.',
     trains: ['TopicCoverage'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },
@@ -127,7 +127,7 @@ export const pack: TopicPack = {
       pitfall:
         'Saying "गणित की अध्यापक" (feminine की on a masculine noun अध्यापक) or "हिंदी का किताब" (masculine का on feminine किताब) is the single most common error. Fix the gender of the second noun first, then pick का/की/के.',
       whyItMatters:
-        'Possessive phrases appear in every school essay — "my maths teacher", "the Hindi book", "the students of my class". Consistent mistakes here cap Language Control at Low no matter how rich the vocabulary is.',
+        'Possessive phrases appear in every school essay - "my maths teacher", "the Hindi book", "the students of my class". Consistent mistakes here cap Language Control at Low no matter how rich the vocabulary is.',
     },
     {
       title: 'Schedule expressions with "___ को" (on Monday, on Tuesday)',
@@ -139,7 +139,7 @@ export const pack: TopicPack = {
         { hindi: 'शुक्रवार को खेल का मैदान खुला रहता है।', transliteration: 'shukravaar ko khel ka maidaan khulaa rahtaa hai.', english: 'On Friday the playground stays open.' },
       ],
       pitfall:
-        'Students often drop को and write "सोमवार गणित है।" — comprehensible but flat. Adding को instantly lifts the sentence register and signals grammatical control.',
+        'Students often drop को and write "सोमवार गणित है।" - comprehensible but flat. Adding को instantly lifts the sentence register and signals grammatical control.',
       whyItMatters:
         'A three-day schedule paragraph (सोमवार को ... मंगलवार को ... शुक्रवार को ...) is the fastest way to hit Text-Type 5 on a school prompt: three connected sentences that cannot be rearranged.',
     },
@@ -155,7 +155,7 @@ export const pack: TopicPack = {
       pitfall:
         'Writing "मेरा सबसे अच्छा विषय हिंदी, क्योंकि अच्छा है।" (missing है and a circular reason) is common. Always include है before क्योंकि and make the reason concrete.',
       whyItMatters:
-        'This single sentence shape gives the rater: a possessive, a superlative, a linking verb, and क्योंकि with a reason — four rubric boxes ticked in one line. Memorize it.',
+        'This single sentence shape gives the rater: a possessive, a superlative, a linking verb, and क्योंकि with a reason - four rubric boxes ticked in one line. Memorize it.',
     },
   ],
   grammarNote: {
@@ -175,7 +175,7 @@ export const pack: TopicPack = {
   ]),
   connectorsNote: {
     why:
-      'पहले / फिर / इसके बाद sequence a school day (prayer → first class → break → last class). क्योंकि justifies a favorite subject. लेकिन contrasts a loved vs. disliked subject. इसलिए reports a consequence ("homework was hard, so I stayed back"). इसके अलावा lets the student add a supply or a club beyond the obvious list — which is how Topic Coverage gets pushed from Average to High.',
+      'पहले / फिर / इसके बाद sequence a school day (prayer → first class → break → last class). क्योंकि justifies a favorite subject. लेकिन contrasts a loved vs. disliked subject. इसलिए reports a consequence ("homework was hard, so I stayed back"). इसके अलावा lets the student add a supply or a club beyond the obvious list - which is how Topic Coverage gets pushed from Average to High.',
     trains: ['TextType'],
   },
 
@@ -188,11 +188,11 @@ export const pack: TopicPack = {
     english:
       'My name is Aarav and I study in class eight. Every morning at seven I get my bag ready. First we all stand for the prayer, then class begins. On Monday there is first a maths class, after that science. The maths teacher is strict, but explains very well. The Hindi teacher reads us stories, so I like Hindi the most. At midday we open our tiffins and eat with friends. Besides this, on Friday the playground stays open. Tomorrow there is a small science test, so this evening I will study from my lab notebook. My favorite subject is Hindi, because it has both stories and questions.',
     highlights: [
-      { term: 'पहले / फिर / इसके बाद', note: 'Three sequence connectors scaffold the school day — sentences can no longer be reshuffled. Pure Text-Type 5.' },
-      { term: 'गणित के अध्यापक (m) / हिंदी की अध्यापिका (f)', note: 'के vs. की agreement on two teachers in the same paragraph — a clean Language Control signal.' },
+      { term: 'पहले / फिर / इसके बाद', note: 'Three sequence connectors scaffold the school day - sentences can no longer be reshuffled. Pure Text-Type 5.' },
+      { term: 'गणित के अध्यापक (m) / हिंदी की अध्यापिका (f)', note: 'के vs. की agreement on two teachers in the same paragraph - a clean Language Control signal.' },
       { term: 'सोमवार को / शुक्रवार को', note: 'Schedule postposition को. Memorize this frame; it reappears in every school essay.' },
-      { term: 'प्रार्थना', note: 'Cultural specific. Indian schools start with a morning prayer — mentioning it lifts Topic Coverage above generic "we go to class".' },
-      { term: 'कल ... पढ़ूँगा', note: 'Future tense in the final paragraph — the third time frame the rubric rewards.' },
+      { term: 'प्रार्थना', note: 'Cultural specific. Indian schools start with a morning prayer - mentioning it lifts Topic Coverage above generic "we go to class".' },
+      { term: 'कल ... पढ़ूँगा', note: 'Future tense in the final paragraph - the third time frame the rubric rewards.' },
       { term: 'मेरा सबसे अच्छा विषय ___ है, क्योंकि ___', note: 'The signature school-prompt scaffold, used in full in the closing line.' },
     ],
     comprehensionQuestions: [
@@ -202,12 +202,12 @@ export const pack: TopicPack = {
       { q: 'Why does Aarav like Hindi the most?', a: 'क्योंकि उसमें कहानियाँ भी हैं और सवाल भी (because it has both stories and questions).' },
       { q: 'What happens on Friday that is different?', a: 'खेल का मैदान खुला रहता है (the playground stays open).' },
       { q: 'Why will Aarav study in the evening?', a: 'क्योंकि कल विज्ञान का छोटा टेस्ट है (because there is a small science test tomorrow).' },
-      { q: 'Identify one possessive phrase and say whether it uses का, की, or के.', a: 'गणित के अध्यापक (के), हिंदी की अध्यापिका (की), विज्ञान का टेस्ट (का), पानी की बोतल (की) — any one.' },
+      { q: 'Identify one possessive phrase and say whether it uses का, की, or के.', a: 'गणित के अध्यापक (के), हिंदी की अध्यापिका (की), विज्ञान का टेस्ट (का), पानी की बोतल (की) - any one.' },
     ],
   },
   anchorNote: {
     why:
-      'This anchor is a worked example of a passing Intermediate-Mid school-day essay. Every structural move the student must make — sequence connectors, possessive agreement, schedule postposition, cultural specific, future-tense close — appears here in context. Read it aloud three times before attempting a prompt.',
+      'This anchor is a worked example of a passing Intermediate-Mid school-day essay. Every structural move the student must make - sequence connectors, possessive agreement, schedule postposition, cultural specific, future-tense close - appears here in context. Read it aloud three times before attempting a prompt.',
     trains: ['TextType', 'TopicCoverage', 'LanguageControl'],
   },
 
@@ -255,7 +255,7 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'A timetable, a diary entry, a friend SMS, and a formal notice — four registers the student should be able to imitate. The timetable alone is a scaffold: swap the names of the subjects and the student already has a middle paragraph for almost any school-day essay.',
+      'A timetable, a diary entry, a friend SMS, and a formal notice - four registers the student should be able to imitate. The timetable alone is a scaffold: swap the names of the subjects and the student already has a middle paragraph for almost any school-day essay.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -263,37 +263,37 @@ export const pack: TopicPack = {
     {
       title: 'Morning Prayer (प्रार्थना)',
       body:
-        'Most Indian schools begin the day with a 10-minute prayer assembly — students line up, sing a bhajan or the national anthem, and hear a short thought for the day. Mentioning प्रार्थना is an instant cultural marker that separates a real Indian school day from a generic description.',
+        'Most Indian schools begin the day with a 10-minute prayer assembly - students line up, sing a bhajan or the national anthem, and hear a short thought for the day. Mentioning प्रार्थना is an instant cultural marker that separates a real Indian school day from a generic description.',
       emoji: '🙏',
     },
     {
-      title: 'सर / मैडम — Subject-Teacher Naming',
+      title: 'सर / मैडम - Subject-Teacher Naming',
       body:
-        'Hindi-medium students rarely say "हिंदी की अध्यापिका" out loud. In speech they say "हिंदी मैडम" or "गणित सर". In formal writing (like the FCPS essay), the full अध्यापक / अध्यापिका is preferred — but knowing both registers shows range.',
+        'Hindi-medium students rarely say "हिंदी की अध्यापिका" out loud. In speech they say "हिंदी मैडम" or "गणित सर". In formal writing (like the FCPS essay), the full अध्यापक / अध्यापिका is preferred - but knowing both registers shows range.',
       emoji: '👩\u200d🏫',
     },
     {
       title: 'School Uniform & Tie',
       body:
-        'Almost every Indian school enforces a uniform — shirt, trousers or skirt, a tie for most middle-and-high school grades, and polished black shoes. A student who writes "मैंने यूनिफ़ॉर्म पहनी" instantly situates the essay in the right cultural frame.',
+        'Almost every Indian school enforces a uniform - shirt, trousers or skirt, a tie for most middle-and-high school grades, and polished black shoes. A student who writes "मैंने यूनिफ़ॉर्म पहनी" instantly situates the essay in the right cultural frame.',
       emoji: '👔',
     },
     {
       title: 'Tuition / Coaching Culture',
       body:
-        'After regular school, many Indian students attend private ट्यूशन or कोचिंग classes — especially for गणित and विज्ञान before exams. Referencing "स्कूल के बाद ट्यूशन" gives the essay a contemporary, specific flavor raters reward under Topic Coverage.',
+        'After regular school, many Indian students attend private ट्यूशन or कोचिंग classes - especially for गणित and विज्ञान before exams. Referencing "स्कूल के बाद ट्यूशन" gives the essay a contemporary, specific flavor raters reward under Topic Coverage.',
       emoji: '📝',
     },
     {
       title: 'CBSE Subject Pattern',
       body:
-        'The standard CBSE timetable grades 6–8 includes Hindi, English, Mathematics, Science, Social Studies, a third language (often Sanskrit), Computer, Art, Music, and Physical Education. When in doubt, list subjects from this set — it matches what any Indian rater expects.',
+        'The standard CBSE timetable grades 6–8 includes Hindi, English, Mathematics, Science, Social Studies, a third language (often Sanskrit), Computer, Art, Music, and Physical Education. When in doubt, list subjects from this set - it matches what any Indian rater expects.',
       emoji: '📋',
     },
   ],
   culturalNote: {
     why:
-      'A generic "I go to school" essay reads as Novice-High regardless of grammar. One specific cultural pin — the morning prayer, the uniform tie, the tuition class after school — is a direct Topic-Coverage boost at no grammar cost. Pick one per essay.',
+      'A generic "I go to school" essay reads as Novice-High regardless of grammar. One specific cultural pin - the morning prayer, the uniform tie, the tuition class after school - is a direct Topic-Coverage boost at no grammar cost. Pick one per essay.',
     trains: ['TopicCoverage', 'TextType'],
   },
 
@@ -303,7 +303,7 @@ export const pack: TopicPack = {
       literal: 'to remember letter by letter',
       meaning: 'To know something by heart, perfectly memorized.',
       example: 'मुझे हिंदी की यह कविता अक्षर-अक्षर याद है।',
-      exampleEnglish: 'I know this Hindi poem by heart — every single word.',
+      exampleEnglish: 'I know this Hindi poem by heart - every single word.',
     },
     {
       phrase: 'नानी याद आना',
@@ -315,7 +315,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Both idioms fit the school context naturally — one for memorized recitation (the Indian classroom norm), one for a brutal test. Used once in a 3-paragraph essay, an idiom signals register mastery. Used twice, it reads as forced.',
+      'Both idioms fit the school context naturally - one for memorized recitation (the Indian classroom norm), one for a brutal test. Used once in a 3-paragraph essay, an idiom signals register mastery. Used twice, it reads as forced.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -327,16 +327,16 @@ export const pack: TopicPack = {
       novice:
         'मैं स्कूल जाता हूँ। मुझे हिंदी पसंद है। मेरा बैग है।',
       intermediateMid:
-        'मेरा नाम आरव है और मैं आठवीं कक्षा में पढ़ता हूँ। रोज़ सुबह सात बजे मैं अपना बैग तैयार करता हूँ — उसमें हिंदी की किताब, गणित की कॉपी, पेंसिल, रबर और पानी की बोतल होती है। पहले हम सब प्रार्थना में खड़े होते हैं, फिर कक्षा शुरू होती है।\n\nसोमवार को पहले गणित की कक्षा होती है, इसके बाद विज्ञान। गणित के अध्यापक सख़्त हैं, लेकिन बहुत अच्छा समझाते हैं। हिंदी की अध्यापिका हमें कहानियाँ पढ़ाती हैं, इसलिए मुझे हिंदी सबसे अच्छी लगती है। दोपहर को हम टिफ़िन खोलते हैं और दोस्तों के साथ खाते हैं।\n\nकल विज्ञान का छोटा टेस्ट है, इसलिए आज शाम मैं प्रयोगशाला की कॉपी से पढ़ूँगा। मेरा सबसे अच्छा विषय हिंदी है, क्योंकि उसमें कहानियाँ भी हैं और सवाल भी। मुझे लगता है कि स्कूल सिर्फ़ पढ़ाई की जगह नहीं है, बल्कि दोस्तों की भी जगह है।',
+        'मेरा नाम आरव है और मैं आठवीं कक्षा में पढ़ता हूँ। रोज़ सुबह सात बजे मैं अपना बैग तैयार करता हूँ - उसमें हिंदी की किताब, गणित की कॉपी, पेंसिल, रबर और पानी की बोतल होती है। पहले हम सब प्रार्थना में खड़े होते हैं, फिर कक्षा शुरू होती है।\n\nसोमवार को पहले गणित की कक्षा होती है, इसके बाद विज्ञान। गणित के अध्यापक सख़्त हैं, लेकिन बहुत अच्छा समझाते हैं। हिंदी की अध्यापिका हमें कहानियाँ पढ़ाती हैं, इसलिए मुझे हिंदी सबसे अच्छी लगती है। दोपहर को हम टिफ़िन खोलते हैं और दोस्तों के साथ खाते हैं।\n\nकल विज्ञान का छोटा टेस्ट है, इसलिए आज शाम मैं प्रयोगशाला की कॉपी से पढ़ूँगा। मेरा सबसे अच्छा विषय हिंदी है, क्योंकि उसमें कहानियाँ भी हैं और सवाल भी। मुझे लगता है कि स्कूल सिर्फ़ पढ़ाई की जगह नहीं है, बल्कि दोस्तों की भी जगह है।',
       annotations: [
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'हिंदी की किताब, गणित की कॉपी, पेंसिल, रबर, पानी की बोतल', note: 'Five distinct supplies with correct की / masculine forms — Topic Coverage secured in one sentence.' },
-        { paragraphIndex: 0, kind: 'cultural', highlight: 'प्रार्थना में खड़े होते हैं', note: 'Cultural specific (morning assembly) in paragraph 1 — immediate Topic-Coverage lift.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'हिंदी की किताब, गणित की कॉपी, पेंसिल, रबर, पानी की बोतल', note: 'Five distinct supplies with correct की / masculine forms - Topic Coverage secured in one sentence.' },
+        { paragraphIndex: 0, kind: 'cultural', highlight: 'प्रार्थना में खड़े होते हैं', note: 'Cultural specific (morning assembly) in paragraph 1 - immediate Topic-Coverage lift.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर', note: 'Sequence connectors lock the paragraph shape.' },
-        { paragraphIndex: 1, kind: 'structure', highlight: 'सोमवार को ... इसके बाद ...', note: 'Schedule postposition को + इसके बाद — two school-specific grammar moves in one sentence.' },
-        { paragraphIndex: 1, kind: 'vocab', highlight: 'गणित के अध्यापक (m) / हिंदी की अध्यापिका (f)', note: 'के vs. की agreement on paired nouns — clean Language Control signal.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'लेकिन / इसलिए', note: 'Contrast + consequence back-to-back — Text-Type lift.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'कल ... है / आज शाम ... पढ़ूँगा', note: 'Future tense arrives explicitly — the third time frame the rubric needs.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: '"Not only ... but also" — an Intermediate-Mid hallmark used in the reflective close.' },
+        { paragraphIndex: 1, kind: 'structure', highlight: 'सोमवार को ... इसके बाद ...', note: 'Schedule postposition को + इसके बाद - two school-specific grammar moves in one sentence.' },
+        { paragraphIndex: 1, kind: 'vocab', highlight: 'गणित के अध्यापक (m) / हिंदी की अध्यापिका (f)', note: 'के vs. की agreement on paired nouns - clean Language Control signal.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'लेकिन / इसलिए', note: 'Contrast + consequence back-to-back - Text-Type lift.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'कल ... है / आज शाम ... पढ़ूँगा', note: 'Future tense arrives explicitly - the third time frame the rubric needs.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... नहीं, बल्कि ... भी', note: '"Not only ... but also" - an Intermediate-Mid hallmark used in the reflective close.' },
       ],
       wordCount: 136,
       tenseUsed: ['past', 'present', 'future'],
@@ -345,15 +345,15 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs, each with a clear job: getting ready + prayer, the actual schedule, and the reflective close. Sentences cannot be reshuffled — Text-Type 5 requirement met.',
+          'Three cohesive paragraphs, each with a clear job: getting ready + prayer, the actual schedule, and the reflective close. Sentences cannot be reshuffled - Text-Type 5 requirement met.',
           'Present-habitual (पढ़ता हूँ, होती है) sits beside future (पढ़ूँगा) in the final paragraph, giving the rubric the tense variety it wants.',
           'Possessive agreement is airtight: हिंदी की किताब, गणित की कॉपी, पानी की बोतल (all की), गणित के अध्यापक, हिंदी की अध्यापिका, विज्ञान का टेस्ट. Language Control stabilizes at Average-High.',
-          'At least seven distinct connectors used correctly — well above the 3-connector threshold.',
+          'At least seven distinct connectors used correctly - well above the 3-connector threshold.',
           'Cultural specific (प्रार्थना, टिफ़िन) grounds the essay in an authentic Indian school, not a generic classroom.',
         ],
         gotchas: [
           'Switching to feminine verb forms mid-essay (I am Aarav but then पढ़ती हूँ) would drop Language Control by a level. Pick a gender and sustain it.',
-          'Losing the "सिर्फ़ ... बल्कि ... भी" close would pull Text-Type back toward 4 — the reflective generalization is what lifts it clearly into 5.',
+          'Losing the "सिर्फ़ ... बल्कि ... भी" close would pull Text-Type back toward 4 - the reflective generalization is what lifts it clearly into 5.',
         ],
       },
     },
@@ -366,13 +366,13 @@ export const pack: TopicPack = {
       intermediateMid:
         'मेरा सबसे अच्छा विषय हिंदी है, क्योंकि उसमें कहानियाँ भी हैं और कविताएँ भी। हिंदी की अध्यापिका बहुत दयालु हैं और हमें अक्षर-अक्षर याद कराती हैं। उनकी कक्षा में मुझे कभी नींद नहीं आती।\n\nकल की बात है, मैडम ने एक पुरानी कहानी पढ़ाई। पहले उन्होंने कहानी पढ़ी, फिर हमें सवाल दिए। मैंने पाँच सवाल हल किए, लेकिन एक समझ नहीं आया। इसलिए मेरे दोस्त ने मुझे समझाया, और अब मुझे पूरी कहानी याद है। रोज़ घर पर भी मैं हिंदी की कॉपी खोलकर कुछ-न-कुछ लिखता हूँ।\n\nअगले सोमवार को हमारा हिंदी का छोटा टेस्ट होगा। इसलिए इस शनिवार मैं पुस्तकालय जाऊँगा और अभ्यास करूँगा। इसके अलावा मैं माँ से भी एक कहानी सुनूँगा। मुझे लगता है कि अगर अध्यापिका अच्छी हो, तो कोई भी विषय सबसे अच्छा बन सकता है।',
       annotations: [
-        { paragraphIndex: 0, kind: 'structure', highlight: 'मेरा सबसे अच्छा विषय ___ है, क्योंकि ___', note: 'The signature scaffold used as the opening line — locks the essay topic and reason in one sentence.' },
-        { paragraphIndex: 0, kind: 'idiom', highlight: 'अक्षर-अक्षर याद', note: 'School-appropriate idiom placed in context — one idiom per essay is plenty.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'मेरा सबसे अच्छा विषय ___ है, क्योंकि ___', note: 'The signature scaffold used as the opening line - locks the essay topic and reason in one sentence.' },
+        { paragraphIndex: 0, kind: 'idiom', highlight: 'अक्षर-अक्षर याद', note: 'School-appropriate idiom placed in context - one idiom per essay is plenty.' },
         { paragraphIndex: 1, kind: 'tense-shift', highlight: 'कल ... मैडम ने पढ़ाई / मैंने हल किए', note: 'Past perfective with ने-construction correctly applied to a female narrator-agent scenario.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'पहले ... फिर ... लेकिन ... इसलिए', note: 'Four connectors in a single paragraph — Text-Type 5 signal.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'रोज़ ... लिखता हूँ', note: 'Present-habitual shift inside the past paragraph — rubric rewards mixed time frames.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'पहले ... फिर ... लेकिन ... इसलिए', note: 'Four connectors in a single paragraph - Text-Type 5 signal.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'रोज़ ... लिखता हूँ', note: 'Present-habitual shift inside the past paragraph - rubric rewards mixed time frames.' },
         { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले सोमवार को ... होगा / जाऊँगा / करूँगा', note: 'Three future-tense verbs in one paragraph seal the third time frame.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'अगर ... तो ... बन सकता है', note: 'Conditional reflective close — Intermediate-Mid hallmark.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'अगर ... तो ... बन सकता है', note: 'Conditional reflective close - Intermediate-Mid hallmark.' },
       ],
       wordCount: 142,
       tenseUsed: ['past', 'present', 'future'],
@@ -381,15 +381,15 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Opens directly with the "सबसे अच्छा विषय ___ है क्योंकि" scaffold — rater sees the key school-prompt move in line 1.',
+          'Opens directly with the "सबसे अच्छा विषय ___ है क्योंकि" scaffold - rater sees the key school-prompt move in line 1.',
           'Clean three-frame coverage: yesterday (कल ... पढ़ाई, हल किए), today (रोज़ ... लिखता हूँ), next week (अगले सोमवार ... होगा, जाऊँगा, करूँगा).',
-          'Past ने-construction is correct: मैंने हल किए, मैडम ने पढ़ाई — raters look specifically for this and it is here.',
+          'Past ने-construction is correct: मैंने हल किए, मैडम ने पढ़ाई - raters look specifically for this and it is here.',
           'Idiom अक्षर-अक्षर याद is embedded, not tacked on. Signals register mastery.',
-          'Reflective conditional close (अगर अध्यापिका अच्छी हो, तो कोई भी विषय सबसे अच्छा बन सकता है) generalizes beyond the event — pure Text-Type 5.',
+          'Reflective conditional close (अगर अध्यापिका अच्छी हो, तो कोई भी विषय सबसे अच्छा बन सकता है) generalizes beyond the event - pure Text-Type 5.',
         ],
         gotchas: [
           'If a student wrote "मैं हल किए" instead of "मैंने हल किए", ne-construction error drops Language Control to Low.',
-          'Dropping the future paragraph entirely and staying in past+present would cap the essay at Benchmark 4 (2 credits) — the third time frame is what unlocks 3.',
+          'Dropping the future paragraph entirely and staying in past+present would cap the essay at Benchmark 4 (2 credits) - the third time frame is what unlocks 3.',
         ],
       },
     },
@@ -425,9 +425,9 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'कल आपके स्कूल में एक टेस्ट या परीक्षा है। तीन अनुच्छेदों में लिखिए — आज आपने क्या पढ़ा, कल आप क्या करेंगे, और आप किस विषय को लेकर सबसे ज़्यादा सोच रहे हैं।',
+        'कल आपके स्कूल में एक टेस्ट या परीक्षा है। तीन अनुच्छेदों में लिखिए - आज आपने क्या पढ़ा, कल आप क्या करेंगे, और आप किस विषय को लेकर सबसे ज़्यादा सोच रहे हैं।',
       english:
-        'Tomorrow there is a test or exam at your school. Write three paragraphs — what you studied today, what you will do tomorrow, and which subject you are most anxious about.',
+        'Tomorrow there is a test or exam at your school. Write three paragraphs - what you studied today, what you will do tomorrow, and which subject you are most anxious about.',
       hint: {
         connectors: ['पहले', 'फिर', 'इसलिए', 'क्योंकि'],
         vocab: ['परीक्षा', 'कॉपी', 'हल करना', 'प्रयोगशाला', 'पुस्तकालय'],
@@ -437,7 +437,7 @@ export const pack: TopicPack = {
   ],
   promptsNote: {
     why:
-      'Each prompt is deliberately FCPS-shaped: three cohesive paragraphs, personal experience, enough time-frame scope to force past + present + future. The hint strip is not the answer — it is a checklist of language goals. If the essay does not use most hints, the rubric will catch the gap.',
+      'Each prompt is deliberately FCPS-shaped: three cohesive paragraphs, personal experience, enough time-frame scope to force past + present + future. The hint strip is not the answer - it is a checklist of language goals. If the essay does not use most hints, the rubric will catch the gap.',
     trains: ['TextType'],
   },
 

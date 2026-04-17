@@ -89,7 +89,7 @@ export const AiAssessmentPanel: React.FC<AiAssessmentPanelProps> = ({
           />
           <Upload size={28} className="mx-auto mb-2 text-slate-400" />
           <p className="text-sm font-bold">
-            {imageData ? 'Image ready — click to change' : 'Upload a photo of handwritten essay'}
+            {imageData ? 'Image ready - click to change' : 'Upload a photo of handwritten essay'}
           </p>
         </label>
       )}

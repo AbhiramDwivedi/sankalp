@@ -1,4 +1,4 @@
-// CapstoneHeroArt — hero illustration for a capstone essay. Mirrors
+// CapstoneHeroArt - hero illustration for a capstone essay. Mirrors
 // PackHeroArt's approach but uses a slightly different composition (wider
 // scene, push-tier capstones get a gold accent ring) so capstones feel
 // visually distinct from topic packs.
@@ -65,7 +65,7 @@ export const CapstoneHeroArt: React.FC<CapstoneHeroArtProps> = ({ capstone, clas
       {/* Centered focal glow */}
       <circle cx="900" cy="300" r="320" fill={`url(#${ringId})`} />
 
-      {/* Main motif — large centered-right */}
+      {/* Main motif - large centered-right */}
       <g transform="translate(780, 120) scale(1.8)">
         <g opacity="0.95">
           <Motif color="#ffffff" accent="rgba(255,255,255,0.6)" />
@@ -87,7 +87,7 @@ export const CapstoneHeroArt: React.FC<CapstoneHeroArtProps> = ({ capstone, clas
         </g>
       )}
 
-      {/* Crest — left-side */}
+      {/* Crest - left-side */}
       <g transform="translate(70, 420)">
         <circle cx="40" cy="40" r="50" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" />
         <circle cx="40" cy="40" r="36" fill="rgba(255,255,255,0.12)" />

@@ -63,7 +63,7 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
           Does this courseware actually earn 3 FCPS credits?
         </h1>
         <p className="text-slate-600 italic max-w-3xl text-lg leading-relaxed">
-          A direct, evidence-based answer — not marketing copy. Hard gates ship with the repo; this page re-computes them every time you open it.
+          A direct, evidence-based answer - not marketing copy. Hard gates ship with the repo; this page re-computes them every time you open it.
         </p>
       </header>
 
@@ -209,7 +209,7 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
       </section>
 
       <p className="text-xs text-slate-400 italic">
-        This page is a live view of the same audit that <code>scripts/credit-audit.ts</code> writes to <code>docs/CREDIT_AUDIT.md</code>. Any gap shown here is a real gap — fix the content, not this page.
+        This page is a live view of the same audit that <code>scripts/credit-audit.ts</code> writes to <code>docs/CREDIT_AUDIT.md</code>. Any gap shown here is a real gap - fix the content, not this page.
       </p>
     </div>
   );

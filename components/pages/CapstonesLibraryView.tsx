@@ -38,7 +38,7 @@ export const CapstonesLibraryView: React.FC<CapstonesLibraryViewProps> = ({
           Cross-topic essays
         </h1>
         <p className="text-slate-600 italic max-w-3xl text-lg leading-relaxed">
-          Ten multi-paragraph essays that cement what the topic packs taught. Each capstone draws from 3–5 packs and exists in three length tiers — Novice, Intermediate-Mid, and Push — so you can see your own ceiling rise.
+          Ten multi-paragraph essays that cement what the topic packs taught. Each capstone draws from 3–5 packs and exists in three length tiers - Novice, Intermediate-Mid, and Push - so you can see your own ceiling rise.
         </p>
       </header>
 
@@ -63,7 +63,7 @@ export const CapstonesLibraryView: React.FC<CapstonesLibraryViewProps> = ({
             <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-black text-emerald-900">
-                {hiddenCount} {hiddenCount === 1 ? 'capstone is' : 'capstones are'} hidden — at or below your level
+                {hiddenCount} {hiddenCount === 1 ? 'capstone is' : 'capstones are'} hidden - at or below your level
               </p>
               <p className="text-xs text-emerald-700 font-medium italic">
                 Based on {studentLevel || 'your level'}. Push-tier capstones always show.

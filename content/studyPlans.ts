@@ -1,4 +1,4 @@
-// Study plans — map a declared ProficiencyLevel to a week-by-week schedule
+// Study plans - map a declared ProficiencyLevel to a week-by-week schedule
 // of topic packs and capstones. Consumed by Onboarding (to pick a default),
 // Dashboard (to surface "this week"), LibraryView ("My Plan" filter), and
 // StudyPlanView (printable schedule).
@@ -58,32 +58,32 @@ const PLAN_FOUNDATION: StudyPlan = {
   weeks: [
     { weekIndex: 1, focus: 'Identity basics', packs: ALL_L1.slice(0, 2),
       writingOutput: '3–5 sentences introducing yourself and a family member.',
-      checkpoint: 'You can greet, introduce, and describe — in present tense only.' },
+      checkpoint: 'You can greet, introduce, and describe - in present tense only.' },
     { weekIndex: 2, focus: 'Family and clothing', packs: ALL_L1.slice(2, 4),
       writingOutput: 'One short paragraph about your family; one about what you wore today.',
       checkpoint: 'You cover a full topic in 4–6 sentences with 2 connectors.' },
     { weekIndex: 3, focus: 'School life I', packs: ALL_L1.slice(4, 7),
       writingOutput: 'Your daily school schedule in present tense.',
-      checkpoint: 'You are at Novice-High (Benchmark 3) — 1 FCPS credit equivalent.' },
+      checkpoint: 'You are at Novice-High (Benchmark 3) - 1 FCPS credit equivalent.' },
     { weekIndex: 4, focus: 'Social and weather', packs: ALL_L1.slice(7, 9),
       writingOutput: 'Two short paragraphs: hobbies, and favorite season.',
       checkpoint: 'You can compare two things using लेकिन.' },
     { weekIndex: 5, focus: 'Community and food', packs: ALL_L1.slice(9, 12),
       capstones: ['C01-restaurant-memory'],
-      writingOutput: 'Capstone C01 — restaurant memory. Use the Novice version first, then re-write at IM length.',
+      writingOutput: 'Capstone C01 - restaurant memory. Use the Novice version first, then re-write at IM length.',
       checkpoint: 'First full 3-paragraph essay. Self-grade strictly against the rubric.' },
     { weekIndex: 6, focus: 'Home life', packs: ALL_L2.slice(0, 3),
       capstones: ['C02-typical-saturday'],
-      writingOutput: 'Capstone C02 — typical Saturday. Shoot for 220 words.',
-      checkpoint: 'Intermediate-Low (Benchmark 4) is realistic here — 2 credits equivalent.' },
+      writingOutput: 'Capstone C02 - typical Saturday. Shoot for 220 words.',
+      checkpoint: 'Intermediate-Low (Benchmark 4) is realistic here - 2 credits equivalent.' },
     { weekIndex: 7, focus: 'Student life', packs: ALL_L2.slice(3, 6),
       capstones: ['C03-festival-weekend'],
-      writingOutput: 'Capstone C03 — festival weekend. Include one muhavara.',
+      writingOutput: 'Capstone C03 - festival weekend. Include one muhavara.',
       checkpoint: 'You mix two tenses and reach 240+ words.' },
     { weekIndex: 8, focus: 'Leisure + events', packs: ALL_L2.slice(6, 9),
       capstones: ['C04-neighborhood-place', 'C05-school-day'],
       writingOutput: 'Capstones C04 + C05. Time C05 to 30 minutes (Mock Exam practice).',
-      checkpoint: 'You should now be writing Benchmark 5 drafts — 3 credits in reach.' },
+      checkpoint: 'You should now be writing Benchmark 5 drafts - 3 credits in reach.' },
     { weekIndex: 9, focus: 'Travel + L3 memories', packs: [...ALL_L2.slice(9, 11), ...ALL_L3.slice(0, 1)],
       capstones: ['C06-india-trip', 'C07-sick-week', 'C08-grandmother-story'],
       writingOutput: 'Three push-tier capstones; one per study session.',
@@ -106,7 +106,7 @@ const PLAN_ACCELERATION: StudyPlan = {
   headline: 'Skim the first four L1 packs as review; dive in at numbers/time. Mock Exams in weeks 7–8.',
   weeks: [
     { weekIndex: 1, focus: 'Identity review', packs: ALL_L1.slice(0, 4),
-      writingOutput: 'Fast review — write one paragraph using vocab from all four packs.',
+      writingOutput: 'Fast review - write one paragraph using vocab from all four packs.',
       checkpoint: 'You confirm gender agreement and can answer "tum kaun ho" in 4 sentences.' },
     { weekIndex: 2, focus: 'School + social', packs: ALL_L1.slice(4, 9),
       writingOutput: 'Two short paragraphs: schedule + hobbies.',
@@ -121,11 +121,11 @@ const PLAN_ACCELERATION: StudyPlan = {
       checkpoint: 'You shift between present-habitual and simple past cleanly.' },
     { weekIndex: 5, focus: 'Student life', packs: ALL_L2.slice(3, 6),
       capstones: ['C03-festival-weekend', 'C04-neighborhood-place'],
-      writingOutput: 'Two capstones this week — pace them on separate days.',
+      writingOutput: 'Two capstones this week - pace them on separate days.',
       checkpoint: 'Benchmark 5 drafts appearing.' },
     { weekIndex: 6, focus: 'Leisure + travel', packs: ALL_L2.slice(6, 11),
       capstones: ['C05-school-day'],
-      writingOutput: 'Timed Mock Exam 1 — 30 minutes on C05, no notes.',
+      writingOutput: 'Timed Mock Exam 1 - 30 minutes on C05, no notes.',
       checkpoint: 'First timed sitting. Self-grade, note any dropped connectors.' },
     { weekIndex: 7, focus: 'L3 stretch', packs: ALL_L3,
       capstones: ['C06-india-trip', 'C07-sick-week', 'C08-grandmother-story'],
@@ -174,7 +174,7 @@ const PLAN_INTERMEDIATE_BRIDGE: StudyPlan = {
       checkpoint: 'Two timed essays at Benchmark 5. Ready.' },
   ],
   pacingNote:
-    'You\'ll feel tempted to skip the L1 skim. Don\'t — that\'s where vocabulary consolidates.',
+    'You\'ll feel tempted to skip the L1 skim. Don\'t - that\'s where vocabulary consolidates.',
 };
 
 const PLAN_PUSH: StudyPlan = {
@@ -239,7 +239,7 @@ export const STUDY_PLANS_BY_ID: Record<string, StudyPlan> = Object.fromEntries(
   STUDY_PLANS.map((p) => [p.id, p]),
 );
 
-// Packs a student at a given level is assumed to already know — these are
+// Packs a student at a given level is assumed to already know - these are
 // hidden from Library, skipped by planCursor, and excluded from "next pack"
 // surfacing. The student can always opt back in via the Library "show known"
 // toggle. Mapping is intentionally conservative: Novice Mid hides only the
@@ -264,7 +264,7 @@ export function isPackKnownAtLevel(packId: string, level: string | undefined): b
 
 // Capstones whose core tier sits at or below the student's declared level.
 // C01 (restaurant memory) and C02 (typical Saturday) are the gentlest core
-// capstones — Intermediate Mid+ students can skip them; Intermediate High
+// capstones - Intermediate Mid+ students can skip them; Intermediate High
 // students can also skip C03/C04. The push tier (C06–C10) is never hidden.
 export const CAPSTONES_KNOWN_AT_LEVEL: Record<string, string[]> = {
   'Novice Low': [],

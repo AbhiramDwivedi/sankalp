@@ -3,7 +3,7 @@ import { composeHeroPrompt } from '../imagePrompts';
 import { pickConnectors } from '../connectors';
 
 // -----------------------------------------------------------------------------
-// L1-02 — Descriptions, Personality, Feelings & Emotions
+// L1-02 - Descriptions, Personality, Feelings & Emotions
 // Adjectives are the Novice → Intermediate bridge. This pack drills
 // gender/number agreement, the मुझे + emotion + होना/लगना construction, and
 // the comparative, so a student can describe a person in three full sentences
@@ -18,15 +18,15 @@ export const pack: TopicPack = {
   heroMotif: 'family',
   titleHindi: 'विवरण और भावनाएँ',
   titleEnglish: 'Descriptions, Personality, Feelings & Emotions',
-  hook: 'Adjectives turn a list into a portrait — the shortest route from Novice to connected sentences.',
+  hook: 'Adjectives turn a list into a portrait - the shortest route from Novice to connected sentences.',
   heroPrompt: composeHeroPrompt(
-    'A gallery-style arrangement of diverse silhouetted figures with warm emotion icons floating above each — heart, star, spark — in earthy tones',
+    'A gallery-style arrangement of diverse silhouetted figures with warm emotion icons floating above each - heart, star, spark - in earthy tones',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Physical Descriptions and Personality Characteristics (FCPS Level 1 — Personal & Family Life)',
-      'Feelings and Emotions (FCPS Level 1 — Personal & Family Life)',
+      'Physical Descriptions and Personality Characteristics (FCPS Level 1 - Personal & Family Life)',
+      'Feelings and Emotions (FCPS Level 1 - Personal & Family Life)',
       'Talking about friends and family (FCPS Level 1)',
     ],
     trains: ['LanguageControl', 'TopicCoverage', 'TextType'],
@@ -53,7 +53,7 @@ export const pack: TopicPack = {
       trains: ['LanguageControl', 'TopicCoverage'],
     },
     {
-      text: 'Write one full paragraph describing a person — physical, personality, AND how they make you feel.',
+      text: 'Write one full paragraph describing a person - physical, personality, AND how they make you feel.',
       trains: ['TextType', 'TopicCoverage'],
     },
     {
@@ -121,17 +121,17 @@ export const pack: TopicPack = {
         { hindi: 'लंबा लड़का खड़ा है।', transliteration: 'lambaa ladkaa khadaa hai.', english: 'The tall boy is standing. (masc. sing.)' },
         { hindi: 'लंबी लड़की खड़ी है।', transliteration: 'lambee ladki khadi hai.', english: 'The tall girl is standing. (fem. sing.)' },
         { hindi: 'लंबे लड़के खड़े हैं।', transliteration: 'lambe ladke khade hain.', english: 'The tall boys are standing. (masc. plural)' },
-        { hindi: 'वह ईमानदार लड़की है।', transliteration: 'vah eemaandaar ladki hai.', english: 'She is an honest girl. (invariant adjective — no change.)' },
+        { hindi: 'वह ईमानदार लड़की है।', transliteration: 'vah eemaandaar ladki hai.', english: 'She is an honest girl. (invariant adjective - no change.)' },
       ],
       pitfall:
-        'Writing "अच्छा लड़की" (masculine adjective on feminine noun) is the #1 error on description essays. Also common: forgetting that invariant adjectives like सुंदर and ईमानदार do NOT take ी/े endings — writing "सुंदरी" is wrong.',
+        'Writing "अच्छा लड़की" (masculine adjective on feminine noun) is the #1 error on description essays. Also common: forgetting that invariant adjectives like सुंदर and ईमानदार do NOT take ी/े endings - writing "सुंदरी" is wrong.',
       whyItMatters:
         'Every single sentence that describes a person tests this rule. A rater reading "मेरी बहन अच्छा है" mentally tallies a Language Control error in the first sentence, and it colors everything after. Get this right and half the rubric is won.',
     },
     {
       title: 'मुझे / उसे / हमें + emotion + होना / लगना',
       rule:
-        'Feelings are expressed with an indirect-object pronoun (मुझे, उसे, हमें, तुम्हें) + the emotion noun + होना (state) or लगना (to feel / to strike). Use होना for "I am happy / proud" (मुझे खुशी है). Use लगना for "I feel scared / angry" (मुझे डर लगता है). The subject of the sentence is NOT "I" — it is the emotion itself.',
+        'Feelings are expressed with an indirect-object pronoun (मुझे, उसे, हमें, तुम्हें) + the emotion noun + होना (state) or लगना (to feel / to strike). Use होना for "I am happy / proud" (मुझे खुशी है). Use लगना for "I feel scared / angry" (मुझे डर लगता है). The subject of the sentence is NOT "I" - it is the emotion itself.',
       examples: [
         { hindi: 'मुझे बहुत खुशी है।', transliteration: 'mujhe bahut khushi hai.', english: 'I am very happy. (lit. "To me there is great happiness.")' },
         { hindi: 'उसे कुत्तों से डर लगता है।', transliteration: 'use kutton se dar lagtaa hai.', english: 'He is afraid of dogs. (lit. "To him fear strikes from dogs.")' },
@@ -139,14 +139,14 @@ export const pack: TopicPack = {
         { hindi: 'मुझे कल बहुत गुस्सा आया।', transliteration: 'mujhe kal bahut gussaa aayaa.', english: 'I got very angry yesterday.' },
       ],
       pitfall:
-        'Students often try to translate "I am happy" as "मैं खुश हूँ" — which works, but then trip when they try "I feel scared" and write "मैं डर हूँ" (wrong). The डर / गुस्सा / खुशी nouns take the indirect construction.',
+        'Students often try to translate "I am happy" as "मैं खुश हूँ" - which works, but then trip when they try "I feel scared" and write "मैं डर हूँ" (wrong). The डर / गुस्सा / खुशी nouns take the indirect construction.',
       whyItMatters:
         'This single construction generates half the sentences in any feelings-topic essay. Controlling it moves Language Control from Low to Average and unlocks a second, more idiomatic time-frame shift (मुझे खुशी है / मुझे खुशी थी).',
     },
     {
       title: 'Comparative: से बेहतर / से अच्छा and superlative सबसे अच्छा',
       rule:
-        'To compare two people, use [X] + से + [adjective] — "X से अच्छा" = "better than X". For the superlative (the best of all), prepend सबसे — "सबसे अच्छा" = "the best". The adjective still agrees with the subject being described.',
+        'To compare two people, use [X] + से + [adjective] - "X से अच्छा" = "better than X". For the superlative (the best of all), prepend सबसे - "सबसे अच्छा" = "the best". The adjective still agrees with the subject being described.',
       examples: [
         { hindi: 'मेरा भाई मुझसे लंबा है।', transliteration: 'meraa bhaai mujhse lambaa hai.', english: 'My brother is taller than me.' },
         { hindi: 'वह मुझसे बेहतर गाती है।', transliteration: 'vah mujhse behtar gaati hai.', english: 'She sings better than me.' },
@@ -154,7 +154,7 @@ export const pack: TopicPack = {
         { hindi: 'यह किताब सबसे अच्छी है।', transliteration: 'yah kitaab sabse achchhi hai.', english: 'This book is the best.' },
       ],
       pitfall:
-        'Forgetting the से — writing "मेरा भाई मैं लंबा है" is not just wrong, it is not Hindi. Also: applying सबसे to verbs ("सबसे गाती" means nothing — use "सबसे अच्छा गाती").',
+        'Forgetting the से - writing "मेरा भाई मैं लंबा है" is not just wrong, it is not Hindi. Also: applying सबसे to verbs ("सबसे गाती" means nothing - use "सबसे अच्छा गाती").',
       whyItMatters:
         'A single comparative sentence ("वह मेरी सबसे अच्छी दोस्त है") is a Benchmark 5 structural marker. Raters see comparatives as evidence of moving beyond one-clause description into relational thinking.',
     },
@@ -188,25 +188,25 @@ export const pack: TopicPack = {
     english:
       'My best friend\'s name is Meera. She is tall and slim, and her black hair is very beautiful. Meera is one year younger than me, but she is much more sensible than I am. She is hardworking in her studies, and on top of that she is good at sports too. Meera is very kind and cheerful, so everyone wants to talk with her. Earlier I was shy at school and did not talk to anyone. Then Meera came and became friends with me. When I feel sad, she tells me funny stories and makes me laugh. I am very proud of her, because she is an honest and kind person. Truly, having a friend like Meera is the greatest happiness for me.',
     highlights: [
-      { term: 'लंबी, पतली, हँसमुख, शर्मीली', note: 'Feminine-ending adjectives (ी) match the feminine narrator and friend — clean Language Control signal across sentences.' },
+      { term: 'लंबी, पतली, हँसमुख, शर्मीली', note: 'Feminine-ending adjectives (ी) match the feminine narrator and friend - clean Language Control signal across sentences.' },
       { term: 'मुझसे छोटी / मुझसे समझदार', note: 'Two comparatives built from से. Raters flag comparatives as Intermediate-Mid structural markers.' },
-      { term: 'मुझे उस पर गर्व है / मुझे खुशी है', note: 'The मुझे + noun + है pattern — exactly what the grammar section drills. See it land twice in one passage.' },
-      { term: 'लेकिन, इसके अलावा, इसलिए, क्योंकि', note: 'Four reasoning connectors thread the paragraph — cohesion that cannot be rearranged.' },
-      { term: 'पहले ... फिर ...', note: 'Sequence pair introduces a past narrative (I was shy → Meera came) inside a present-tense description — the tense shift Benchmark 5 requires.' },
+      { term: 'मुझे उस पर गर्व है / मुझे खुशी है', note: 'The मुझे + noun + है pattern - exactly what the grammar section drills. See it land twice in one passage.' },
+      { term: 'लेकिन, इसके अलावा, इसलिए, क्योंकि', note: 'Four reasoning connectors thread the paragraph - cohesion that cannot be rearranged.' },
+      { term: 'पहले ... फिर ...', note: 'Sequence pair introduces a past narrative (I was shy → Meera came) inside a present-tense description - the tense shift Benchmark 5 requires.' },
     ],
     comprehensionQuestions: [
       { q: 'What does Meera look like physically?', a: 'लंबी, पतली, और उसके काले बाल सुंदर हैं (tall, slim, with beautiful black hair).' },
-      { q: 'Who is older, the narrator or Meera?', a: 'The narrator — Meera is one year younger (मीरा मुझसे एक साल छोटी है).' },
+      { q: 'Who is older, the narrator or Meera?', a: 'The narrator - Meera is one year younger (मीरा मुझसे एक साल छोटी है).' },
       { q: 'Name two personality traits of Meera.', a: 'Any two of: मेहनती, दयालु, हँसमुख, ईमानदार.' },
-      { q: 'What did the narrator used to be like before meeting Meera?', a: 'शर्मीली — shy, and she did not talk to anyone.' },
+      { q: 'What did the narrator used to be like before meeting Meera?', a: 'शर्मीली - shy, and she did not talk to anyone.' },
       { q: 'What does Meera do when the narrator feels sad?', a: 'She tells funny stories and makes the narrator laugh (मज़ाकिया कहानियाँ सुनाती है, हँसाती है).' },
-      { q: 'Identify one sentence that uses a comparative and explain the structure.', a: '"मीरा मुझसे एक साल छोटी है" or "वह मुझसे बहुत समझदार है" — [person] + से + [adjective] = "-er than [person]".' },
+      { q: 'Identify one sentence that uses a comparative and explain the structure.', a: '"मीरा मुझसे एक साल छोटी है" or "वह मुझसे बहुत समझदार है" - [person] + से + [adjective] = "-er than [person]".' },
       { q: 'Why is the narrator proud of Meera?', a: 'क्योंकि वह एक ईमानदार और दयालु इंसान है (because she is an honest and kind person).' },
     ],
   },
   anchorNote: {
     why:
-      'Every sentence in this passage is a miniature of something the student must produce: physical descriptor with gender agreement, personality adjective in a क्योंकि clause, feelings construction with मुझे, comparative with से, time shift from present to past. Read it aloud three times before writing — the shapes will start to stick.',
+      'Every sentence in this passage is a miniature of something the student must produce: physical descriptor with gender agreement, personality adjective in a क्योंकि clause, feelings construction with मुझे, comparative with से, time shift from present to past. Read it aloud three times before writing - the shapes will start to stick.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -245,16 +245,16 @@ export const pack: TopicPack = {
       kind: 'poster',
       title: 'कक्षा का पोस्टर · Classroom Poster',
       hindi:
-        'आज का विद्यार्थी: अरुण ⭐\nगुण: दयालु, मेहनती, मज़ाकिया\nकक्षा में सबसे हँसमुख लड़का!\nबधाई हो, अरुण — हमें तुम पर गर्व है 🏆',
+        'आज का विद्यार्थी: अरुण ⭐\nगुण: दयालु, मेहनती, मज़ाकिया\nकक्षा में सबसे हँसमुख लड़का!\nबधाई हो, अरुण - हमें तुम पर गर्व है 🏆',
       transliteration:
-        'aaj kaa vidyaarthi: Arun ⭐\nguṇ: dayaalu, mehnati, mazaakiya\nkakshaa mein sabse hansmukh ladkaa!\nbadhaai ho, Arun — hamein tum par garv hai 🏆',
+        'aaj kaa vidyaarthi: Arun ⭐\nguṇ: dayaalu, mehnati, mazaakiya\nkakshaa mein sabse hansmukh ladkaa!\nbadhaai ho, Arun - hamein tum par garv hai 🏆',
       english:
-        'Student of the Day: Arun ⭐\nQualities: kind, hardworking, funny\nThe most cheerful boy in the class!\nCongratulations, Arun — we are proud of you 🏆',
+        'Student of the Day: Arun ⭐\nQualities: kind, hardworking, funny\nThe most cheerful boy in the class!\nCongratulations, Arun - we are proud of you 🏆',
     },
   ],
   modelTextsNote: {
     why:
-      'SMS, diary, formal email, and classroom poster — four registers that all describe people and feelings, each in a different voice. The SMS keeps it casual and emoji-rich; the email stays polite and adjective-heavy; the diary models the past-tense feelings shift; the poster compresses three personality adjectives into one sentence. Copy the shapes, change the names.',
+      'SMS, diary, formal email, and classroom poster - four registers that all describe people and feelings, each in a different voice. The SMS keeps it casual and emoji-rich; the email stays polite and adjective-heavy; the diary models the past-tense feelings shift; the poster compresses three personality adjectives into one sentence. Copy the shapes, change the names.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -262,7 +262,7 @@ export const pack: TopicPack = {
     {
       title: 'Complimenting without body-talk',
       body:
-        'In India, commenting directly on someone\'s body — weight, skin color, height — is considered rude, even when affectionate. Safer compliments target personality (दयालु, मेहनती) or energy (हँसमुख). In an essay, lead with personality before physical description, and you sound culturally fluent.',
+        'In India, commenting directly on someone\'s body - weight, skin color, height - is considered rude, even when affectionate. Safer compliments target personality (दयालु, मेहनती) or energy (हँसमुख). In an essay, lead with personality before physical description, and you sound culturally fluent.',
       emoji: '🙏',
     },
     {
@@ -278,7 +278,7 @@ export const pack: TopicPack = {
       emoji: '👵',
     },
     {
-      title: 'नज़र लग जाना — the evil eye',
+      title: 'नज़र लग जाना - the evil eye',
       body:
         'When praising a child, Indian elders often add "मशा-अल्लाह" or touch behind the ear to ward off नज़र (the evil eye). In essays, this superstition shows up as a natural hedge: "वह बहुत सुंदर है, नज़र न लगे।" Using it once marks the essay as authentic.',
       emoji: '🧿',
@@ -286,7 +286,7 @@ export const pack: TopicPack = {
     {
       title: 'Feelings are shared, not owned',
       body:
-        'Indian conversation leans on collective feelings — "हमें खुशी है" ("we are happy") is more common in family talk than "मुझे खुशी है". When describing a family event, swapping मुझे for हमें once or twice reads as culturally attuned.',
+        'Indian conversation leans on collective feelings - "हमें खुशी है" ("we are happy") is more common in family talk than "मुझे खुशी है". When describing a family event, swapping मुझे for हमें once or twice reads as culturally attuned.',
       emoji: '👨‍👩‍👧',
     },
   ],
@@ -300,21 +300,21 @@ export const pack: TopicPack = {
     {
       phrase: 'दिल का साफ़ होना',
       literal: 'to be clean of heart',
-      meaning: 'To be sincere and without malice — a common personality compliment.',
+      meaning: 'To be sincere and without malice - a common personality compliment.',
       example: 'मेरी दादी दिल की साफ़ हैं, इसलिए सब उन्हें प्यार करते हैं।',
       exampleEnglish: 'My grandmother is pure-hearted, which is why everyone loves her.',
     },
     {
       phrase: 'आँखों का तारा',
       literal: 'star of the eyes',
-      meaning: 'The apple of one\'s eye — a beloved person.',
+      meaning: 'The apple of one\'s eye - a beloved person.',
       example: 'छोटी बहन पूरे परिवार की आँखों का तारा है।',
       exampleEnglish: 'Little sister is the apple of the whole family\'s eye.',
     },
   ],
   muhavareNote: {
     why:
-      'Both idioms describe people affectionately — the exact register description-essays need. One placed in a closing sentence ("वह मेरे आँखों का तारा है") reads as register mastery. Two is overkill; pick whichever fits the person you\'re describing.',
+      'Both idioms describe people affectionately - the exact register description-essays need. One placed in a closing sentence ("वह मेरे आँखों का तारा है") reads as register mastery. Two is overkill; pick whichever fits the person you\'re describing.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -328,13 +328,13 @@ export const pack: TopicPack = {
       intermediateMid:
         'मेरे सबसे अच्छे दोस्त का नाम अरुण है। वह मुझसे थोड़ा लंबा है और उसके बाल काले हैं। अरुण बहुत हँसमुख और मज़ाकिया है, इसलिए हमारी कक्षा में सब उससे बात करना चाहते हैं। वह पढ़ाई में भी मेहनती है, इसके अलावा वह खेल में भी अच्छा है।\n\nअरुण का स्वभाव बहुत दयालु है। पिछले साल जब मैं बीमार था, तब वह हर दिन मेरे घर आता था और मुझे होमवर्क समझाता था। वह कभी गुस्सा नहीं करता, और हमेशा शांत रहता है। एक बार मैं परीक्षा से बहुत परेशान था, लेकिन अरुण ने मज़ाकिया बातें करके मुझे हँसाया।\n\nमुझे अरुण पर बहुत गर्व है, क्योंकि वह एक ईमानदार और सच्चा दोस्त है। जब मैं उदास होता हूँ, तो उससे बात करने से मुझे एकदम अच्छा लगता है। मुझे लगता है कि अगले साल भी हम साथ पढ़ेंगे और यह दोस्ती हमेशा ऐसी ही बनी रहेगी।',
       annotations: [
-        { paragraphIndex: 0, kind: 'structure', highlight: 'मुझसे थोड़ा लंबा है', note: 'Comparative (मुझसे + adjective) in the opening sentence — a clean Benchmark 5 structural marker.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'हँसमुख, मज़ाकिया, मेहनती', note: 'Three personality adjectives in one sentence — Topic Coverage lift and clean gender agreement (masculine subject).' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'मुझसे थोड़ा लंबा है', note: 'Comparative (मुझसे + adjective) in the opening sentence - a clean Benchmark 5 structural marker.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'हँसमुख, मज़ाकिया, मेहनती', note: 'Three personality adjectives in one sentence - Topic Coverage lift and clean gender agreement (masculine subject).' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'इसलिए / इसके अलावा', note: 'Reasoning + addition. Ideas are linked, not listed.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले साल ... आता था ... समझाता था', note: 'Opens the second paragraph in past habitual — an Intermediate-Mid time frame that raters specifically reward.' },
-        { paragraphIndex: 1, kind: 'cultural', highlight: 'मेरे घर आता था और होमवर्क समझाता था', note: 'Concrete, culturally specific detail — friendship shown through action, not just adjective.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'मुझे अरुण पर बहुत गर्व है', note: 'The feelings construction (मुझे + noun + है) applied to a person — exactly the grammar focus of this pack.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल भी हम साथ पढ़ेंगे', note: 'Future tense in the closing — third time frame, sealing Benchmark 5.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'पिछले साल ... आता था ... समझाता था', note: 'Opens the second paragraph in past habitual - an Intermediate-Mid time frame that raters specifically reward.' },
+        { paragraphIndex: 1, kind: 'cultural', highlight: 'मेरे घर आता था और होमवर्क समझाता था', note: 'Concrete, culturally specific detail - friendship shown through action, not just adjective.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'मुझे अरुण पर बहुत गर्व है', note: 'The feelings construction (मुझे + noun + है) applied to a person - exactly the grammar focus of this pack.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले साल भी हम साथ पढ़ेंगे', note: 'Future tense in the closing - third time frame, sealing Benchmark 5.' },
       ],
       wordCount: 138,
       tenseUsed: ['past', 'present', 'future'],
@@ -343,11 +343,11 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs, each with its own job (appearance → personality → feeling) — paragraphs cannot be rearranged, which is the Text-Type 5 test.',
-          'Uses past habitual (आता था, समझाता था), present (है, रहता है), and future (पढ़ेंगे) within 138 words — all three time frames raters want.',
-          'Adjective-noun agreement is clean across 8+ adjectives in one essay — ईमानदार दोस्त, दयालु स्वभाव, मज़ाकिया बातें — Language Control stabilizes at Average or higher.',
-          'One comparative (मुझसे थोड़ा लंबा) and two feelings constructions (मुझे गर्व है, मुझे अच्छा लगता है) — the exact structures this pack trains.',
-          'Six different connectors used across the three paragraphs, including the reasoning pair क्योंकि / इसलिए — unambiguous Text-Type signal.',
+          'Three cohesive paragraphs, each with its own job (appearance → personality → feeling) - paragraphs cannot be rearranged, which is the Text-Type 5 test.',
+          'Uses past habitual (आता था, समझाता था), present (है, रहता है), and future (पढ़ेंगे) within 138 words - all three time frames raters want.',
+          'Adjective-noun agreement is clean across 8+ adjectives in one essay - ईमानदार दोस्त, दयालु स्वभाव, मज़ाकिया बातें - Language Control stabilizes at Average or higher.',
+          'One comparative (मुझसे थोड़ा लंबा) and two feelings constructions (मुझे गर्व है, मुझे अच्छा लगता है) - the exact structures this pack trains.',
+          'Six different connectors used across the three paragraphs, including the reasoning pair क्योंकि / इसलिए - unambiguous Text-Type signal.',
         ],
         gotchas: [
           'If the narrator were female, "उदास होता हूँ" must become "उदास होती हूँ". One inconsistency here drops Language Control from Average to Low.',
@@ -364,14 +364,14 @@ export const pack: TopicPack = {
       intermediateMid:
         'मेरी माँ का नाम सुनीता है। वह मध्यम कद की हैं, गोरी हैं, और उनके लंबे काले बाल हैं। वह हमेशा सादी साड़ी पहनती हैं। देखने में वह शांत लगती हैं, लेकिन असल में वह बहुत मेहनती और स्मार्ट हैं।\n\nमाँ का स्वभाव मुझसे बिल्कुल अलग है। मैं थोड़ा शर्मीला हूँ, जबकि वह हर किसी से खुलकर बात करती हैं। वह दिल की साफ़ हैं और कभी किसी पर गुस्सा नहीं करतीं। जब मैं छोटा था, तब हर रात वह मुझे कहानी सुनाती थीं। उनकी आवाज़ सुनकर मुझे एकदम नींद आ जाती थी।\n\nमुझे माँ पर बहुत गर्व है, क्योंकि वह पूरे दिन काम करती हैं और फिर भी हमारे लिए समय निकालती हैं। उनसे मैंने सीखा है कि ईमानदारी सबसे बड़ी चीज़ है। अगले महीने उनका जन्मदिन है, इसलिए मैं उनके लिए एक ख़ास तोहफ़ा ख़रीदूँगा। माँ जैसी इंसान मिलना मेरे लिए सबसे बड़ी खुशी है।',
       annotations: [
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'मध्यम कद, गोरी, लंबे काले बाल', note: 'Three physical descriptors with clean feminine/plural agreement — one sentence covers the whole physical brief.' },
-        { paragraphIndex: 0, kind: 'structure', highlight: 'देखने में ... लेकिन असल में ...', note: '"Looks ... but actually ..." construction introduces contrast between appearance and personality — a Benchmark 5 complexity marker.' },
-        { paragraphIndex: 1, kind: 'connector', highlight: 'जबकि', note: 'Contrastive connector "whereas" — elevates simple listing into comparison.' },
-        { paragraphIndex: 1, kind: 'idiom', highlight: 'दिल की साफ़', note: 'Culturally specific idiom used as a personality compliment — register lift.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'जब मैं छोटा था, तब ... सुनाती थीं', note: 'Past-habitual inside a memory paragraph — shifts cleanly from present to past and back.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'मुझे माँ पर बहुत गर्व है', note: 'Feelings construction (मुझे + गर्व + है) — the pack\'s target grammar, applied to a family member.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले महीने ... ख़रीदूँगा', note: 'Future tense arrives in the closing — past / present / future all land inside a single essay.' },
-        { paragraphIndex: 2, kind: 'cultural', highlight: 'माँ हैं / करती हैं / निकालती हैं', note: 'Respectful plural verbs for mother throughout — cultural register maintained without a single slip.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'मध्यम कद, गोरी, लंबे काले बाल', note: 'Three physical descriptors with clean feminine/plural agreement - one sentence covers the whole physical brief.' },
+        { paragraphIndex: 0, kind: 'structure', highlight: 'देखने में ... लेकिन असल में ...', note: '"Looks ... but actually ..." construction introduces contrast between appearance and personality - a Benchmark 5 complexity marker.' },
+        { paragraphIndex: 1, kind: 'connector', highlight: 'जबकि', note: 'Contrastive connector "whereas" - elevates simple listing into comparison.' },
+        { paragraphIndex: 1, kind: 'idiom', highlight: 'दिल की साफ़', note: 'Culturally specific idiom used as a personality compliment - register lift.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'जब मैं छोटा था, तब ... सुनाती थीं', note: 'Past-habitual inside a memory paragraph - shifts cleanly from present to past and back.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'मुझे माँ पर बहुत गर्व है', note: 'Feelings construction (मुझे + गर्व + है) - the pack\'s target grammar, applied to a family member.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले महीने ... ख़रीदूँगा', note: 'Future tense arrives in the closing - past / present / future all land inside a single essay.' },
+        { paragraphIndex: 2, kind: 'cultural', highlight: 'माँ हैं / करती हैं / निकालती हैं', note: 'Respectful plural verbs for mother throughout - cultural register maintained without a single slip.' },
       ],
       wordCount: 145,
       tenseUsed: ['past', 'present', 'future'],
@@ -380,22 +380,22 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Respectful plural verbs (हैं, पहनती हैं, करतीं) sustained for मां across the entire essay — a register signal raters explicitly flag for Indian-language essays.',
-          'The "देखने में शांत, असल में मेहनती" contrast is a compound structure that separates IM from IL — appearance vs essence in one breath.',
-          'Five connectors including जबकि (whereas) — a connector rarely seen below Benchmark 5.',
-          'Past habitual (सुनाती थीं), present habitual (करती हैं), and simple future (ख़रीदूँगा) all represented — the three time frames the rubric requires.',
-          'Idiom दिल की साफ़ is placed inside a sentence, not appended — the way IM students use idioms.',
+          'Respectful plural verbs (हैं, पहनती हैं, करतीं) sustained for मां across the entire essay - a register signal raters explicitly flag for Indian-language essays.',
+          'The "देखने में शांत, असल में मेहनती" contrast is a compound structure that separates IM from IL - appearance vs essence in one breath.',
+          'Five connectors including जबकि (whereas) - a connector rarely seen below Benchmark 5.',
+          'Past habitual (सुनाती थीं), present habitual (करती हैं), and simple future (ख़रीदूँगा) all represented - the three time frames the rubric requires.',
+          'Idiom दिल की साफ़ is placed inside a sentence, not appended - the way IM students use idioms.',
         ],
         gotchas: [
           'Using singular "है" for माँ even once ("माँ मेहनती है") would pull the cultural register from High to Low.',
-          'If the comparative/contrast sentence were removed, the essay reads as Benchmark 4 — three adjectives listed side-by-side with no reasoning.',
+          'If the comparative/contrast sentence were removed, the essay reads as Benchmark 4 - three adjectives listed side-by-side with no reasoning.',
         ],
       },
     },
   ],
   modelEssaysNote: {
     why:
-      'The two essays drill the two most common description prompts — a friend and a family member — at Intermediate-Mid. Study the annotations: every one of them maps to a rubric box a rater is ticking. When you write your own essay, ask "which of those boxes am I ticking in this sentence?" If none, rewrite the sentence.',
+      'The two essays drill the two most common description prompts - a friend and a family member - at Intermediate-Mid. Study the annotations: every one of them maps to a rubric box a rater is ticking. When you write your own essay, ask "which of those boxes am I ticking in this sentence?" If none, rewrite the sentence.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 

@@ -28,7 +28,7 @@ export const PrintSheet: React.FC<PrintSheetProps> = ({ deck }) => {
           <div className="print:break-after-page">
             <div className="text-center mb-4">
               <p className="text-xs font-black uppercase tracking-widest text-slate-500">
-                {deck.title} — front · page {pageIdx * 2 + 1}
+                {deck.title} - front · page {pageIdx * 2 + 1}
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -45,7 +45,7 @@ export const PrintSheet: React.FC<PrintSheetProps> = ({ deck }) => {
           <div className="print:break-after-page">
             <div className="text-center mb-4">
               <p className="text-xs font-black uppercase tracking-widest text-slate-500">
-                {deck.title} — back · page {pageIdx * 2 + 2}
+                {deck.title} - back · page {pageIdx * 2 + 2}
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3" style={{ direction: 'rtl' }}>

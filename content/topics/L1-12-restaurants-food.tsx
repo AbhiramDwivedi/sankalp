@@ -17,16 +17,16 @@ export const pack: TopicPack = {
   heroMotif: 'thali',
   titleHindi: 'रेस्तराँ और खाना',
   titleEnglish: 'Restaurants & Food',
-  hook: 'Culturally rich, vocabulary-dense, naturally uses connectors and past/present tenses — the ideal FCPS essay topic.',
+  hook: 'Culturally rich, vocabulary-dense, naturally uses connectors and past/present tenses - the ideal FCPS essay topic.',
   heroPrompt: composeHeroPrompt(
-    'An Indian thali on a low wooden table — brass katoris filled with dal, sabzi, raita, chutneys, a pile of rotis, a tulsi plant in the corner, warm afternoon light',
+    'An Indian thali on a low wooden table - brass katoris filled with dal, sabzi, raita, chutneys, a pile of rotis, a tulsi plant in the corner, warm afternoon light',
   ),
 
   rationale: {
     fcpsSubTopics: [
-      'Restaurants and Food (FCPS Level 1 — Community Life)',
+      'Restaurants and Food (FCPS Level 1 - Community Life)',
       'Shopping at markets and ordering (FCPS Level 1)',
-      'Bridges into Food (FCPS Level 2 — Home Life) for deeper treatment later',
+      'Bridges into Food (FCPS Level 2 - Home Life) for deeper treatment later',
     ],
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
     afterThisPackStudentCan: [
@@ -60,7 +60,7 @@ export const pack: TopicPack = {
       trains: ['LanguageControl'],
     },
     {
-      text: 'Add at least one cultural specific — a dish name, a festival food, or an eating custom — to lift Text-Type.',
+      text: 'Add at least one cultural specific - a dish name, a festival food, or an eating custom - to lift Text-Type.',
       trains: ['TopicCoverage', 'TextType'],
     },
   ],
@@ -116,7 +116,7 @@ export const pack: TopicPack = {
     {
       title: 'Gender agreement on food nouns',
       rule:
-        'Most Hindi food nouns ending in ा are masculine (खाना, चावल, पानी) and most ending in ी are feminine (रोटी, दाल — note: दाल is feminine even though it ends in ल, a common irregular). Adjectives and verbs must agree.',
+        'Most Hindi food nouns ending in ा are masculine (खाना, चावल, पानी) and most ending in ी are feminine (रोटी, दाल - note: दाल is feminine even though it ends in ल, a common irregular). Adjectives and verbs must agree.',
       examples: [
         { hindi: 'गरम रोटी अच्छी लगती है।', transliteration: 'garam roti achchhi lagti hai.', english: 'Hot roti feels/tastes good. (feminine)' },
         { hindi: 'गरम खाना अच्छा लगता है।', transliteration: 'garam khaana achchha lagta hai.', english: 'Hot food feels/tastes good. (masculine)' },
@@ -130,7 +130,7 @@ export const pack: TopicPack = {
     {
       title: 'Polite request forms with कृपया + दीजिए',
       rule:
-        'To make a polite request (the register FCPS restaurant prompts expect), use कृपया + noun + दीजिए/लाइए. Avoid imperative मुझे दो — that is too casual for essays.',
+        'To make a polite request (the register FCPS restaurant prompts expect), use कृपया + noun + दीजिए/लाइए. Avoid imperative मुझे दो - that is too casual for essays.',
       examples: [
         { hindi: 'कृपया एक गिलास पानी दीजिए।', transliteration: 'kripaya ek gilaas paani deejiye.', english: 'Please give a glass of water.' },
         { hindi: 'कृपया मेन्यू लाइए।', transliteration: 'kripaya menu laaiye.', english: 'Please bring the menu.' },
@@ -144,14 +144,14 @@ export const pack: TopicPack = {
     {
       title: 'Past tense with perfective verbs (खाया / खाई / खाए / खाईं)',
       rule:
-        'To narrate a past meal — which Intermediate-Mid essays require — use the perfective form. The verb changes by gender and number of the OBJECT (not the subject) when there is one, in the ने construction.',
+        'To narrate a past meal - which Intermediate-Mid essays require - use the perfective form. The verb changes by gender and number of the OBJECT (not the subject) when there is one, in the ने construction.',
       examples: [
         { hindi: 'मैंने रोटी खाई।', transliteration: 'maine roti khaayi.', english: 'I ate roti. (feminine singular object)' },
         { hindi: 'मैंने चावल खाए।', transliteration: 'maine chaaval khaaye.', english: 'I ate rice. (masculine plural)' },
         { hindi: 'हमने थालियाँ मँगाईं।', transliteration: 'humne thaaliyaan mangaaheen.', english: 'We ordered (feminine plural) thalis.' },
       ],
       pitfall:
-        'Many students say "मैं खाया" (wrong — subject takes ने in past transitive). The correct form is "मैंने खाया".',
+        'Many students say "मैं खाया" (wrong - subject takes ने in past transitive). The correct form is "मैंने खाया".',
       whyItMatters:
         'Intermediate-Mid requires control of past, present, AND future. One unambiguous past-tense sentence anchors the tense shift the rubric rewards.',
     },
@@ -188,9 +188,9 @@ export const pack: TopicPack = {
     english:
       'On Sunday, everyone in my house wakes up late. First, Mother and Grandmother go to the kitchen. Then they make a large thali. The thali has daal, rice, hot roti, and two vegetables. Father likes spicy food, but I like something a little sweet. So Mother also keeps a bowl of sweet yogurt. We all sit and eat together. After eating, we have sweets, because this is our family\'s Sunday tradition. Finally, Grandmother makes tea. This is my favorite day.',
     highlights: [
-      { term: 'पहले / फिर / अंत में', note: 'Three sequence connectors scaffold the paragraph. Notice how sentences cannot be rearranged — that is Text-Type 5.' },
+      { term: 'पहले / फिर / अंत में', note: 'Three sequence connectors scaffold the paragraph. Notice how sentences cannot be rearranged - that is Text-Type 5.' },
       { term: 'लेकिन / इसलिए / क्योंकि', note: 'Three reasoning connectors add the "why" raters reward.' },
-      { term: 'गरम रोटी (feminine) / तीखा खाना (masculine)', note: 'Adjective-noun agreement on both genders in a single paragraph — clean Language Control signal.' },
+      { term: 'गरम रोटी (feminine) / तीखा खाना (masculine)', note: 'Adjective-noun agreement on both genders in a single paragraph - clean Language Control signal.' },
       { term: 'परिवार की परंपरा', note: 'Cultural specific. Raters bump Topic-Coverage when authentic customs appear.' },
     ],
     comprehensionQuestions: [
@@ -199,12 +199,12 @@ export const pack: TopicPack = {
       { q: 'Name four things in the thali.', a: 'दाल, चावल, गरम रोटी, और दो सब्ज़ियाँ.' },
       { q: 'Why does Mother keep sweet yogurt?', a: 'Because the narrator likes something a little sweet, even though Father likes spicy food.' },
       { q: 'What happens after the meal?', a: 'They eat sweets as a Sunday family tradition; then Grandmother makes tea.' },
-      { q: 'Identify one connector and explain what it does.', a: 'Any of पहले, फिर, लेकिन, इसलिए, क्योंकि, अंत में — each links ideas in time or reasoning.' },
+      { q: 'Identify one connector and explain what it does.', a: 'Any of पहले, फिर, लेकिन, इसलिए, क्योंकि, अंत में - each links ideas in time or reasoning.' },
     ],
   },
   anchorNote: {
     why:
-      'This anchor is a model of what a passing Intermediate-Mid essay on food looks like. The student\'s OUTPUT should mirror this INPUT. Read it aloud three times before attempting a prompt — the sentence shapes will start to feel automatic.',
+      'This anchor is a model of what a passing Intermediate-Mid essay on food looks like. The student\'s OUTPUT should mirror this INPUT. Read it aloud three times before attempting a prompt - the sentence shapes will start to feel automatic.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -215,19 +215,19 @@ export const pack: TopicPack = {
       hindi:
         'दाल चावल - ₹80\nछोले भटूरे - ₹120\nआलू पराठा - ₹60\nमसाला डोसा - ₹150\nथाली (शाकाहारी) - ₹200\nगुलाब जामुन (दो) - ₹40\nमसाला चाय - ₹30\nलस्सी (मीठी) - ₹50',
       transliteration:
-        'daal chaaval — 80 | chhole bhature — 120 | aaloo paraatha — 60 | masala dosa — 150 | thaali (shaakaahaaree) — 200 | gulaab jaamun (do) — 40 | masala chaay — 30 | lassi (meethi) — 50',
+        'daal chaaval - 80 | chhole bhature - 120 | aaloo paraatha - 60 | masala dosa - 150 | thaali (shaakaahaaree) - 200 | gulaab jaamun (do) - 40 | masala chaay - 30 | lassi (meethi) - 50',
       english:
-        'Daal rice — ₹80 · Chole bhature — ₹120 · Aloo paratha — ₹60 · Masala dosa — ₹150 · Thali (vegetarian) — ₹200 · Gulab jamun (two pieces) — ₹40 · Masala tea — ₹30 · Lassi (sweet) — ₹50',
+        'Daal rice - ₹80 · Chole bhature - ₹120 · Aloo paratha - ₹60 · Masala dosa - ₹150 · Thali (vegetarian) - ₹200 · Gulab jamun (two pieces) - ₹40 · Masala tea - ₹30 · Lassi (sweet) - ₹50',
     },
     {
       kind: 'diary',
       title: 'मेरा डायरी पृष्ठ · My Diary Page',
       hindi:
-        'आज हम नए रेस्तराँ गए। वहाँ की थाली बहुत स्वादिष्ट थी। लेकिन सब्ज़ी थोड़ी तीखी थी, इसलिए मैंने ज़्यादा चावल खाए। अंत में मीठा भी था — गुलाब जामुन। मैं फिर से वहाँ जाना चाहूँगा।',
+        'आज हम नए रेस्तराँ गए। वहाँ की थाली बहुत स्वादिष्ट थी। लेकिन सब्ज़ी थोड़ी तीखी थी, इसलिए मैंने ज़्यादा चावल खाए। अंत में मीठा भी था - गुलाब जामुन। मैं फिर से वहाँ जाना चाहूँगा।',
       transliteration:
-        'aaj hum naye restaran gaye. vahaan ki thaali bahut svaadisht thi. lekin sabzi thodi teekhi thi, isliye maine zyaada chaaval khaaye. ant mein meetha bhi tha — gulaab jaamun. main phir se vahaan jaana chaahoonga.',
+        'aaj hum naye restaran gaye. vahaan ki thaali bahut svaadisht thi. lekin sabzi thodi teekhi thi, isliye maine zyaada chaaval khaaye. ant mein meetha bhi tha - gulaab jaamun. main phir se vahaan jaana chaahoonga.',
       english:
-        'Today we went to a new restaurant. The thali there was very delicious. But the sabzi was a little spicy, so I ate more rice. At the end there was dessert too — gulab jamun. I would like to go there again.',
+        'Today we went to a new restaurant. The thali there was very delicious. But the sabzi was a little spicy, so I ate more rice. At the end there was dessert too - gulab jamun. I would like to go there again.',
     },
     {
       kind: 'sms',
@@ -237,7 +237,7 @@ export const pack: TopicPack = {
       transliteration:
         'are! kal tumhaare ghar khaana khaane aaoon kya? maa kah rahi hain ki main bahut baahar khaata hoon 😂 tumhaare ghar daal chaaval sabse achchhe bante hain.',
       english:
-        'Hey! Can I come eat at your house tomorrow? Mom is saying that I eat out too much 😂 — daal and rice turn out best at your place.',
+        'Hey! Can I come eat at your house tomorrow? Mom is saying that I eat out too much 😂 - daal and rice turn out best at your place.',
     },
     {
       kind: 'review',
@@ -252,7 +252,7 @@ export const pack: TopicPack = {
   ],
   modelTextsNote: {
     why:
-      'Menus, diary entries, text messages, and reviews are the four text-types the student most often needs to imitate. Each shows a different register — formal, personal, casual, evaluative — so the student sees Hindi does not sound the same in every situation.',
+      'Menus, diary entries, text messages, and reviews are the four text-types the student most often needs to imitate. Each shows a different register - formal, personal, casual, evaluative - so the student sees Hindi does not sound the same in every situation.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -260,7 +260,7 @@ export const pack: TopicPack = {
     {
       title: 'The Thali is the Template',
       body:
-        'An Indian thali is not a single dish but a carefully balanced meal: carb (rice or roti), protein (dal), two or three vegetables, a bit of yogurt, a pickle or chutney, and a small sweet. Writing "I ate a thali" lets you list six specific foods in one breath — huge Topic-Coverage win.',
+        'An Indian thali is not a single dish but a carefully balanced meal: carb (rice or roti), protein (dal), two or three vegetables, a bit of yogurt, a pickle or chutney, and a small sweet. Writing "I ate a thali" lets you list six specific foods in one breath - huge Topic-Coverage win.',
       emoji: '🍽️',
     },
     {
@@ -272,13 +272,13 @@ export const pack: TopicPack = {
     {
       title: 'Chai is a Ritual, Not Just a Drink',
       body:
-        'Morning chai with family, 4 p.m. chai break at work, chai after dinner — it structures the day. Referencing चाय as a time marker ("चाय के बाद" = after chai) reads as authentic.',
+        'Morning chai with family, 4 p.m. chai break at work, chai after dinner - it structures the day. Referencing चाय as a time marker ("चाय के बाद" = after chai) reads as authentic.',
       emoji: '🍵',
     },
     {
       title: 'Eating with Hands',
       body:
-        'In most Indian households people eat rice + dal + sabzi with the right hand, not a fork. Mentioning this casually — "हम हाथ से खाते हैं" — adds a sensory, specific detail.',
+        'In most Indian households people eat rice + dal + sabzi with the right hand, not a fork. Mentioning this casually - "हम हाथ से खाते हैं" - adds a sensory, specific detail.',
       emoji: '✋',
     },
     {
@@ -290,7 +290,7 @@ export const pack: TopicPack = {
   ],
   culturalNote: {
     why:
-      'FCPS raters on Hindi essays will have seen hundreds of "I eat rice and it is good" answers. A concrete cultural detail — thali structure, the chai break, hand-eating, a festival sweet — instantly separates the essay from the pile. That is a pure Text-Type boost at no grammar cost.',
+      'FCPS raters on Hindi essays will have seen hundreds of "I eat rice and it is good" answers. A concrete cultural detail - thali structure, the chai break, hand-eating, a festival sweet - instantly separates the essay from the pile. That is a pure Text-Type boost at no grammar cost.',
     trains: ['TextType', 'TopicCoverage'],
   },
 
@@ -300,7 +300,7 @@ export const pack: TopicPack = {
       literal: 'to be something black in the daal',
       meaning: 'Something suspicious is going on.',
       example: 'वह बहुत जल्दी-जल्दी घर लौटता है, दाल में कुछ काला है।',
-      exampleEnglish: 'He keeps returning home hurriedly — something is fishy.',
+      exampleEnglish: 'He keeps returning home hurriedly - something is fishy.',
     },
     {
       phrase: 'मुँह में पानी आना',
@@ -312,7 +312,7 @@ export const pack: TopicPack = {
   ],
   muhavareNote: {
     why:
-      'Food-based idioms are unusually welcome in food essays — they fit the topic naturally. One idiom placed in a 3-paragraph essay reads as register mastery. Two is overkill; one is plenty.',
+      'Food-based idioms are unusually welcome in food essays - they fit the topic naturally. One idiom placed in a 3-paragraph essay reads as register mastery. Two is overkill; one is plenty.',
     trains: ['TextType', 'LanguageControl'],
   },
 
@@ -325,13 +325,13 @@ export const pack: TopicPack = {
       intermediateMid:
         'पिछले रविवार को मेरे घर में सब लोग साथ थे। माँ ने एक बड़ी थाली बनाई। थाली में गरम रोटी, दाल, हरी सब्ज़ी और मीठा दही था। पिताजी को तीखा खाना पसंद है, लेकिन दादी को हल्का खाना अच्छा लगता है, इसलिए माँ दो तरह की सब्ज़ी बनाती हैं।\n\nहम सब साथ बैठकर खाते हैं। खाने के बाद दादी ने मुझे एक कहानी सुनाई। मेरी छोटी बहन ने एक गुलाब जामुन पूरा खा लिया और फिर मुझसे एक और माँगा। यह देखकर सबको हँसी आ गई।\n\nमुझे लगता है कि रविवार का खाना सिर्फ़ खाना नहीं है, बल्कि परिवार का समय भी है। अगले रविवार को मैं माँ के साथ रसोई में जाऊँगा और पहली बार रोटी बनाना सीखूँगा।',
       annotations: [
-        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले रविवार को', note: 'Opens in past tense — anchors one time frame early.' },
-        { paragraphIndex: 0, kind: 'vocab', highlight: 'गरम रोटी, दाल, हरी सब्ज़ी, मीठा दही', note: 'Four distinct food items with correct gender agreement — Topic Coverage + Language Control.' },
+        { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले रविवार को', note: 'Opens in past tense - anchors one time frame early.' },
+        { paragraphIndex: 0, kind: 'vocab', highlight: 'गरम रोटी, दाल, हरी सब्ज़ी, मीठा दही', note: 'Four distinct food items with correct gender agreement - Topic Coverage + Language Control.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'लेकिन / इसलिए', note: 'Contrast + consequence in one sentence. Text-Type lift.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'हम खाते हैं / दादी ने सुनाई', note: 'Present-habitual beside past-perfective — raters love seeing this within a single paragraph.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'हम खाते हैं / दादी ने सुनाई', note: 'Present-habitual beside past-perfective - raters love seeing this within a single paragraph.' },
         { paragraphIndex: 1, kind: 'cultural', highlight: 'दादी ने कहानी सुनाई', note: 'Specific family custom, not a generic statement.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... बल्कि ... भी', note: 'Not-only-but-also structure — an Intermediate-Mid hallmark.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले रविवार को ... सीखूँगा', note: 'Future tense arrives in the closing — three time frames in one essay = clean Benchmark 5.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'सिर्फ़ ... बल्कि ... भी', note: 'Not-only-but-also structure - an Intermediate-Mid hallmark.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगले रविवार को ... सीखूँगा', note: 'Future tense arrives in the closing - three time frames in one essay = clean Benchmark 5.' },
       ],
       wordCount: 124,
       tenseUsed: ['past', 'present', 'future'],
@@ -340,8 +340,8 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Three cohesive paragraphs that cannot be rearranged — Text-Type 5 requirement met.',
-          'Uses past (बनाई, सुनाई), present (खाते हैं), and future (सीखूँगा) within 124 words — satisfies the rubric\'s "some control of major time frames" for IM.',
+          'Three cohesive paragraphs that cannot be rearranged - Text-Type 5 requirement met.',
+          'Uses past (बनाई, सुनाई), present (खाते हैं), and future (सीखूँगा) within 124 words - satisfies the rubric\'s "some control of major time frames" for IM.',
           'Gender agreement is clean: गरम रोटी (f), हरी सब्ज़ी (f), मीठा दही (m), तीखा खाना (m). Language Control stabilizes at Average or High.',
           'Three different connectors (लेकिन, इसलिए, बल्कि) used correctly. Raters see this as explicit connectedness.',
           'Concrete cultural detail (दादी की कहानी, गुलाब जामुन) raises Topic Coverage above generic responses.',
@@ -362,11 +362,11 @@ export const pack: TopicPack = {
       annotations: [
         { paragraphIndex: 0, kind: 'tense-shift', highlight: 'पिछले शनिवार को', note: 'Past frame opens the essay.' },
         { paragraphIndex: 0, kind: 'connector', highlight: 'पहले ... फिर ... क्योंकि', note: 'Three connectors in a single sentence build temporal + causal cohesion.' },
-        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'जब ... तो', note: '"When...then" construction — a reliable Intermediate-Mid marker.' },
+        { paragraphIndex: 1, kind: 'tense-shift', highlight: 'जब ... तो', note: '"When...then" construction - a reliable Intermediate-Mid marker.' },
         { paragraphIndex: 1, kind: 'vocab', highlight: 'कृपया-धन्यवाद', note: 'Polite register chunk used in context, not listed.' },
-        { paragraphIndex: 1, kind: 'idiom', highlight: 'मुँह में पानी आना', note: 'Food-idiom placed perfectly — one per essay is plenty.' },
-        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगर ... तो ... जाएँगे', note: 'Conditional + future in the closing — third time frame sealed.' },
-        { paragraphIndex: 2, kind: 'structure', highlight: 'दोनों मिलकर ... बना देते हैं', note: 'Reflective closing generalizes beyond the event — Text-Type lift.' },
+        { paragraphIndex: 1, kind: 'idiom', highlight: 'मुँह में पानी आना', note: 'Food-idiom placed perfectly - one per essay is plenty.' },
+        { paragraphIndex: 2, kind: 'tense-shift', highlight: 'अगर ... तो ... जाएँगे', note: 'Conditional + future in the closing - third time frame sealed.' },
+        { paragraphIndex: 2, kind: 'structure', highlight: 'दोनों मिलकर ... बना देते हैं', note: 'Reflective closing generalizes beyond the event - Text-Type lift.' },
       ],
       wordCount: 131,
       tenseUsed: ['past', 'present', 'future'],
@@ -375,21 +375,21 @@ export const pack: TopicPack = {
         predictedBenchmark: 5,
         predictedCredit: 'IntermediateMid_3cr',
         whyItPasses: [
-          'Six different connectors used — far above the 3-connector threshold. Text-Type 5 confirmed.',
-          'Idiom मुँह में पानी आना is placed inside a past narrative, not appended — this is how Intermediate-Mid students use idioms.',
+          'Six different connectors used - far above the 3-connector threshold. Text-Type 5 confirmed.',
+          'Idiom मुँह में पानी आना is placed inside a past narrative, not appended - this is how Intermediate-Mid students use idioms.',
           'Conditional closing (अगर ... तो जाएँगे) adds the future frame and reflective tone raters specifically reward.',
-          'Polite register is sustained (वेटर ने बहुत प्यार से, कृपया-धन्यवाद) — signals Language Control above Average.',
+          'Polite register is sustained (वेटर ने बहुत प्यार से, कृपया-धन्यवाद) - signals Language Control above Average.',
         ],
         gotchas: [
           'If the student writes "मैं गया" as a female narrator, drop in Language Control to Low.',
-          'Using ज़्यादा casual English transliterations instead of Devanagari loses points — write in script throughout.',
+          'Using ज़्यादा casual English transliterations instead of Devanagari loses points - write in script throughout.',
         ],
       },
     },
   ],
   modelEssaysNote: {
     why:
-      'Two fully-worked model essays at Intermediate-Mid. Study them until you can reproduce the sentence shapes without looking. The verdict cards show exactly which rubric boxes each sentence ticks — raters think in these boxes, and so should you.',
+      'Two fully-worked model essays at Intermediate-Mid. Study them until you can reproduce the sentence shapes without looking. The verdict cards show exactly which rubric boxes each sentence ticks - raters think in these boxes, and so should you.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 
@@ -418,9 +418,9 @@ export const pack: TopicPack = {
     },
     {
       hindi:
-        'अगर आप एक रेस्तराँ खोलेंगे, तो वह कैसा होगा? तीन अनुच्छेदों में लिखिए — मेन्यू, सेवा, और खास बात।',
+        'अगर आप एक रेस्तराँ खोलेंगे, तो वह कैसा होगा? तीन अनुच्छेदों में लिखिए - मेन्यू, सेवा, और खास बात।',
       english:
-        'If you were to open a restaurant, what would it be like? Write three paragraphs — menu, service, and unique feature.',
+        'If you were to open a restaurant, what would it be like? Write three paragraphs - menu, service, and unique feature.',
       hint: {
         connectors: ['अगर... तो', 'इसके अलावा', 'सिर्फ़... बल्कि भी'],
         vocab: ['मेन्यू', 'थाली', 'सेवा', 'ग्राहक', 'स्वादिष्ट'],
@@ -430,7 +430,7 @@ export const pack: TopicPack = {
   ],
   promptsNote: {
     why:
-      'Each prompt is written in the exact FCPS shape: three cohesive paragraphs, personal experience OR hypothetical experience, with enough scope for tense variety. The hint strip under each prompt is not "the answer" — it is the set of language goals the student should target.',
+      'Each prompt is written in the exact FCPS shape: three cohesive paragraphs, personal experience OR hypothetical experience, with enough scope for tense variety. The hint strip under each prompt is not "the answer" - it is the set of language goals the student should target.',
     trains: ['TextType'],
   },
 
