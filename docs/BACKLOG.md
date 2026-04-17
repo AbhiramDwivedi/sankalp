@@ -19,7 +19,7 @@ Each item flows: **implementer → reviewer → (fixer if needed) → merge**. E
    - **Phase B — Reviewer subagent** (fresh context, blind to implementer's reasoning): brief = item text + Invariants + the full diff (`git diff main...auto/{item-id}`). Checks: (1) Done-when criteria objectively met? (2) Do-not-touch boundaries respected? (3) Invariants respected? (4) No dead code, no scope creep, no unjustified deps? (5) If the item required tests/visual goldens, do they exist and are they meaningful? Returns: `{verdict: "approve" | "request_changes", comments: [{file, line, severity: "blocker"|"nit", message}]}`. Nits are advisory only — only `blocker` comments gate the merge.
    - **Phase C — (if request_changes) Fixer subagent**: brief = the review comments + the item brief + the branch. Addresses each blocker, commits on the same branch, pushes. Returns summary of fixes.
    - **Re-review**: go back to Phase B on the updated branch. Max 2 review cycles total. If the second review still has blockers: open the PR in draft state with review comments as the PR body, leave the box unchecked, log "needs human review: {link}" in AGENT_LOG.
-4. **Merge**: on approve, `gh pr create` (if not already open) with the item id in the title, then `gh pr merge --squash --delete-branch`. Check the backlog box with commit SHA + PR number. Append an AGENT_LOG entry with `[implementer summary, review verdict, merge SHA]`.
+4. **Merge**: on approve, the parent does: `git fetch origin && git checkout auto/{item-id} && git rebase origin/main` (final rebase in case main moved during review). If rebase succeeds clean: `gh pr create` with item id in title if not open, then `gh pr merge --squash --delete-branch`. Check the backlog box with commit SHA + PR number. Append an AGENT_LOG entry with `[implementer summary, review verdict, merge SHA]`. If the final rebase has conflicts: leave the PR open, log "rebase conflict — needs human attention: {PR link}" in AGENT_LOG.
 5. On any failure: the failing item's branch stays on remote for human inspection. Log it in AGENT_LOG with the branch name and the failure phase.
 6. After all first-batch items finish: if parent context is still light and ≥4 more items are ready, do **one more batch of 4**. Otherwise commit + push any backlog/log updates to main and exit.
 7. Max 2 batches per fire. Hard stop.
@@ -35,13 +35,15 @@ INVARIANTS:
 {invariants section pasted verbatim}
 
 STEPS:
-1. git checkout main && git pull
+1. git checkout main && git pull --rebase origin main   # always start fresh
 2. git checkout -b auto/{item-id}
 3. Implement the item. Only touch files the brief authorizes.
 4. Run the gate: npx tsc --noEmit && npx tsx scripts/validate-packs.ts && npx tsx scripts/build-flashcards.ts && npx tsx scripts/credit-audit.ts. After 0.1 ships: npm run check. After 0.2: also npm run smoke. After 0.3: also npm run visual.
 5. If gate red: report the exact failure and stop. Do NOT commit.
-6. If gate green: git add only your intended files + any regenerated outputs. git commit with a single-line conventional message referencing the item id. git push -u origin auto/{item-id}.
-7. Return: branch name, list of files changed, gate results, any blockers encountered.
+6. If gate green: git add only your intended files + any regenerated outputs. git commit with a single-line conventional message referencing the item id.
+7. BEFORE pushing: git fetch origin && git rebase origin/main. If conflicts, resolve only if trivial (imports, lockfiles); otherwise abort rebase, report as a blocker. This catches merge conflicts EARLY while the context is still yours.
+8. git push -u origin auto/{item-id}
+9. Return: branch name, list of files changed, gate results, any blockers encountered.
 
 Do NOT open a PR. Do NOT merge. Do NOT change scope. If the brief seems wrong, report it as a blocker.
 ```
@@ -75,6 +77,25 @@ Return JSON: {"verdict": "approve" | "request_changes", "comments": [{"file": ".
 
 Only "blocker" comments gate the merge. "nit" comments are recorded but do not block.
 ```
+
+## Standing authorizations (for every fire and every subagent)
+
+Granted by Abhiram up-front. Do not re-ask.
+
+- Run `npm install`, `npm install -D <dep-from-item-brief>`, `npx playwright install chromium`, `npx husky init`, etc. — anything an item's brief names.
+- Create branches named `auto/{item-id}`, push branches to `origin`, open PRs via `gh pr create`, squash-merge via `gh pr merge --squash --delete-branch` after approve.
+- Regenerate `content/flashcards/generated.ts`, `docs/CREDIT_AUDIT.md`, any other committed script-output files — and commit the regeneration alongside the content change.
+- Commit housekeeping updates (BACKLOG checkbox + AGENT_LOG entry) directly to `main`.
+- Make product-taste decisions WITHIN an item's stated Done-when scope (e.g. color shade choice, copy wording, animation timing).
+
+NOT authorized — these require stopping and logging, or they are forbidden:
+
+- Changing an item's brief, scope, Done-when, or Do-not-touch. If it looks wrong, log and skip.
+- Pushing directly to `main` for item work (housekeeping only).
+- Force-pushing any branch that has been opened as a PR (even yours).
+- Merging a PR that has unaddressed blocker review comments or failing CI.
+- Adding dependencies not named in an item's brief.
+- Changing rubric / credit / benchmark constants in `content/rubric.ts`.
 
 ## Invariants (subagents must not violate)
 
@@ -121,9 +142,19 @@ Only "blocker" comments gate the merge. "nit" comments are recorded but do not b
 **Do not touch**: settings.json (commands are separate).
 
 ### [ ] 0.6 — CLAUDE.md invariants section (no dependency)
-**Brief**: Append a new section to `CLAUDE.md` titled "Autonomous-run invariants" that lists the invariants from this backlog header (never edit generated.ts, always regenerate flashcards after pack edits, never change rubric constants without explicit authorization, always run the full gate before declaring done, before any UI task runs `/ship`).
+**Brief**: Append a new section to `CLAUDE.md` titled "Autonomous-run invariants" that lists the invariants from this backlog header (never edit generated.ts, always regenerate flashcards after pack edits, never change rubric constants without explicit authorization, always run the full gate before declaring done, branch-and-PR only, audit failure is a revert).
 **Done when**: section exists and is concise (<40 lines).
 **Do not touch**: existing CLAUDE.md content — only append.
+
+### [ ] 0.7 — Git pre-commit hook running `npm run check` (depends on: 0.1)
+**Brief**: Add a `.husky/pre-commit` hook (via husky init, or a hand-rolled `.git/hooks/pre-commit` + `prepare` npm script that symlinks from a tracked `.githooks/` directory — pick whichever adds fewer deps). The hook runs `npm run check` (from 0.1). If it fails, the commit is blocked. This is defense-in-depth — the protocol already runs the gate, but the hook catches any subagent that forgets. The hook must be installable via `npm install` (husky auto-installs via `prepare`; or `scripts/install-hooks.sh` invoked by `postinstall`). Document the bypass path (`git commit --no-verify`) explicitly and note that subagents must NEVER use it (invariant already says this).
+**Done when**: `git commit` on a clean branch with a gate-failing change (deliberately break something) is blocked with a clear message. `npm install` on a fresh clone installs the hook. Smoke test passes.
+**Do not touch**: `.git/hooks/` directly (use husky or tracked .githooks/ so the hook is versioned).
+
+### [ ] 0.8 — GitHub Actions CI workflow for PRs (depends on: 0.1, 0.2, 0.3)
+**Brief**: Add `.github/workflows/ci.yml` that runs on `pull_request` to main: checkout, setup-node (v20), `npm ci`, `npm run check`, `npm run smoke`, `npm run visual`. Cache node_modules and playwright browsers. On failure: annotate the PR with the failing step + logs. Separately add `.github/workflows/guard.yml` that runs on `pull_request` only: a guard job that fails if the PR diff contains changes to `content/rubric.ts` benchmark-boundary constants OR the PR author is a bot / automated-branch (`auto/*`) AND the diff contains changes to `content/studyPlans.ts` plan-data arrays without an explicit "CURRICULUM-AUTHORIZED" tag in the PR body. This is a scope-creep detector for the automated workflow. Document that `auto/*` branches require these checks green before squash-merge; if a check is failing, the reviewer agent should leave the PR open for human review.
+**Done when**: opening a PR against main triggers CI. Deliberately failing a check blocks merge. The guard workflow fires on a test PR that touches rubric constants and fails correctly. Document the required-checks branch protection recommendation in `CLAUDE.md` (manual user step — actions cannot enable branch protection themselves without admin PAT).
+**Do not touch**: the main workflows concept — keep two workflows (ci.yml + guard.yml) separate for clarity.
 
 ---
 
