@@ -11,7 +11,7 @@ import { RubricReferenceView } from './components/pages/RubricReferenceView';
 import { CreditAuditView } from './components/pages/CreditAuditView';
 import { StudyPlanView } from './components/pages/StudyPlanView';
 import { CapstonesLibraryView } from './components/pages/CapstonesLibraryView';
-import { CapstoneView } from './components/capstone/CapstoneView';
+import { CapstoneViewV2 as CapstoneView } from './components/capstone/CapstoneViewV2';
 import { FlashcardsLibraryView } from './components/pages/FlashcardsLibraryView';
 import { DeckRunner } from './components/flashcards/DeckRunner';
 import { PrintSheet } from './components/flashcards/PrintSheet';
