@@ -11,9 +11,14 @@ import { RubricReferenceView } from './components/pages/RubricReferenceView';
 import { StudyPlanView } from './components/pages/StudyPlanView';
 import { CapstonesLibraryView } from './components/pages/CapstonesLibraryView';
 import { CapstoneView } from './components/capstone/CapstoneView';
+import { FlashcardsLibraryView } from './components/pages/FlashcardsLibraryView';
+import { DeckRunner } from './components/flashcards/DeckRunner';
+import { PrintSheet } from './components/flashcards/PrintSheet';
 import { TopicPackView } from './components/topic/TopicPackView';
 import { TOPIC_PACKS_BY_ID } from './content';
 import { CAPSTONES_BY_ID } from './content/capstones';
+import { DECKS_BY_ID } from './content/flashcards';
+import type { Deck } from './content/schema';
 import { studyPlanForLevel } from './content/studyPlans';
 import { Search, PlusCircle, GraduationCap, CheckCircle2, Info } from 'lucide-react';
 
@@ -28,6 +33,7 @@ const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [openPack, setOpenPack] = useState<TopicPack | null>(null);
   const [openCapstone, setOpenCapstone] = useState<Capstone | null>(null);
+  const [openDeck, setOpenDeck] = useState<Deck | null>(null);
   const [showHowThisWorks, setShowHowThisWorks] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -104,6 +110,37 @@ const App: React.FC = () => {
     setActiveTab('dashboard');
     setOpenPack(null);
     setOpenCapstone(null);
+    setOpenDeck(null);
+  };
+
+  const openDeckById = (deckId: string) => {
+    const d = DECKS_BY_ID[deckId];
+    if (!d) return;
+    setOpenPack(null);
+    setOpenCapstone(null);
+    setOpenDeck(d);
+  };
+
+  const markCardSeen = (cardId: string) => {
+    updateActiveProfile((p) => ({
+      ...p,
+      flashcardsSeen: Array.from(new Set([...(p.flashcardsSeen || []), cardId])),
+    }));
+  };
+
+  const markCardMastered = (cardId: string) => {
+    updateActiveProfile((p) => ({
+      ...p,
+      flashcardsSeen: Array.from(new Set([...(p.flashcardsSeen || []), cardId])),
+      flashcardsMastered: Array.from(new Set([...(p.flashcardsMastered || []), cardId])),
+    }));
+  };
+
+  const markCardNotYet = (cardId: string) => {
+    updateActiveProfile((p) => ({
+      ...p,
+      flashcardsMastered: (p.flashcardsMastered || []).filter((id) => id !== cardId),
+    }));
   };
 
   const handleMarkComplete = () => {
@@ -297,7 +334,31 @@ const App: React.FC = () => {
     );
   }
 
-  // C) First-run explainer
+  // C) Flashcard deck runner overlay
+  if (openDeck) {
+    return (
+      <Layout
+        activeTab={activeTab}
+        setActiveTab={(t) => setActiveTab(t as Tab)}
+        brandingName="सङ्कल्प"
+        onSwitch={handleSwitchStudent}
+      >
+        <DeckRunner
+          deck={openDeck}
+          seenIds={profile.flashcardsSeen || []}
+          masteredIds={profile.flashcardsMastered || []}
+          onCardSeen={markCardSeen}
+          onCardMastered={markCardMastered}
+          onCardNotYet={markCardNotYet}
+          onBack={() => setOpenDeck(null)}
+          onPrint={() => window.print()}
+        />
+        <PrintSheet deck={openDeck} />
+      </Layout>
+    );
+  }
+
+  // D) First-run explainer
   if (showHowThisWorks) {
     return (
       <Layout
@@ -351,16 +412,11 @@ const App: React.FC = () => {
         );
       case 'flashcards':
         return (
-          <div className="max-w-3xl mx-auto text-center py-20 space-y-5">
-            <div className="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full mx-auto flex items-center justify-center">
-              <GraduationCap size={40} />
-            </div>
-            <h2 className="text-3xl font-black text-slate-900">Flashcards coming next</h2>
-            <p className="text-slate-500 italic">
-              Pack, theme, connector, muhavara, and exam-prep decks — printable as 8-up cut sheets.
-              This tab will light up in Phase C of the build.
-            </p>
-          </div>
+          <FlashcardsLibraryView
+            seenIds={profile.flashcardsSeen || []}
+            masteredIds={profile.flashcardsMastered || []}
+            onOpenDeck={openDeckById}
+          />
         );
       case 'rubric':
         return <RubricReferenceView onBack={() => setActiveTab('dashboard')} />;
