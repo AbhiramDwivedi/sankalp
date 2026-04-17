@@ -16,6 +16,20 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #0b (setup continued, manual)
+**Items attempted**: protocol revision + POC of remote-trigger path
+**Items completed**: BACKLOG.md protocol rewrite (branch → implementer → reviewer → fixer → PR merge), invariants updated, stale content/studyPlans.ts do-not-touch references removed (user pushed that work).
+**Items deferred**: none
+**Open questions for Abhiram**: verdict on remote triggers (see Notes)
+**Commits pushed**: TBD (after POC verdict)
+**Notes**:
+- User directive added: every logical piece of work gets a reviewer agent. Implemented as branch-per-item + PR workflow. Phase A (implementer) → Phase B (reviewer, blind to implementer's reasoning, reads the diff fresh) → Phase C (fixer, only if review requests changes, max 2 cycles) → squash-merge. This applies whether execution is local-subagent or remote-trigger based.
+- POC of remote triggers (Option B from prior turn): created two triggers via RemoteTrigger API. First attempt (sankalp-poc) was missing `sources` config — created but never executed. Second attempt (sankalp-poc-v2, trig_01H1vk83Y32W3JtoirASJdYc) had full config (github.com/AbhiramDwivedi/sankalp source, sonnet-4-6 model, prompt to create branch + PR with a marker file). Fired via `run` action twice. After 4+ and 8+ minute waits: no branch, no PR, no commit on origin. `run` returns HTTP 200 but no observable side effect; trigger state's updated_at is unchanged. Remote-trigger API appears to accept work but not execute it — possibly an environment-provisioning issue, possibly undocumented behavior.
+- Verdict: Option B is NOT validated. Fallback to Option A — local CronCreate-based cron in this Claude Code session. The earlier session-only cron (e3c8e02a) was cancelled because its prompt predated the PR-workflow revision; a new one will be created with the updated prompt after the POC window closes.
+- User's Fri 14:13 push `9457941 Rewrite study plans for realistic 2 hr/week pacing` shipped the studyPlans.ts rewrite. The plan-push missing-10th-capstone audit failure surfaced in the prior turn may be resolved or still pending — to be verified on first real fire.
+
+---
+
 ## 2026-04-17 — Fire #0 (setup, manual)
 **Items attempted**: N/A — this was the pre-run setup.
 **Items completed**: none (the backlog itself is the deliverable)

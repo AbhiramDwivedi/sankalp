@@ -8,23 +8,85 @@ If you (Abhiram) want to course-correct: edit this file directly — add, re-pri
 
 ## Protocol (every fire, in order)
 
-1. `git pull --rebase origin main` — pick up any manual edits to this backlog, AGENT_LOG, or uncommitted work from the user.
-2. Read this file. Pick up to **4 unchecked items** that satisfy: (a) prereqs met, (b) mutually independent (no shared files), (c) Tier 0 done before any product tier.
-3. Launch each as a subagent with the item's full brief. Run in parallel via a single message with multiple `Agent` tool calls.
-4. When subagents return: for each success, run `/ship` (or equivalent: tsc → validate-packs → build-flashcards → credit-audit → playwright smoke → visual diff). If green, commit (conventional message) + push. If red, log the failure in AGENT_LOG and DO NOT mark the item done.
-5. Update this file (check the box, add completion date) + append to `docs/AGENT_LOG.md`.
-6. If parent context is still light and ≥4 more items are ready, do **one more batch of 4**. Otherwise exit — the next scheduled fire will resume.
+Each item flows: **implementer → reviewer → (fixer if needed) → merge**. Every item becomes a PR. This is a hard rule — no commits to `main` for item work. Only housekeeping (backlog checkbox updates, AGENT_LOG entries) commits directly to `main`.
+
+### Fire steps
+
+1. `git checkout main && git pull --rebase origin main` — pick up manual edits to backlog, AGENT_LOG, or user's own work.
+2. Read this file. Pick up to **4 unchecked items** that satisfy: (a) prereqs met, (b) mutually independent (no shared files — check each brief's files against the others), (c) Tier 0 done before any product tier.
+3. **For each item, in parallel** (one message with up to 4 `Agent` tool calls per phase):
+   - **Phase A — Implementer subagent**: brief = the item text from this file + the Invariants section. Creates `auto/{item-id}` branch from main (e.g. `auto/0.1-check-script`), implements, runs the full gate, commits, pushes the branch. Returns: `{branch, filesChanged[], gateResults, blockers[]}`. If blockers are logged: stop for this item, log in AGENT_LOG, leave the box unchecked.
+   - **Phase B — Reviewer subagent** (fresh context, blind to implementer's reasoning): brief = item text + Invariants + the full diff (`git diff main...auto/{item-id}`). Checks: (1) Done-when criteria objectively met? (2) Do-not-touch boundaries respected? (3) Invariants respected? (4) No dead code, no scope creep, no unjustified deps? (5) If the item required tests/visual goldens, do they exist and are they meaningful? Returns: `{verdict: "approve" | "request_changes", comments: [{file, line, severity: "blocker"|"nit", message}]}`. Nits are advisory only — only `blocker` comments gate the merge.
+   - **Phase C — (if request_changes) Fixer subagent**: brief = the review comments + the item brief + the branch. Addresses each blocker, commits on the same branch, pushes. Returns summary of fixes.
+   - **Re-review**: go back to Phase B on the updated branch. Max 2 review cycles total. If the second review still has blockers: open the PR in draft state with review comments as the PR body, leave the box unchecked, log "needs human review: {link}" in AGENT_LOG.
+4. **Merge**: on approve, `gh pr create` (if not already open) with the item id in the title, then `gh pr merge --squash --delete-branch`. Check the backlog box with commit SHA + PR number. Append an AGENT_LOG entry with `[implementer summary, review verdict, merge SHA]`.
+5. On any failure: the failing item's branch stays on remote for human inspection. Log it in AGENT_LOG with the branch name and the failure phase.
+6. After all first-batch items finish: if parent context is still light and ≥4 more items are ready, do **one more batch of 4**. Otherwise commit + push any backlog/log updates to main and exit.
 7. Max 2 batches per fire. Hard stop.
+
+### Implementer brief template (parent fills in)
+
+```
+You are implementing backlog item {item id}. Item brief follows, then invariants.
+
+{full item text}
+
+INVARIANTS:
+{invariants section pasted verbatim}
+
+STEPS:
+1. git checkout main && git pull
+2. git checkout -b auto/{item-id}
+3. Implement the item. Only touch files the brief authorizes.
+4. Run the gate: npx tsc --noEmit && npx tsx scripts/validate-packs.ts && npx tsx scripts/build-flashcards.ts && npx tsx scripts/credit-audit.ts. After 0.1 ships: npm run check. After 0.2: also npm run smoke. After 0.3: also npm run visual.
+5. If gate red: report the exact failure and stop. Do NOT commit.
+6. If gate green: git add only your intended files + any regenerated outputs. git commit with a single-line conventional message referencing the item id. git push -u origin auto/{item-id}.
+7. Return: branch name, list of files changed, gate results, any blockers encountered.
+
+Do NOT open a PR. Do NOT merge. Do NOT change scope. If the brief seems wrong, report it as a blocker.
+```
+
+### Reviewer brief template (parent fills in)
+
+```
+You are reviewing backlog item {item id}. You have NOT seen the implementer's work — read the diff fresh. Item brief and invariants follow.
+
+{full item text}
+
+INVARIANTS:
+{invariants section pasted verbatim}
+
+DIFF TO REVIEW:
+{output of `git diff main...auto/{item-id}`}
+
+GATE RESULTS (from implementer):
+{gateResults from Phase A}
+
+REVIEW CHECKLIST:
+1. Does the diff objectively meet the item's Done-when criteria? (if no → blocker)
+2. Are Do-not-touch files untouched? (if no → blocker)
+3. Are the backlog invariants respected? (any violation → blocker)
+4. Is there scope creep beyond what the brief authorizes? (yes → blocker)
+5. If the brief required tests or visual goldens, do they exist AND are they meaningful (not trivially passing)? (missing or trivial → blocker)
+6. Code quality: dead code, unused imports, obvious bugs, unjustified new deps? (yes → blocker)
+7. Anything that would surprise a reader but isn't explained? (yes → nit unless critical)
+
+Return JSON: {"verdict": "approve" | "request_changes", "comments": [{"file": "...", "line": n, "severity": "blocker" | "nit", "message": "..."}]}
+
+Only "blocker" comments gate the merge. "nit" comments are recorded but do not block.
+```
 
 ## Invariants (subagents must not violate)
 
-- **Never edit** `content/studyPlans.ts` or `docs/CREDIT_AUDIT.md` unless the item explicitly names them — the user has in-progress work in these files.
-- **Never edit** `content/flashcards/generated.ts` by hand — only regenerate via `scripts/build-flashcards.ts`.
-- **Never change** STAMP benchmark values, FCPS credit thresholds, or rubric axis definitions in `content/rubric.ts` without the item explicitly authorizing it.
-- **Never skip** git hooks (`--no-verify`), never force-push, never amend published commits.
-- **Always run** the full gate before declaring done: `npx tsc --noEmit` + `npx tsx scripts/validate-packs.ts` + `npx tsx scripts/build-flashcards.ts` + `npx tsx scripts/credit-audit.ts`. After Tier 0.2/0.3 land, also playwright smoke + visual diff.
-- **Commit scope**: one item = one commit (or a small, coherent series). Conventional prefix: `feat:`, `fix:`, `refactor:`, `chore:`, `test:`, `docs:`.
-- **If blocked**: do NOT improvise outside the item's scope. Log the blocker in AGENT_LOG, leave the item unchecked, move on.
+- **Branch-and-PR only** for item work. Never commit item changes directly to `main`. Branch naming: `auto/{item-id}` (e.g. `auto/0.1-check-script`). Only housekeeping (backlog checkbox updates, AGENT_LOG entries) commits directly to `main`.
+- **Never edit** `content/flashcards/generated.ts` by hand — only regenerate via `scripts/build-flashcards.ts` and commit the regenerated output alongside content changes.
+- **Never change** STAMP benchmark values, FCPS credit thresholds, or rubric axis definitions in `content/rubric.ts` without the item explicitly authorizing it. These are claims about the exam vendor, not design choices.
+- **Never skip** git hooks (`--no-verify`), never force-push to `main` or shared branches, never amend published commits.
+- **Never add dependencies** beyond what the item brief explicitly names. No "might be useful later" additions.
+- **Always run** the full gate before declaring Phase A complete: `npx tsc --noEmit` + `npx tsx scripts/validate-packs.ts` + `npx tsx scripts/build-flashcards.ts` + `npx tsx scripts/credit-audit.ts`. After Tier 0.1 ships: `npm run check`. After 0.2: also `npm run smoke`. After 0.3: also `npm run visual`.
+- **Commit scope**: one item = one branch = one PR = one squash-merge commit on `main`. Conventional prefix: `feat:`, `fix:`, `refactor:`, `chore:`, `test:`, `docs:`, with the item id in the message (e.g. `feat(1.1): next-nav in overlay`).
+- **If blocked**: do NOT improvise outside the item's scope. Push the branch in its current state, log the blocker in AGENT_LOG with the branch name, leave the box unchecked, move on.
+- **Audit failure is a revert**, not a follow-up. If `credit-audit.ts` fails after a content change, the item is unshipped until the audit passes — even if tsc is green.
 
 ---
 
@@ -70,7 +132,7 @@ If you (Abhiram) want to course-correct: edit this file directly — add, re-pri
 ### [ ] 1.1 — "Next" navigation in pack / capstone / deck overlays
 **Brief**: At the bottom of every full-screen overlay (TopicPackView, CapstoneView, DeckRunner), add a `NextUpCard` that: (a) reads `planCursor(activeProfile)` to determine next item in the active plan; (b) shows "Next: {title}" with a 1-line preview of why it's next (e.g. "Introduces ne-construction, which C03 needs"); (c) primary CTA "Continue" opens it, secondary "Skip for now" marks as deferred in profile (add `deferredIds: string[]` to profile schema, migrate in `types.ts`). Also: mini-progress bar at top of overlay ("Pack 7 of 26 • Foundation plan • 23% complete"). Keyboard shortcut: `N` = next, `Esc` = back (already exists).
 **Done when**: opening any pack shows correct next item; clicking "Continue" navigates without returning to library; Skip hides it from the next-up resolver permanently (per profile); smoke test covers this.
-**Do not touch**: `content/studyPlans.ts` (user is editing it). `planCursor()` logic itself is fine to extend — just don't change the plans data.
+**Do not touch**: existing plan data in `content/studyPlans.ts` (plans are authored content). `planCursor()` logic itself is fine to extend. Types in `content/schema.ts` may need `deferredIds: string[]` added.
 **Product note**: Next-up respects plan order, not pack-id order. If student is on Foundation plan and just finished L1-12, next is whatever L1-12's successor in Foundation is — could be L1-13, could be a capstone.
 
 ### [ ] 1.2 — Completion celebrations
@@ -120,12 +182,12 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 ### [ ] 3.1 — CURRICULUM constant (no dependency)
 **Brief**: Create `content/curriculum.ts` with a single exported `CURRICULUM` object: `{ id: 'fcps-stamp-hindi', language: { name: 'Hindi', code: 'hi', script: 'Devanagari', fontStack: [...] }, examSystem: { name: 'STAMP 2S/WS', provider: 'Avant', sections: ['Writing', 'Speaking'] }, creditMapping: { benchmark: 5, creditName: 'Intermediate Mid', credits: 3, issuer: 'FCPS' }, displayStrings: { examShortName: 'STAMP', creditPhrase: '3 FCPS credits', targetPhrase: 'Benchmark 5' } }`. Then grep the codebase for every hardcoded "STAMP", "FCPS", "Benchmark 5", "3 credits", "Hindi", "Devanagari" string and route them through `CURRICULUM.*` — mechanical refactor, no behavior change. Audit covers: components, content files (topics, capstones, study plans — but NOT studyPlans.ts since user edits it; defer that one to 3.2), rubric.ts, audit script, credit-audit.md template.
 **Done when**: grep for literal "STAMP" or "FCPS" or "Benchmark 5" returns only `content/curriculum.ts` and maybe test fixtures / docs (docs are acceptable). visual regression (0.3) unchanged. tsc + validate-packs green.
-**Do not touch**: `content/studyPlans.ts` (user is editing).
+**Do not touch**: the plan data arrays in `content/studyPlans.ts` (authored content). Import-only edits are fine if needed.
 
 ### [ ] 3.2 — Curriculum-shaped folders (depends on: 3.1)
-**Brief**: Move `content/rubric.ts`, `content/connectors.ts`, `content/muhavare` (if any standalone), and the grammar-specific diagrams (NeConstructionDiagram, GenderAgreementDiagram — Hindi-specific) into `content/curricula/fcps-stamp-hindi/`. Keep `content/schema.ts` and `content/topics/*` where they are for now (topics are per-curriculum content but moving 26 files is higher risk — defer). Update all imports. Add `content/curricula/README.md` explaining the layout for when we add e.g. `cbse-marathi` later. Also: update `content/studyPlans.ts` imports but DO NOT touch other lines in that file (user edits).
+**Brief**: Move `content/rubric.ts`, `content/connectors.ts`, `content/muhavare` (if any standalone), and the grammar-specific diagrams (NeConstructionDiagram, GenderAgreementDiagram — Hindi-specific) into `content/curricula/fcps-stamp-hindi/`. Keep `content/schema.ts` and `content/topics/*` where they are for now (topics are per-curriculum content but moving 26 files is higher risk — defer). Update all imports. Add `content/curricula/README.md` explaining the layout for when we add e.g. `cbse-marathi` later. Update `content/studyPlans.ts` imports as needed for the moved files — do not change plan data.
 **Done when**: imports all resolve; tsc green; validate-packs green; smoke green; visual regression green.
-**Do not touch**: `content/studyPlans.ts` non-import lines; topic content.
+**Do not touch**: plan data arrays in `content/studyPlans.ts`; topic content files.
 
 ### [ ] 3.3 — Generic ScriptText + parameterized rubric prompt (depends on: 3.2)
 **Brief**: Rename `DevanagariText` to `ScriptText` (keep `DevanagariText` as a thin alias that sets `script="Devanagari"` for backwards compat during transition); drive `lang` attribute and font-stack from `CURRICULUM.language`. Then refactor `geminiService.ts` `evaluateWriting()` to accept a rubric object (`CURRICULUM.examSystem.rubric` — wire rubric into the CURRICULUM shape) instead of the hardcoded STAMP-specific prompt text. The prompt becomes a template that takes benchmark descriptors, credit mapping, and language name as parameters. Behavior for Hindi+STAMP must be byte-identical to today.
