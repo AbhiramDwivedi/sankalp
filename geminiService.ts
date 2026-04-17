@@ -1,6 +1,6 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
-import { ProficiencyLevel, Unit, EvaluationResult, Material } from "./types";
+import { EvaluationResult } from "./types";
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
@@ -14,155 +14,48 @@ const safeJsonParse = (text: string) => {
   }
 };
 
-export const generateCoursePlan = async (
-  name: string,
-  startLevel: ProficiencyLevel,
-  monthsAvailable: number
-): Promise<Unit[]> => {
-  // Cap generation to a reasonable number of units to maintain AI response quality (max 18 units)
-  const unitsToGenerate = Math.min(monthsAvailable, 18);
+// Assessment is the only AI call retained. Inputs: either a pasted/typed essay
+// (preferred — matches exam typing interface) or a handwritten image.
+export type WritingSubmission =
+  | { kind: 'text'; text: string }
+  | { kind: 'image'; data: string };
+
+const RUBRIC_PROMPT_HEADER = `You are an Avant-style STAMP 2S/WS rater grading a Hindi response for the FCPS World Language Credit Exam.
+
+Grade against the STAMP rubric:
+- TEXT-TYPE:
+  Benchmark 3 (Novice High) = simple sentences, disconnected
+  Benchmark 4 (Intermediate Low) = strings of sentences with detail, still independent
+  Benchmark 5 (Intermediate Mid, TARGET for 3 FCPS credits) = connected sentences with transitions and groupings of ideas; sentences cannot be rearranged without altering meaning; some control of past/present/future
+  Benchmark 6+ = paragraph cohesion with stronger accuracy
+- LANGUAGE CONTROL: High / Average / Low based on comprehensibility and accuracy (gender, number, verb forms).
+- TOPIC COVERAGE: does the response stay on topic with specific vocabulary?
+
+FCPS Writing format expected: two essays, each at least 3 cohesive paragraphs, personal experience.
+
+Return a score 1-10 where 7+ maps to STAMP Benchmark 5 (Intermediate Mid, 3 credits).`;
+
+export async function evaluateWriting(
+  submission: WritingSubmission,
+  promptContext: string
+): Promise<EvaluationResult> {
+  const taskLine = `Prompt context: ${promptContext}\n\nEvaluate the student's response below against the STAMP rubric above.`;
+
+  const parts: any[] = [];
+  if (submission.kind === 'image') {
+    parts.push({ inlineData: { mimeType: 'image/jpeg', data: submission.data } });
+    parts.push({ text: `${RUBRIC_PROMPT_HEADER}\n\n${taskLine}\n\n(Student response is in the attached image of handwriting.)` });
+  } else {
+    parts.push({
+      text: `${RUBRIC_PROMPT_HEADER}\n\n${taskLine}\n\nStudent response (Devanagari):\n${submission.text}`,
+    });
+  }
 
   const response = await ai.models.generateContent({
-    model: 'gemini-3-pro-preview',
-    contents: `Create a strategic Hindi Learning Path for ${name} starting at ${startLevel} level. 
-    The student has ${monthsAvailable} months until their target FCPS World Language Credit exam.
-    
-    CRITICAL INSTRUCTIONS:
-    1. Generate EXACTLY ${unitsToGenerate} Units (one per month). 
-    2. Each Unit must contain 4 distinct weekly lessons.
-    3. SCALING COMPLEXITY:
-       - If ${startLevel} is Novice Low and monthsAvailable is high (>6): Unit 1 MUST start with basic Devanagari alphabet (Varnamala), phonetics, and 2-letter words. DO NOT jump into sentences yet.
-       - Gradually transition from alphabet -> words -> simple phrases -> sentences -> narratives -> complex logic + idioms.
-       - The path should peak at Intermediate-Mid proficiency in the final 3 months.
-    4. "SANKALPA" PHILOSOPHY: Focus on intentional logic. Even early lessons should ask "Why?".
-    
-    Ensure the JSON structure matches exactly.`,
+    model: 'gemini-2.5-flash',
+    contents: { parts },
     config: {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.ARRAY,
-        items: {
-          type: Type.OBJECT,
-          properties: {
-            id: { type: Type.STRING },
-            name: { type: Type.STRING },
-            cognitiveGoal: { type: Type.STRING },
-            targetProficiency: { type: Type.STRING },
-            lessons: {
-              type: Type.ARRAY,
-              items: {
-                type: Type.OBJECT,
-                properties: {
-                  id: { type: Type.STRING },
-                  title: { type: Type.STRING },
-                  topic: { type: Type.STRING },
-                  difficulty: { type: Type.NUMBER },
-                  description: { type: Type.STRING },
-                  status: { type: Type.STRING }
-                },
-                required: ["id", "title", "topic", "difficulty", "description", "status"]
-              }
-            }
-          },
-          required: ["id", "name", "cognitiveGoal", "targetProficiency", "lessons"]
-        }
-      }
-    }
-  });
-
-  return safeJsonParse(response.text);
-};
-
-export const generateLessonMaterial = async (
-  topic: string, 
-  level: ProficiencyLevel
-): Promise<Material> => {
-  const response = await ai.models.generateContent({
-    model: 'gemini-3-pro-preview',
-    contents: `Generate a rich, multi-modal Hindi worksheet for ${level} student. Topic: ${topic}.
-    
-    SANKALPA GUIDELINES:
-    - If ${level} is Novice Low: Focus on basic literacy, repetitive sounds, and high-frequency nouns. Keep idioms very simple (e.g., 'aankh ka tara').
-    - If ${level} is Intermediate: Use complex sentence structures and deep narrative logic.
-    
-    MUST INCLUDE:
-    1. A Narrative text (Devanagari). Length should be appropriate for ${level} (30 words for Novice Low, 150+ for Intermediate).
-    2. Two "Muhavare" (Idioms) with Hindi meanings and example sentences.
-    3. Three Practice Questions:
-       - Q1: Interpretive (Hindi comprehension).
-       - Q2: Interpersonal logic (Opinion/Thought).
-       - Q3: Presentational challenge (Logic scenario).
-    4. 5 Vocabulary words.
-    5. 'thoughtPrompts': Thinking-heavy prompts for the parent/teacher to ask orally.`,
-    config: {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          title: { type: Type.STRING },
-          hindiText: { type: Type.STRING },
-          transliteration: { type: Type.STRING },
-          englishTranslation: { type: Type.STRING },
-          activity: { type: Type.STRING },
-          idioms: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: {
-                phrase: { type: Type.STRING },
-                meaning: { type: Type.STRING },
-                example: { type: Type.STRING }
-              }
-            }
-          },
-          practiceQuestions: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: {
-                question: { type: Type.STRING },
-                hindiQuestion: { type: Type.STRING }
-              }
-            }
-          },
-          vocabulary: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: { word: { type: Type.STRING }, meaning: { type: Type.STRING } }
-            }
-          },
-          thoughtPrompts: { type: Type.ARRAY, items: { type: Type.STRING } }
-        },
-        required: ["title", "hindiText", "transliteration", "englishTranslation", "activity", "vocabulary", "thoughtPrompts", "idioms", "practiceQuestions"]
-      }
-    }
-  });
-
-  return safeJsonParse(response.text);
-};
-
-export const evaluateHandwriting = async (
-  imageData: string,
-  lessonContext: string
-): Promise<EvaluationResult> => {
-  const response = await ai.models.generateContent({
-    model: 'gemini-3-flash-preview',
-    contents: {
-      parts: [
-        { inlineData: { mimeType: 'image/jpeg', data: imageData } },
-        { text: `Strict Evaluation for: ${lessonContext}.
-        
-        STAMP RUBRIC CRITERIA:
-        - Novice: Can they write words/characters correctly?
-        - Intermediate Low: Are they creating sentences with intent?
-        - Intermediate Mid: Is there a cohesive story/narrative logic across time frames?
-        
-        Check Devanagari stroke logic if possible. Analyze the "Sankalpa" (intent) behind the student's choices.` }
-      ]
-    },
-    config: {
-      responseMimeType: "application/json",
+      responseMimeType: 'application/json',
       responseSchema: {
         type: Type.OBJECT,
         properties: {
@@ -171,11 +64,13 @@ export const evaluateHandwriting = async (
           identifiedStrengths: { type: Type.ARRAY, items: { type: Type.STRING } },
           areasToImprove: { type: Type.ARRAY, items: { type: Type.STRING } },
           suggestedNextStep: { type: Type.STRING },
-          thoughtProcessAnalysis: { type: Type.STRING }
-        }
-      }
-    }
+          thoughtProcessAnalysis: { type: Type.STRING },
+        },
+        required: ['score', 'feedback', 'identifiedStrengths', 'areasToImprove', 'suggestedNextStep', 'thoughtProcessAnalysis'],
+      },
+    },
   });
 
-  return safeJsonParse(response.text);
-};
+  const raw = safeJsonParse(response.text) as Omit<EvaluationResult, 'date'>;
+  return { ...raw, date: new Date().toISOString() };
+}

@@ -4,41 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sankalpa Hindi - Teacher's Portal</title>
+    <title>Sankalp Hindi · FCPS Credit Prep</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700;900&family=Tiro+Devanagari+Hindi&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --hindi-line-height: 2.2;
+            --hindi-line-height: 2.1;
+            --hindi-display-line-height: 1.5;
         }
-        @media print {
-            @page {
-                size: letter portrait;
-                margin: 0.4in;
-            }
-            .no-print { display: none !important; }
-            body { 
-                background: white !important; 
-                padding: 0 !important; 
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .printable-area { margin: 0 !important; width: 100% !important; border: none !important; box-shadow: none !important; }
-            .bg-orange-600 { background-color: #ea580c !important; color: white !important; }
-            .bg-blue-50 { background-color: #eff6ff !important; }
-            .bg-slate-50 { background-color: #f8fafc !important; }
-            .font-hindi { font-size: 1.25rem !important; line-height: var(--hindi-line-height) !important; }
-        }
+
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-hindi { 
-            font-family: 'Noto Sans Devanagari', sans-serif; 
+
+        .font-hindi {
+            font-family: 'Noto Sans Devanagari', sans-serif;
             line-height: var(--hindi-line-height);
         }
+        .font-hindi-display {
+            font-family: 'Tiro Devanagari Hindi', 'Noto Sans Devanagari', sans-serif;
+            line-height: var(--hindi-display-line-height);
+            font-feature-settings: 'kern' 1, 'liga' 1;
+        }
+
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        /* ------------------------------------------------------------------
+           Print layout
+           ------------------------------------------------------------------ */
+        @media print {
+            @page {
+                size: letter portrait;
+                margin: 0.5in;
+            }
+            @page :first {
+                margin-top: 0.3in;
+            }
+
+            html, body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
+            }
+
+            .no-print { display: none !important; }
+
+            .printable-area {
+                margin: 0 !important;
+                width: 100% !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+            }
+
+            /* Tighten card padding for paper */
+            .printable-area .rounded-\[2\.5rem\],
+            .printable-area .rounded-\[2rem\],
+            .printable-area .rounded-\[3rem\],
+            .printable-area .rounded-\[1\.75rem\] {
+                border-radius: 0.75rem !important;
+            }
+
+            /* Devanagari stays readable but tighter than on screen */
+            .font-hindi { font-size: 1.05rem !important; }
+            .font-hindi-display { font-size: 2rem !important; }
+
+            /* Section-level break control */
+            .print\:break-before-page { break-before: page; page-break-before: always; }
+            .print\:break-after-page { break-after: page; page-break-after: always; }
+            .print\:break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
+            .print\:break-inside-avoid-page { break-inside: avoid-page; page-break-inside: avoid; }
+
+            /* Keep headings with their content */
+            h1, h2, h3, h4 {
+                break-after: avoid;
+                page-break-after: avoid;
+                orphans: 3;
+                widows: 3;
+            }
+
+            p, li { orphans: 2; widows: 2; }
+
+            /* Links in color survive; image colors preserved */
+            img { print-color-adjust: exact; }
+
+            /* Hide the sidebar + mobile nav + aside */
+            aside, nav { display: none !important; }
+            main { overflow: visible !important; padding: 0 !important; }
+
+            /* Table borders visible in print */
+            table { border-collapse: collapse !important; }
+            table, th, td { border-color: #cbd5e1 !important; }
+        }
     </style>
 <script type="importmap">
 {
