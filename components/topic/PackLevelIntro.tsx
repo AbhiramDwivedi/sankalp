@@ -25,7 +25,7 @@ function scriptFor(level: ProficiencyLevel | undefined, packTitleEnglish: string
       return {
         kicker: 'Building fluency',
         headline: `Skim vocabulary, then slow down at grammar and the model essay.`,
-        body: 'You probably know most of the words. Spend your time on the possessive-agreement rule and the anchor passage — that\'s where real fluency comes from.',
+        body: 'You probably know most of the words. Spend your time on the possessive-agreement rule and the reading sample — that\'s where real fluency comes from.',
         icon: <Compass size={20} />,
         tone: 'from-sky-50 to-white border-sky-200 text-sky-900',
         badge: 'bg-sky-600',

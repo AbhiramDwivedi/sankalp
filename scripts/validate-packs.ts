@@ -68,7 +68,7 @@ function validatePack(p: TopicPack) {
   // Connectors
   if (p.connectors.length < 6) push(p.id, 'error', 'connectors', `only ${p.connectors.length}, need ≥6`);
 
-  // Anchor passage
+  // Reading sample (schema field: `anchor`)
   const aw = countWords(p.anchor.hindi);
   if (aw < 80) push(p.id, 'error', 'anchor', `${aw} Hindi words, need ~100-150`);
   if (aw > 180) push(p.id, 'warn', 'anchor', `${aw} Hindi words, over range`);

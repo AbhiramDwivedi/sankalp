@@ -107,7 +107,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 30 words are the exact set FCPS prompts on personality, physical description, and feelings pull from. The split into Physical / Personality / Feelings / Intensifiers mirrors the three sentence-types the student must produce ("She looks like…", "She is…", "She makes me feel…"). Every word here appears in the anchor passage or a model essay.',
+      'These 30 words are the exact set FCPS prompts on personality, physical description, and feelings pull from. The split into Physical / Personality / Feelings / Intensifiers mirrors the three sentence-types the student must produce ("She looks like…", "She is…", "She makes me feel…"). Every word here appears in the reading sample or a model essay.',
     trains: ['TopicCoverage', 'LanguageControl'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },

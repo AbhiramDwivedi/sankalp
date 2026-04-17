@@ -155,6 +155,8 @@ export interface EssayAnnotation {
 }
 
 export interface ModelEssay {
+  /** Short tab label (2–4 words) — what makes this essay different from its sibling. */
+  shortLabel?: string;
   prompt: string;
   novice: string;
   intermediateMid: string;

@@ -15,7 +15,7 @@ import { CapstoneView } from './components/capstone/CapstoneView';
 import { FlashcardsLibraryView } from './components/pages/FlashcardsLibraryView';
 import { DeckRunner } from './components/flashcards/DeckRunner';
 import { PrintSheet } from './components/flashcards/PrintSheet';
-import { TopicPackView } from './components/topic/TopicPackView';
+import { TopicPackViewV2 } from './components/topic/TopicPackViewV2';
 import { LandingView } from './components/pages/LandingView';
 import { TOPIC_PACKS_BY_ID } from './content';
 import { CAPSTONES_BY_ID } from './content/capstones';
@@ -239,7 +239,7 @@ const App: React.FC = () => {
         brandingName="सङ्कल्प"
         onSwitch={handleSwitchStudent}
       >
-        <TopicPackView
+        <TopicPackViewV2
           pack={openPack}
           aiEnabled={!!profile.aiAssessmentEnabled}
           level={profile.currentLevel}

@@ -111,7 +111,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 29 entries are the precise set that FCPS opening prompts ("Introduce yourself", "Describe your family") pull from again and again. Every item appears in the anchor passage or one of the model essays. Master this list and the first 3–4 sentences of any essay become automatic — which is exactly where raters form their first impression.',
+      'These 29 entries are the precise set that FCPS opening prompts ("Introduce yourself", "Describe your family") pull from again and again. Every item appears in the reading sample or one of the model essays. Master this list and the first 3–4 sentences of any essay become automatic — which is exactly where raters form their first impression.',
     trains: ['TopicCoverage', 'LanguageControl'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?" Greetings + self-intro vocab opens every FCPS prompt.',
   },

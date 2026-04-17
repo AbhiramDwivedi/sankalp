@@ -101,7 +101,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 29 entries are the minimum calendar bank the student needs to talk about any schedule, routine, holiday, or plan. Every day and every season appears in the anchor passage or a model essay — memorize this list first and the rest of the pack becomes a fill-in-the-blank.',
+      'These 29 entries are the minimum calendar bank the student needs to talk about any schedule, routine, holiday, or plan. Every day and every season appears in the reading sample or a model essay — memorize this list first and the rest of the pack becomes a fill-in-the-blank.',
     trains: ['TopicCoverage'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?" — School Life routines require day/month/season precision.',
   },

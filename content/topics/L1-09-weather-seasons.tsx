@@ -456,7 +456,7 @@ export const pack: TopicPack = {
 
   rubricNote: {
     why:
-      'Self-grade every essay you draft in this pack against the three axes. Weather prompts are the most forgiving place to produce three tenses — if you cannot hit Benchmark 5 here, go back to the anchor passage and imitate its structure line by line before trying again.',
+      'Self-grade every essay you draft in this pack against the three axes. Weather prompts are the most forgiving place to produce three tenses — if you cannot hit Benchmark 5 here, go back to the reading sample and imitate its structure line by line before trying again.',
     trains: ['TextType', 'LanguageControl', 'TopicCoverage'],
   },
 

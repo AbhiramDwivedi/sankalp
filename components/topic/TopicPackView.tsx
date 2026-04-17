@@ -104,7 +104,7 @@ export const TopicPackView: React.FC<TopicPackViewProps> = ({
 
       <PaisleyDivider color={tokens.primaryHex} />
 
-      <LevelLens tier="core" level={level} title="Anchor passage">
+      <LevelLens tier="core" level={level} title="Reading sample">
         <AnchorPassage passage={pack.anchor} note={pack.anchorNote} />
       </LevelLens>
 

@@ -107,7 +107,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 27 words are the narrow set FCPS prompts on food and restaurants keep pulling from. Every one of them appears in the anchor passage, the model texts, or the model essays. Learning this list first guarantees Topic-Coverage rubric points.',
+      'These 27 words are the narrow set FCPS prompts on food and restaurants keep pulling from. Every one of them appears in the reading sample, the model texts, or the model essays. Learning this list first guarantees Topic-Coverage rubric points.',
     trains: ['TopicCoverage'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?"',
   },

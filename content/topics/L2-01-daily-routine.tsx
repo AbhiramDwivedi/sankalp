@@ -108,7 +108,7 @@ export const pack: TopicPack = {
   ],
   vocabularyNote: {
     why:
-      'These 28 entries are the exact lexical set an FCPS "describe your daily routine" prompt pulls from. Eight routine verbs + six time-of-day nouns + five clock-time phrases + four frequency adverbs is enough to build a 150-word essay without repetition. Every item reappears in the anchor passage, model texts, or essays below.',
+      'These 28 entries are the exact lexical set an FCPS "describe your daily routine" prompt pulls from. Eight routine verbs + six time-of-day nouns + five clock-time phrases + four frequency adverbs is enough to build a 150-word essay without repetition. Every item reappears in the reading sample, model texts, or essays below.',
     trains: ['TopicCoverage', 'LanguageControl'],
     examLink: 'STAMP Topic Coverage: "Does the student use vocabulary specific to the theme?" — daily-routine prompts expect time words and routine verbs densely.',
   },
@@ -334,6 +334,7 @@ export const pack: TopicPack = {
 
   modelEssays: [
     {
+      shortLabel: 'A typical day',
       prompt:
         'अपनी दैनिक दिनचर्या के बारे में तीन अनुच्छेदों में लिखिए। सुबह, दोपहर और शाम के बारे में बताइए। (Write in three paragraphs about your daily routine. Describe morning, afternoon, and evening.)',
       novice: 'मैं उठता हूँ। मैं खाता हूँ। मैं सोता हूँ।',
@@ -369,6 +370,7 @@ export const pack: TopicPack = {
       },
     },
     {
+      shortLabel: 'Yesterday → tomorrow',
       prompt:
         'कल आपने क्या किया, और कल आप क्या करेंगे? तीन अनुच्छेदों में अपने परिवार की भूमिका भी बताइए। (What did you do yesterday, and what will you do tomorrow? In three paragraphs, also describe your family\'s role.)',
       novice: 'कल मैं स्कूल गया। आज मैं पढ़ूँगा। कल छुट्टी है।',

@@ -12,7 +12,7 @@ interface AnchorPassageProps {
 
 export const AnchorPassage: React.FC<AnchorPassageProps> = ({ passage, note }) => (
   <Section
-    title="Anchor Passage"
+    title="Reading Sample"
     eyebrow={passage.title}
     accent="orange"
     icon={<BookOpen size={28} strokeWidth={2.5} />}

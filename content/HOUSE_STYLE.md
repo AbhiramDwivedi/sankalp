@@ -34,7 +34,7 @@ required. Every section has a `TeacherNote` explaining why the section exists.
 - Start pack's selection with STARTER_CONNECTOR_KEYS for L1 packs, widen to
   GROWING for L2, IM_PUSH for L3.
 
-### Anchor Passage — 100–150 Hindi words
+### Reading Sample (schema field: `anchor`) — 100–150 Hindi words
 - One title (Devanagari + English transliteration), `hindi` Devanagari text,
   `transliteration`, `english` translation.
 - 4–6 `highlights` (what the student should notice — connectors, gender,
