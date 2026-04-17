@@ -8,14 +8,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` — start Vite dev server on port 3000 (host 0.0.0.0)
 - `npm run build` — production build to `dist/`
 - `npm run preview` — preview the production build
-- `npx tsx scripts/validate-packs.ts` — structural validator across all topic packs (exits non-zero on schema violations)
-- `GEMINI_API_KEY=... npx tsx scripts/generate-heroes.ts` — generate hero images via Google Imagen (idempotent; skips existing)
+- `npx tsx scripts/validate-packs.ts` — structural validator across packs, capstones, study plans (exits non-zero on schema violations)
+- `npx tsx scripts/build-flashcards.ts` — regenerate `content/flashcards/generated.ts` from packs + capstones + curated priority list (idempotent; commit output)
+- `npx tsx scripts/credit-audit.ts` — re-run the 3-credit audit; writes `docs/CREDIT_AUDIT.md` and exits non-zero on hard-gate failure
+- `GEMINI_API_KEY=... npx tsx scripts/generate-heroes.ts` — optional Imagen-based hero JPEGs (SVG heroes ship by default; this path is unused unless upgrading visuals)
 
 No test or lint scripts are configured.
 
 ## Environment
 
-`GEMINI_API_KEY` must be set in `.env.local` for optional AI assessment. `vite.config.ts` injects it into the client bundle as both `process.env.API_KEY` and `process.env.GEMINI_API_KEY` via `define` — there is no server, the key ships to the browser.
+`GEMINI_API_KEY` is only needed for the optional AI writing assessment. The app is fully functional without it — hero art is SVG, flashcards are deterministic, and the credit audit uses no external services.
+
+`vite.config.ts` injects the key into the client bundle as `process.env.API_KEY` / `process.env.GEMINI_API_KEY` — there is no server, the key ships to the browser.
 
 ## Architecture
 
@@ -25,12 +29,28 @@ Styling uses Tailwind utility classes via CDN (no Tailwind build step or config 
 
 ### Content-first, AI-sparing design
 
-The app is **static content + optional AI evaluation**, not AI-generated content:
+The app is **static content + optional AI evaluation**, not AI-generated content. Four content layers, all typed and validated:
 
-- **26 hand-authored topic packs** live in `content/topics/*.tsx` covering FCPS Levels 1, 2, and an L3 stretch.
-- Each pack conforms to the `TopicPack` schema in `content/schema.ts` and includes: vocabulary, grammar, connectors, an anchor passage, model texts, cultural insights, muhavare, two fully-annotated model essays (each with a VerdictCard predicting Benchmark 5), writing prompts, and a self-check rubric.
-- Every section carries a `TeacherNote` explaining *why it exists* and which rubric axis (Text-Type / Language Control / Topic Coverage) it trains — so a teacher unfamiliar with STAMP can see the pedagogical logic.
-- AI is reserved for **optional writing evaluation** via `evaluateWriting()` in `geminiService.ts` (accepts typed Devanagari or a handwritten photo). Disabled per-profile by default.
+- **26 hand-authored topic packs** (`content/topics/*.tsx`) — FCPS Levels 1, 2, and an L3 stretch. Each pack: vocabulary, grammar, connectors, an anchor passage, model texts, cultural insights, muhavare, two annotated model essays (each with a VerdictCard predicting Benchmark 5), writing prompts, self-check rubric.
+- **10 cross-topic capstones** (`content/capstones/*.tsx`) — 5 core (220–280 words, B5 target) + 5 push (280–340 words, B6 reach). Each capstone draws from 3–5 packs and ships in three tiers (novice / intermediateMid / push) side-by-side so the student sees growth. Two capstones double as timed Mock Exams. C01/C05/C10 are the quality anchors.
+- **5 named study plans** (`content/studyPlans.ts`) — `plan-foundation` (10 weeks), `plan-acceleration` (8 weeks), `plan-intermediate-bridge` (6 weeks), `plan-push` (4 weeks), `plan-polish` (2 weeks). A profile's `currentLevel` maps to one; `planCursor()` drives "next pack" resolution on the dashboard and highlights the current week in Library.
+- **~850-card flashcard library** (`content/flashcards/generated.ts`, committed output of `scripts/build-flashcards.ts`) — 26 pack-review + 3 theme-review + 1 connector-drill + 1 muhavara-drill + 1 grammar-essentials + 1 top-150 exam-prep deck. Priority tiers: `must-know` / `core` / `bonus`. Printable 8-up duplex-aligned cut sheets via `PrintSheet`.
+
+Every section, every capstone, and every diagram carries a `TeacherNote` explaining *why it exists* and which rubric axis it trains (Text-Type / Language Control / Topic Coverage). A non-expert teacher can read the page and see the pedagogical logic.
+
+AI is reserved for **optional writing evaluation** via `evaluateWriting()` in `geminiService.ts` (accepts typed Devanagari or a handwritten photo). Disabled per-profile by default.
+
+### 3-credit audit
+
+`scripts/credit-audit.ts` reads the content and writes `docs/CREDIT_AUDIT.md` — a plain-English evidence report the teacher can trust. Hard gates: every FCPS sub-topic served; every core connector used in ≥1 IM essay; tense coverage floors (past ≥20, present ≥20, future ≥15); every study plan references all 10 capstones. Live copy of the same audit renders at `/audit` (via `CreditAuditView`), linked from Settings.
+
+### SVG art system
+
+Zero external image dependencies. 15 motif components (`components/art/motifs.tsx` — thali, diya, rickshaw, umbrella, books, sunrise, temple, bazaar, clock, family, kurta, suitcase, notebook, cricket, namaste) + `PackHeroArt` / `CapstoneHeroArt` composers that mix motifs with theme-colored gradients and rangoli/paisley decoration. Every pack declares a `heroMotif` key.
+
+5 explainer diagrams (`components/art/diagrams.tsx`): `TenseTimelineDiagram`, `RubricLadderDiagram`, `ParagraphScaffoldDiagram`, `NeConstructionDiagram`, `GenderAgreementDiagram`. Used in grammar sections, rubric page, and before each capstone body.
+
+The Imagen script (`scripts/generate-heroes.ts`) exists but is not on the critical path. SVG art renders everywhere by default.
 
 ### State model
 
@@ -38,51 +58,97 @@ All state is client-side in `localStorage` — no backend:
 - `sankalpa_hindi_profiles` — array of `StudentProfile` (all students)
 - `sankalpa_active_id` — currently selected student id
 
-`App.tsx` is the single source of truth: it owns `profiles`, `activeId`, `activeTab`, `openPack`, and `showHowThisWorks`, and passes callbacks down. `updateActiveProfile` + `saveAllProfiles` is the canonical write path — any mutation should route through these so localStorage stays in sync. `migrateProfile()` in `types.ts` normalizes legacy profile records from the old AI-curriculum era.
+`App.tsx` is the single source of truth: it owns `profiles`, `activeId`, `activeTab`, `openPack`, `openCapstone`, `openDeck`, `showHowThisWorks`. `updateActiveProfile` + `saveAllProfiles` is the canonical write path. `migrateProfile()` in `types.ts` normalizes legacy profile records.
+
+Profile state includes: `completedTopicIds`, `completedCapstoneIds`, `selectedStudyPlanId`, `flashcardsSeen`, `flashcardsMastered`, `aiAssessmentEnabled`, `howThisWorksSeen`.
 
 ### Directory layout
 
 ```
 content/
-  schema.ts          # TopicPack types (single source of truth)
-  rubric.ts          # STAMP benchmarks 1–8, rubric axes, FCPS credit mapping
-  connectors.ts      # Master Hindi connector bank; pickConnectors(keys)
-  imagePrompts.ts    # Shared hero-image style wrapper
-  index.ts           # Ordered registry: TOPIC_PACKS, TOPIC_PACKS_BY_ID, etc.
-  stubHelpers.ts     # Used by stub packs only — shipped packs don't need it
-  topics/            # 26 TopicPack files, one per FCPS sub-topic
-  HOUSE_STYLE.md     # Authoring guide for new packs
+  schema.ts              # All content types (TopicPack, Capstone, StudyPlan, Flashcard, Deck)
+  rubric.ts              # STAMP benchmarks 1–8, rubric axes, FCPS credit mapping
+  connectors.ts          # Master Hindi connector bank; pickConnectors(keys)
+  imagePrompts.ts        # Legacy Imagen wrapper (unused by default)
+  index.ts               # TOPIC_PACKS registry
+  topics/                # 26 TopicPack files
+  capstones/
+    index.ts             # CAPSTONES registry
+    CAPSTONE_STYLE.md    # Authoring guide
+    C01..C10.tsx         # 10 cross-topic capstones
+  studyPlans.ts          # 5 named study plans + planCursor()
+  flashcards/
+    index.ts             # DECKS consumer API
+    generated.ts         # Committed generator output (do not edit)
+    mustHaveCards.ts     # Curated grammar essentials + priority rules
+  HOUSE_STYLE.md         # Authoring guide for packs
+
 components/
-  Layout.tsx         # Shell with sidebar + mobile nav
-  Onboarding.tsx     # Profile creation wizard
-  ui/                # Card, Badge, Section, Callout, DevanagariText, SVG motifs
-  topic/             # TopicPackView + 13 section components + AiAssessmentPanel
-  pages/             # LibraryView, DashboardView, HowThisWorksView, RubricReferenceView
-public/topics/       # Hero images hero-<id>.jpg (or hero-<id>.svg fallback)
-scripts/             # validate-packs.ts, generate-heroes.ts
+  Layout.tsx             # Shell with sidebar + mobile nav
+  Onboarding.tsx         # Profile creation + plan matching
+  ui/                    # Card, Badge, Section, Callout, DevanagariText, PaisleyDivider, RangoliCorner
+  art/
+    motifs.tsx           # 15 SVG motifs + MOTIFS registry
+    PackHeroArt.tsx      # Theme-colored scene composer for packs
+    CapstoneHeroArt.tsx  # Same for capstones (push tier gets gold accent)
+    diagrams.tsx         # 5 explainer diagrams (tense timeline, rubric ladder, etc.)
+  topic/                 # TopicPackView + section components + AiAssessmentPanel
+  capstone/
+    CapstoneView.tsx     # Full-screen capstone reader
+    VersionComparison.tsx # 3-tab novice/IM/push; print shows all three
+    DrawsFromPanel.tsx   # Links to contributing packs
+  flashcards/
+    FlashcardItem.tsx    # Flip card
+    DeckRunner.tsx       # Keyboard + mastery tracking
+    PrintSheet.tsx       # 8-up duplex-aligned print layout
+  pages/
+    DashboardView.tsx    # Plan-aware next-pack + upcoming capstone + rubric at a glance
+    LibraryView.tsx      # 26-pack grid with SVG heroes
+    CapstonesLibraryView.tsx  # 10-capstone grid by tier
+    FlashcardsLibraryView.tsx # 33-deck grid with priority filter
+    StudyPlanView.tsx    # Weekly schedule, printable
+    HowThisWorksView.tsx # First-run exam/rubric explainer
+    RubricReferenceView.tsx   # Full STAMP rubric
+    CreditAuditView.tsx  # Live 3-credit audit
+
+scripts/
+  validate-packs.ts      # Structural validator (packs + capstones + plans)
+  build-flashcards.ts    # Generator → content/flashcards/generated.ts
+  credit-audit.ts        # Writes docs/CREDIT_AUDIT.md + hard gates
+  generate-heroes.ts     # Optional Imagen JPEGs (not on critical path)
+
+docs/
+  CREDIT_AUDIT.md        # Generated audit (commit after content changes)
+
+public/topics/
+  hero-placeholder.svg   # Fallback only; SVG heroes render from PackHeroArt
 ```
 
 ### Routing
 
 - No active profile → student picker + `Onboarding` overlay.
 - First-run per profile → `HowThisWorksView` (mandatory exam/rubric explainer).
-- Active profile + no open pack → tab-based layout:
-  - `dashboard` → `DashboardView` (progress, next pack, rubric at a glance)
-  - `library` → `LibraryView` (grouped grid of 26 packs)
-  - `rubric` → `RubricReferenceView` (full STAMP rubric + FCPS credit ladder)
-  - `settings` → profile CRUD + AI-assessment toggle
-- Click a pack → `TopicPackView` full-screen overlay with "Back to Library" + Print.
+- Active profile + no overlay → tab-based layout:
+  - `dashboard` → `DashboardView` (plan-aware next-pack, upcoming capstone, rubric at a glance)
+  - `library` → `LibraryView` (26 packs with SVG heroes)
+  - `capstones` → `CapstonesLibraryView` (10 capstones by tier)
+  - `flashcards` → `FlashcardsLibraryView` (33 decks, filterable by kind)
+  - `plan` → `StudyPlanView` (week-by-week schedule, printable)
+  - `rubric` → `RubricReferenceView` (full STAMP rubric)
+  - `audit` → `CreditAuditView` (3-credit audit — linked from Settings)
+  - `settings` → profile CRUD + AI toggle + audit link
+- Overlays: clicking a pack/capstone/deck opens a full-screen overlay with Back + Print.
 
 ### Gemini integration (`geminiService.ts`)
 
-A single call: `evaluateWriting(submission, promptContext)`. Accepts either `{ kind: 'text', text }` (typed essay in Devanagari) or `{ kind: 'image', data }` (base64 JPEG of handwriting). Rubric prompt encodes STAMP 2S/WS Benchmarks 1–8, FCPS credit mapping, and the FCPS-specific 3-paragraph personal-essay format. Output is an `EvaluationResult` stored in `profile.evaluations[topicId]`.
+One call: `evaluateWriting(submission, promptContext)`. Accepts `{ kind: 'text', text }` (typed essay) or `{ kind: 'image', data }` (base64 JPEG). Rubric prompt encodes STAMP 2S/WS Benchmarks 1–8 + FCPS credit mapping + 3-paragraph personal-essay expectation. Output is an `EvaluationResult` stored in `profile.evaluations[topicId]`.
 
-Old AI calls (`generateCoursePlan`, `generateLessonMaterial`) were removed when static content landed.
+### Authoring
 
-### Authoring new or modified packs
-
-Read `content/HOUSE_STYLE.md`. Use `content/topics/L1-12-restaurants-food.tsx` as the quality anchor — every other pack should match its depth. Run `npx tsc --noEmit` and `npx tsx scripts/validate-packs.ts` before committing.
+- **New topic packs**: read `content/HOUSE_STYLE.md`; quality anchor is `content/topics/L1-12-restaurants-food.tsx`.
+- **New capstones**: read `content/capstones/CAPSTONE_STYLE.md`; quality anchors are C01 (narrative core), C05 (mid-point core), C10 (push ceiling).
+- **After content changes**: run `npx tsc --noEmit`, then `npx tsx scripts/validate-packs.ts`, then `npx tsx scripts/build-flashcards.ts`, then `npx tsx scripts/credit-audit.ts`. Commit regenerated `content/flashcards/generated.ts` and `docs/CREDIT_AUDIT.md` alongside your content changes.
 
 ### Print design
 
-Every pack is designed to print cleanly. `index.html` extends the print CSS with named pages, break-before/after utilities (`print:break-before-page`, `print:break-inside-avoid`), 3-column vocab grid, and a tear-off self-check rubric. Test print preview on at least one L1 + one L2 + one L3 pack after major changes.
+Every pack, every capstone, every flashcard deck is designed to print cleanly. `index.html` extends the print CSS with named pages, break-before/after utilities, 3-column vocab grid, duplex-aligned 8-up flashcard layout, and tear-off self-check rubrics. Test print preview on at least one L1 + one L2 + one L3 pack + one core capstone + one flashcard sheet after major changes.
