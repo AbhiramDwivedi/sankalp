@@ -172,7 +172,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 **Done when**: `npm run smoke` passes on clean main in under 90 seconds; deliberately breaking a tab (e.g. renaming `DashboardView` export) makes it fail with useful output.
 **Do not touch**: content, components (except import-only if needed).
 
-### [ ] 0.3 — Print visual regression (depends on: 0.2)
+### [x] 0.3 — Print visual regression (depends on: 0.2) — merged 2026-04-17 via PR #5 (`835efdc`)
 **Brief**: Add Playwright PDF-snapshot tests for: one pack print view (use L1-12-restaurants-food), one core capstone print view (C01), one 8-up flashcard duplex sheet (front + back). Store goldens in `tests/visual/__snapshots__/`. Golden comparison via `expect(pdfBytes).toMatchSnapshot()` with a small pixel-diff threshold (PDFs embed fonts so byte-diff is too brittle — render PDF pages to PNG and use pixel-diff at 2% threshold). Add `npm run visual`. Update `scripts/check.ts` to call it.
 **Done when**: `npm run visual` passes on clean main; regenerating goldens with `--update-snapshots` is documented in AGENT_LOG.
 **Do not touch**: print styles in `index.html` (those are the subject under test; 1.3 will modify them).

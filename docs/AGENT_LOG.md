@@ -16,6 +16,20 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #3 (scheduled cron 18:35 EDT, hourly cadence)
+**Items attempted**: 0.3
+**Items completed**:
+- **0.3** — Print visual regression — PR #5 → merged as `835efdc`. Implementer chose Option B (Playwright built-in `toHaveScreenshot` with `page.emulateMedia({ media: 'print' })`, zero new deps) over Option A (PDF→PNG+pixelmatch). 3 tests (pack L1-12, capstone C01, flashcard 8-up front+back), 4 PNG goldens committed, runs in ~22s. Scope-isolated via `playwright.visual.config.ts` + custom `testMatch: /.*\.visual\.ts$/` (visual spec filename is `.visual.ts`, not `.spec.ts`, so smoke's default match pattern doesn't pick them up). `scripts/check.ts` now runs 6 stages: tsc → validate-packs → build-flashcards → credit-audit → smoke → visual.
+**Items deferred**: 0.5 (slash commands, depends on 0.1/0.2/0.3) and 0.8 (CI workflow, depends on 0.1/0.2/0.3) — BOTH now unblocked for the next fire. 0.5 and 0.8 touch different files (`.claude/commands/*` vs `.github/workflows/*`) so they're candidates for parallel execution with worktree isolation.
+**Commits pushed**: `835efdc` (PR #5), plus this housekeeping commit.
+**Notes**:
+- N=1 this fire, so no worktree was needed — used main repo directly.
+- Reviewer flagged two worthwhile nits (CSS selector for flashcard sheet could use data-testid; fullPage captures are large and trigger regen on any below-fold content change). Neither blocking. Worth considering as small follow-ups but not on the backlog yet.
+- Regenerating goldens: `npx playwright test --config=playwright.visual.config.ts --update-snapshots`. Documented in `tests/visual/README.md` per brief.
+- CRLF stat-cache artifacts on `content/flashcards/generated.ts` and `docs/CREDIT_AUDIT.md` appeared again during review (running npm run check leaves them "modified" in git status even though content is identical). Cleaned via `git checkout --` before merge operations. Known issue, not blocking — worth a future item to have the gate normalize or avoid rewriting unchanged outputs.
+
+---
+
 ## 2026-04-17 — Fire #2 (scheduled cron 15:35 EDT)
 **Items attempted**: 0.2, 0.7
 **Items completed**:
