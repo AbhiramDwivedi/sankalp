@@ -67,6 +67,11 @@ const stages: Stage[] = [
   },
   { name: 'credit audit', command: 'npx', args: ['tsx', 'scripts/credit-audit.ts'] },
   { name: 'smoke', command: 'npx', args: ['playwright', 'test'] },
+  {
+    name: 'visual',
+    command: 'npx',
+    args: ['playwright', 'test', '--config=playwright.visual.config.ts'],
+  },
 ];
 
 for (const stage of stages) {

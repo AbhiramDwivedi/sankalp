@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "check": "npx tsx scripts/check.ts",
     "smoke": "playwright test",
+    "visual": "playwright test --config=playwright.visual.config.ts",
     "prepare": "node scripts/install-hooks.js"
   },
   "dependencies": {
