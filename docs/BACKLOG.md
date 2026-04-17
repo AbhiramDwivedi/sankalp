@@ -127,7 +127,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 **Done when**: `npm run check` exits 0 on clean main; flipping any invariant (e.g. deleting a pack's `heroMotif`) makes it exit non-zero with a clear message naming the failing stage.
 **Do not touch**: any content files, any generator outputs.
 
-### [ ] 0.2 — Playwright smoke harness (depends on: 0.1)
+### [x] 0.2 — Playwright smoke harness (depends on: 0.1) — merged 2026-04-17 via PR #4 (`78cfd93`)
 **Brief**: Add `@playwright/test` as devDependency. Install chromium only (`npx playwright install chromium`). Write `tests/smoke.spec.ts` covering: app boots on `npm run dev`, onboarding creates a profile, each tab (dashboard/library/capstones/flashcards/plan/rubric/settings) opens, one L1 pack opens + closes via Back, one capstone opens, one deck runner flips a card and marks it mastered, settings toggle persists across reload. Configure `playwright.config.ts` to spawn the dev server. Add `npm run smoke`. Update `scripts/check.ts` to call smoke after credit-audit.
 **Done when**: `npm run smoke` passes on clean main in under 90 seconds; deliberately breaking a tab (e.g. renaming `DashboardView` export) makes it fail with useful output.
 **Do not touch**: content, components (except import-only if needed).
@@ -155,7 +155,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 **Done when**: section exists and is concise (<40 lines).
 **Do not touch**: existing CLAUDE.md content — only append.
 
-### [ ] 0.7 — Git pre-commit hook running `npm run check` (depends on: 0.1)
+### [x] 0.7 — Git pre-commit hook running `npm run check` (depends on: 0.1) — merged 2026-04-17 via PR #3 (`1fd3456`)
 **Brief**: Add a `.husky/pre-commit` hook (via husky init, or a hand-rolled `.git/hooks/pre-commit` + `prepare` npm script that symlinks from a tracked `.githooks/` directory — pick whichever adds fewer deps). The hook runs `npm run check` (from 0.1). If it fails, the commit is blocked. This is defense-in-depth — the protocol already runs the gate, but the hook catches any subagent that forgets. The hook must be installable via `npm install` (husky auto-installs via `prepare`; or `scripts/install-hooks.sh` invoked by `postinstall`). Document the bypass path (`git commit --no-verify`) explicitly and note that subagents must NEVER use it (invariant already says this).
 **Done when**: `git commit` on a clean branch with a gate-failing change (deliberately break something) is blocked with a clear message. `npm install` on a fresh clone installs the hook. Smoke test passes.
 **Do not touch**: `.git/hooks/` directly (use husky or tracked .githooks/ so the hook is versioned).

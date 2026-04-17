@@ -16,6 +16,21 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #2 (scheduled cron 15:35 EDT)
+**Items attempted**: 0.2, 0.7
+**Items completed**:
+- **0.2** — Playwright smoke harness — PR #4 → merged as `78cfd93`. 7 tests covering app boot, onboarding, all 7 sidebar tabs (with content-specific hallmarks), pack/capstone overlay flows, deck runner card-flip-and-mastery, settings persistence across reload. Runs in ~20s. Wired into `scripts/check.ts` gate.
+- **0.7** — Pre-commit hook running `npm run check` — PR #3 → merged as `1fd3456`. Hand-rolled (no husky dep). `.githooks/pre-commit` + `scripts/install-hooks.js` + npm `prepare` lifecycle. Happy/failure/idempotency paths all verified in review. Executable bit `100755` in git index.
+**Items deferred**: 0.3 (visual, depends on 0.2), 0.5 (slash commands, depends on 0.1/0.2/0.3), 0.8 (CI, depends on 0.1/0.2/0.3). 0.3 is now ready for the next fire.
+**Commits pushed**: `1fd3456` (PR #3 0.7), `78cfd93` (PR #4 0.2), plus this housekeeping commit.
+**Notes**:
+- **Parallel-execution friction**: running two implementers concurrently in the same local working tree caused significant contention. Each agent's branch checkouts wiped the other's untracked files; recovery via repeated `git stash` (4 stashes accumulated on disk). Both items landed successfully but wall-clock time for parallel 0.2+0.7 was ~31 minutes — roughly equal to what serial execution would have taken. **Lesson**: in local CronCreate-driven fires, parallel implementers hurt more than help because they share a filesystem. Future fires should either (a) run items serially within a fire, or (b) use `git worktree add` to give each implementer its own working tree. Deferring a protocol update until 0.3's fire — noting here for continuity.
+- **Known nit from fire #1 & #2**: running the gate leaves `content/flashcards/generated.ts` and `docs/CREDIT_AUDIT.md` marked modified in `git status` even though the content is byte-identical (CRLF/mtime stat-cache on Windows). Not a real diff — gate's `git diff --exit-code` confirms clean. But it's friction; `git checkout --` resets cleanly. Potential follow-up: have the gate script refresh the git stat cache or skip rewriting when content is unchanged.
+- Pre-commit hook is now active on anyone running `npm install` + `npm run prepare`. When the next fire commits, the hook fires; expected to pass since gate passes on clean main.
+- Cleaned up 4 leftover stashes from the parallel-execution recovery — they represented pre-commit working-tree snapshots that are now redundant (both commits are on origin).
+
+---
+
 ## 2026-04-17 — Fire #1 (manual "fire, proceed" at ~14:50 EDT)
 **Items attempted**: 0.1, 0.4 (housekeeping), 0.6
 **Items completed**:
