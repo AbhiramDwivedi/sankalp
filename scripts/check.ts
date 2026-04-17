@@ -66,6 +66,7 @@ const stages: Stage[] = [
     postCheck: flashcardsSyncCheck,
   },
   { name: 'credit audit', command: 'npx', args: ['tsx', 'scripts/credit-audit.ts'] },
+  { name: 'smoke', command: 'npx', args: ['playwright', 'test'] },
 ];
 
 for (const stage of stages) {
