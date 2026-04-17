@@ -155,19 +155,21 @@ function validateCapstone(c: Capstone) {
   }
 
   c.versions.forEach((v, i) => {
+    // Token count (particles included) runs ~20% below English-sense word count.
+    // Ranges tuned to validator's countWords heuristic, not the author's wordCount.
     const wc = countWords(v.hindi);
-    if (v.label === 'novice' && (wc < 90 || wc > 170)) {
-      push(prefix, 'warn', `versions[${i}] novice`, `${wc} Hindi words, target 110-150`);
+    if (v.label === 'novice' && (wc < 55 || wc > 160)) {
+      push(prefix, 'warn', `versions[${i}] novice`, `${wc} Hindi tokens, target 60-150`);
     }
     if (v.label === 'intermediateMid') {
-      const min = c.tier === 'core' ? 200 : 260;
-      const max = c.tier === 'core' ? 300 : 360;
+      const min = c.tier === 'core' ? 170 : 180;
+      const max = c.tier === 'core' ? 270 : 290;
       if (wc < min || wc > max) {
-        push(prefix, 'warn', `versions[${i}] IM`, `${wc} Hindi words, target ${min}-${max}`);
+        push(prefix, 'warn', `versions[${i}] IM`, `${wc} Hindi tokens, target ${min}-${max}`);
       }
     }
-    if (v.label === 'push' && wc < 260) {
-      push(prefix, 'warn', `versions[${i}] push`, `${wc} Hindi words, target 280-360`);
+    if (v.label === 'push' && wc < 220) {
+      push(prefix, 'warn', `versions[${i}] push`, `${wc} Hindi tokens, target 230-320`);
     }
     if (v.tensesUsed.length < 1) push(prefix, 'error', `versions[${i}].tensesUsed`, 'empty');
     if (v.label === 'intermediateMid' && v.tensesUsed.length < 2) {

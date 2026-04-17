@@ -16,7 +16,8 @@
       "Bash(pdftotext -layout webfetch-1776388433875-l8bhli.pdf stamp_content.txt)",
       "Bash(npx tsc *)",
       "Bash(npx tsx *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git add *)"
     ]
   }
 }

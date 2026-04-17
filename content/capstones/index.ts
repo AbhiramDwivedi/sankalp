@@ -5,16 +5,18 @@
 import type { Capstone, CapstoneIndexEntry } from '../schema';
 
 import { capstone as C01 } from './C01-restaurant-memory';
+import { capstone as C02 } from './C02-typical-saturday';
+import { capstone as C03 } from './C03-festival-weekend';
+import { capstone as C04 } from './C04-neighborhood-place';
 import { capstone as C05 } from './C05-school-day';
+import { capstone as C06 } from './C06-india-trip';
+import { capstone as C07 } from './C07-sick-week';
+import { capstone as C08 } from './C08-grandmother-story';
+import { capstone as C09 } from './C09-ten-years-from-now';
 import { capstone as C10 } from './C10-teen-life-essay';
 
-// The registry auto-compacts; consumers import CAPSTONES / CAPSTONES_BY_ID.
-
 export const CAPSTONES: Capstone[] = [
-  C01,
-  C05,
-  C10,
-  // C02, C03, C04, C06, C07, C08, C09 authored in Phase B sub-agent batches
+  C01, C02, C03, C04, C05, C06, C07, C08, C09, C10,
 ];
 
 export const CAPSTONES_BY_ID: Record<string, Capstone> = Object.fromEntries(
