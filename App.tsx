@@ -8,6 +8,7 @@ import { LibraryView } from './components/pages/LibraryView';
 import { DashboardView } from './components/pages/DashboardView';
 import { HowThisWorksView } from './components/pages/HowThisWorksView';
 import { RubricReferenceView } from './components/pages/RubricReferenceView';
+import { CreditAuditView } from './components/pages/CreditAuditView';
 import { StudyPlanView } from './components/pages/StudyPlanView';
 import { CapstonesLibraryView } from './components/pages/CapstonesLibraryView';
 import { CapstoneView } from './components/capstone/CapstoneView';
@@ -25,7 +26,7 @@ import { Search, PlusCircle, GraduationCap, CheckCircle2, Info } from 'lucide-re
 const APP_STORAGE_KEY = 'sankalpa_hindi_profiles';
 const ACTIVE_PROFILE_KEY = 'sankalpa_active_id';
 
-type Tab = 'dashboard' | 'library' | 'capstones' | 'flashcards' | 'plan' | 'rubric' | 'settings';
+type Tab = 'dashboard' | 'library' | 'capstones' | 'flashcards' | 'plan' | 'rubric' | 'audit' | 'settings';
 
 const App: React.FC = () => {
   const [profiles, setProfiles] = useState<StudentProfile[]>([]);
@@ -420,6 +421,8 @@ const App: React.FC = () => {
         );
       case 'rubric':
         return <RubricReferenceView onBack={() => setActiveTab('dashboard')} />;
+      case 'audit':
+        return <CreditAuditView onBack={() => setActiveTab('dashboard')} />;
       case 'settings':
         return (
           <div className="max-w-2xl mx-auto space-y-10 animate-in fade-in">
@@ -484,6 +487,13 @@ const App: React.FC = () => {
                 className="w-full flex items-center justify-center gap-2 py-4 bg-white border-2 border-slate-100 text-slate-700 hover:border-orange-400 rounded-2xl font-black"
               >
                 <Info size={18} /> Re-read "How this works"
+              </button>
+
+              <button
+                onClick={() => setActiveTab('audit')}
+                className="w-full flex items-center justify-center gap-2 py-4 bg-emerald-50 border-2 border-emerald-200 text-emerald-800 hover:bg-emerald-100 rounded-2xl font-black"
+              >
+                <GraduationCap size={18} /> View 3-credit audit
               </button>
 
               <button
