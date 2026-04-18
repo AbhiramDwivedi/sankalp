@@ -1,0 +1,111 @@
+{
+  "errors": 0,
+  "warnings": 1,
+  "packs": [
+    {
+      "id": "L1-01-greetings",
+      "status": "ok"
+    },
+    {
+      "id": "L1-02-descriptions-feelings",
+      "status": "ok"
+    },
+    {
+      "id": "L1-03-family",
+      "status": "ok"
+    },
+    {
+      "id": "L1-04-clothing-colors",
+      "status": "ok"
+    },
+    {
+      "id": "L1-05-numbers-time",
+      "status": "ok"
+    },
+    {
+      "id": "L1-06-calendar",
+      "status": "ok"
+    },
+    {
+      "id": "L1-07-classes-supplies",
+      "status": "ok"
+    },
+    {
+      "id": "L1-08-interests-leisure",
+      "status": "ok"
+    },
+    {
+      "id": "L1-09-weather-seasons",
+      "status": "ok"
+    },
+    {
+      "id": "L1-10-places-transport",
+      "status": "ok"
+    },
+    {
+      "id": "L1-11-shopping",
+      "status": "ok"
+    },
+    {
+      "id": "L1-12-restaurants-food",
+      "status": "ok"
+    },
+    {
+      "id": "L2-01-daily-routine",
+      "status": "ok"
+    },
+    {
+      "id": "L2-02-rooms-chores",
+      "status": "ok"
+    },
+    {
+      "id": "L2-03-food",
+      "status": "ok"
+    },
+    {
+      "id": "L2-04-school-routines",
+      "status": "ok"
+    },
+    {
+      "id": "L2-05-school-activities",
+      "status": "ok"
+    },
+    {
+      "id": "L2-06-health-fitness",
+      "status": "ok"
+    },
+    {
+      "id": "L2-07-indoor-outdoor",
+      "status": "ok"
+    },
+    {
+      "id": "L2-08-shopping-advanced",
+      "status": "ok"
+    },
+    {
+      "id": "L2-09-special-events",
+      "status": "ok"
+    },
+    {
+      "id": "L2-10-travel-plans",
+      "status": "ok"
+    },
+    {
+      "id": "L2-11-countries-directions",
+      "status": "ok"
+    },
+    {
+      "id": "L3-01-my-memories",
+      "status": "warning",
+      "message": "vocabulary: 33 items, > 30"
+    },
+    {
+      "id": "L3-02-teen-life",
+      "status": "ok"
+    },
+    {
+      "id": "L3-03-my-future",
+      "status": "ok"
+    }
+  ]
+}

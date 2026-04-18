@@ -335,11 +335,31 @@ const outPath = join(__dirname, '..', 'docs', 'CREDIT_AUDIT.md');
 mkdirSync(dirname(outPath), { recursive: true });
 writeFileSync(outPath, md, 'utf8');
 
+// --- Write machine-readable state JSON (no timestamps; freshness is implied
+// by git commit history of this file — see design note in backlog 4.6). The
+// shape is stable and committed; `scripts/check.ts` sync-checks it. -----------
+const auditState = {
+  verdict,
+  packs: TOPIC_PACKS.length,
+  capstones: CAPSTONES.length,
+  plans: STUDY_PLANS.length,
+  imEssaysScanned: allIMEssays.length,
+  tenseCoverage: {
+    past: pastCount,
+    present: presentCount,
+    future: futureCount,
+  },
+  gateFailures: gateFailures.length,
+};
+const auditStatePath = join(__dirname, '..', 'docs', 'AUDIT_STATE.json');
+writeFileSync(auditStatePath, JSON.stringify(auditState, null, 2) + '\n', 'utf8');
+
 console.log(`Credit audit: ${verdict}`);
 console.log(`  Packs: ${TOPIC_PACKS.length} · Capstones: ${CAPSTONES.length} · Study plans: ${STUDY_PLANS.length} · Decks: ${DECKS.length}`);
 console.log(`  IM essays scanned: ${allIMEssays.length}`);
 console.log(`  Tense coverage: past ${pastCount} · present ${presentCount} · future ${futureCount}`);
 console.log(`  Gate failures: ${gateFailures.length}`);
 console.log(`Wrote ${outPath}`);
+console.log(`Wrote ${auditStatePath}`);
 
 if (gateFailures.length > 0) process.exit(1);

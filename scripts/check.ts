@@ -44,28 +44,55 @@ function runStage(stage: Stage): void {
   process.stdout.write(`ok: ${stage.name}\n`);
 }
 
-function flashcardsSyncCheck(): string | null {
-  const result = spawnSync(
-    'git',
-    ['diff', '--exit-code', 'content/flashcards/generated.ts'],
-    { stdio: 'inherit', shell: process.platform === 'win32' },
-  );
-  if (result.status !== 0) {
-    return 'Flashcards out of sync — run `npx tsx scripts/build-flashcards.ts` and commit content/flashcards/generated.ts';
-  }
-  return null;
+function gitCleanSyncCheck(path: string, fixHint: string): () => string | null {
+  return () => {
+    const result = spawnSync(
+      'git',
+      ['diff', '--exit-code', path],
+      { stdio: 'inherit', shell: process.platform === 'win32' },
+    );
+    if (result.status !== 0) {
+      return `${path} out of sync — ${fixHint}`;
+    }
+    return null;
+  };
 }
+
+const flashcardsSyncCheck = gitCleanSyncCheck(
+  'content/flashcards/generated.ts',
+  'run `npx tsx scripts/build-flashcards.ts` and commit content/flashcards/generated.ts',
+);
+
+const validationStateSyncCheck = gitCleanSyncCheck(
+  'docs/VALIDATION_STATE.json',
+  'run `npx tsx scripts/validate-packs.ts` and commit docs/VALIDATION_STATE.json',
+);
+
+const auditStateSyncCheck = gitCleanSyncCheck(
+  'docs/AUDIT_STATE.json',
+  'run `npx tsx scripts/credit-audit.ts` and commit docs/AUDIT_STATE.json',
+);
 
 const stages: Stage[] = [
   { name: 'type check', command: 'npx', args: ['tsc', '--noEmit'] },
-  { name: 'validate packs', command: 'npx', args: ['tsx', 'scripts/validate-packs.ts'] },
+  {
+    name: 'validate packs',
+    command: 'npx',
+    args: ['tsx', 'scripts/validate-packs.ts'],
+    postCheck: validationStateSyncCheck,
+  },
   {
     name: 'build flashcards',
     command: 'npx',
     args: ['tsx', 'scripts/build-flashcards.ts'],
     postCheck: flashcardsSyncCheck,
   },
-  { name: 'credit audit', command: 'npx', args: ['tsx', 'scripts/credit-audit.ts'] },
+  {
+    name: 'credit audit',
+    command: 'npx',
+    args: ['tsx', 'scripts/credit-audit.ts'],
+    postCheck: auditStateSyncCheck,
+  },
   { name: 'smoke', command: 'npx', args: ['playwright', 'test'] },
   {
     name: 'visual',

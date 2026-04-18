@@ -3,10 +3,16 @@
 // Run: `npx tsx scripts/validate-packs.ts`.
 // Exits non-zero on any structural violation.
 
+import { writeFileSync, mkdirSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 import { TOPIC_PACKS, TOPIC_PACKS_BY_ID } from '../content';
 import { CAPSTONES } from '../content/capstones';
 import { STUDY_PLANS } from '../content/studyPlans';
 import type { Capstone, StudyPlan, TopicPack } from '../content/schema';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface Issue {
   pack: string;
@@ -257,5 +263,43 @@ for (const [pack, list] of byPack) {
     console.log(`  ${tag} [${i.field}] ${i.message}`);
   });
 }
+
+// --- Write machine-readable state JSON (no timestamps; freshness is implied
+// by git commit history of this file — see design note in backlog 4.6). The
+// shape is stable and committed; `scripts/check.ts` sync-checks it. Only
+// real packs (not capstone:/plan: prefixed issues) are listed in the per-pack
+// grid so the UI stays focused on the 26 topic cards. -------------------------
+
+type ValidationStatus = 'ok' | 'warning' | 'error';
+
+interface ValidationStatePack {
+  id: string;
+  status: ValidationStatus;
+  message?: string;
+}
+
+const packStates: ValidationStatePack[] = TOPIC_PACKS.map((p): ValidationStatePack => {
+  const mine = issues.filter((i) => i.pack === p.id);
+  if (mine.length === 0) return { id: p.id, status: 'ok' };
+  const worst: ValidationStatus = mine.some((i) => i.severity === 'error') ? 'error' : 'warning';
+  // Shortest-possible human message: field + message of the worst issue.
+  const pick = mine.find((i) => i.severity === (worst === 'error' ? 'error' : 'warn'))!;
+  return {
+    id: p.id,
+    status: worst,
+    message: `${pick.field}: ${pick.message}`,
+  };
+}).sort((a, b) => a.id.localeCompare(b.id));
+
+const validationState = {
+  errors: errors.length,
+  warnings: warns.length,
+  packs: packStates,
+};
+
+const validationStatePath = join(__dirname, '..', 'docs', 'VALIDATION_STATE.json');
+mkdirSync(dirname(validationStatePath), { recursive: true });
+writeFileSync(validationStatePath, JSON.stringify(validationState, null, 2) + '\n', 'utf8');
+console.log(`Wrote ${validationStatePath}`);
 
 if (errors.length > 0) process.exit(1);
