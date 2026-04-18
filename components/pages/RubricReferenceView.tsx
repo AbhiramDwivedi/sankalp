@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowLeft, BookOpen, Target } from 'lucide-react';
-import { STAMP_BENCHMARKS, RUBRIC_AXES, FCPS_CREDIT_SUMMARY, TARGET_BENCHMARK } from '../../content/rubric';
+import { STAMP_BENCHMARKS, RUBRIC_AXES, FCPS_CREDIT_SUMMARY, TARGET_BENCHMARK } from '../../content/curricula/fcps-stamp-hindi/rubric';
 import { CURRICULUM } from '../../content/curriculum';
 import { Badge } from '../ui/Badge';
 

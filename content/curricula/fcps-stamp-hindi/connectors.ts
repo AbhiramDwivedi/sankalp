@@ -2,7 +2,7 @@
 // component renders the full definition. Keeping connectors centralized keeps
 // transliteration and frames consistent across 26 packs.
 
-import type { ConnectorEntry } from './schema';
+import type { ConnectorEntry } from '../../schema';
 
 export const CONNECTORS: Record<string, ConnectorEntry> = {
   pahle: {

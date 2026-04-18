@@ -1,6 +1,6 @@
 import type { TopicPack } from '../schema';
 import { composeHeroPrompt } from '../imagePrompts';
-import { pickConnectors } from '../connectors';
+import { pickConnectors } from '../curricula/fcps-stamp-hindi/connectors';
 
 // -----------------------------------------------------------------------------
 // L2-02 · Rooms of the House & Household Chores (घर के कमरे और कार्य)

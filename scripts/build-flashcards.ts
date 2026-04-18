@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import { TOPIC_PACKS, TOPIC_PACKS_BY_LEVEL } from '../content';
 import { CAPSTONES } from '../content/capstones';
-import { CONNECTORS } from '../content/connectors';
+import { CONNECTORS } from '../content/curricula/fcps-stamp-hindi/connectors';
 import { GRAMMAR_ESSENTIALS, MUST_KNOW_CONNECTOR_KEYS, VOCAB_MUST_KNOW_CROSS_PACK_THRESHOLD } from '../content/flashcards/mustHaveCards';
 import type { Deck, Flashcard, TopicPack } from '../content/schema';
 import { CURRICULUM } from '../content/curriculum';

@@ -12,8 +12,8 @@ import { TOPIC_PACKS } from '../content';
 import { CAPSTONES } from '../content/capstones';
 import { STUDY_PLANS } from '../content/studyPlans';
 import { DECKS, totalCards } from '../content/flashcards';
-import { CONNECTORS } from '../content/connectors';
-import { STAMP_BENCHMARKS, TARGET_BENCHMARK, RUBRIC_AXES, EXAM_FACTS } from '../content/rubric';
+import { CONNECTORS } from '../content/curricula/fcps-stamp-hindi/connectors';
+import { STAMP_BENCHMARKS, TARGET_BENCHMARK, RUBRIC_AXES, EXAM_FACTS } from '../content/curricula/fcps-stamp-hindi/rubric';
 import { CURRICULUM } from '../content/curriculum';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -234,7 +234,7 @@ const md = `# Credit Audit — ${CURRICULUM.creditMapping.issuer} ${CURRICULUM.l
 
 ## 1. Rubric fidelity
 
-The courseware targets **${EXAM_FACTS.targetForThreeCredits}**. This audit confirms that the rubric table in \`content/rubric.ts\` matches the public ${CURRICULUM.examSystem.providerShortName} / ${CURRICULUM.creditMapping.issuer} descriptor for Benchmark ${TARGET_BENCHMARK}:
+The courseware targets **${EXAM_FACTS.targetForThreeCredits}**. This audit confirms that the rubric table in \`content/curricula/fcps-stamp-hindi/rubric.ts\` matches the public ${CURRICULUM.examSystem.providerShortName} / ${CURRICULUM.creditMapping.issuer} descriptor for Benchmark ${TARGET_BENCHMARK}:
 
 > ${STAMP_BENCHMARKS.find((b) => b.benchmark === TARGET_BENCHMARK)?.textType}
 >
