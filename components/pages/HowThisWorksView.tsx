@@ -6,7 +6,7 @@ import {
   FCPS_CREDIT_SUMMARY,
   EXAM_FACTS,
   TARGET_BENCHMARK,
-} from '../../content/rubric';
+} from '../../content/curricula/fcps-stamp-hindi/rubric';
 import { CURRICULUM } from '../../content/curriculum';
 import { Callout } from '../ui/Callout';
 import { PaisleyDivider } from '../ui/PaisleyDivider';

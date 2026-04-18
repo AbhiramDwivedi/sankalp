@@ -35,7 +35,7 @@ import { AiAssessmentPanel } from './AiAssessmentPanel';
 import { Badge } from '../ui/Badge';
 import { DevanagariText } from '../ui/DevanagariText';
 import { tokensFor } from '../ui/themeTokens';
-import { TARGET_BENCHMARK } from '../../content/rubric';
+import { TARGET_BENCHMARK } from '../../content/curricula/fcps-stamp-hindi/rubric';
 import { CURRICULUM } from '../../content/curriculum';
 import { RubricAxisTags } from './RubricAxisTag';
 import { NextUpCard, type NextUpCardProps } from '../ui/NextUpCard';

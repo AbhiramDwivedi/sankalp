@@ -10,8 +10,8 @@ import type {
   FcpsCreditLevel,
   RubricAxis,
   StampBenchmark,
-} from './schema';
-import { CURRICULUM } from './curriculum';
+} from '../../schema';
+import { CURRICULUM } from '../../curriculum';
 
 export interface BenchmarkDescriptor {
   benchmark: StampBenchmark;

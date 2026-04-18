@@ -1,6 +1,6 @@
 import type { TopicPack } from '../schema';
 import { composeHeroPrompt } from '../imagePrompts';
-import { pickConnectors } from '../connectors';
+import { pickConnectors } from '../curricula/fcps-stamp-hindi/connectors';
 
 // -----------------------------------------------------------------------------
 // L2-09 - Special Events & Festivals (विशेष अवसर और त्योहार)

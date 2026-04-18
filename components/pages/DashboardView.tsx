@@ -5,7 +5,7 @@ import type { TopicPack, Capstone } from '../../content/schema';
 import { TOPIC_PACKS, nextPackAfter, getPack } from '../../content';
 import { CAPSTONES, getCapstone } from '../../content/capstones';
 import { getStudyPlan, studyPlanForLevel, planCursor } from '../../content/studyPlans';
-import { TARGET_BENCHMARK, FCPS_CREDIT_SUMMARY, RUBRIC_AXES } from '../../content/rubric';
+import { TARGET_BENCHMARK, FCPS_CREDIT_SUMMARY, RUBRIC_AXES } from '../../content/curricula/fcps-stamp-hindi/rubric';
 import { CURRICULUM } from '../../content/curriculum';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';

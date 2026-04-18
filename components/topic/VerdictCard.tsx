@@ -1,7 +1,7 @@
 import React from 'react';
 import { Award, AlertCircle, CheckCircle2 } from 'lucide-react';
 import type { VerdictCard as VerdictCardT } from '../../content/schema';
-import { STAMP_BENCHMARKS, FCPS_CREDIT_SUMMARY } from '../../content/rubric';
+import { STAMP_BENCHMARKS, FCPS_CREDIT_SUMMARY } from '../../content/curricula/fcps-stamp-hindi/rubric';
 import { CURRICULUM } from '../../content/curriculum';
 
 interface VerdictCardProps {

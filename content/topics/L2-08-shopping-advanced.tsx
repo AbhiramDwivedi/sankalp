@@ -1,6 +1,6 @@
 import type { TopicPack } from '../schema';
 import { composeHeroPrompt } from '../imagePrompts';
-import { pickConnectors } from '../connectors';
+import { pickConnectors } from '../curricula/fcps-stamp-hindi/connectors';
 
 export const pack: TopicPack = {
   id: 'L2-08-shopping-advanced',

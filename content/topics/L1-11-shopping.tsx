@@ -1,6 +1,6 @@
 import type { TopicPack } from '../schema';
 import { composeHeroPrompt } from '../imagePrompts';
-import { pickConnectors } from '../connectors';
+import { pickConnectors } from '../curricula/fcps-stamp-hindi/connectors';
 
 // -----------------------------------------------------------------------------
 // SHOPPING (बाज़ार और ख़रीदारी) - FCPS Level 1, Community Life
