@@ -16,6 +16,30 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-18 — Fire #10 (manual resume after session death)
+**Items attempted**: 3.4 (resume), 4.6 (resume), plus a hotfix for CI that had been red on every run since 0.2 shipped.
+**Items completed**:
+- **3.4** — cbse-marathi stub — PR #17 merged as `ba22c8f`. 3 new files in `content/curricula/cbse-marathi/` (rubric.ts, connectors.ts, README.md), exports mirror fcps-stamp-hindi shape, nothing imports from the folder. Reviewer approved with 2 non-blocking nits. **Tier 3 complete.**
+- **4.6** — Content QA surface — PR #18 merged as `fb0ed0d`. `docs/AUDIT_STATE.json` + `docs/VALIDATION_STATE.json` (byte-stable, sync-checked in gate), `CreditAuditView` FreshnessBanner + per-pack ValidationGrid, `tsconfig.json` resolveJsonModule. First review blocked for missing `/audit` smoke test; fixer added one (`f20aa94`); re-review approved.
+- **Hotfix (not a backlog item)** — PR #19 merged as `2078e52`. Two problems, one PR:
+  1. `geminiService.ts` eagerly called `new GoogleGenAI({ apiKey: process.env.API_KEY })` at module scope. When `API_KEY` was absent (CI with no secret; fresh worktrees without `.env.local`), the SDK constructor threw in the browser on import → React never mounted → every smoke test failed with a generic "element not found" on the landing heading. Lazy-init via `getAi()` defers the constructor until `evaluateWriting()` is called. Profiles with AI disabled never touch it.
+  2. Visual regression goldens were generated on Windows. Linux CI produced ~1.5% page-height drift (Noto Sans Devanagari font metrics) that tripped `toHaveScreenshot` at a 0% pixel-diff threshold. Switched the `check` job in `.github/workflows/ci.yml` from `ubuntu-latest` to `windows-latest` — users run the app on Windows, so CI matching that platform is simpler than maintaining per-OS goldens.
+
+  **Every CI run since 0.2 merged had been failing silently** because both issues hit before the smoke and visual stages could report anything useful. Local gates stayed green because `.env.local` was always present. Branch protection was not enforced, so items merged on local-green.
+
+**Items deferred**: 2.3 (a11y), 4.1-4.5 remaining Tier 4 items. **19/25 items done (76%)**.
+
+**Commits pushed**: `2078e52` (PR #19 hotfix), `ba22c8f` (PR #17 3.4), `fb0ed0d` (PR #18 4.6), plus this housekeeping commit.
+
+**Notes**:
+- Session death after Fire #9 killed the in-memory cron; nothing fired autonomously between then and this manual resume.
+- Resumed state: `auto/3.4-marathi-stub` worktree had Phase A files staged but not committed (local smoke blocked by the gemini bug above); `auto/4.6-content-qa` was committed + pushed but unreviewed.
+- The protocol's "fixer" role (Phase C) was exercised for the first time on this run, on 4.6. Pattern worked cleanly: reviewer JSON flagged one blocker, fixer briefed with the blocker + worktree path, implementation scoped to `tests/smoke.spec.ts` only (+27 lines), re-review approved, merged.
+- Worktree cleanup (junction-FIRST, per the protocol codified after fire #4): worked. Main's `node_modules/.bin` verified intact (45 symlinks). 3.4 worktree dir lingered on disk due to a Windows file-handle lock — not a git concern.
+- For future fires: when a worktree is created from `origin/main`, copy `.env.local` from the main repo into it before running the gate locally. The gemini hotfix makes this non-blocking for CI, but local smoke still needs the key for any AI-enabled flow test (none exist today).
+
+---
+
 ## 2026-04-18 — Fire #9 (scheduled cron 00:35 EDT, hourly) — RATE-LIMIT EXIT
 **Items attempted**: 3.3, 4.6
 **Items completed**:

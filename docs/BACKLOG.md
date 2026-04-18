@@ -284,7 +284,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 **Done when**: tsc green; validate-packs green; smoke green; a manual eval call (via `npm run dev` + AI toggle) produces a response shape identical to pre-change for one test essay (record a before-fixture, run after, diff — expect only non-deterministic fields like score rationale text to differ).
 **Do not touch**: the rubric VALUES themselves (benchmark boundaries, credit thresholds). Only the plumbing.
 
-### [ ] 3.4 — Second-curriculum stub (depends on: 3.3)
+### [x] 3.4 — Second-curriculum stub (depends on: 3.3) — merged 2026-04-18 via PR #17 (`ba22c8f`). **Tier 3 complete.**
 **Brief**: Create `content/curricula/cbse-marathi/` (chosen because Marathi uses Devanagari too → lowest-risk test of the seam) with: empty `rubric.ts` shell (exports a type-correct but empty object), empty `connectors.ts`, `README.md` with "NOT AUTHORED — this is a seam proof-of-concept." Do NOT wire it into the app UI. Do NOT author any content. Goal is strictly: verify the folder structure + type exports + curriculum object shape work for a second language.
 **Done when**: tsc green; the folder exists and is type-correct; running the validator on only the `fcps-stamp-hindi` curriculum still works and is unaffected by cbse-marathi's existence; documented in AGENT_LOG that this is a stub only.
 **Do not touch**: anything outside `content/curricula/cbse-marathi/`.
@@ -321,7 +321,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 **Done when**: Lighthouse PWA score ≥ 90; offline-mode test in Chromium devtools shows app loads + all tabs work + AI eval shows friendly offline message.
 **Do not touch**: existing fetch/storage patterns beyond what the plugin needs.
 
-### [ ] 4.6 — Content QA surface
+### [x] 4.6 — Content QA surface — merged 2026-04-18 via PR #18 (`fb0ed0d`)
 **Brief**: In the existing `CreditAuditView` (route `/audit`), add: a freshness timestamp from `docs/CREDIT_AUDIT.md` file mtime (or a header field in the audit output); a per-pack "Last validated" badge driven by `validate-packs.ts` output (have the validator write `docs/VALIDATION_STATE.json` with per-pack pass/fail + timestamp, read it here); a "Run validators now" button that shells out via... actually no, we're static — instead, link to the git action / instructions to re-run locally, and show the last committed state. Keep it informative, not interactive.
 **Done when**: audit view shows a dated banner ("Last validated 2026-04-17 — clean"); pack list shows validation status; smoke covers the view loads.
 **Do not touch**: the audit script's core logic (only add timestamp output).
