@@ -4,6 +4,7 @@
 
 import React from 'react';
 import type { StampBenchmark } from '../../content/schema';
+import { CURRICULUM } from '../../content/curriculum';
 
 // ---------------------------------------------------------------------------
 // TenseTimelineDiagram - past / present / future horizontal bar with
@@ -90,7 +91,7 @@ export const RubricLadderDiagram: React.FC<RubricLadderProps> = ({ highlight = 5
   const stepW = 210;
 
   return (
-    <svg viewBox={`0 0 760 ${totalH}`} className={`w-full ${className}`} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="STAMP benchmark ladder">
+    <svg viewBox={`0 0 760 ${totalH}`} className={`w-full ${className}`} xmlns="http://www.w3.org/2000/svg" role="img" aria-label={`${CURRICULUM.examSystem.shortName} benchmark ladder`}>
       {LADDER_STEPS.map((step, i) => {
         const y = totalH - 60 - (i + 1) * stepH;
         const w = stepW + i * 48;
@@ -153,10 +154,10 @@ export const RubricLadderDiagram: React.FC<RubricLadderProps> = ({ highlight = 5
         );
       })}
       <text x="40" y={totalH - 20} fontSize="12" fill="#64748B" fontWeight="700">
-        FCPS credit ladder - reach Benchmark 5 on writing AND speaking for the full 3 credits.
+        {CURRICULUM.creditMapping.issuer} credit ladder - reach Benchmark {CURRICULUM.creditMapping.benchmark} on writing AND speaking for the full {CURRICULUM.creditMapping.credits} credits.
       </text>
       <text x="40" y={24} fontSize="13" fontWeight="900" fill="#0F172A">
-        STAMP benchmarks · FCPS Hindi Credit by Exam
+        {CURRICULUM.examSystem.shortName} benchmarks · {CURRICULUM.creditMapping.issuer} {CURRICULUM.language.name} Credit by Exam
       </text>
     </svg>
   );
@@ -325,7 +326,7 @@ export const RubricAxisTriangle: React.FC<{ className?: string }> = ({ className
     <text x="250" y="274" textAnchor="middle" fontSize="10" fill="#9A3412">3 credits</text>
 
     <text x="250" y="430" textAnchor="middle" fontSize="11" fill="#64748B" fontStyle="italic">
-      Orange = Benchmark 5 (IM). Grey dashed = Benchmark 4 (IL). You need balance across all three to reach orange.
+      Orange = {CURRICULUM.displayStrings.targetPhrase} (IM). Grey dashed = Benchmark 4 (IL). You need balance across all three to reach orange.
     </text>
   </svg>
 );

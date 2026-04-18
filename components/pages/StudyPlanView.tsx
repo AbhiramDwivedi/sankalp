@@ -5,6 +5,7 @@ import { STUDY_PLANS, planCursor, getStudyPlan, studyPlanForLevel } from '../../
 import type { StudentProfile } from '../../types';
 import { TOPIC_PACKS_BY_ID } from '../../content';
 import { Badge } from '../ui/Badge';
+import { CURRICULUM } from '../../content/curriculum';
 
 interface StudyPlanViewProps {
   profile: StudentProfile;
@@ -72,7 +73,7 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
                 <p className="text-[9px] font-black uppercase tracking-widest opacity-70">
                   Target
                 </p>
-                <p className="text-xl font-black">Benchmark 5 · 3 credits</p>
+                <p className="text-xl font-black">{CURRICULUM.displayStrings.targetPhrase} · {CURRICULUM.creditMapping.credits} credits</p>
               </div>
             </div>
           </div>

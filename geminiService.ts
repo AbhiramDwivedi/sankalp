@@ -1,6 +1,7 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
 import { EvaluationResult } from "./types";
+import { CURRICULUM } from "./content/curriculum";
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
@@ -20,26 +21,26 @@ export type WritingSubmission =
   | { kind: 'text'; text: string }
   | { kind: 'image'; data: string };
 
-const RUBRIC_PROMPT_HEADER = `You are an Avant-style STAMP 2S/WS rater grading a Hindi response for the FCPS World Language Credit Exam.
+const RUBRIC_PROMPT_HEADER = `You are an ${CURRICULUM.examSystem.providerShortName}-style ${CURRICULUM.examSystem.name} rater grading a ${CURRICULUM.language.name} response for the ${CURRICULUM.creditMapping.issuer} World Language Credit Exam.
 
-Grade against the STAMP rubric:
+Grade against the ${CURRICULUM.examSystem.shortName} rubric:
 - TEXT-TYPE:
   Benchmark 3 (Novice High) = simple sentences, disconnected
   Benchmark 4 (Intermediate Low) = strings of sentences with detail, still independent
-  Benchmark 5 (Intermediate Mid, TARGET for 3 FCPS credits) = connected sentences with transitions and groupings of ideas; sentences cannot be rearranged without altering meaning; some control of past/present/future
+  Benchmark ${CURRICULUM.creditMapping.benchmark} (${CURRICULUM.creditMapping.creditName}, TARGET for ${CURRICULUM.displayStrings.creditPhrase}) = connected sentences with transitions and groupings of ideas; sentences cannot be rearranged without altering meaning; some control of past/present/future
   Benchmark 6+ = paragraph cohesion with stronger accuracy
 - LANGUAGE CONTROL: High / Average / Low based on comprehensibility and accuracy (gender, number, verb forms).
 - TOPIC COVERAGE: does the response stay on topic with specific vocabulary?
 
-FCPS Writing format expected: two essays, each at least 3 cohesive paragraphs, personal experience.
+${CURRICULUM.creditMapping.issuer} Writing format expected: two essays, each at least 3 cohesive paragraphs, personal experience.
 
-Return a score 1-10 where 7+ maps to STAMP Benchmark 5 (Intermediate Mid, 3 credits).`;
+Return a score 1-10 where 7+ maps to ${CURRICULUM.examSystem.shortName} Benchmark ${CURRICULUM.creditMapping.benchmark} (${CURRICULUM.creditMapping.creditName}, ${CURRICULUM.creditMapping.credits} credits).`;
 
 export async function evaluateWriting(
   submission: WritingSubmission,
   promptContext: string
 ): Promise<EvaluationResult> {
-  const taskLine = `Prompt context: ${promptContext}\n\nEvaluate the student's response below against the STAMP rubric above.`;
+  const taskLine = `Prompt context: ${promptContext}\n\nEvaluate the student's response below against the ${CURRICULUM.examSystem.shortName} rubric above.`;
 
   const parts: any[] = [];
   if (submission.kind === 'image') {
@@ -47,7 +48,7 @@ export async function evaluateWriting(
     parts.push({ text: `${RUBRIC_PROMPT_HEADER}\n\n${taskLine}\n\n(Student response is in the attached image of handwriting.)` });
   } else {
     parts.push({
-      text: `${RUBRIC_PROMPT_HEADER}\n\n${taskLine}\n\nStudent response (Devanagari):\n${submission.text}`,
+      text: `${RUBRIC_PROMPT_HEADER}\n\n${taskLine}\n\nStudent response (${CURRICULUM.language.script}):\n${submission.text}`,
     });
   }
 

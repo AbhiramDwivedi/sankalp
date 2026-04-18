@@ -6,6 +6,7 @@ import { STUDY_PLANS } from '../../content/studyPlans';
 import { DECKS, totalCards } from '../../content/flashcards';
 import { CONNECTORS } from '../../content/connectors';
 import { STAMP_BENCHMARKS, TARGET_BENCHMARK, RUBRIC_AXES } from '../../content/rubric';
+import { CURRICULUM } from '../../content/curriculum';
 import { RubricLadderDiagram } from '../art/diagrams';
 import { Badge } from '../ui/Badge';
 
@@ -60,7 +61,7 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
           Credit audit
         </p>
         <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">
-          Does this courseware actually earn 3 FCPS credits?
+          Does this courseware actually earn {CURRICULUM.displayStrings.creditPhrase}?
         </h1>
         <p className="text-slate-600 italic max-w-3xl text-lg leading-relaxed">
           A direct, evidence-based answer - not marketing copy. Hard gates ship with the repo; this page re-computes them every time you open it.
@@ -92,7 +93,7 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
             <Target size={24} />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-slate-900">Target: Benchmark {TARGET_BENCHMARK} · Intermediate Mid</h2>
+            <h2 className="text-2xl font-black text-slate-900">Target: Benchmark {TARGET_BENCHMARK} · {CURRICULUM.creditMapping.creditName}</h2>
             <p className="text-sm text-slate-600 italic mt-1">{targetBench.inOneLine}</p>
           </div>
         </div>

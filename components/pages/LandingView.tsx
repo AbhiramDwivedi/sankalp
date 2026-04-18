@@ -15,6 +15,7 @@ import {
   MotifTemple,
 } from '../art/motifs';
 import { RubricLadderDiagram } from '../art/diagrams';
+import { CURRICULUM } from '../../content/curriculum';
 import {
   PlusCircle,
   Search,
@@ -107,15 +108,15 @@ export const LandingView: React.FC<LandingViewProps> = ({
             </DevanagariText>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.05]">
-              Earn <span className="text-orange-600">3 FCPS World Language credits</span> in Hindi.
+              Earn <span className="text-orange-600">{CURRICULUM.creditMapping.credits} {CURRICULUM.creditMapping.issuer} World Language credits</span> in {CURRICULUM.language.name}.
             </h2>
 
             <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-xl">
-              A complete prep course for the Avant{' '}
-              <strong className="text-slate-900">STAMP 2S</strong> exam -{' '}
+              A complete prep course for the {CURRICULUM.examSystem.providerShortName}{' '}
+              <strong className="text-slate-900">{CURRICULUM.examSystem.shortName} 2S</strong> exam -{' '}
               {TOPIC_PACKS.length} topic packs, {CAPSTONES.length} capstones,{' '}
               {totalCards().toLocaleString()} flashcards. Target:{' '}
-              <strong className="text-slate-900">Benchmark 5 (Intermediate-Mid)</strong>.
+              <strong className="text-slate-900">{CURRICULUM.displayStrings.targetPhrase} (Intermediate-Mid)</strong>.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-1">
@@ -141,7 +142,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
 
             <div className="inline-flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 rounded-full px-4 py-2 text-sm font-black text-emerald-800">
               <ShieldCheck size={16} strokeWidth={2.5} />
-              3-credit audit:
+              {CURRICULUM.creditMapping.credits}-credit audit:
               <span className="tracking-widest">GUARANTEED</span>
             </div>
           </div>
@@ -199,10 +200,10 @@ export const LandingView: React.FC<LandingViewProps> = ({
             Why Sankalp exists
           </p>
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
-            One exam. One target. One honest path to 3 credits.
+            One exam. One target. One honest path to {CURRICULUM.creditMapping.credits} credits.
           </h2>
           <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed">
-            Not a generic Hindi course. Every page is engineered around the FCPS Credit-by-Exam
+            Not a generic {CURRICULUM.language.name} course. Every page is engineered around the {CURRICULUM.creditMapping.issuer} Credit-by-Exam
             path - the exam you actually take, the rubric you're actually scored against.
           </p>
         </header>
@@ -211,15 +212,15 @@ export const LandingView: React.FC<LandingViewProps> = ({
           <PromiseCard
             icon={<ClipboardList size={28} strokeWidth={2.5} />}
             eyebrow="What you're prepping for"
-            headline="Avant STAMP 2S - Writing + Speaking only"
-            body="Two sections, ~2 hours total. No reading, no listening. FCPS only grades what you produce, so we only train what gets graded."
+            headline={`${CURRICULUM.examSystem.providerShortName} ${CURRICULUM.examSystem.shortName} 2S - Writing + Speaking only`}
+            body={`Two sections, ~2 hours total. No reading, no listening. ${CURRICULUM.creditMapping.issuer} only grades what you produce, so we only train what gets graded.`}
             tone="blue"
           />
           <PromiseCard
             icon={<Award size={28} strokeWidth={2.5} />}
             eyebrow="What you walk away with"
-            headline="Benchmark 5 = 3 FCPS credits"
-            body="Intermediate-Mid proficiency on both Writing and Speaking. The full 3-credit ceiling FCPS awards - no halfway prize."
+            headline={`${CURRICULUM.displayStrings.targetPhrase} = ${CURRICULUM.displayStrings.creditPhrase}`}
+            body={`Intermediate-Mid proficiency on both Writing and Speaking. The full ${CURRICULUM.creditMapping.credits}-credit ceiling ${CURRICULUM.creditMapping.issuer} awards - no halfway prize.`}
             tone="emerald"
             highlight
           />
@@ -266,7 +267,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
             <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row md:items-end gap-6 justify-between">
               <div className="max-w-xl">
                 <p className="text-white text-lg md:text-2xl font-black leading-snug">
-                  "The 3-credit outcome is the expected one, not the hoped-for one."
+                  "The {CURRICULUM.creditMapping.credits}-credit outcome is the expected one, not the hoped-for one."
                 </p>
                 <p className="text-slate-400 text-sm italic mt-2">
                   - from the shipping credit audit, regenerated every build.
@@ -439,7 +440,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
 
       <footer className="max-w-7xl mx-auto px-6 lg:px-12 py-10 text-center">
         <p className="text-xs text-slate-400 font-semibold tracking-wide">
-          सङ्कल्प · Sankalp Hindi - a home-built prep kit for the FCPS World Language Credit Exam.
+          सङ्कल्प · Sankalp {CURRICULUM.language.name} - a home-built prep kit for the {CURRICULUM.creditMapping.issuer} World Language Credit Exam.
         </p>
       </footer>
     </div>

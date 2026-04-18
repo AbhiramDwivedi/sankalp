@@ -6,6 +6,7 @@ import { TOPIC_PACKS, nextPackAfter, getPack } from '../../content';
 import { CAPSTONES, getCapstone } from '../../content/capstones';
 import { getStudyPlan, studyPlanForLevel, planCursor } from '../../content/studyPlans';
 import { TARGET_BENCHMARK, FCPS_CREDIT_SUMMARY, RUBRIC_AXES } from '../../content/rubric';
+import { CURRICULUM } from '../../content/curriculum';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
 import { PackHeroArt } from '../art/PackHeroArt';
@@ -256,7 +257,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 Target benchmark
               </p>
               <p className="text-3xl font-black">
-                {TARGET_BENCHMARK} <span className="text-amber-300 text-lg font-bold">Intermediate Mid</span>
+                {TARGET_BENCHMARK} <span className="text-amber-300 text-lg font-bold">{CURRICULUM.creditMapping.creditName}</span>
               </p>
               <p className="text-xs text-slate-400 italic mt-1">
                 {FCPS_CREDIT_SUMMARY.find((c) => c.credits === 3)?.description}

@@ -2,12 +2,16 @@
 // Sourced from Avant Assessment's STAMP 4S/2S rubric + FCPS World Language
 // Credit by Exam passing ranges. Rendered in HowThisWorksView and throughout
 // the app so non-expert teachers can see exactly what the rubric measures.
+//
+// Note: every exam-vendor / credit-issuer string in this file is routed
+// through the CURRICULUM constant. See content/curriculum.ts.
 
 import type {
   FcpsCreditLevel,
   RubricAxis,
   StampBenchmark,
 } from './schema';
+import { CURRICULUM } from './curriculum';
 
 export interface BenchmarkDescriptor {
   benchmark: StampBenchmark;
@@ -45,7 +49,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Emerging sentence construction; heavy reliance on formulaic expressions.',
     credit: 'NoviceHigh_1cr',
     creditCount: 1,
-    inOneLine: 'Simple sentences - earns 1 FCPS credit.',
+    inOneLine: `Simple sentences - earns 1 ${CURRICULUM.creditMapping.issuer} credit.`,
   },
   {
     benchmark: 4,
@@ -54,16 +58,16 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
     languageControl: 'Control is uneven; preparatory phrases/adverbial enhancements appear but stand independently.',
     credit: 'IntermediateLow_2cr',
     creditCount: 2,
-    inOneLine: 'Strings of sentences - earns 2 FCPS credits.',
+    inOneLine: `Strings of sentences - earns 2 ${CURRICULUM.creditMapping.issuer} credits.`,
   },
   {
     benchmark: 5,
-    actflLabel: 'Intermediate Mid',
+    actflLabel: CURRICULUM.creditMapping.creditName,
     textType: 'Connected sentences with transitions and groupings of ideas; sentences cannot be rearranged without altering meaning.',
     languageControl: 'Comprehensible across the whole response; some control of past, present, and future time frames.',
     credit: 'IntermediateMid_3cr',
     creditCount: 3,
-    inOneLine: 'Connected sentences with time frames - earns 3 FCPS credits. 🎯 TARGET.',
+    inOneLine: `Connected sentences with time frames - earns ${CURRICULUM.creditMapping.credits} ${CURRICULUM.creditMapping.issuer} credits. 🎯 TARGET.`,
   },
   {
     benchmark: 6,
@@ -94,7 +98,7 @@ export const STAMP_BENCHMARKS: BenchmarkDescriptor[] = [
   },
 ];
 
-export const TARGET_BENCHMARK: StampBenchmark = 5;
+export const TARGET_BENCHMARK: StampBenchmark = CURRICULUM.creditMapping.benchmark;
 
 export interface RubricAxisInfo {
   id: RubricAxis;
@@ -147,7 +151,7 @@ export const RUBRIC_AXES: RubricAxisInfo[] = [
       'Are there concrete details, or only generic words?',
     ],
     howToTrain: [
-      'Learn 20–30 high-yield words per FCPS topic before writing about it.',
+      `Learn 20–30 high-yield words per ${CURRICULUM.creditMapping.issuer} topic before writing about it.`,
       'Include at least one cultural specific (food name, festival, place).',
       'Prefer precise nouns and verbs over "good," "nice," "do."',
     ],
@@ -176,20 +180,20 @@ export const FCPS_CREDIT_SUMMARY = [
   {
     level: 'IntermediateMid_3cr' as FcpsCreditLevel,
     credits: 3,
-    label: 'Intermediate Mid = 3 credits 🎯',
+    label: `${CURRICULUM.creditMapping.creditName} = ${CURRICULUM.creditMapping.credits} credits 🎯`,
     description: 'Connected paragraphs with multiple time frames. Full World Language requirement.',
   },
 ];
 
 export const EXAM_FACTS = {
-  examName: 'FCPS World Language Credit by Exam (Hindi)',
-  testVendor: 'Avant Assessment - STAMP 2S/WS',
+  examName: `${CURRICULUM.creditMapping.issuer} World Language Credit by Exam (${CURRICULUM.language.name})`,
+  testVendor: `${CURRICULUM.examSystem.provider} - ${CURRICULUM.examSystem.name}`,
   sections: [
     {
       name: 'Writing',
       prompts: 3,
       timeMinutes: 25,
-      details: 'Two FCPS-graded essays on personal-experience topics. Each essay ≥3 well-developed cohesive paragraphs. Typed in Devanagari via a virtual keyboard on an FCPS Chromebook.',
+      details: `Two ${CURRICULUM.creditMapping.issuer}-graded essays on personal-experience topics. Each essay ≥3 well-developed cohesive paragraphs. Typed in ${CURRICULUM.language.script} via a virtual keyboard on an ${CURRICULUM.creditMapping.issuer} Chromebook.`,
     },
     {
       name: 'Speaking',
@@ -200,6 +204,6 @@ export const EXAM_FACTS = {
   ],
   noReadingSection: true,
   noListeningSection: true,
-  creditWindow: 'Scored by Avant Certified Raters; results in ~25 business days.',
-  targetForThreeCredits: 'STAMP Benchmark 5 (Intermediate Mid) on both Writing and Speaking.',
+  creditWindow: `Scored by ${CURRICULUM.examSystem.providerShortName} Certified Raters; results in ~25 business days.`,
+  targetForThreeCredits: `${CURRICULUM.displayStrings.targetFullPhrase} on both Writing and Speaking.`,
 };

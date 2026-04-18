@@ -6,6 +6,7 @@ import type { Capstone } from '../../content/schema';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
 import { CapstoneHeroArt } from '../art/CapstoneHeroArt';
+import { CURRICULUM } from '../../content/curriculum';
 
 interface CapstonesLibraryViewProps {
   completedIds: string[];
@@ -82,7 +83,7 @@ export const CapstonesLibraryView: React.FC<CapstonesLibraryViewProps> = ({
 
       <TierGroup
         label="Core tier"
-        subtitle="Benchmark 5 target · 220–280 words · earn your 3 FCPS credits"
+        subtitle={`${CURRICULUM.displayStrings.targetPhrase} target · 220–280 words · earn your ${CURRICULUM.displayStrings.creditPhrase}`}
         icon={<Flag size={20} />}
         capstones={filterKnown(CAPSTONES_BY_TIER.core)}
         completedSet={completedSet}

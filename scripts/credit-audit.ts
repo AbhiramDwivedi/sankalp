@@ -14,11 +14,12 @@ import { STUDY_PLANS } from '../content/studyPlans';
 import { DECKS, totalCards } from '../content/flashcards';
 import { CONNECTORS } from '../content/connectors';
 import { STAMP_BENCHMARKS, TARGET_BENCHMARK, RUBRIC_AXES, EXAM_FACTS } from '../content/rubric';
+import { CURRICULUM } from '../content/curriculum';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// --- FCPS sub-topics (from CLAUDE.md authoritative list) -------------------
+// --- Credit-issuer sub-topics (from CLAUDE.md authoritative list) ----------
 
 const FCPS_SUB_TOPICS: Array<{ name: string; level: 1 | 2 | 3; expectedPacks: string[] }> = [
   { name: 'Identity: greetings', level: 1, expectedPacks: ['L1-01-greetings'] },
@@ -123,7 +124,7 @@ function connectorUsage(): Array<{ key: string; hindi: string; count: number }> 
 
 function topicCoverageMatrix(): string[] {
   const rows: string[] = [];
-  rows.push('| FCPS Sub-Topic | Level | Pack(s) | Capstones that draw it | Training axes |');
+  rows.push(`| ${CURRICULUM.creditMapping.issuer} Sub-Topic | Level | Pack(s) | Capstones that draw it | Training axes |`);
   rows.push('|---|---|---|---|---|');
   for (const st of FCPS_SUB_TOPICS) {
     const packs = st.expectedPacks.filter((pid) => TOPIC_PACKS.some((p) => p.id === pid));
@@ -176,7 +177,7 @@ const gateFailures: string[] = [];
 // Gate 1: all sub-topics served
 FCPS_SUB_TOPICS.forEach((st) => {
   const ok = st.expectedPacks.every((pid) => TOPIC_PACKS.some((p) => p.id === pid));
-  if (!ok) gateFailures.push(`Missing pack(s) for FCPS sub-topic: ${st.name}`);
+  if (!ok) gateFailures.push(`Missing pack(s) for ${CURRICULUM.creditMapping.issuer} sub-topic: ${st.name}`);
 });
 
 // Gate 2: every CORE connector appears in ≥1 IM essay. Advanced/stylistic
@@ -222,18 +223,18 @@ const verdict =
 
 const today = new Date().toISOString().slice(0, 10);
 
-const md = `# Credit Audit — FCPS Hindi courseware
+const md = `# Credit Audit — ${CURRICULUM.creditMapping.issuer} ${CURRICULUM.language.name} courseware
 
 **Generated**: ${today}
-**Rubric source**: Avant STAMP 2S/WS (Writing + Speaking) · FCPS Credit by Exam
-**Target**: STAMP Benchmark ${TARGET_BENCHMARK} (Intermediate Mid) → **3 FCPS credits**
+**Rubric source**: ${CURRICULUM.examSystem.providerShortName} ${CURRICULUM.examSystem.name} (Writing + Speaking) · ${CURRICULUM.creditMapping.issuer} Credit by Exam
+**Target**: ${CURRICULUM.examSystem.shortName} Benchmark ${TARGET_BENCHMARK} (${CURRICULUM.creditMapping.creditName}) → **${CURRICULUM.displayStrings.creditPhrase}**
 **Verdict**: \`${verdict}\`
 
 ---
 
 ## 1. Rubric fidelity
 
-The courseware targets **${EXAM_FACTS.targetForThreeCredits}**. This audit confirms that the rubric table in \`content/rubric.ts\` matches the public Avant / FCPS descriptor for Benchmark ${TARGET_BENCHMARK}:
+The courseware targets **${EXAM_FACTS.targetForThreeCredits}**. This audit confirms that the rubric table in \`content/rubric.ts\` matches the public ${CURRICULUM.examSystem.providerShortName} / ${CURRICULUM.creditMapping.issuer} descriptor for Benchmark ${TARGET_BENCHMARK}:
 
 > ${STAMP_BENCHMARKS.find((b) => b.benchmark === TARGET_BENCHMARK)?.textType}
 >
@@ -241,11 +242,11 @@ The courseware targets **${EXAM_FACTS.targetForThreeCredits}**. This audit confi
 
 The three rubric axes — **${RUBRIC_AXES.map((a) => a.name).join(', ')}** — are encoded on every pack's \`rationale.trains\` and on every section's \`TeacherNote.trains\`, so the teacher can see which axis every piece of content serves.
 
-FCPS awards **3 World Language credits** at Benchmark ${TARGET_BENCHMARK}. The exam vendor is ${EXAM_FACTS.testVendor}, testing only **${EXAM_FACTS.sections.map((s) => s.name).join(' and ')}** — no reading or listening sections.
+${CURRICULUM.creditMapping.issuer} awards **${CURRICULUM.creditMapping.credits} World Language credits** at Benchmark ${TARGET_BENCHMARK}. The exam vendor is ${EXAM_FACTS.testVendor}, testing only **${EXAM_FACTS.sections.map((s) => s.name).join(' and ')}** — no reading or listening sections.
 
 ## 2. Topic coverage matrix
 
-All ${FCPS_SUB_TOPICS.length} FCPS sub-topics are served by at least one pack; most are reinforced by at least one capstone.
+All ${FCPS_SUB_TOPICS.length} ${CURRICULUM.creditMapping.issuer} sub-topics are served by at least one pack; most are reinforced by at least one capstone.
 
 ${topicCoverageMatrix().join('\n')}
 
@@ -320,7 +321,7 @@ This gate is **non-blocking** (API availability is outside the repo).
 
 ${
   gateFailures.length === 0
-    ? `Every hard gate passes. A diligent student following any of the 5 study plans will produce more than the rubric requires across all three axes. The 3 FCPS credits are the expected outcome.`
+    ? `Every hard gate passes. A diligent student following any of the 5 study plans will produce more than the rubric requires across all three axes. The ${CURRICULUM.displayStrings.creditPhrase} are the expected outcome.`
     : `The following hard gates failed:\n\n${gateFailures.map((f) => `- ${f}`).join('\n')}\n\nFix these before shipping to a student.`
 }
 
