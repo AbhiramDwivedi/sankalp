@@ -1,0 +1,13 @@
+{
+  "verdict": "GUARANTEED",
+  "packs": 26,
+  "capstones": 10,
+  "plans": 5,
+  "imEssaysScanned": 62,
+  "tenseCoverage": {
+    "past": 59,
+    "present": 62,
+    "future": 61
+  },
+  "gateFailures": 0
+}

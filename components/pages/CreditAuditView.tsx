@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, ShieldCheck, CheckCircle2, Target } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, CheckCircle2, Target, RefreshCw } from 'lucide-react';
 import { TOPIC_PACKS } from '../../content';
 import { CAPSTONES } from '../../content/capstones';
 import { STUDY_PLANS } from '../../content/studyPlans';
@@ -9,6 +9,29 @@ import { STAMP_BENCHMARKS, TARGET_BENCHMARK, RUBRIC_AXES } from '../../content/c
 import { CURRICULUM } from '../../content/curriculum';
 import { RubricLadderDiagram } from '../art/diagrams';
 import { Badge } from '../ui/Badge';
+import auditState from '../../docs/AUDIT_STATE.json';
+import validationState from '../../docs/VALIDATION_STATE.json';
+
+// Types mirror the JSON shape written by scripts/credit-audit.ts and
+// scripts/validate-packs.ts. The `as const` on the JSON imports narrows the
+// literals; we re-widen here for the renderer.
+type Verdict = 'GUARANTEED' | 'GAPS_TO_CLOSE';
+type PackStatus = 'ok' | 'warning' | 'error';
+interface ValidationPack { id: string; status: PackStatus; message?: string }
+const typedAudit = auditState as {
+  verdict: Verdict;
+  packs: number;
+  capstones: number;
+  plans: number;
+  imEssaysScanned: number;
+  tenseCoverage: { past: number; present: number; future: number };
+  gateFailures: number;
+};
+const typedValidation = validationState as {
+  errors: number;
+  warnings: number;
+  packs: ValidationPack[];
+};
 
 interface CreditAuditViewProps {
   onBack: () => void;
@@ -67,6 +90,14 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
           A direct, evidence-based answer - not marketing copy. Hard gates ship with the repo; this page re-computes them every time you open it.
         </p>
       </header>
+
+      {/* Freshness banner — sourced from docs/AUDIT_STATE.json, which is
+          regenerated and sync-checked by `npm run check`. The pill + counts
+          reflect the last committed audit state. */}
+      <FreshnessBanner />
+
+      {/* Per-pack validation grid — sourced from docs/VALIDATION_STATE.json. */}
+      <ValidationGrid />
 
       {/* Verdict card */}
       <section className="bg-gradient-to-br from-emerald-600 via-emerald-500 to-green-500 text-white rounded-[2.5rem] p-10 shadow-2xl print:shadow-none">
@@ -209,10 +240,126 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
         </div>
       </section>
 
+      {/* Refresh instructions — teachers/parents who want to re-run the
+          audit or confirm CI is enforcing it. */}
+      <section className="bg-slate-50 border-2 border-slate-100 rounded-[2rem] p-8">
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 bg-slate-200 text-slate-700 rounded-xl flex items-center justify-center shrink-0">
+            <RefreshCw size={22} />
+          </div>
+          <div className="space-y-2">
+            <h2 className="text-xl font-black text-slate-900">Refresh this audit</h2>
+            <p className="text-sm text-slate-700 leading-relaxed">
+              To regenerate locally: <code className="bg-white px-2 py-0.5 rounded border border-slate-200 text-xs">npm run check</code> then commit and push. CI re-runs on every PR:{' '}
+              <a
+                href="https://github.com/AbhiramDwivedi/sankalp/actions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-600 hover:text-orange-700 font-bold underline"
+              >
+                github.com/AbhiramDwivedi/sankalp/actions
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
+
       <p className="text-xs text-slate-400 italic">
         This page is a live view of the same audit that <code>scripts/credit-audit.ts</code> writes to <code>docs/CREDIT_AUDIT.md</code>. Any gap shown here is a real gap - fix the content, not this page.
       </p>
     </div>
+  );
+};
+
+const FreshnessBanner: React.FC = () => {
+  const { verdict, packs, capstones, plans, imEssaysScanned, gateFailures } = typedAudit;
+  const ok = verdict === 'GUARANTEED';
+  return (
+    <section
+      className={`rounded-[2rem] p-6 border-2 ${
+        ok ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'
+      }`}
+    >
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+        <span
+          className={`inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full ${
+            ok ? 'bg-emerald-600 text-white' : 'bg-rose-600 text-white'
+          }`}
+        >
+          {ok ? <CheckCircle2 size={14} strokeWidth={3} /> : null}
+          {verdict}
+        </span>
+        <Stat label="Packs" value={packs} />
+        <Stat label="Capstones" value={capstones} />
+        <Stat label="Plans" value={plans} />
+        <Stat label="IM essays scanned" value={imEssaysScanned} />
+        <Stat
+          label="Gate failures"
+          value={gateFailures}
+          tone={gateFailures === 0 ? 'emerald' : 'rose'}
+        />
+      </div>
+      <p className="text-xs text-slate-500 italic mt-4">
+        State read from <code>docs/AUDIT_STATE.json</code> — regenerated by <code>npm run check</code> and sync-checked in CI.
+      </p>
+    </section>
+  );
+};
+
+const Stat: React.FC<{ label: string; value: number | string; tone?: 'emerald' | 'rose' }> = ({
+  label,
+  value,
+  tone,
+}) => {
+  const valueClass =
+    tone === 'rose' ? 'text-rose-700' : tone === 'emerald' ? 'text-emerald-700' : 'text-slate-900';
+  return (
+    <div>
+      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</p>
+      <p className={`text-2xl font-black ${valueClass}`}>{value}</p>
+    </div>
+  );
+};
+
+const ValidationGrid: React.FC = () => {
+  const { errors, warnings, packs } = typedValidation;
+  return (
+    <section className="bg-white border-2 border-slate-100 rounded-[2rem] p-8 shadow-sm">
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-5">
+        <h2 className="text-2xl font-black text-slate-900 tracking-tight">Per-pack validation</h2>
+        <span className="text-xs font-bold text-slate-500">
+          {errors} error{errors === 1 ? '' : 's'} · {warnings} warning{warnings === 1 ? '' : 's'} · state read from <code>docs/VALIDATION_STATE.json</code>
+        </span>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+        {packs.map((p) => (
+          <div
+            key={p.id}
+            title={p.status === 'ok' ? undefined : p.message}
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-bold ${
+              p.status === 'ok'
+                ? 'bg-emerald-50 border-emerald-100 text-slate-700'
+                : p.status === 'warning'
+                ? 'bg-amber-50 border-amber-200 text-slate-800 cursor-help'
+                : 'bg-rose-50 border-rose-200 text-slate-800 cursor-help'
+            }`}
+          >
+            <span
+              aria-hidden
+              className={`w-2.5 h-2.5 rounded-full shrink-0 ${
+                p.status === 'ok'
+                  ? 'bg-emerald-500'
+                  : p.status === 'warning'
+                  ? 'bg-amber-500'
+                  : 'bg-rose-500'
+              }`}
+            />
+            <span className="truncate">{p.id}</span>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

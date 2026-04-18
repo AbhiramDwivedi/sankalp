@@ -238,6 +238,33 @@ test.describe('Completion celebrations', () => {
   });
 });
 
+test.describe('Audit view', () => {
+  test('credit audit view renders freshness banner and pack validation grid', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (err) => errors.push(`pageerror: ${err.message}`));
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') errors.push(`console.error: ${msg.text()}`);
+    });
+
+    await gotoClean(page);
+    await onboardStudent(page, 'Audit Tester');
+
+    // Audit view is reached via Settings → "View 3-credit audit" button.
+    await clickSidebarTab(page, 'Settings');
+    const auditLink = page.getByRole('button', { name: /view 3-credit audit/i });
+    await auditLink.scrollIntoViewIfNeeded();
+    await auditLink.click();
+
+    // FreshnessBanner hallmark: verdict pill + the "State read from..." note.
+    await expect(page.getByText('GUARANTEED', { exact: true }).first()).toBeVisible();
+
+    // ValidationGrid hallmark: the per-pack validation heading.
+    await expect(page.getByRole('heading', { name: /per-pack validation/i })).toBeVisible();
+
+    expect(errors, `Console/page errors: ${errors.join('\n')}`).toEqual([]);
+  });
+});
+
 test.describe('Settings persistence', () => {
   test('AI assessment toggle persists across reload', async ({ page }) => {
     await gotoClean(page);
