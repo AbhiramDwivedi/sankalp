@@ -165,3 +165,12 @@ The repository supports a scheduled autonomous build run driven by `docs/BACKLOG
 - **Audit failure is a revert, not a follow-up.** If `scripts/credit-audit.ts` fails after a content change, the change is unshipped until the audit passes — even if `tsc` is green.
 - **Never skip git hooks** (`--no-verify`), **never force-push** to `main` or shared branches, **never amend published commits**.
 - **Never add dependencies** beyond what a specific backlog item's brief authorizes.
+
+### Recommended branch protection (manual)
+
+For full autonomous safety, a repo admin should enable branch protection on `main` with:
+- Require pull request before merging.
+- Require status checks to pass: `CI / check` and `guard / scope-creep`.
+- Disallow force-pushes to main.
+
+Without this, CI failures on an `auto/*` PR don't block the squash-merge path the autonomous build uses. The repo admin step cannot be automated from Actions (admin PAT required).
