@@ -353,6 +353,48 @@ test.describe('Mock exam mode', () => {
   });
 });
 
+test.describe('PWA', () => {
+  // The service worker is only wired in the production bundle (see
+  // vite.config.ts `devOptions.enabled: false`) — enabling it in dev made
+  // Playwright's webServer lane flaky. The SW surface itself is verified
+  // manually against `npm run build && npm run preview`. Here we assert on
+  // the parts of the PWA surface that are present in dev too: the manifest
+  // link, the theme-color meta, and the apple-touch-icon link.
+  test('manifest link and PWA meta are present on the landing page', async ({ page }) => {
+    await gotoClean(page);
+
+    const manifestHref = await page.locator('link[rel="manifest"]').getAttribute('href');
+    expect(manifestHref).toBe('/manifest.webmanifest');
+
+    const themeColor = await page
+      .locator('meta[name="theme-color"]')
+      .getAttribute('content');
+    expect(themeColor).toBe('#ea580c');
+
+    const appleIcon = await page
+      .locator('link[rel="apple-touch-icon"]')
+      .getAttribute('href');
+    expect(appleIcon).toBe('/icon-192.png');
+
+    // The manifest must be served successfully and parse as JSON with the
+    // expected app identity.
+    const res = await page.request.get(`${BASE}/manifest.webmanifest`);
+    expect(res.status()).toBe(200);
+    const manifest = await res.json();
+    expect(manifest.name).toBe('Sankalp Hindi');
+    expect(manifest.short_name).toBe('Sankalp');
+    expect(manifest.display).toBe('standalone');
+    expect(Array.isArray(manifest.icons)).toBe(true);
+    expect(manifest.icons.length).toBeGreaterThanOrEqual(2);
+
+    // Both icon assets must resolve.
+    const icon192 = await page.request.get(`${BASE}/icon-192.png`);
+    expect(icon192.status()).toBe(200);
+    const icon512 = await page.request.get(`${BASE}/icon-512.png`);
+    expect(icon512.status()).toBe(200);
+  });
+});
+
 test.describe('Settings persistence', () => {
   test('AI assessment toggle persists across reload', async ({ page }) => {
     await gotoClean(page);

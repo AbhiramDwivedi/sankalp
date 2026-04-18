@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# vite-plugin-pwa dev-mode workbox output
+dev-dist
+
 # Generated screenshots from scripts/shoot.mjs and scripts/flow.mjs
 scripts/dev-shots/
 
