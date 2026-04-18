@@ -96,6 +96,16 @@
                 margin: 0.4in;
             }
 
+            /* Progress report (4.4) prints with a tighter half-inch margin so
+               the at-a-glance stats + headline numbers fit without breaking. */
+            .progress-report-page {
+                page: progress-report;
+            }
+            @page progress-report {
+                size: letter portrait;
+                margin: 0.5in;
+            }
+
             html, body {
                 background: white !important;
                 padding: 0 !important;

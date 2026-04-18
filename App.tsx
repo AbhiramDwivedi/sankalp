@@ -17,6 +17,8 @@ import { DeckRunner } from './components/flashcards/DeckRunner';
 import { PrintSheet } from './components/flashcards/PrintSheet';
 import { TopicPackViewV2 } from './components/topic/TopicPackViewV2';
 import { LandingView } from './components/pages/LandingView';
+import { ProgressReportView } from './components/pages/ProgressReportView';
+import { downloadJsonExport } from './lib/exportProgress';
 import { TOPIC_PACKS_BY_ID, TOPIC_PACKS_BY_LEVEL } from './content';
 import { CAPSTONES_BY_TIER, CAPSTONES_BY_ID } from './content/capstones';
 import { DECKS, DECKS_BY_ID } from './content/flashcards';
@@ -100,6 +102,7 @@ const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [currentCelebration, setCurrentCelebration] = useState<CelebrationMessage | null>(null);
+  const [showProgressReport, setShowProgressReport] = useState(false);
 
   const profile = profiles.find((p) => p.id === activeId) || null;
 
@@ -413,6 +416,29 @@ const App: React.FC = () => {
     updateActiveProfile((p) => ({ ...p, selectedStudyPlanId: planId }));
   };
 
+  /**
+   * 4.4 export — JSON download path. Sanitizes the active profile (drops AI
+   * thoughtProcessAnalysis), triggers a Blob download, and stamps
+   * `lastExportedAt` so the parent can see when they last shared a snapshot.
+   */
+  const handleDownloadProgressJson = () => {
+    if (!profile) return;
+    const exportedAt = downloadJsonExport(profile);
+    updateActiveProfile((p) => ({ ...p, lastExportedAt: exportedAt }));
+  };
+
+  /**
+   * 4.4 export — print-to-PDF path. Opens the report overlay; the overlay's
+   * Print button fires window.print(), which the user resolves to "Save as
+   * PDF" via the browser dialog. We stamp `lastExportedAt` on open since the
+   * teacher-facing snapshot is now visible regardless of whether they print.
+   */
+  const handleOpenProgressReport = () => {
+    if (!profile) return;
+    setShowProgressReport(true);
+    updateActiveProfile((p) => ({ ...p, lastExportedAt: new Date().toISOString() }));
+  };
+
   // ---- Landing page (no active profile) ----
   if (!activeId || !profile) {
     const handleSelectProfile = (id: string) => {
@@ -537,6 +563,17 @@ const App: React.FC = () => {
       onDismiss={() => setCurrentCelebration(null)}
     />
   ) : null;
+
+  // 4.4 progress report overlay. Wired here (not inside Settings) so the
+  // overlay floats above the entire app shell — print styles in index.html
+  // hide the sidebar/nav so a teacher prints just the report body.
+  const progressReportOverlay =
+    showProgressReport && profile ? (
+      <ProgressReportView
+        profile={profile}
+        onClose={() => setShowProgressReport(false)}
+      />
+    ) : null;
 
   // A) Topic pack overlay
   if (openPack) {
@@ -790,6 +827,41 @@ const App: React.FC = () => {
                 <GraduationCap size={18} /> View 3-credit audit
               </button>
 
+              <div className="p-5 bg-orange-50 rounded-2xl border border-orange-100 space-y-3">
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-orange-600">
+                    Export progress
+                  </p>
+                  <p className="font-black text-slate-900">Share with a teacher or parent</p>
+                  <p className="text-xs text-slate-600 italic mt-1">
+                    JSON gives the full sanitized profile (no AI free-form scratch). The
+                    report opens a print-friendly page; use your browser's "Save as PDF"
+                    in the print dialog.
+                  </p>
+                  {profile.lastExportedAt && (
+                    <p className="text-[11px] text-slate-500 mt-2">
+                      Last exported {new Date(profile.lastExportedAt).toLocaleDateString()}.
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button
+                    data-testid="export-progress-json"
+                    onClick={handleDownloadProgressJson}
+                    className="flex-1 py-3 px-4 rounded-xl bg-white border-2 border-orange-200 text-orange-800 hover:bg-orange-100 font-black text-xs uppercase tracking-widest"
+                  >
+                    Download progress as JSON
+                  </button>
+                  <button
+                    data-testid="open-progress-report"
+                    onClick={handleOpenProgressReport}
+                    className="flex-1 py-3 px-4 rounded-xl bg-orange-600 text-white hover:bg-orange-700 font-black text-xs uppercase tracking-widest"
+                  >
+                    Open progress report (print / save as PDF)
+                  </button>
+                </div>
+              </div>
+
               <button
                 onClick={() => {
                   if (confirm(`Delete student "${profile.name}" and all their progress?`)) {
@@ -821,6 +893,7 @@ const App: React.FC = () => {
         {renderTab()}
       </Layout>
       {celebrationOverlay}
+      {progressReportOverlay}
     </>
   );
 };
