@@ -46,7 +46,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
           {[1, 2, 3].map((s) => (
             <div
               key={s}
-              className={`h-2 flex-1 mx-1 rounded-full transition-all duration-500 ${s <= step ? 'bg-orange-600 shadow-sm' : 'bg-slate-100'}`}
+              className={`h-2 flex-1 mx-1 rounded-full transition-all duration-500 ${s <= step ? 'bg-orange-700 shadow-sm' : 'bg-slate-100'}`}
             />
           ))}
         </div>
@@ -54,13 +54,13 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
         <form onSubmit={handleSubmit} className="space-y-8">
           {step === 1 && (
             <div className="animate-in fade-in slide-in-from-bottom-6 duration-700">
-              <div className="w-20 h-20 bg-orange-100 rounded-[2rem] flex items-center justify-center text-orange-600 mb-8 shadow-inner">
+              <div className="w-20 h-20 bg-orange-100 rounded-[2rem] flex items-center justify-center text-orange-700 mb-8 shadow-inner">
                 <User size={40} />
               </div>
               <h2 className="text-4xl font-black text-slate-900 mb-3 tracking-tight">Student Details</h2>
               <p className="text-slate-500 mb-10 font-medium">Every child's journey is unique. Let's name the hero of this story.</p>
               <div className="space-y-2">
-                <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Student Name</label>
+                <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Student Name</label>
                 <input
                   required
                   autoFocus
@@ -120,7 +120,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
 
               <div className="bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200 rounded-3xl p-6 space-y-4 mb-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center text-white shrink-0">
+                  <div className="w-12 h-12 bg-orange-700 rounded-xl flex items-center justify-center text-white shrink-0">
                     <Flag size={22} />
                   </div>
                   <div className="flex-1">
@@ -130,7 +130,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3 pt-2 border-t border-orange-200/60">
-                  <Target size={16} className="text-orange-600" />
+                  <Target size={16} className="text-orange-700" />
                   <p className="text-xs font-bold text-slate-600">
                     <span className="font-black text-slate-900">{matchedPlan.durationWeeks}-week</span> plan ·
                     Starts at: {matchedPlan.weeks[0]?.packs[0] || 'Capstones only'} ·
@@ -141,7 +141,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
 
               <div className="bg-orange-50 border border-orange-200 rounded-3xl p-6 space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-orange-600 shadow-sm"><Clock size={18}/></div>
+                  <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-orange-700 shadow-sm"><Clock size={18}/></div>
                   <div>
                     <p className="text-xs font-black text-orange-400 uppercase tracking-widest">Recommended Readiness</p>
                     <p className="text-lg font-black text-slate-900">{new Date(formData.examDate).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}</p>
@@ -149,7 +149,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Exam date (adjustable)</label>
+                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Exam date (adjustable)</label>
                   <input
                     required
                     type="date"
@@ -164,7 +164,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
 
           <button
             type="submit"
-            className="w-full bg-orange-600 hover:bg-orange-700 text-white font-black py-5 rounded-[1.5rem] flex items-center justify-center gap-3 transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-orange-200"
+            className="w-full bg-orange-700 hover:bg-orange-700 text-white font-black py-5 rounded-[1.5rem] flex items-center justify-center gap-3 transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-orange-200"
           >
             {step === 3 ? 'Start this plan' : 'Continue'}
             <ArrowRight size={24} />

@@ -197,7 +197,7 @@ export const MockExamMode: React.FC<MockExamModeProps> = ({
               }
               onExit(phase === 'done' ? result : null);
             }}
-            className="flex items-center gap-2 text-sm font-black text-slate-500 hover:text-orange-600"
+            className="flex items-center gap-2 text-sm font-black text-slate-500 hover:text-orange-700"
           >
             <ArrowLeft size={16} /> {phase === 'done' ? 'Back to capstone' : 'Exit exam'}
           </button>
@@ -224,8 +224,8 @@ export const MockExamMode: React.FC<MockExamModeProps> = ({
             data-testid="mock-exam-done"
             className={`px-5 py-2 rounded-xl font-black text-sm shadow-lg ${
               phase === 'writing'
-                ? 'bg-emerald-600 text-white hover:bg-emerald-700'
-                : 'bg-slate-200 text-slate-400 cursor-default'
+                ? 'bg-emerald-700 text-white hover:bg-emerald-700'
+                : 'bg-slate-200 text-slate-500 cursor-default'
             }`}
           >
             Done
@@ -319,7 +319,7 @@ const WritingArea: React.FC<{
         <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
           Your response
         </p>
-        <p className="text-xs font-black text-slate-400 uppercase tracking-widest">
+        <p className="text-xs font-black text-slate-500 uppercase tracking-widest">
           {wordCount} words
         </p>
       </div>
@@ -327,7 +327,7 @@ const WritingArea: React.FC<{
         value={text}
         onChange={(e) => onChange(e.target.value)}
         placeholder={`यहाँ लिखें... (${CURRICULUM.language.script})`}
-        className="w-full min-h-[55vh] bg-white border-2 border-slate-200 rounded-2xl p-5 font-hindi text-lg leading-[2] placeholder:text-slate-400 focus:ring-2 focus:ring-orange-300 focus:border-orange-300 outline-none"
+        className="w-full min-h-[55vh] bg-white border-2 border-slate-200 rounded-2xl p-5 font-hindi text-lg leading-[2] placeholder:text-slate-500 focus:ring-2 focus:ring-orange-300 focus:border-orange-300 outline-none"
         data-testid="mock-exam-textarea"
         autoFocus
       />
@@ -381,7 +381,7 @@ const ResultPanel: React.FC<{
           {timedOut ? (
             <AlertTriangle size={28} className="text-amber-600 shrink-0 mt-1" />
           ) : (
-            <CheckCircle2 size={28} className="text-emerald-600 shrink-0 mt-1" />
+            <CheckCircle2 size={28} className="text-emerald-700 shrink-0 mt-1" />
           )}
           <div>
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
@@ -411,7 +411,7 @@ const ResultPanel: React.FC<{
             {result.text}
           </DevanagariText>
         ) : (
-          <p className="text-slate-400 italic text-sm">(Nothing written.)</p>
+          <p className="text-slate-500 italic text-sm">(Nothing written.)</p>
         )}
       </section>
 
@@ -512,7 +512,7 @@ const SelfCheckBlock: React.FC<{
             className="border border-slate-100 rounded-2xl p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
           >
             <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-orange-600">
+              <p className="text-[10px] font-black uppercase tracking-widest text-orange-700">
                 {q.axis}
               </p>
               <p className="text-sm font-bold text-slate-800">{q.question}</p>
@@ -522,7 +522,7 @@ const SelfCheckBlock: React.FC<{
                 onClick={() => onChange(q.id, true)}
                 className={`px-4 py-2 rounded-xl font-black text-xs uppercase tracking-widest ${
                   val === true
-                    ? 'bg-emerald-600 text-white'
+                    ? 'bg-emerald-700 text-white'
                     : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
                 }`}
               >
@@ -548,7 +548,7 @@ const SelfCheckBlock: React.FC<{
 
 const TIER_LABELS: Record<EssayVersion['label'], { title: string; tone: string }> = {
   novice: { title: 'Novice', tone: 'bg-slate-500' },
-  intermediateMid: { title: 'Intermediate-Mid (target)', tone: 'bg-orange-600' },
+  intermediateMid: { title: 'Intermediate-Mid (target)', tone: 'bg-orange-700' },
   push: { title: 'Push', tone: 'bg-indigo-600' },
 };
 

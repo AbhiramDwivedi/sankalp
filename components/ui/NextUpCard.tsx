@@ -50,7 +50,7 @@ export const NextUpCard: React.FC<NextUpCardProps> = ({
         aria-label="Plan complete"
       >
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-emerald-100">
+          <div className="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center shrink-0 shadow-lg shadow-emerald-100">
             <CheckCircle2 size={22} strokeWidth={2.5} />
           </div>
           <div className="flex-1">
@@ -80,7 +80,7 @@ export const NextUpCard: React.FC<NextUpCardProps> = ({
     >
       <div className="flex flex-col md:flex-row md:items-stretch gap-6">
         <div className="flex items-start gap-4 flex-1">
-          <div className="w-12 h-12 rounded-2xl bg-orange-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-orange-100">
+          <div className="w-12 h-12 rounded-2xl bg-orange-700 text-white flex items-center justify-center shrink-0 shadow-lg shadow-orange-100">
             <ArrowRight size={22} strokeWidth={2.5} />
           </div>
           <div className="flex-1 space-y-2">
@@ -122,7 +122,7 @@ export const NextUpCard: React.FC<NextUpCardProps> = ({
           <button
             type="button"
             onClick={onContinue}
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-orange-600 text-white font-black text-sm uppercase tracking-widest shadow-lg shadow-orange-200 hover:bg-orange-700"
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-orange-700 text-white font-black text-sm uppercase tracking-widest shadow-lg shadow-orange-200 hover:bg-orange-700"
           >
             Continue <ArrowRight size={16} />
           </button>
@@ -135,7 +135,7 @@ export const NextUpCard: React.FC<NextUpCardProps> = ({
               <SkipForward size={14} /> Skip for now
             </button>
           )}
-          <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+          <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">
             Press <kbd className="px-1.5 py-0.5 rounded bg-white border border-slate-200 text-slate-700">N</kbd> to continue
           </p>
         </div>

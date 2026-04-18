@@ -31,7 +31,7 @@ export const VocabCard: React.FC<VocabCardProps> = ({ entry, compact = false }) 
             {entry.partOfSpeech}
           </span>
         </div>
-        <p className="text-xs text-slate-400 font-bold italic">{entry.transliteration}</p>
+        <p className="text-xs text-slate-500 font-bold italic">{entry.transliteration}</p>
         <p className="text-sm text-slate-800 font-bold">{entry.english}</p>
         {!compact && (
           <div className="mt-3 pt-3 border-t border-slate-100">

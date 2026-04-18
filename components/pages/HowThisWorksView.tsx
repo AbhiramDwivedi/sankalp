@@ -19,10 +19,10 @@ interface HowThisWorksViewProps {
 export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }) => (
   <div className="max-w-4xl mx-auto space-y-12 pb-20 animate-in fade-in duration-500">
     <header className="text-center space-y-4">
-      <div className="w-20 h-20 bg-orange-600 text-white rounded-3xl flex items-center justify-center mx-auto shadow-xl shadow-orange-100">
+      <div className="w-20 h-20 bg-orange-700 text-white rounded-3xl flex items-center justify-center mx-auto shadow-xl shadow-orange-100">
         <GraduationCap size={42} strokeWidth={2.5} />
       </div>
-      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
         A five-minute read before you start
       </p>
       <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight">
@@ -125,7 +125,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
             <p className="text-sm text-slate-600 italic mb-4">{ax.oneLiner}</p>
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">
                   What raters look for
                 </p>
                 <ul className="space-y-1 text-slate-700">
@@ -138,7 +138,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
                 </ul>
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">
                   How this app trains it
                 </p>
                 <ul className="space-y-1 text-slate-700">
@@ -247,7 +247,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
     <div className="text-center pt-6">
       <button
         onClick={onContinue}
-        className="inline-flex items-center gap-3 bg-orange-600 hover:bg-orange-700 text-white font-black px-10 py-5 rounded-2xl shadow-xl shadow-orange-100 transition-all"
+        className="inline-flex items-center gap-3 bg-orange-700 hover:bg-orange-700 text-white font-black px-10 py-5 rounded-2xl shadow-xl shadow-orange-100 transition-all"
       >
         Open the Library <ArrowRight size={22} />
       </button>

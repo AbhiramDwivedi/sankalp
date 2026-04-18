@@ -90,10 +90,10 @@ export const LandingView: React.FC<LandingViewProps> = ({
           {/* Left - text */}
           <div className="space-y-7 animate-in fade-in duration-700">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-orange-600 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-orange-200">
+              <div className="w-12 h-12 bg-orange-700 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-orange-200">
                 स
               </div>
-              <span className="text-[11px] font-black tracking-[0.3em] text-orange-600 uppercase">
+              <span className="text-[11px] font-black tracking-[0.3em] text-orange-700 uppercase">
                 Sankalp · हिन्दी
               </span>
             </div>
@@ -108,7 +108,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
             </DevanagariText>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.05]">
-              Earn <span className="text-orange-600">{CURRICULUM.creditMapping.credits} {CURRICULUM.creditMapping.issuer} World Language credits</span> in {CURRICULUM.language.name}.
+              Earn <span className="text-orange-700">{CURRICULUM.creditMapping.credits} {CURRICULUM.creditMapping.issuer} World Language credits</span> in {CURRICULUM.language.name}.
             </h2>
 
             <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed max-w-xl">
@@ -122,7 +122,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
             <div className="flex flex-col sm:flex-row gap-3 pt-1">
               <button
                 onClick={onAddStudent}
-                className="group inline-flex items-center justify-center gap-3 bg-orange-600 hover:bg-orange-700 text-white font-black px-7 py-4 md:px-8 md:py-5 rounded-2xl shadow-xl shadow-orange-200 transition-all hover:-translate-y-0.5 text-base"
+                className="group inline-flex items-center justify-center gap-3 bg-orange-700 hover:bg-orange-700 text-white font-black px-7 py-4 md:px-8 md:py-5 rounded-2xl shadow-xl shadow-orange-200 transition-all hover:-translate-y-0.5 text-base"
               >
                 <PlusCircle size={20} strokeWidth={2.5} />
                 Start a student
@@ -172,7 +172,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
 
             {/* Bottom-left - Books */}
             <div className="absolute bottom-4 left-0 md:bottom-6 md:left-2 w-28 md:w-36 aspect-square z-20 rotate-6">
-              <div className="w-full h-full bg-emerald-600 rounded-3xl p-3 md:p-4 shadow-xl">
+              <div className="w-full h-full bg-emerald-700 rounded-3xl p-3 md:p-4 shadow-xl">
                 <MotifBooks color="#ffffff" accent="#a7f3d0" />
               </div>
             </div>
@@ -196,7 +196,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
       {/* ─────────────────────────────────────────────────────────── */}
       <section id="why" className="max-w-7xl mx-auto px-6 lg:px-12 py-16 md:py-20 space-y-12">
         <header className="text-center max-w-3xl mx-auto space-y-4">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
             Why Sankalp exists
           </p>
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
@@ -281,7 +281,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
 
             <div className="bg-white rounded-[2rem] p-5 md:p-8">
               <div className="flex items-center gap-3 mb-4">
-                <Target size={20} strokeWidth={2.5} className="text-orange-600" />
+                <Target size={20} strokeWidth={2.5} className="text-orange-700" />
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
                   Where we're aimed
                 </p>
@@ -301,7 +301,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
       {/* ─────────────────────────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 py-16 md:py-24">
         <header className="text-center max-w-2xl mx-auto space-y-3 mb-12">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
             Ready when you are
           </p>
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">
@@ -318,7 +318,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
             <div className="md:col-span-3 bg-white border border-slate-100 rounded-[2.5rem] p-7 md:p-10 shadow-sm space-y-6">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-700">
                     Welcome back
                   </p>
                   <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
@@ -354,15 +354,15 @@ export const LandingView: React.FC<LandingViewProps> = ({
                       className="w-full flex items-center justify-between p-5 bg-slate-50 hover:bg-white border border-slate-100 hover:border-orange-300 rounded-2xl transition-all group text-left hover:shadow-lg"
                     >
                       <div className="flex items-center gap-4 min-w-0">
-                        <div className="w-14 h-14 shrink-0 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center font-black text-xl group-hover:bg-orange-600 group-hover:text-white transition-all">
+                        <div className="w-14 h-14 shrink-0 bg-orange-100 text-orange-700 rounded-2xl flex items-center justify-center font-black text-xl group-hover:bg-orange-700 group-hover:text-white transition-all">
                           {p.name[0]}
                         </div>
                         <div className="min-w-0">
                           <p className="text-lg font-black text-slate-900 truncate">{p.name}</p>
-                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
                             {p.currentLevel}
                           </p>
-                          <p className="text-xs font-bold text-orange-600 mt-0.5">
+                          <p className="text-xs font-bold text-orange-700 mt-0.5">
                             {packs} / {TOPIC_PACKS.length} packs · {caps} / {CAPSTONES.length}{' '}
                             capstones
                           </p>
@@ -375,20 +375,20 @@ export const LandingView: React.FC<LandingViewProps> = ({
                         <ArrowRight
                           size={18}
                           strokeWidth={2.5}
-                          className="text-slate-300 group-hover:text-orange-600 group-hover:translate-x-1 transition-all"
+                          className="text-slate-300 group-hover:text-orange-700 group-hover:translate-x-1 transition-all"
                         />
                       </div>
                     </button>
                   );
                 })}
                 {filtered.length === 0 && (
-                  <p className="text-center text-slate-400 text-sm italic py-8">
+                  <p className="text-center text-slate-500 text-sm italic py-8">
                     No matches. Clear the search or add a new student.
                   </p>
                 )}
               </div>
 
-              <p className="text-xs text-slate-400 italic">
+              <p className="text-xs text-slate-500 italic">
                 Switch between students anytime from Settings.
               </p>
             </div>
@@ -439,7 +439,7 @@ export const LandingView: React.FC<LandingViewProps> = ({
       </section>
 
       <footer className="max-w-7xl mx-auto px-6 lg:px-12 py-10 text-center">
-        <p className="text-xs text-slate-400 font-semibold tracking-wide">
+        <p className="text-xs text-slate-500 font-semibold tracking-wide">
           सङ्कल्प · Sankalp {CURRICULUM.language.name} - a home-built prep kit for the {CURRICULUM.creditMapping.issuer} World Language Credit Exam.
         </p>
       </footer>
@@ -472,12 +472,12 @@ const toneStyles: Record<
   emerald: {
     iconBg: 'bg-emerald-100 text-emerald-700',
     border: 'border-emerald-200',
-    accent: 'text-emerald-600',
+    accent: 'text-emerald-700',
   },
   orange: {
     iconBg: 'bg-orange-100 text-orange-700',
     border: 'border-orange-100',
-    accent: 'text-orange-600',
+    accent: 'text-orange-700',
   },
 };
 
@@ -497,7 +497,7 @@ const PromiseCard: React.FC<PromiseCardProps> = ({
       }`}
     >
       {highlight && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-700 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
           Your target
         </div>
       )}

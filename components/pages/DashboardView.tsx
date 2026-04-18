@@ -120,7 +120,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-2">
             Dashboard
           </p>
           <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">
@@ -132,11 +132,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
         <div className="flex gap-3 flex-wrap">
           <div className="bg-white border-2 border-slate-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-            <div className="w-10 h-10 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-orange-100 text-orange-700 rounded-xl flex items-center justify-center">
               <Flame size={18} />
             </div>
             <div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">Packs</p>
+              <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">Packs</p>
               <p className="text-xl font-black text-slate-900">{completedPacks.length} / {totalPacks}</p>
             </div>
           </div>
@@ -145,7 +145,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <Flag size={18} />
             </div>
             <div>
-              <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">Capstones</p>
+              <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">Capstones</p>
               <p className="text-xl font-black text-slate-900">{completedCaps.length} / {totalCaps}</p>
             </div>
           </div>
@@ -177,7 +177,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
           <button
             onClick={onOpenPlanTab}
-            className="text-sm font-black text-orange-600 hover:text-orange-800 flex items-center gap-2"
+            className="text-sm font-black text-orange-700 hover:text-orange-800 flex items-center gap-2"
           >
             See full plan <ArrowRight size={16} />
           </button>
@@ -196,7 +196,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
           <button
             onClick={onOpenLibrary}
-            className="text-sm font-black text-orange-600 hover:text-orange-800 flex items-center gap-2"
+            className="text-sm font-black text-orange-700 hover:text-orange-800 flex items-center gap-2"
           >
             Open library <ArrowRight size={16} />
           </button>
@@ -247,7 +247,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       {upcomingCapstone.hook}
                     </p>
                   </div>
-                  <ArrowRight size={24} className="text-slate-400 shrink-0" />
+                  <ArrowRight size={24} className="text-slate-500 shrink-0" />
                 </div>
               </button>
             </>
@@ -267,7 +267,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <p className="text-3xl font-black">
                 {TARGET_BENCHMARK} <span className="text-amber-300 text-lg font-bold">{CURRICULUM.creditMapping.creditName}</span>
               </p>
-              <p className="text-xs text-slate-400 italic mt-1">
+              <p className="text-xs text-slate-300 italic mt-1">
                 {FCPS_CREDIT_SUMMARY.find((c) => c.credits === 3)?.description}
               </p>
             </div>
@@ -277,7 +277,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </p>
               {RUBRIC_AXES.map((ax) => (
                 <div key={ax.id} className="flex items-start gap-2 text-sm">
-                  <Badge tone="slate" size="xs" className="bg-white/10 text-white border-white/20 shrink-0">
+                  <Badge tone="slate" size="xs" className="!bg-white/10 !text-white !border-white/20 shrink-0">
                     {ax.id.substring(0, 2)}
                   </Badge>
                   <div>
@@ -385,13 +385,13 @@ const TodayStrip: React.FC<TodayStripProps> = ({
       <div className="bg-white rounded-xl border border-slate-100 px-4 py-3 flex items-center gap-3">
         <div
           className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-            streak > 0 ? 'bg-orange-100 text-orange-600' : 'bg-slate-100 text-slate-400'
+            streak > 0 ? 'bg-orange-100 text-orange-700' : 'bg-slate-100 text-slate-500'
           }`}
         >
           <Flame size={18} />
         </div>
         <div className="min-w-0">
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Today</p>
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Today</p>
           <p className="text-sm font-black text-slate-900 truncate">{streakLabel}</p>
           <p className="text-[11px] text-slate-500 italic truncate">{streakSubtitle}</p>
         </div>
@@ -406,15 +406,15 @@ const TodayStrip: React.FC<TodayStripProps> = ({
           <Target size={18} />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
             Today's focus
           </p>
-          <p className="text-sm font-black text-slate-900 truncate group-hover:text-orange-600">
+          <p className="text-sm font-black text-slate-900 truncate group-hover:text-orange-700">
             {nextTitle}
           </p>
           <p className="text-[11px] text-slate-500 italic truncate">{nextSubtitle}</p>
         </div>
-        <span className="text-[10px] font-black uppercase tracking-widest text-orange-600 shrink-0 flex items-center gap-1">
+        <span className="text-[10px] font-black uppercase tracking-widest text-orange-700 shrink-0 flex items-center gap-1">
           {nextCta} <ArrowRight size={12} />
         </span>
       </button>
@@ -432,7 +432,7 @@ const TodayStrip: React.FC<TodayStripProps> = ({
             <Layers size={18} />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
               Cards due
             </p>
             <p className="text-sm font-black text-slate-900 truncate group-hover:text-indigo-700">
@@ -449,17 +449,17 @@ const TodayStrip: React.FC<TodayStripProps> = ({
       ) : (
         <div
           aria-label="No flashcards due"
-          className="bg-white rounded-xl border border-slate-100 px-4 py-3 flex items-center gap-3 opacity-80"
+          className="bg-white rounded-xl border border-slate-100 px-4 py-3 flex items-center gap-3"
         >
-          <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
             <Layers size={18} />
           </div>
           <div className="min-w-0">
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-600">
               Cards due
             </p>
-            <p className="text-sm font-black text-slate-500 truncate">Nothing due today</p>
-            <p className="text-[11px] text-slate-400 italic truncate">
+            <p className="text-sm font-black text-slate-600 truncate">Nothing due today</p>
+            <p className="text-[11px] text-slate-600 italic truncate">
               Rate cards in any deck to build the queue
             </p>
           </div>
@@ -486,12 +486,12 @@ const NextPackCard: React.FC<{ pack: TopicPack; onClick: () => void }> = ({ pack
       <div className="p-6 flex items-center justify-between gap-4">
         <div className="flex-1 space-y-1">
           <Badge tone="orange" size="xs">Level {pack.level} · {tokens.label}</Badge>
-          <h3 className="text-2xl font-black text-slate-900 group-hover:text-orange-600 transition-colors">
+          <h3 className="text-2xl font-black text-slate-900 group-hover:text-orange-700 transition-colors">
             {pack.titleEnglish}
           </h3>
           <p className="text-sm text-slate-500 italic leading-relaxed">{pack.hook}</p>
         </div>
-        <div className="w-14 h-14 bg-slate-100 group-hover:bg-orange-600 group-hover:text-white text-slate-400 rounded-2xl flex items-center justify-center transition-colors shrink-0">
+        <div className="w-14 h-14 bg-slate-100 group-hover:bg-orange-700 group-hover:text-white text-slate-500 rounded-2xl flex items-center justify-center transition-colors shrink-0">
           <ArrowRight size={24} />
         </div>
       </div>

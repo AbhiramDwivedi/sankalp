@@ -36,7 +36,7 @@ export const VerdictCard: React.FC<VerdictCardProps> = ({ verdict }) => {
       <div className="space-y-3">
         {verdict.whyItPasses.map((reason, i) => (
           <div key={i} className="flex items-start gap-3">
-            <CheckCircle2 size={18} className="text-emerald-400 print:text-emerald-600 shrink-0 mt-0.5" strokeWidth={3} />
+            <CheckCircle2 size={18} className="text-emerald-400 print:text-emerald-700 shrink-0 mt-0.5" strokeWidth={3} />
             <p className="text-sm leading-relaxed text-slate-100 print:text-slate-800 font-medium">
               {reason}
             </p>

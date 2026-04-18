@@ -56,7 +56,7 @@ const TABS: TabDef[] = [
 
 const TIER_META: Record<EssayVersion['label'], { title: string; subtitle: string; tone: string }> = {
   novice: { title: 'Novice draft', subtitle: 'What a new learner might write', tone: 'bg-slate-500' },
-  intermediateMid: { title: 'Intermediate-Mid', subtitle: `${CURRICULUM.displayStrings.targetPhrase} · the ${CURRICULUM.creditMapping.credits}-credit target`, tone: 'bg-orange-600' },
+  intermediateMid: { title: 'Intermediate-Mid', subtitle: `${CURRICULUM.displayStrings.targetPhrase} · the ${CURRICULUM.creditMapping.credits}-credit target`, tone: 'bg-orange-700' },
   push: { title: 'Push tier', subtitle: 'Reaching toward Benchmark 6', tone: 'bg-indigo-600' },
 };
 
@@ -144,7 +144,7 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
       <div className="flex flex-wrap items-center justify-between gap-3 no-print">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-sm font-black text-slate-500 hover:text-orange-600"
+          className="flex items-center gap-2 text-sm font-black text-slate-500 hover:text-orange-700"
         >
           <ArrowLeft size={16} /> Back to Capstones
         </button>
@@ -206,7 +206,7 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
             <Badge tone="amber" size="xs">
               Capstone {capstone.order} · {capstone.tier === 'push' ? 'Push tier' : 'Core tier'}
             </Badge>
-            <Badge tone="slate" size="xs" className="bg-white/15 text-white border-white/20">
+            <Badge tone="slate" size="xs" className="!bg-white/15 !text-white !border-white/20">
               {tokens.label}
             </Badge>
             {capstone.isMockExam && (
@@ -248,7 +248,7 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
               >
                 <span
                   className={`shrink-0 w-7 h-7 rounded-xl flex items-center justify-center ${
-                    isActive ? `${tokens.accentBg} text-white` : 'bg-white text-slate-400 group-hover:text-slate-700'
+                    isActive ? `${tokens.accentBg} text-white` : 'bg-white text-slate-500 group-hover:text-slate-700'
                   }`}
                 >
                   {t.icon}
@@ -287,7 +287,7 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
 
       {nextUp && <NextUpCard {...nextUp} />}
 
-      <footer className="pt-10 border-t-4 border-dotted border-slate-100 flex justify-between items-end text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] print:text-slate-400">
+      <footer className="pt-10 border-t-4 border-dotted border-slate-100 flex justify-between items-end text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] print:text-slate-500">
         <span>Student: ____________________________</span>
         <span className="text-center">सङ्कल्प · {capstone.id}</span>
         <span>Date: ________________</span>
@@ -359,7 +359,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ capstone, goTo, onOpenPack }) => {
     <section className="space-y-10">
       {/* Why this capstone */}
       <div className="bg-white rounded-[2.5rem] border-2 border-slate-100 p-8 md:p-12 shadow-sm">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-3">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-3">
           What this capstone rehearses
         </p>
         <p className="text-base text-slate-800 leading-relaxed">{capstone.whyThisCapstone}</p>
@@ -367,7 +367,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ capstone, goTo, onOpenPack }) => {
 
       {/* Action steps */}
       <div>
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-4">
           Your path through this capstone
         </p>
         <ol className="space-y-3">
@@ -387,7 +387,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ capstone, goTo, onOpenPack }) => {
                     <p className="text-base md:text-lg font-black text-slate-900 leading-tight">{s.title}</p>
                     <p className="text-sm text-slate-500 leading-snug mt-1">{s.body}</p>
                     {s.minutes && (
-                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-2 flex items-center gap-1.5">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mt-2 flex items-center gap-1.5">
                         <Clock size={10} /> {s.minutes}
                       </p>
                     )}
@@ -445,7 +445,7 @@ const SourcePacks: React.FC<{
                 <div className="flex-1">
                   <button
                     onClick={() => onOpenPack(d.packId)}
-                    className="text-sm font-black text-slate-900 hover:text-orange-600 hover:underline text-left"
+                    className="text-sm font-black text-slate-900 hover:text-orange-700 hover:underline text-left"
                   >
                     {pack ? pack.titleEnglish : d.packId}
                   </button>
@@ -461,7 +461,7 @@ const SourcePacks: React.FC<{
                 </div>
                 <button
                   onClick={() => onOpenPack(d.packId)}
-                  className="shrink-0 text-slate-400 hover:text-orange-600 mt-1"
+                  className="shrink-0 text-slate-500 hover:text-orange-700 mt-1"
                   aria-label={`Open ${pack ? pack.titleEnglish : d.packId}`}
                 >
                   <ArrowUpRight size={16} />
@@ -625,7 +625,7 @@ const VersionBody: React.FC<{ version: EssayVersion }> = ({ version }) => {
       </div>
 
       <details className="mt-6 no-print">
-        <summary className="text-xs font-black uppercase tracking-widest text-slate-500 cursor-pointer hover:text-orange-600">
+        <summary className="text-xs font-black uppercase tracking-widest text-slate-500 cursor-pointer hover:text-orange-700">
           Show English translation
         </summary>
         <div className="mt-4 space-y-3 text-sm text-slate-600 italic leading-relaxed border-l-2 border-slate-200 pl-4">
@@ -663,11 +663,11 @@ const TeacherTab: React.FC<{ capstone: Capstone }> = ({ capstone }) => {
       {/* Why this capstone (deeper) */}
       <div className="bg-gradient-to-br from-amber-50 via-orange-50/50 to-white border-2 border-amber-100 rounded-[2.5rem] p-8 md:p-12 shadow-sm space-y-6 print:break-inside-avoid">
         <div className="flex items-start gap-5">
-          <div className="w-14 h-14 bg-orange-600 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-orange-100">
+          <div className="w-14 h-14 bg-orange-700 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-orange-100">
             <GraduationCap size={26} strokeWidth={2.5} />
           </div>
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">For the teacher</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-700">For the teacher</p>
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
               Why this capstone exists
             </h2>
@@ -748,7 +748,7 @@ const TeacherTab: React.FC<{ capstone: Capstone }> = ({ capstone }) => {
 
 const RefHeader: React.FC<{ id: string; eyebrow: string; title: string }> = ({ id, eyebrow, title }) => (
   <header id={id} className="space-y-1 scroll-mt-32">
-    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">{eyebrow}</p>
+    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">{eyebrow}</p>
     <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900">{title}</h2>
   </header>
 );

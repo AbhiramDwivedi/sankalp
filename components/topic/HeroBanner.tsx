@@ -23,7 +23,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ pack }) => {
           <Badge tone="amber" size="xs">
             Level {pack.level} · {tokens.label}
           </Badge>
-          <Badge tone="slate" size="xs" className="bg-white/15 text-white border-white/20">
+          <Badge tone="slate" size="xs" className="!bg-white/15 !text-white !border-white/20">
             Topic {pack.order} of 26
           </Badge>
           {pack.status !== 'shipped' && (

@@ -32,12 +32,12 @@ export const Layout: React.FC<LayoutProps> = ({
     <div className="flex flex-col md:flex-row min-h-screen bg-slate-50 font-sans text-slate-900">
       <aside className="hidden md:flex flex-col w-72 bg-white border-r border-slate-100 shadow-2xl z-20 no-print">
         <div className="p-10 flex items-center gap-4">
-          <div className="w-12 h-12 bg-orange-600 rounded-[1.2rem] flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-orange-200">
+          <div className="w-12 h-12 bg-orange-700 rounded-[1.2rem] flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-orange-200">
             स
           </div>
           <div>
             <h1 className="text-2xl font-black text-slate-900 tracking-tight">{brandingName}</h1>
-            <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+            <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">
               {CURRICULUM.creditMapping.issuer} {CURRICULUM.language.name} · {CURRICULUM.creditMapping.credits}-credit prep
             </p>
           </div>
@@ -48,9 +48,9 @@ export const Layout: React.FC<LayoutProps> = ({
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center gap-4 px-6 py-4 rounded-[1.25rem] transition-all ${
+              className={`w-full flex items-center gap-4 px-6 py-4 rounded-[1.25rem] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 ${
                 activeTab === item.id
-                  ? 'bg-orange-600 text-white font-black shadow-xl shadow-orange-100'
+                  ? 'bg-orange-700 text-white font-black shadow-xl shadow-orange-100'
                   : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800 font-bold'
               }`}
             >
@@ -63,7 +63,7 @@ export const Layout: React.FC<LayoutProps> = ({
         <div className="p-8">
           <button
             onClick={onSwitch}
-            className="w-full flex items-center justify-center gap-3 py-4 bg-slate-900 text-white font-black rounded-[1.25rem] shadow-xl hover:bg-black transition-all"
+            className="w-full flex items-center justify-center gap-3 py-4 bg-slate-900 text-white font-black rounded-[1.25rem] shadow-xl hover:bg-black transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
           >
             <Users size={18} /> Switch Student
           </button>
@@ -79,15 +79,19 @@ export const Layout: React.FC<LayoutProps> = ({
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className={`flex flex-col items-center gap-1 p-3 transition-all ${
-              activeTab === item.id ? 'text-orange-400 scale-125' : 'text-slate-400'
+            className={`flex flex-col items-center gap-1 p-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 rounded-md ${
+              activeTab === item.id ? 'text-orange-400 scale-125' : 'text-slate-300'
             }`}
             aria-label={item.label}
           >
             {item.icon}
           </button>
         ))}
-        <button onClick={onSwitch} className="flex flex-col items-center gap-1 p-3 text-white">
+        <button
+          onClick={onSwitch}
+          aria-label="Switch student"
+          className="flex flex-col items-center gap-1 p-3 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 rounded-md"
+        >
           <Users size={18} />
         </button>
       </nav>
