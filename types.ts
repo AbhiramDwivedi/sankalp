@@ -93,6 +93,12 @@ export interface StudentProfile {
   // NextUpCard so "Skip for now" sticks.
   deferredIds?: string[];
 
+  // Stable ids of completion celebrations already shown to this student, so
+  // each achievement fires exactly once. See content/celebrations.ts for the
+  // id conventions (e.g. `pack-complete:<packId>`, `plan-milestone-50:<planId>`,
+  // `stamp-ready`).
+  celebrationsShown?: string[];
+
   // Legacy fields (kept optional so old localStorage records still parse):
   plan?: Unit[];
   completedLessonIds?: string[];
@@ -121,6 +127,7 @@ export function migrateProfile(raw: any): StudentProfile {
     flashcardsSeen: Array.isArray(raw.flashcardsSeen) ? raw.flashcardsSeen : [],
     flashcardsMastered: Array.isArray(raw.flashcardsMastered) ? raw.flashcardsMastered : [],
     deferredIds: Array.isArray(raw.deferredIds) ? raw.deferredIds : [],
+    celebrationsShown: Array.isArray(raw.celebrationsShown) ? raw.celebrationsShown : [],
     plan: raw.plan,
     completedLessonIds: raw.completedLessonIds,
     generatedMaterials: raw.generatedMaterials,

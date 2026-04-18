@@ -17,14 +17,24 @@ import { DeckRunner } from './components/flashcards/DeckRunner';
 import { PrintSheet } from './components/flashcards/PrintSheet';
 import { TopicPackViewV2 } from './components/topic/TopicPackViewV2';
 import { LandingView } from './components/pages/LandingView';
-import { TOPIC_PACKS_BY_ID } from './content';
-import { CAPSTONES_BY_ID } from './content/capstones';
+import { TOPIC_PACKS_BY_ID, TOPIC_PACKS_BY_LEVEL } from './content';
+import { CAPSTONES_BY_TIER, CAPSTONES_BY_ID } from './content/capstones';
 import { DECKS_BY_ID } from './content/flashcards';
 import type { Deck } from './content/schema';
 import { studyPlanForLevel, getStudyPlan } from './content/studyPlans';
 import { resolveNextUp, getPlanProgress } from './components/ui/nextUpResolver';
 import type { NextUpCardProps } from './components/ui/NextUpCard';
 import { GraduationCap, Info } from 'lucide-react';
+import { Celebration } from './components/ui/Celebration';
+import {
+  packCompleteMessage,
+  capstoneCompleteMessage,
+  deckMasteredMessage,
+  planMilestoneMessage,
+  planMilestoneJustCrossed,
+  stampReadyMessage,
+  type CelebrationMessage,
+} from './content/celebrations';
 
 const APP_STORAGE_KEY = 'sankalpa_hindi_profiles';
 const ACTIVE_PROFILE_KEY = 'sankalpa_active_id';
@@ -41,6 +51,7 @@ const App: React.FC = () => {
   const [showHowThisWorks, setShowHowThisWorks] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [currentCelebration, setCurrentCelebration] = useState<CelebrationMessage | null>(null);
 
   const profile = profiles.find((p) => p.id === activeId) || null;
 
@@ -76,6 +87,58 @@ const App: React.FC = () => {
     if (!activeId) return;
     const updated = profiles.map((p) => (p.id === activeId ? updater(p) : p));
     saveAllProfiles(updated);
+  };
+
+  /**
+   * Fire a one-shot completion celebration. If `message.id` is already in the
+   * profile's `celebrationsShown`, this is a no-op. Otherwise the message
+   * renders and its id is persisted so it won't fire again on reload.
+   */
+  const fireCelebration = (
+    baseProfile: StudentProfile,
+    message: CelebrationMessage,
+  ): StudentProfile => {
+    const already = (baseProfile.celebrationsShown || []).includes(message.id);
+    if (already) return baseProfile;
+    // Only show one celebration at a time (if multiple fire at once, the last
+    // one wins - in practice pack-complete + plan-milestone could both trigger,
+    // and the bigger milestone wins because it's fired second).
+    setCurrentCelebration(message);
+    return {
+      ...baseProfile,
+      celebrationsShown: [...(baseProfile.celebrationsShown || []), message.id],
+    };
+  };
+
+  /**
+   * After a completion update, check if the plan milestone threshold was just
+   * crossed and fire the celebration. Returns the (possibly-mutated) profile.
+   */
+  const maybeFirePlanMilestone = (p: StudentProfile): StudentProfile => {
+    const planId = p.selectedStudyPlanId;
+    if (!planId) return p;
+    const plan = getStudyPlan(planId);
+    if (!plan) return p;
+    const prog = getPlanProgress(plan, p, null);
+    const crossed = planMilestoneJustCrossed(prog.percent, planId, p.celebrationsShown || []);
+    if (crossed === null) return p;
+    return fireCelebration(p, planMilestoneMessage(planId, crossed));
+  };
+
+  /**
+   * STAMP-ready: all 12 L1 + 11 L2 packs + all 5 core capstones complete. The
+   * single most important celebration in the app - fires exactly once.
+   */
+  const maybeFireStampReady = (p: StudentProfile): StudentProfile => {
+    if ((p.celebrationsShown || []).includes('stamp-ready')) return p;
+    const completedPacks = new Set(p.completedTopicIds || []);
+    const completedCaps = new Set(p.completedCapstoneIds || []);
+    const l1l2Done = [...TOPIC_PACKS_BY_LEVEL[1], ...TOPIC_PACKS_BY_LEVEL[2]].every((pk) =>
+      completedPacks.has(pk.id),
+    );
+    const coreCapsDone = CAPSTONES_BY_TIER.core.every((c) => completedCaps.has(c.id));
+    if (!(l1l2Done && coreCapsDone)) return p;
+    return fireCelebration(p, stampReadyMessage());
   };
 
   const handleOnboarding = (data: {
@@ -133,11 +196,24 @@ const App: React.FC = () => {
   };
 
   const markCardMastered = (cardId: string) => {
-    updateActiveProfile((p) => ({
-      ...p,
-      flashcardsSeen: Array.from(new Set([...(p.flashcardsSeen || []), cardId])),
-      flashcardsMastered: Array.from(new Set([...(p.flashcardsMastered || []), cardId])),
-    }));
+    updateActiveProfile((p) => {
+      const mastered = Array.from(new Set([...(p.flashcardsMastered || []), cardId]));
+      let next: StudentProfile = {
+        ...p,
+        flashcardsSeen: Array.from(new Set([...(p.flashcardsSeen || []), cardId])),
+        flashcardsMastered: mastered,
+      };
+      // Deck-mastered celebration: if the currently-open deck now has every
+      // card in `mastered`, fire once.
+      if (openDeck) {
+        const masteredSet = new Set(mastered);
+        const allMastered = openDeck.cards.every((c) => masteredSet.has(c.id));
+        if (allMastered) {
+          next = fireCelebration(next, deckMasteredMessage(openDeck));
+        }
+      }
+      return next;
+    });
   };
 
   const markCardNotYet = (cardId: string) => {
@@ -149,21 +225,47 @@ const App: React.FC = () => {
 
   const handleMarkComplete = () => {
     if (!openPack) return;
-    updateActiveProfile((p) => ({
-      ...p,
-      completedTopicIds: Array.from(new Set([...(p.completedTopicIds || []), openPack.id])),
-      inProgressTopicId: undefined,
-    }));
+    const pack = openPack;
+    updateActiveProfile((p) => {
+      const wasAlreadyComplete = (p.completedTopicIds || []).includes(pack.id);
+      let next: StudentProfile = {
+        ...p,
+        completedTopicIds: Array.from(new Set([...(p.completedTopicIds || []), pack.id])),
+        inProgressTopicId: undefined,
+      };
+      if (!wasAlreadyComplete) {
+        // Chained against the new state so one completion can fire a pack
+        // celebration AND cross a milestone threshold. The later call wins
+        // on screen (by design - milestone > pack).
+        next = fireCelebration(next, packCompleteMessage(pack));
+        next = maybeFirePlanMilestone(next);
+        next = maybeFireStampReady(next);
+      }
+      return next;
+    });
     setOpenPack(null);
   };
 
   const handleMarkCapstoneComplete = () => {
     if (!openCapstone) return;
-    updateActiveProfile((p) => ({
-      ...p,
-      completedCapstoneIds: Array.from(new Set([...(p.completedCapstoneIds || []), openCapstone.id])),
-      inProgressCapstoneId: undefined,
-    }));
+    const capstone = openCapstone;
+    updateActiveProfile((p) => {
+      const wasAlreadyComplete = (p.completedCapstoneIds || []).includes(capstone.id);
+      let next: StudentProfile = {
+        ...p,
+        completedCapstoneIds: Array.from(new Set([...(p.completedCapstoneIds || []), capstone.id])),
+        inProgressCapstoneId: undefined,
+      };
+      if (!wasAlreadyComplete) {
+        // Word count from the intermediateMid (target) version.
+        const imVersion = capstone.versions.find((v) => v.label === 'intermediateMid');
+        const wc = imVersion?.wordCount ?? 0;
+        next = fireCelebration(next, capstoneCompleteMessage(capstone, wc));
+        next = maybeFirePlanMilestone(next);
+        next = maybeFireStampReady(next);
+      }
+      return next;
+    });
     setOpenCapstone(null);
   };
 
@@ -319,27 +421,37 @@ const App: React.FC = () => {
 
   // ---- Main app (active profile) ----
 
+  const celebrationOverlay = currentCelebration ? (
+    <Celebration
+      message={currentCelebration}
+      onDismiss={() => setCurrentCelebration(null)}
+    />
+  ) : null;
+
   // A) Topic pack overlay
   if (openPack) {
     const { progress, nextUp } = buildOverlayBundle(openPack.id, `Pack: ${openPack.titleEnglish}`, 'pack');
     return (
-      <Layout
-        activeTab={activeTab}
-        setActiveTab={(t) => setActiveTab(t as Tab)}
-        brandingName="सङ्कल्प"
-        onSwitch={handleSwitchStudent}
-      >
-        <TopicPackViewV2
-          pack={openPack}
-          aiEnabled={!!profile.aiAssessmentEnabled}
-          level={profile.currentLevel}
-          onBack={() => setOpenPack(null)}
-          onMarkComplete={handleMarkComplete}
-          onEvaluation={handleAddEvaluation}
-          progress={progress}
-          nextUp={nextUp}
-        />
-      </Layout>
+      <>
+        <Layout
+          activeTab={activeTab}
+          setActiveTab={(t) => setActiveTab(t as Tab)}
+          brandingName="सङ्कल्प"
+          onSwitch={handleSwitchStudent}
+        >
+          <TopicPackViewV2
+            pack={openPack}
+            aiEnabled={!!profile.aiAssessmentEnabled}
+            level={profile.currentLevel}
+            onBack={() => setOpenPack(null)}
+            onMarkComplete={handleMarkComplete}
+            onEvaluation={handleAddEvaluation}
+            progress={progress}
+            nextUp={nextUp}
+          />
+        </Layout>
+        {celebrationOverlay}
+      </>
     );
   }
 
@@ -351,22 +463,25 @@ const App: React.FC = () => {
       'capstone',
     );
     return (
-      <Layout
-        activeTab={activeTab}
-        setActiveTab={(t) => setActiveTab(t as Tab)}
-        brandingName="सङ्कल्प"
-        onSwitch={handleSwitchStudent}
-      >
-        <CapstoneView
-          capstone={openCapstone}
-          isCompleted={(profile.completedCapstoneIds || []).includes(openCapstone.id)}
-          onBack={() => setOpenCapstone(null)}
-          onMarkComplete={handleMarkCapstoneComplete}
-          onOpenPack={openPackById}
-          progress={progress}
-          nextUp={nextUp}
-        />
-      </Layout>
+      <>
+        <Layout
+          activeTab={activeTab}
+          setActiveTab={(t) => setActiveTab(t as Tab)}
+          brandingName="सङ्कल्प"
+          onSwitch={handleSwitchStudent}
+        >
+          <CapstoneView
+            capstone={openCapstone}
+            isCompleted={(profile.completedCapstoneIds || []).includes(openCapstone.id)}
+            onBack={() => setOpenCapstone(null)}
+            onMarkComplete={handleMarkCapstoneComplete}
+            onOpenPack={openPackById}
+            progress={progress}
+            nextUp={nextUp}
+          />
+        </Layout>
+        {celebrationOverlay}
+      </>
     );
   }
 
@@ -382,26 +497,29 @@ const App: React.FC = () => {
     // student isn't deferring a plan item - they're just browsing drills).
     const deckNextUp: NextUpCardProps = { ...nextUp, onSkip: undefined };
     return (
-      <Layout
-        activeTab={activeTab}
-        setActiveTab={(t) => setActiveTab(t as Tab)}
-        brandingName="सङ्कल्प"
-        onSwitch={handleSwitchStudent}
-      >
-        <DeckRunner
-          deck={openDeck}
-          seenIds={profile.flashcardsSeen || []}
-          masteredIds={profile.flashcardsMastered || []}
-          onCardSeen={markCardSeen}
-          onCardMastered={markCardMastered}
-          onCardNotYet={markCardNotYet}
-          onBack={() => setOpenDeck(null)}
-          onPrint={() => window.print()}
-          progress={progress}
-          nextUp={deckNextUp}
-        />
-        <PrintSheet deck={openDeck} />
-      </Layout>
+      <>
+        <Layout
+          activeTab={activeTab}
+          setActiveTab={(t) => setActiveTab(t as Tab)}
+          brandingName="सङ्कल्प"
+          onSwitch={handleSwitchStudent}
+        >
+          <DeckRunner
+            deck={openDeck}
+            seenIds={profile.flashcardsSeen || []}
+            masteredIds={profile.flashcardsMastered || []}
+            onCardSeen={markCardSeen}
+            onCardMastered={markCardMastered}
+            onCardNotYet={markCardNotYet}
+            onBack={() => setOpenDeck(null)}
+            onPrint={() => window.print()}
+            progress={progress}
+            nextUp={deckNextUp}
+          />
+          <PrintSheet deck={openDeck} />
+        </Layout>
+        {celebrationOverlay}
+      </>
     );
   }
 
@@ -409,17 +527,20 @@ const App: React.FC = () => {
   // clicking any sidebar tab (otherwise the nav appears unresponsive).
   if (showHowThisWorks) {
     return (
-      <Layout
-        activeTab={activeTab}
-        setActiveTab={(t) => {
-          markHowThisWorksSeen();
-          setActiveTab(t as Tab);
-        }}
-        brandingName="सङ्कल्प"
-        onSwitch={handleSwitchStudent}
-      >
-        <HowThisWorksView onContinue={markHowThisWorksSeen} />
-      </Layout>
+      <>
+        <Layout
+          activeTab={activeTab}
+          setActiveTab={(t) => {
+            markHowThisWorksSeen();
+            setActiveTab(t as Tab);
+          }}
+          brandingName="सङ्कल्प"
+          onSwitch={handleSwitchStudent}
+        >
+          <HowThisWorksView onContinue={markHowThisWorksSeen} />
+        </Layout>
+        {celebrationOverlay}
+      </>
     );
   }
 
@@ -570,14 +691,17 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout
-      activeTab={activeTab}
-      setActiveTab={(t) => setActiveTab(t as Tab)}
-      brandingName="सङ्कल्प"
-      onSwitch={handleSwitchStudent}
-    >
-      {renderTab()}
-    </Layout>
+    <>
+      <Layout
+        activeTab={activeTab}
+        setActiveTab={(t) => setActiveTab(t as Tab)}
+        brandingName="सङ्कल्प"
+        onSwitch={handleSwitchStudent}
+      >
+        {renderTab()}
+      </Layout>
+      {celebrationOverlay}
+    </>
   );
 };
 
