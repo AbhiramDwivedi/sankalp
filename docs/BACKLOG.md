@@ -219,7 +219,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 
 ## Tier 1 — Quick product wins (requires: Tier 0 complete)
 
-### [ ] 1.1 — "Next" navigation in pack / capstone / deck overlays
+### [x] 1.1 — "Next" navigation in pack / capstone / deck overlays — merged 2026-04-17 via PR #9 (`8a919e9`)
 **Brief**: At the bottom of every full-screen overlay (TopicPackView, CapstoneView, DeckRunner), add a `NextUpCard` that: (a) reads `planCursor(activeProfile)` to determine next item in the active plan; (b) shows "Next: {title}" with a 1-line preview of why it's next (e.g. "Introduces ne-construction, which C03 needs"); (c) primary CTA "Continue" opens it, secondary "Skip for now" marks as deferred in profile (add `deferredIds: string[]` to profile schema, migrate in `types.ts`). Also: mini-progress bar at top of overlay ("Pack 7 of 26 • Foundation plan • 23% complete"). Keyboard shortcut: `N` = next, `Esc` = back (already exists).
 **Done when**: opening any pack shows correct next item; clicking "Continue" navigates without returning to library; Skip hides it from the next-up resolver permanently (per profile); smoke test covers this.
 **Do not touch**: existing plan data in `content/studyPlans.ts` (plans are authored content). `planCursor()` logic itself is fine to extend. Types in `content/schema.ts` may need `deferredIds: string[]` added.
@@ -236,7 +236,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 **Done when**: triggers fire exactly once per achievement per profile (persisted in `profile.celebrationsShown: string[]`). Reduced-motion respected. Smoke test covers at least one trigger.
 **Do not touch**: existing completion logic in App.tsx beyond adding the celebration hook.
 
-### [ ] 1.3 — Flashcard print layout fix (depends on: 0.3 for verification)
+### [x] 1.3 — Flashcard print layout fix (depends on: 0.3 for verification) — merged 2026-04-17 via PR #8 (`efd06f6`). Original user complaint resolved.
 **Brief**: Fix `components/flashcards/PrintSheet.tsx` so 8-up duplex sheets print correctly. Requirements: (a) each card has fixed dimensions in inches (3.5"×2.5" — standard index card), not rem/flex; (b) `@page { size: letter; margin: 0.4in }` named page; (c) each card cell has `break-inside: avoid`; (d) front-sheet and back-sheet separated by `page-break-after: always`; (e) back-sheet is horizontally mirrored per-row so when duplexed along the long edge, card N front aligns with card N back (row order same, column order reversed); (f) test with 1 must-know deck (large), 1 theme deck (medium), 1 deck with count not divisible by 8 (partial final sheet). Also: separate screen view (single card, flip) from print view (8-up grid) cleanly — they should not share a layout component.
 **Done when**: visual regression test 0.3 passes with the new goldens; print preview in Chromium shows 8 cards per page, aligned; numbered test sheet (add a hidden card-index prop for visual verification) confirms back-side mirroring.
 **Do not touch**: `FlashcardItem.tsx` flip interaction (that's the screen view), `generated.ts` (content).

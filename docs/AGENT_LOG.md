@@ -16,6 +16,21 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #5 (scheduled cron 20:35 EDT, hourly)
+**Items attempted**: 1.1, 1.3
+**Items completed**:
+- **1.1** — Next navigation in overlays — PR #9 → merged as `8a919e9`. NextUpCard + OverlayProgress + nextUpResolver wired into TopicPackViewV2/CapstoneViewV2/DeckRunner. `planCursor()` extended with optional `deferredIds` parameter; new helpers `nextPlanItemAfter`/`planItemSequence`/`planProgressFor` appended below plan data. Plan data arrays byte-identical to main (scope-creep guard verified). `deferredIds` added to StudentProfile with migration. `N` keybind (input-guarded) triggers Continue; Esc unchanged. Continue opens next item without library round-trip.
+- **1.3** — Flashcard print layout fix (the original user complaint) — PR #8 → merged as `efd06f6`. New `PrintCard` component (purely presentational, no state/handlers). `PrintSheet` rewritten with CSS grid + explicit 3.5×2.5in card dimensions + `@page flashcard` named page scoped to flashcard printing. Back-sheet columns reversed per row so duplex-flip aligns. Partial final sheet fills with blank placeholder cells, no card shift. Visual goldens regenerated (front + back PNGs), mirroring verified programmatically for all partial sheet sizes. FlashcardItem (screen flip) and DeckRunner untouched.
+**Items deferred**: 1.2 (celebrations) and 1.4 (today-glance) — both remain ready. Next fire can pair them if they're file-disjoint (check: 1.2 touches Celebration.tsx + celebrations.ts + App.tsx + profile schema; 1.4 touches DashboardView.tsx + types.ts — shared touch on types.ts/App.tsx; best to do serially OR split so only one touches schema this fire).
+**Commits pushed**: `efd06f6` (PR #8), `8a919e9` (PR #9), plus this housekeeping commit.
+**Notes — second successful worktree run**:
+- Both implementers ran cleanly in parallel worktrees. No contention, no stashes. Total wall-clock for implementer+reviewer+merge of both items: ~75 min (1.1 took ~28 min of implementer time, 1.3 took ~48 min — partly due to parallel port-3000 clash during print-preview test, noted but resolved).
+- **Worktree cleanup with corrected junction-first order WORKED**: junctions removed safely (main's `node_modules/.bin/tsc` intact this time). Only follow-on issue: worktree directory shells can't be removed due to lingering Windows file-handle locks (likely vite dev server or playwright process still running). Git metadata is clean, branches deleted, junctions gone — the empty directories are harmless leftovers to sweep later. Documented as a minor follow-up.
+- **Scope-creep guard first real test**: 1.1's PR #9 touched content/studyPlans.ts (helper extensions only, plan data byte-identical). Included `CURRICULUM-AUTHORIZED` in the PR body with a clear rationale. The guard workflow from 0.8 would have blocked the PR without the token — this is exactly the intended use case. Reviewer independently verified plan data was byte-identical before approving.
+- Implementer for 1.1 flagged an environment issue: worktrees don't inherit the main repo's `.env.local`, and `geminiService.ts` instantiates `new GoogleGenAI({ apiKey: process.env.API_KEY })` at module load — without a key, smoke sees an empty page. They added a gitignored `.env.local` with a placeholder key in the worktree. Worth a future item to scaffold worktrees with a dummy `.env.local` so subagents don't each solve this themselves.
+
+---
+
 ## 2026-04-17 — Fire #4 (scheduled cron 19:35 EDT, hourly)
 **Items attempted**: 0.5, 0.8
 **Items completed**:
