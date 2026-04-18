@@ -178,7 +178,7 @@ export const Celebration: React.FC<CelebrationProps> = ({
             <div className="flex-1 min-w-0">
               {message.lead && (
                 <p
-                  className="text-lg font-black text-orange-600 leading-tight mb-1"
+                  className="text-lg font-black text-orange-700 leading-tight mb-1"
                   style={{ fontFamily: '"Tiro Devanagari Hindi", "Noto Sans Devanagari", serif' }}
                 >
                   {message.lead}
@@ -194,7 +194,7 @@ export const Celebration: React.FC<CelebrationProps> = ({
             type="button"
             onClick={onDismiss}
             aria-label="Dismiss"
-            className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+            className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-700 hover:bg-slate-100"
           >
             <X size={16} />
           </button>

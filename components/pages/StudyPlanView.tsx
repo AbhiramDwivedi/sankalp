@@ -33,7 +33,7 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
   return (
     <div className="space-y-12 animate-in fade-in duration-500">
       <header className="space-y-3">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
           Study plan
         </p>
         <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">
@@ -48,7 +48,7 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
       <section className="bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500 text-white rounded-[2.5rem] p-10 shadow-2xl print:shadow-none">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
           <div>
-            <Badge tone="amber" size="xs" className="bg-white text-orange-700 border-white mb-3">
+            <Badge tone="amber" size="xs" className="!bg-white !text-orange-700 !border-white mb-3">
               Your plan
             </Badge>
             <h2 className="text-4xl md:text-5xl font-black">{currentPlan.titleEnglish}</h2>
@@ -101,12 +101,12 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
                   : 'bg-white border-slate-100 hover:border-orange-300 hover:-translate-y-1'
               }`}
             >
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
                 {p.forLevels.join(' · ')}
               </p>
               <p className="font-black text-lg text-slate-900 mt-2">{p.titleEnglish}</p>
               <p className="text-sm text-slate-500 italic mt-1 leading-relaxed">{p.headline}</p>
-              <p className="text-xs font-black text-orange-600 mt-3">{p.durationWeeks} weeks</p>
+              <p className="text-xs font-black text-orange-700 mt-3">{p.durationWeeks} weeks</p>
             </button>
           ))}
         </div>
@@ -120,7 +120,7 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
           </h3>
           <button
             onClick={() => window.print()}
-            className="text-sm font-black text-orange-600 hover:text-orange-800"
+            className="text-sm font-black text-orange-700 hover:text-orange-800"
           >
             Print this plan →
           </button>
@@ -166,7 +166,7 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
                       Packs this week
                     </p>
                     {w.packs.length === 0 ? (
-                      <p className="text-sm italic text-slate-400">No new packs - capstones only.</p>
+                      <p className="text-sm italic text-slate-500">No new packs - capstones only.</p>
                     ) : (
                       <ul className="space-y-1">
                         {w.packs.map((pid) => {
@@ -177,13 +177,13 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
                               <button
                                 onClick={() => p && onOpenPack(pid)}
                                 className={`text-sm flex items-center gap-2 hover:underline text-left ${
-                                  done ? 'text-emerald-600' : 'text-slate-700'
+                                  done ? 'text-emerald-700' : 'text-slate-700'
                                 }`}
                               >
                                 {done ? (
                                   <CheckCircle2 size={14} />
                                 ) : (
-                                  <ArrowRight size={14} className="text-slate-400" />
+                                  <ArrowRight size={14} className="text-slate-500" />
                                 )}
                                 <span className="font-bold">
                                   {p ? p.titleEnglish : pid}
@@ -216,7 +216,7 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
                               key={cid}
                               onClick={() => onOpenCapstone(cid)}
                               className={`text-sm flex items-center gap-2 hover:underline text-left ${
-                                done ? 'text-emerald-600' : 'text-orange-700'
+                                done ? 'text-emerald-700' : 'text-orange-700'
                               }`}
                             >
                               {done ? <CheckCircle2 size={14} /> : <Flag size={14} />}

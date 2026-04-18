@@ -44,7 +44,7 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
     <div className="space-y-10 animate-in fade-in duration-500">
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-2">
             The Sankalp Library
           </p>
           <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">
@@ -113,7 +113,7 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
       {hiddenCount > 0 && (
         <div className="flex items-center justify-between gap-4 bg-emerald-50 border-2 border-emerald-100 rounded-2xl px-5 py-4">
           <div className="flex items-start gap-3 min-w-0">
-            <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle2 size={20} className="text-emerald-700 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-black text-emerald-900">
                 {hiddenCount} {hiddenCount === 1 ? 'pack is' : 'packs are'} hidden - already at your level
@@ -177,7 +177,8 @@ const TopicCard: React.FC<TopicCardProps> = ({ pack, completed, known, onClick }
   return (
     <button
       onClick={onClick}
-      className={`group text-left bg-white border-2 rounded-[1.75rem] overflow-hidden shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 ${
+      aria-label={`Open pack: ${pack.titleEnglish}`}
+      className={`group text-left bg-white border-2 rounded-[1.75rem] overflow-hidden shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 ${
         known ? 'border-emerald-200 opacity-75 hover:opacity-100' : 'border-slate-100 hover:border-orange-400'
       }`}
     >
@@ -186,7 +187,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ pack, completed, known, onClick }
         <div className="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-transparent" />
         <div className="relative z-10 h-full p-5 flex flex-col justify-between text-white">
           <div className="flex items-center justify-between">
-            <Badge tone="amber" size="xs" className="bg-white/20 text-white border-white/30">
+            <Badge tone="amber" size="xs" className="!bg-white/20 !text-white !border-white/30">
               #{pack.order}
             </Badge>
             {completed ? (
@@ -209,7 +210,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ pack, completed, known, onClick }
           {pack.titleEnglish}
         </h3>
         <p className="text-xs text-slate-500 italic leading-relaxed line-clamp-2">{pack.hook}</p>
-        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 pt-2">
+        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 pt-2">
           <BookOpen size={12} />
           <span>{tokens.label}</span>
           <span className="mx-1">·</span>

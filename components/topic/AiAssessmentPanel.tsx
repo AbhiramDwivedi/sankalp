@@ -87,7 +87,7 @@ export const AiAssessmentPanel: React.FC<AiAssessmentPanelProps> = ({
             onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])}
             className="hidden"
           />
-          <Upload size={28} className="mx-auto mb-2 text-slate-400" />
+          <Upload size={28} className="mx-auto mb-2 text-slate-500" />
           <p className="text-sm font-bold">
             {imageData ? 'Image ready - click to change' : 'Upload a photo of handwritten essay'}
           </p>

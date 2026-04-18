@@ -32,7 +32,7 @@ export const CapstonesLibraryView: React.FC<CapstonesLibraryViewProps> = ({
   return (
     <div className="space-y-12 animate-in fade-in duration-500">
       <header className="space-y-3">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
           Capstones
         </p>
         <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">
@@ -61,7 +61,7 @@ export const CapstonesLibraryView: React.FC<CapstonesLibraryViewProps> = ({
       {hiddenCount > 0 && (
         <div className="flex items-center justify-between gap-4 bg-emerald-50 border-2 border-emerald-100 rounded-2xl px-5 py-4">
           <div className="flex items-start gap-3 min-w-0">
-            <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle2 size={20} className="text-emerald-700 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-black text-emerald-900">
                 {hiddenCount} {hiddenCount === 1 ? 'capstone is' : 'capstones are'} hidden - at or below your level
@@ -115,7 +115,7 @@ const TierGroup: React.FC<{
 }> = ({ label, subtitle, icon, capstones, completedSet, knownSet, onOpenCapstone }) => (
   <section className="space-y-5">
     <div className="flex items-center gap-4">
-      <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center">
+      <div className="w-12 h-12 bg-orange-100 text-orange-700 rounded-2xl flex items-center justify-center">
         {icon}
       </div>
       <div>
@@ -125,7 +125,7 @@ const TierGroup: React.FC<{
     </div>
 
     {capstones.length === 0 ? (
-      <p className="text-slate-400 italic text-sm">No capstones authored yet in this tier.</p>
+      <p className="text-slate-500 italic text-sm">No capstones authored yet in this tier.</p>
     ) : (
       <div className="grid md:grid-cols-2 gap-5">
         {capstones.map((c) => (
@@ -152,7 +152,8 @@ const CapstoneCard: React.FC<{ capstone: Capstone; done: boolean; known?: boolea
   return (
     <button
       onClick={onClick}
-      className={`group text-left bg-white rounded-[2rem] border-2 shadow-sm hover:shadow-xl overflow-hidden transition-all hover:-translate-y-1 ${
+      aria-label={`Open capstone C${String(capstone.order).padStart(2, '0')}: ${capstone.titleEnglish}`}
+      className={`group text-left bg-white rounded-[2rem] border-2 shadow-sm hover:shadow-xl overflow-hidden transition-all hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 ${
         known ? 'border-emerald-200 opacity-75 hover:opacity-100' : 'border-slate-100 hover:border-orange-400'
       }`}
     >
@@ -160,7 +161,7 @@ const CapstoneCard: React.FC<{ capstone: Capstone; done: boolean; known?: boolea
         <CapstoneHeroArt capstone={capstone} />
         <div className="absolute inset-0 bg-gradient-to-tr from-black/50 via-transparent to-transparent" />
         <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
-          <Badge tone="amber" size="xs" className="bg-white text-orange-700 border-white">
+          <Badge tone="amber" size="xs" className="!bg-white !text-orange-700 !border-white">
             C{String(capstone.order).padStart(2, '0')}
           </Badge>
           {capstone.isMockExam && (
@@ -183,15 +184,15 @@ const CapstoneCard: React.FC<{ capstone: Capstone; done: boolean; known?: boolea
         <Badge tone="orange" size="xs">
           {tokens.label} · {capstone.tier === 'push' ? 'Push' : 'Core'}
         </Badge>
-        <h3 className="text-xl font-black text-slate-900 group-hover:text-orange-600 transition-colors">
+        <h3 className="text-xl font-black text-slate-900 group-hover:text-orange-700 transition-colors">
           {capstone.titleEnglish}
         </h3>
         <p className="text-sm text-slate-500 italic leading-relaxed">{capstone.hook}</p>
         <div className="flex items-center justify-between pt-2">
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
             Draws from {capstone.draws.length} packs
           </p>
-          <ArrowRight size={18} className="text-slate-400 group-hover:text-orange-600" />
+          <ArrowRight size={18} className="text-slate-500 group-hover:text-orange-700" />
         </div>
       </div>
     </button>

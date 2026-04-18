@@ -195,7 +195,7 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
               >
                 <span
                   className={`shrink-0 w-7 h-7 rounded-xl flex items-center justify-center ${
-                    isActive ? `${tokens.accentBg} text-white` : 'bg-white text-slate-400 group-hover:text-slate-700'
+                    isActive ? `${tokens.accentBg} text-white` : 'bg-white text-slate-500 group-hover:text-slate-700'
                   }`}
                 >
                   {t.icon}
@@ -242,7 +242,7 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
 
       {nextUp && <NextUpCard {...nextUp} />}
 
-      <footer className="pt-10 border-t-4 border-dotted border-slate-100 flex justify-between items-end text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] print:text-slate-400">
+      <footer className="pt-10 border-t-4 border-dotted border-slate-100 flex justify-between items-end text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] print:text-slate-500">
         <span>Student: ____________________________</span>
         <span className="text-center">सङ्कल्प · {pack.id}</span>
         <span>Date: ________________</span>
@@ -318,7 +318,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ pack, goTo }) => {
     <section className="space-y-10">
       {/* Hook + outcomes */}
       <div className="bg-white rounded-[2.5rem] border-2 border-slate-100 p-8 md:p-12 shadow-sm">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-3">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-3">
           What you'll be able to do after this pack
         </p>
         <ul className="grid md:grid-cols-2 gap-x-8 gap-y-3">
@@ -329,7 +329,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ pack, goTo }) => {
             </li>
           ))}
         </ul>
-        <div className="mt-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400">
+        <div className="mt-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500">
           <Clock size={12} />
           <span>Total time: {pack.rationale.estimatedTime}</span>
         </div>
@@ -337,7 +337,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ pack, goTo }) => {
 
       {/* Action steps */}
       <div>
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-4">
           Your path through this pack
         </p>
         <ol className="space-y-3">
@@ -362,7 +362,7 @@ const StudyTab: React.FC<StudyTabProps> = ({ pack, goTo }) => {
                     </p>
                     <p className="text-sm text-slate-500 leading-snug mt-1">{s.body}</p>
                     {s.minutes && (
-                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-2 flex items-center gap-1.5">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mt-2 flex items-center gap-1.5">
                         <Clock size={10} /> {s.minutes}
                       </p>
                     )}
@@ -423,7 +423,7 @@ const ReferenceTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
           <div key={group}>
             <div className="flex items-center gap-3 mb-4">
               <Badge tone="orange" size="xs">{group.replace(/-/g, ' ')}</Badge>
-              <span className="text-xs font-semibold text-slate-400">{entries.length} words</span>
+              <span className="text-xs font-semibold text-slate-500">{entries.length} words</span>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 print:grid-cols-3 print:gap-2">
               {entries.map((e, i) => (
@@ -484,7 +484,7 @@ const ReferenceTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
 
 const RefHeader: React.FC<{ id: string; eyebrow: string; title: string }> = ({ id, eyebrow, title }) => (
   <header id={id} className="space-y-1 scroll-mt-32">
-    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">{eyebrow}</p>
+    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">{eyebrow}</p>
     <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900">{title}</h2>
   </header>
 );
@@ -559,7 +559,7 @@ const RefMuhavare: React.FC<{ muhavare: Muhavara[] }> = ({ muhavare }) => (
         <DevanagariText as="p" size="md" weight="black" className="text-violet-800">
           {m.phrase}
         </DevanagariText>
-        <p className="text-xs italic text-slate-400 mt-1">Lit: {m.literal}</p>
+        <p className="text-xs italic text-slate-500 mt-1">Lit: {m.literal}</p>
         <p className="text-sm font-bold text-slate-800 mt-3 leading-relaxed">{m.meaning}</p>
         <div className="mt-4 bg-violet-50 rounded-xl p-3">
           <DevanagariText as="p" size="sm" weight="bold" className="text-slate-800 leading-relaxed">
@@ -638,7 +638,7 @@ const WriteTab: React.FC<WriteTabProps> = ({ pack, aiEnabled, onEvaluation }) =>
           <details className="bg-white border border-slate-100 rounded-2xl p-5 group" open>
             <summary className="cursor-pointer flex items-center justify-between">
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">What to notice</span>
-              <ChevronDown size={14} className="text-slate-400 group-open:rotate-180 transition-transform" />
+              <ChevronDown size={14} className="text-slate-500 group-open:rotate-180 transition-transform" />
             </summary>
             <ul className="space-y-2 mt-4">
               {pack.anchor.highlights.map((h, i) => (
@@ -782,10 +782,10 @@ const ModelEssayBody: React.FC<{ essay: ModelEssay; idx: number }> = ({ essay, i
     <article className="bg-white border-2 border-slate-100 rounded-[2.5rem] overflow-hidden shadow-md print:shadow-none print:break-inside-avoid-page">
       <header className="bg-gradient-to-br from-orange-600 to-amber-600 text-white p-8 md:p-10">
         <div className="flex items-center gap-3 flex-wrap mb-3">
-          <Badge tone="amber" size="xs" className="bg-white/20 text-white border-white/30">Essay {idx + 1}</Badge>
-          <Badge tone="amber" size="xs" className="bg-white/20 text-white border-white/30">{essay.wordCount} words</Badge>
+          <Badge tone="amber" size="xs" className="!bg-white/20 !text-white !border-white/30">Essay {idx + 1}</Badge>
+          <Badge tone="amber" size="xs" className="!bg-white/20 !text-white !border-white/30">{essay.wordCount} words</Badge>
           {essay.tenseUsed.map((t) => (
-            <Badge key={t} tone="amber" size="xs" className="bg-white/20 text-white border-white/30">{t} tense</Badge>
+            <Badge key={t} tone="amber" size="xs" className="!bg-white/20 !text-white !border-white/30">{t} tense</Badge>
           ))}
         </div>
         <p className="text-sm font-medium opacity-90 mb-1">Prompt:</p>
@@ -812,7 +812,7 @@ const ModelEssayBody: React.FC<{ essay: ModelEssay; idx: number }> = ({ essay, i
                 </DevanagariText>
                 {anns.length > 0 && (
                   <aside className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 self-start">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">
                       Paragraph {pi + 1} - what to notice
                     </p>
                     {anns.map((a, ai) => (
@@ -846,7 +846,7 @@ const PromptCard: React.FC<{
 }> = ({ prompt, idx, aiEnabled, isOpen, onToggleAi }) => (
   <li className="bg-white rounded-2xl border-2 border-slate-100 p-6 md:p-8 print:break-inside-avoid">
     <div className="flex items-start gap-4">
-      <span className="font-hindi-display text-3xl font-black text-orange-600 shrink-0 leading-none">
+      <span className="font-hindi-display text-3xl font-black text-orange-700 shrink-0 leading-none">
         {idx + 1}
       </span>
       <div className="flex-1 space-y-3">
@@ -913,11 +913,11 @@ const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
       {/* Why this pack */}
       <div className="bg-gradient-to-br from-amber-50 via-orange-50/50 to-white border-2 border-amber-100 rounded-[2.5rem] p-8 md:p-12 shadow-sm space-y-8 print:break-inside-avoid">
         <div className="flex items-start gap-5">
-          <div className="w-14 h-14 bg-orange-600 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-orange-100">
+          <div className="w-14 h-14 bg-orange-700 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-orange-100">
             <Compass size={26} strokeWidth={2.5} />
           </div>
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-700">
               For the teacher
             </p>
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
@@ -933,7 +933,7 @@ const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
 
         <div className="grid md:grid-cols-2 gap-5">
           <div className="bg-white rounded-2xl p-5 border border-slate-100">
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">
               {CURRICULUM.creditMapping.issuer} sub-topics covered
             </p>
             <ul className="space-y-1.5">
@@ -946,7 +946,7 @@ const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
             </ul>
           </div>
           <div className="bg-white rounded-2xl p-5 border border-slate-100">
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">
               Rubric axes trained
             </p>
             <RubricAxisTags axes={r.trains} size="sm" />
@@ -965,7 +965,7 @@ const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
             <p className="text-sm font-black text-indigo-900 leading-snug">{positionLabel[r.positionOnArc]}</p>
           </div>
           <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4">
-            <p className="text-[10px] font-black uppercase tracking-widest text-emerald-600 mb-1 flex items-center gap-1.5">
+            <p className="text-[10px] font-black uppercase tracking-widest text-emerald-700 mb-1 flex items-center gap-1.5">
               <Clock size={11} /> Expected time
             </p>
             <p className="text-sm font-black text-emerald-900 leading-snug">{r.estimatedTime}</p>
@@ -979,14 +979,14 @@ const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
         </div>
 
         <div className="bg-white rounded-2xl p-5 border border-slate-100">
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-2">
-            <Target size={12} className="text-emerald-600" />
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-3 flex items-center gap-2">
+            <Target size={12} className="text-emerald-700" />
             Pack-level objectives
           </p>
           <ul className="space-y-2">
             {pack.objectives.map((o, i) => (
               <li key={i} className="text-sm font-bold text-slate-800 flex items-start gap-2 leading-relaxed">
-                <span className="text-emerald-600 mt-0.5">✓</span>
+                <span className="text-emerald-700 mt-0.5">✓</span>
                 <span className="flex-1">{o.text}</span>
                 <RubricAxisTags axes={o.trains} size="sm" />
               </li>
@@ -1006,7 +1006,7 @@ const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
         <div className="space-y-6">
           {pack.modelEssays.map((e, i) => (
             <div key={i} className="space-y-2">
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
                 Essay {i + 1}
               </p>
               <VerdictCard verdict={e.verdict} />

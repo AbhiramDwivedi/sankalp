@@ -67,7 +67,7 @@ export const FlashcardsLibraryView: React.FC<FlashcardsLibraryViewProps> = ({
     <div className="space-y-10 animate-in fade-in duration-500">
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-2">
             Flashcards
           </p>
           <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">
@@ -94,7 +94,7 @@ export const FlashcardsLibraryView: React.FC<FlashcardsLibraryViewProps> = ({
         <button
           onClick={() => setFilter('all')}
           className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest ${
-            filter === 'all' ? 'bg-orange-600 text-white shadow-lg' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+            filter === 'all' ? 'bg-orange-700 text-white shadow-lg' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
           }`}
         >
           All {DECKS.length}
@@ -107,7 +107,7 @@ export const FlashcardsLibraryView: React.FC<FlashcardsLibraryViewProps> = ({
               key={k}
               onClick={() => setFilter(k)}
               className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest ${
-                filter === k ? 'bg-orange-600 text-white shadow-lg' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                filter === k ? 'bg-orange-700 text-white shadow-lg' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               {kindMeta[k].label} ({DECKS_BY_KIND[k].length})
@@ -118,7 +118,7 @@ export const FlashcardsLibraryView: React.FC<FlashcardsLibraryViewProps> = ({
       {hiddenCount > 0 && (
         <div className="flex items-center justify-between gap-4 bg-emerald-50 border-2 border-emerald-100 rounded-2xl px-5 py-4">
           <div className="flex items-start gap-3 min-w-0">
-            <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
+            <CheckCircle2 size={20} className="text-emerald-700 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-black text-emerald-900">
                 {hiddenCount} pack-review {hiddenCount === 1 ? 'deck is' : 'decks are'} hidden - already at your level
@@ -164,10 +164,11 @@ const DeckCard: React.FC<{
   return (
     <button
       onClick={onClick}
-      className={`group text-left bg-white rounded-[1.75rem] border-2 ${meta.color} hover:border-orange-400 shadow-sm hover:shadow-xl overflow-hidden transition-all hover:-translate-y-0.5 p-6 space-y-3`}
+      aria-label={`Open deck: ${deck.title}`}
+      className={`group text-left bg-white rounded-[1.75rem] border-2 ${meta.color} hover:border-orange-400 shadow-sm hover:shadow-xl overflow-hidden transition-all hover:-translate-y-0.5 p-6 space-y-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2`}
     >
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-white border-2 border-slate-100 rounded-xl flex items-center justify-center text-orange-600">
+        <div className="w-10 h-10 bg-white border-2 border-slate-100 rounded-xl flex items-center justify-center text-orange-700">
           <Layers size={18} />
         </div>
         <Badge tone="slate" size="xs">{meta.label}</Badge>
@@ -175,7 +176,7 @@ const DeckCard: React.FC<{
       </div>
 
       <div>
-        <h3 className="text-xl font-black text-slate-900 group-hover:text-orange-600 transition-colors">
+        <h3 className="text-xl font-black text-slate-900 group-hover:text-orange-700 transition-colors">
           {deck.title}
         </h3>
         {deck.subtitle && (
@@ -190,7 +191,7 @@ const DeckCard: React.FC<{
         <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
           {deck.cards.length} cards · {masteredCount} mastered
         </p>
-        <ArrowRight size={16} className="text-slate-400 group-hover:text-orange-600" />
+        <ArrowRight size={16} className="text-slate-500 group-hover:text-orange-700" />
       </div>
 
       <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">

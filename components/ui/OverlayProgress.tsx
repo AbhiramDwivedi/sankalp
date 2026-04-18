@@ -35,8 +35,8 @@ export const OverlayProgress: React.FC<OverlayProgressProps> = ({ position, plan
       </span>
       {planName && (
         <>
-          <span className="text-slate-300">•</span>
-          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-500">
+          <span className="text-slate-500" aria-hidden="true">•</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-600">
             {planName}
           </span>
         </>
@@ -45,6 +45,7 @@ export const OverlayProgress: React.FC<OverlayProgressProps> = ({ position, plan
         <div
           className="flex-1 h-1.5 rounded-full bg-slate-200 overflow-hidden"
           role="progressbar"
+          aria-label={`${position}: ${pct}% complete`}
           aria-valuenow={pct}
           aria-valuemin={0}
           aria-valuemax={100}

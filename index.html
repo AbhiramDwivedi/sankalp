@@ -37,6 +37,42 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 
         /* ------------------------------------------------------------------
+           Accessibility: keyboard focus
+           Default focus-visible ring for ALL interactive elements. Components
+           that need a custom focus style (e.g. sidebar nav, card-as-button)
+           override via Tailwind utilities; this global rule is the safety net
+           for anything we forgot. Color is saffron-500 to match the brand.
+           ------------------------------------------------------------------ */
+        :focus-visible {
+            outline: 2px solid #f97316;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        /* Suppress the global ring on elements that already declare their own
+           focus-visible style via Tailwind (focus-visible:ring-*). */
+        .focus-visible\:ring-2:focus-visible {
+            outline: none;
+        }
+
+        /* ------------------------------------------------------------------
+           Reduced motion: respect the OS preference everywhere.
+           Components like Celebration scope their own keyframes and already
+           react to prefers-reduced-motion. This rule covers the Tailwind
+           utility classes (`animate-in`, `animate-pulse`, `transition-*`)
+           that are sprinkled across the app's hover/enter animations.
+           ------------------------------------------------------------------ */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ------------------------------------------------------------------
            Print layout
            ------------------------------------------------------------------ */
         @media print {

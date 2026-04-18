@@ -74,13 +74,13 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
     <div className="space-y-12 max-w-5xl animate-in fade-in duration-500">
       <button
         onClick={onBack}
-        className="flex items-center gap-2 text-sm font-black text-slate-500 hover:text-orange-600 no-print"
+        className="flex items-center gap-2 text-sm font-black text-slate-500 hover:text-orange-700 no-print"
       >
         <ArrowLeft size={16} /> Back
       </button>
 
       <header className="space-y-4">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
           Credit audit
         </p>
         <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">
@@ -230,7 +230,7 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
             ['Weak ne-construction in past tense', 'NeConstructionDiagram + grammar-essentials deck; reinforced in every pack with past-tense grammar notes.'],
           ].map(([mode, mitig], i) => (
             <div key={i} className="flex items-start gap-3 border-b border-slate-100 pb-3 last:border-b-0">
-              <CheckCircle2 size={16} className="text-emerald-600 shrink-0 mt-1" strokeWidth={3} />
+              <CheckCircle2 size={16} className="text-emerald-700 shrink-0 mt-1" strokeWidth={3} />
               <div>
                 <p className="font-black text-slate-900">{mode}</p>
                 <p className="text-slate-600 italic leading-relaxed">{mitig}</p>
@@ -255,7 +255,7 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
                 href="https://github.com/AbhiramDwivedi/sankalp/actions"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-orange-600 hover:text-orange-700 font-bold underline"
+                className="text-orange-700 hover:text-orange-700 font-bold underline"
               >
                 github.com/AbhiramDwivedi/sankalp/actions
               </a>
@@ -265,7 +265,7 @@ export const CreditAuditView: React.FC<CreditAuditViewProps> = ({ onBack }) => {
         </div>
       </section>
 
-      <p className="text-xs text-slate-400 italic">
+      <p className="text-xs text-slate-500 italic">
         This page is a live view of the same audit that <code>scripts/credit-audit.ts</code> writes to <code>docs/CREDIT_AUDIT.md</code>. Any gap shown here is a real gap - fix the content, not this page.
       </p>
     </div>
@@ -284,7 +284,7 @@ const FreshnessBanner: React.FC = () => {
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <span
           className={`inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full ${
-            ok ? 'bg-emerald-600 text-white' : 'bg-rose-600 text-white'
+            ok ? 'bg-emerald-700 text-white' : 'bg-rose-600 text-white'
           }`}
         >
           {ok ? <CheckCircle2 size={14} strokeWidth={3} /> : null}
@@ -373,7 +373,7 @@ const StatCard: React.FC<{ label: string; value: string; ok?: boolean; gate?: st
     <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">{label}</p>
     <p className="text-2xl font-black text-slate-900">{value}</p>
     {gate && (
-      <p className={`text-[10px] font-black mt-1 ${ok ? 'text-emerald-600' : 'text-rose-600'}`}>
+      <p className={`text-[10px] font-black mt-1 ${ok ? 'text-emerald-700' : 'text-rose-600'}`}>
         Gate: {gate} · {ok ? 'PASS' : 'FAIL'}
       </p>
     )}

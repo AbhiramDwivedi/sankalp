@@ -17,14 +17,24 @@ const DEFAULT = '#ffffff';
 const ACCENT = 'rgba(255,255,255,0.6)';
 
 // Utility: all motifs render at 240×240, then PackHeroArt scales.
-const box = (children: React.ReactNode) => (
+//
+// Accessibility notes:
+//   - Motifs ALWAYS nest inside PackHeroArt / CapstoneHeroArt, which set
+//     role="img" and aria-label on the OUTER svg. The inner motif <svg>
+//     therefore stays aria-hidden so screen readers don't double-announce.
+//   - Each motif still embeds a <title> element. Browsers surface this as
+//     a hover tooltip and assistive tech can opt-in via aria-describedby
+//     if a sibling component needs it. It also documents the motif for
+//     future contributors who view the rendered SVG directly.
+const box = (title: string, children: React.ReactNode) => (
   <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+    <title>{title}</title>
     {children}
   </svg>
 );
 
 /** Thali - round platter with four small bowls + flatbread. */
-export const MotifThali: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifThali: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Thali plate with bowls', 
   <>
     <circle cx="120" cy="120" r="96" fill="none" stroke={color} strokeWidth="4" opacity="0.9" />
     <circle cx="120" cy="120" r="80" fill={color} opacity="0.12" />
@@ -38,7 +48,7 @@ export const MotifThali: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACC
 );
 
 /** Diya - oil lamp with flame. */
-export const MotifDiya: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifDiya: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Diya oil lamp with flame', 
   <>
     <path d="M120 80 Q116 70 120 56 Q124 70 120 80 Q130 92 120 108 Q110 92 120 80 Z" fill={accent} />
     <circle cx="120" cy="72" r="3" fill={color} />
@@ -50,7 +60,7 @@ export const MotifDiya: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCE
 );
 
 /** Rickshaw - three-wheeler silhouette. */
-export const MotifRickshaw: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifRickshaw: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Auto-rickshaw', 
   <>
     <rect x="60" y="90" width="120" height="60" rx="8" fill={color} opacity="0.85" />
     <path d="M60 90 L80 60 L160 60 L180 90 Z" fill={color} />
@@ -64,7 +74,7 @@ export const MotifRickshaw: React.FC<MotifProps> = ({ color = DEFAULT, accent = 
 );
 
 /** Umbrella + raindrops (monsoon). */
-export const MotifUmbrella: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifUmbrella: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Umbrella with monsoon raindrops', 
   <>
     <path d="M40 110 Q120 40 200 110 Z" fill={color} opacity="0.9" />
     <path d="M40 110 Q80 100 120 110" fill="none" stroke={accent} strokeWidth="2" />
@@ -79,7 +89,7 @@ export const MotifUmbrella: React.FC<MotifProps> = ({ color = DEFAULT, accent = 
 );
 
 /** Books - stack with pencil cup. */
-export const MotifBooks: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifBooks: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Stack of books with pencil cup', 
   <>
     <rect x="50" y="150" width="110" height="20" fill={color} />
     <rect x="60" y="130" width="90" height="20" fill={accent} />
@@ -93,7 +103,7 @@ export const MotifBooks: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACC
 );
 
 /** Sunrise - sun behind layered hills. */
-export const MotifSunrise: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifSunrise: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Sunrise behind layered hills', 
   <>
     <circle cx="120" cy="130" r="40" fill={color} opacity="0.9" />
     <path d="M0 170 Q60 140 120 160 Q180 180 240 150 L240 240 L0 240 Z" fill={accent} />
@@ -107,7 +117,7 @@ export const MotifSunrise: React.FC<MotifProps> = ({ color = DEFAULT, accent = A
 );
 
 /** Temple - tiered arch silhouette. */
-export const MotifTemple: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifTemple: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Temple silhouette', 
   <>
     <rect x="60" y="160" width="120" height="50" fill={color} opacity="0.9" />
     <path d="M70 160 L120 100 L170 160 Z" fill={color} />
@@ -121,7 +131,7 @@ export const MotifTemple: React.FC<MotifProps> = ({ color = DEFAULT, accent = AC
 );
 
 /** Bazaar - canopy with hanging bulbs. */
-export const MotifBazaar: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifBazaar: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Bazaar canopy with hanging bulbs', 
   <>
     <path d="M30 90 L210 90 L190 60 L50 60 Z" fill={color} opacity="0.85" />
     <path d="M50 60 L50 90 M90 60 L90 90 M130 60 L130 90 M170 60 L170 90 M210 90 L210 60 M30 90 L30 60" stroke={accent} strokeWidth="2" />
@@ -141,7 +151,7 @@ export const MotifBazaar: React.FC<MotifProps> = ({ color = DEFAULT, accent = AC
 );
 
 /** Clock - round face with marks. */
-export const MotifClock: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifClock: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Clock face', 
   <>
     <circle cx="120" cy="120" r="80" fill="none" stroke={color} strokeWidth="5" />
     <circle cx="120" cy="120" r="72" fill={color} opacity="0.08" />
@@ -156,7 +166,7 @@ export const MotifClock: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACC
 );
 
 /** Family - three-figure silhouette. */
-export const MotifFamily: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifFamily: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Family of three figures', 
   <>
     <circle cx="80" cy="100" r="16" fill={color} />
     <path d="M58 200 Q80 132 102 200 Z" fill={color} />
@@ -169,7 +179,7 @@ export const MotifFamily: React.FC<MotifProps> = ({ color = DEFAULT, accent = AC
 );
 
 /** Kurta - on hanger. */
-export const MotifKurta: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifKurta: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Kurta on a hanger', 
   <>
     <path d="M120 50 Q110 60 120 70 Q130 60 120 50 Z" fill={color} />
     <path d="M90 80 L150 80 L180 100 L170 130 L160 110 L160 200 L80 200 L80 110 L70 130 L60 100 Z" fill={color} opacity="0.9" />
@@ -183,7 +193,7 @@ export const MotifKurta: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACC
 );
 
 /** Suitcase + plane contrail. */
-export const MotifSuitcase: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifSuitcase: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Suitcase with airplane contrail', 
   <>
     <rect x="50" y="120" width="140" height="90" rx="8" fill={color} opacity="0.9" />
     <rect x="100" y="100" width="40" height="20" rx="4" fill="none" stroke={color} strokeWidth="4" />
@@ -196,7 +206,7 @@ export const MotifSuitcase: React.FC<MotifProps> = ({ color = DEFAULT, accent = 
 );
 
 /** Notebook - open with pen. */
-export const MotifNotebook: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifNotebook: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Open notebook with pen', 
   <>
     <path d="M50 80 L120 70 L120 200 L50 210 Z" fill={color} opacity="0.9" />
     <path d="M190 80 L120 70 L120 200 L190 210 Z" fill={color} opacity="0.75" />
@@ -213,7 +223,7 @@ export const MotifNotebook: React.FC<MotifProps> = ({ color = DEFAULT, accent = 
 );
 
 /** Cricket - bat + stumps. */
-export const MotifCricket: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifCricket: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Cricket bat and stumps', 
   <>
     <rect x="70" y="170" width="4" height="50" fill={color} />
     <rect x="90" y="170" width="4" height="50" fill={color} />
@@ -228,7 +238,7 @@ export const MotifCricket: React.FC<MotifProps> = ({ color = DEFAULT, accent = A
 );
 
 /** Namaste - two hands in greeting. */
-export const MotifNamaste: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box(
+export const MotifNamaste: React.FC<MotifProps> = ({ color = DEFAULT, accent = ACCENT }) => box('Namaste hands in greeting', 
   <>
     <circle cx="120" cy="180" r="50" fill={color} opacity="0.15" />
     <path d="M100 200 L100 120 Q100 100 112 90 L120 84 L128 90 Q140 100 140 120 L140 200 Z" fill={color} />

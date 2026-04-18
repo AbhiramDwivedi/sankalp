@@ -44,7 +44,7 @@ export const Section: React.FC<SectionProps> = ({
   >
     <header className="space-y-2">
       {eyebrow && (
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
           {eyebrow}
         </p>
       )}

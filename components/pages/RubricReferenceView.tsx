@@ -18,7 +18,7 @@ export const RubricReferenceView: React.FC<RubricReferenceViewProps> = ({ onBack
     </button>
 
     <header className="space-y-3">
-      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Reference</p>
+      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Reference</p>
       <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
         {CURRICULUM.examSystem.shortName} Rubric · {CURRICULUM.creditMapping.issuer} Credit Mapping
       </h1>
@@ -64,7 +64,7 @@ export const RubricReferenceView: React.FC<RubricReferenceViewProps> = ({ onBack
 
     <section className="space-y-4">
       <h2 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-3">
-        <Target size={24} className="text-emerald-600" /> Rubric Axes
+        <Target size={24} className="text-emerald-700" /> Rubric Axes
       </h2>
       {RUBRIC_AXES.map((ax) => (
         <div key={ax.id} className="bg-white border-2 border-slate-100 rounded-2xl p-6">
@@ -75,7 +75,7 @@ export const RubricReferenceView: React.FC<RubricReferenceViewProps> = ({ onBack
           <p className="text-sm text-slate-500 italic mb-4">{ax.oneLiner}</p>
           <div className="grid md:grid-cols-2 gap-5">
             <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">
                 What raters check
               </p>
               <ul className="space-y-1 text-slate-700 text-sm">
@@ -85,7 +85,7 @@ export const RubricReferenceView: React.FC<RubricReferenceViewProps> = ({ onBack
               </ul>
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">
                 How to train
               </p>
               <ul className="space-y-1 text-slate-700 text-sm">
@@ -101,7 +101,7 @@ export const RubricReferenceView: React.FC<RubricReferenceViewProps> = ({ onBack
 
     <section className="space-y-4">
       <h2 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-3">
-        <BookOpen size={24} className="text-orange-600" /> {CURRICULUM.creditMapping.issuer} Credit Ladder
+        <BookOpen size={24} className="text-orange-700" /> {CURRICULUM.creditMapping.issuer} Credit Ladder
       </h2>
       <div className="grid md:grid-cols-2 gap-4">
         {FCPS_CREDIT_SUMMARY.map((c) => (

@@ -111,14 +111,14 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-3">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-sm font-black text-slate-500 hover:text-orange-600"
+          className="flex items-center gap-2 text-sm font-black text-slate-500 hover:text-orange-700"
         >
           <ArrowLeft size={16} /> Back to decks
         </button>
         <div className="flex gap-2 flex-wrap">
           <button
             onClick={() => setIsShuffled((s) => !s)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-black ${isShuffled ? 'bg-orange-600 text-white' : 'bg-slate-100 text-slate-700'}`}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-black ${isShuffled ? 'bg-orange-700 text-white' : 'bg-slate-100 text-slate-700'}`}
           >
             <Shuffle size={14} /> {isShuffled ? 'Shuffled' : 'Ordered'}
           </button>
@@ -132,7 +132,7 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
       </div>
 
       <header>
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-1">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-1">
           {deck.kind.replace('-', ' ')}
         </p>
         <h1 className="text-3xl md:text-4xl font-black text-slate-900">{deck.title}</h1>
@@ -164,7 +164,7 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
             Card {index + 1} of {order.length}
           </p>
           {masteredSet.has(current.id) && (
-            <p className="text-[10px] font-black text-emerald-600 mt-1">✓ Mastered</p>
+            <p className="text-[10px] font-black text-emerald-700 mt-1">✓ Mastered</p>
           )}
         </div>
 
@@ -209,7 +209,7 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
               onCardRated?.(current.id, 'good');
               setIndex((i) => Math.min(order.length - 1, i + 1));
             }}
-            className="flex items-center gap-2 px-5 py-3 bg-emerald-600 text-white rounded-2xl font-black hover:bg-emerald-700 shadow-lg"
+            className="flex items-center gap-2 px-5 py-3 bg-emerald-700 text-white rounded-2xl font-black hover:bg-emerald-700 shadow-lg"
           >
             <Check size={16} /> Got it
           </button>
@@ -226,7 +226,7 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
         </div>
       )}
 
-      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 text-center no-print">
+      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 text-center no-print">
         Keys · Space = flip · ← → navigate{nextUp?.onContinue ? ' · N = continue' : ''}
       </p>
 
