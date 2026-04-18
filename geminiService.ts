@@ -29,10 +29,24 @@ export type WritingSubmission =
   | { kind: 'text'; text: string }
   | { kind: 'image'; data: string };
 
+const OFFLINE_MESSAGE =
+  "You're offline — AI assessment needs an internet connection. Your essay is saved locally.";
+
+function isOffline(): boolean {
+  return typeof navigator !== 'undefined' && navigator.onLine === false;
+}
+
 export async function evaluateWriting(
   submission: WritingSubmission,
   promptContext: string
 ): Promise<EvaluationResult> {
+  // Short-circuit when the browser reports offline. The Gemini SDK would
+  // otherwise surface a cryptic fetch error; surface a friendly message
+  // and keep the locally-persisted essay untouched.
+  if (isOffline()) {
+    throw new Error(OFFLINE_MESSAGE);
+  }
+
   // The prompt header is derived entirely from CURRICULUM + curriculum-neutral
   // rubric data (see content/curriculumRubric.ts). No rubric prose is hard-
   // coded here — swapping CURRICULUM swaps the prompt.
@@ -49,26 +63,35 @@ export async function evaluateWriting(
     });
   }
 
-  const response = await getAi().models.generateContent({
-    model: 'gemini-2.5-flash',
-    contents: { parts },
-    config: {
-      responseMimeType: 'application/json',
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          score: { type: Type.NUMBER },
-          feedback: { type: Type.STRING },
-          identifiedStrengths: { type: Type.ARRAY, items: { type: Type.STRING } },
-          areasToImprove: { type: Type.ARRAY, items: { type: Type.STRING } },
-          suggestedNextStep: { type: Type.STRING },
-          thoughtProcessAnalysis: { type: Type.STRING },
+  try {
+    const response = await getAi().models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: { parts },
+      config: {
+        responseMimeType: 'application/json',
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            score: { type: Type.NUMBER },
+            feedback: { type: Type.STRING },
+            identifiedStrengths: { type: Type.ARRAY, items: { type: Type.STRING } },
+            areasToImprove: { type: Type.ARRAY, items: { type: Type.STRING } },
+            suggestedNextStep: { type: Type.STRING },
+            thoughtProcessAnalysis: { type: Type.STRING },
+          },
+          required: ['score', 'feedback', 'identifiedStrengths', 'areasToImprove', 'suggestedNextStep', 'thoughtProcessAnalysis'],
         },
-        required: ['score', 'feedback', 'identifiedStrengths', 'areasToImprove', 'suggestedNextStep', 'thoughtProcessAnalysis'],
       },
-    },
-  });
+    });
 
-  const raw = safeJsonParse(response.text) as Omit<EvaluationResult, 'date'>;
-  return { ...raw, date: new Date().toISOString() };
+    const raw = safeJsonParse(response.text) as Omit<EvaluationResult, 'date'>;
+    return { ...raw, date: new Date().toISOString() };
+  } catch (err) {
+    // A network failure inside the SDK surfaces as a generic TypeError. If
+    // we dropped offline mid-request, normalize the message.
+    if (isOffline()) {
+      throw new Error(OFFLINE_MESSAGE);
+    }
+    throw err;
+  }
 }

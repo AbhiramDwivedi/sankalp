@@ -1,0 +1,25 @@
+{
+  "name": "Sankalp Hindi",
+  "short_name": "Sankalp",
+  "description": "A parent-led Hindi learning platform designed for FCPS World Language credit achievement. Features personalized study plans, AI-driven handwriting evaluation, and gamified offline activities.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff7ed",
+  "theme_color": "#ea580c",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
