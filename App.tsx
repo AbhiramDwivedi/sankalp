@@ -19,12 +19,13 @@ import { TopicPackViewV2 } from './components/topic/TopicPackViewV2';
 import { LandingView } from './components/pages/LandingView';
 import { TOPIC_PACKS_BY_ID, TOPIC_PACKS_BY_LEVEL } from './content';
 import { CAPSTONES_BY_TIER, CAPSTONES_BY_ID } from './content/capstones';
-import { DECKS_BY_ID } from './content/flashcards';
-import type { Deck } from './content/schema';
+import { DECKS, DECKS_BY_ID } from './content/flashcards';
+import type { Deck, Flashcard } from './content/schema';
 import { studyPlanForLevel, getStudyPlan } from './content/studyPlans';
 import { resolveNextUp, getPlanProgress } from './components/ui/nextUpResolver';
 import type { NextUpCardProps } from './components/ui/NextUpCard';
 import { appendToday } from './lib/streak';
+import { nextCardState, dueCardIds, type Rating } from './lib/srs';
 import { GraduationCap, Info } from 'lucide-react';
 import { Celebration } from './components/ui/Celebration';
 import {
@@ -39,6 +40,52 @@ import {
 
 const APP_STORAGE_KEY = 'sankalpa_hindi_profiles';
 const ACTIVE_PROFILE_KEY = 'sankalpa_active_id';
+
+// Synthetic deck id for the Due-today SRS queue on the dashboard. Not present
+// in DECKS_BY_ID — the deck-resolver in App.tsx intercepts this id and builds
+// a fresh deck from the student's cardStates and the global card universe.
+const DUE_TODAY_DECK_ID = 'due-today';
+
+// Flat de-duplicated list of every flashcard in the app, used to validate
+// cardStates against the current content universe and to build the synthetic
+// Due-today deck. Derived once at module load; DECKS are static.
+const ALL_CARDS: Flashcard[] = (() => {
+  const seen = new Set<string>();
+  const out: Flashcard[] = [];
+  for (const d of DECKS) {
+    for (const c of d.cards) {
+      if (seen.has(c.id)) continue;
+      seen.add(c.id);
+      out.push(c);
+    }
+  }
+  return out;
+})();
+const ALL_CARD_IDS = ALL_CARDS.map((c) => c.id);
+const ALL_CARDS_BY_ID: Record<string, Flashcard> = Object.fromEntries(
+  ALL_CARDS.map((c) => [c.id, c]),
+);
+
+/**
+ * Build the synthetic Due-today deck from a profile's cardStates. The deck
+ * contains up to 20 cards whose `due` timestamp is <= now, sorted most-
+ * overdue first. If nothing is due, the deck has zero cards (the caller is
+ * responsible for not opening an empty deck — the dashboard CTA is disabled
+ * in that state).
+ */
+function buildDueTodayDeck(profile: StudentProfile, now: Date = new Date()): Deck {
+  const ids = dueCardIds(profile.cardStates, ALL_CARD_IDS, now, 20);
+  const cards = ids.map((id) => ALL_CARDS_BY_ID[id]).filter((c): c is Flashcard => !!c);
+  return {
+    id: DUE_TODAY_DECK_ID,
+    title: 'Due today',
+    subtitle: 'आज की समीक्षा',
+    description:
+      '10-minute spaced-repetition review. The most-overdue cards from across your decks, up to 20 at a time.',
+    kind: 'exam-prep',
+    cards,
+  };
+}
 
 type Tab = 'dashboard' | 'library' | 'capstones' | 'flashcards' | 'plan' | 'rubric' | 'audit' | 'settings';
 
@@ -183,6 +230,15 @@ const App: React.FC = () => {
   };
 
   const openDeckById = (deckId: string) => {
+    if (deckId === DUE_TODAY_DECK_ID) {
+      if (!profile) return;
+      const synthetic = buildDueTodayDeck(profile);
+      if (synthetic.cards.length === 0) return; // nothing to review
+      setOpenPack(null);
+      setOpenCapstone(null);
+      setOpenDeck(synthetic);
+      return;
+    }
     const d = DECKS_BY_ID[deckId];
     if (!d) return;
     setOpenPack(null);
@@ -224,6 +280,22 @@ const App: React.FC = () => {
       ...p,
       flashcardsMastered: (p.flashcardsMastered || []).filter((id) => id !== cardId),
     }));
+  };
+
+  /**
+   * Update the SM-2-lite schedule for a single card. Runs alongside the
+   * existing mastery writes (markCardMastered / markCardNotYet) — ratings
+   * and mastery are orthogonal states that are both persisted per review.
+   */
+  const markCardRated = (cardId: string, rating: Rating) => {
+    updateActiveProfile((p) => {
+      const prev = p.cardStates?.[cardId];
+      const next = nextCardState(prev, rating);
+      return {
+        ...p,
+        cardStates: { ...(p.cardStates || {}), [cardId]: next },
+      };
+    });
   };
 
   const handleMarkComplete = () => {
@@ -516,6 +588,7 @@ const App: React.FC = () => {
             onCardSeen={markCardSeen}
             onCardMastered={markCardMastered}
             onCardNotYet={markCardNotYet}
+            onCardRated={markCardRated}
             onBack={() => setOpenDeck(null)}
             onPrint={() => window.print()}
             progress={progress}
@@ -552,17 +625,21 @@ const App: React.FC = () => {
   // D) Tab content
   const renderTab = () => {
     switch (activeTab) {
-      case 'dashboard':
+      case 'dashboard': {
+        const dueIds = dueCardIds(profile.cardStates, ALL_CARD_IDS);
         return (
           <DashboardView
             profile={{ ...profile, selectedStudyPlanId: ensuredPlan }}
+            dueCount={dueIds.length}
             onOpenTopic={(p) => openPackById(p.id)}
             onOpenCapstone={(cid) => openCapstoneById(cid)}
             onOpenLibrary={() => setActiveTab('library')}
             onOpenCapstonesTab={() => setActiveTab('capstones')}
             onOpenPlanTab={() => setActiveTab('plan')}
+            onOpenDueDeck={() => openDeckById(DUE_TODAY_DECK_ID)}
           />
         );
+      }
       case 'library':
         return (
           <LibraryView

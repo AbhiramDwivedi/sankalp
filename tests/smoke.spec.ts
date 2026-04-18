@@ -194,6 +194,49 @@ test.describe('Overlay flows', () => {
   });
 });
 
+test.describe('Spaced repetition (4.1)', () => {
+  test('rated cards are scheduled in the future and persist across reload', async ({ page }) => {
+    await gotoClean(page);
+    await onboardStudent(page, 'SRS Tester');
+
+    // Dashboard should report no due cards initially.
+    await expect(page.getByText(/nothing due today/i)).toBeVisible();
+
+    // Open a deck and rate two cards "Got it" (→ SM-2 'good', interval ~3d).
+    await clickSidebarTab(page, 'Flashcards');
+    await expect(page.getByRole('heading', { name: 'Drill before the exam' })).toBeVisible();
+
+    const firstDeck = page.getByRole('button').filter({ hasText: /\d+\s*cards/i }).first();
+    await firstDeck.scrollIntoViewIfNeeded();
+    await firstDeck.click();
+
+    await expect(page.getByRole('button', { name: /back to decks/i })).toBeVisible();
+    await expect(page.getByText(/Card 1 of \d+/i)).toBeVisible();
+
+    // Rate card 1 as 'good'.
+    await page.keyboard.press('Space');
+    const gotIt = page.getByRole('button', { name: /got it/i });
+    await expect(gotIt).toBeVisible();
+    await gotIt.click();
+
+    // Rate card 2 as 'good' (still in runner, next card is showing).
+    await expect(page.getByText(/Card 2 of \d+/i)).toBeVisible();
+    await page.keyboard.press('Space');
+    await page.getByRole('button', { name: /got it/i }).click();
+
+    // Reload — SRS state must persist in localStorage.
+    await page.reload();
+    await expect(page.getByRole('heading', { name: /नमस्ते, SRS Tester/ })).toBeVisible();
+
+    // Dashboard Due-today tile: the two cards we just rated were scheduled a
+    // few days into the future, so the tile should still say "Nothing due".
+    // (If scheduling were broken and the interval came out as 0 or negative,
+    // the tile would show "N cards due today" and this assertion would fail.)
+    await expect(page.getByText(/nothing due today/i)).toBeVisible();
+    await expect(page.getByText(/cards due today/i)).toHaveCount(0);
+  });
+});
+
 test.describe('Completion celebrations', () => {
   test('pack-complete celebration fires once, then never again', async ({ page }) => {
     await gotoClean(page);
