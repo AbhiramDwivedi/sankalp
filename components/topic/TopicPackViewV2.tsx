@@ -13,6 +13,7 @@ import {
   Compass,
   HelpCircle,
   ChevronDown,
+  Mic,
 } from 'lucide-react';
 import type {
   TopicPack,
@@ -26,12 +27,13 @@ import type {
   TeacherNote,
   VocabEntry,
 } from '../../content/schema';
-import type { EvaluationResult } from '../../types';
+import type { EvaluationResult, SpeakingAttempt, StudentProfile } from '../../types';
 import type { ProficiencyLevel } from '../../types';
 import { HeroBanner } from './HeroBanner';
 import { VocabCard } from './VocabCard';
 import { VerdictCard } from './VerdictCard';
 import { AiAssessmentPanel } from './AiAssessmentPanel';
+import { SpeakingPanel } from './SpeakingPanel';
 import { Badge } from '../ui/Badge';
 import { DevanagariText } from '../ui/DevanagariText';
 import { tokensFor } from '../ui/themeTokens';
@@ -78,6 +80,11 @@ interface TopicPackViewV2Props {
   onBack: () => void;
   onMarkComplete?: () => void;
   onEvaluation?: (result: EvaluationResult) => void;
+  /** Profile + speaking-attempt persistence callback. Both optional so the
+   *  view still renders inside tests / storyboards without a profile context.
+   *  When omitted, the Speaking practice section hides itself. */
+  profile?: StudentProfile;
+  onPersistSpeakingAttempt?: (packId: string, attempt: SpeakingAttempt) => void;
   /** Mini-progress bar data + next-up card data. Both optional so the view
    *  still renders inside tests / storyboards without a profile context. */
   progress?: {
@@ -94,6 +101,8 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
   onBack,
   onMarkComplete,
   onEvaluation,
+  profile,
+  onPersistSpeakingAttempt,
   progress,
   nextUp,
 }) => {
@@ -233,6 +242,8 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
             pack={pack}
             aiEnabled={aiEnabled}
             onEvaluation={onEvaluation}
+            profile={profile}
+            onPersistSpeakingAttempt={onPersistSpeakingAttempt}
           />
         </div>
         <div className={activeTab === 'teacher' ? 'block' : 'hidden print:block'}>
@@ -612,11 +623,20 @@ interface WriteTabProps {
   pack: TopicPack;
   aiEnabled: boolean;
   onEvaluation?: (result: EvaluationResult) => void;
+  profile?: StudentProfile;
+  onPersistSpeakingAttempt?: (packId: string, attempt: SpeakingAttempt) => void;
 }
 
-const WriteTab: React.FC<WriteTabProps> = ({ pack, aiEnabled, onEvaluation }) => {
+const WriteTab: React.FC<WriteTabProps> = ({
+  pack,
+  aiEnabled,
+  onEvaluation,
+  profile,
+  onPersistSpeakingAttempt,
+}) => {
   const [essayIdx, setEssayIdx] = useState(0);
   const [openAiFor, setOpenAiFor] = useState<number | null>(null);
+  const [speakingOpen, setSpeakingOpen] = useState(false);
 
   return (
     <section className="space-y-14">
@@ -720,6 +740,47 @@ const WriteTab: React.FC<WriteTabProps> = ({ pack, aiEnabled, onEvaluation }) =>
           </div>
         )}
       </div>
+
+      {/* Speaking practice — collapsible. Renders only when a profile + persist
+          callback are wired (i.e. inside the App, not inside storyboards).
+          The whole block is no-print: the recorder is interactive-only and
+          adding it to the print golden would force a snapshot rebake. */}
+      {profile && onPersistSpeakingAttempt && (
+        <div id="speaking-practice" className="scroll-mt-32 space-y-4 no-print">
+          <button
+            onClick={() => setSpeakingOpen((v) => !v)}
+            data-testid="speaking-toggle"
+            aria-expanded={speakingOpen}
+            className="w-full flex items-center justify-between gap-4 bg-amber-50 hover:bg-amber-100 border-2 border-amber-200 rounded-2xl px-6 py-4 transition-colors"
+          >
+            <span className="flex items-center gap-3">
+              <span className="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center">
+                <Mic size={16} strokeWidth={2.5} />
+              </span>
+              <span className="text-left">
+                <span className="block text-sm md:text-base font-black text-slate-900 leading-tight">
+                  Speaking practice
+                </span>
+                <span className="block text-[10px] font-black uppercase tracking-widest text-slate-500">
+                  Record · self-check · {aiEnabled ? 'optional AI feedback' : 'AI off (toggle in Settings)'}
+                </span>
+              </span>
+            </span>
+            <ChevronDown
+              size={18}
+              className={`text-slate-500 transition-transform ${speakingOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+          {speakingOpen && (
+            <SpeakingPanel
+              pack={pack}
+              profile={profile}
+              aiEnabled={aiEnabled}
+              onPersistAttempt={onPersistSpeakingAttempt}
+            />
+          )}
+        </div>
+      )}
     </section>
   );
 };

@@ -103,6 +103,20 @@ export interface MockExamResult {
   selfCheck?: Record<string, boolean>;
 }
 
+/**
+ * One persisted speaking-practice attempt for a single prompt within a pack.
+ * The audio Blob itself is NOT serialized to localStorage (Blobs aren't JSON-
+ * serializable and would blow the storage quota anyway). Only the metadata
+ * + self-check + optional AI evaluation persist. The recording lives in a
+ * transient `URL.createObjectURL` while the panel is open. Added in 4.3.
+ */
+export interface SpeakingAttempt {
+  promptIndex: number;
+  selfCheck: Record<string, boolean>;
+  aiEval?: EvaluationResult;
+  recordedAt: string;
+}
+
 export interface StudentProfile {
   id: string;
   name: string;
@@ -149,6 +163,11 @@ export interface StudentProfile {
   // student submits (manually or via timer expiry). Added in 4.2.
   mockExamResults?: Record<string, MockExamResult>;
 
+  // Speaking-practice attempts, keyed by packId. Each entry is an array of
+  // attempts (one per prompt index, last write wins). Audio blobs are NOT
+  // persisted — only metadata + self-check + optional AI eval. Added in 4.3.
+  speakingRecordings?: Record<string, SpeakingAttempt[]>;
+
   // Legacy fields (kept optional so old localStorage records still parse):
   plan?: Unit[];
   completedLessonIds?: string[];
@@ -192,6 +211,10 @@ export function migrateProfile(raw: any): StudentProfile {
     mockExamResults:
       raw.mockExamResults && typeof raw.mockExamResults === 'object'
         ? { ...raw.mockExamResults }
+        : {},
+    speakingRecordings:
+      raw.speakingRecordings && typeof raw.speakingRecordings === 'object' && !Array.isArray(raw.speakingRecordings)
+        ? (raw.speakingRecordings as Record<string, SpeakingAttempt[]>)
         : {},
     plan: raw.plan,
     completedLessonIds: raw.completedLessonIds,
