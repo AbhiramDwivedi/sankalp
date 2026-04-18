@@ -260,7 +260,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 **Done when**: all 7 primitives import from theme; visual regression (0.3) shows no pixel difference; tsc passes.
 **Do not touch**: pages, views, content.
 
-### [ ] 2.3 — Accessibility pass
+### [x] 2.3 — Accessibility pass — merged 2026-04-18 via PR #23 (`8c6d12f`). **Tier 2 complete.**
 **Brief**: Audit the app for: `lang="hi"` on every `DevanagariText` (component-level, so automatic); `<title>` on every SVG motif so screen readers announce them (15 motifs); focus-visible ring on every interactive element (button, link, card-as-button); `prefers-reduced-motion` on Celebration (from 1.2) and any other animation; contrast check on theme-tinted hero art (use a known-good contrast checker library or write a small one — saffron-400 text on saffron-50 bg is the likely offender). Deliverable: a fix PR touching the specific issues found, plus `docs/A11Y_AUDIT.md` with a one-line-per-issue summary.
 **Done when**: axe-core run via Playwright (add `@axe-core/playwright` devDep) reports 0 critical, 0 serious on dashboard, library, one pack view, one capstone view, one deck runner.
 **Do not touch**: visual design intent (fix contrast by adjusting shade choice, not by rewriting components).
@@ -293,17 +293,17 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 
 ## Tier 4 — Larger product bets
 
-### [ ] 4.1 — Spaced repetition on flashcards (depends on: 0.5, 1.4)
+### [x] 4.1 — Spaced repetition on flashcards (depends on: 0.5, 1.4) — merged 2026-04-18 via PR #20 (`cd3820a`)
 **Brief**: Add SM-2-lite scheduler. Per-card state in profile: `cardStates: Record<cardId, { ease: number; interval: number; due: ISOString; reviews: number }>`. On each review in `DeckRunner`, update ease (again/hard/good/easy → -0.2/-0.1/0/+0.1, clamped 1.3–2.5), interval (again → 1 day, else interval * ease, min 1 day, max 365), due (now + interval). Surface a new "Due today" list on dashboard (was placeholder from 1.4) showing the top 20 due cards across all decks, with a "Start 10-minute review" CTA that launches a synthetic deck of due cards.
 **Done when**: reviews update state correctly (unit test this — add `tests/srs.spec.ts` with SM-2 math assertions); dashboard shows accurate count; synthetic deck runs; persists across reloads. Smoke covers the flow.
 **Do not touch**: deck content.
 
-### [ ] 4.2 — Mock exam mode
+### [x] 4.2 — Mock exam mode — merged 2026-04-18 via PR #21 (`01ee08a`)
 **Brief**: Identify which capstones are flagged as mock exams (grep schema + capstones for `isMockExam` or similar; if the flag doesn't exist, add it to C02 and C08 — cross-topic + B5-target). Add `MockExamMode.tsx`: 20-min countdown timer, capstone prompt only (no model essay visible), a single textarea, scroll-disabled past the prompt, auto-submit at 0:00, auto-submit also on manual Done. Submits to `evaluateWriting()` if AI enabled; otherwise stores the essay + student-self-rubric. Shows result + comparison to all three tiers (novice/IM/push) of that capstone.
 **Done when**: two capstones have mock-exam mode; timer counts down accurately; auto-submit works; smoke covers the flow.
 **Do not touch**: existing capstone view behavior for non-mock access.
 
-### [ ] 4.3 — Speaking practice (free tier via Gemini 2.5 Flash audio)
+### [x] 4.3 — Speaking practice (free tier via Gemini 2.5 Flash audio) — merged 2026-04-18 via PR #24 (`d0ba14d`)
 **Brief**: Ship in two phases within one item:
   **Phase A (always-free)**: every pack gets a `speakingPrompts: string[]` field (5 prompts — add to schema; seed for all 26 packs with sensible defaults derived from the writingPrompts, using the same theme). New `SpeakingPanel.tsx` in topic view: shows prompt, in-browser recorder (MediaRecorder API, webm/opus), self-check rubric checklist (5 items per pack — "Used past tense correctly", "Named at least 3 vocab items", "Connected sentences with one of {pack connectors}", etc.), local audio playback.
   **Phase B (optional AI)**: if `profile.aiAssessmentEnabled`, add "Get AI feedback" button. Sends audio to Gemini 2.5 Flash (model id `gemini-2.5-flash`, free tier supports audio input up to 15 RPM / 1500 RPD) with a speaking-rubric prompt derived from CURRICULUM. Handles rate-limit errors gracefully (queue locally, retry with backoff). Shows feedback in same shape as writing eval.
@@ -311,12 +311,12 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 **Do not touch**: `evaluateWriting()` — add `evaluateSpeaking()` as a sibling. Don't break the writing flow.
 **Product note**: speaking was a credibility gap for "prepares for STAMP 2S/WS" (2S = 2-skill including speaking). This closes it.
 
-### [ ] 4.4 — Teacher/parent progress export (depends on: 1.4, 4.1)
+### [x] 4.4 — Teacher/parent progress export (depends on: 1.4, 4.1) — merged 2026-04-18 via PR #25 (`d61cbab`)
 **Brief**: In Settings, add "Export progress" that generates: (a) JSON file with full profile state (sanitized — no AI API responses, just scores); (b) printable PDF report via Playwright or equivalent print-to-PDF of a new `ProgressReportView.tsx` showing packs done, capstones done with scores, deck mastery bars, streak, recent AI eval excerpts. File name: `{profileName}-sankalp-progress-{ISO-date}.pdf/json`.
 **Done when**: export produces both formats; PDF renders correctly with print styles; smoke covers the flow.
 **Do not touch**: profile schema beyond adding export metadata.
 
-### [ ] 4.5 — PWA / offline
+### [x] 4.5 — PWA / offline — merged 2026-04-18 via PR #22 (`11b6035`). **Tier 4 complete. All backlog items done.**
 **Brief**: Add a service worker (prefer vite-plugin-pwa to avoid hand-rolling). Precache app shell + SVG motifs + fonts. Runtime-cache content (topics, capstones, flashcards JSON if we ever serialize — for now they're bundled). Add manifest.json with app name, icon (generate 192+512 from existing SVG motif), theme color. Installable on desktop and iPad. Works offline after first load.
 **Done when**: Lighthouse PWA score ≥ 90; offline-mode test in Chromium devtools shows app loads + all tabs work + AI eval shows friendly offline message.
 **Do not touch**: existing fetch/storage patterns beyond what the plugin needs.

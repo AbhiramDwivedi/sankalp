@@ -16,7 +16,27 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
-## 2026-04-18 — Fire #10 (manual resume after session death)
+## 2026-04-18 — Fire #11 (manual, batched — user directed "no crons, run in batches now")
+**Items attempted**: 2.3, 4.1, 4.2, 4.3, 4.4, 4.5 — all remaining backlog items.
+**Items completed** (all 6):
+- **4.1** SM-2-lite SRS — PR #20 merged as `cd3820a`. `lib/srs.ts` pure math, DeckRunner 4-button rating, DashboardView due-today tile, App.tsx synthetic `due-today` deck, `tests/srs.spec.ts` with 12 unit assertions. Reviewer approved with 2 nits.
+- **4.2** Mock exam mode — PR #21 merged as `01ee08a`. `MockExamMode.tsx` (20-min countdown, scroll-lock, auto-submit), `isMockExam` on C01/C06 (already set pre-branch), `MockExamResult` + `mockExamResults` on profile. Reviewer approved with 2 nits (stale-closure durationSeconds on timeout, body-scroll-lock scope — both cosmetic).
+- **4.5** PWA — PR #22 merged as `11b6035`. `vite-plugin-pwa` (brief-authorized devDep), workbox precache + runtime caches, manifest.webmanifest, 192/512 PNG icons rasterized via Playwright, `geminiService.ts` offline-friendly error. Reviewer approved with 2 nits.
+- **2.3** Accessibility pass — PR #23 merged as `8c6d12f`. `@axe-core/playwright` devDep + `npm run a11y`, SVG `<title>` on 15 motifs, focus-visible rings on interactive elements, shade-only contrast fixes (saffron/emerald/slate 400 → 600/700), `docs/A11Y_AUDIT.md`. Before: 9 serious violation classes (~98 nodes); after: 0 critical + 0 serious on 6 surfaces (landing + 5 brief-mandated). Reviewer approved with 6 nits (all positive confirmations).
+- **4.3** Speaking practice — PR #24 merged as `d0ba14d`. `SpeakingPanel.tsx` (MediaRecorder, self-check, optional AI), `content/speakingDefaults.ts` (central helpers for 26 packs — avoids 26 hand edits; override via optional schema fields), `evaluateSpeaking()` sibling in geminiService, `SpeakingAttempt` on profile (audio blobs NOT serialized). `playwright.config.ts` set to `workers: 1` for Windows multi-worker stability — scope-adjacent but documented. Reviewer approved with 3 nits.
+- **4.4** Teacher/parent progress export — PR #25 merged as `d61cbab`. `lib/exportProgress.ts` (sanitizes `thoughtProcessAnalysis` from evaluations + mockExamResults.ai), `ProgressReportView.tsx` (teacher-friendly print-styled view), named `@page progress-report` in index.html, Settings buttons for JSON download + PDF via `window.print()`, `lastExportedAt` added to profile. No new deps. Reviewer approved with 2 nits.
+
+**Items deferred**: none. **25/25 items done — backlog complete.**
+
+**Commits pushed**: `cd3820a` (PR #20), `01ee08a` (PR #21), `11b6035` (PR #22), `8c6d12f` (PR #23), `d0ba14d` (PR #24), `d61cbab` (PR #25), plus this housekeeping commit.
+
+**Notes**:
+- 3 batches of parallel implementers: Batch 1 (4.1, 4.2, 4.5), Batch 2 (2.3, 4.3, 4.4). Actually ran Batch 2 + 3 as one 3-wide parallel dispatch since file-overlap risk turned out manageable (confirmed via rebase-time conflict resolution).
+- 3 rebase conflict resolutions at merge time, all on additive schema/test files: (a) types.ts profile fields for 4.2/4.1 (keep both); (b) tests/smoke.spec.ts for 4.5 on top of 4.2 (keep both describe blocks); (c) types.ts + tests/smoke.spec.ts for 4.4 on top of 4.3 (keep both, including the interleaved test-case navigation code — resolved by dropping the 4.3 test from 4.4's rebase since 4.3 had already merged).
+- **One incident**: during worktree cleanup for 4.4, an `rm -rf` hit the junction-pointing dir before the junction had been removed (violation of the junction-FIRST protocol). This recursed through the junction into main's `node_modules`, emptying it. Recovery: `npm install`. Main's state restored clean. No data loss (node_modules is regeneratable). Flagging: the junction-FIRST rule needs enforcement — a script would be safer than manual ordering.
+- The autonomous run is complete. The `auto/*` workflow has merged 25 out of 25 planned backlog items across 11 fires.
+
+
 **Items attempted**: 3.4 (resume), 4.6 (resume), plus a hotfix for CI that had been red on every run since 0.2 shipped.
 **Items completed**:
 - **3.4** — cbse-marathi stub — PR #17 merged as `ba22c8f`. 3 new files in `content/curricula/cbse-marathi/` (rubric.ts, connectors.ts, README.md), exports mirror fcps-stamp-hindi shape, nothing imports from the folder. Reviewer approved with 2 non-blocking nits. **Tier 3 complete.**
