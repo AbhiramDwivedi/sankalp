@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, ArrowRight, Shuffle, RefreshCcw, Check, X, Printer } from 'lucide-react';
 import type { Deck, Flashcard } from '../../content/schema';
+import type { Rating } from '../../lib/srs';
 import { FlashcardItem } from './FlashcardItem';
 import { Badge } from '../ui/Badge';
 import { NextUpCard, type NextUpCardProps } from '../ui/NextUpCard';
@@ -13,6 +14,14 @@ interface DeckRunnerProps {
   onCardSeen: (cardId: string) => void;
   onCardMastered: (cardId: string) => void;
   onCardNotYet: (cardId: string) => void;
+  /**
+   * SRS review callback. Fires in addition to the mastered/not-yet callbacks
+   * when the student rates a flipped card. DeckRunner collapses the UI into
+   * 4 rating buttons; `again` + `hard` also call `onCardNotYet`, `good` +
+   * `easy` also call `onCardMastered`, so the existing binary mastery state
+   * stays consistent without a second write path.
+   */
+  onCardRated?: (cardId: string, rating: Rating) => void;
   onBack: () => void;
   onPrint: () => void;
   progress?: {
@@ -39,6 +48,7 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
   onCardSeen,
   onCardMastered,
   onCardNotYet,
+  onCardRated,
   onBack,
   onPrint,
   progress,
@@ -167,26 +177,51 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
         </button>
       </div>
 
-      {/* Mastery buttons (only when flipped) */}
+      {/* Rating buttons (only when flipped). Four SM-2 ratings drive the SRS
+          scheduler in lib/srs.ts. 'Review again'/'Hard' also flip the card
+          back to not-yet-mastered; 'Got it'/'Easy' also mark it mastered —
+          so the binary mastery UI stays in sync with SRS scheduling. */}
       {flipped && (
-        <div className="flex gap-3 justify-center pt-2">
+        <div className="flex flex-wrap gap-3 justify-center pt-2">
           <button
             onClick={() => {
               onCardNotYet(current.id);
+              onCardRated?.(current.id, 'again');
               setIndex((i) => Math.min(order.length - 1, i + 1));
             }}
-            className="flex items-center gap-2 px-6 py-3 bg-rose-50 text-rose-700 rounded-2xl font-black hover:bg-rose-100"
+            className="flex items-center gap-2 px-5 py-3 bg-rose-50 text-rose-700 rounded-2xl font-black hover:bg-rose-100"
           >
             <X size={16} /> Review again
           </button>
           <button
             onClick={() => {
-              onCardMastered(current.id);
+              onCardNotYet(current.id);
+              onCardRated?.(current.id, 'hard');
               setIndex((i) => Math.min(order.length - 1, i + 1));
             }}
-            className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-2xl font-black hover:bg-emerald-700 shadow-lg"
+            className="flex items-center gap-2 px-5 py-3 bg-amber-50 text-amber-800 rounded-2xl font-black hover:bg-amber-100"
+          >
+            Hard
+          </button>
+          <button
+            onClick={() => {
+              onCardMastered(current.id);
+              onCardRated?.(current.id, 'good');
+              setIndex((i) => Math.min(order.length - 1, i + 1));
+            }}
+            className="flex items-center gap-2 px-5 py-3 bg-emerald-600 text-white rounded-2xl font-black hover:bg-emerald-700 shadow-lg"
           >
             <Check size={16} /> Got it
+          </button>
+          <button
+            onClick={() => {
+              onCardMastered(current.id);
+              onCardRated?.(current.id, 'easy');
+              setIndex((i) => Math.min(order.length - 1, i + 1));
+            }}
+            className="flex items-center gap-2 px-5 py-3 bg-sky-50 text-sky-800 rounded-2xl font-black hover:bg-sky-100"
+          >
+            Easy
           </button>
         </div>
       )}

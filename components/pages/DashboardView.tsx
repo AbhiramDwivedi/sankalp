@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2, Flame, Target, ArrowRight, BookOpen, Flag, Calendar, Layers, Lock } from 'lucide-react';
+import { CheckCircle2, Flame, Target, ArrowRight, BookOpen, Flag, Calendar, Layers } from 'lucide-react';
 import type { StudentProfile } from '../../types';
 import type { TopicPack, Capstone } from '../../content/schema';
 import { TOPIC_PACKS, nextPackAfter, getPack } from '../../content';
@@ -15,20 +15,26 @@ import { computeStreak, lastActivityLabel } from '../../lib/streak';
 
 interface DashboardViewProps {
   profile: StudentProfile;
+  /** Number of flashcards due now (<= 20 — the queue cap). 0 means nothing due. */
+  dueCount: number;
   onOpenTopic: (pack: TopicPack) => void;
   onOpenCapstone: (capstoneId: string) => void;
   onOpenLibrary: () => void;
   onOpenCapstonesTab: () => void;
   onOpenPlanTab: () => void;
+  /** Launches the synthetic Due-today deck overlay. Disabled when dueCount=0. */
+  onOpenDueDeck: () => void;
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
   profile,
+  dueCount,
   onOpenTopic,
   onOpenCapstone,
   onOpenLibrary,
   onOpenCapstonesTab,
   onOpenPlanTab,
+  onOpenDueDeck,
 }) => {
   const completedPacks = profile.completedTopicIds || [];
   const completedCaps = profile.completedCapstoneIds || [];
@@ -105,9 +111,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         streak={streak}
         lastActive={lastActive}
         nextAction={nextAction}
+        dueCount={dueCount}
         onOpenPack={onOpenTopic}
         onOpenCapstone={onOpenCapstone}
         onOpenCapstonesTab={onOpenCapstonesTab}
+        onOpenDueDeck={onOpenDueDeck}
       />
 
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -324,18 +332,22 @@ interface TodayStripProps {
   streak: number;
   lastActive: string;
   nextAction: TodayNextAction;
+  dueCount: number;
   onOpenPack: (pack: TopicPack) => void;
   onOpenCapstone: (capstoneId: string) => void;
   onOpenCapstonesTab: () => void;
+  onOpenDueDeck: () => void;
 }
 
 const TodayStrip: React.FC<TodayStripProps> = ({
   streak,
   lastActive,
   nextAction,
+  dueCount,
   onOpenPack,
   onOpenCapstone,
   onOpenCapstonesTab,
+  onOpenDueDeck,
 }) => {
   const streakLabel = streak === 1 ? '1 day streak' : `${streak} day streak`;
   const streakSubtitle = streak === 0 ? 'Start today' : lastActive;
@@ -407,26 +419,52 @@ const TodayStrip: React.FC<TodayStripProps> = ({
         </span>
       </button>
 
-      {/* Tile 3: SRS placeholder (disabled; reserved for 4.1) */}
-      <div
-        aria-disabled="true"
-        title="Spaced repetition coming in a future update"
-        className="bg-white rounded-xl border border-dashed border-slate-200 px-4 py-3 flex items-center gap-3 cursor-not-allowed opacity-60 select-none"
-      >
-        <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center shrink-0 relative">
-          <Layers size={18} />
-          <span className="absolute -top-1 -right-1 bg-white rounded-full p-0.5 border border-slate-200 text-slate-400">
-            <Lock size={8} />
+      {/* Tile 3: Due-today SRS queue (4.1). Becomes a CTA once the student has
+          rated at least one card and its interval has lapsed. When nothing is
+          due, the tile stays present but inert so the strip layout doesn't
+          shift. */}
+      {dueCount > 0 ? (
+        <button
+          onClick={onOpenDueDeck}
+          className="text-left bg-white rounded-xl border border-slate-100 hover:border-indigo-300 hover:shadow-sm transition-all px-4 py-3 flex items-center gap-3 group"
+        >
+          <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0 group-hover:bg-indigo-200">
+            <Layers size={18} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+              Cards due
+            </p>
+            <p className="text-sm font-black text-slate-900 truncate group-hover:text-indigo-700">
+              {dueCount} {dueCount === 1 ? 'card' : 'cards'} due today
+            </p>
+            <p className="text-[11px] text-slate-500 italic truncate">
+              Start 10-minute review
+            </p>
+          </div>
+          <span className="text-[10px] font-black uppercase tracking-widest text-indigo-700 shrink-0 flex items-center gap-1">
+            Start <ArrowRight size={12} />
           </span>
+        </button>
+      ) : (
+        <div
+          aria-label="No flashcards due"
+          className="bg-white rounded-xl border border-slate-100 px-4 py-3 flex items-center gap-3 opacity-80"
+        >
+          <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center shrink-0">
+            <Layers size={18} />
+          </div>
+          <div className="min-w-0">
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+              Cards due
+            </p>
+            <p className="text-sm font-black text-slate-500 truncate">Nothing due today</p>
+            <p className="text-[11px] text-slate-400 italic truncate">
+              Rate cards in any deck to build the queue
+            </p>
+          </div>
         </div>
-        <div className="min-w-0">
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-            Cards due
-          </p>
-          <p className="text-sm font-black text-slate-500 truncate">— due today</p>
-          <p className="text-[11px] text-slate-400 italic truncate">SRS coming soon</p>
-        </div>
-      </div>
+      )}
     </section>
   );
 };

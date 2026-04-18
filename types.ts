@@ -67,6 +67,26 @@ export interface EvaluationResult {
   thoughtProcessAnalysis: string;
 }
 
+/**
+ * SM-2-lite spaced-repetition state for a single flashcard. Persisted per-
+ * profile under `cardStates[cardId]`. Separate concept from `flashcardsMastered`
+ * (which is binary "got it / not yet"): cardStates carries the scheduling math
+ * that picks which cards surface on the Due-today dashboard tile.
+ *
+ *   ease     — multiplier for interval growth. Clamped to [1.3, 2.5].
+ *   interval — days until next review. Clamped to [1, 365]; 'again' resets to 1.
+ *   due      — ISO datetime (full ISOString) when the card is next due.
+ *   reviews  — count of reviews applied so far.
+ *
+ * See lib/srs.ts for the math.
+ */
+export interface CardState {
+  ease: number;
+  interval: number;
+  due: string;
+  reviews: number;
+}
+
 export interface StudentProfile {
   id: string;
   name: string;
@@ -104,6 +124,11 @@ export interface StudentProfile {
   // Used by the Dashboard Today-strip streak counter. Added in 1.4.
   activityDates?: string[];
 
+  // SM-2-lite spaced-repetition schedule. Keyed by flashcard id. Populated on
+  // each review inside DeckRunner. Consumed by the Due-today dashboard tile
+  // and the synthetic `due-today` deck. Added in 4.1.
+  cardStates?: Record<string, CardState>;
+
   // Legacy fields (kept optional so old localStorage records still parse):
   plan?: Unit[];
   completedLessonIds?: string[];
@@ -140,6 +165,10 @@ export function migrateProfile(raw: any): StudentProfile {
           ),
         ).sort()
       : [],
+    cardStates:
+      raw.cardStates && typeof raw.cardStates === 'object' && !Array.isArray(raw.cardStates)
+        ? (raw.cardStates as Record<string, CardState>)
+        : {},
     plan: raw.plan,
     completedLessonIds: raw.completedLessonIds,
     generatedMaterials: raw.generatedMaterials,
