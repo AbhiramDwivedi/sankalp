@@ -87,6 +87,22 @@ export interface CardState {
   reviews: number;
 }
 
+/**
+ * Stored record of a mock-exam sitting. Keyed by capstone id in
+ * StudentProfile.mockExamResults. Persists to localStorage so the student can
+ * revisit their last timed attempt. `ai` is present only when AI assessment
+ * was enabled at submission time. `selfCheck` records the student's yes/no
+ * answers to the rubric questions (shown when AI is off).
+ */
+export interface MockExamResult {
+  text: string;
+  submittedAt: string;
+  durationSeconds: number;
+  timedOut: boolean;
+  ai?: EvaluationResult;
+  selfCheck?: Record<string, boolean>;
+}
+
 export interface StudentProfile {
   id: string;
   name: string;
@@ -129,6 +145,10 @@ export interface StudentProfile {
   // and the synthetic `due-today` deck. Added in 4.1.
   cardStates?: Record<string, CardState>;
 
+  // Latest mock-exam sitting per capstone id. Written by MockExamMode when the
+  // student submits (manually or via timer expiry). Added in 4.2.
+  mockExamResults?: Record<string, MockExamResult>;
+
   // Legacy fields (kept optional so old localStorage records still parse):
   plan?: Unit[];
   completedLessonIds?: string[];
@@ -168,6 +188,10 @@ export function migrateProfile(raw: any): StudentProfile {
     cardStates:
       raw.cardStates && typeof raw.cardStates === 'object' && !Array.isArray(raw.cardStates)
         ? (raw.cardStates as Record<string, CardState>)
+        : {},
+    mockExamResults:
+      raw.mockExamResults && typeof raw.mockExamResults === 'object'
+        ? { ...raw.mockExamResults }
         : {},
     plan: raw.plan,
     completedLessonIds: raw.completedLessonIds,

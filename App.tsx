@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { StudentProfile, ProficiencyLevel, EvaluationResult, migrateProfile } from './types';
+import { StudentProfile, ProficiencyLevel, EvaluationResult, MockExamResult, migrateProfile } from './types';
 import type { TopicPack, Capstone } from './content/schema';
 import { Onboarding } from './components/Onboarding';
 import { Layout } from './components/Layout';
@@ -355,6 +355,17 @@ const App: React.FC = () => {
     });
   };
 
+  const handleMockExamSubmit = (capstoneId: string, result: MockExamResult) => {
+    updateActiveProfile((p) => {
+      const prev = p.mockExamResults || {};
+      return {
+        ...p,
+        mockExamResults: { ...prev, [capstoneId]: result },
+        activityDates: appendToday(p.activityDates),
+      };
+    });
+  };
+
   const markHowThisWorksSeen = () => {
     updateActiveProfile((p) => ({ ...p, howThisWorksSeen: true }));
     setShowHowThisWorks(false);
@@ -555,6 +566,9 @@ const App: React.FC = () => {
             onOpenPack={openPackById}
             progress={progress}
             nextUp={nextUp}
+            profile={profile}
+            aiEnabled={!!profile.aiAssessmentEnabled}
+            onMockExamSubmit={handleMockExamSubmit}
           />
         </Layout>
         {celebrationOverlay}
