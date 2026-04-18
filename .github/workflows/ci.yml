@@ -10,7 +10,11 @@ on:
 jobs:
   check:
     name: check
-    runs-on: ubuntu-latest
+    # Windows runner so Playwright visual goldens render with the same fonts
+    # (Noto Sans Devanagari, Tiro Devanagari Hindi) as the target deployment
+    # platform. Linux runners produced 1-2% page-height drift that tripped
+    # toHaveScreenshot at a 0% pixel-diff threshold.
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,16 +27,14 @@ jobs:
         uses: actions/cache@v4
         id: playwright-cache
         with:
-          path: ~/.cache/ms-playwright
+          path: ~\AppData\Local\ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install Playwright chromium
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
-      - name: Install Playwright system dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
+        run: npx playwright install chromium
       - name: Full gate (tsc, validate-packs, flashcards sync, credit-audit, smoke, visual)
         run: npm run check
+        shell: bash
       - name: Upload Playwright report on failure
         if: failure()
         uses: actions/upload-artifact@v4
