@@ -14,6 +14,11 @@ export default defineConfig({
   timeout: 30_000,
   retries: 0,
   fullyParallel: false,
+  // Single worker: the Vite dev server is shared across workers and crashes
+  // intermittently under multi-worker compilation load on Windows worktrees,
+  // causing ERR_CONNECTION_REFUSED partway through the suite. The whole
+  // suite finishes in ~1 minute single-threaded. (Added in 4.3.)
+  workers: 1,
   reporter: [['list']],
   use: {
     baseURL: 'http://localhost:3000',

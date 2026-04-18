@@ -395,6 +395,117 @@ test.describe('PWA', () => {
   });
 });
 
+test.describe('Speaking practice (4.3)', () => {
+  // Mock getUserMedia + MediaRecorder before the page loads so the panel
+  // can transition through idle → recording → stopped without a real mic.
+  // The shim records 50ms of dummy data and emits an inline-data Blob.
+  async function installSpeakingShim(page: Page) {
+    await page.addInitScript(() => {
+      const origNav = window.navigator;
+      try {
+        // Many browsers expose mediaDevices as a non-configurable getter; if
+        // we can't redefine, attach our shim directly to it.
+        const fakeStream = {
+          getTracks: () => [{ stop: () => {} }],
+        } as unknown as MediaStream;
+        const mediaDevices = {
+          getUserMedia: async () => fakeStream,
+        };
+        try {
+          Object.defineProperty(origNav, 'mediaDevices', {
+            value: mediaDevices,
+            configurable: true,
+          });
+        } catch {
+          (origNav as any).mediaDevices = mediaDevices;
+        }
+      } catch {
+        /* ignore */
+      }
+
+      class FakeMediaRecorder {
+        public state: 'inactive' | 'recording' = 'inactive';
+        public mimeType = 'audio/webm';
+        public ondataavailable: ((e: { data: Blob }) => void) | null = null;
+        public onstop: (() => void) | null = null;
+        constructor(_stream: any) {}
+        start() {
+          this.state = 'recording';
+        }
+        stop() {
+          this.state = 'inactive';
+          // Emit one chunk and then onstop, matching real MediaRecorder shape.
+          const blob = new Blob([new Uint8Array([0, 1, 2, 3])], { type: this.mimeType });
+          if (this.ondataavailable) this.ondataavailable({ data: blob });
+          if (this.onstop) this.onstop();
+        }
+      }
+      (window as any).MediaRecorder = FakeMediaRecorder;
+    });
+  }
+
+  test('records, transitions to playback, and persists self-check across reload', async ({ page }) => {
+    await installSpeakingShim(page);
+    await gotoClean(page);
+    await onboardStudent(page, 'Speaker Tester');
+
+    // Open Library → first pack overlay.
+    await clickSidebarTab(page, 'Library');
+    await expect(page.getByRole('heading', { name: /26 reading packs/i })).toBeVisible();
+    const packCard = page.getByRole('button', { name: /restaurants.*food/i }).first();
+    await packCard.scrollIntoViewIfNeeded();
+    await packCard.click();
+    await expect(page.getByRole('button', { name: /back to library/i })).toBeVisible();
+
+    // Switch to the Write tab (where Speaking practice lives).
+    await page.getByRole('tab', { name: /write/i }).click();
+
+    // Expand Speaking practice.
+    const toggle = page.getByTestId('speaking-toggle');
+    await toggle.scrollIntoViewIfNeeded();
+    await toggle.click();
+
+    const panel = page.getByTestId('speaking-panel');
+    await expect(panel).toBeVisible();
+
+    // State machine: idle → recording → stopped.
+    await expect(page.getByTestId('speaking-state')).toHaveText(/idle/i);
+    const startBtn = page.getByTestId('speaking-start');
+    await startBtn.click();
+    await expect(page.getByTestId('speaking-state')).toHaveText(/recording/i);
+    const stopBtn = page.getByTestId('speaking-stop');
+    await stopBtn.click();
+    await expect(page.getByTestId('speaking-state')).toHaveText(/recording ready/i);
+
+    // Audio element should appear with a blob: src.
+    const audio = page.getByTestId('speaking-audio');
+    await expect(audio).toBeVisible();
+    const src = await audio.getAttribute('src');
+    expect(src || '').toMatch(/^blob:/);
+
+    // Tick the first two self-check items.
+    await page.getByTestId('speaking-self-check-item-0').check();
+    await page.getByTestId('speaking-self-check-item-1').check();
+    await expect(page.getByTestId('speaking-self-check-item-0')).toBeChecked();
+    await expect(page.getByTestId('speaking-self-check-item-1')).toBeChecked();
+
+    // Reload — self-check ticks must persist via localStorage.
+    await page.reload();
+    await expect(page.getByRole('heading', { name: /नमस्ते, Speaker Tester/ })).toBeVisible();
+
+    // Reopen the same pack and re-expand the speaking panel.
+    await clickSidebarTab(page, 'Library');
+    await page.getByRole('button', { name: /restaurants.*food/i }).first().click();
+    await page.getByRole('tab', { name: /write/i }).click();
+    await page.getByTestId('speaking-toggle').click();
+    await expect(page.getByTestId('speaking-panel')).toBeVisible();
+
+    // Ticks for prompt 1 (default-selected) survived.
+    await expect(page.getByTestId('speaking-self-check-item-0')).toBeChecked();
+    await expect(page.getByTestId('speaking-self-check-item-1')).toBeChecked();
+  });
+});
+
 test.describe('Settings persistence', () => {
   test('AI assessment toggle persists across reload', async ({ page }) => {
     await gotoClean(page);

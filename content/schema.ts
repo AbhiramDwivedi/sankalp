@@ -219,6 +219,21 @@ export interface TopicPack {
   modelEssaysNote: TeacherNote;
   prompts: WritingPrompt[];
   promptsNote: TeacherNote;
+  /**
+   * Optional per-pack speaking prompts (5 per pack). Spoken delivery of the
+   * same theme as `prompts`. If absent at the pack level, a sensible default
+   * is computed in `content/speakingDefaults.ts` from `prompts` + theme.
+   * Added in 4.3.
+   */
+  speakingPrompts?: string[];
+  /**
+   * Optional per-pack speaking self-check items (5 per pack). Each item is a
+   * single short claim the student ticks if true of their recording. If
+   * absent at the pack level, a default 5-item rubric is computed in
+   * `content/speakingDefaults.ts` from the pack's grammar/vocab/connectors/
+   * muhavare. Added in 4.3.
+   */
+  speakingSelfCheck?: string[];
   rubricNote: TeacherNote;
   status: 'stub' | 'drafted' | 'reviewed' | 'shipped';
   version: 1;

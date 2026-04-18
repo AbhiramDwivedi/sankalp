@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { StudentProfile, ProficiencyLevel, EvaluationResult, MockExamResult, migrateProfile } from './types';
+import { StudentProfile, ProficiencyLevel, EvaluationResult, MockExamResult, SpeakingAttempt, migrateProfile } from './types';
 import type { TopicPack, Capstone } from './content/schema';
 import { Onboarding } from './components/Onboarding';
 import { Layout } from './components/Layout';
@@ -355,6 +355,28 @@ const App: React.FC = () => {
     });
   };
 
+  /**
+   * Persist a single speaking-practice attempt for (packId, promptIndex).
+   * Last write wins per prompt — the student is rehearsing, not auditioning.
+   * Audio Blobs are NOT serialized (handled by SpeakingPanel locally); only
+   * metadata + self-check ticks + optional AI eval persist here.
+   */
+  const handlePersistSpeakingAttempt = (packId: string, attempt: SpeakingAttempt) => {
+    updateActiveProfile((p) => {
+      const all = { ...(p.speakingRecordings || {}) };
+      const list = (all[packId] || []).filter(
+        (a) => a.promptIndex !== attempt.promptIndex,
+      );
+      list.push(attempt);
+      all[packId] = list;
+      return {
+        ...p,
+        speakingRecordings: all,
+        activityDates: appendToday(p.activityDates),
+      };
+    });
+  };
+
   const handleMockExamSubmit = (capstoneId: string, result: MockExamResult) => {
     updateActiveProfile((p) => {
       const prev = p.mockExamResults || {};
@@ -534,6 +556,8 @@ const App: React.FC = () => {
             onBack={() => setOpenPack(null)}
             onMarkComplete={handleMarkComplete}
             onEvaluation={handleAddEvaluation}
+            profile={profile}
+            onPersistSpeakingAttempt={handlePersistSpeakingAttempt}
             progress={progress}
             nextUp={nextUp}
           />
