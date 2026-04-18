@@ -99,6 +99,11 @@ export interface StudentProfile {
   // `stamp-ready`).
   celebrationsShown?: string[];
 
+  // Local-time ISO dates ('YYYY-MM-DD') for every day the student did anything
+  // (completed a pack, capstone, or mastered a flashcard). Unique + ascending.
+  // Used by the Dashboard Today-strip streak counter. Added in 1.4.
+  activityDates?: string[];
+
   // Legacy fields (kept optional so old localStorage records still parse):
   plan?: Unit[];
   completedLessonIds?: string[];
@@ -128,6 +133,13 @@ export function migrateProfile(raw: any): StudentProfile {
     flashcardsMastered: Array.isArray(raw.flashcardsMastered) ? raw.flashcardsMastered : [],
     deferredIds: Array.isArray(raw.deferredIds) ? raw.deferredIds : [],
     celebrationsShown: Array.isArray(raw.celebrationsShown) ? raw.celebrationsShown : [],
+    activityDates: Array.isArray(raw.activityDates)
+      ? Array.from(
+          new Set(
+            (raw.activityDates as unknown[]).filter((d): d is string => typeof d === 'string'),
+          ),
+        ).sort()
+      : [],
     plan: raw.plan,
     completedLessonIds: raw.completedLessonIds,
     generatedMaterials: raw.generatedMaterials,
