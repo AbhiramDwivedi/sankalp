@@ -225,7 +225,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 **Do not touch**: existing plan data in `content/studyPlans.ts` (plans are authored content). `planCursor()` logic itself is fine to extend. Types in `content/schema.ts` may need `deferredIds: string[]` added.
 **Product note**: Next-up respects plan order, not pack-id order. If student is on Foundation plan and just finished L1-12, next is whatever L1-12's successor in Foundation is — could be L1-13, could be a capstone.
 
-### [ ] 1.2 — Completion celebrations
+### [x] 1.2 — Completion celebrations — merged 2026-04-17 via PR #10 (`1c6371d`)
 **Brief**: New `components/ui/Celebration.tsx` that fires on: pack complete, capstone complete, deck mastered (all cards green), plan milestone (25/50/75/100%), and the big one — "STAMP-ready" (all L1+L2 packs + 5 core capstones done). Uses CSS-only confetti (no lib dependency; a `@keyframes` burst of 20 particles with randomized rotation/translate). Respects `prefers-reduced-motion` (fallback: static burst + text, no animation). Message is SPECIFIC not generic — see `content/celebrations.ts` (new file) for the copy bank:
 - Pack: "Pack done. You used {1 connector from that pack} like a native." (pick any connector from the pack's connectors array)
 - Capstone: "{wordCount} words of structured Hindi. That's Benchmark 5 territory."
@@ -241,7 +241,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 **Done when**: visual regression test 0.3 passes with the new goldens; print preview in Chromium shows 8 cards per page, aligned; numbered test sheet (add a hidden card-index prop for visual verification) confirms back-side mirroring.
 **Do not touch**: `FlashcardItem.tsx` flip interaction (that's the screen view), `generated.ts` (content).
 
-### [ ] 1.4 — Dashboard today-glance
+### [x] 1.4 — Dashboard today-glance — merged 2026-04-17 via PR #11 (`133a7ee`). **Tier 1 complete.**
 **Brief**: Add to `DashboardView.tsx` a compact "Today" strip above the existing content: (a) streak counter — days with any pack/capstone/deck activity in profile's history (add `activityDates: string[]` to profile, push on any completion or deck run, migrate in `types.ts`); (b) one concrete next action — "Spend 20 min on {next pack}" with CTA; (c) cards due today counter (placeholder "—" until Tier 4.1 SRS lands; show it as a disabled tile so the visual space is reserved). Keep it minimal — this is a glance, not another dashboard.
 **Done when**: streak increments correctly across reloads; next-action CTA opens the right pack; the due-cards tile shows a disabled placeholder.
 **Do not touch**: existing dashboard cards beyond layout.

@@ -16,6 +16,21 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #6 (scheduled cron 21:35 EDT, hourly)
+**Items attempted**: 1.2, 1.4
+**Items completed**:
+- **1.2** — Completion celebrations — PR #10 → merged as `1c6371d`. New `Celebration.tsx` (CSS-only 20-particle confetti, respects prefers-reduced-motion, auto-dismiss at 6s) + new `content/celebrations.ts` copy bank (specific not generic — pack-complete names a connector from the pack; capstone names word count + tier with B6 for push; plan milestones name the plan; STAMP-ready is the big one). Leader rotation (~1/3 via stableHash) keeps "शाबाश!" meaningful. Idempotent via `celebrationsShown` on profile. App.tsx wiring wraps existing completion flows to fire celebrations; -89 deletions are layout-rewraps to host the overlay. New smoke test covers pack-complete → reload → no re-fire.
+- **1.4** — Dashboard today-glance — PR #11 → merged as `133a7ee`. New `lib/streak.ts` (pure helpers, local-time ISO dates not UTC, today-or-yesterday courtesy anchor) + 3-tile TodayStrip above dashboard. Streak tile with flame icon. Next-action tile driven by planCursor. Disabled SRS placeholder with dashed border reserving visual slot for 4.1. Rebased onto 1.2-merged main — trivial conflicts in types.ts (different fields added to StudentProfile) and App.tsx (different lines added to each of 3 completion handlers) resolved by keeping both sides.
+**Items deferred**: none remaining in Tier 1. Tier 2 items ready next: 2.1 theme tokens (no deps), 2.2 UI primitives (depends on 2.1), 2.3 accessibility pass (depends on 2.1, 2.2).
+**Commits pushed**: `1c6371d` (PR #10), `133a7ee` (PR #11), plus this housekeeping commit.
+**Notes**:
+- Both implementers ran cleanly in parallel worktrees again. Worktree cleanup with junction-first order worked reliably — main's node_modules/.bin/tsc intact throughout.
+- First real merge-conflict resolution this run: types.ts (additive on StudentProfile) and App.tsx (additive on 3 completion handlers). Both trivial — keep both sides' additions. Verified by running full gate on the rebased branch before push.
+- Reviewers caught a real copy nit (1.2's "like a native" is performative for an IM target — logged for potential future follow-up), a real style-consistency nit (1.4's em-dash in "— due today" conflicts with recent bb0458e em-dash removal), and code-quality nits (streak's NaN handling, 1.2's last-wins behavior on concurrent celebrations). None were blockers.
+- **Tier 1 complete.** Product wins shipped: next-nav, celebrations, flashcard print fix (the original user complaint), today-glance.
+
+---
+
 ## 2026-04-17 — Fire #5 (scheduled cron 20:35 EDT, hourly)
 **Items attempted**: 1.1, 1.3
 **Items completed**:
