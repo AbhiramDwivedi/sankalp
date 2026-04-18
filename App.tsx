@@ -24,6 +24,7 @@ import type { Deck } from './content/schema';
 import { studyPlanForLevel, getStudyPlan } from './content/studyPlans';
 import { resolveNextUp, getPlanProgress } from './components/ui/nextUpResolver';
 import type { NextUpCardProps } from './components/ui/NextUpCard';
+import { appendToday } from './lib/streak';
 import { GraduationCap, Info } from 'lucide-react';
 import { Celebration } from './components/ui/Celebration';
 import {
@@ -157,6 +158,7 @@ const App: React.FC = () => {
       completedCapstoneIds: [],
       flashcardsSeen: [],
       flashcardsMastered: [],
+      activityDates: [],
       evaluations: {},
       aiAssessmentEnabled: false,
       howThisWorksSeen: false,
@@ -202,6 +204,7 @@ const App: React.FC = () => {
         ...p,
         flashcardsSeen: Array.from(new Set([...(p.flashcardsSeen || []), cardId])),
         flashcardsMastered: mastered,
+        activityDates: appendToday(p.activityDates),
       };
       // Deck-mastered celebration: if the currently-open deck now has every
       // card in `mastered`, fire once.
@@ -232,6 +235,7 @@ const App: React.FC = () => {
         ...p,
         completedTopicIds: Array.from(new Set([...(p.completedTopicIds || []), pack.id])),
         inProgressTopicId: undefined,
+        activityDates: appendToday(p.activityDates),
       };
       if (!wasAlreadyComplete) {
         // Chained against the new state so one completion can fire a pack
@@ -255,6 +259,7 @@ const App: React.FC = () => {
         ...p,
         completedCapstoneIds: Array.from(new Set([...(p.completedCapstoneIds || []), capstone.id])),
         inProgressCapstoneId: undefined,
+        activityDates: appendToday(p.activityDates),
       };
       if (!wasAlreadyComplete) {
         // Word count from the intermediateMid (target) version.

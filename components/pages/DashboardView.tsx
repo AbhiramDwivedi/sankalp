@@ -1,7 +1,7 @@
 import React from 'react';
-import { CheckCircle2, Flame, Target, ArrowRight, BookOpen, Flag, Calendar } from 'lucide-react';
+import { CheckCircle2, Flame, Target, ArrowRight, BookOpen, Flag, Calendar, Layers, Lock } from 'lucide-react';
 import type { StudentProfile } from '../../types';
-import type { TopicPack } from '../../content/schema';
+import type { TopicPack, Capstone } from '../../content/schema';
 import { TOPIC_PACKS, nextPackAfter, getPack } from '../../content';
 import { CAPSTONES, getCapstone } from '../../content/capstones';
 import { getStudyPlan, studyPlanForLevel, planCursor } from '../../content/studyPlans';
@@ -10,6 +10,7 @@ import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
 import { PackHeroArt } from '../art/PackHeroArt';
 import { CapstoneHeroArt } from '../art/CapstoneHeroArt';
+import { computeStreak, lastActivityLabel } from '../../lib/streak';
 
 interface DashboardViewProps {
   profile: StudentProfile;
@@ -79,8 +80,35 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       ? 'Nearing Intermediate-Low - 2 credits realistic.'
       : 'Approaching Intermediate-Mid - 3 credits within reach.';
 
+  // Today-glance strip (1.4): streak + next-action + SRS placeholder.
+  // Next-action prefers the plan cursor's next pack (usual weekly rhythm: read
+  // pack, then draft capstone). If the week has no pack pending but does have
+  // a capstone, surface the capstone. If the plan is fully done, invite the
+  // student to re-run a mock exam from the Capstones tab.
+  const streak = computeStreak(profile.activityDates);
+  const lastActive = lastActivityLabel(profile.activityDates);
+  const nextAction: TodayNextAction =
+    cursor.isAllDone
+      ? { kind: 'done' }
+      : cursor.nextPackId && nextPack
+      ? { kind: 'pack', pack: nextPack }
+      : upcomingCapstone
+      ? { kind: 'capstone', capstone: upcomingCapstone }
+      : nextPack
+      ? { kind: 'pack', pack: nextPack }
+      : { kind: 'done' };
+
   return (
     <div className="space-y-10 animate-in fade-in duration-500">
+      <TodayStrip
+        streak={streak}
+        lastActive={lastActive}
+        nextAction={nextAction}
+        onOpenPack={onOpenTopic}
+        onOpenCapstone={onOpenCapstone}
+        onOpenCapstonesTab={onOpenCapstonesTab}
+      />
+
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2">
@@ -273,6 +301,132 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       </div>
     </div>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// Today-glance strip (1.4): 3 small tiles above the dashboard proper.
+//   1. Streak (days-in-a-row active)
+//   2. One concrete next action (20 min on the next pack/capstone)
+//   3. SRS placeholder (disabled until 4.1 ships)
+// Design intent: GLANCE, not another dashboard. Subtle background, compact
+// typography, 3-column on md+ / stacked on mobile. Visual space for tile 3
+// is reserved now so 4.1 can light it up without shifting layout.
+// ---------------------------------------------------------------------------
+
+type TodayNextAction =
+  | { kind: 'pack'; pack: TopicPack }
+  | { kind: 'capstone'; capstone: Capstone }
+  | { kind: 'done' };
+
+interface TodayStripProps {
+  streak: number;
+  lastActive: string;
+  nextAction: TodayNextAction;
+  onOpenPack: (pack: TopicPack) => void;
+  onOpenCapstone: (capstoneId: string) => void;
+  onOpenCapstonesTab: () => void;
+}
+
+const TodayStrip: React.FC<TodayStripProps> = ({
+  streak,
+  lastActive,
+  nextAction,
+  onOpenPack,
+  onOpenCapstone,
+  onOpenCapstonesTab,
+}) => {
+  const streakLabel = streak === 1 ? '1 day streak' : `${streak} day streak`;
+  const streakSubtitle = streak === 0 ? 'Start today' : lastActive;
+
+  let nextTitle: string;
+  let nextSubtitle: string;
+  let onNext: () => void;
+  let nextCta: string;
+
+  if (nextAction.kind === 'pack') {
+    nextTitle = `Spend 20 min on ${nextAction.pack.titleEnglish}`;
+    nextSubtitle = `Level ${nextAction.pack.level} pack`;
+    onNext = () => onOpenPack(nextAction.pack);
+    nextCta = 'Open';
+  } else if (nextAction.kind === 'capstone') {
+    nextTitle = `Draft capstone: ${nextAction.capstone.titleEnglish}`;
+    nextSubtitle = nextAction.capstone.isMockExam
+      ? `Mock Exam · ${nextAction.capstone.mockExamMinutes} min`
+      : `Capstone · ${nextAction.capstone.tier === 'push' ? 'Push tier' : 'Core tier'}`;
+    onNext = () => onOpenCapstone(nextAction.capstone.id);
+    nextCta = 'Open';
+  } else {
+    nextTitle = "You're ready — try a mock exam";
+    nextSubtitle = 'Plan complete';
+    onNext = onOpenCapstonesTab;
+    nextCta = 'Capstones';
+  }
+
+  return (
+    <section
+      aria-label="Today"
+      className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 border border-slate-200 rounded-2xl p-3"
+    >
+      {/* Tile 1: Streak */}
+      <div className="bg-white rounded-xl border border-slate-100 px-4 py-3 flex items-center gap-3">
+        <div
+          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+            streak > 0 ? 'bg-orange-100 text-orange-600' : 'bg-slate-100 text-slate-400'
+          }`}
+        >
+          <Flame size={18} />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Today</p>
+          <p className="text-sm font-black text-slate-900 truncate">{streakLabel}</p>
+          <p className="text-[11px] text-slate-500 italic truncate">{streakSubtitle}</p>
+        </div>
+      </div>
+
+      {/* Tile 2: Concrete next action */}
+      <button
+        onClick={onNext}
+        className="text-left bg-white rounded-xl border border-slate-100 hover:border-orange-300 hover:shadow-sm transition-all px-4 py-3 flex items-center gap-3 group"
+      >
+        <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 group-hover:bg-amber-200">
+          <Target size={18} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+            Today's focus
+          </p>
+          <p className="text-sm font-black text-slate-900 truncate group-hover:text-orange-600">
+            {nextTitle}
+          </p>
+          <p className="text-[11px] text-slate-500 italic truncate">{nextSubtitle}</p>
+        </div>
+        <span className="text-[10px] font-black uppercase tracking-widest text-orange-600 shrink-0 flex items-center gap-1">
+          {nextCta} <ArrowRight size={12} />
+        </span>
+      </button>
+
+      {/* Tile 3: SRS placeholder (disabled; reserved for 4.1) */}
+      <div
+        aria-disabled="true"
+        title="Spaced repetition coming in a future update"
+        className="bg-white rounded-xl border border-dashed border-slate-200 px-4 py-3 flex items-center gap-3 cursor-not-allowed opacity-60 select-none"
+      >
+        <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center shrink-0 relative">
+          <Layers size={18} />
+          <span className="absolute -top-1 -right-1 bg-white rounded-full p-0.5 border border-slate-200 text-slate-400">
+            <Lock size={8} />
+          </span>
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+            Cards due
+          </p>
+          <p className="text-sm font-black text-slate-500 truncate">— due today</p>
+          <p className="text-[11px] text-slate-400 italic truncate">SRS coming soon</p>
+        </div>
+      </div>
+    </section>
   );
 };
 
