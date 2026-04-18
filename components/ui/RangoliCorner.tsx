@@ -1,4 +1,5 @@
 import React from 'react';
+import { theme } from '../../theme';
 
 interface RangoliCornerProps {
   className?: string;
@@ -14,9 +15,11 @@ const cornerRotation = {
   bl: 270,
 };
 
+// The default stroke/fill color is sourced from `theme.colors.saffron[600]`
+// (hex `#ea580c` — the canonical warm primary). Callers can override.
 export const RangoliCorner: React.FC<RangoliCornerProps> = ({
   className = '',
-  color = '#ea580c',
+  color = theme.colors.saffron[600],
   corner = 'tl',
   size = 80,
 }) => (

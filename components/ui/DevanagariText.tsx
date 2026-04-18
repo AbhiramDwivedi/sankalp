@@ -1,4 +1,5 @@
 import React from 'react';
+import { theme } from '../../theme';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl' | 'display';
 type Weight = 'regular' | 'medium' | 'bold' | 'black';
@@ -12,6 +13,13 @@ interface DevanagariTextProps {
   as?: React.ElementType;
 }
 
+// Size + weight Tailwind classes are STRUCTURAL (responsive breakpoints are
+// needed, e.g. `md:text-2xl`) so they stay as utilities. The `.font-hindi` /
+// `.font-hindi-display` class is retained because index.html's print
+// `@media` block overrides `font-size` on those classes — dropping them
+// would break print visual goldens. The `fontFamily` inline style
+// redundantly (and pixel-identically) sources the family from theme.ts so
+// that the primitive has a live dependency on the token set.
 const sizeClass: Record<Size, string> = {
   sm: 'text-lg',
   md: 'text-xl md:text-2xl',
@@ -36,11 +44,15 @@ export const DevanagariText: React.FC<DevanagariTextProps> = ({
   as: As = 'p',
 }) => {
   const fontClass = display ? 'font-hindi-display' : 'font-hindi';
+  const fontFamily = display
+    ? theme.typography.devanagari.display.family
+    : theme.typography.devanagari.body.family;
   return (
     <As
       dir="ltr"
       lang="hi"
       className={`${fontClass} ${sizeClass[size]} ${weightClass[weight]} ${className}`}
+      style={{ fontFamily }}
     >
       {children}
     </As>
