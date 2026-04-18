@@ -182,7 +182,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 **Done when**: file exists with at least the header and first real fire's entry.
 **Do not touch**: anything else.
 
-### [ ] 0.5 — Custom commands (`/ship`, `/pick-next`, `/revert-last`) (depends on: 0.1, 0.2, 0.3)
+### [x] 0.5 — Custom commands (`/ship`, `/pick-next`, `/revert-last`) (depends on: 0.1, 0.2, 0.3) — merged 2026-04-17 via PR #6 (`9bd845e`)
 **Brief**: Add three slash commands to `.claude/commands/`:
 - `/ship` — stage current changes, run `npm run check`, if green: commit with message inferred from diff (conventional prefix + short summary), push to origin/main. If red: report failures, abort without commit.
 - `/pick-next` — read this backlog, identify top unchecked unblocked item, print its brief. (Informational — the cron fire does the actual dispatching.)
@@ -200,7 +200,7 @@ NOT authorized — these require stopping and logging, or they are forbidden:
 **Done when**: `git commit` on a clean branch with a gate-failing change (deliberately break something) is blocked with a clear message. `npm install` on a fresh clone installs the hook. Smoke test passes.
 **Do not touch**: `.git/hooks/` directly (use husky or tracked .githooks/ so the hook is versioned).
 
-### [ ] 0.8 — GitHub Actions CI workflow for PRs (depends on: 0.1, 0.2, 0.3)
+### [x] 0.8 — GitHub Actions CI workflow for PRs (depends on: 0.1, 0.2, 0.3) — merged 2026-04-17 via PR #7 (`f0f9e18`). **Tier 0 complete.**
 **Brief**: Add `.github/workflows/ci.yml` that runs on `pull_request` to main: checkout, setup-node (v20), `npm ci`, `npm run check`, `npm run smoke`, `npm run visual`. Cache node_modules and playwright browsers. On failure: annotate the PR with the failing step + logs. Separately add `.github/workflows/guard.yml` that runs on `pull_request` only: a guard job that fails if the PR diff contains changes to `content/rubric.ts` benchmark-boundary constants OR the PR author is a bot / automated-branch (`auto/*`) AND the diff contains changes to `content/studyPlans.ts` plan-data arrays without an explicit "CURRICULUM-AUTHORIZED" tag in the PR body. This is a scope-creep detector for the automated workflow. Document that `auto/*` branches require these checks green before squash-merge; if a check is failing, the reviewer agent should leave the PR open for human review.
 **Done when**: opening a PR against main triggers CI. Deliberately failing a check blocks merge. The guard workflow fires on a test PR that touches rubric constants and fails correctly. Document the required-checks branch protection recommendation in `CLAUDE.md` (manual user step — actions cannot enable branch protection themselves without admin PAT).
 **Do not touch**: the main workflows concept — keep two workflows (ci.yml + guard.yml) separate for clarity.

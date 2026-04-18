@@ -16,6 +16,21 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #4 (scheduled cron 19:35 EDT, hourly)
+**Items attempted**: 0.5, 0.8
+**Items completed**:
+- **0.5** — Slash commands — PR #6 → merged as `9bd845e`. 3 markdown files under `.claude/commands/` (ship.md 100 lines, pick-next.md 70 lines, revert-last.md 61 lines). `/ship` is branch-aware (main = housekeeping to origin/main; auto/* = commit + push branch, never main). `/pick-next` parses BACKLOG.md read-only. `/revert-last` uses --soft, warns on pushed commits.
+- **0.8** — GitHub Actions CI + scope-creep guard — PR #7 → merged as `f0f9e18`. Two workflows (ci.yml running full 6-stage gate on ubuntu-latest with npm + Playwright caching; guard.yml blocking rubric.ts changes and unauthorized auto/* studyPlans.ts edits). CLAUDE.md gets a "### Recommended branch protection (manual)" subsection explaining the repo admin must wire these as required checks. Validated via actionlint v1.7.12 (0 errors) + PyYAML.
+**Items deferred**: none — Tier 0 COMPLETE with this fire.
+**Commits pushed**: `9bd845e` (PR #6), `f0f9e18` (PR #7), plus this housekeeping commit.
+**Notes — worktree protocol first real test**:
+- Two implementers ran cleanly in parallel worktrees with ZERO cross-contamination, ZERO stashes. Protocol works. Total wall-clock ~6 min for implementer+reviewer+merge of both items — roughly 2× faster than the contended fire #2.
+- **New failure mode discovered during cleanup**: `rm -rf` on a worktree directory while the `node_modules` junction was still in place recursed through the junction and wiped the main repo's `node_modules/.bin/` symlinks, breaking the next `npm run check` with a cryptic "This is not the tsc command you are looking for" (Windows task scheduler fallback). Recovery: `npm install` restored .bin. Protocol tightened to require junction removal BEFORE worktree dir removal. Committed as part of this fire's housekeeping.
+- Pre-commit hook fired on both implementer commits AND during the housekeeping commit — all passed.
+- Rebase of 0.8 onto main (after 0.5 merged) worked clean (no package.json touched in either item this fire).
+
+---
+
 ## 2026-04-17 — Fire #3 (scheduled cron 18:35 EDT, hourly cadence)
 **Items attempted**: 0.3
 **Items completed**:
