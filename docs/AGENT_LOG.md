@@ -16,6 +16,21 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #7 (scheduled cron 22:35 EDT, hourly)
+**Items attempted**: 2.1, 3.1
+**Items completed**:
+- **2.1** — Theme tokens reference — PR #12 → merged as `ef17e6e`. Single 292-line `theme.ts` at repo root. Extraction-driven: grepped Tailwind utility frequency, took most-used shade per role. Discovered the "saffron" brief name doesn't match the actual Tailwind CDN palette (no `saffron-*` utilities exist) — aliased to `colors.orange` which IS what the codebase uses; both names point to the same scale. Reference-only, not wired up yet (2.2's scope).
+- **3.1** — CURRICULUM constant — PR #13 → merged as `9f30662`. 20 files changed (1 new `content/curriculum.ts` + 19 files refactored to interpolate through CURRICULUM instead of hardcoded strings). All rubric VALUES byte-identical (verified by reviewer); only STRING references routed. Credit audit stayed GUARANTEED. Visual goldens unchanged. First real exercise of the `CURRICULUM-AUTHORIZED` token in a PR body (scope-creep guard correctly flagged rubric.ts touch; token + rationale satisfied it). Implementer added one small scope extension: `examSystem.providerShortName: 'Avant'` (reviewer confirmed reasonable).
+**Items deferred**: 2.2 (depends on 2.1 — now ready), 2.3 (depends on 2.2), 3.2 (depends on 3.1 — now ready), 3.3/3.4 (depend on 3.2). Tier 4 items all still independent.
+**Commits pushed**: `ef17e6e` (PR #12), `9f30662` (PR #13), plus this housekeeping commit.
+**Notes**:
+- Both implementers ran cleanly in parallel worktrees, no contention. Worktree cleanup with junction-first order continues to work reliably.
+- First transient failure on PR #12 merge: GH returned "Base branch was modified" — race condition with no actual diff. Retried immediately and it succeeded. Worth flagging for future fires in case it becomes a pattern.
+- **Tier 1 complete (from fire #6), now Tier 0+1+2.1+3.1 all shipped.** 14/22 items done (64%).
+- Cross-tier parallelism works: Tier 2 and Tier 3 can run items in parallel since their file touch-sets are disjoint.
+
+---
+
 ## 2026-04-17 — Fire #6 (scheduled cron 21:35 EDT, hourly)
 **Items attempted**: 1.2, 1.4
 **Items completed**:

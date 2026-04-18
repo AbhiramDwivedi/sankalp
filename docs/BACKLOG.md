@@ -250,7 +250,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 
 ## Tier 2 — Design tokens lite (option b, NO CDN migration)
 
-### [ ] 2.1 — Theme tokens file
+### [x] 2.1 — Theme tokens file — merged 2026-04-17 via PR #12 (`ef17e6e`)
 **Brief**: Create `theme.ts` at repo root with: color scales (saffron-50..900, indigo-50..900, emerald-50..900 — extract exact hex values currently used across the codebase by grepping for bg-*, text-*, border-* utilities and taking the most-frequent shades); spacing scale (map current Tailwind usage to a 4-step scale: xs, sm, md, lg, xl); radii (sm: 4px, md: 8px, lg: 16px, full: 9999px from current usage); type scale for Devanagari (display: Tiro Devanagari, body: Noto Sans Devanagari — sizes 14/16/18/24/32/48) and Latin (Plus Jakarta). Export as a single `theme` object. Don't wire it up yet — just capture the current vocabulary.
 **Done when**: `theme.ts` exists and accurately reflects what's already in the codebase (not aspirational). Add a short README section in `theme.ts` as a top-comment explaining this is for reference + future migration, not currently consumed.
 **Do not touch**: any existing component.
@@ -269,7 +269,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 
 ## Tier 3 — Multi-Indian-language architecture seam (architecture only, no second language content)
 
-### [ ] 3.1 — CURRICULUM constant (no dependency)
+### [x] 3.1 — CURRICULUM constant (no dependency) — merged 2026-04-17 via PR #13 (`9f30662`)
 **Brief**: Create `content/curriculum.ts` with a single exported `CURRICULUM` object: `{ id: 'fcps-stamp-hindi', language: { name: 'Hindi', code: 'hi', script: 'Devanagari', fontStack: [...] }, examSystem: { name: 'STAMP 2S/WS', provider: 'Avant', sections: ['Writing', 'Speaking'] }, creditMapping: { benchmark: 5, creditName: 'Intermediate Mid', credits: 3, issuer: 'FCPS' }, displayStrings: { examShortName: 'STAMP', creditPhrase: '3 FCPS credits', targetPhrase: 'Benchmark 5' } }`. Then grep the codebase for every hardcoded "STAMP", "FCPS", "Benchmark 5", "3 credits", "Hindi", "Devanagari" string and route them through `CURRICULUM.*` — mechanical refactor, no behavior change. Audit covers: components, content files (topics, capstones, study plans — but NOT studyPlans.ts since user edits it; defer that one to 3.2), rubric.ts, audit script, credit-audit.md template.
 **Done when**: grep for literal "STAMP" or "FCPS" or "Benchmark 5" returns only `content/curriculum.ts` and maybe test fixtures / docs (docs are acceptable). visual regression (0.3) unchanged. tsc + validate-packs green.
 **Do not touch**: the plan data arrays in `content/studyPlans.ts` (authored content). Import-only edits are fine if needed.
