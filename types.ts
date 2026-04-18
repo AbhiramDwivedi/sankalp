@@ -168,6 +168,11 @@ export interface StudentProfile {
   // persisted — only metadata + self-check + optional AI eval. Added in 4.3.
   speakingRecordings?: Record<string, SpeakingAttempt[]>;
 
+  // ISO timestamp of the most recent JSON/PDF progress export. Stamped by
+  // lib/exportProgress.downloadJsonExport (and the print-to-PDF flow) so the
+  // teacher/parent can see when they last shared a snapshot. Added in 4.4.
+  lastExportedAt?: string;
+
   // Legacy fields (kept optional so old localStorage records still parse):
   plan?: Unit[];
   completedLessonIds?: string[];
@@ -216,6 +221,7 @@ export function migrateProfile(raw: any): StudentProfile {
       raw.speakingRecordings && typeof raw.speakingRecordings === 'object' && !Array.isArray(raw.speakingRecordings)
         ? (raw.speakingRecordings as Record<string, SpeakingAttempt[]>)
         : {},
+    lastExportedAt: typeof raw.lastExportedAt === 'string' ? raw.lastExportedAt : undefined,
     plan: raw.plan,
     completedLessonIds: raw.completedLessonIds,
     generatedMaterials: raw.generatedMaterials,
