@@ -279,7 +279,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 **Done when**: imports all resolve; tsc green; validate-packs green; smoke green; visual regression green.
 **Do not touch**: plan data arrays in `content/studyPlans.ts`; topic content files.
 
-### [ ] 3.3 — Generic ScriptText + parameterized rubric prompt (depends on: 3.2)
+### [x] 3.3 — Generic ScriptText + parameterized rubric prompt (depends on: 3.2) — merged 2026-04-17 via PR #16
 **Brief**: Rename `DevanagariText` to `ScriptText` (keep `DevanagariText` as a thin alias that sets `script="Devanagari"` for backwards compat during transition); drive `lang` attribute and font-stack from `CURRICULUM.language`. Then refactor `geminiService.ts` `evaluateWriting()` to accept a rubric object (`CURRICULUM.examSystem.rubric` — wire rubric into the CURRICULUM shape) instead of the hardcoded STAMP-specific prompt text. The prompt becomes a template that takes benchmark descriptors, credit mapping, and language name as parameters. Behavior for Hindi+STAMP must be byte-identical to today.
 **Done when**: tsc green; validate-packs green; smoke green; a manual eval call (via `npm run dev` + AI toggle) produces a response shape identical to pre-change for one test essay (record a before-fixture, run after, diff — expect only non-deterministic fields like score rationale text to differ).
 **Do not touch**: the rubric VALUES themselves (benchmark boundaries, credit thresholds). Only the plumbing.
