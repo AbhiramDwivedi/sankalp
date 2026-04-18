@@ -255,7 +255,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 **Done when**: `theme.ts` exists and accurately reflects what's already in the codebase (not aspirational). Add a short README section in `theme.ts` as a top-comment explaining this is for reference + future migration, not currently consumed.
 **Do not touch**: any existing component.
 
-### [ ] 2.2 — UI primitives consume tokens (depends on: 2.1)
+### [x] 2.2 — UI primitives consume tokens (depends on: 2.1) — merged 2026-04-17 via PR #14 (`563a25c`)
 **Brief**: Refactor `components/ui/*` (Card, Badge, Section, Callout, DevanagariText, PaisleyDivider, RangoliCorner) to consume `theme.ts` via className interpolation — i.e. `${theme.colors.saffron[500]}` inside a `style` prop for color values, keep Tailwind utilities for structural classes. This is surgical: only the ui primitives, not the pages.
 **Done when**: all 7 primitives import from theme; visual regression (0.3) shows no pixel difference; tsc passes.
 **Do not touch**: pages, views, content.
@@ -274,7 +274,7 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 **Done when**: grep for literal "STAMP" or "FCPS" or "Benchmark 5" returns only `content/curriculum.ts` and maybe test fixtures / docs (docs are acceptable). visual regression (0.3) unchanged. tsc + validate-packs green.
 **Do not touch**: the plan data arrays in `content/studyPlans.ts` (authored content). Import-only edits are fine if needed.
 
-### [ ] 3.2 — Curriculum-shaped folders (depends on: 3.1)
+### [x] 3.2 — Curriculum-shaped folders (depends on: 3.1) — merged 2026-04-17 via PR #15 (`7440167`)
 **Brief**: Move `content/rubric.ts`, `content/connectors.ts`, `content/muhavare` (if any standalone), and the grammar-specific diagrams (NeConstructionDiagram, GenderAgreementDiagram — Hindi-specific) into `content/curricula/fcps-stamp-hindi/`. Keep `content/schema.ts` and `content/topics/*` where they are for now (topics are per-curriculum content but moving 26 files is higher risk — defer). Update all imports. Add `content/curricula/README.md` explaining the layout for when we add e.g. `cbse-marathi` later. Update `content/studyPlans.ts` imports as needed for the moved files — do not change plan data.
 **Done when**: imports all resolve; tsc green; validate-packs green; smoke green; visual regression green.
 **Do not touch**: plan data arrays in `content/studyPlans.ts`; topic content files.

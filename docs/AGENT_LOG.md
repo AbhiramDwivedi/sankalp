@@ -16,6 +16,21 @@ Chronological log of the autonomous build run. Each entry = one fire of the sche
 
 ---
 
+## 2026-04-17 — Fire #8 (scheduled cron 23:35 EDT, hourly)
+**Items attempted**: 2.2, 3.2
+**Items completed**:
+- **2.2** — UI primitives consume theme tokens — PR #14 → merged as `563a25c`. 7 primitives (Card, Badge, Callout, Section, DevanagariText, PaisleyDivider, RangoliCorner) refactored to use `style` prop interpolations from theme.ts for COLOR values while keeping Tailwind for structural classes. Added `hexToRgba()` helper to theme.ts. Visual goldens byte-identical. Design decision: only saffron/indigo/emerald tones moved to tokens (theme's scope); amber/slate/blue/rose variants stay Tailwind.
+- **3.2** — Curricula-shaped folders — PR #15 → merged as `7440167`. Moved `rubric.ts` and `connectors.ts` (via git mv with 99% similarity — history preserved) + Hindi-specific diagrams extracted into new `content/curricula/fcps-stamp-hindi/`. 35 import sites updated across 26 topic files + 5 runtime components + 2 scripts + 1 diagrams file. Added `content/curricula/README.md` layout explainer. Rubric VALUES byte-identical (verified by reviewer). Credit audit verdict stayed GUARANTEED. Reviewer flagged one cosmetic nit: committed CREDIT_AUDIT.md on 3.2's branch still referenced old rubric path in prose — **fixed in this housekeeping commit** by regenerating the audit against the new layout.
+**Items deferred**: 2.3 (depends on 2.2 — now ready), 3.3 (depends on 3.2 — now ready), 3.4 (depends on 3.3). Plus all Tier 4 items independent.
+**Commits pushed**: `563a25c` (PR #14), `7440167` (PR #15), plus this housekeeping commit (regenerates CREDIT_AUDIT.md with correct rubric path).
+**Notes**:
+- Parallel worktrees worked cleanly again. Both implementers noted port-3000 contention when both dev servers tried to claim the same port; Playwright's `reuseExistingServer: !CI` made one agent's smoke tests route to the other agent's app. Resolved by waiting for one to release. This is a real ergonomic issue for the worktree protocol — worth a future follow-up to assign distinct ports per worktree (e.g. `PORT=3000+N` env) so parallel dev servers don't collide.
+- Worktree cleanup: junction-first order continues to protect main's node_modules/.bin/. The worktree directory shells get stuck on Windows file locks (Permission denied on git worktree remove --force) — harmless residue that accumulates. Could add a follow-up to clean-sweep stale worktree dirs at the start of each fire.
+- **16/22 items done (73%).** Tier 0 + Tier 1 + 2.1/2.2 + 3.1/3.2 shipped. Tier 2 needs only 2.3 (a11y) to close. Tier 3 needs 3.3 (generic ScriptText + parameterized Gemini rubric) and 3.4 (second-curriculum stub). Tier 4 is all independent.
+- Next fire can pair 2.3 + 3.3 (disjoint: 2.3 touches components/ui/* + new tests; 3.3 touches geminiService.ts + DevanagariText).
+
+---
+
 ## 2026-04-17 — Fire #7 (scheduled cron 22:35 EDT, hourly)
 **Items attempted**: 2.1, 3.1
 **Items completed**:

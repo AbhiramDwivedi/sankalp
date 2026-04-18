@@ -1,6 +1,6 @@
 # Credit Audit — FCPS Hindi courseware
 
-**Generated**: 2026-04-17
+**Generated**: 2026-04-18
 **Rubric source**: Avant STAMP 2S/WS (Writing + Speaking) · FCPS Credit by Exam
 **Target**: STAMP Benchmark 5 (Intermediate Mid) → **3 FCPS credits**
 **Verdict**: `GUARANTEED`
@@ -9,7 +9,7 @@
 
 ## 1. Rubric fidelity
 
-The courseware targets **STAMP Benchmark 5 (Intermediate Mid) on both Writing and Speaking.**. This audit confirms that the rubric table in `content/rubric.ts` matches the public Avant / FCPS descriptor for Benchmark 5:
+The courseware targets **STAMP Benchmark 5 (Intermediate Mid) on both Writing and Speaking.**. This audit confirms that the rubric table in `content/curricula/fcps-stamp-hindi/rubric.ts` matches the public Avant / FCPS descriptor for Benchmark 5:
 
 > Connected sentences with transitions and groupings of ideas; sentences cannot be rearranged without altering meaning.
 >
