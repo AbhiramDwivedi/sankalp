@@ -3,6 +3,8 @@ import { ArrowLeft, ArrowRight, Shuffle, RefreshCcw, Check, X, Printer } from 'l
 import type { Deck, Flashcard } from '../../content/schema';
 import { FlashcardItem } from './FlashcardItem';
 import { Badge } from '../ui/Badge';
+import { NextUpCard, type NextUpCardProps } from '../ui/NextUpCard';
+import { OverlayProgress } from '../ui/OverlayProgress';
 
 interface DeckRunnerProps {
   deck: Deck;
@@ -13,6 +15,12 @@ interface DeckRunnerProps {
   onCardNotYet: (cardId: string) => void;
   onBack: () => void;
   onPrint: () => void;
+  progress?: {
+    position: string;
+    planName?: string;
+    percent: number;
+  };
+  nextUp?: NextUpCardProps;
 }
 
 function shuffled<T>(arr: T[]): T[] {
@@ -33,6 +41,8 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
   onCardNotYet,
   onBack,
   onPrint,
+  progress,
+  nextUp,
 }) => {
   const [isShuffled, setIsShuffled] = useState(false);
   const [index, setIndex] = useState(0);
@@ -53,26 +63,40 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
   }, [index, current?.id]);
 
   // Keyboard navigation
+  const nextContinue = nextUp?.onContinue ?? null;
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null;
+      const inText = !!t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
       if (e.key === ' ') {
         e.preventDefault();
         setFlipped((f) => !f);
       }
       if (e.key === 'ArrowLeft') setIndex((i) => Math.max(0, i - 1));
       if (e.key === 'ArrowRight') setIndex((i) => Math.min(order.length - 1, i + 1));
+      if ((e.key === 'n' || e.key === 'N') && !inText && nextContinue) {
+        e.preventDefault();
+        nextContinue();
+      }
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [order.length]);
+  }, [order.length, nextContinue]);
 
   if (!current) return null;
 
   const mustKnow = deck.cards.filter((c) => c.priority === 'must-know').length;
-  const progress = Math.round((seenIds.filter((id) => order.some((c) => c.id === id)).length / order.length) * 100);
+  const deckSeenPercent = Math.round((seenIds.filter((id) => order.some((c) => c.id === id)).length / order.length) * 100);
 
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
+      {progress && (
+        <OverlayProgress
+          position={progress.position}
+          planName={progress.planName}
+          percent={progress.percent}
+        />
+      )}
       {/* Top bar */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <button
@@ -108,7 +132,7 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
         <div className="flex items-center gap-3 mt-2 flex-wrap">
           <Badge tone="orange" size="xs">{order.length} cards</Badge>
           <Badge tone="amber" size="xs">★ {mustKnow} must-know</Badge>
-          <Badge tone="green" size="xs">{progress}% seen</Badge>
+          <Badge tone="green" size="xs">{deckSeenPercent}% seen</Badge>
         </div>
       </header>
 
@@ -168,8 +192,10 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
       )}
 
       <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 text-center no-print">
-        Keys · Space = flip · ← → navigate
+        Keys · Space = flip · ← → navigate{nextUp?.onContinue ? ' · N = continue' : ''}
       </p>
+
+      {nextUp && <NextUpCard {...nextUp} />}
     </div>
   );
 };

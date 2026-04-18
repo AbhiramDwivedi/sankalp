@@ -37,7 +37,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   // Resolve plan
   const plan =
     getStudyPlan(profile.selectedStudyPlanId) || studyPlanForLevel(profile.currentLevel);
-  const cursor = planCursor(plan, completedPacks, completedCaps, profile.currentLevel);
+  const cursor = planCursor(
+    plan,
+    completedPacks,
+    completedCaps,
+    profile.currentLevel,
+    profile.deferredIds || [],
+  );
 
   // Next pack: prefer plan cursor; fall back to in-progress or first-uncomplete.
   let nextPack: TopicPack | undefined;
