@@ -194,6 +194,50 @@ test.describe('Overlay flows', () => {
   });
 });
 
+test.describe('Completion celebrations', () => {
+  test('pack-complete celebration fires once, then never again', async ({ page }) => {
+    await gotoClean(page);
+    await onboardStudent(page, 'Celebration Tester');
+
+    await clickSidebarTab(page, 'Library');
+    await expect(page.getByRole('heading', { name: /26 reading packs/i })).toBeVisible();
+
+    // Open L1-12 Restaurants & Food (quality anchor pack).
+    const packCard = page.getByRole('button', { name: /restaurants.*food/i }).first();
+    await packCard.scrollIntoViewIfNeeded();
+    await packCard.click();
+
+    await expect(page.getByRole('button', { name: /back to library/i })).toBeVisible();
+
+    // Find and click the "Mark as Complete"-style button. TopicPackViewV2 uses
+    // a "Mark pack complete" button; fall back to a broad regex.
+    const markComplete = page
+      .getByRole('button', { name: /mark.*complete|mark pack complete|complete pack/i })
+      .first();
+    await markComplete.scrollIntoViewIfNeeded();
+    await markComplete.click();
+
+    // The celebration card renders as a status overlay containing "Pack done."
+    // We assert on the body text rather than the lead (which is random 1/3).
+    const celebration = page.getByTestId('celebration');
+    await expect(celebration).toBeVisible({ timeout: 5_000 });
+    await expect(celebration).toContainText(/pack done/i);
+
+    // Dismiss via the X button inside the celebration card.
+    await celebration.getByRole('button', { name: /dismiss/i }).first().click();
+    await expect(celebration).toHaveCount(0);
+
+    // Reload — state comes from localStorage. The pack is marked complete
+    // and its celebration id is in `celebrationsShown`, so reopening the
+    // library should NOT re-fire the celebration.
+    await page.reload();
+    await expect(page.getByRole('heading', { name: /नमस्ते, Celebration Tester/ })).toBeVisible();
+    // Give the app a beat to render; celebration should not appear.
+    await page.waitForTimeout(500);
+    await expect(page.getByTestId('celebration')).toHaveCount(0);
+  });
+});
+
 test.describe('Settings persistence', () => {
   test('AI assessment toggle persists across reload', async ({ page }) => {
     await gotoClean(page);
