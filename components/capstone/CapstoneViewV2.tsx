@@ -13,8 +13,10 @@ import {
   Flag,
   HelpCircle,
   ChevronDown,
+  Timer,
 } from 'lucide-react';
 import type { Capstone, EssayVersion } from '../../content/schema';
+import type { MockExamResult, StudentProfile } from '../../types';
 import { TOPIC_PACKS_BY_ID } from '../../content';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
@@ -27,6 +29,7 @@ import { ParagraphScaffoldDiagram } from '../art/diagrams';
 import { NextUpCard, type NextUpCardProps } from '../ui/NextUpCard';
 import { OverlayProgress } from '../ui/OverlayProgress';
 import { CURRICULUM } from '../../content/curriculum';
+import { MockExamMode } from './MockExamMode';
 
 // -----------------------------------------------------------------------------
 // CapstoneViewV2 - capstone page IA, mirrors the topic-pack 4-tab pattern
@@ -69,6 +72,10 @@ interface CapstoneViewV2Props {
     percent: number;
   };
   nextUp?: NextUpCardProps;
+  // 4.2 — Mock exam mode. Only consumed when capstone.isMockExam is true.
+  profile?: StudentProfile;
+  aiEnabled?: boolean;
+  onMockExamSubmit?: (capstoneId: string, result: MockExamResult) => void;
 }
 
 export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
@@ -79,10 +86,14 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
   onOpenPack,
   progress,
   nextUp,
+  profile,
+  aiEnabled = false,
+  onMockExamSubmit,
 }) => {
   const tokens = tokensFor(capstone.themeGroup);
   const [activeTab, setActiveTab] = useState<TabKey>('study');
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
+  const [mockOpen, setMockOpen] = useState<boolean>(false);
   const tabBodyRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -138,6 +149,15 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
           <ArrowLeft size={16} /> Back to Capstones
         </button>
         <div className="flex gap-2">
+          {capstone.isMockExam && (
+            <button
+              onClick={() => setMockOpen(true)}
+              data-testid="start-mock-exam"
+              className="flex items-center gap-2 px-5 py-2 rounded-xl bg-rose-600 text-white font-black text-sm shadow-lg hover:bg-rose-700"
+            >
+              <Timer size={16} /> Start mock exam
+            </button>
+          )}
           <button
             onClick={() => window.print()}
             className="flex items-center gap-2 px-5 py-2 rounded-xl bg-slate-100 text-slate-700 font-black hover:bg-slate-200 text-sm"
@@ -157,6 +177,23 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
           </button>
         </div>
       </div>
+
+      {/* 4.2 — Mock exam mode overlay. Only rendered for mock-flagged capstones
+           once the student clicks "Start mock exam". Default capstone view is
+           unchanged until then. */}
+      {mockOpen && capstone.isMockExam && profile && (
+        <MockExamMode
+          capstone={capstone}
+          profile={profile}
+          aiEnabled={aiEnabled}
+          onExit={(result) => {
+            if (result && onMockExamSubmit) {
+              onMockExamSubmit(capstone.id, result);
+            }
+            setMockOpen(false);
+          }}
+        />
+      )}
 
       {/* Hero */}
       <div className="relative overflow-hidden rounded-[2.5rem] text-white shadow-2xl print:shadow-none print:break-after-page">

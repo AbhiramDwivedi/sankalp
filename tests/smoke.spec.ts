@@ -308,6 +308,51 @@ test.describe('Audit view', () => {
   });
 });
 
+test.describe('Mock exam mode', () => {
+  test('start mock exam on C01, write text, click Done, see result', async ({ page }) => {
+    await gotoClean(page);
+    await onboardStudent(page, 'Mock Tester');
+
+    await clickSidebarTab(page, 'Capstones');
+    await expect(page.getByRole('heading', { name: 'Cross-topic essays' })).toBeVisible();
+
+    // C01 is flagged isMockExam. Open it.
+    const c01Card = page.getByRole('button').filter({ hasText: /\bC01\b/ }).first();
+    await c01Card.scrollIntoViewIfNeeded();
+    await c01Card.click();
+
+    await expect(page.getByRole('button', { name: /back to capstones/i })).toBeVisible({
+      timeout: 10_000,
+    });
+
+    // The "Start mock exam" button is only shown on mock-flagged capstones.
+    const startBtn = page.getByTestId('start-mock-exam');
+    await expect(startBtn).toBeVisible();
+    await startBtn.click();
+
+    // Mock exam overlay is open — timer, textarea, Done button.
+    await expect(page.getByTestId('mock-exam-mode')).toBeVisible();
+    await expect(page.getByTestId('mock-exam-timer')).toBeVisible();
+    const textarea = page.getByTestId('mock-exam-textarea');
+    await expect(textarea).toBeVisible();
+
+    // Type a short response. AI is OFF by default on new profiles, so Done
+    // should skip the grading phase and go straight to the result panel.
+    await textarea.fill('मेरा एक सामान्य शनिवार बहुत अच्छा होता है।');
+
+    await page.getByTestId('mock-exam-done').click();
+
+    // Result panel renders, self-check (non-AI path) is shown, tier comparison too.
+    await expect(page.getByTestId('mock-exam-result')).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByTestId('mock-exam-self-check')).toBeVisible();
+    await expect(page.getByTestId('mock-exam-tier-comparison')).toBeVisible();
+
+    // Exit back to the capstone view.
+    await page.getByTestId('mock-exam-finish').click();
+    await expect(page.getByRole('button', { name: /back to capstones/i })).toBeVisible();
+  });
+});
+
 test.describe('Settings persistence', () => {
   test('AI assessment toggle persists across reload', async ({ page }) => {
     await gotoClean(page);
