@@ -4,7 +4,14 @@ import { EvaluationResult } from "./types";
 import { CURRICULUM } from "./content/curriculum";
 import { buildRaterPromptHeader } from "./content/curriculumRubric";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+let _ai: GoogleGenAI | null = null;
+function getAi(): GoogleGenAI {
+  if (_ai) return _ai;
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) throw new Error("GEMINI_API_KEY is not set; AI assessment is disabled.");
+  _ai = new GoogleGenAI({ apiKey });
+  return _ai;
+}
 
 const safeJsonParse = (text: string) => {
   const cleaned = text.trim().replace(/^```json\s*/i, "").replace(/```\s*$/i, "").trim();
@@ -42,7 +49,7 @@ export async function evaluateWriting(
     });
   }
 
-  const response = await ai.models.generateContent({
+  const response = await getAi().models.generateContent({
     model: 'gemini-2.5-flash',
     contents: { parts },
     config: {
