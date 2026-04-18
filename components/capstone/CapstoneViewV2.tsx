@@ -26,6 +26,7 @@ import { RubricAxisTags } from '../topic/RubricAxisTag';
 import { ParagraphScaffoldDiagram } from '../art/diagrams';
 import { NextUpCard, type NextUpCardProps } from '../ui/NextUpCard';
 import { OverlayProgress } from '../ui/OverlayProgress';
+import { CURRICULUM } from '../../content/curriculum';
 
 // -----------------------------------------------------------------------------
 // CapstoneViewV2 - capstone page IA, mirrors the topic-pack 4-tab pattern
@@ -52,7 +53,7 @@ const TABS: TabDef[] = [
 
 const TIER_META: Record<EssayVersion['label'], { title: string; subtitle: string; tone: string }> = {
   novice: { title: 'Novice draft', subtitle: 'What a new learner might write', tone: 'bg-slate-500' },
-  intermediateMid: { title: 'Intermediate-Mid', subtitle: 'Benchmark 5 · the 3-credit target', tone: 'bg-orange-600' },
+  intermediateMid: { title: 'Intermediate-Mid', subtitle: `${CURRICULUM.displayStrings.targetPhrase} · the ${CURRICULUM.creditMapping.credits}-credit target`, tone: 'bg-orange-600' },
   push: { title: 'Push tier', subtitle: 'Reaching toward Benchmark 6', tone: 'bg-indigo-600' },
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { RubricAxis } from '../../content/schema';
+import { CURRICULUM } from '../../content/curriculum';
 
 interface RubricAxisTagProps {
   axis: RubricAxis;
@@ -36,7 +37,7 @@ export const RubricAxisTag: React.FC<RubricAxisTagProps> = ({
   return (
     <span
       className={`inline-flex items-center gap-1 font-black uppercase tracking-widest rounded ${d.bg} ${d.text} ${textSize}`}
-      title={`This trains the ${d.label} axis of the STAMP rubric`}
+      title={`This trains the ${d.label} axis of the ${CURRICULUM.examSystem.shortName} rubric`}
     >
       <span>{d.short}</span>
       <span className="opacity-70 hidden sm:inline">{d.label}</span>

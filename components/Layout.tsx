@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { BookOpen, Settings, Home, Users, ClipboardList, Flag, Calendar, Layers } from 'lucide-react';
+import { CURRICULUM } from '../content/curriculum';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -37,7 +38,7 @@ export const Layout: React.FC<LayoutProps> = ({
           <div>
             <h1 className="text-2xl font-black text-slate-900 tracking-tight">{brandingName}</h1>
             <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-              FCPS Hindi · 3-credit prep
+              {CURRICULUM.creditMapping.issuer} {CURRICULUM.language.name} · {CURRICULUM.creditMapping.credits}-credit prep
             </p>
           </div>
         </div>

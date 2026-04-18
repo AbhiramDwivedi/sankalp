@@ -7,6 +7,7 @@ import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
 import { Callout } from '../ui/Callout';
 import { PackHeroArt } from '../art/PackHeroArt';
+import { CURRICULUM } from '../../content/curriculum';
 
 interface LibraryViewProps {
   completedIds: string[];
@@ -16,8 +17,8 @@ interface LibraryViewProps {
 }
 
 const levelMeta: Record<Level, { title: string; subtitle: string; tone: string }> = {
-  1: { title: 'Level 1 - Foundations', subtitle: 'FCPS Year 1 topics. Get comfortable producing simple sentences.', tone: 'text-orange-700' },
-  2: { title: 'Level 2 - Building Paragraphs', subtitle: 'FCPS Year 2 topics. Shift into connected paragraphs and time frames.', tone: 'text-emerald-700' },
+  1: { title: 'Level 1 - Foundations', subtitle: `${CURRICULUM.creditMapping.issuer} Year 1 topics. Get comfortable producing simple sentences.`, tone: 'text-orange-700' },
+  2: { title: 'Level 2 - Building Paragraphs', subtitle: `${CURRICULUM.creditMapping.issuer} Year 2 topics. Shift into connected paragraphs and time frames.`, tone: 'text-emerald-700' },
   3: { title: 'Level 3 - Pushing to Intermediate-Mid', subtitle: 'The stretch topics that lift a 2-credit essay to 3 credits.', tone: 'text-indigo-700' },
 };
 
@@ -47,7 +48,7 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
             The Sankalp Library
           </p>
           <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">
-            26 reading packs → 3 FCPS credits
+            26 reading packs → {CURRICULUM.displayStrings.creditPhrase}
           </h1>
           <p className="text-slate-500 font-semibold text-lg mt-3 max-w-2xl">
             Every pack explains its place in the exam, its rubric alignment, and shows
@@ -62,10 +63,10 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
         </button>
       </header>
 
-      <Callout kind="goal" title="What earns 3 credits">
+      <Callout kind="goal" title={`What earns ${CURRICULUM.creditMapping.credits} credits`}>
         <p>
-          FCPS awards <strong>3 World Language credits</strong> when a student scores{' '}
-          <strong>Intermediate-Mid (STAMP Benchmark 5)</strong> on the Writing and Speaking
+          {CURRICULUM.creditMapping.issuer} awards <strong>{CURRICULUM.creditMapping.credits} World Language credits</strong> when a student scores{' '}
+          <strong>Intermediate-Mid ({CURRICULUM.examSystem.shortName} {CURRICULUM.displayStrings.targetPhrase})</strong> on the Writing and Speaking
           sections. Target: connected paragraphs in past, present, and future tenses. Every
           pack in this library is designed against that target.
         </p>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ProficiencyLevel } from '../types';
 import { PROFICIENCY_ORDER, AVANT_RUBRIC_SUMMARY, calculateRecommendedDate } from '../constants';
 import { studyPlanForLevel } from '../content/studyPlans';
+import { CURRICULUM } from '../content/curriculum';
 import { Calendar, User, Trophy, ArrowRight, Clock, Flag, Target } from 'lucide-react';
 
 interface OnboardingProps {
@@ -114,7 +115,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
               </div>
               <h2 className="text-4xl font-black text-slate-900 mb-3 tracking-tight">Your Plan</h2>
               <p className="text-slate-500 mb-6 font-medium">
-                Based on your level, here's the study plan that gets you to Benchmark 5 (3 FCPS credits).
+                Based on your level, here's the study plan that gets you to {CURRICULUM.displayStrings.targetPhrase} ({CURRICULUM.displayStrings.creditPhrase}).
               </p>
 
               <div className="bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200 rounded-3xl p-6 space-y-4 mb-6">

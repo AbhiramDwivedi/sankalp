@@ -16,6 +16,7 @@ import { CAPSTONES } from '../content/capstones';
 import { CONNECTORS } from '../content/connectors';
 import { GRAMMAR_ESSENTIALS, MUST_KNOW_CONNECTOR_KEYS, VOCAB_MUST_KNOW_CROSS_PACK_THRESHOLD } from '../content/flashcards/mustHaveCards';
 import type { Deck, Flashcard, TopicPack } from '../content/schema';
+import { CURRICULUM } from '../content/curriculum';
 
 // --- Helpers ---------------------------------------------------------------
 
@@ -202,7 +203,7 @@ function buildConnectorDrillDeck(): Deck {
     id: 'deck-connector-drill',
     title: 'Connector drill',
     subtitle: 'पहले · फिर · क्योंकि · लेकिन · इसलिए · हालाँकि · अगर...तो',
-    description: `All ${cards.length} connectors in the master bank, with frame and sample. The single most important pre-exam drill - no connectors means no Benchmark 5.`,
+    description: `All ${cards.length} connectors in the master bank, with frame and sample. The single most important pre-exam drill - no connectors means no ${CURRICULUM.displayStrings.targetPhrase}.`,
     kind: 'connector-drill',
     cards,
   };
@@ -228,7 +229,7 @@ function buildGrammarEssentialsDeck(): Deck {
   return {
     id: 'deck-grammar-essentials',
     title: 'Grammar essentials',
-    subtitle: 'The 25 Hindi control points that land Benchmark 5',
+    subtitle: `The 25 ${CURRICULUM.language.name} control points that land ${CURRICULUM.displayStrings.targetPhrase}`,
     description: `ने construction, gender agreement, postpositions, tenses, conditional, polite imperatives, reported speech, and complex clauses. ${cards.length} cards.`,
     kind: 'grammar-essentials',
     cards,

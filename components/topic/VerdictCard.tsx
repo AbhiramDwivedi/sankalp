@@ -2,6 +2,7 @@ import React from 'react';
 import { Award, AlertCircle, CheckCircle2 } from 'lucide-react';
 import type { VerdictCard as VerdictCardT } from '../../content/schema';
 import { STAMP_BENCHMARKS, FCPS_CREDIT_SUMMARY } from '../../content/rubric';
+import { CURRICULUM } from '../../content/curriculum';
 
 interface VerdictCardProps {
   verdict: VerdictCardT;
@@ -22,7 +23,7 @@ export const VerdictCard: React.FC<VerdictCardProps> = ({ verdict }) => {
             Why This Essay Would Pass
           </p>
           <p className="text-xl font-black mt-1">
-            Predicted STAMP Benchmark {verdict.predictedBenchmark} · {bench?.actflLabel}
+            Predicted {CURRICULUM.examSystem.shortName} Benchmark {verdict.predictedBenchmark} · {bench?.actflLabel}
           </p>
           {credit && (
             <p className="text-sm font-bold text-slate-300 print:text-slate-600 mt-1">

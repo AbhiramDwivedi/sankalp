@@ -7,6 +7,7 @@ import {
   EXAM_FACTS,
   TARGET_BENCHMARK,
 } from '../../content/rubric';
+import { CURRICULUM } from '../../content/curriculum';
 import { Callout } from '../ui/Callout';
 import { PaisleyDivider } from '../ui/PaisleyDivider';
 import { Badge } from '../ui/Badge';
@@ -28,7 +29,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
         How this works
       </h1>
       <p className="text-slate-600 text-lg max-w-2xl mx-auto font-medium">
-        Sankalp prepares a student to earn 3 World Language credits on the FCPS Hindi exam.
+        Sankalp prepares a student to earn {CURRICULUM.creditMapping.credits} World Language credits on the {CURRICULUM.creditMapping.issuer} {CURRICULUM.language.name} exam.
         This page explains the exam, the rubric, and what to read first.
       </p>
     </header>
@@ -43,7 +44,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
         </div>
         <div>
           <p className="text-[10px] font-black uppercase tracking-widest text-indigo-700">Step 1</p>
-          <h2 className="text-2xl font-black text-slate-900">What is the FCPS exam, really?</h2>
+          <h2 className="text-2xl font-black text-slate-900">What is the {CURRICULUM.creditMapping.issuer} exam, really?</h2>
         </div>
       </header>
 
@@ -64,7 +65,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
           ))}
         </div>
         <Callout kind="info" title="There is no reading or listening section">
-          Unlike the full STAMP 4S test, FCPS only grades Writing and Speaking. That means
+          Unlike the full {CURRICULUM.examSystem.shortName} 4S test, {CURRICULUM.creditMapping.issuer} only grades Writing and Speaking. That means
           this app focuses entirely on producing output - the reading material here exists
           to teach the student to write and speak well.
         </Callout>
@@ -111,7 +112,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
         </div>
         <div>
           <p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">Step 3</p>
-          <h2 className="text-2xl font-black text-slate-900">The two rubric axes Avant raters score on</h2>
+          <h2 className="text-2xl font-black text-slate-900">The two rubric axes {CURRICULUM.examSystem.providerShortName} raters score on</h2>
         </div>
       </header>
       <div className="space-y-4">
@@ -163,7 +164,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
         </div>
         <div>
           <p className="text-[10px] font-black uppercase tracking-widest text-orange-700">Step 4</p>
-          <h2 className="text-2xl font-black text-slate-900">STAMP benchmarks 1–8 at a glance</h2>
+          <h2 className="text-2xl font-black text-slate-900">{CURRICULUM.examSystem.shortName} benchmarks 1–8 at a glance</h2>
         </div>
       </header>
       <div className="bg-white border border-slate-100 rounded-2xl overflow-hidden">
@@ -196,9 +197,9 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
           </tbody>
         </table>
       </div>
-      <Callout kind="success" title="The target is Benchmark 5 on both Writing and Speaking">
-        Benchmark 5 = Intermediate-Mid = 3 credits. Higher benchmarks do not earn more credits
-        on the FCPS exam, but they give you headroom if one section slips.
+      <Callout kind="success" title={`The target is ${CURRICULUM.displayStrings.targetPhrase} on both Writing and Speaking`}>
+        Benchmark {CURRICULUM.creditMapping.benchmark} = Intermediate-Mid = {CURRICULUM.creditMapping.credits} credits. Higher benchmarks do not earn more credits
+        on the {CURRICULUM.creditMapping.issuer} exam, but they give you headroom if one section slips.
       </Callout>
     </section>
 
@@ -223,7 +224,7 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
           idiom placement. Read the verdict card at the end.
         </li>
         <li className="leading-relaxed">
-          <strong>Attempt a writing prompt.</strong> Follow the FCPS format: two essays, at least
+          <strong>Attempt a writing prompt.</strong> Follow the {CURRICULUM.creditMapping.issuer} format: two essays, at least
           three cohesive paragraphs each. Write by hand or type.
         </li>
         <li className="leading-relaxed">
@@ -237,8 +238,8 @@ export const HowThisWorksView: React.FC<HowThisWorksViewProps> = ({ onContinue }
       </ol>
     </section>
 
-    <Callout kind="tip" title="You don't need to learn all of Hindi">
-      The goal is 3 credits, not native fluency. Every word, every rule, every essay in this
+    <Callout kind="tip" title={`You don't need to learn all of ${CURRICULUM.language.name}`}>
+      The goal is {CURRICULUM.creditMapping.credits} credits, not native fluency. Every word, every rule, every essay in this
       library has been chosen because it's likely to appear on a prompt or push a rubric score
       up. If something feels off-topic, it was cut on purpose.
     </Callout>

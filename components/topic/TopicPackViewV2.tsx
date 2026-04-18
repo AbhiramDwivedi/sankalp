@@ -36,6 +36,7 @@ import { Badge } from '../ui/Badge';
 import { DevanagariText } from '../ui/DevanagariText';
 import { tokensFor } from '../ui/themeTokens';
 import { TARGET_BENCHMARK } from '../../content/rubric';
+import { CURRICULUM } from '../../content/curriculum';
 import { RubricAxisTags } from './RubricAxisTag';
 import { NextUpCard, type NextUpCardProps } from '../ui/NextUpCard';
 import { OverlayProgress } from '../ui/OverlayProgress';
@@ -933,7 +934,7 @@ const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
         <div className="grid md:grid-cols-2 gap-5">
           <div className="bg-white rounded-2xl p-5 border border-slate-100">
             <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">
-              FCPS sub-topics covered
+              {CURRICULUM.creditMapping.issuer} sub-topics covered
             </p>
             <ul className="space-y-1.5">
               {r.fcpsSubTopics.map((t, i) => (
@@ -951,7 +952,7 @@ const TeacherTab: React.FC<{ pack: TopicPack }> = ({ pack }) => {
             <RubricAxisTags axes={r.trains} size="sm" />
             <p className="text-xs text-slate-500 italic mt-3 leading-relaxed">
               Mastering these axes at Benchmark {TARGET_BENCHMARK} earns the student
-              Intermediate-Mid - which maps to 3 FCPS credits.
+              Intermediate-Mid - which maps to {CURRICULUM.displayStrings.creditPhrase}.
             </p>
           </div>
         </div>

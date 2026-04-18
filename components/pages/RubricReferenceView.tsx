@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft, BookOpen, Target } from 'lucide-react';
 import { STAMP_BENCHMARKS, RUBRIC_AXES, FCPS_CREDIT_SUMMARY, TARGET_BENCHMARK } from '../../content/rubric';
+import { CURRICULUM } from '../../content/curriculum';
 import { Badge } from '../ui/Badge';
 
 interface RubricReferenceViewProps {
@@ -19,10 +20,10 @@ export const RubricReferenceView: React.FC<RubricReferenceViewProps> = ({ onBack
     <header className="space-y-3">
       <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Reference</p>
       <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-        STAMP Rubric · FCPS Credit Mapping
+        {CURRICULUM.examSystem.shortName} Rubric · {CURRICULUM.creditMapping.issuer} Credit Mapping
       </h1>
       <p className="text-slate-500 italic">
-        The ground-truth rubric every Avant rater uses on the FCPS Hindi exam.
+        The ground-truth rubric every {CURRICULUM.examSystem.providerShortName} rater uses on the {CURRICULUM.creditMapping.issuer} {CURRICULUM.language.name} exam.
       </p>
     </header>
 
@@ -34,7 +35,7 @@ export const RubricReferenceView: React.FC<RubricReferenceViewProps> = ({ onBack
             <th className="p-3 text-left text-[10px] font-black uppercase tracking-widest text-slate-500">ACTFL</th>
             <th className="p-3 text-left text-[10px] font-black uppercase tracking-widest text-slate-500">Text-Type</th>
             <th className="p-3 text-left text-[10px] font-black uppercase tracking-widest text-slate-500">Language Control</th>
-            <th className="p-3 text-left text-[10px] font-black uppercase tracking-widest text-slate-500">FCPS Credits</th>
+            <th className="p-3 text-left text-[10px] font-black uppercase tracking-widest text-slate-500">{CURRICULUM.creditMapping.issuer} Credits</th>
           </tr>
         </thead>
         <tbody>
@@ -100,7 +101,7 @@ export const RubricReferenceView: React.FC<RubricReferenceViewProps> = ({ onBack
 
     <section className="space-y-4">
       <h2 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-3">
-        <BookOpen size={24} className="text-orange-600" /> FCPS Credit Ladder
+        <BookOpen size={24} className="text-orange-600" /> {CURRICULUM.creditMapping.issuer} Credit Ladder
       </h2>
       <div className="grid md:grid-cols-2 gap-4">
         {FCPS_CREDIT_SUMMARY.map((c) => (
