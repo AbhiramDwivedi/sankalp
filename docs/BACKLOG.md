@@ -35,7 +35,7 @@ Each item flows: **implementer → reviewer → (fixer if needed) → merge**. E
    # (actually git worktrees share hooks via ../../.git/hooks automatically — verify with `ls .git`)
    ```
 
-   Each implementer is given its own worktree path in its brief and operates ONLY there. Parent's main repo checkout is untouched during implementer runs. After Phase D merge, parent removes the worktree: `git worktree remove C:\sw\sankalp-worktrees\{item-id}` and deletes the junction if still present.
+   Each implementer is given its own worktree path in its brief and operates ONLY there. Parent's main repo checkout is untouched during implementer runs. After Phase D merge, parent cleans up the worktree — see step 4 for the correct cleanup order (junction FIRST, then worktree dir; reverse order can corrupt main repo's node_modules).
 
    For N = 1 (single-item fire), worktree is optional — the main repo is fine since there's no contention.
 
@@ -52,14 +52,24 @@ Each item flows: **implementer → reviewer → (fixer if needed) → merge**. E
    git push --force-with-lease origin auto/{item-id}   # if rebase moved commits
    ```
 
-   If rebase succeeds clean: `gh pr create` with item id in title if not open, then `gh pr merge --squash --delete-branch`. Check the backlog box with commit SHA + PR number. Append an AGENT_LOG entry with `[implementer summary, review verdict, merge SHA]`. Then clean up the worktree:
+   If rebase succeeds clean: `gh pr create` with item id in title if not open, then `gh pr merge --squash --delete-branch`. Check the backlog box with commit SHA + PR number. Append an AGENT_LOG entry with `[implementer summary, review verdict, merge SHA]`. Then clean up the worktree — **order matters on Windows** (learned in fire #4 — `rm -rf` on the worktree dir while the `node_modules` junction is still present recurses through it and wipes main's `node_modules/.bin/` symlinks):
 
    ```
    cd C:\sw\sankalp
-   git worktree remove C:\sw\sankalp-worktrees\{item-id}
-   # Remove the node_modules junction if `git worktree remove` left it:
-   cmd //c "rmdir C:\sw\sankalp-worktrees\{item-id}\node_modules"  # if the junction survived
+   # 1. Remove the node_modules junction FIRST so nothing recurses through it:
+   cmd //c "rmdir C:\sw\sankalp-worktrees\{item-id}\node_modules"
+   # 2. Remove the worktree via git. --force needed if there are untracked/uncommitted files
+   #    (common: generator outputs left by `npm run check`):
+   git worktree remove --force C:\sw\sankalp-worktrees\{item-id}
+   # 3. If the directory still exists on disk after git's remove (it sometimes fails with
+   #    "Invalid argument" but still unregisters the worktree), delete it explicitly — SAFE
+   #    because step 1 already removed the junction:
+   rm -rf C:\sw\sankalp-worktrees\{item-id}
+   # 4. Delete the local branch (remote branch was auto-deleted by gh pr merge --delete-branch):
+   git branch -D auto/{item-id}
    ```
+
+   Recovery if cleanup-order was violated and main's node_modules is corrupted: `npm install` (not `npm ci` — avoid a full reinstall).
 
    If the final rebase has conflicts: leave the PR open, log "rebase conflict — needs human attention: {PR link}" in AGENT_LOG. Leave the worktree in place so the user can inspect or continue.
 
