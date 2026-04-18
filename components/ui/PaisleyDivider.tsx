@@ -1,13 +1,17 @@
 import React from 'react';
+import { theme } from '../../theme';
 
 interface PaisleyDividerProps {
   className?: string;
   color?: string;
 }
 
+// The default stroke/fill color is sourced from `theme.colors.saffron[600]`
+// (hex `#ea580c` — the canonical warm primary). Callers can override with
+// any CSS color string.
 export const PaisleyDivider: React.FC<PaisleyDividerProps> = ({
   className = '',
-  color = '#ea580c',
+  color = theme.colors.saffron[600],
 }) => (
   <div className={`flex items-center gap-4 my-8 ${className}`} aria-hidden>
     <span className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />

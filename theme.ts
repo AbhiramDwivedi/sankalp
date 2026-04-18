@@ -290,3 +290,21 @@ export const theme = {
 } as const;
 
 export type Theme = typeof theme;
+
+// ---------------------------------------------------------------------
+// Color utilities
+// ---------------------------------------------------------------------
+// `hexToRgba(hex, alpha)` — convert a 6-digit hex from the color scales
+// into an `rgb(r g b / a)` string matching Tailwind's alpha-utility output
+// (e.g. the `bg-orange-50/60` class renders `rgb(255 247 237 / 0.6)`).
+//
+// Exposed so item 2.2's refactor of `components/ui/*` can preserve the
+// byte-identical visual output of alpha-tinted backgrounds without each
+// primitive reinventing the conversion.
+export function hexToRgba(hex: string, alpha: number): string {
+  const normalized = hex.replace('#', '');
+  const r = parseInt(normalized.slice(0, 2), 16);
+  const g = parseInt(normalized.slice(2, 4), 16);
+  const b = parseInt(normalized.slice(4, 6), 16);
+  return `rgb(${r} ${g} ${b} / ${alpha})`;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { theme } from '../../theme';
 
 type BadgeTone = 'orange' | 'blue' | 'green' | 'indigo' | 'slate' | 'rose' | 'amber';
 
@@ -9,14 +10,35 @@ interface BadgeProps {
   className?: string;
 }
 
+// Tones mapped to the theme.ts scales (orange = saffron, green = emerald,
+// indigo = indigo) move their colors to `style`. Blue, slate, rose, amber
+// stay as Tailwind classes — those palettes are outside theme.ts scope.
 const toneClass: Record<BadgeTone, string> = {
-  orange: 'bg-orange-50 text-orange-700 border-orange-100',
+  orange: '',
   blue: 'bg-blue-50 text-blue-700 border-blue-100',
-  green: 'bg-emerald-50 text-emerald-700 border-emerald-100',
-  indigo: 'bg-indigo-50 text-indigo-700 border-indigo-100',
+  green: '',
+  indigo: '',
   slate: 'bg-slate-100 text-slate-700 border-slate-200',
   rose: 'bg-rose-50 text-rose-700 border-rose-100',
   amber: 'bg-amber-50 text-amber-700 border-amber-100',
+};
+
+const toneStyle: Partial<Record<BadgeTone, React.CSSProperties>> = {
+  orange: {
+    backgroundColor: theme.colors.saffron[50],
+    color: theme.colors.saffron[700],
+    borderColor: theme.colors.saffron[100],
+  },
+  green: {
+    backgroundColor: theme.colors.emerald[50],
+    color: theme.colors.emerald[700],
+    borderColor: theme.colors.emerald[100],
+  },
+  indigo: {
+    backgroundColor: theme.colors.indigo[50],
+    color: theme.colors.indigo[700],
+    borderColor: theme.colors.indigo[100],
+  },
 };
 
 const sizeClass = {
@@ -33,6 +55,7 @@ export const Badge: React.FC<BadgeProps> = ({
 }) => (
   <span
     className={`inline-flex items-center gap-1 font-black uppercase border rounded-full ${toneClass[tone]} ${sizeClass[size]} ${className}`}
+    style={toneStyle[tone]}
   >
     {children}
   </span>
