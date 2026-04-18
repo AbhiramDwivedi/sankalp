@@ -88,6 +88,11 @@ export interface StudentProfile {
   flashcardsSeen?: string[];
   flashcardsMastered?: string[];
 
+  // Items the student chose to skip from next-up resolution. Applies across
+  // packs, capstones, and decks. Kept per-profile. Added for the in-overlay
+  // NextUpCard so "Skip for now" sticks.
+  deferredIds?: string[];
+
   // Legacy fields (kept optional so old localStorage records still parse):
   plan?: Unit[];
   completedLessonIds?: string[];
@@ -115,6 +120,7 @@ export function migrateProfile(raw: any): StudentProfile {
     inProgressCapstoneId: raw.inProgressCapstoneId,
     flashcardsSeen: Array.isArray(raw.flashcardsSeen) ? raw.flashcardsSeen : [],
     flashcardsMastered: Array.isArray(raw.flashcardsMastered) ? raw.flashcardsMastered : [],
+    deferredIds: Array.isArray(raw.deferredIds) ? raw.deferredIds : [],
     plan: raw.plan,
     completedLessonIds: raw.completedLessonIds,
     generatedMaterials: raw.generatedMaterials,

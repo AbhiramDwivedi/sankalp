@@ -606,6 +606,7 @@ export function planCursor(
   completedTopicIds: string[],
   completedCapstoneIds: string[] = [],
   studentLevel?: string,
+  deferredIds: string[] = [],
 ): {
   currentWeekIndex: number;
   nextPackId: string | null;
@@ -613,9 +614,10 @@ export function planCursor(
   isAllDone: boolean;
 } {
   const knownSet = new Set(packsKnownAtLevel(studentLevel));
-  const completedSet = new Set([...completedTopicIds, ...knownSet]);
+  const deferredSet = new Set(deferredIds);
+  const completedSet = new Set([...completedTopicIds, ...knownSet, ...deferredSet]);
   const knownCapSet = new Set(capstonesKnownAtLevel(studentLevel));
-  const completedCapSet = new Set([...completedCapstoneIds, ...knownCapSet]);
+  const completedCapSet = new Set([...completedCapstoneIds, ...knownCapSet, ...deferredSet]);
   for (const w of plan.weeks) {
     const nextPack = w.packs.find((pid) => !completedSet.has(pid));
     const upcoming = (w.capstones || []).filter((cid) => !completedCapSet.has(cid));
@@ -635,4 +637,123 @@ export function planCursor(
     upcomingCapstoneIds: [],
     isAllDone: true,
   };
+}
+
+// ---------------------------------------------------------------------------
+// Plan-aware "next after id X" resolution for NextUpCard.
+// Walks the plan in authored order, finds the given itemId, then returns the
+// first subsequent item (pack or capstone) that is not completed, not deferred,
+// and not already-known at the student's level.
+// ---------------------------------------------------------------------------
+
+export type PlanItemKind = 'pack' | 'capstone';
+
+export interface PlanItemRef {
+  kind: PlanItemKind;
+  id: string;
+  weekIndex: number;
+  /** Position of this item in the flattened plan item sequence (1-based). */
+  position: number;
+}
+
+/** Flatten a plan's weeks into an in-order sequence of pack/capstone refs. */
+export function planItemSequence(plan: StudyPlan): PlanItemRef[] {
+  const seq: PlanItemRef[] = [];
+  let position = 0;
+  for (const w of plan.weeks) {
+    for (const pid of w.packs) {
+      position += 1;
+      seq.push({ kind: 'pack', id: pid, weekIndex: w.weekIndex, position });
+    }
+    for (const cid of w.capstones || []) {
+      position += 1;
+      seq.push({ kind: 'capstone', id: cid, weekIndex: w.weekIndex, position });
+    }
+  }
+  return seq;
+}
+
+/**
+ * Given a plan and an item the student just finished (or is viewing), return
+ * the next item in plan order, skipping: completed items, deferred items,
+ * and items marked known at the student's level. Returns null if the student
+ * is at/after the last plan item.
+ *
+ * If the given itemId is not found in the plan, falls back to returning the
+ * first unfinished item in the plan (essentially planCursor's next step).
+ */
+export function nextPlanItemAfter(
+  plan: StudyPlan,
+  currentItemId: string,
+  opts: {
+    completedTopicIds?: string[];
+    completedCapstoneIds?: string[];
+    studentLevel?: string;
+    deferredIds?: string[];
+  } = {},
+): PlanItemRef | null {
+  const seq = planItemSequence(plan);
+  const knownPacks = new Set(packsKnownAtLevel(opts.studentLevel));
+  const knownCaps = new Set(capstonesKnownAtLevel(opts.studentLevel));
+  const deferred = new Set(opts.deferredIds || []);
+  const donePacks = new Set([...(opts.completedTopicIds || []), ...knownPacks]);
+  const doneCaps = new Set([...(opts.completedCapstoneIds || []), ...knownCaps]);
+
+  const idx = seq.findIndex((it) => it.id === currentItemId);
+  // If current item isn't in this plan, start from the top.
+  const start = idx < 0 ? 0 : idx + 1;
+
+  for (let i = start; i < seq.length; i++) {
+    const it = seq[i];
+    if (deferred.has(it.id)) continue;
+    if (it.kind === 'pack' && donePacks.has(it.id)) continue;
+    if (it.kind === 'capstone' && doneCaps.has(it.id)) continue;
+    return it;
+  }
+  return null;
+}
+
+/**
+ * Plan progress summary for the mini progress bar at the top of each overlay.
+ * Effective totals exclude items marked known at the student's level so the
+ * percent reflects the work the student actually has to do.
+ */
+export interface PlanProgress {
+  totalItems: number;
+  completedItems: number;
+  percent: number;
+  currentPosition: number;
+}
+
+export function planProgressFor(
+  plan: StudyPlan,
+  currentItemId: string | null,
+  opts: {
+    completedTopicIds?: string[];
+    completedCapstoneIds?: string[];
+    studentLevel?: string;
+  } = {},
+): PlanProgress {
+  const seq = planItemSequence(plan);
+  const knownPacks = new Set(packsKnownAtLevel(opts.studentLevel));
+  const knownCaps = new Set(capstonesKnownAtLevel(opts.studentLevel));
+  const donePacks = new Set(opts.completedTopicIds || []);
+  const doneCaps = new Set(opts.completedCapstoneIds || []);
+
+  const effective = seq.filter((it) =>
+    it.kind === 'pack' ? !knownPacks.has(it.id) : !knownCaps.has(it.id),
+  );
+  const completedItems = effective.filter((it) =>
+    it.kind === 'pack' ? donePacks.has(it.id) : doneCaps.has(it.id),
+  ).length;
+  const totalItems = effective.length;
+  const percent = totalItems === 0 ? 0 : Math.round((completedItems / totalItems) * 100);
+
+  let currentPosition = 0;
+  if (currentItemId) {
+    const match = effective.findIndex((it) => it.id === currentItemId);
+    currentPosition = match < 0 ? 0 : match + 1;
+  }
+
+  return { totalItems, completedItems, percent, currentPosition };
 }

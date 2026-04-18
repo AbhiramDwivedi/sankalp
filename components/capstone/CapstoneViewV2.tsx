@@ -24,6 +24,8 @@ import { VerdictCard } from '../topic/VerdictCard';
 import { TeacherNoteBox } from '../topic/TeacherNoteBox';
 import { RubricAxisTags } from '../topic/RubricAxisTag';
 import { ParagraphScaffoldDiagram } from '../art/diagrams';
+import { NextUpCard, type NextUpCardProps } from '../ui/NextUpCard';
+import { OverlayProgress } from '../ui/OverlayProgress';
 
 // -----------------------------------------------------------------------------
 // CapstoneViewV2 - capstone page IA, mirrors the topic-pack 4-tab pattern
@@ -60,6 +62,12 @@ interface CapstoneViewV2Props {
   onBack: () => void;
   onMarkComplete: () => void;
   onOpenPack: (packId: string) => void;
+  progress?: {
+    position: string;
+    planName?: string;
+    percent: number;
+  };
+  nextUp?: NextUpCardProps;
 }
 
 export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
@@ -68,6 +76,8 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
   onBack,
   onMarkComplete,
   onOpenPack,
+  progress,
+  nextUp,
 }) => {
   const tokens = tokensFor(capstone.themeGroup);
   const [activeTab, setActiveTab] = useState<TabKey>('study');
@@ -85,6 +95,22 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
     return () => window.clearTimeout(t);
   }, [pendingScroll, activeTab]);
 
+  // `N` key triggers Continue from anywhere inside the overlay (unless typing
+  // in an input/textarea). Scoped to this component so it unmounts cleanly.
+  const nextContinue = nextUp?.onContinue ?? null;
+  useEffect(() => {
+    if (!nextContinue) return;
+    const h = (e: KeyboardEvent) => {
+      if (e.key !== 'n' && e.key !== 'N') return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      e.preventDefault();
+      nextContinue();
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  }, [nextContinue]);
+
   const goTo = (tab: TabKey, anchorId?: string) => {
     setActiveTab(tab);
     if (anchorId) setPendingScroll(anchorId);
@@ -95,6 +121,13 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
 
   return (
     <div className="max-w-6xl mx-auto pb-32 space-y-8 animate-in fade-in duration-300 printable-area">
+      {progress && (
+        <OverlayProgress
+          position={progress.position}
+          planName={progress.planName}
+          percent={progress.percent}
+        />
+      )}
       {/* Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-3 no-print">
         <button
@@ -213,6 +246,8 @@ export const CapstoneViewV2: React.FC<CapstoneViewV2Props> = ({
           <TeacherTab capstone={capstone} />
         </div>
       </div>
+
+      {nextUp && <NextUpCard {...nextUp} />}
 
       <footer className="pt-10 border-t-4 border-dotted border-slate-100 flex justify-between items-end text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] print:text-slate-400">
         <span>Student: ____________________________</span>

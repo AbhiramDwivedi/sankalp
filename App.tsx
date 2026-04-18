@@ -21,7 +21,9 @@ import { TOPIC_PACKS_BY_ID } from './content';
 import { CAPSTONES_BY_ID } from './content/capstones';
 import { DECKS_BY_ID } from './content/flashcards';
 import type { Deck } from './content/schema';
-import { studyPlanForLevel } from './content/studyPlans';
+import { studyPlanForLevel, getStudyPlan } from './content/studyPlans';
+import { resolveNextUp, getPlanProgress } from './components/ui/nextUpResolver';
+import type { NextUpCardProps } from './components/ui/NextUpCard';
 import { GraduationCap, Info } from 'lucide-react';
 
 const APP_STORAGE_KEY = 'sankalpa_hindi_profiles';
@@ -228,10 +230,98 @@ const App: React.FC = () => {
   // Auto-adopt a default study plan for profiles that never got one.
   const ensuredPlan = profile.selectedStudyPlanId || studyPlanForLevel(profile.currentLevel).id;
 
+  // Active plan object (used for overlay progress + next-up resolution).
+  const activePlan = getStudyPlan(ensuredPlan) || studyPlanForLevel(profile.currentLevel);
+
+  const deferCurrentOverlay = (id: string) => {
+    updateActiveProfile((p) => ({
+      ...p,
+      deferredIds: Array.from(new Set([...(p.deferredIds || []), id])),
+      inProgressTopicId: p.inProgressTopicId === id ? undefined : p.inProgressTopicId,
+      inProgressCapstoneId: p.inProgressCapstoneId === id ? undefined : p.inProgressCapstoneId,
+    }));
+  };
+
+  const openNextPlanItem = (kind: 'pack' | 'capstone', id: string) => {
+    // Clear whatever overlay is currently open, then open the new one.
+    setOpenPack(null);
+    setOpenCapstone(null);
+    setOpenDeck(null);
+    if (kind === 'pack') openPackById(id);
+    else openCapstoneById(id);
+  };
+
+  /**
+   * Build NextUpCard props + OverlayProgress props for a given overlay.
+   * currentItemId is the pack/capstone id the student is viewing. For the
+   * deck overlay we pass the in-progress pack/capstone id (or empty string,
+   * which makes nextPlanItemAfter fall through to the first unfinished item).
+   */
+  const buildOverlayBundle = (
+    currentItemId: string,
+    finishedLabel: string,
+    kind: 'pack' | 'capstone' | 'deck' = 'pack',
+  ): { progress: { position: string; planName?: string; percent: number }; nextUp: NextUpCardProps } => {
+    const resolved = resolveNextUp({ profile, plan: activePlan, currentItemId });
+    const prog = getPlanProgress(activePlan, profile, currentItemId);
+
+    let position: string;
+    if (kind === 'deck') {
+      position = `Drill · ${prog.completedItems}/${prog.totalItems} plan items done`;
+    } else if (prog.currentPosition > 0 && prog.totalItems > 0) {
+      const label = kind === 'capstone' ? 'Capstone' : 'Pack';
+      position = `${label} ${prog.currentPosition} of ${prog.totalItems}`;
+    } else if (prog.totalItems > 0) {
+      position = `${prog.completedItems} of ${prog.totalItems} done`;
+    } else {
+      position = 'Plan';
+    }
+
+    const nextUp: NextUpCardProps = {
+      finishedLabel,
+      onContinue: null,
+      isAllDone: !resolved.item,
+    };
+
+    if (resolved.pack) {
+      nextUp.nextTitle = resolved.pack.titleEnglish;
+      nextUp.nextTitleHindi = resolved.pack.titleHindi;
+      nextUp.nextKindLabel = `Pack · L${resolved.pack.level}`;
+      nextUp.nextReason = resolved.reason;
+      nextUp.onContinue = () => openNextPlanItem('pack', resolved.pack!.id);
+    } else if (resolved.capstone) {
+      nextUp.nextTitle = resolved.capstone.titleEnglish;
+      nextUp.nextTitleHindi = resolved.capstone.titleHindi;
+      nextUp.nextKindLabel = resolved.capstone.isMockExam
+        ? `Mock Exam · ${resolved.capstone.mockExamMinutes} min`
+        : `Capstone · ${resolved.capstone.tier === 'push' ? 'Push tier' : 'Core tier'}`;
+      nextUp.nextReason = resolved.reason;
+      nextUp.onContinue = () => openNextPlanItem('capstone', resolved.capstone!.id);
+    } else {
+      nextUp.nextReason = '';
+    }
+
+    if (currentItemId) {
+      nextUp.onSkip = () => {
+        deferCurrentOverlay(currentItemId);
+        // Close the overlay after skipping so the student returns to the library.
+        setOpenPack(null);
+        setOpenCapstone(null);
+        setOpenDeck(null);
+      };
+    }
+
+    return {
+      progress: { position, planName: activePlan.titleEnglish, percent: prog.percent },
+      nextUp,
+    };
+  };
+
   // ---- Main app (active profile) ----
 
   // A) Topic pack overlay
   if (openPack) {
+    const { progress, nextUp } = buildOverlayBundle(openPack.id, `Pack: ${openPack.titleEnglish}`, 'pack');
     return (
       <Layout
         activeTab={activeTab}
@@ -246,6 +336,8 @@ const App: React.FC = () => {
           onBack={() => setOpenPack(null)}
           onMarkComplete={handleMarkComplete}
           onEvaluation={handleAddEvaluation}
+          progress={progress}
+          nextUp={nextUp}
         />
       </Layout>
     );
@@ -253,6 +345,11 @@ const App: React.FC = () => {
 
   // B) Capstone overlay
   if (openCapstone) {
+    const { progress, nextUp } = buildOverlayBundle(
+      openCapstone.id,
+      `Capstone: ${openCapstone.titleEnglish}`,
+      'capstone',
+    );
     return (
       <Layout
         activeTab={activeTab}
@@ -266,6 +363,8 @@ const App: React.FC = () => {
           onBack={() => setOpenCapstone(null)}
           onMarkComplete={handleMarkCapstoneComplete}
           onOpenPack={openPackById}
+          progress={progress}
+          nextUp={nextUp}
         />
       </Layout>
     );
@@ -273,6 +372,15 @@ const App: React.FC = () => {
 
   // C) Flashcard deck runner overlay
   if (openDeck) {
+    // Decks aren't in the plan sequence - use inProgress pack/capstone as an
+    // anchor so NextUpCard surfaces the first plan item after that. If none,
+    // the empty string falls through to "first unfinished item".
+    const deckAnchorId =
+      profile.inProgressTopicId || profile.inProgressCapstoneId || '';
+    const { progress, nextUp } = buildOverlayBundle(deckAnchorId, `Deck: ${openDeck.title}`, 'deck');
+    // A deck is not a plan item, so don't offer "skip for now" on decks (the
+    // student isn't deferring a plan item - they're just browsing drills).
+    const deckNextUp: NextUpCardProps = { ...nextUp, onSkip: undefined };
     return (
       <Layout
         activeTab={activeTab}
@@ -289,6 +397,8 @@ const App: React.FC = () => {
           onCardNotYet={markCardNotYet}
           onBack={() => setOpenDeck(null)}
           onPrint={() => window.print()}
+          progress={progress}
+          nextUp={deckNextUp}
         />
         <PrintSheet deck={openDeck} />
       </Layout>
