@@ -43,6 +43,18 @@
                 margin-top: 0.3in;
             }
 
+            /* Flashcard 8-up sheets need a tighter, predictable margin so the
+               2×4 grid of 3.5in × 2.5in cards fits on letter without clipping.
+               Scoped to the flashcard print root so pack/capstone print is
+               untouched. */
+            .flashcard-print-root {
+                page: flashcard;
+            }
+            @page flashcard {
+                size: letter portrait;
+                margin: 0.4in;
+            }
+
             html, body {
                 background: white !important;
                 padding: 0 !important;
@@ -73,6 +85,18 @@
             /* Devanagari stays readable but tighter than on screen */
             .font-hindi { font-size: 1.05rem !important; }
             .font-hindi-display { font-size: 2rem !important; }
+
+            /* Flashcard print cards set their own explicit font sizes in pt.
+               Don't let the global Devanagari size override them — cards are
+               fixed 3.5in × 2.5in and content must fit. */
+            .flashcard-print-root .font-hindi { font-size: inherit !important; }
+            .flashcard-print-root .font-hindi-display { font-size: inherit !important; }
+
+            /* Every card cell must stay on a single page. */
+            .flashcard-print-root .print-card {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
 
             /* Section-level break control */
             .print\:break-before-page { break-before: page; page-break-before: always; }
