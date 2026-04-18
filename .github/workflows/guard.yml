@@ -1,0 +1,54 @@
+name: guard
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  scope-creep:
+    name: scope-creep
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check for rubric.ts changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+          if echo "$CHANGED" | grep -q '^content/rubric\.ts$'; then
+            echo "::error::content/rubric.ts was modified. Rubric constants (STAMP benchmarks, FCPS credit thresholds, axis definitions) are claims about the exam vendor, not design choices. Changes require explicit human authorization — override this guard in repo admin."
+            exit 1
+          fi
+          echo "rubric.ts untouched — ok"
+      - name: Check for unauthorized studyPlans.ts changes on auto/* branches
+        env:
+          BRANCH: ${{ github.head_ref }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          if [[ "$BRANCH" != auto/* ]]; then
+            echo "Not an auto/* branch — guard does not apply"
+            exit 0
+          fi
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+          if ! echo "$CHANGED" | grep -q '^content/studyPlans\.ts$'; then
+            echo "studyPlans.ts untouched — ok"
+            exit 0
+          fi
+          # studyPlans.ts was changed. Check if only imports changed.
+          NONIMPORT_DIFF=$(git diff "$BASE_SHA" "$HEAD_SHA" -- content/studyPlans.ts | grep -E '^[+-]' | grep -vE '^(\+\+\+|---|[+-]import |[+-]from |[+-]$|[+-]\s*//)' || true)
+          if [ -z "$NONIMPORT_DIFF" ]; then
+            echo "studyPlans.ts only has import-only changes — ok"
+            exit 0
+          fi
+          # Has non-import changes. Check PR body for CURRICULUM-AUTHORIZED token.
+          if echo "$PR_BODY" | grep -q 'CURRICULUM-AUTHORIZED'; then
+            echo "PR body contains CURRICULUM-AUTHORIZED — override ok"
+            exit 0
+          fi
+          echo "::error::An auto/* branch modified content/studyPlans.ts plan data without CURRICULUM-AUTHORIZED in PR body. Plan data is authored content. If this change is intentional, add CURRICULUM-AUTHORIZED to the PR body to override."
+          exit 1
