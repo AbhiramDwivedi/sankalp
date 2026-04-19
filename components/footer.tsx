@@ -1,41 +1,42 @@
 import Link from 'next/link'
 
+// Three-column footer that matches the app's real IA. The v0 "Languages"
+// column (Tamil / Telugu / Kannada tiles) moved up to the landing page
+// where it's clearer those are aspirational. "Reference" groups the
+// things a parent or teacher reads rather than a student does day-to-day.
 const footerLinks = {
   learn: [
-    { href: '/courses', label: 'Courses' },
     { href: '/lessons', label: 'Lessons' },
-    { href: '/practice', label: 'Practice' },
-    { href: '/exams', label: 'Mock Exams' },
+    { href: '/flashcards', label: 'Flashcards' },
+    { href: '/capstones', label: 'Capstones' },
   ],
-  resources: [
-    { href: '/resources', label: 'Parent Guide' },
-    { href: '/resources/curriculum', label: 'Curriculum' },
-    { href: '/resources/rubrics', label: 'Assessment Rubrics' },
-    { href: '/resources/faq', label: 'FAQ' },
+  reference: [
+    { href: '/plan', label: 'Plan' },
+    { href: '/rubric', label: 'Rubric' },
+    { href: '/audit', label: 'Credit audit' },
   ],
-  languages: [
-    { href: '/courses/hindi', label: 'Hindi' },
-    { href: '/courses/tamil', label: 'Tamil (Coming Soon)' },
-    { href: '/courses/telugu', label: 'Telugu (Coming Soon)' },
-    { href: '/courses/kannada', label: 'Kannada (Coming Soon)' },
+  about: [
+    { href: '/how-this-works', label: 'How this works' },
+    { href: '/settings', label: 'Settings' },
   ],
 }
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-muted/30">
+    <footer className="border-t border-border bg-muted/30 rounded-t-2xl">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
                 <span className="font-bold text-lg">सं</span>
               </div>
               <span className="font-semibold text-xl text-foreground">Sankalp</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Empowering middle school students to learn Indian languages and earn world language credit through engaging, interactive lessons.
+              Sankalp — Hindi learning for US middle-schoolers aiming at STAMP proficiency. Built for students,
+              parents, and teachers.
             </p>
           </div>
 
@@ -56,11 +57,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Reference */}
           <div>
-            <h3 className="font-semibold text-foreground mb-3">Resources</h3>
+            <h3 className="font-semibold text-foreground mb-3">Reference</h3>
             <ul className="space-y-2">
-              {footerLinks.resources.map((link) => (
+              {footerLinks.reference.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -73,11 +74,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Languages */}
+          {/* About */}
           <div>
-            <h3 className="font-semibold text-foreground mb-3">Languages</h3>
+            <h3 className="font-semibold text-foreground mb-3">About</h3>
             <ul className="space-y-2">
-              {footerLinks.languages.map((link) => (
+              {footerLinks.about.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -93,22 +94,11 @@ export function Footer() {
 
         <div className="border-t border-border mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            {new Date().getFullYear()} Sankalp Learning. Designed for world language credit.
+            {new Date().getFullYear()} Sankalp — built for FCPS World Language Credit (STAMP 2S/WS Hindi).
           </p>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/privacy"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              Terms of Service
-            </Link>
-          </div>
+          <p className="text-sm text-muted-foreground">
+            Local-only. No login, no accounts, no data leaves your browser.
+          </p>
         </div>
       </div>
     </footer>
