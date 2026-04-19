@@ -1,100 +1,139 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.shadcn'
+import { Badge } from '@/components/ui/badge.shadcn'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
-import { LevelBadge } from '@/components/level-badge'
 import {
   BookOpen,
   GraduationCap,
   Users,
-  Trophy,
   CheckCircle,
   ArrowRight,
-  Headphones,
   Mic,
   PenLine,
   Brain,
   Sparkles,
-  Target
+  CalendarDays,
+  Target,
+  Layers,
 } from 'lucide-react'
-import { availableLanguages } from '@/lib/data/hindi-course'
-import type { FluencyLevel } from '@/lib/types'
+import { landingLanguages } from '@/lib/data/languages'
 
-const features = [
+// -----------------------------------------------------------------------------
+// Sankalp-honest landing page. Phase 2a rewrite over the v0 marketing home.
+//
+// Framing: "Learn Hindi and more." Today Hindi is the only active language
+// (26 topic packs + 10 capstones + 33 flashcard decks all target Hindi
+// STAMP 2S/WS). Other languages ship as aspirational tiles. No login, no
+// account creation — three role-tagged "Enter as X" CTAs drop the student
+// into /dashboard with a ?role= query Phase 3 will read.
+// -----------------------------------------------------------------------------
+
+const features: { icon: React.ComponentType<{ className?: string }>; title: string; description: string }[] = [
   {
     icon: BookOpen,
-    title: 'Weekly Lesson Plans',
-    description: 'Structured curriculum with vocabulary, grammar, listening, and speaking practice each week.',
-  },
-  {
-    icon: Brain,
-    title: 'Interactive Exercises',
-    description: 'Engaging flashcards, quizzes, drag-and-drop activities, and fill-in-the-blank exercises.',
-  },
-  {
-    icon: Headphones,
-    title: 'Listening Practice',
-    description: 'Audio clips with native speakers to train your ear for authentic pronunciation.',
-  },
-  {
-    icon: Mic,
-    title: 'Speaking Practice',
-    description: 'Record and compare your pronunciation to build speaking confidence.',
-  },
-  {
-    icon: Trophy,
-    title: 'Capstone Projects',
-    description: 'End-of-unit projects that demonstrate mastery and cement your learning.',
+    title: '26 Topic Packs',
+    description:
+      'Hand-authored Hindi lessons across FCPS Levels 1–2 plus an L3 stretch. Each pack: vocabulary, grammar, connectors, cultural insight, model essays, and a self-check rubric.',
   },
   {
     icon: Target,
-    title: 'Mock Exams',
-    description: 'Practice tests aligned with STAMP proficiency levels for exam readiness.',
+    title: 'Capstone Essays',
+    description:
+      '10 cross-topic capstones shown side-by-side in novice, intermediate-mid, and push tiers so you can see exactly what growth looks like.',
+  },
+  {
+    icon: Layers,
+    title: 'Flashcard Drills',
+    description:
+      'Roughly 850 cards across 33 decks — pack reviews, connector drills, muhavare, grammar essentials, and a top-150 exam-prep deck. Print-ready 8-up sheets included.',
+  },
+  {
+    icon: PenLine,
+    title: 'Writing AI Feedback',
+    description:
+      'Type a Hindi essay or photograph your handwriting; an optional Gemini pass scores it against the STAMP rubric (Text-Type, Language Control, Topic Coverage).',
+  },
+  {
+    icon: Mic,
+    title: 'Speaking AI Feedback',
+    description:
+      'Record answers to capstone prompts; transcription + rubric grounding give you feedback you can act on rather than a black-box score.',
+  },
+  {
+    icon: CalendarDays,
+    title: 'Study Plans',
+    description:
+      '10-, 8-, 6-, 4-, and 2-week plans picked by profile level. Every plan hits all 10 capstones — no path skips the exam-quality assessments.',
   },
 ]
 
-const proficiencyLevels: { level: FluencyLevel; topics: string[] }[] = [
+const proficiencyLevels: {
+  label: string
+  stamp: number
+  description: string
+  topics: string[]
+  levelBand: string
+}[] = [
   {
-    level: 'novice-low',
-    topics: ['Basic greetings', 'Family members', 'Numbers 1-10', 'Colors'],
+    label: 'Novice Low',
+    stamp: 1,
+    description: 'Isolated words',
+    topics: ['Greetings', 'Family', 'Numbers', 'Colors'],
+    levelBand: 'Pre-L1',
   },
   {
-    level: 'novice-mid',
-    topics: ['School vocabulary', 'Weather', 'Time expressions', 'Simple phrases'],
+    label: 'Novice Mid',
+    stamp: 2,
+    description: 'Basic phrases',
+    topics: ['School', 'Weather', 'Time', 'Simple phrases'],
+    levelBand: 'L1 entry',
   },
   {
-    level: 'novice-high',
-    topics: ['Daily routine', 'Food and meals', 'Simple conversations', 'Descriptions'],
+    label: 'Novice High',
+    stamp: 3,
+    description: 'Simple sentences',
+    topics: ['Daily routine', 'Food', 'Simple conversations', 'Descriptions'],
+    levelBand: 'FCPS L1 packs',
   },
   {
-    level: 'intermediate-low',
-    topics: ['Past tense', 'Future plans', 'Shopping dialogues', 'Health'],
+    label: 'Intermediate Low',
+    stamp: 4,
+    description: 'Strings of sentences',
+    topics: ['Past tense', 'Future plans', 'Shopping', 'Health'],
+    levelBand: 'FCPS L2 packs',
   },
   {
-    level: 'intermediate-mid',
-    topics: ['Travel and directions', 'Cultural discussions', 'Opinions', 'Storytelling'],
+    label: 'Intermediate Mid',
+    stamp: 5,
+    description: 'Connected paragraphs · 3 FCPS credits',
+    topics: ['Travel', 'Opinions', 'Cultural discussions', 'Storytelling'],
+    levelBand: 'L3 stretch + capstones',
   },
 ]
 
-const userTypes = [
+const userTypes: { icon: React.ComponentType<{ className?: string }>; title: string; description: string; href: string }[] = [
   {
     icon: GraduationCap,
     title: 'Students',
-    description: 'Interactive lessons designed for middle schoolers with gamified progress tracking.',
-    href: '/auth/register?role=student',
+    description:
+      'Work through packs and capstones at your own pace. Flashcards stay warm with spaced repetition; the dashboard shows your next pack.',
+    href: '/dashboard?role=student',
   },
   {
     icon: Users,
     title: 'Parents',
-    description: 'Monitor your child\'s progress and understand the curriculum requirements.',
-    href: '/auth/register?role=parent',
+    description:
+      'See where your child is on the STAMP ladder, what the next week looks like, and what the exam actually asks them to produce.',
+    href: '/dashboard?role=parent',
   },
   {
     icon: BookOpen,
     title: 'Teachers',
-    description: 'Manage multiple students, track class progress, and access teaching resources.',
-    href: '/auth/register?role=teacher',
+    description:
+      'Every pack and capstone carries a teacher note explaining the rubric axis it trains. Print-ready lessons, flashcard sheets, and a live credit audit.',
+    href: '/dashboard?role=teacher',
   },
 ]
 
@@ -102,44 +141,47 @@ export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
+
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* Hero */}
         <section className="relative overflow-hidden bg-gradient-to-b from-muted/50 to-background py-20 md:py-32">
-          <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden" aria-hidden>
             <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
             <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
           </div>
-          
+
           <div className="container mx-auto px-4 relative">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
                 <Sparkles className="h-4 w-4" />
-                World Language Credit for Middle School
+                STAMP-aligned Hindi · FCPS world language credit
               </div>
-              
+
               <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
-                Learn Hindi and more — interactive lessons, capstones, and{' '}
-                <span className="text-primary">STAMP-aligned practice</span>.
+                Learn Hindi <span className="text-primary">and more</span>
               </h1>
-              
+
               <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed text-pretty">
-                An engaging learning platform designed for middle school students to master Indian world languages and earn academic credit. Interactive lessons, capstone projects, and STAMP-aligned assessments.
+                Interactive lessons, capstone projects, and STAMP-aligned practice for students, parents, and
+                teachers.
               </p>
-              
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Button size="lg" asChild className="w-full sm:w-auto">
-                  <Link href="/auth/register">
-                    Start Learning Free
+                  <Link href="/dashboard?role=student">
+                    Enter as Student
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
-                  <Link href="/courses">Browse Courses</Link>
+                  <Link href="/dashboard?role=parent">Enter as Parent</Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
+                  <Link href="/dashboard?role=teacher">Enter as Teacher</Link>
                 </Button>
               </div>
-              
-              <div className="mt-12 flex items-center justify-center gap-8 text-sm text-muted-foreground">
+
+              <div className="mt-12 flex items-center justify-center gap-8 text-sm text-muted-foreground flex-wrap">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-primary" />
                   <span>STAMP Aligned</span>
@@ -157,18 +199,19 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* Features */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
-                Everything You Need to Succeed
+                What Sankalp Actually Does
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-                Our comprehensive curriculum covers all aspects of language learning with engaging, interactive content.
+                Content-first, AI-sparing. Hand-authored packs and capstones do the heavy lifting; AI helps when
+                you want feedback, not when you want a lesson.
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((feature) => (
                 <Card key={feature.title} className="border-border hover:border-primary/50 transition-colors">
@@ -187,26 +230,26 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Proficiency Levels Section */}
+        {/* Proficiency ladder */}
         <section className="py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
-                5 Proficiency Levels
+                Five STAMP Proficiency Levels
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-                Start where you are and progress through STAMP-aligned levels from Novice to Intermediate.
+                Intermediate Mid (Benchmark 5) earns 3 FCPS world language credits. Here's what each step up the
+                ladder looks like in the Hindi content we ship.
               </p>
             </div>
-            
+
             <div className="max-w-4xl mx-auto">
               <div className="relative">
-                {/* Progress line */}
                 <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-border md:hidden" />
-                
+
                 <div className="space-y-6">
                   {proficiencyLevels.map((item, index) => (
-                    <div key={item.level} className="flex gap-4 md:gap-6">
+                    <div key={item.label} className="flex gap-4 md:gap-6">
                       <div className="flex-shrink-0 relative z-10">
                         <div className="w-12 h-12 rounded-full bg-background border-2 border-primary flex items-center justify-center font-bold text-primary">
                           {index + 1}
@@ -214,9 +257,12 @@ export default function HomePage() {
                       </div>
                       <Card className="flex-1">
                         <CardHeader className="pb-2">
-                          <div className="flex items-center gap-3">
-                            <LevelBadge level={item.level} size="md" />
+                          <div className="flex items-center gap-3 flex-wrap">
+                            <CardTitle className="text-lg">{item.label}</CardTitle>
+                            <Badge variant="secondary">Benchmark {item.stamp}</Badge>
+                            <span className="text-xs text-muted-foreground">{item.levelBand}</span>
                           </div>
+                          <CardDescription>{item.description}</CardDescription>
                         </CardHeader>
                         <CardContent>
                           <div className="flex flex-wrap gap-2">
@@ -239,7 +285,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Languages Section */}
+        {/* Languages */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
@@ -247,23 +293,26 @@ export default function HomePage() {
                 Indian Languages
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-                Starting with Hindi, with more languages coming soon.
+                Starting with Hindi. More scripts and languages are on the roadmap — we'll ship them when the
+                content clears the same bar.
               </p>
             </div>
-            
-            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-4xl mx-auto">
-              {availableLanguages.map((lang) => (
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+              {landingLanguages.map((lang) => (
                 <Card
                   key={lang.id}
-                  className={`text-center hover:border-primary/50 transition-colors ${
-                    lang.id === 'hindi' ? 'border-primary ring-1 ring-primary/20' : ''
+                  className={`text-center transition-colors ${
+                    lang.available
+                      ? 'border-primary ring-1 ring-primary/20 hover:border-primary/70'
+                      : 'hover:border-primary/30'
                   }`}
                 >
                   <CardContent className="pt-6">
                     <div className="text-4xl mb-2">{lang.nativeName}</div>
                     <p className="font-medium text-foreground">{lang.name}</p>
                     <p className="text-xs text-muted-foreground mt-1">{lang.script} script</p>
-                    {lang.id !== 'hindi' && (
+                    {!lang.available && (
                       <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground">
                         Coming Soon
                       </span>
@@ -275,7 +324,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* User Types Section */}
+        {/* Built for everyone */}
         <section className="py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
@@ -283,10 +332,11 @@ export default function HomePage() {
                 Built for Everyone
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-                Whether you are a student, parent, or teacher, Sankalp has tools designed for you.
+                The same content reads differently when you're the learner, the parent behind the learner, or
+                the teacher running the room.
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {userTypes.map((type) => (
                 <Card key={type.title} className="text-center hover:border-primary/50 transition-colors">
@@ -311,24 +361,28 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* Final CTA */}
         <section className="py-20 bg-primary text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-              Ready to Start Your Language Journey?
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Ready to start?</h2>
             <p className="text-lg opacity-90 max-w-2xl mx-auto mb-8 text-pretty">
-              Join thousands of students learning Indian languages and earning world language credit.
+              Open the dashboard and pick up where you left off. Everything stays on this device — no account,
+              nothing to sign up for.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button size="lg" variant="secondary" asChild>
-                <Link href="/auth/register">
-                  Create Free Account
+                <Link href="/dashboard?role=student">
+                  Enter as Student
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="bg-transparent border-primary-foreground/30 hover:bg-primary-foreground/10">
-                <Link href="/resources">View Resources</Link>
+              <Button
+                size="lg"
+                variant="outline"
+                asChild
+                className="bg-transparent border-primary-foreground/30 hover:bg-primary-foreground/10"
+              >
+                <Link href="/rubric">View the rubric</Link>
               </Button>
             </div>
           </div>
