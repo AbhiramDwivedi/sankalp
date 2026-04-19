@@ -7,6 +7,7 @@ import type {
   Passage,
   ThemeGroup,
   TopicPack,
+  TopicTheme,
 } from './schema';
 import { composeHeroPrompt } from './imagePrompts';
 
@@ -32,6 +33,7 @@ export interface StubArgs {
   id: string;
   level: Level;
   themeGroup: ThemeGroup;
+  topicTheme?: TopicTheme;
   order: number;
   titleHindi: string;
   titleEnglish: string;
@@ -45,6 +47,7 @@ export function makeStub(args: StubArgs): TopicPack {
     id: args.id,
     level: args.level,
     themeGroup: args.themeGroup,
+    topicTheme: args.topicTheme,
     order: args.order,
     titleHindi: args.titleHindi,
     titleEnglish: args.titleEnglish,
