@@ -32,23 +32,12 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "legacy",
-    "tmp",
-    "app/auth/**",
-    "app/capstones/**",
-    "app/dashboard/**",
-    "app/exams/**",
-    "app/lessons/**",
-    "app/resources/**",
-    "app/page.tsx",
-    "components/navbar.tsx",
-    "components/footer.tsx",
-    "components/dashboard/**",
-    "lib/data/**",
-    "lib/context/**"
+    "tmp"
   ]
 }
