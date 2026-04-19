@@ -9,6 +9,8 @@ import { writeFileSync, mkdirSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { TOPIC_PACKS } from '../content';
+import { TOPIC_THEME_META } from '../content/schema';
+import type { TopicTheme } from '../content/schema';
 import { CAPSTONES } from '../content/capstones';
 import { STUDY_PLANS } from '../content/studyPlans';
 import { DECKS, totalCards } from '../content/flashcards';
@@ -249,6 +251,16 @@ ${CURRICULUM.creditMapping.issuer} awards **${CURRICULUM.creditMapping.credits} 
 All ${FCPS_SUB_TOPICS.length} ${CURRICULUM.creditMapping.issuer} sub-topics are served by at least one pack; most are reinforced by at least one capstone.
 
 ${topicCoverageMatrix().join('\n')}
+
+### Theme coverage (finer-grained \`topicTheme\` groupings)
+
+${(Object.keys(TOPIC_THEME_META) as TopicTheme[])
+  .map((t) => {
+    const meta = TOPIC_THEME_META[t];
+    const ids = TOPIC_PACKS.filter((p) => p.topicTheme === t).map((p) => p.id);
+    return `- ${meta.emoji} **${meta.label}** (\`${t}\`): ${ids.length ? ids.join(', ') : '_no packs_'}`;
+  })
+  .join('\n')}
 
 ## 3. Text-type inventory (tense frames across all IM essays)
 

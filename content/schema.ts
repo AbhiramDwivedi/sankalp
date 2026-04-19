@@ -242,11 +242,10 @@ export interface TopicPack {
    * Finer-grained subject tag used by the Library's per-card theme chip and
    * the pack page's "related at other levels" sibling strip. Independent of
    * `themeGroup` (coarse AAPPL classification). See `TOPIC_THEME_META` for
-   * labels and `packsInTopicTheme()` for the sibling lookup. Optional at the
-   * schema level only so in-flight pack edits compile incrementally; the
-   * validator asserts every pack has one.
+   * labels and `packsInTopicTheme()` for the sibling lookup. Required — the
+   * structural validator refuses any pack missing it.
    */
-  topicTheme?: TopicTheme;
+  topicTheme: TopicTheme;
   order: number;
   titleHindi: string;
   titleEnglish: string;

@@ -10,6 +10,7 @@ import { TOPIC_PACKS, TOPIC_PACKS_BY_ID } from '../content';
 import { CAPSTONES } from '../content/capstones';
 import { STUDY_PLANS } from '../content/studyPlans';
 import type { Capstone, StudyPlan, TopicPack } from '../content/schema';
+import { TOPIC_THEME_META } from '../content/schema';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -36,6 +37,15 @@ function countWords(hindi: string): number {
 }
 
 function validatePack(p: TopicPack) {
+  // Theme tag — the finer-grained `topicTheme` drives the Library theme chip
+  // and the pack-page sibling strip. Missing value = silently-broken sibling
+  // strip. Runtime check backs up the TypeScript requirement.
+  if (!p.topicTheme) {
+    push(p.id, 'error', 'topicTheme', 'missing — every pack must declare one of TOPIC_THEME_META');
+  } else if (!(p.topicTheme in TOPIC_THEME_META)) {
+    push(p.id, 'error', 'topicTheme', `unknown value "${p.topicTheme}"`);
+  }
+
   // Rationale
   if (!p.rationale.fcpsSubTopics?.length) push(p.id, 'error', 'rationale.fcpsSubTopics', 'empty');
   if (!p.rationale.trains?.length) push(p.id, 'error', 'rationale.trains', 'empty');

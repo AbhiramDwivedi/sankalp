@@ -33,7 +33,7 @@ export interface StubArgs {
   id: string;
   level: Level;
   themeGroup: ThemeGroup;
-  topicTheme?: TopicTheme;
+  topicTheme: TopicTheme;
   order: number;
   titleHindi: string;
   titleEnglish: string;
