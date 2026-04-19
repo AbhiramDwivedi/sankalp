@@ -1,18 +1,44 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Noto_Sans_Devanagari, Tiro_Devanagari_Hindi } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { AuthProvider } from '@/lib/context/auth-context'
 import { Toaster } from 'sonner'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+// Latin body/mono. Geist ships CSS vars we pick up in globals.css via
+// @theme inline { --font-sans / --font-mono }. The Devanagari families are
+// surfaced as --font-hindi-body / --font-hindi-display and wired to the
+// .font-hindi / .font-hindi-display utility classes that ScriptText and
+// DevanagariText emit.
+const geistSans = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist-sans',
+  display: 'swap',
+})
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+  display: 'swap',
+})
+const notoSansDevanagari = Noto_Sans_Devanagari({
+  subsets: ['devanagari', 'latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-hindi-body',
+  display: 'swap',
+})
+const tiroDevanagariHindi = Tiro_Devanagari_Hindi({
+  subsets: ['devanagari', 'latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-hindi-display',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'Sankalp - Learn Indian Languages',
-  description: 'An engaging learning platform for middle school students to learn Hindi and other Indian languages towards world language credit. Interactive lessons, capstone projects, and mock exams.',
-  keywords: ['Hindi', 'Indian languages', 'world language credit', 'middle school', 'language learning', 'STAMP'],
-  authors: [{ name: 'Sankalp Learning' }],
+  title: 'Sankalp — Hindi STAMP prep',
+  description:
+    'Hindi learning for US middle-schoolers targeting the FCPS World Language Credit Exam (Avant STAMP 2S/WS). Hand-authored topic packs, capstones, flashcards, and study plans — built for students, parents, and teachers.',
+  keywords: ['Hindi', 'STAMP', 'FCPS', 'world language credit', 'middle school', 'language learning'],
+  authors: [{ name: 'Sankalp' }],
   icons: {
     icon: [
       {
@@ -44,12 +70,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${notoSansDevanagari.variable} ${tiroDevanagariHindi.variable} bg-background`}
+    >
       <body className="font-sans antialiased min-h-screen">
-        <AuthProvider>
-          {children}
-          <Toaster position="top-right" richColors />
-        </AuthProvider>
+        {children}
+        <Toaster position="top-right" richColors />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
