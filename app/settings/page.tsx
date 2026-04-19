@@ -34,7 +34,15 @@ import {
   Users,
 } from 'lucide-react'
 import { downloadJsonExport } from '@/lib/exportProgress'
-import type { StudentProfile, ProfileRole } from '@/types'
+import {
+  bandFromProficiency,
+  defaultProficiencyForBand,
+  type Band,
+  type ProfileRole,
+  type StudentProfile,
+} from '@/types'
+import { studyPlanForLevel } from '@/content/studyPlans'
+import { BandLevelDial } from '@/components/BandLevelDial'
 
 const ROLE_ICON: Record<ProfileRole, React.ComponentType<{ className?: string }>> = {
   student: GraduationCap,
@@ -91,6 +99,21 @@ export default function SettingsPage() {
   const handleExport = () => {
     const exportedAt = downloadJsonExport(profile)
     setProfile((p) => ({ ...p, lastExportedAt: exportedAt }))
+  }
+
+  const handleBandChange = (nextBand: Band) => {
+    // Derive a concrete ProficiencyLevel for the band (the entry-point) and
+    // re-select the matching study plan. Completed lessons / capstones /
+    // flashcards are left intact — the student keeps their progress as they
+    // switch tracks.
+    const nextLevel = defaultProficiencyForBand(nextBand)
+    const nextPlanId = studyPlanForLevel(nextLevel).id
+    setProfile((p) => ({
+      ...p,
+      currentBand: nextBand,
+      currentLevel: nextLevel,
+      selectedStudyPlanId: nextPlanId,
+    }))
   }
 
   const updateProfileName = (id: string, name: string) => {
@@ -193,7 +216,7 @@ export default function SettingsPage() {
         <Card>
           <CardHeader>
             <CardTitle>Active profile</CardTitle>
-            <CardDescription>The name and level that drives your plan.</CardDescription>
+            <CardDescription>The name that shows on your dashboard.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
@@ -205,17 +228,17 @@ export default function SettingsPage() {
                 onBlur={handleNameCommit}
               />
             </div>
-            <div className="space-y-2">
-              <Label>Proficiency level</Label>
-              <div className="text-sm px-3 py-2 rounded-md bg-muted text-foreground">
-                {profile.currentLevel}
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Set during onboarding. Re-assessment arrives with the Phase 3 role picker.
-              </p>
-            </div>
           </CardContent>
         </Card>
+
+        {/* Level dial ---------------------------------------------------- */}
+        <BandLevelDial
+          value={profile.currentBand ?? bandFromProficiency(profile.currentLevel)}
+          title="Your level"
+          description="Three bands map the curriculum. Pick the one that matches where you are today — your study plan adjusts."
+          confirmDescription="Changing your level will re-sequence your study plan. Completed lessons and mastered flashcards stay completed. Continue?"
+          onConfirm={handleBandChange}
+        />
 
         {/* AI toggle ----------------------------------------------------- */}
         <Card>

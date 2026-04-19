@@ -21,11 +21,15 @@ import {
   AlertCircle,
   Info,
 } from 'lucide-react'
-import type { DemoStudent, StudentProfile } from '@/types'
+import type { DemoStudent, StudentProfile, Band } from '@/types'
+import { BAND_META, bandFromProficiency, defaultProficiencyForBand } from '@/types'
 import { computeStreak } from '@/lib/streak'
 import { computeXp } from '@/lib/xp'
 import { TOPIC_PACKS } from '@/content'
 import { CAPSTONES } from '@/content/capstones'
+import { studyPlanForLevel } from '@/content/studyPlans'
+import { useProfile } from '@/lib/profile-context'
+import { BandLevelDial } from '@/components/BandLevelDial'
 
 // -----------------------------------------------------------------------------
 // TeacherDashboard — Phase 3. Reads profile.demoStudent as the sole "roster
@@ -35,9 +39,27 @@ import { CAPSTONES } from '@/content/capstones'
 // -----------------------------------------------------------------------------
 
 export default function TeacherDashboard({ profile }: { profile: StudentProfile }) {
+  const { setProfile } = useProfile()
   const roster: DemoStudent[] = profile.demoStudent ? [profile.demoStudent] : []
   const totalPacks = TOPIC_PACKS.length
   const totalCaps = CAPSTONES.length
+
+  const handleDemoBandChange = (nextBand: Band) => {
+    const nextLevel = defaultProficiencyForBand(nextBand)
+    const nextPlanId = studyPlanForLevel(nextLevel).id
+    setProfile((p) => {
+      if (!p.demoStudent) return p
+      return {
+        ...p,
+        demoStudent: {
+          ...p.demoStudent,
+          currentBand: nextBand,
+          currentLevel: nextLevel,
+          selectedStudyPlanId: nextPlanId,
+        },
+      }
+    })
+  }
 
   // Per-student aggregates (XP + streak).
   const rows = roster.map((s) => {
@@ -53,18 +75,19 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
     const totalItems = totalPacks + totalCaps
     const doneItems = s.completedTopicIds.length + s.completedCapstoneIds.length
     const progressPct = totalItems ? Math.round((doneItems / totalItems) * 100) : 0
-    return { student: s, xp, streak, progressPct }
+    const band = s.currentBand ?? bandFromProficiency(s.currentLevel)
+    return { student: s, xp, streak, progressPct, band }
   })
 
   const avgStreak = rows.length ? Math.round(rows.reduce((a, r) => a + r.streak, 0) / rows.length) : 0
   const avgXp = rows.length ? Math.round(rows.reduce((a, r) => a + r.xp, 0) / rows.length) : 0
 
-  // Level distribution (for the roster card). With a single demo student this
+  // Band distribution (for the roster card). With a single demo student this
   // is basically a one-bucket bar, but the shape scales for an eventual
   // multi-student roster.
-  const levelDistribution = rows.reduce<Record<string, number>>((acc, r) => {
-    const l = r.student.currentLevel as unknown as string
-    acc[l] = (acc[l] || 0) + 1
+  const bandDistribution = rows.reduce<Record<string, number>>((acc, r) => {
+    const label = BAND_META[r.band].label
+    acc[label] = (acc[label] || 0) + 1
     return acc
   }, {})
 
@@ -144,7 +167,9 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
                         <tr key={row.student.name} className="border-b border-border last:border-0">
                           <td className="py-3 pr-4 font-medium text-foreground">{row.student.name}</td>
                           <td className="py-3 pr-4">
-                            <Badge variant="secondary">{row.student.currentLevel}</Badge>
+                            <Badge variant="secondary" title={`STAMP: ${row.student.currentLevel}`}>
+                              {BAND_META[row.band].label}
+                            </Badge>
                           </td>
                           <td className="py-3 pr-4">
                             <span className="inline-flex items-center gap-1">
@@ -181,15 +206,15 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
 
           <Card>
             <CardHeader>
-              <CardTitle>Level distribution</CardTitle>
-              <CardDescription>Where your roster sits on the STAMP ladder.</CardDescription>
+              <CardTitle>Band distribution</CardTitle>
+              <CardDescription>Where your roster sits across Foundations / Intermediate / Skilled.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              {Object.entries(levelDistribution).length === 0 ? (
+              {Object.entries(bandDistribution).length === 0 ? (
                 <p className="text-sm text-muted-foreground">No students on the roster yet.</p>
               ) : (
-                Object.entries(levelDistribution).map(([lvl, count]) => {
-                  const max = Math.max(1, ...Object.values(levelDistribution))
+                Object.entries(bandDistribution).map(([lvl, count]) => {
+                  const max = Math.max(1, ...Object.values(bandDistribution))
                   const pct = Math.round((count / max) * 100)
                   return (
                     <div key={lvl}>
@@ -199,13 +224,27 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
                           {count} {count === 1 ? 'student' : 'students'}
                         </span>
                       </div>
-                      <Progress value={pct} aria-label={`${lvl} level: ${count}`} />
+                      <Progress value={pct} aria-label={`${lvl} band: ${count}`} />
                     </div>
                   )
                 })
               )}
             </CardContent>
           </Card>
+
+          {profile.demoStudent ? (
+            <BandLevelDial
+              value={
+                profile.demoStudent.currentBand ??
+                bandFromProficiency(profile.demoStudent.currentLevel)
+              }
+              title={`Adjust ${profile.demoStudent.name}'s level`}
+              description="Demo-student band. The level distribution and the plan preview above update immediately; seeded completions stay as-is."
+              confirmDescription={`Move ${profile.demoStudent.name} to a new band? Their completed packs and capstones stay; only the upcoming plan re-sequences.`}
+              applyLabel="Update demo student"
+              onConfirm={handleDemoBandChange}
+            />
+          ) : null}
         </div>
 
         {/* Right column: Quick actions */}

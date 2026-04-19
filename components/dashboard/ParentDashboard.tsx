@@ -21,8 +21,11 @@ import {
   Info,
   CalendarDays,
 } from 'lucide-react'
-import type { StudentProfile } from '@/types'
+import type { StudentProfile, Band } from '@/types'
+import { BAND_META, bandFromProficiency, defaultProficiencyForBand } from '@/types'
 import { computeStreak, lastActivityLabel } from '@/lib/streak'
+import { useProfile } from '@/lib/profile-context'
+import { BandLevelDial } from '@/components/BandLevelDial'
 import { computeXp } from '@/lib/xp'
 import { TOPIC_PACKS, getPack } from '@/content'
 import { CAPSTONES, getCapstone } from '@/content/capstones'
@@ -40,9 +43,27 @@ import { AVANT_RUBRIC_SUMMARY } from '@/constants'
 // -----------------------------------------------------------------------------
 
 export default function ParentDashboard({ profile }: { profile: StudentProfile }) {
+  const { setProfile } = useProfile()
   const demo = profile.demoStudent
   const totalPacks = TOPIC_PACKS.length
   const totalCaps = CAPSTONES.length
+
+  const handleChildBandChange = (nextBand: Band) => {
+    const nextLevel = defaultProficiencyForBand(nextBand)
+    const nextPlanId = studyPlanForLevel(nextLevel).id
+    setProfile((p) => {
+      if (!p.demoStudent) return p
+      return {
+        ...p,
+        demoStudent: {
+          ...p.demoStudent,
+          currentBand: nextBand,
+          currentLevel: nextLevel,
+          selectedStudyPlanId: nextPlanId,
+        },
+      }
+    })
+  }
 
   if (!demo) {
     return (
@@ -95,6 +116,8 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
 
   const initials = (demo.name.trim().charAt(0) || 'S').toUpperCase()
   const parentFirst = profile.name.split(/\s+/)[0] || profile.name
+  const demoBand = demo.currentBand ?? bandFromProficiency(demo.currentLevel)
+  const demoBandMeta = BAND_META[demoBand]
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
@@ -134,8 +157,11 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
                 </Avatar>
                 <div className="flex-1">
                   <CardTitle className="text-2xl">{demo.name}</CardTitle>
-                  <CardDescription>
-                    <Badge variant="secondary" className="mt-1">{demo.currentLevel}</Badge>
+                  <CardDescription className="flex items-center gap-2 mt-1 flex-wrap">
+                    <Badge variant="secondary" title={`STAMP: ${demo.currentLevel}`}>
+                      {demoBandMeta.label}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">{demoBandMeta.stampRange}</span>
                   </CardDescription>
                 </div>
               </div>
@@ -209,16 +235,31 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
           <Card>
             <CardHeader>
               <CardTitle>Understanding {demo.name.split(/\s+/)[0]}'s level</CardTitle>
-              <CardDescription>{demo.currentLevel}</CardDescription>
+              <CardDescription>
+                {demoBandMeta.label} · {demoBandMeta.stampRange}
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3 text-sm text-muted-foreground">
-              <p>{AVANT_RUBRIC_SUMMARY[demo.currentLevel]}</p>
+              <p>{demoBandMeta.description}</p>
               <p>
-                The STAMP ladder goes from Novice Low (single words) to Intermediate High (abstract topics).
-                Benchmark 5 — Intermediate Mid — earns 3 FCPS world language credits.
+                The three bands — Foundations, Intermediate, and Skilled — map to the STAMP ladder.
+                The Intermediate band (Benchmark 5) is what earns 3 FCPS world language credits.
+              </p>
+              <p className="text-xs text-muted-foreground/80 italic">
+                STAMP target: {demo.currentLevel}. {AVANT_RUBRIC_SUMMARY[demo.currentLevel]}
               </p>
             </CardContent>
           </Card>
+
+          <BandLevelDial
+            value={demoBand}
+            title={`Adjust ${demo.name.split(/\s+/)[0]}'s level`}
+            description="If your child's real-world level is different from what you picked at onboarding, change it here. Completed lessons stay completed."
+            confirmDescription={`Move ${demo.name} to a new band? Upcoming weeks re-sequence; completed packs and capstones are untouched.`}
+            applyLabel="Update child's level"
+            onConfirm={handleChildBandChange}
+            compact
+          />
 
           <Card>
             <CardHeader>

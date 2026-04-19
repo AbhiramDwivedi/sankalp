@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { TopicPack } from '../../content/schema';
+import { BAND_META, bandForPack } from '../../types';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
 import { PackHeroArt } from '../art/PackHeroArt';
@@ -34,7 +35,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
       <div className="relative z-10 p-12 md:p-16 min-h-[360px] flex flex-col justify-between">
         <div className="flex items-center gap-3 flex-wrap">
           <Badge tone="amber" size="xs">
-            Level {pack.level} · {tokens.label}
+            {BAND_META[bandForPack(pack.level)].label} · {tokens.label}
           </Badge>
           <div className="inline-flex items-center gap-1 rounded-full bg-white/15 border border-white/20 backdrop-blur-sm no-print">
             <button

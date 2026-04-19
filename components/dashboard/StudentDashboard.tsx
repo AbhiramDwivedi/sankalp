@@ -22,6 +22,7 @@ import {
   ClipboardList,
 } from 'lucide-react'
 import type { StudentProfile } from '@/types'
+import { BAND_META, bandForPack, bandFromProficiency } from '@/types'
 import { computeStreak, lastActivityLabel } from '@/lib/streak'
 import { computeXp } from '@/lib/xp'
 import { TOPIC_PACKS, getPack } from '@/content'
@@ -106,6 +107,8 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
   const pctPlan = planTotalItems ? Math.round((planDoneItems / planTotalItems) * 100) : 0
 
   const firstName = profile.name.split(/\s+/)[0] || profile.name
+  const band = profile.currentBand ?? bandFromProficiency(profile.currentLevel)
+  const bandMeta = BAND_META[band]
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -116,7 +119,7 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
             Welcome back, {firstName}!
           </h1>
           <p className="text-muted-foreground mt-1">
-            {streakLabel} · {profile.currentLevel}
+            {streakLabel} · {bandMeta.label}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -190,7 +193,7 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
                       {nextPack.titleHindi}
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Level {nextPack.level} · {currentWeek?.focus}
+                      {BAND_META[bandForPack(nextPack.level)].label} · {currentWeek?.focus}
                     </p>
                   </div>
                   <Button asChild>
@@ -305,9 +308,15 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
               <CardTitle>Your Level</CardTitle>
             </CardHeader>
             <CardContent>
-              <Badge variant="secondary" className="mb-2">{profile.currentLevel}</Badge>
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
+                <Badge variant="secondary">{bandMeta.label}</Badge>
+                <span className="text-xs text-muted-foreground">{bandMeta.stampRange}</span>
+              </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                {AVANT_RUBRIC_SUMMARY[profile.currentLevel]}
+                {bandMeta.description}
+              </p>
+              <p className="text-xs text-muted-foreground/80 mt-2 italic">
+                STAMP target: {profile.currentLevel}. {AVANT_RUBRIC_SUMMARY[profile.currentLevel]}
               </p>
             </CardContent>
           </Card>

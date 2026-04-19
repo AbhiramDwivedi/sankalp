@@ -9,6 +9,91 @@ export enum ProficiencyLevel {
 }
 
 // ---------------------------------------------------------------------------
+// Band — user-facing 3-value coarse classification layered on top of the
+// 6-value `ProficiencyLevel` enum. The enum stays the STAMP-aligned internal
+// representation (drives plan selection, capstone tier matching, rubric
+// display). The band is what we show to a student ("where I am"), what we
+// tag each pack with ("which bucket does this sit in"), and what the level
+// dial on Settings / Teacher / Parent lets a user pick.
+//
+//   foundations  — NOVICE_LOW / NOVICE_MID / NOVICE_HIGH    — L1 packs
+//   intermediate — INTERMEDIATE_LOW / INTERMEDIATE_MID      — L2 packs
+//   skilled      — INTERMEDIATE_HIGH                        — L3 stretch
+// ---------------------------------------------------------------------------
+
+export type Band = 'foundations' | 'intermediate' | 'skilled';
+
+export const BAND_ORDER: Band[] = ['foundations', 'intermediate', 'skilled'];
+
+export interface BandMeta {
+  label: string;
+  stampRange: string;
+  description: string;
+}
+
+export const BAND_META: Record<Band, BandMeta> = {
+  foundations: {
+    label: 'Foundations',
+    stampRange: 'STAMP 3–4',
+    description:
+      'Words, phrases, simple sentences on familiar topics. Build the vocabulary and structure that intermediate writing rests on.',
+  },
+  intermediate: {
+    label: 'Intermediate',
+    stampRange: 'STAMP 5',
+    description:
+      'Connected sentences, past and future time frames, paragraph writing. This is the target band for the FCPS 3-credit award.',
+  },
+  skilled: {
+    label: 'Skilled',
+    stampRange: 'STAMP 6+',
+    description:
+      'Narrative and opinion register, complex discourse, honors-level stretch. Past the 3-credit gate; polishing for higher benchmarks.',
+  },
+};
+
+/** Derive the coarse band from a 6-value ProficiencyLevel. */
+export function bandFromProficiency(level: ProficiencyLevel): Band {
+  switch (level) {
+    case ProficiencyLevel.NOVICE_LOW:
+    case ProficiencyLevel.NOVICE_MID:
+    case ProficiencyLevel.NOVICE_HIGH:
+      return 'foundations';
+    case ProficiencyLevel.INTERMEDIATE_LOW:
+    case ProficiencyLevel.INTERMEDIATE_MID:
+      return 'intermediate';
+    case ProficiencyLevel.INTERMEDIATE_HIGH:
+      return 'skilled';
+    default:
+      return 'foundations';
+  }
+}
+
+/** Map a pack's `level: 1 | 2 | 3` to its display band. */
+export function bandForPack(level: 1 | 2 | 3): Band {
+  if (level === 1) return 'foundations';
+  if (level === 2) return 'intermediate';
+  return 'skilled';
+}
+
+/**
+ * When a user picks a band from the level dial we need a concrete
+ * ProficiencyLevel to drive plan selection. These are the "entry point" of
+ * each band — the plan is the most relevant to someone just stepping into
+ * the band rather than finishing it.
+ */
+export function defaultProficiencyForBand(band: Band): ProficiencyLevel {
+  switch (band) {
+    case 'foundations':
+      return ProficiencyLevel.NOVICE_MID;
+    case 'intermediate':
+      return ProficiencyLevel.INTERMEDIATE_LOW;
+    case 'skilled':
+      return ProficiencyLevel.INTERMEDIATE_MID;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Legacy material/lesson types - kept for older localStorage profiles only.
 // New content flows through content/schema.ts TopicPack. Do not extend these.
 // ---------------------------------------------------------------------------
@@ -76,6 +161,12 @@ export type ProfileRole = 'student' | 'teacher' | 'parent';
 export interface DemoStudent {
   name: string;
   currentLevel: ProficiencyLevel;
+  /**
+   * Coarse user-facing band derived from `currentLevel`. Persisted so a
+   * Teacher / Parent can dial the demo student's band without churning the
+   * ProficiencyLevel on every change.
+   */
+  currentBand: Band;
   completedTopicIds: string[];
   flashcardsMastered: string[];
   completedCapstoneIds: string[];
@@ -147,6 +238,13 @@ export interface StudentProfile {
   id: string;
   name: string;
   currentLevel: ProficiencyLevel;
+  /**
+   * Coarse user-facing band derived from `currentLevel`. Set by onboarding
+   * (student picks a band; we pick a default ProficiencyLevel for it) and
+   * by the Settings level dial. `currentLevel` stays the precise STAMP-
+   * aligned value; `currentBand` is the label we show in UI.
+   */
+  currentBand: Band;
   startDate: string;
   examDate: string;
 
@@ -215,11 +313,20 @@ export interface StudentProfile {
  * Normalize a profile loaded from localStorage so legacy records work with the
  * new static-content code paths. Idempotent.
  */
+function isBand(v: unknown): v is Band {
+  return v === 'foundations' || v === 'intermediate' || v === 'skilled';
+}
+
 function migrateDemoStudent(raw: any): DemoStudent | undefined {
   if (!raw || typeof raw !== 'object') return undefined;
+  const currentLevel = raw.currentLevel as ProficiencyLevel;
+  const currentBand: Band = isBand(raw.currentBand)
+    ? raw.currentBand
+    : bandFromProficiency(currentLevel);
   return {
     name: typeof raw.name === 'string' ? raw.name : 'Student',
-    currentLevel: raw.currentLevel,
+    currentLevel,
+    currentBand,
     completedTopicIds: Array.isArray(raw.completedTopicIds) ? raw.completedTopicIds : [],
     flashcardsMastered: Array.isArray(raw.flashcardsMastered) ? raw.flashcardsMastered : [],
     completedCapstoneIds: Array.isArray(raw.completedCapstoneIds) ? raw.completedCapstoneIds : [],
@@ -235,10 +342,15 @@ function migrateDemoStudent(raw: any): DemoStudent | undefined {
 export function migrateProfile(raw: any): StudentProfile {
   const role: ProfileRole =
     raw.role === 'teacher' || raw.role === 'parent' ? raw.role : 'student';
+  const currentLevel = raw.currentLevel as ProficiencyLevel;
+  const currentBand: Band = isBand(raw.currentBand)
+    ? raw.currentBand
+    : bandFromProficiency(currentLevel);
   const profile: StudentProfile = {
     id: raw.id,
     name: raw.name,
-    currentLevel: raw.currentLevel,
+    currentLevel,
+    currentBand,
     startDate: raw.startDate,
     examDate: raw.examDate,
     role,

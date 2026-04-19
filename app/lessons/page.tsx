@@ -17,6 +17,7 @@ export default function LessonsPage() {
       <LibraryView
         completedIds={profile.completedTopicIds || []}
         studentLevel={profile.currentLevel}
+        selectedStudyPlanId={profile.selectedStudyPlanId}
         onOpenTopic={(pack) => router.push(`/lessons/${pack.id}`)}
         onOpenHowThisWorks={() => router.push('/how-this-works')}
       />
