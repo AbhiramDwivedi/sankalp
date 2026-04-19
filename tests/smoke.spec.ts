@@ -22,7 +22,7 @@ import { test, expect, type Page } from '@playwright/test';
  *   /capstones           >=10 capstone cards
  *   /capstones/[id]      3-tier comparison
  *   /flashcards          decks list
- *   /plan /rubric /audit /how-this-works  each render a visible H1
+ *   /plan /rubric /audit /overview  each render a visible H1
  *   /settings            profile CRUD card
  */
 
@@ -126,10 +126,12 @@ test.describe('Student flow', () => {
     // Phase B: library is now 3 collapsible bands. The student's band is
     // expanded by default; the other two start collapsed. Expand any that
     // aren't already open so the full catalog is in the accessibility tree.
-    const bandTriggers = page.getByRole('button', { expanded: false });
+    // Scope to <main> so navbar buttons with aria-expanded (profile dropdown,
+    // mobile menu toggle) don't get picked up by `.first()`.
+    const bandTriggers = page.locator('main').getByRole('button', { expanded: false });
     const collapsed = await bandTriggers.count();
     for (let i = 0; i < collapsed; i += 1) {
-      await page.getByRole('button', { expanded: false }).first().click();
+      await page.locator('main').getByRole('button', { expanded: false }).first().click();
     }
     // Pack cards render as <button>s with an English title.
     const packButtons = page
@@ -193,13 +195,13 @@ test.describe('Student flow', () => {
     await expect.poll(async () => await deckCards.count()).toBeGreaterThanOrEqual(20);
   });
 
-  test('/plan /rubric /audit /how-this-works each render a visible H1', async ({ page }) => {
+  test('/plan /rubric /audit /overview each render a visible H1', async ({ page }) => {
     await onboard(page, 'student', 'Nav Tester');
     const routes: [string, RegExp][] = [
       ['/plan', /how to use this library/i],
       ['/rubric', /rubric/i],
       ['/audit', /earn/i],
-      ['/how-this-works', /how this works/i],
+      ['/overview', /how sankalp works/i],
     ];
     for (const [path, h1] of routes) {
       await page.goto(BASE + path);
