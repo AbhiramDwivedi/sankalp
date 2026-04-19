@@ -21,12 +21,15 @@ import {
   AlertCircle,
   Info,
 } from 'lucide-react'
-import type { DemoStudent, StudentProfile } from '@/types'
-import { BAND_META, bandFromProficiency } from '@/types'
+import type { DemoStudent, StudentProfile, Band } from '@/types'
+import { BAND_META, bandFromProficiency, defaultProficiencyForBand } from '@/types'
 import { computeStreak } from '@/lib/streak'
 import { computeXp } from '@/lib/xp'
 import { TOPIC_PACKS } from '@/content'
 import { CAPSTONES } from '@/content/capstones'
+import { studyPlanForLevel } from '@/content/studyPlans'
+import { useProfile } from '@/lib/profile-context'
+import { BandLevelDial } from '@/components/BandLevelDial'
 
 // -----------------------------------------------------------------------------
 // TeacherDashboard — Phase 3. Reads profile.demoStudent as the sole "roster
@@ -36,9 +39,27 @@ import { CAPSTONES } from '@/content/capstones'
 // -----------------------------------------------------------------------------
 
 export default function TeacherDashboard({ profile }: { profile: StudentProfile }) {
+  const { setProfile } = useProfile()
   const roster: DemoStudent[] = profile.demoStudent ? [profile.demoStudent] : []
   const totalPacks = TOPIC_PACKS.length
   const totalCaps = CAPSTONES.length
+
+  const handleDemoBandChange = (nextBand: Band) => {
+    const nextLevel = defaultProficiencyForBand(nextBand)
+    const nextPlanId = studyPlanForLevel(nextLevel).id
+    setProfile((p) => {
+      if (!p.demoStudent) return p
+      return {
+        ...p,
+        demoStudent: {
+          ...p.demoStudent,
+          currentBand: nextBand,
+          currentLevel: nextLevel,
+          selectedStudyPlanId: nextPlanId,
+        },
+      }
+    })
+  }
 
   // Per-student aggregates (XP + streak).
   const rows = roster.map((s) => {
@@ -210,6 +231,20 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
               )}
             </CardContent>
           </Card>
+
+          {profile.demoStudent ? (
+            <BandLevelDial
+              value={
+                profile.demoStudent.currentBand ??
+                bandFromProficiency(profile.demoStudent.currentLevel)
+              }
+              title={`Adjust ${profile.demoStudent.name}'s level`}
+              description="Demo-student band. The level distribution and the plan preview above update immediately; seeded completions stay as-is."
+              confirmDescription={`Move ${profile.demoStudent.name} to a new band? Their completed packs and capstones stay; only the upcoming plan re-sequences.`}
+              applyLabel="Update demo student"
+              onConfirm={handleDemoBandChange}
+            />
+          ) : null}
         </div>
 
         {/* Right column: Quick actions */}

@@ -21,9 +21,11 @@ import {
   Info,
   CalendarDays,
 } from 'lucide-react'
-import type { StudentProfile } from '@/types'
-import { BAND_META, bandFromProficiency } from '@/types'
+import type { StudentProfile, Band } from '@/types'
+import { BAND_META, bandFromProficiency, defaultProficiencyForBand } from '@/types'
 import { computeStreak, lastActivityLabel } from '@/lib/streak'
+import { useProfile } from '@/lib/profile-context'
+import { BandLevelDial } from '@/components/BandLevelDial'
 import { computeXp } from '@/lib/xp'
 import { TOPIC_PACKS, getPack } from '@/content'
 import { CAPSTONES, getCapstone } from '@/content/capstones'
@@ -41,9 +43,27 @@ import { AVANT_RUBRIC_SUMMARY } from '@/constants'
 // -----------------------------------------------------------------------------
 
 export default function ParentDashboard({ profile }: { profile: StudentProfile }) {
+  const { setProfile } = useProfile()
   const demo = profile.demoStudent
   const totalPacks = TOPIC_PACKS.length
   const totalCaps = CAPSTONES.length
+
+  const handleChildBandChange = (nextBand: Band) => {
+    const nextLevel = defaultProficiencyForBand(nextBand)
+    const nextPlanId = studyPlanForLevel(nextLevel).id
+    setProfile((p) => {
+      if (!p.demoStudent) return p
+      return {
+        ...p,
+        demoStudent: {
+          ...p.demoStudent,
+          currentBand: nextBand,
+          currentLevel: nextLevel,
+          selectedStudyPlanId: nextPlanId,
+        },
+      }
+    })
+  }
 
   if (!demo) {
     return (
@@ -230,6 +250,16 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
               </p>
             </CardContent>
           </Card>
+
+          <BandLevelDial
+            value={demoBand}
+            title={`Adjust ${demo.name.split(/\s+/)[0]}'s level`}
+            description="If your child's real-world level is different from what you picked at onboarding, change it here. Completed lessons stay completed."
+            confirmDescription={`Move ${demo.name} to a new band? Upcoming weeks re-sequence; completed packs and capstones are untouched.`}
+            applyLabel="Update child's level"
+            onConfirm={handleChildBandChange}
+            compact
+          />
 
           <Card>
             <CardHeader>
