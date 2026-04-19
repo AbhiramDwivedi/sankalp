@@ -38,7 +38,7 @@ function isOffline(): boolean {
 
 // User-friendly message for HTTP 429 (free-tier quota). Surfaced verbatim.
 const RATE_LIMIT_MESSAGE =
-  "AI grading is rate-limited right now (free tier: 15 requests/min, 1500/day). Wait a minute and try again — your recording is saved locally.";
+  "AI grading is rate-limited right now (free tier: ~10 requests/min, 250/day). Wait a minute and try again — your recording is saved locally.";
 
 export async function evaluateWriting(
   submission: WritingSubmission,
@@ -155,11 +155,15 @@ export async function evaluateSpeaking(
   }
 
   const rubricPromptHeader = buildRaterPromptHeader();
-  const speakingWrapper = `The student's response below is SPOKEN, not written. Audio is attached as inline data. Apply the same ${CURRICULUM.examSystem.shortName} rubric, but score for spoken delivery: fluency / pacing / pronunciation count toward Language Control; visible paragraph structure does not apply (judge cohesion through transitions and ideas). The student is rehearsing for the ${CURRICULUM.examSystem.name} Speaking section.
+  const speakingWrapper = `The student's response below is SPOKEN ${CURRICULUM.language.name}, not written. Audio is attached as inline data. Apply the ${CURRICULUM.examSystem.shortName} rubric above, but score for spoken delivery: fluency / pacing / pronunciation count toward Language Control; visible paragraph structure does not apply (judge cohesion through transitions and ideas). The student is rehearsing for the ${CURRICULUM.examSystem.name} Speaking section.
 
 Prompt context: ${promptContext}
 
-Listen to the attached audio and grade against the rubric above.`;
+MANDATORY — do these in order:
+1. Listen to the attached audio end-to-end.
+2. Transcribe what you hear into ${CURRICULUM.language.script} and put it in the "transcript" field. If the audio is silent, unintelligible, or obviously not ${CURRICULUM.language.name}, set "transcript" to an empty string, set "score" to 0, and say so plainly in "feedback".
+3. Grade the TRANSCRIBED response against the rubric. In "identifiedStrengths" and "areasToImprove", quote specific ${CURRICULUM.language.script} phrases from the transcript (e.g., 'You said "…" — this is strong because …'). Generic feedback not grounded in the transcript is wrong.
+4. Return the JSON response described by the schema.`;
 
   // Default to audio/webm (MediaRecorder default in Chromium). Strip any
   // codec qualifier ("audio/webm;codecs=opus" → "audio/webm") because the
@@ -188,6 +192,7 @@ Listen to the attached audio and grade against the rubric above.`;
         responseSchema: {
           type: Type.OBJECT,
           properties: {
+            transcript: { type: Type.STRING },
             score: { type: Type.NUMBER },
             feedback: { type: Type.STRING },
             identifiedStrengths: { type: Type.ARRAY, items: { type: Type.STRING } },
@@ -196,6 +201,7 @@ Listen to the attached audio and grade against the rubric above.`;
             thoughtProcessAnalysis: { type: Type.STRING },
           },
           required: [
+            'transcript',
             'score',
             'feedback',
             'identifiedStrengths',

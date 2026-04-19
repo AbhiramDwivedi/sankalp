@@ -368,8 +368,10 @@ export const SpeakingPanel: React.FC<SpeakingPanelProps> = ({
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
             Sends your recording to Gemini 2.5 Flash with the STAMP speaking
-            rubric. Free tier is 15 requests/minute, 1500/day — heavy use will
-            be rate-limited.
+            rubric. The grader transcribes what it heard first (shown below)
+            and quotes your actual Hindi phrases in its feedback — if the
+            transcript looks wrong or empty, the audio didn't reach the model
+            cleanly. Free tier is ~10 requests/minute, 250/day.
           </p>
           <button
             onClick={submitForAi}
@@ -389,6 +391,35 @@ export const SpeakingPanel: React.FC<SpeakingPanelProps> = ({
                 <div className="text-3xl font-black text-amber-300">{aiResult.score}/10</div>
                 <p className="text-xs text-slate-300 italic">{aiResult.suggestedNextStep}</p>
               </div>
+              {typeof aiResult.transcript === 'string' && (
+                <div
+                  data-testid="speaking-ai-transcript"
+                  className={`rounded-lg px-3 py-2 border ${
+                    aiResult.transcript.trim().length === 0
+                      ? 'bg-rose-950/40 border-rose-500/40'
+                      : 'bg-white/5 border-white/10'
+                  }`}
+                >
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
+                    What the grader heard
+                  </p>
+                  {aiResult.transcript.trim().length === 0 ? (
+                    <p className="text-xs text-rose-200 leading-relaxed">
+                      The grader couldn't transcribe your audio. Re-record in a
+                      quieter room and speak closer to the mic — the score
+                      above is not reliable until this shows your Hindi.
+                    </p>
+                  ) : (
+                    <DevanagariText
+                      as="p"
+                      size="sm"
+                      className="text-slate-100 leading-relaxed"
+                    >
+                      {aiResult.transcript}
+                    </DevanagariText>
+                  )}
+                </div>
+              )}
               <p className="text-xs text-slate-200 leading-relaxed">{aiResult.feedback}</p>
               {aiResult.identifiedStrengths?.length > 0 && (
                 <div>

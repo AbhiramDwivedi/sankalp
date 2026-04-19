@@ -65,6 +65,11 @@ export interface EvaluationResult {
   areasToImprove: string[];
   suggestedNextStep: string;
   thoughtProcessAnalysis: string;
+  // Populated by evaluateSpeaking() only: what the model heard in the
+  // student's recording, in Devanagari. Surfaced in the UI so the student
+  // can tell if audio actually reached the grader (and isn't being graded
+  // off the rubric prompt alone).
+  transcript?: string;
 }
 
 /**
