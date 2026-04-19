@@ -19,9 +19,14 @@ import {
 import { Badge } from '@/components/ui/badge.shadcn'
 import { useProfile } from '@/lib/profile-context'
 import { seedDemoStudent, pickDefaultDemoName } from '@/lib/seedDemoStudent'
-import { ProficiencyLevel, bandFromProficiency } from '@/types'
-import type { ProfileRole, StudentProfile } from '@/types'
-import { PROFICIENCY_ORDER, AVANT_RUBRIC_SUMMARY, calculateRecommendedDate } from '@/constants'
+import {
+  ProficiencyLevel,
+  BAND_META,
+  BAND_ORDER,
+  defaultProficiencyForBand,
+} from '@/types'
+import type { Band, ProfileRole, StudentProfile } from '@/types'
+import { AVANT_RUBRIC_SUMMARY, calculateRecommendedDate } from '@/constants'
 import { studyPlanForLevel } from '@/content/studyPlans'
 import {
   GraduationCap,
@@ -85,8 +90,16 @@ function OnboardingRouteInner() {
   const [step, setStep] = useState<number>(initialRole ? 2 : 1)
   const [role, setRole] = useState<Role | ''>(initialRole)
   const [name, setName] = useState<string>('')
-  const [level, setLevel] = useState<ProficiencyLevel>(ProficiencyLevel.NOVICE_LOW)
+  const [band, setBand] = useState<Band>('foundations')
   const [alreadyMessage, setAlreadyMessage] = useState<string>('')
+
+  // Onboarding carries the 3-band picker as the primary proficiency input.
+  // The concrete ProficiencyLevel is derived for plan selection + legacy
+  // consumers; power users can fine-tune from Settings later.
+  const level: ProficiencyLevel = useMemo(
+    () => defaultProficiencyForBand(band),
+    [band],
+  )
 
   // If a profile of the chosen role already exists, bounce to /dashboard with
   // a heads-up message. Runs once hydration finishes and only for role-locked
@@ -134,7 +147,7 @@ function OnboardingRouteInner() {
       case 2:
         return role === 'student' ? "What's your name?" : role === 'parent' ? "What's your child's name?" : 'Your name (teacher)'
       case 3:
-        return role === 'student' ? "What's your current Hindi level?" : "What's your student's Hindi level?"
+        return role === 'student' ? 'Where are you on the Hindi ladder?' : "Where is your student on the Hindi ladder?"
       default:
         return 'Ready to start'
     }
@@ -143,7 +156,7 @@ function OnboardingRouteInner() {
   const canAdvance = (() => {
     if (step === 1) return !!role
     if (step === 2) return name.trim().length >= 1
-    if (step === 3) return !!level
+    if (step === 3) return !!band
     return true
   })()
 
@@ -178,7 +191,7 @@ function OnboardingRouteInner() {
         id,
         name: trimmedName || 'Student',
         currentLevel: level,
-        currentBand: bandFromProficiency(level),
+        currentBand: band,
         startDate: new Date().toISOString(),
         examDate,
         role: 'student',
@@ -208,7 +221,7 @@ function OnboardingRouteInner() {
         id,
         name: adultName,
         currentLevel: level,
-        currentBand: bandFromProficiency(level),
+        currentBand: band,
         startDate: new Date().toISOString(),
         examDate,
         role,
@@ -270,7 +283,7 @@ function OnboardingRouteInner() {
                   {step === 2 && role === 'parent' && "We'll use this to label the demo student's card."}
                   {step === 2 && role === 'teacher' && 'Shows on your navbar; never leaves this device.'}
                   {step === 2 && role === 'student' && 'Shows on your dashboard and navbar.'}
-                  {step === 3 && "This picks the study plan. You can change the level from Settings later."}
+                  {step === 3 && 'Three bands. Pick the one that fits today — you can switch from Settings later.'}
                   {step === 4 && 'Confirm and jump in. No account, nothing uploaded.'}
                 </CardDescription>
               </div>
@@ -281,11 +294,12 @@ function OnboardingRouteInner() {
             {step === 2 && (
               <StepName role={role as Role} name={name} onChange={setName} />
             )}
-            {step === 3 && <StepLevel level={level} onChange={setLevel} />}
+            {step === 3 && <StepBand band={band} onChange={setBand} />}
             {step === 4 && (
               <StepConfirm
                 role={role as Role}
                 name={name}
+                band={band}
                 level={level}
                 planTitle={matchedPlan.titleEnglish}
                 planHeadline={matchedPlan.headline}
@@ -388,28 +402,34 @@ function StepName({ role, name, onChange }: { role: Role; name: string; onChange
   )
 }
 
-function StepLevel({ level, onChange }: { level: ProficiencyLevel; onChange: (v: ProficiencyLevel) => void }) {
+function StepBand({ band, onChange }: { band: Band; onChange: (v: Band) => void }) {
   return (
     <RadioGroup
-      value={level}
-      onValueChange={(v) => onChange(v as ProficiencyLevel)}
-      className="grid gap-2"
+      value={band}
+      onValueChange={(v) => onChange(v as Band)}
+      className="grid gap-3"
       aria-label="Select proficiency level"
     >
-      {PROFICIENCY_ORDER.map((lvl) => {
-        const active = level === lvl
+      {BAND_ORDER.map((b) => {
+        const meta = BAND_META[b]
+        const active = band === b
         return (
           <Label
-            key={lvl}
-            htmlFor={`lvl-${lvl}`}
-            className={`flex items-start gap-3 rounded-md border p-3 cursor-pointer transition-colors ${
-              active ? 'border-primary ring-2 ring-primary/20 bg-primary/5' : 'border-border hover:border-primary/40'
+            key={b}
+            htmlFor={`band-${b}`}
+            className={`flex items-start gap-4 rounded-lg border p-4 cursor-pointer transition-colors ${
+              active
+                ? 'border-primary ring-2 ring-primary/20 bg-primary/5'
+                : 'border-border hover:border-primary/50'
             }`}
           >
-            <RadioGroupItem value={lvl} id={`lvl-${lvl}`} className="mt-1" />
+            <RadioGroupItem value={b} id={`band-${b}`} className="mt-1" />
             <div className="flex-1">
-              <span className="font-medium text-foreground">{lvl}</span>
-              <p className="text-xs text-muted-foreground mt-0.5">{AVANT_RUBRIC_SUMMARY[lvl]}</p>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-semibold text-foreground">{meta.label}</span>
+                <span className="text-xs text-muted-foreground">{meta.stampRange}</span>
+              </div>
+              <p className="text-sm text-muted-foreground mt-1">{meta.description}</p>
             </div>
           </Label>
         )
@@ -421,18 +441,21 @@ function StepLevel({ level, onChange }: { level: ProficiencyLevel; onChange: (v:
 function StepConfirm({
   role,
   name,
+  band,
   level,
   planTitle,
   planHeadline,
 }: {
   role: Role
   name: string
+  band: Band
   level: ProficiencyLevel
   planTitle: string
   planHeadline: string
 }) {
   const meta = ROLE_META[role]
   const Icon = meta.icon
+  const bandMeta = BAND_META[band]
   const shownName = name.trim() || (role === 'parent' ? 'Your child' : role === 'teacher' ? 'Teacher' : 'Student')
   return (
     <div className="space-y-4">
@@ -444,9 +467,12 @@ function StepConfirm({
         </div>
         <div className="grid sm:grid-cols-2 gap-3 text-sm">
           <div>
-            <p className="text-xs uppercase tracking-wider text-muted-foreground">Level</p>
-            <p className="font-semibold text-foreground">{level}</p>
-            <p className="text-xs text-muted-foreground mt-1">{AVANT_RUBRIC_SUMMARY[level]}</p>
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">Band</p>
+            <p className="font-semibold text-foreground">{bandMeta.label}</p>
+            <p className="text-xs text-muted-foreground mt-1">{bandMeta.stampRange}</p>
+            <p className="text-xs text-muted-foreground/80 mt-1 italic">
+              STAMP target: {level} — {AVANT_RUBRIC_SUMMARY[level]}
+            </p>
           </div>
           <div>
             <p className="text-xs uppercase tracking-wider text-muted-foreground">Study plan</p>
@@ -457,8 +483,9 @@ function StepConfirm({
       </div>
       {role !== 'student' && (
         <p className="text-sm text-muted-foreground">
-          We'll seed a demo {role === 'parent' ? 'child' : 'student'} with realistic completions at this
-          level so your dashboard has something meaningful to look at.
+          We'll seed a demo {role === 'parent' ? 'child' : 'student'} at the{' '}
+          {bandMeta.label} band with realistic completions so your dashboard has
+          something meaningful to look at.
         </p>
       )}
     </div>
