@@ -16,7 +16,7 @@ const footerLinks = {
     { href: '/audit', label: 'Credit audit' },
   ],
   about: [
-    { href: '/how-this-works', label: 'How this works' },
+    { href: '/overview', label: 'Overview' },
     { href: '/settings', label: 'Settings' },
   ],
 }

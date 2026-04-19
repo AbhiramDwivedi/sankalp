@@ -23,7 +23,7 @@ export default function LessonsPage() {
         currentBand={currentBand}
         selectedStudyPlanId={profile.selectedStudyPlanId}
         onOpenTopic={(pack) => router.push(`/lessons/${pack.id}`)}
-        onOpenHowThisWorks={() => router.push('/how-this-works')}
+        onOpenHowThisWorks={() => router.push('/overview')}
       />
     </PageShell>
   )

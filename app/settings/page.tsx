@@ -57,7 +57,7 @@ const ROLE_ICON: Record<ProfileRole, React.ComponentType<{ className?: string }>
 // - Current proficiency level is read-only (Onboarding sets it; Phase 3 may
 //   add a re-assess flow).
 // - AI assessment toggle writes profile.aiAssessmentEnabled.
-// - Links to /audit, /how-this-works, /rubric.
+// - Links to /audit, /overview, /rubric.
 // - Export progress wires lib/exportProgress.downloadJsonExport and stamps
 //   profile.lastExportedAt. Print-to-PDF report overlay is deferred to Phase 3
 //   (it was an App.tsx-level overlay in the Vite app).
@@ -289,9 +289,9 @@ export default function SettingsPage() {
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/how-this-works">
+              <Link href="/overview">
                 <Info className="mr-2 h-4 w-4" />
-                How this works
+                Overview
               </Link>
             </Button>
           </CardContent>

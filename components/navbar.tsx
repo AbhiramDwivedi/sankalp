@@ -21,6 +21,7 @@ import {
   Target,
   CalendarDays,
   ClipboardList,
+  Compass,
   Flame,
   Sparkles,
   Settings,
@@ -41,6 +42,7 @@ import { computeXp } from '@/lib/xp'
 // here; Phase 3 wires them to the active profile.
 const navItems: { href: string; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/overview', label: 'Overview', icon: Compass },
   { href: '/lessons', label: 'Lessons', icon: BookOpen },
   { href: '/flashcards', label: 'Flashcards', icon: Layers },
   { href: '/capstones', label: 'Capstones', icon: Target },

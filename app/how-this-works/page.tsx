@@ -1,28 +1,9 @@
-'use client'
+import { redirect } from 'next/navigation'
 
-import { useRouter } from 'next/navigation'
-import { HowThisWorksView } from '@/components/pages/HowThisWorksView'
-import { useProfile } from '@/lib/profile-context'
-import { PageShell } from '@/components/route-helpers'
-
-// The first-run "How this works" explainer. In the Vite SPA it was a
-// mandatory overlay; in the Next.js shell it's a reachable route. Visiting
-// it marks the profile as having seen the explainer so the welcome path
-// stops prompting.
+// Legacy route. The content moved to /overview in Phase D. We keep this
+// redirect so older bookmarks, footer links cached in a parent's browser,
+// and any external references still resolve cleanly. Next.js performs the
+// 307 at render time; no client JS needed.
 export default function HowThisWorksPage() {
-  const router = useRouter()
-  const { profile, setProfile } = useProfile()
-
-  const onContinue = () => {
-    if (profile && !profile.howThisWorksSeen) {
-      setProfile((p) => ({ ...p, howThisWorksSeen: true }))
-    }
-    router.push('/dashboard')
-  }
-
-  return (
-    <PageShell>
-      <HowThisWorksView onContinue={onContinue} />
-    </PageShell>
-  )
+  redirect('/overview')
 }
