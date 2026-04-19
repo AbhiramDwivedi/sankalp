@@ -88,7 +88,7 @@ export async function evaluateWriting(
       },
     });
 
-    const raw = safeJsonParse(response.text) as Omit<EvaluationResult, 'date'>;
+    const raw = safeJsonParse(response.text ?? '') as Omit<EvaluationResult, 'date'>;
     return { ...raw, date: new Date().toISOString() };
   } catch (err) {
     // A network failure inside the SDK surfaces as a generic TypeError. If
@@ -207,7 +207,7 @@ Listen to the attached audio and grade against the rubric above.`;
       },
     });
 
-    const raw = safeJsonParse(response.text) as Omit<EvaluationResult, 'date'>;
+    const raw = safeJsonParse(response.text ?? '') as Omit<EvaluationResult, 'date'>;
     return { ...raw, date: new Date().toISOString() };
   } catch (err) {
     if (isOffline()) {
