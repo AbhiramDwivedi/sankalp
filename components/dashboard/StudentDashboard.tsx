@@ -174,7 +174,11 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
                   <div>plan done</div>
                 </div>
               </div>
-              <Progress value={pctPlan} className="mt-3" />
+              <Progress
+                value={pctPlan}
+                className="mt-3"
+                aria-label={`Study plan progress: ${pctPlan}%`}
+              />
             </CardHeader>
             <CardContent className="space-y-4">
               {nextPack ? (
@@ -319,7 +323,7 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
                   <span className="text-muted-foreground">Library</span>
                   <span className="font-medium text-foreground">{pctPacks}%</span>
                 </div>
-                <Progress value={pctPacks} />
+                <Progress value={pctPacks} aria-label={`Library completion: ${pctPacks}%`} />
               </div>
               <StatRow
                 label="Flashcards mastered"

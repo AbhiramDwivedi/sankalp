@@ -1,14 +1,8 @@
 // Pre-flight gate script.
-// Runs type check, pack validation, flashcard build (+ sync check), and credit
-// audit in order. Any failure exits non-zero with the underlying output visible.
+// Runs type check, pack validation, flashcard build (+ sync check), credit
+// audit, then Playwright smoke + visual + a11y in order. Any failure exits
+// non-zero with the underlying output visible.
 // Run: `npm run check` (or `npx tsx scripts/check.ts`).
-//
-// MIGRATION MODE (Phase 1a, feat/nextjs-shell):
-// Playwright smoke/visual/a11y stages are temporarily disabled. Their configs
-// target the Vite SPA (http://localhost:3000 with overlay routing) and won't
-// match Next.js route structure until Phase 4 rewrites them. Re-enable by
-// restoring the `smoke` / `visual` / `a11y` entries in the `stages` array
-// below.
 
 import { spawnSync, type SpawnSyncOptions } from 'node:child_process';
 
@@ -100,33 +94,25 @@ const stages: Stage[] = [
     args: ['tsx', 'scripts/credit-audit.ts'],
     postCheck: auditStateSyncCheck,
   },
-  // Playwright stages (smoke / visual / a11y) are intentionally omitted during
-  // the Phase 1a Next.js migration. See top-of-file note for re-enable steps.
-  //
-  // { name: 'smoke', command: 'npx', args: ['playwright', 'test'] },
-  // {
-  //   name: 'visual',
-  //   command: 'npx',
-  //   args: ['playwright', 'test', '--config=playwright.visual.config.ts'],
-  // },
+  { name: 'smoke', command: 'npx', args: ['playwright', 'test'] },
+  {
+    name: 'visual',
+    command: 'npx',
+    args: ['playwright', 'test', '--config=playwright.visual.config.ts'],
+  },
+  {
+    name: 'a11y',
+    command: 'npx',
+    args: ['playwright', 'test', '--config=playwright.a11y.config.ts'],
+  },
 ];
 
-function printMigrationBanner(): void {
-  const banner = [
-    '',
-    'MIGRATION MODE - Playwright smoke / visual / a11y tests are skipped.',
-    '  They will be rewritten for Next.js routes in Phase 4 (feat/nextjs-shell).',
-    '  Re-enable by restoring the `smoke`/`visual`/`a11y` calls in scripts/check.ts.',
-    '',
-  ].join('\n');
-  process.stderr.write(`${banner}\n`);
-}
-
-printMigrationBanner();
+// Print the stage plan up front so the user sees what's about to run.
+process.stdout.write(`Running ${stages.length} stages: ${stages.map((s) => s.name).join(', ')}\n\n`);
 
 for (const stage of stages) {
   runStage(stage);
 }
 
-process.stdout.write('All checks passed (migration mode: Playwright skipped)\n');
+process.stdout.write('All checks passed\n');
 process.exit(0);

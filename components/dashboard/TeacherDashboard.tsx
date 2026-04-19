@@ -160,7 +160,11 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
                           </td>
                           <td className="py-3 pr-4 min-w-[140px]">
                             <div className="flex items-center gap-2">
-                              <Progress value={row.progressPct} className="flex-1" />
+                              <Progress
+                                value={row.progressPct}
+                                className="flex-1"
+                                aria-label={`${row.student.name} progress: ${row.progressPct}%`}
+                              />
                               <span className="text-xs text-muted-foreground w-9 text-right">
                                 {row.progressPct}%
                               </span>
@@ -195,7 +199,7 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
                           {count} {count === 1 ? 'student' : 'students'}
                         </span>
                       </div>
-                      <Progress value={pct} />
+                      <Progress value={pct} aria-label={`${lvl} level: ${count}`} />
                     </div>
                   )
                 })

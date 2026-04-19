@@ -162,7 +162,7 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
                   <span className="text-muted-foreground">Progress</span>
                   <span className="font-medium text-foreground">{progressPct}%</span>
                 </div>
-                <Progress value={progressPct} />
+                <Progress value={progressPct} aria-label={`Overall progress: ${progressPct}%`} />
               </div>
             </CardContent>
           </Card>
