@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge.shadcn'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
+import { LandingCtaRow } from '@/components/landing-cta-row'
 import {
   BookOpen,
   GraduationCap,
@@ -119,21 +120,21 @@ const userTypes: { icon: React.ComponentType<{ className?: string }>; title: str
     title: 'Students',
     description:
       'Work through packs and capstones at your own pace. Flashcards stay warm with spaced repetition; the dashboard shows your next pack.',
-    href: '/dashboard?role=student',
+    href: '/onboarding?role=student',
   },
   {
     icon: Users,
     title: 'Parents',
     description:
       'See where your child is on the STAMP ladder, what the next week looks like, and what the exam actually asks them to produce.',
-    href: '/dashboard?role=parent',
+    href: '/onboarding?role=parent',
   },
   {
     icon: BookOpen,
     title: 'Teachers',
     description:
       'Every pack and capstone carries a teacher note explaining the rubric axis it trains. Print-ready lessons, flashcard sheets, and a live credit audit.',
-    href: '/dashboard?role=teacher',
+    href: '/onboarding?role=teacher',
   },
 ]
 
@@ -166,20 +167,7 @@ export default function HomePage() {
                 teachers.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Button size="lg" asChild className="w-full sm:w-auto">
-                  <Link href="/dashboard?role=student">
-                    Enter as Student
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
-                  <Link href="/dashboard?role=parent">Enter as Parent</Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
-                  <Link href="/dashboard?role=teacher">Enter as Teacher</Link>
-                </Button>
-              </div>
+              <LandingCtaRow withRoleOptions size="lg" />
 
               <div className="mt-12 flex items-center justify-center gap-8 text-sm text-muted-foreground flex-wrap">
                 <div className="flex items-center gap-2">
@@ -369,22 +357,7 @@ export default function HomePage() {
               Open the dashboard and pick up where you left off. Everything stays on this device — no account,
               nothing to sign up for.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button size="lg" variant="secondary" asChild>
-                <Link href="/dashboard?role=student">
-                  Enter as Student
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-                className="bg-transparent border-primary-foreground/30 hover:bg-primary-foreground/10"
-              >
-                <Link href="/rubric">View the rubric</Link>
-              </Button>
-            </div>
+            <LandingCtaRow withRoleOptions={false} size="lg" />
           </div>
         </section>
       </main>
