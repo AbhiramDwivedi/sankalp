@@ -29,6 +29,7 @@ import {
 import { useState } from 'react'
 import { useProfile } from '@/lib/profile-context'
 import { computeStreak } from '@/lib/streak'
+import { computeXp } from '@/lib/xp'
 
 // Sankalp has a single-role, local-only student shell — no login, no roles
 // bolted onto the navbar. The six primary destinations below match the tabs
@@ -49,25 +50,40 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { hydrated, profile } = useProfile()
 
-  // Hydrate streak + derived progress-points from the active profile.
-  // Before ProfileProvider finishes reading localStorage (first paint / SSR)
-  // we render zeros so the server and client markup match, then the numbers
-  // fill in after hydration.
+  // Hydrate streak + XP from the active profile. Before ProfileProvider
+  // finishes reading localStorage (first paint / SSR) we render zeros so the
+  // server and client markup match, then the numbers fill in after hydration.
   //
-  // TODO(phase3): replace the derived "progress points" number with a
-  // real profile.xp field once the role-picker + XP economy land.
+  // For teacher / parent profiles, the navbar pills reflect their demo
+  // student's progress (that's the whole point of the demo dashboard).
+  const role = profile?.role ?? 'student'
+  const demo = profile?.demoStudent
+  const xpSource =
+    hydrated && profile
+      ? role !== 'student' && demo
+        ? {
+            completedTopicIds: demo.completedTopicIds,
+            completedCapstoneIds: demo.completedCapstoneIds,
+            flashcardsMastered: demo.flashcardsMastered,
+            evaluations: {},
+            speakingRecordings: {},
+          }
+        : profile
+      : null
+  const streakSource =
+    hydrated && profile
+      ? role !== 'student' && demo
+        ? demo.activityDates
+        : profile.activityDates
+      : undefined
+
   const placeholderName = hydrated && profile ? profile.name : 'Student'
   const initials =
     hydrated && profile && profile.name
       ? profile.name.trim().charAt(0).toUpperCase() || 'S'
       : 'S'
-  const streakDays = hydrated && profile ? computeStreak(profile.activityDates) : 0
-  const xpTotal =
-    hydrated && profile
-      ? (profile.completedTopicIds?.length || 0) * 50 +
-        (profile.completedCapstoneIds?.length || 0) * 100 +
-        (profile.flashcardsMastered?.length || 0) * 5
-      : 0
+  const streakDays = streakSource ? computeStreak(streakSource) : 0
+  const xpTotal = xpSource ? computeXp(xpSource) : 0
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
 

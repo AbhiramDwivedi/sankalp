@@ -57,6 +57,32 @@ export interface Unit {
 // Active student profile - static-content era.
 // ---------------------------------------------------------------------------
 
+/**
+ * Phase 3 onwards the `StudentProfile` holds profiles for all three roles
+ * (student / teacher / parent). The name is kept for BC with the 20+ consumers;
+ * the `role` field discriminates and drives which dashboard is rendered.
+ * For teacher / parent profiles `name` is the teacher/parent's own name and
+ * `demoStudent` seeds a read-only "representative student" whose completion
+ * state populates the demo dashboards.
+ */
+export type ProfileRole = 'student' | 'teacher' | 'parent';
+
+/**
+ * Read-only seeded roster member for Teacher / Parent demo dashboards. A
+ * single demo student is sufficient for Phase 3 — the fields mirror the
+ * subset of StudentProfile needed to compute streak, XP, plan progress, and
+ * quick stats. Static after onboarding.
+ */
+export interface DemoStudent {
+  name: string;
+  currentLevel: ProficiencyLevel;
+  completedTopicIds: string[];
+  flashcardsMastered: string[];
+  completedCapstoneIds: string[];
+  activityDates: string[];
+  selectedStudyPlanId?: string;
+}
+
 export interface EvaluationResult {
   date: string;
   score: number;
@@ -124,6 +150,12 @@ export interface StudentProfile {
   startDate: string;
   examDate: string;
 
+  // Phase 3: which dashboard this profile renders. For teacher / parent the
+  // `name` is the adult's name and `demoStudent` holds the representative
+  // student whose state drives the dashboard.
+  role?: ProfileRole;
+  demoStudent?: DemoStudent;
+
   // New static-content era:
   completedTopicIds: string[];
   inProgressTopicId?: string;
@@ -183,13 +215,34 @@ export interface StudentProfile {
  * Normalize a profile loaded from localStorage so legacy records work with the
  * new static-content code paths. Idempotent.
  */
+function migrateDemoStudent(raw: any): DemoStudent | undefined {
+  if (!raw || typeof raw !== 'object') return undefined;
+  return {
+    name: typeof raw.name === 'string' ? raw.name : 'Student',
+    currentLevel: raw.currentLevel,
+    completedTopicIds: Array.isArray(raw.completedTopicIds) ? raw.completedTopicIds : [],
+    flashcardsMastered: Array.isArray(raw.flashcardsMastered) ? raw.flashcardsMastered : [],
+    completedCapstoneIds: Array.isArray(raw.completedCapstoneIds) ? raw.completedCapstoneIds : [],
+    activityDates: Array.isArray(raw.activityDates)
+      ? Array.from(
+          new Set((raw.activityDates as unknown[]).filter((d): d is string => typeof d === 'string')),
+        ).sort()
+      : [],
+    selectedStudyPlanId: typeof raw.selectedStudyPlanId === 'string' ? raw.selectedStudyPlanId : undefined,
+  };
+}
+
 export function migrateProfile(raw: any): StudentProfile {
+  const role: ProfileRole =
+    raw.role === 'teacher' || raw.role === 'parent' ? raw.role : 'student';
   const profile: StudentProfile = {
     id: raw.id,
     name: raw.name,
     currentLevel: raw.currentLevel,
     startDate: raw.startDate,
     examDate: raw.examDate,
+    role,
+    demoStudent: migrateDemoStudent(raw.demoStudent),
     completedTopicIds: Array.isArray(raw.completedTopicIds) ? raw.completedTopicIds : [],
     inProgressTopicId: raw.inProgressTopicId,
     evaluations: raw.evaluations || {},
