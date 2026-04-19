@@ -19,14 +19,28 @@ import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Badge } from '@/components/ui/badge.shadcn'
 import {
   ShieldCheck,
   Info,
   ClipboardList,
   Download,
   FileText,
+  UserPlus,
+  Trash2,
+  Check,
+  GraduationCap,
+  BookOpen,
+  Users,
 } from 'lucide-react'
 import { downloadJsonExport } from '@/lib/exportProgress'
+import type { StudentProfile, ProfileRole } from '@/types'
+
+const ROLE_ICON: Record<ProfileRole, React.ComponentType<{ className?: string }>> = {
+  student: GraduationCap,
+  teacher: BookOpen,
+  parent: Users,
+}
 
 // -----------------------------------------------------------------------------
 // Settings page — Phase 2b minimum.
@@ -43,8 +57,17 @@ import { downloadJsonExport } from '@/lib/exportProgress'
 // -----------------------------------------------------------------------------
 
 export default function SettingsPage() {
-  const { hydrated, profile, setProfile } = useProfile()
+  const {
+    hydrated,
+    profile,
+    profiles,
+    activeId,
+    setProfile,
+    switchProfile,
+    saveAllProfiles,
+  } = useProfile()
   const [nameDraft, setNameDraft] = useState<string>('')
+  const [profileNameDrafts, setProfileNameDrafts] = useState<Record<string, string>>({})
 
   if (!hydrated) return <HydratingShell />
   if (!profile) return <NoProfileShell title="Settings" />
@@ -70,6 +93,27 @@ export default function SettingsPage() {
     setProfile((p) => ({ ...p, lastExportedAt: exportedAt }))
   }
 
+  const updateProfileName = (id: string, name: string) => {
+    const trimmed = name.trim()
+    if (!trimmed) return
+    const next = profiles.map((p) => (p.id === id ? { ...p, name: trimmed } : p))
+    saveAllProfiles(next)
+  }
+
+  const deleteProfile = (id: string) => {
+    if (profiles.length <= 1) return // never delete the last
+    if (!confirm('Delete this profile? This cannot be undone.')) return
+    const next = profiles.filter((p) => p.id !== id)
+    saveAllProfiles(next)
+    if (id === activeId) {
+      switchProfile(next[0]?.id ?? null)
+    }
+  }
+
+  const makeActive = (id: string) => {
+    switchProfile(id)
+  }
+
   return (
     <PageShell>
       <div className="max-w-2xl mx-auto space-y-6">
@@ -80,10 +124,75 @@ export default function SettingsPage() {
           </p>
         </div>
 
+        {/* Your profiles ---------------------------------------------- */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Your profiles</CardTitle>
+            <CardDescription>
+              One active profile drives the dashboard. Switch to see a different view, or add a new one.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {profiles.map((p) => {
+              const role = (p.role ?? 'student') as ProfileRole
+              const Icon = ROLE_ICON[role]
+              const isActive = p.id === activeId
+              const draft = profileNameDrafts[p.id] ?? p.name
+              return (
+                <div
+                  key={p.id}
+                  className={`flex flex-col sm:flex-row sm:items-center gap-3 rounded-lg border p-3 ${
+                    isActive ? 'border-primary/60 bg-primary/5' : 'border-border'
+                  }`}
+                >
+                  <Icon className="h-5 w-5 text-primary shrink-0" aria-hidden />
+                  <div className="flex-1 flex items-center gap-2 min-w-0">
+                    <Input
+                      value={draft}
+                      onChange={(e) =>
+                        setProfileNameDrafts((prev) => ({ ...prev, [p.id]: e.target.value }))
+                      }
+                      onBlur={() => updateProfileName(p.id, draft)}
+                      aria-label={`Edit name for profile ${p.name}`}
+                    />
+                    <Badge variant="secondary" className="capitalize shrink-0">{role}</Badge>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    {isActive ? (
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-primary">
+                        <Check className="h-3.5 w-3.5" /> Active
+                      </span>
+                    ) : (
+                      <Button size="sm" variant="outline" onClick={() => makeActive(p.id)}>
+                        Set active
+                      </Button>
+                    )}
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => deleteProfile(p.id)}
+                      disabled={profiles.length <= 1}
+                      aria-label={`Delete profile ${p.name}`}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              )
+            })}
+            <Button asChild variant="outline" className="w-full sm:w-auto">
+              <Link href="/onboarding">
+                <UserPlus className="mr-2 h-4 w-4" />
+                Create new profile
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
+
         {/* Profile card -------------------------------------------------- */}
         <Card>
           <CardHeader>
-            <CardTitle>Profile</CardTitle>
+            <CardTitle>Active profile</CardTitle>
             <CardDescription>The name and level that drives your plan.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

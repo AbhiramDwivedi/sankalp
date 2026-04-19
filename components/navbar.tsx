@@ -24,7 +24,10 @@ import {
   Flame,
   Sparkles,
   Settings,
-  UserCog,
+  UserPlus,
+  Check,
+  GraduationCap,
+  Users,
 } from 'lucide-react'
 import { useState } from 'react'
 import { useProfile } from '@/lib/profile-context'
@@ -45,10 +48,16 @@ const navItems: { href: string; label: string; icon: React.ComponentType<{ class
   { href: '/rubric', label: 'Rubric', icon: ClipboardList },
 ]
 
+const ROLE_ICON: Record<'student' | 'teacher' | 'parent', React.ComponentType<{ className?: string }>> = {
+  student: GraduationCap,
+  teacher: BookOpen,
+  parent: Users,
+}
+
 export function Navbar() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { hydrated, profile } = useProfile()
+  const { hydrated, profile, profiles, activeId, switchProfile } = useProfile()
 
   // Hydrate streak + XP from the active profile. Before ProfileProvider
   // finishes reading localStorage (first paint / SSR) we render zeros so the
@@ -140,16 +149,16 @@ export function Navbar() {
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end">
+            <DropdownMenuContent className="w-64" align="end">
               <div className="flex items-center gap-2 p-2">
                 <Avatar className="h-8 w-8">
                   <AvatarFallback className="bg-primary text-primary-foreground text-xs">
                     {initials}
                   </AvatarFallback>
                 </Avatar>
-                <div className="flex flex-col">
-                  <p className="text-sm font-medium">{placeholderName}</p>
-                  <p className="text-xs text-muted-foreground">Local profile</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-sm font-medium truncate">{placeholderName}</p>
+                  <p className="text-xs text-muted-foreground capitalize">{role} · local profile</p>
                 </div>
               </div>
               <DropdownMenuSeparator />
@@ -165,12 +174,35 @@ export function Navbar() {
                   Settings
                 </Link>
               </DropdownMenuItem>
+              {profiles.length > 0 ? (
+                <>
+                  <DropdownMenuSeparator />
+                  <div className="px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    Switch profile
+                  </div>
+                  {profiles.map((p) => {
+                    const pRole = (p.role ?? 'student') as 'student' | 'teacher' | 'parent'
+                    const Icon = ROLE_ICON[pRole]
+                    const isActive = p.id === activeId
+                    return (
+                      <DropdownMenuItem
+                        key={p.id}
+                        onSelect={() => switchProfile(p.id)}
+                        className="cursor-pointer"
+                      >
+                        <Icon className="mr-2 h-4 w-4" />
+                        <span className="flex-1 truncate">{p.name}</span>
+                        {isActive ? <Check className="h-4 w-4 text-primary" /> : null}
+                      </DropdownMenuItem>
+                    )
+                  })}
+                </>
+              ) : null}
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                {/* Phase 3 wires real profile swap; dead link for now. */}
-                <Link href="#" className="cursor-pointer" aria-disabled>
-                  <UserCog className="mr-2 h-4 w-4" />
-                  Switch profile
+                <Link href="/onboarding" className="cursor-pointer">
+                  <UserPlus className="mr-2 h-4 w-4" />
+                  Add profile
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
