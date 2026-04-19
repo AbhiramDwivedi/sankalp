@@ -79,6 +79,7 @@ export default function PackDeepDivePage() {
         onNextPack={nextPack ? () => router.push(`/lessons/${nextPack.id}`) : undefined}
         prevPackTitle={prevPack?.titleEnglish}
         nextPackTitle={nextPack?.titleEnglish}
+        onOpenPack={(id) => router.push(`/lessons/${id}`)}
       />
     </PageShell>
   )

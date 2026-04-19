@@ -6,6 +6,7 @@ export const pack: TopicPack = {
   id: 'L2-10-travel-plans',
   level: 2,
   themeGroup: 'ModernSociety',
+  topicTheme: 'travel',
   order: 22,
   heroMotif: 'suitcase',
   titleHindi: 'यात्रा की योजनाएँ',

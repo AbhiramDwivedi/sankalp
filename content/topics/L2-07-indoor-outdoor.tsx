@@ -6,6 +6,7 @@ export const pack: TopicPack = {
   id: 'L2-07-indoor-outdoor',
   level: 2,
   themeGroup: 'HumanIngenuity',
+  topicTheme: 'leisure',
   order: 19,
   heroMotif: 'cricket',
   titleHindi: 'अंदर और बाहर की गतिविधियाँ',

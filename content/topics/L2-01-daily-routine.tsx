@@ -13,6 +13,7 @@ export const pack: TopicPack = {
   id: 'L2-01-daily-routine',
   level: 2,
   themeGroup: 'Identity',
+  topicTheme: 'daily-life',
   order: 13,
   heroMotif: 'sunrise',
   titleHindi: 'दैनिक दिनचर्या',

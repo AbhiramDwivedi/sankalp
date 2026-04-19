@@ -2,7 +2,7 @@
 // Components read from TOPIC_PACKS / TOPIC_PACKS_BY_ID to render the Library
 // and pack views.
 
-import type { TopicIndexEntry, TopicPack } from './schema';
+import type { TopicIndexEntry, TopicPack, TopicTheme } from './schema';
 
 import { pack as L1_01 } from './topics/L1-01-greetings';
 import { pack as L1_02 } from './topics/L1-02-descriptions-feelings';
@@ -67,4 +67,18 @@ export function nextPackAfter(id: string): TopicPack | null {
 
 export function getPack(id: string): TopicPack | undefined {
   return TOPIC_PACKS_BY_ID[id];
+}
+
+/**
+ * Return all packs tagged with the given finer-grained `topicTheme`, sorted
+ * by level (L1 → L2 → L3) and then by `order` within each level. Consumed
+ * by the pack page "related at other levels" sibling strip (see
+ * `ThemeSiblingStrip`) and by any cross-cutting theme view. If no packs are
+ * tagged with the theme the list is empty.
+ */
+export function packsInTopicTheme(theme: TopicTheme): TopicPack[] {
+  return TOPIC_PACKS
+    .filter((p) => p.topicTheme === theme)
+    .slice()
+    .sort((a, b) => (a.level - b.level) || (a.order - b.order));
 }

@@ -28,6 +28,7 @@ import type {
 import type { EvaluationResult, SpeakingAttempt, StudentProfile } from '../../types';
 import type { ProficiencyLevel } from '../../types';
 import { HeroBanner } from './HeroBanner';
+import { ThemeSiblingStrip } from './ThemeSiblingStrip';
 import { VocabCard } from './VocabCard';
 import { VerdictCard } from './VerdictCard';
 import { AiAssessmentPanel } from './AiAssessmentPanel';
@@ -104,6 +105,9 @@ interface TopicPackViewV2Props {
   prevPackTitle?: string;
   nextPackTitle?: string;
   totalTopics?: number;
+  /** Open an arbitrary pack by id — consumed by ThemeSiblingStrip to jump
+   *  across cross-level siblings tagged with the same `topicTheme`. */
+  onOpenPack?: (packId: string) => void;
 }
 
 export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
@@ -121,6 +125,7 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
   prevPackTitle,
   nextPackTitle,
   totalTopics,
+  onOpenPack,
 }) => {
   const tokens = tokensFor(pack.themeGroup);
   const [section, setSection] = useState<SectionKey>('read');
@@ -205,6 +210,8 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
         prevTitle={prevPackTitle}
         nextTitle={nextPackTitle}
       />
+
+      <ThemeSiblingStrip pack={pack} onOpenSibling={onOpenPack} />
 
       {/* Section stepper — sticky on scroll. 1-2-3-4 book structure, always visible. */}
       <div className="sticky top-0 z-20 -mx-2 px-2 py-3 bg-white/90 backdrop-blur-md border-b border-slate-100 no-print">

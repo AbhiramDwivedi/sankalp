@@ -12,6 +12,7 @@ export const pack: TopicPack = {
   id: 'L3-03-my-future',
   level: 3,
   themeGroup: 'Identity',
+  topicTheme: 'future',
   order: 26,
   heroMotif: 'sunrise',
   titleHindi: 'मेरा भविष्य',

@@ -52,6 +52,25 @@ All 26 FCPS sub-topics are served by at least one pack; most are reinforced by a
 | L3 stretch: teen life (opinion) | L3 | L3-02-teen-life | C10-teen-life-essay | TextType, LanguageControl, TopicCoverage |
 | L3 stretch: future & hypotheticals | L3 | L3-03-my-future | C09-ten-years-from-now, C10-teen-life-essay | TextType, LanguageControl, TopicCoverage |
 
+### Theme coverage (finer-grained `topicTheme` groupings)
+
+- 🙏 **Greetings & Introductions** (`greetings`): L1-01-greetings
+- 👪 **Family & Home** (`family`): L1-02-descriptions-feelings, L1-03-family, L2-02-rooms-chores
+- 👕 **Clothing & Appearance** (`appearance`): L1-04-clothing-colors
+- 🕐 **Numbers & Time** (`time`): L1-05-numbers-time, L1-06-calendar
+- 📚 **School Life** (`school`): L1-07-classes-supplies, L2-04-school-routines, L2-05-school-activities
+- 🏏 **Interests & Hobbies** (`leisure`): L1-08-interests-leisure, L2-07-indoor-outdoor
+- ☔ **Weather & Seasons** (`weather`): L1-09-weather-seasons
+- 🛺 **Places & Transport** (`places`): L1-10-places-transport, L2-11-countries-directions
+- 🛍️ **Shopping & Markets** (`shopping`): L1-11-shopping, L2-08-shopping-advanced
+- 🍛 **Food & Meals** (`food`): L1-12-restaurants-food, L2-03-food
+- 🌅 **Daily Routines** (`daily-life`): L2-01-daily-routine
+- 💪 **Health & Wellness** (`health`): L2-06-health-fitness
+- 🧳 **Travel & Directions** (`travel`): L2-10-travel-plans
+- 🪔 **Festivals & Events** (`special-events`): L2-09-special-events
+- 📓 **Personal Stories** (`personal`): L3-01-my-memories, L3-02-teen-life
+- 🌱 **Future Plans** (`future`): L3-03-my-future
+
 ## 3. Text-type inventory (tense frames across all IM essays)
 
 Total IM-level essays in the library: **62**

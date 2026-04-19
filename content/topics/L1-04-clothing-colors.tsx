@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   id: 'L1-04-clothing-colors',
   level: 1,
   themeGroup: 'ModernSociety',
+  topicTheme: 'appearance',
   order: 4,
   heroMotif: 'kurta',
   titleHindi: 'कपड़े और रंग',

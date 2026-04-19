@@ -13,6 +13,7 @@ export const pack: TopicPack = {
   id: 'L1-01-greetings',
   level: 1,
   themeGroup: 'Identity',
+  topicTheme: 'greetings',
   order: 1,
   heroMotif: 'namaste',
   titleHindi: 'अभिवादन और परिचय',

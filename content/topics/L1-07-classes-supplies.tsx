@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   id: 'L1-07-classes-supplies',
   level: 1,
   themeGroup: 'Identity',
+  topicTheme: 'school',
   order: 7,
   heroMotif: 'books',
   titleHindi: 'कक्षाएँ और स्कूल की चीज़ें',

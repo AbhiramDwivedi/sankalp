@@ -6,6 +6,56 @@ export type Level = 1 | 2 | 3;
 
 export type ThemeGroup = 'Identity' | 'ModernSociety' | 'HumanIngenuity';
 
+// ---------------------------------------------------------------------------
+// TopicTheme — finer-grained subject tag that sits BELOW `themeGroup`. Where
+// `themeGroup` is the coarse 3-value AAPPL-style classification used by hero
+// art tokens, `topicTheme` is the 16-value subject family used by the
+// Library's theme chips and the "related at other levels" sibling strip on
+// pack pages. A pack has exactly one of each; they're independent axes.
+// ---------------------------------------------------------------------------
+
+export type TopicTheme =
+  | 'greetings'
+  | 'family'
+  | 'appearance'
+  | 'time'
+  | 'school'
+  | 'leisure'
+  | 'weather'
+  | 'places'
+  | 'shopping'
+  | 'food'
+  | 'daily-life'
+  | 'health'
+  | 'travel'
+  | 'special-events'
+  | 'personal'
+  | 'future';
+
+export interface TopicThemeMeta {
+  label: string;
+  emoji: string;
+}
+
+export const TOPIC_THEME_META: Record<TopicTheme, TopicThemeMeta> = {
+  greetings: { label: 'Greetings & Introductions', emoji: '🙏' },
+  family: { label: 'Family & Home', emoji: '👪' },
+  appearance: { label: 'Clothing & Appearance', emoji: '👕' },
+  time: { label: 'Numbers & Time', emoji: '🕐' },
+  school: { label: 'School Life', emoji: '📚' },
+  leisure: { label: 'Interests & Hobbies', emoji: '🏏' },
+  weather: { label: 'Weather & Seasons', emoji: '☔' },
+  places: { label: 'Places & Transport', emoji: '🛺' },
+  shopping: { label: 'Shopping & Markets', emoji: '🛍️' },
+  food: { label: 'Food & Meals', emoji: '🍛' },
+  'daily-life': { label: 'Daily Routines', emoji: '🌅' },
+  health: { label: 'Health & Wellness', emoji: '💪' },
+  travel: { label: 'Travel & Directions', emoji: '🧳' },
+  'special-events': { label: 'Festivals & Events', emoji: '🪔' },
+  personal: { label: 'Personal Stories', emoji: '📓' },
+  future: { label: 'Future Plans', emoji: '🌱' },
+};
+
 export type RubricAxis = 'TextType' | 'LanguageControl' | 'TopicCoverage';
 
 export type StampBenchmark = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
@@ -188,6 +238,14 @@ export interface TopicPack {
   id: string;
   level: Level;
   themeGroup: ThemeGroup;
+  /**
+   * Finer-grained subject tag used by the Library's per-card theme chip and
+   * the pack page's "related at other levels" sibling strip. Independent of
+   * `themeGroup` (coarse AAPPL classification). See `TOPIC_THEME_META` for
+   * labels and `packsInTopicTheme()` for the sibling lookup. Required — the
+   * structural validator refuses any pack missing it.
+   */
+  topicTheme: TopicTheme;
   order: number;
   titleHindi: string;
   titleEnglish: string;

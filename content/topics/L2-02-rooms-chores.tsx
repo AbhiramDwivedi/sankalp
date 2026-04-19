@@ -11,6 +11,7 @@ export const pack: TopicPack = {
   id: 'L2-02-rooms-chores',
   level: 2,
   themeGroup: 'Identity',
+  topicTheme: 'family',
   order: 14,
   heroMotif: 'family',
   titleHindi: 'घर के कमरे और कार्य',
