@@ -13,6 +13,7 @@ export const pack: TopicPack = {
   id: 'L1-10-places-transport',
   level: 1,
   themeGroup: 'ModernSociety',
+  topicTheme: 'places',
   order: 10,
   heroMotif: 'rickshaw',
   titleHindi: 'जगहें और यातायात',

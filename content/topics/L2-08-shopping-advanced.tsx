@@ -6,6 +6,7 @@ export const pack: TopicPack = {
   id: 'L2-08-shopping-advanced',
   level: 2,
   themeGroup: 'ModernSociety',
+  topicTheme: 'shopping',
   order: 20,
   heroMotif: 'bazaar',
   titleHindi: 'ख़रीदारी (स्तर 2)',

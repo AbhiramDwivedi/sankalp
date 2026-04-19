@@ -13,6 +13,7 @@ export const pack: TopicPack = {
   id: 'L1-12-restaurants-food',
   level: 1,
   themeGroup: 'ModernSociety',
+  topicTheme: 'food',
   order: 12,
   heroMotif: 'thali',
   titleHindi: 'रेस्तराँ और खाना',

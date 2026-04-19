@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   id: 'L2-03-food',
   level: 2,
   themeGroup: 'ModernSociety',
+  topicTheme: 'food',
   order: 15,
   heroMotif: 'thali',
   titleHindi: 'खाना और व्यंजन',

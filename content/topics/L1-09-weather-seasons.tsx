@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   id: 'L1-09-weather-seasons',
   level: 1,
   themeGroup: 'Identity',
+  topicTheme: 'weather',
   order: 9,
   heroMotif: 'umbrella',
   titleHindi: 'मौसम और ऋतुएँ',

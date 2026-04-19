@@ -6,6 +6,7 @@ export const pack: TopicPack = {
   id: 'L2-11-countries-directions',
   level: 2,
   themeGroup: 'ModernSociety',
+  topicTheme: 'places',
   order: 23,
   heroMotif: 'temple',
   titleHindi: 'देश, नागरिकता और दिशाएँ',

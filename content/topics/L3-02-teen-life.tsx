@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   id: 'L3-02-teen-life',
   level: 3,
   themeGroup: 'Identity',
+  topicTheme: 'personal',
   order: 25,
   heroMotif: 'notebook',
   titleHindi: 'किशोर जीवन',

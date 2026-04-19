@@ -6,6 +6,7 @@ export const pack: TopicPack = {
   id: 'L1-06-calendar',
   level: 1,
   themeGroup: 'Identity',
+  topicTheme: 'time',
   order: 6,
   heroMotif: 'clock',
   titleHindi: 'दिन, महीने और कैलेंडर',

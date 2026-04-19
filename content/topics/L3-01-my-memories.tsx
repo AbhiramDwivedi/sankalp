@@ -17,6 +17,7 @@ export const pack: TopicPack = {
   id: 'L3-01-my-memories',
   level: 3,
   themeGroup: 'Identity',
+  topicTheme: 'personal',
   order: 24,
   heroMotif: 'notebook',
   titleHindi: 'मेरी यादें',

@@ -6,6 +6,7 @@ export const pack: TopicPack = {
   id: 'L2-06-health-fitness',
   level: 2,
   themeGroup: 'HumanIngenuity',
+  topicTheme: 'health',
   order: 18,
   heroMotif: 'sunrise',
   titleHindi: 'स्वास्थ्य और व्यायाम',

@@ -6,6 +6,7 @@ export const pack: TopicPack = {
   id: 'L1-08-interests-leisure',
   level: 1,
   themeGroup: 'Identity',
+  topicTheme: 'leisure',
   order: 8,
   heroMotif: 'cricket',
   titleHindi: 'रुचियाँ और मनोरंजन',

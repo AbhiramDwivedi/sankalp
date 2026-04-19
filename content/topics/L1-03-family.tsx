@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   id: 'L1-03-family',
   level: 1,
   themeGroup: 'Identity',
+  topicTheme: 'family',
   order: 3,
   heroMotif: 'family',
   titleHindi: 'मेरा परिवार',

@@ -13,6 +13,7 @@ export const pack: TopicPack = {
   id: 'L2-04-school-routines',
   level: 2,
   themeGroup: 'Identity',
+  topicTheme: 'school',
   order: 16,
   heroMotif: 'books',
   titleHindi: 'स्कूल की दिनचर्या',

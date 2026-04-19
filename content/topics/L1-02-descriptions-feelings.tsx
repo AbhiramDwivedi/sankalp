@@ -14,6 +14,7 @@ export const pack: TopicPack = {
   id: 'L1-02-descriptions-feelings',
   level: 1,
   themeGroup: 'Identity',
+  topicTheme: 'family',
   order: 2,
   heroMotif: 'family',
   titleHindi: 'विवरण और भावनाएँ',

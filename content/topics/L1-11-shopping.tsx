@@ -13,6 +13,7 @@ export const pack: TopicPack = {
   id: 'L1-11-shopping',
   level: 1,
   themeGroup: 'ModernSociety',
+  topicTheme: 'shopping',
   order: 11,
   heroMotif: 'bazaar',
   titleHindi: 'बाज़ार और ख़रीदारी',

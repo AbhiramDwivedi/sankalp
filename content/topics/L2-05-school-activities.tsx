@@ -12,6 +12,7 @@ export const pack: TopicPack = {
   id: 'L2-05-school-activities',
   level: 2,
   themeGroup: 'Identity',
+  topicTheme: 'school',
   order: 17,
   heroMotif: 'cricket',
   titleHindi: 'स्कूल की गतिविधियाँ',

@@ -6,6 +6,7 @@ export const pack: TopicPack = {
   id: 'L1-05-numbers-time',
   level: 1,
   themeGroup: 'Identity',
+  topicTheme: 'time',
   order: 5,
   heroMotif: 'clock',
   titleHindi: 'गिनती और समय',

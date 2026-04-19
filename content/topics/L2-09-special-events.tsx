@@ -12,6 +12,7 @@ export const pack: TopicPack = {
   id: 'L2-09-special-events',
   level: 2,
   themeGroup: 'ModernSociety',
+  topicTheme: 'special-events',
   order: 21,
   heroMotif: 'diya',
   titleHindi: 'विशेष अवसर और त्योहार',
