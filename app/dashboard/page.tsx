@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
@@ -13,47 +12,23 @@ import {
   CardTitle,
 } from '@/components/ui/card.shadcn'
 import { BookOpen, Target, Layers, ArrowRight, UserPlus } from 'lucide-react'
-import type { StudentProfile } from '@/types'
-import { migrateProfile } from '@/types'
+import { useProfile } from '@/lib/profile-context'
 
 // -----------------------------------------------------------------------------
-// Placeholder dashboard. Phase 2a stub over the v0 dashboard.
+// Placeholder dashboard. Phase 2b update over the Phase 2a stub.
 //
-// This reads the existing localStorage keys the Vite app writes today
-// (sankalpa_hindi_profiles + sankalpa_active_id, per CLAUDE.md) so a student
-// carrying over an existing profile sees a familiar greeting. Phase 3
-// replaces this with the real student / parent / teacher dashboards —
-// right now it's just a landing pad that links to the three content
-// libraries. Routes like /lessons, /flashcards, /capstones 404 until
-// Phase 2b.
+// Reads the active profile through useProfile() (which reads/writes the same
+// localStorage keys the Vite app used). Phase 3 replaces this with the real
+// student/parent/teacher dashboards — for now it stays a landing pad linking
+// into the three content libraries.
+//
+// If there is no profile yet (first visit on this device), we push the user
+// to /onboarding?role=student so they get the guided setup instead of a
+// broken empty dashboard.
 // -----------------------------------------------------------------------------
-
-const PROFILES_KEY = 'sankalpa_hindi_profiles'
-const ACTIVE_ID_KEY = 'sankalpa_active_id'
 
 export default function DashboardPage() {
-  const [hydrated, setHydrated] = useState(false)
-  const [profile, setProfile] = useState<StudentProfile | null>(null)
-
-  useEffect(() => {
-    try {
-      const activeId = localStorage.getItem(ACTIVE_ID_KEY)
-      const raw = localStorage.getItem(PROFILES_KEY)
-      if (activeId && raw) {
-        const parsed = JSON.parse(raw) as unknown
-        if (Array.isArray(parsed)) {
-          const match = parsed.find((p) => p && typeof p === 'object' && (p as { id?: unknown }).id === activeId)
-          if (match) {
-            setProfile(migrateProfile(match))
-          }
-        }
-      }
-    } catch {
-      // Corrupted localStorage shouldn't crash the placeholder — just
-      // fall through to the "no profile" path.
-    }
-    setHydrated(true)
-  }, [])
+  const { hydrated, profile } = useProfile()
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -71,12 +46,16 @@ export default function DashboardPage() {
               <CardHeader>
                 <CardTitle className="text-2xl md:text-3xl">Welcome, {profile.name}</CardTitle>
                 <CardDescription>
-                  Your study plan: <span className="font-medium">{profile.selectedStudyPlanId ?? 'not yet selected'}</span>
+                  Your study plan:{' '}
+                  <span className="font-medium">
+                    {profile.selectedStudyPlanId ?? 'not yet selected'}
+                  </span>
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 <p className="text-sm text-muted-foreground">
-                  Phase 2a shell. The real dashboard lands in Phase 3 — for now, jump straight into the content.
+                  Phase 2b shell. The full student / parent / teacher dashboard lands in
+                  Phase 3 — for now, jump straight into the content.
                 </p>
                 <div className="grid gap-3 sm:grid-cols-3 pt-2">
                   <Button asChild variant="outline">
@@ -103,17 +82,17 @@ export default function DashboardPage() {
           ) : (
             <Card className="max-w-2xl mx-auto">
               <CardHeader>
-                <CardTitle className="text-2xl md:text-3xl">No profile yet</CardTitle>
+                <CardTitle className="text-2xl md:text-3xl">Set up your profile</CardTitle>
                 <CardDescription>
-                  Sankalp stores your progress locally. Set up a profile from the landing page to pick a study
-                  plan and start.
+                  Sankalp stores your progress locally — no account, nothing to sign up
+                  for. Pick a study plan and you're in.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Button asChild>
-                  <Link href="/">
+                  <Link href="/onboarding?role=student">
                     <UserPlus className="mr-2 h-4 w-4" />
-                    Set up a profile
+                    Start onboarding
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Noto_Sans_Devanagari, Tiro_Devanagari_Hindi } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from 'sonner'
+import { ProfileProvider } from '@/lib/profile-context'
 import './globals.css'
 
 // Latin body/mono. Geist ships CSS vars we pick up in globals.css via
@@ -75,9 +76,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${notoSansDevanagari.variable} ${tiroDevanagariHindi.variable} bg-background`}
     >
       <body className="font-sans antialiased min-h-screen">
-        {children}
-        <Toaster position="top-right" richColors />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <ProfileProvider>
+          {children}
+          <Toaster position="top-right" richColors />
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+        </ProfileProvider>
       </body>
     </html>
   )

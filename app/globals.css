@@ -187,3 +187,170 @@
 @utility font-hindi-display {
   font-family: var(--font-hindi-display);
 }
+
+/* ---------------------------------------------------------------------------
+ * Accessibility: keyboard focus safety net. Copied from legacy/index.html so
+ * components that don't declare their own focus-visible style still show the
+ * brand saffron ring.
+ * ------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.focus-visible\:ring-2:focus-visible {
+  outline: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * Reduced motion. Covers the Tailwind `animate-in`/`animate-pulse`/transition
+ * utilities sprinkled across the app.
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Print layout. Ported from legacy/index.html so every pack / capstone /
+ * flashcard deck still prints cleanly inside the Next.js shell.
+ * ------------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 0.5in;
+  }
+  @page :first {
+    margin-top: 0.3in;
+  }
+
+  .flashcard-print-root {
+    page: flashcard;
+  }
+  @page flashcard {
+    size: letter portrait;
+    margin: 0.4in;
+  }
+
+  .progress-report-page {
+    page: progress-report;
+  }
+  @page progress-report {
+    size: letter portrait;
+    margin: 0.5in;
+  }
+
+  html,
+  body {
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .printable-area {
+    margin: 0 !important;
+    width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .printable-area .rounded-\[2\.5rem\],
+  .printable-area .rounded-\[2rem\],
+  .printable-area .rounded-\[3rem\],
+  .printable-area .rounded-\[1\.75rem\] {
+    border-radius: 0.75rem !important;
+  }
+
+  .font-hindi {
+    font-size: 1.05rem !important;
+  }
+  .font-hindi-display {
+    font-size: 2rem !important;
+  }
+
+  .flashcard-print-root .font-hindi {
+    font-size: inherit !important;
+  }
+  .flashcard-print-root .font-hindi-display {
+    font-size: inherit !important;
+  }
+
+  .flashcard-print-root .print-card {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print\:break-before-page {
+    break-before: page;
+    page-break-before: always;
+  }
+  .print\:break-after-page {
+    break-after: page;
+    page-break-after: always;
+  }
+  .print\:break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .print\:break-inside-avoid-page {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+    orphans: 3;
+    widows: 3;
+  }
+
+  p,
+  li {
+    orphans: 2;
+    widows: 2;
+  }
+
+  img {
+    print-color-adjust: exact;
+  }
+
+  /* Navbar + footer are chrome; they stay off the printed page so a teacher
+   * prints the lesson body, not the shell. */
+  aside,
+  nav,
+  header[role='banner'],
+  header.sticky,
+  footer {
+    display: none !important;
+  }
+  main {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  table {
+    border-collapse: collapse !important;
+  }
+  table,
+  th,
+  td {
+    border-color: #cbd5e1 !important;
+  }
+}
