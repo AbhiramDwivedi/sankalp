@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Noto_Sans_Devanagari, Tiro_Devanagari_Hindi } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from 'sonner'
 import { ProfileProvider } from '@/lib/profile-context'
 import './globals.css'
@@ -79,7 +78,6 @@ export default function RootLayout({
         <ProfileProvider>
           {children}
           <Toaster position="top-right" richColors />
-          {process.env.NODE_ENV === 'production' && <Analytics />}
         </ProfileProvider>
       </body>
     </html>
