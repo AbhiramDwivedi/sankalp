@@ -1,6 +1,7 @@
 // Pre-flight gate script.
-// Runs type check, pack validation, flashcard build (+ sync check), and credit
-// audit in order. Any failure exits non-zero with the underlying output visible.
+// Runs type check, pack validation, flashcard build (+ sync check), credit
+// audit, then Playwright smoke + visual + a11y in order. Any failure exits
+// non-zero with the underlying output visible.
 // Run: `npm run check` (or `npx tsx scripts/check.ts`).
 
 import { spawnSync, type SpawnSyncOptions } from 'node:child_process';
@@ -99,7 +100,15 @@ const stages: Stage[] = [
     command: 'npx',
     args: ['playwright', 'test', '--config=playwright.visual.config.ts'],
   },
+  {
+    name: 'a11y',
+    command: 'npx',
+    args: ['playwright', 'test', '--config=playwright.a11y.config.ts'],
+  },
 ];
+
+// Print the stage plan up front so the user sees what's about to run.
+process.stdout.write(`Running ${stages.length} stages: ${stages.map((s) => s.name).join(', ')}\n\n`);
 
 for (const stage of stages) {
   runStage(stage);

@@ -1,0 +1,356 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Warm cream/off-white background */
+  --background: oklch(0.98 0.005 85);
+  --foreground: oklch(0.20 0.02 260);
+  
+  /* Cards with slight warmth */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.02 260);
+  
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.02 260);
+  
+  /* Saffron/Orange primary - inspired by Indian flag */
+  --primary: oklch(0.65 0.18 45);
+  --primary-foreground: oklch(1 0 0);
+  
+  /* Deep indigo secondary */
+  --secondary: oklch(0.35 0.12 280);
+  --secondary-foreground: oklch(0.98 0 0);
+  
+  /* Warm muted tones */
+  --muted: oklch(0.95 0.01 85);
+  --muted-foreground: oklch(0.45 0.02 260);
+  
+  /* Teal accent */
+  --accent: oklch(0.55 0.12 180);
+  --accent-foreground: oklch(1 0 0);
+  
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  
+  /* Warm borders */
+  --border: oklch(0.90 0.01 85);
+  --input: oklch(0.92 0.01 85);
+  --ring: oklch(0.65 0.18 45);
+  
+  /* Chart colors */
+  --chart-1: oklch(0.65 0.18 45);
+  --chart-2: oklch(0.55 0.12 180);
+  --chart-3: oklch(0.35 0.12 280);
+  --chart-4: oklch(0.70 0.15 140);
+  --chart-5: oklch(0.60 0.20 30);
+  
+  --radius: 0.75rem;
+  
+  /* Sidebar */
+  --sidebar: oklch(0.98 0.005 85);
+  --sidebar-foreground: oklch(0.20 0.02 260);
+  --sidebar-primary: oklch(0.65 0.18 45);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.95 0.01 85);
+  --sidebar-accent-foreground: oklch(0.20 0.02 260);
+  --sidebar-border: oklch(0.90 0.01 85);
+  --sidebar-ring: oklch(0.65 0.18 45);
+  
+  /* Custom tokens for Sankalp */
+  --success: oklch(0.60 0.15 145);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.75 0.15 85);
+  --warning-foreground: oklch(0.20 0.02 260);
+  --info: oklch(0.55 0.12 240);
+  --info-foreground: oklch(1 0 0);
+}
+
+.dark {
+  --background: oklch(0.15 0.02 260);
+  --foreground: oklch(0.95 0.005 85);
+  --card: oklch(0.18 0.02 260);
+  --card-foreground: oklch(0.95 0.005 85);
+  --popover: oklch(0.18 0.02 260);
+  --popover-foreground: oklch(0.95 0.005 85);
+  --primary: oklch(0.70 0.16 45);
+  --primary-foreground: oklch(0.15 0.02 260);
+  --secondary: oklch(0.45 0.10 280);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.25 0.02 260);
+  --muted-foreground: oklch(0.65 0.02 260);
+  --accent: oklch(0.60 0.10 180);
+  --accent-foreground: oklch(0.15 0.02 260);
+  --destructive: oklch(0.50 0.20 25);
+  --destructive-foreground: oklch(0.95 0 0);
+  --border: oklch(0.28 0.02 260);
+  --input: oklch(0.25 0.02 260);
+  --ring: oklch(0.70 0.16 45);
+  --chart-1: oklch(0.70 0.16 45);
+  --chart-2: oklch(0.60 0.10 180);
+  --chart-3: oklch(0.55 0.12 280);
+  --chart-4: oklch(0.65 0.12 140);
+  --chart-5: oklch(0.65 0.18 30);
+  --sidebar: oklch(0.18 0.02 260);
+  --sidebar-foreground: oklch(0.95 0.005 85);
+  --sidebar-primary: oklch(0.70 0.16 45);
+  --sidebar-primary-foreground: oklch(0.15 0.02 260);
+  --sidebar-accent: oklch(0.25 0.02 260);
+  --sidebar-accent-foreground: oklch(0.95 0.005 85);
+  --sidebar-border: oklch(0.28 0.02 260);
+  --sidebar-ring: oklch(0.70 0.16 45);
+  
+  --success: oklch(0.55 0.12 145);
+  --success-foreground: oklch(0.95 0 0);
+  --warning: oklch(0.70 0.12 85);
+  --warning-foreground: oklch(0.15 0.02 260);
+  --info: oklch(0.50 0.10 240);
+  --info-foreground: oklch(0.95 0 0);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), 'Geist Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), 'Geist Mono Fallback', ui-monospace, monospace;
+  /* Devanagari stacks — loaded by next/font in app/layout.tsx.
+   * font-hindi (body): Noto Sans Devanagari.
+   * font-hindi-display: Tiro Devanagari Hindi, calligraphic.
+   * Keeping the utility class names stable so ScriptText /
+   * DevanagariText keep working and print CSS overrides still match. */
+  --font-hindi: var(--font-hindi-body), 'Noto Sans Devanagari', 'Mangal', serif;
+  --font-hindi-display: var(--font-hindi-display), 'Tiro Devanagari Hindi',
+    'Noto Sans Devanagari', 'Mangal', serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Devanagari utility classes. ScriptText / DevanagariText emit
+ * `font-hindi` and `font-hindi-display`; these classes resolve those
+ * names to the next/font CSS variables defined in app/layout.tsx.
+ * Print CSS overrides (e.g. larger Hindi sizes) continue to match
+ * these selectors. Inline `font-family` from theme.ts is still set on
+ * the element for redundancy — the class exists both as a semantic
+ * hook and so print styles can target it. */
+@utility font-hindi {
+  font-family: var(--font-hindi);
+}
+
+@utility font-hindi-display {
+  font-family: var(--font-hindi-display);
+}
+
+/* ---------------------------------------------------------------------------
+ * Accessibility: keyboard focus safety net. Copied from legacy/index.html so
+ * components that don't declare their own focus-visible style still show the
+ * brand saffron ring.
+ * ------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.focus-visible\:ring-2:focus-visible {
+  outline: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * Reduced motion. Covers the Tailwind `animate-in`/`animate-pulse`/transition
+ * utilities sprinkled across the app.
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Print layout. Ported from legacy/index.html so every pack / capstone /
+ * flashcard deck still prints cleanly inside the Next.js shell.
+ * ------------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 0.5in;
+  }
+  @page :first {
+    margin-top: 0.3in;
+  }
+
+  .flashcard-print-root {
+    page: flashcard;
+  }
+  @page flashcard {
+    size: letter portrait;
+    margin: 0.4in;
+  }
+
+  .progress-report-page {
+    page: progress-report;
+  }
+  @page progress-report {
+    size: letter portrait;
+    margin: 0.5in;
+  }
+
+  html,
+  body {
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .printable-area {
+    margin: 0 !important;
+    width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .printable-area .rounded-\[2\.5rem\],
+  .printable-area .rounded-\[2rem\],
+  .printable-area .rounded-\[3rem\],
+  .printable-area .rounded-\[1\.75rem\] {
+    border-radius: 0.75rem !important;
+  }
+
+  .font-hindi {
+    font-size: 1.05rem !important;
+  }
+  .font-hindi-display {
+    font-size: 2rem !important;
+  }
+
+  .flashcard-print-root .font-hindi {
+    font-size: inherit !important;
+  }
+  .flashcard-print-root .font-hindi-display {
+    font-size: inherit !important;
+  }
+
+  .flashcard-print-root .print-card {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print\:break-before-page {
+    break-before: page;
+    page-break-before: always;
+  }
+  .print\:break-after-page {
+    break-after: page;
+    page-break-after: always;
+  }
+  .print\:break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .print\:break-inside-avoid-page {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+    orphans: 3;
+    widows: 3;
+  }
+
+  p,
+  li {
+    orphans: 2;
+    widows: 2;
+  }
+
+  img {
+    print-color-adjust: exact;
+  }
+
+  /* Navbar + footer are chrome; they stay off the printed page so a teacher
+   * prints the lesson body, not the shell. */
+  aside,
+  nav,
+  header[role='banner'],
+  header.sticky,
+  footer {
+    display: none !important;
+  }
+  main {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  table {
+    border-collapse: collapse !important;
+  }
+  table,
+  th,
+  td {
+    border-color: #cbd5e1 !important;
+  }
+}
