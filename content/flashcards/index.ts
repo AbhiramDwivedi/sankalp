@@ -23,6 +23,16 @@ export function getDeck(id: string): Deck | undefined {
   return DECKS_BY_ID[id];
 }
 
+// Resolve the pack-review deck id for a given pack id. Returns null when no
+// matching deck exists so call sites (e.g. the lesson-end "practice vocab"
+// card) can safely guard against broken links. Convention: deck ids for
+// pack-review decks are `deck-pack-<packId>` — generated deterministically by
+// scripts/build-flashcards.ts.
+export function packReviewDeckId(packId: string): string | null {
+  const candidate = `deck-pack-${packId}`;
+  return DECKS_BY_ID[candidate] ? candidate : null;
+}
+
 export function totalCards(): number {
   return DECKS.reduce((s, d) => s + d.cards.length, 0);
 }
