@@ -1,0 +1,1 @@
+Vite SPA entry points archived during Next.js migration. Content in `content/`, `components/art/`, `components/topic/`, `components/capstone/`, `components/flashcards/`, `components/pages/` is still live and will be wired into the Next.js app in later phases.
