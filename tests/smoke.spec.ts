@@ -123,8 +123,15 @@ test.describe('Student flow', () => {
     await expect(
       page.getByRole('heading', { level: 1, name: /26 reading packs/i }),
     ).toBeVisible();
-    // Pack cards render as <button>s with an English title. The L1/L2/L3
-    // sections together ship 26 packs.
+    // Phase B: library is now 3 collapsible bands. The student's band is
+    // expanded by default; the other two start collapsed. Expand any that
+    // aren't already open so the full catalog is in the accessibility tree.
+    const bandTriggers = page.getByRole('button', { expanded: false });
+    const collapsed = await bandTriggers.count();
+    for (let i = 0; i < collapsed; i += 1) {
+      await page.getByRole('button', { expanded: false }).first().click();
+    }
+    // Pack cards render as <button>s with an English title.
     const packButtons = page
       .locator('section')
       .getByRole('button')
