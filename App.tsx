@@ -19,7 +19,7 @@ import { TopicPackViewV2 } from './components/topic/TopicPackViewV2';
 import { LandingView } from './components/pages/LandingView';
 import { ProgressReportView } from './components/pages/ProgressReportView';
 import { downloadJsonExport } from './lib/exportProgress';
-import { TOPIC_PACKS_BY_ID, TOPIC_PACKS_BY_LEVEL } from './content';
+import { TOPIC_PACKS, TOPIC_PACKS_BY_ID, TOPIC_PACKS_BY_LEVEL } from './content';
 import { CAPSTONES_BY_TIER, CAPSTONES_BY_ID } from './content/capstones';
 import { DECKS, DECKS_BY_ID } from './content/flashcards';
 import type { Deck, Flashcard } from './content/schema';
@@ -457,7 +457,7 @@ const App: React.FC = () => {
           onAddStudent={() => setShowOnboarding(true)}
         />
         {showOnboarding && (
-          <div className="fixed inset-0 z-[100]">
+          <div className="fixed inset-0 z-[100] overflow-y-auto">
             <Onboarding onComplete={handleOnboarding} />
           </div>
         )}
@@ -578,6 +578,9 @@ const App: React.FC = () => {
   // A) Topic pack overlay
   if (openPack) {
     const { progress, nextUp } = buildOverlayBundle(openPack.id, `Pack: ${openPack.titleEnglish}`, 'pack');
+    const packIdx = TOPIC_PACKS.findIndex((p) => p.id === openPack.id);
+    const prevPack = packIdx > 0 ? TOPIC_PACKS[packIdx - 1] : null;
+    const nextPack = packIdx >= 0 && packIdx < TOPIC_PACKS.length - 1 ? TOPIC_PACKS[packIdx + 1] : null;
     return (
       <>
         <Layout
@@ -597,6 +600,11 @@ const App: React.FC = () => {
             onPersistSpeakingAttempt={handlePersistSpeakingAttempt}
             progress={progress}
             nextUp={nextUp}
+            totalTopics={TOPIC_PACKS.length}
+            onPrevPack={prevPack ? () => openPackById(prevPack.id) : undefined}
+            onNextPack={nextPack ? () => openPackById(nextPack.id) : undefined}
+            prevPackTitle={prevPack?.titleEnglish}
+            nextPackTitle={nextPack?.titleEnglish}
           />
         </Layout>
         {celebrationOverlay}

@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ProficiencyLevel } from '../types';
 import { PROFICIENCY_ORDER, AVANT_RUBRIC_SUMMARY, calculateRecommendedDate } from '../constants';
 import { studyPlanForLevel } from '../content/studyPlans';
 import { CURRICULUM } from '../content/curriculum';
-import { Calendar, User, Trophy, ArrowRight, Clock, Flag, Target } from 'lucide-react';
+import { Calendar, User, Trophy, ArrowRight, ArrowLeft, Clock, Flag, Target } from 'lucide-react';
 
 interface OnboardingProps {
   onComplete: (data: {
@@ -22,11 +22,28 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
     level: ProficiencyLevel.NOVICE_LOW,
     examDate: '',
   });
+  const rootRef = useRef<HTMLDivElement>(null);
 
   // Calculate recommended date whenever level changes
   useEffect(() => {
     setFormData((prev) => ({ ...prev, examDate: calculateRecommendedDate(prev.level) }));
   }, [formData.level]);
+
+  // Reset scroll to top on step change so the new step starts at its header,
+  // not wherever the previous step was scrolled to. Walks up from the root to
+  // find the scrollable ancestor (the fixed overlay in App.tsx sets overflow-y-auto).
+  useEffect(() => {
+    let el: HTMLElement | null = rootRef.current;
+    while (el) {
+      const style = window.getComputedStyle(el);
+      if (/(auto|scroll)/.test(style.overflowY) && el.scrollHeight > el.clientHeight) {
+        el.scrollTop = 0;
+        return;
+      }
+      el = el.parentElement;
+    }
+    window.scrollTo(0, 0);
+  }, [step]);
 
   const matchedPlan = studyPlanForLevel(formData.level);
 
@@ -40,7 +57,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
   };
 
   return (
-    <div className="min-h-screen bg-orange-50 flex items-center justify-center p-4">
+    <div ref={rootRef} className="min-h-screen bg-orange-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-[3rem] shadow-2xl max-w-xl w-full p-8 md:p-12 border border-orange-100">
         <div className="flex justify-between mb-10">
           {[1, 2, 3].map((s) => (
@@ -162,13 +179,25 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
             </div>
           )}
 
-          <button
-            type="submit"
-            className="w-full bg-orange-700 hover:bg-orange-700 text-white font-black py-5 rounded-[1.5rem] flex items-center justify-center gap-3 transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-orange-200"
-          >
-            {step === 3 ? 'Start this plan' : 'Continue'}
-            <ArrowRight size={24} />
-          </button>
+          <div className="flex gap-3">
+            {step > 1 && (
+              <button
+                type="button"
+                onClick={() => setStep(step - 1)}
+                className="px-6 py-5 bg-white border-2 border-slate-200 text-slate-700 font-black rounded-[1.5rem] flex items-center justify-center gap-2 transition-all hover:border-slate-300 hover:bg-slate-50 active:scale-95"
+              >
+                <ArrowLeft size={20} />
+                Back
+              </button>
+            )}
+            <button
+              type="submit"
+              className="flex-1 bg-orange-700 hover:bg-orange-700 text-white font-black py-5 rounded-[1.5rem] flex items-center justify-center gap-3 transition-all transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-orange-200"
+            >
+              {step === 3 ? 'Start this plan' : 'Continue'}
+              <ArrowRight size={24} />
+            </button>
+          </div>
         </form>
       </div>
     </div>

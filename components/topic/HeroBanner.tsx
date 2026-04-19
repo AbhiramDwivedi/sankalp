@@ -1,4 +1,5 @@
 import React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { TopicPack } from '../../content/schema';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
@@ -6,9 +7,21 @@ import { PackHeroArt } from '../art/PackHeroArt';
 
 interface HeroBannerProps {
   pack: TopicPack;
+  totalTopics?: number;
+  onPrevPack?: () => void;
+  onNextPack?: () => void;
+  prevTitle?: string;
+  nextTitle?: string;
 }
 
-export const HeroBanner: React.FC<HeroBannerProps> = ({ pack }) => {
+export const HeroBanner: React.FC<HeroBannerProps> = ({
+  pack,
+  totalTopics = 26,
+  onPrevPack,
+  onNextPack,
+  prevTitle,
+  nextTitle,
+}) => {
   const tokens = tokensFor(pack.themeGroup);
 
   return (
@@ -23,8 +36,37 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ pack }) => {
           <Badge tone="amber" size="xs">
             Level {pack.level} · {tokens.label}
           </Badge>
-          <Badge tone="slate" size="xs" className="!bg-white/15 !text-white !border-white/20">
-            Topic {pack.order} of 26
+          <div className="inline-flex items-center gap-1 rounded-full bg-white/15 border border-white/20 backdrop-blur-sm no-print">
+            <button
+              type="button"
+              onClick={onPrevPack}
+              disabled={!onPrevPack}
+              aria-label={prevTitle ? `Previous topic: ${prevTitle}` : 'No previous topic'}
+              title={prevTitle ? `← ${prevTitle}` : undefined}
+              className="w-7 h-7 flex items-center justify-center rounded-full text-white/90 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <ChevronLeft size={14} strokeWidth={2.5} />
+            </button>
+            <span className="px-1 text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
+              Topic {pack.order} of {totalTopics}
+            </span>
+            <button
+              type="button"
+              onClick={onNextPack}
+              disabled={!onNextPack}
+              aria-label={nextTitle ? `Next topic: ${nextTitle}` : 'No next topic'}
+              title={nextTitle ? `${nextTitle} →` : undefined}
+              className="w-7 h-7 flex items-center justify-center rounded-full text-white/90 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <ChevronRight size={14} strokeWidth={2.5} />
+            </button>
+          </div>
+          <Badge
+            tone="slate"
+            size="xs"
+            className="!bg-white/15 !text-white !border-white/20 hidden print:inline-flex"
+          >
+            Topic {pack.order} of {totalTopics}
           </Badge>
           {pack.status !== 'shipped' && (
             <Badge tone="rose" size="xs" className="bg-rose-400/30 text-white border-white/30">
