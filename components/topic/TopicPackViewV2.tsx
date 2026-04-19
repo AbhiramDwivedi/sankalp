@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import {
   ArrowLeft,
+  ArrowRight,
   ChevronLeft,
   ChevronRight,
   Printer,
   HelpCircle,
   ChevronDown,
+  Layers,
   Mic,
   Clock,
   Compass,
@@ -41,6 +44,15 @@ import { CURRICULUM } from '../../content/curriculum';
 import { RubricAxisTags } from './RubricAxisTag';
 import { NextUpCard, type NextUpCardProps } from '../ui/NextUpCard';
 import { OverlayProgress } from '../ui/OverlayProgress';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card.shadcn';
+import { Button } from '../ui/button';
+import { packReviewDeckId, getDeck } from '../../content/flashcards';
 
 // -----------------------------------------------------------------------------
 // TopicPackViewV2 — a chapter in book form.
@@ -309,6 +321,8 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
         </div>
       </div>
 
+      <PracticeVocabCard pack={pack} />
+
       {nextUp && <NextUpCard {...nextUp} />}
 
       <footer className="pt-10 border-t-4 border-dotted border-slate-100 flex justify-between items-end text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] print:text-slate-500">
@@ -317,6 +331,65 @@ export const TopicPackViewV2: React.FC<TopicPackViewV2Props> = ({
         <span>Date: ________________</span>
       </footer>
     </div>
+  );
+};
+
+// -----------------------------------------------------------------------------
+// PracticeVocabCard — end-of-chapter CTA that links to the matching pack-review
+// flashcard deck. Keeps the student in flow after they finish reading the
+// lesson: "lock the vocab in before moving on." Renders null when no deck
+// exists for the pack (safety guard; every shipped pack currently has one).
+//
+// Hidden in print — the pack is designed to print as a self-contained chapter,
+// flashcards print from their own deck sheets.
+// -----------------------------------------------------------------------------
+
+const PracticeVocabCard: React.FC<{ pack: TopicPack }> = ({ pack }) => {
+  const deckId = packReviewDeckId(pack.id);
+  if (!deckId) return null;
+  const deck = getDeck(deckId);
+  if (!deck) return null;
+
+  const summary = deck.description?.trim()
+    ? deck.description
+    : `${pack.vocabulary.length} words from this lesson.`;
+
+  return (
+    <Card className="no-print border-2 border-amber-300 bg-gradient-to-br from-amber-50 via-orange-50/70 to-white shadow-lg shadow-amber-100/60">
+      <CardHeader>
+        <div className="flex items-start gap-4">
+          <div className="shrink-0 w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center shadow-md shadow-amber-200">
+            <Layers size={22} strokeWidth={2.5} aria-hidden />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-amber-700">
+              Keep going
+            </p>
+            <CardTitle className="text-xl md:text-2xl font-black tracking-tight text-slate-900">
+              Practice this lesson's vocab
+            </CardTitle>
+            <CardDescription className="mt-1 text-sm font-semibold text-slate-700">
+              {deck.title} · {deck.cards.length} cards
+            </CardDescription>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <p className="text-sm text-slate-700 leading-relaxed md:max-w-2xl">
+          {summary} Flip through to lock them in — mastered cards count toward XP.
+        </p>
+        <Button
+          asChild
+          size="lg"
+          className="self-start md:self-end bg-amber-600 hover:bg-amber-700 text-white font-black shadow-md shadow-amber-200 shrink-0"
+        >
+          <Link href={`/flashcards/${deckId}`}>
+            Start drill
+            <ArrowRight className="ml-1 h-4 w-4" />
+          </Link>
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 
