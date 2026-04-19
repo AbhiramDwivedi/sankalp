@@ -19,7 +19,7 @@ import {
 import { Badge } from '@/components/ui/badge.shadcn'
 import { useProfile } from '@/lib/profile-context'
 import { seedDemoStudent, pickDefaultDemoName } from '@/lib/seedDemoStudent'
-import { ProficiencyLevel } from '@/types'
+import { ProficiencyLevel, bandFromProficiency } from '@/types'
 import type { ProfileRole, StudentProfile } from '@/types'
 import { PROFICIENCY_ORDER, AVANT_RUBRIC_SUMMARY, calculateRecommendedDate } from '@/constants'
 import { studyPlanForLevel } from '@/content/studyPlans'
@@ -178,6 +178,7 @@ function OnboardingRouteInner() {
         id,
         name: trimmedName || 'Student',
         currentLevel: level,
+        currentBand: bandFromProficiency(level),
         startDate: new Date().toISOString(),
         examDate,
         role: 'student',
@@ -207,6 +208,7 @@ function OnboardingRouteInner() {
         id,
         name: adultName,
         currentLevel: level,
+        currentBand: bandFromProficiency(level),
         startDate: new Date().toISOString(),
         examDate,
         role,

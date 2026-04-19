@@ -15,7 +15,7 @@
 // filtered by level, so the demo view always references real content.
 // -----------------------------------------------------------------------------
 
-import { ProficiencyLevel, type DemoStudent } from '@/types';
+import { ProficiencyLevel, bandFromProficiency, type DemoStudent } from '@/types';
 import { TOPIC_PACKS_BY_LEVEL } from '@/content';
 import { DECKS_BY_ID } from '@/content/flashcards';
 import { CAPSTONES_BY_TIER } from '@/content/capstones';
@@ -91,6 +91,7 @@ export function seedDemoStudent(level: ProficiencyLevel, name: string): DemoStud
   return {
     name,
     currentLevel: level,
+    currentBand: bandFromProficiency(level),
     completedTopicIds,
     flashcardsMastered: Array.from(mastered),
     completedCapstoneIds: coreCaps,
