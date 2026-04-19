@@ -386,7 +386,7 @@ const PLAN_INTERMEDIATE_BRIDGE: StudyPlan = {
   headline: 'You already write simple sentences. In 24 weeks you will write connected paragraphs under time.',
   weeks: buildWeeks(BRIDGE_WEEKS),
   pacingNote:
-    'Budget ~2 hours per week. L1 is assumed - pull any L1 pack from the Library if a vocabulary gap bites. The last 5 weeks are push-tier capstones only.',
+    'Budget ~2 hours per week. Foundations packs are assumed - pull any Foundations pack from the Library if a vocabulary gap bites. The last 5 weeks are push-tier capstones only.',
 };
 
 // --- PUSH ----------------------------------------------------------------
@@ -479,7 +479,7 @@ const PLAN_PUSH: StudyPlan = {
   headline: 'You already string sentences. 24 weeks to connector density, tense control, and timed Benchmark 5.',
   weeks: buildWeeks(PUSH_WEEKS),
   pacingNote:
-    'Budget ~2 hours per week. L1 is assumed known. The final 5 weeks are push-tier capstones only; protect them.',
+    'Budget ~2 hours per week. Foundations packs are assumed known. The final 5 weeks are push-tier capstones only; protect them.',
 };
 
 // --- POLISH -------------------------------------------------------------
