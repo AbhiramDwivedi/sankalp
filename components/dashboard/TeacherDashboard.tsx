@@ -22,6 +22,7 @@ import {
   Info,
 } from 'lucide-react'
 import type { DemoStudent, StudentProfile } from '@/types'
+import { BAND_META, bandFromProficiency } from '@/types'
 import { computeStreak } from '@/lib/streak'
 import { computeXp } from '@/lib/xp'
 import { TOPIC_PACKS } from '@/content'
@@ -53,18 +54,19 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
     const totalItems = totalPacks + totalCaps
     const doneItems = s.completedTopicIds.length + s.completedCapstoneIds.length
     const progressPct = totalItems ? Math.round((doneItems / totalItems) * 100) : 0
-    return { student: s, xp, streak, progressPct }
+    const band = s.currentBand ?? bandFromProficiency(s.currentLevel)
+    return { student: s, xp, streak, progressPct, band }
   })
 
   const avgStreak = rows.length ? Math.round(rows.reduce((a, r) => a + r.streak, 0) / rows.length) : 0
   const avgXp = rows.length ? Math.round(rows.reduce((a, r) => a + r.xp, 0) / rows.length) : 0
 
-  // Level distribution (for the roster card). With a single demo student this
+  // Band distribution (for the roster card). With a single demo student this
   // is basically a one-bucket bar, but the shape scales for an eventual
   // multi-student roster.
-  const levelDistribution = rows.reduce<Record<string, number>>((acc, r) => {
-    const l = r.student.currentLevel as unknown as string
-    acc[l] = (acc[l] || 0) + 1
+  const bandDistribution = rows.reduce<Record<string, number>>((acc, r) => {
+    const label = BAND_META[r.band].label
+    acc[label] = (acc[label] || 0) + 1
     return acc
   }, {})
 
@@ -144,7 +146,9 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
                         <tr key={row.student.name} className="border-b border-border last:border-0">
                           <td className="py-3 pr-4 font-medium text-foreground">{row.student.name}</td>
                           <td className="py-3 pr-4">
-                            <Badge variant="secondary">{row.student.currentLevel}</Badge>
+                            <Badge variant="secondary" title={`STAMP: ${row.student.currentLevel}`}>
+                              {BAND_META[row.band].label}
+                            </Badge>
                           </td>
                           <td className="py-3 pr-4">
                             <span className="inline-flex items-center gap-1">
@@ -181,15 +185,15 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
 
           <Card>
             <CardHeader>
-              <CardTitle>Level distribution</CardTitle>
-              <CardDescription>Where your roster sits on the STAMP ladder.</CardDescription>
+              <CardTitle>Band distribution</CardTitle>
+              <CardDescription>Where your roster sits across Foundations / Intermediate / Skilled.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              {Object.entries(levelDistribution).length === 0 ? (
+              {Object.entries(bandDistribution).length === 0 ? (
                 <p className="text-sm text-muted-foreground">No students on the roster yet.</p>
               ) : (
-                Object.entries(levelDistribution).map(([lvl, count]) => {
-                  const max = Math.max(1, ...Object.values(levelDistribution))
+                Object.entries(bandDistribution).map(([lvl, count]) => {
+                  const max = Math.max(1, ...Object.values(bandDistribution))
                   const pct = Math.round((count / max) * 100)
                   return (
                     <div key={lvl}>
@@ -199,7 +203,7 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
                           {count} {count === 1 ? 'student' : 'students'}
                         </span>
                       </div>
-                      <Progress value={pct} aria-label={`${lvl} level: ${count}`} />
+                      <Progress value={pct} aria-label={`${lvl} band: ${count}`} />
                     </div>
                   )
                 })

@@ -36,7 +36,7 @@ const features: { icon: React.ComponentType<{ className?: string }>; title: stri
     icon: BookOpen,
     title: '26 Topic Packs',
     description:
-      'Hand-authored Hindi lessons across FCPS Levels 1–2 plus an L3 stretch. Each pack: vocabulary, grammar, connectors, cultural insight, model essays, and a self-check rubric.',
+      'Hand-authored Hindi lessons across the Foundations, Intermediate, and Skilled bands. Each pack: vocabulary, grammar, connectors, cultural insight, model essays, and a self-check rubric.',
   },
   {
     icon: Target,
@@ -82,35 +82,35 @@ const proficiencyLevels: {
     stamp: 1,
     description: 'Isolated words',
     topics: ['Greetings', 'Family', 'Numbers', 'Colors'],
-    levelBand: 'Pre-L1',
+    levelBand: 'Foundations · pre-pack',
   },
   {
     label: 'Novice Mid',
     stamp: 2,
     description: 'Basic phrases',
     topics: ['School', 'Weather', 'Time', 'Simple phrases'],
-    levelBand: 'L1 entry',
+    levelBand: 'Foundations · entry',
   },
   {
     label: 'Novice High',
     stamp: 3,
     description: 'Simple sentences',
     topics: ['Daily routine', 'Food', 'Simple conversations', 'Descriptions'],
-    levelBand: 'FCPS L1 packs',
+    levelBand: 'Foundations packs',
   },
   {
     label: 'Intermediate Low',
     stamp: 4,
     description: 'Strings of sentences',
     topics: ['Past tense', 'Future plans', 'Shopping', 'Health'],
-    levelBand: 'FCPS L2 packs',
+    levelBand: 'Intermediate packs',
   },
   {
     label: 'Intermediate Mid',
     stamp: 5,
     description: 'Connected paragraphs · 3 FCPS credits',
     topics: ['Travel', 'Opinions', 'Cultural discussions', 'Storytelling'],
-    levelBand: 'L3 stretch + capstones',
+    levelBand: 'Skilled stretch + capstones',
   },
 ]
 
