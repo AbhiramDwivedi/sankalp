@@ -40,18 +40,27 @@ const SHAPES: Record<ProficiencyLevel, SeedShape> = {
 };
 
 /**
- * Build a set of ISO dates covering (approximately) the last `totalDays`
- * calendar days, with 2 small gaps sprinkled in the middle so the streak
- * calculation shows "N day streak" for roughly the expected number.
+ * Build a set of ISO dates covering the last `streakDays` consecutive
+ * calendar days ending today, plus a handful of older dates scattered
+ * before the streak to pad total activity without breaking the streak.
+ * The streak computation walks backwards from today and stops at the
+ * first missing day, so the streak that surfaces on the dashboard will
+ * be exactly `streakDays`.
  */
-function seedActivityDates(totalDays: number, now: Date = new Date()): string[] {
-  if (totalDays <= 0) return [];
+function seedActivityDates(streakDays: number, now: Date = new Date()): string[] {
+  if (streakDays <= 0) return [];
   const dates: string[] = [];
-  const gaps = totalDays >= 6 ? new Set([3, 7]) : new Set<number>();
-  for (let i = 0; i < totalDays + gaps.size; i++) {
-    if (gaps.has(i)) continue;
+  // Consecutive streak ending today.
+  for (let i = 0; i < streakDays; i++) {
     const d = new Date(now);
     d.setDate(d.getDate() - i);
+    dates.push(localIsoDate(d));
+  }
+  // A few older "historical" dates (offset +2, +4 beyond the streak) so the
+  // Today strip's "Active X days ago" shows more than a strict streak.
+  for (const extra of [streakDays + 2, streakDays + 4]) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - extra);
     dates.push(localIsoDate(d));
   }
   return Array.from(new Set(dates)).sort();
