@@ -30,6 +30,10 @@ test-results/
 /blob-report/
 /playwright/.cache/
 
+# Claude Code runtime artifacts (per-session, not for sharing)
+.claude/scheduled_tasks.lock
+.claude/worktrees/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
