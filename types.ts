@@ -309,6 +309,35 @@ export interface StudentProfile {
   generatedMaterials?: Record<string, Material>;
 }
 
+// ---------------------------------------------------------------------------
+// Student links — parent/teacher ↔ student relationships.
+//
+// One row in `public.student_links` per relationship. Lifecycle:
+//   pending  — adult has invited the email; student hasn't signed in yet
+//              (or has signed in but hasn't accepted)
+//   accepted — student approved; cross-profile reads + path-dial writes
+//              are now permitted by RLS + the update_linked_student_path fn
+//   revoked  — either side canceled. A fresh invite from the same adult
+//              to the same email creates a new row; revoked rows stay for
+//              audit.
+// ---------------------------------------------------------------------------
+export type StudentLinkStatus = 'pending' | 'accepted' | 'revoked';
+
+export interface StudentLink {
+  id: string;
+  adultProfileId: string;
+  adultUserId: string;
+  studentProfileId: string | null;
+  studentUserId: string | null;
+  invitedEmail: string;
+  status: StudentLinkStatus;
+  adultLabel: string | null;
+  createdAt: string;
+  acceptedAt: string | null;
+  revokedAt: string | null;
+  revokedBy: 'adult' | 'student' | null;
+}
+
 /**
  * Normalize a profile loaded from localStorage so legacy records work with the
  * new static-content code paths. Idempotent.

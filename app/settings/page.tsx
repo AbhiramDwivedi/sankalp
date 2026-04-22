@@ -43,6 +43,8 @@ import {
 } from '@/types'
 import { studyPlanForLevel } from '@/content/studyPlans'
 import { BandLevelDial } from '@/components/BandLevelDial'
+import { LinkedStudentsCard } from '@/components/settings/LinkedStudentsCard'
+import { LinkedAdultsCard } from '@/components/settings/LinkedAdultsCard'
 
 const ROLE_ICON: Record<ProfileRole, React.ComponentType<{ className?: string }>> = {
   student: GraduationCap,
@@ -67,6 +69,7 @@ const ROLE_ICON: Record<ProfileRole, React.ComponentType<{ className?: string }>
 export default function SettingsPage() {
   const {
     hydrated,
+    authUser,
     profile,
     profiles,
     activeId,
@@ -143,9 +146,21 @@ export default function SettingsPage() {
         <div>
           <h1 className="text-3xl md:text-4xl font-bold">Settings</h1>
           <p className="text-muted-foreground mt-1">
-            Local to this device. Sankalp never signs you in or syncs anything off-box.
+            Your profile, progress, and connections. Synced to your account.
           </p>
         </div>
+
+        {/* Connections (role-aware) --------------------------------- */}
+        {authUser && (profile.role === 'parent' || profile.role === 'teacher') ? (
+          <LinkedStudentsCard
+            adultProfileId={profile.id}
+            adultUserId={authUser.id}
+            relationshipWord={profile.role === 'parent' ? 'children' : 'students'}
+          />
+        ) : null}
+        {authUser && (profile.role ?? 'student') === 'student' ? (
+          <LinkedAdultsCard />
+        ) : null}
 
         {/* Your profiles ---------------------------------------------- */}
         <Card>
