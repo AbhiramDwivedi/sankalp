@@ -38,8 +38,18 @@ export function LoginForm() {
   const safeRole = roleParam && VALID_ROLES.has(roleParam) ? roleParam : null
 
   function resolveDestination(): string {
-    // If middleware bounced us with a specific redirect target, honor it.
-    if (redirectParam && redirectParam.startsWith('/')) return redirectParam
+    // If middleware bounced us with a specific redirect target, honor it —
+    // but only for same-origin paths. A path starting with `//` is
+    // protocol-relative and browsers resolve it as a cross-origin URL, so
+    // `/login?redirect=//evil.com` would navigate off-domain after a
+    // successful OTP. The extra `//` check closes that open-redirect vector.
+    if (
+      redirectParam &&
+      redirectParam.startsWith('/') &&
+      !redirectParam.startsWith('//')
+    ) {
+      return redirectParam
+    }
     // Otherwise, if a role was carried forward from a landing CTA, deep-link
     // to onboarding so a brand-new account picks up that role. Onboarding
     // itself short-circuits to /dashboard when a profile already exists.

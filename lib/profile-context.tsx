@@ -359,6 +359,11 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const signOut = useCallback(async () => {
+    // Flush any pending per-profile debounced writes so a timer scheduled
+    // within the last 500 ms doesn't fire against an expired session and
+    // surface a "Couldn't save progress" toast to the next visitor.
+    for (const t of Object.values(writeTimers.current)) clearTimeout(t)
+    writeTimers.current = {}
     await supabase.auth.signOut()
     // authUser goes null via onAuthStateChange; the load effect clears
     // profiles naturally.
