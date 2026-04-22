@@ -154,8 +154,15 @@ export function LinkedAdultsCard() {
                   className="flex items-center gap-3 rounded-lg border border-border p-3"
                 >
                   <div className="flex-1 min-w-0">
+                    {/* The adult's name/email isn't exposed pre-accept — RLS on
+                     * profiles gates cross-user reads behind an accepted link.
+                     * The one thing we *do* have is `adult_label`, which the
+                     * adult filled in at invite time ("My son Aarav",
+                     * "Period 3 - Priya"). If set, show it verbatim. */}
                     <p className="text-sm font-medium truncate">
-                      Invite from {link.invitedEmail === '' ? 'an adult' : 'someone'}
+                      {link.adultLabel
+                        ? `Invite from ${link.adultLabel}`
+                        : 'Invite from a parent or teacher'}
                     </p>
                     <p className="text-xs text-muted-foreground">
                       Sent {new Date(link.createdAt).toLocaleDateString()}

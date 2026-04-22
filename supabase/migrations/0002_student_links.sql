@@ -102,7 +102,18 @@ create policy "student_links_insert_adult" on public.student_links
 
 -- Students accept or revoke their own pending/accepted invites. The
 -- WITH CHECK disallows resurrecting a revoked invite and enforces that an
--- accept row carries the correct student_user_id.
+-- accept row carries the correct student_user_id AND that the attached
+-- student profile is one the student actually owns (belt-and-braces on top
+-- of the profiles-RLS owner check, so a shared-device user can't
+-- accidentally attach a friend's profile).
+--
+-- Per-column immutability of adult_profile_id / adult_user_id / invited_email
+-- / student_{profile,user}_id-after-accept is enforced by the
+-- enforce_student_links_immutable_cols BEFORE UPDATE trigger further down.
+-- RLS WITH CHECK alone cannot express "this column's value must equal its
+-- prior value" (it evaluates against the NEW row only), so the trigger is
+-- how we close the reviewer-found privilege-escalation hole where a student
+-- could rewrite adult_user_id on their own accepted link.
 drop policy if exists "student_links_update_student" on public.student_links;
 create policy "student_links_update_student" on public.student_links
   for update
@@ -115,11 +126,17 @@ create policy "student_links_update_student" on public.student_links
   )
   with check (
     status in ('accepted','revoked')
-    and (status <> 'accepted' or student_user_id = auth.uid())
+    and (status <> 'accepted' or (
+      student_user_id = auth.uid()
+      and student_profile_id in (
+        select id from public.profiles where owner_user_id = auth.uid()
+      )
+    ))
   );
 
--- Adults revoke their own invites (any status → revoked). Cannot reassign
--- the adult or student ids.
+-- Adults revoke their own invites (any status → revoked). Column
+-- immutability for adult_* / student_* / invited_email is trigger-enforced
+-- (same trigger as the student side).
 drop policy if exists "student_links_update_adult_revoke" on public.student_links;
 create policy "student_links_update_adult_revoke" on public.student_links
   for update
@@ -128,6 +145,45 @@ create policy "student_links_update_adult_revoke" on public.student_links
     auth.uid() = adult_user_id
     and status = 'revoked'
   );
+
+-- Column-immutability trigger. RLS can only see the NEW row, so per-column
+-- "value cannot change" assertions have to come from a trigger that sees
+-- both OLD and NEW.
+--
+-- Rules:
+--   adult_profile_id / adult_user_id / invited_email — immutable forever
+--   student_profile_id / student_user_id — may be set on pending→accepted
+--     (both start NULL and fill in at acceptance); once non-null, immutable
+create or replace function public.enforce_student_links_immutable_cols()
+returns trigger
+language plpgsql
+as $$
+begin
+  if new.adult_profile_id is distinct from old.adult_profile_id then
+    raise exception 'student_links.adult_profile_id is immutable' using errcode = '42501';
+  end if;
+  if new.adult_user_id is distinct from old.adult_user_id then
+    raise exception 'student_links.adult_user_id is immutable' using errcode = '42501';
+  end if;
+  if new.invited_email is distinct from old.invited_email then
+    raise exception 'student_links.invited_email is immutable' using errcode = '42501';
+  end if;
+  if old.student_profile_id is not null
+     and new.student_profile_id is distinct from old.student_profile_id then
+    raise exception 'student_links.student_profile_id is immutable after acceptance' using errcode = '42501';
+  end if;
+  if old.student_user_id is not null
+     and new.student_user_id is distinct from old.student_user_id then
+    raise exception 'student_links.student_user_id is immutable after acceptance' using errcode = '42501';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists student_links_immutable_cols on public.student_links;
+create trigger student_links_immutable_cols
+  before update on public.student_links
+  for each row execute function public.enforce_student_links_immutable_cols();
 
 -- ---------------------------------------------------------------------------
 -- Cross-user profile reads enabled by an accepted link.
@@ -197,14 +253,16 @@ begin
     raise exception 'Not authorized to update this student' using errcode = '42501';
   end if;
 
+  -- Skip any key whose parameter is NULL so a partial call (adult only
+  -- wants to update `selectedStudyPlanId`, say) doesn't silently overwrite
+  -- the other three fields with null. `jsonb_build_object` would happily
+  -- write {"currentLevel": null}; the `case when` guard avoids that.
   update public.profiles
   set data = coalesce(data, '{}'::jsonb)
-    || jsonb_build_object(
-      'currentLevel',          p_current_level,
-      'currentBand',           p_current_band,
-      'selectedStudyPlanId',   p_selected_study_plan_id,
-      'examDate',              p_exam_date
-    ),
+    || coalesce(case when p_current_level          is not null then jsonb_build_object('currentLevel',        p_current_level)        end, '{}'::jsonb)
+    || coalesce(case when p_current_band           is not null then jsonb_build_object('currentBand',         p_current_band)         end, '{}'::jsonb)
+    || coalesce(case when p_selected_study_plan_id is not null then jsonb_build_object('selectedStudyPlanId', p_selected_study_plan_id) end, '{}'::jsonb)
+    || coalesce(case when p_exam_date              is not null then jsonb_build_object('examDate',            p_exam_date)            end, '{}'::jsonb),
     updated_at = now()
   where id = p_student_profile_id;
 end;
