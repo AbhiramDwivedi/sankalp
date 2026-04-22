@@ -1,10 +1,10 @@
 'use client'
 
-// Small client island for the landing-page CTA rows. Reads profiles
-// through useProfile() and routes a returning user (of any role) to
-// /dashboard instead of re-prompting onboarding. When a role-matching
-// profile exists on-device we silently switch to it so the right dashboard
-// loads on arrival.
+// Landing-page CTA rows. Auth-aware: a returning signed-in user with a
+// role-matching profile jumps straight to /dashboard; a signed-in user
+// without a matching profile lands on /onboarding; a signed-out visitor
+// routes through /login?role=... (the login form carries the role forward
+// and drops the new account into onboarding).
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -23,21 +23,35 @@ interface CtaRowProps {
 }
 
 export function LandingCtaRow({ withRoleOptions = true, size = 'lg' }: CtaRowProps) {
-  const { hydrated, profile, profiles, switchProfile } = useProfile()
+  const { hydrated, authUser, profile, profiles, switchProfile } = useProfile()
 
-  // Before hydration (SSR / first paint) we render the onboarding variant.
-  // A returning user flips to "Go to Dashboard" on mount. This avoids a
-  // hydration mismatch and doesn't leave the button dead for a beat.
   const findRoleProfile = (role: ProfileRole) =>
     profiles.find((p) => (p.role ?? 'student') === role)
 
+  // E2E bypass mode: the auth gate is disabled for the smoke suite; behave
+  // like the pre-auth app so existing tests still exercise the onboarding
+  // flow via these CTAs. This is the NEXT_PUBLIC_ form because landing-cta
+  // is a client component; the value is inlined at build time.
+  const e2eBypass = process.env.NEXT_PUBLIC_E2E_AUTH_BYPASS === '1'
+
   const roleCta = (role: ProfileRole, fallbackLabel: string) => {
-    if (!hydrated) return { href: `/onboarding?role=${role}`, label: fallbackLabel, onClick: undefined }
-    // If the active profile matches the role, go straight to dashboard.
+    // Before hydration we render the sign-in variant so the server and
+    // client markup match; post-hydration the right destination fills in.
+    if (!hydrated) {
+      const href = e2eBypass ? `/onboarding?role=${role}` : `/login?role=${role}`
+      return { href, label: fallbackLabel, onClick: undefined }
+    }
+    // Signed-out visitor → login flow carries the role forward (except when
+    // the E2E bypass is active — in which case we fall through to the same
+    // profile-aware branching that used to exist pre-auth).
+    if (!authUser && !e2eBypass) {
+      return { href: `/login?role=${role}`, label: fallbackLabel, onClick: undefined }
+    }
+    // Signed in + active profile matches the role → straight to dashboard.
     if (profile && (profile.role ?? 'student') === role) {
       return { href: '/dashboard', label: 'Go to Dashboard', onClick: undefined }
     }
-    // If another profile on-device has this role, select it first.
+    // Signed in + a profile of this role already exists → switch + dashboard.
     const match = findRoleProfile(role)
     if (match) {
       return {
@@ -46,21 +60,20 @@ export function LandingCtaRow({ withRoleOptions = true, size = 'lg' }: CtaRowPro
         onClick: () => switchProfile(match.id),
       }
     }
+    // No matching profile yet → onboarding.
     return { href: `/onboarding?role=${role}`, label: fallbackLabel, onClick: undefined }
   }
 
   const studentCta = roleCta('student', 'Enter as Student')
   const parentCta = roleCta('parent', 'Enter as Parent')
   const teacherCta = roleCta('teacher', 'Enter as Teacher')
-  const studentHref = studentCta.href
-  const studentLabel = studentCta.label
 
   if (!withRoleOptions) {
     return (
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
         <Button size={size} variant="secondary" asChild>
-          <Link href={studentHref} onClick={studentCta.onClick}>
-            {studentLabel}
+          <Link href={studentCta.href} onClick={studentCta.onClick}>
+            {studentCta.label}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
@@ -79,8 +92,8 @@ export function LandingCtaRow({ withRoleOptions = true, size = 'lg' }: CtaRowPro
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
       <Button size={size} asChild className="w-full sm:w-auto">
-        <Link href={studentHref}>
-          {studentLabel}
+        <Link href={studentCta.href} onClick={studentCta.onClick}>
+          {studentCta.label}
           <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </Button>

@@ -25,7 +25,15 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   webServer: {
+    // E2E_AUTH_BYPASS=1 disables the Supabase middleware gate so the smoke
+    // suite (written before auth shipped) can hit gated routes directly.
+    // Non-prod only — see lib/supabase/middleware.ts for the check. Rewriting
+    // the suite to exercise the real auth flow is tracked as a follow-up.
     command: 'npm run dev',
+    env: {
+      E2E_AUTH_BYPASS: '1',
+      NEXT_PUBLIC_E2E_AUTH_BYPASS: '1',
+    },
     port: 3000,
     reuseExistingServer: !process.env.CI,
     timeout: 90_000,

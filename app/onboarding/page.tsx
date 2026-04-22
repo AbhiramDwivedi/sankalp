@@ -85,7 +85,16 @@ function OnboardingRouteInner() {
     return raw === 'student' || raw === 'parent' || raw === 'teacher' ? raw : ''
   })()
 
-  const { hydrated, profiles, saveAllProfiles, switchProfile } = useProfile()
+  const {
+    hydrated,
+    profiles,
+    saveAllProfiles,
+    switchProfile,
+    hasPendingLocalMigration,
+    pendingLocalProfiles,
+    adoptLocalProfiles,
+    discardLocalProfiles,
+  } = useProfile()
 
   const [step, setStep] = useState<number>(initialRole ? 2 : 1)
   const [role, setRole] = useState<Role | ''>(initialRole)
@@ -132,6 +141,50 @@ function OnboardingRouteInner() {
           <CardContent>
             <Button asChild>
               <Link href="/dashboard">Open dashboard</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </Shell>
+    )
+  }
+
+  // Legacy-migration prompt. Runs at most once per device per user: a user
+  // who was already using Sankalp before auth shipped has profiles in
+  // localStorage; after their first sign-in we offer to copy them into the
+  // new account. See lib/profile-context.tsx for the state machine.
+  if (hydrated && hasPendingLocalMigration) {
+    return (
+      <Shell>
+        <Card className="max-w-xl mx-auto">
+          <CardHeader>
+            <CardTitle>Bring your progress in?</CardTitle>
+            <CardDescription>
+              We found {pendingLocalProfiles.length}{' '}
+              {pendingLocalProfiles.length === 1 ? 'profile' : 'profiles'} saved on
+              this device from before you signed in
+              {pendingLocalProfiles[0]?.name
+                ? ` (including ${pendingLocalProfiles[0].name}${pendingLocalProfiles.length > 1 ? ' and others' : ''})`
+                : ''}
+              . Copy them into your account so your streak, XP, and completed
+              packs follow you across devices?
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col sm:flex-row gap-3">
+            <Button
+              onClick={async () => {
+                await adoptLocalProfiles()
+                router.push('/dashboard')
+              }}
+              className="flex-1"
+            >
+              Copy progress into my account
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => discardLocalProfiles()}
+              className="flex-1"
+            >
+              Start fresh
             </Button>
           </CardContent>
         </Card>
