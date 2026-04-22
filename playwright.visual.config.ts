@@ -28,7 +28,14 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   webServer: {
+    // E2E_AUTH_BYPASS disables the Supabase auth gate so these screens can
+    // render without a real session. Non-prod only — see
+    // lib/supabase/middleware.ts and components/landing-cta-row.tsx.
     command: 'npm run dev',
+    env: {
+      E2E_AUTH_BYPASS: '1',
+      NEXT_PUBLIC_E2E_AUTH_BYPASS: '1',
+    },
     port: 3000,
     reuseExistingServer: !process.env.CI,
     timeout: 90_000,

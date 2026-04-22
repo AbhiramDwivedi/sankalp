@@ -16,7 +16,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Environment
 
-`GEMINI_API_KEY` is only needed for the optional AI writing / speaking evaluation. The app is fully functional without it — hero art is SVG, flashcards are deterministic, and the credit audit uses no external services. There is no server: `next.config.mjs` disables image optimization, everything is either static or client-rendered, and any Gemini call runs client-side with the key exposed in the bundle.
+See `.env.example` for the full list; the load-bearing vars are:
+
+- **`NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`** — required. Drive sign-in (email OTP) and cross-device profile sync. RLS on `public.profiles` is the actual security boundary; the publishable key is meant to ship in the browser bundle.
+- **`SUPABASE_SERVICE_ROLE_KEY` + `SUPABASE_JWT_SECRET`** — server-only. Reserved for future admin operations.
+- **`POSTGRES_*`** — populated by the Vercel + Supabase integration. Used by `scripts/apply-migrations.ts` for schema changes; no runtime code reads them.
+- **`GEMINI_API_KEY`** — optional. Only the AI writing / speaking evaluation panels call Gemini; the rest of the app (packs, flashcards, credit audit, capstones) is fully deterministic and works without it.
+- **`E2E_AUTH_BYPASS` / `NEXT_PUBLIC_E2E_AUTH_BYPASS`** — test-only. Set by the Playwright configs so the pre-auth-era smoke/visual/a11y suites can hit gated routes directly. Ignored in production (middleware checks `NODE_ENV !== 'production'`).
+
+Middleware (`middleware.ts`) runs on every request to refresh the Supabase session cookie and redirect unauthenticated users off gated routes. Public marketing routes (`/`, `/overview`, `/how-this-works`, `/audit`, `/rubric`) remain reachable without a session — enumerated in `lib/auth-routes.ts`.
 
 ## Architecture
 
@@ -47,7 +55,7 @@ Zero external image dependencies. 15 motif components (`components/art/motifs.ts
 
 ### Three-role system
 
-Sankalp ships three role shells — Student, Teacher, Parent — with **no login or account creation**. Roles are a UI discriminator stored on the profile (`profile.role`). Onboarding at `/onboarding?role=<role>` collects a name + proficiency level and:
+Sankalp ships three role shells — Student, Teacher, Parent. Sign-in (email OTP via Supabase) is required to reach the app surfaces; role is a UI discriminator stored on the profile (`profile.role`) and can be chosen independently per profile (one signed-in email may own multiple profiles across roles). Onboarding at `/onboarding?role=<role>` collects a name + proficiency level and:
 
 - **Student** → creates a `StudentProfile` with the chosen level and empty progress.
 - **Teacher / Parent** → creates a shell profile with `role: 'teacher' | 'parent'` and a seeded `demoStudent` (`lib/seedDemoStudent.ts`) whose `activityDates` / `completedTopicIds` / `flashcardsMastered` reflect a plausible student at the chosen level. The dashboard reads `profile.demoStudent` as the data source; the adult's own `activityDates` stay empty.
@@ -65,11 +73,11 @@ Navbar pills read the active profile (or its `demoStudent` for teacher/parent) a
 
 ### State model
 
-All state is client-side in `localStorage` — no backend:
-- `sankalpa_hindi_profiles` — array of `StudentProfile` (all profiles, all roles)
-- `sankalpa_active_id` — currently selected profile id
+Profiles live in Supabase (`public.profiles`, one row per `StudentProfile` blob, owned by `auth.users.id` and gated by RLS). `lib/profile-context.tsx` is the single client accessor — it reads from Supabase on auth state change, writes through optimistically (debounced for per-keystroke updates, immediate for onboarding batch saves), and falls back to legacy `localStorage` keys (`sankalpa_hindi_profiles`, `sankalpa_active_id`) when there is no session so the public marketing routes and the pre-auth test suite still work.
 
-`lib/profile-context.tsx` exposes `useProfile()`, the canonical client-side accessor. `migrateProfile()` in `types.ts` normalizes legacy records on read.
+The first time a signed-in user arrives with legacy `localStorage` profiles and an empty remote, the onboarding route shows an **adopt vs. start-fresh** prompt. Adopting copies the local profiles into their account and clears the local keys. This is a one-time migration path; new users never see it.
+
+`migrateProfile()` in `types.ts` normalizes records from both sources on read so any schema evolution lives in client code rather than the DB.
 
 ### Directory layout
 
@@ -190,6 +198,7 @@ The repository supports a scheduled autonomous build run driven by `docs/BACKLOG
 - **Always regenerate flashcards after pack edits.** The generator is deterministic; a stale `generated.ts` is a merge hazard.
 - **Never change STAMP benchmark boundaries, FCPS credit thresholds, or rubric-axis definitions in `content/rubric.ts`** without explicit authorization. These are claims about the exam vendor, not design choices.
 - **Always run the full gate before declaring a task done.** `npm run check`. For UI tasks this already includes smoke + visual + a11y.
+- **Always invoke the `reviewer` sub-agent after any code-generation pass, before declaring work done.** See `.claude/agents/reviewer.md`. The reviewer is blind to the implementer's reasoning — treat its verdict as an independent check. `VERDICT: fix-first` or `reject` blocks shipping until addressed. Applies to: new files, edits to existing code, refactors, bug fixes. Does not apply to: pure doc edits, backlog checkbox ticks, agent-log entries.
 - **Branch-and-PR only for feature/fix work.** Direct commits to `main` are reserved for housekeeping (backlog checkbox updates, agent log entries). Branch naming for autonomous items: `auto/{item-id}`.
 - **Audit failure is a revert, not a follow-up.** If `scripts/credit-audit.ts` fails after a content change, the change is unshipped until the audit passes — even if `tsc` is green.
 - **Never skip git hooks** (`--no-verify`), **never force-push** to `main` or shared branches, **never amend published commits**.

@@ -17,7 +17,13 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   webServer: {
+    // E2E_AUTH_BYPASS disables the Supabase auth gate so axe-core can hit
+    // gated routes directly. Non-prod only — see lib/supabase/middleware.ts.
     command: 'npm run dev',
+    env: {
+      E2E_AUTH_BYPASS: '1',
+      NEXT_PUBLIC_E2E_AUTH_BYPASS: '1',
+    },
     port: 3000,
     reuseExistingServer: !process.env.CI,
     timeout: 90_000,

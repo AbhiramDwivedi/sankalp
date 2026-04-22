@@ -60,8 +60,8 @@ export function NoProfileShell({ title }: { title?: string }) {
             {title ?? 'Set up your profile'}
           </CardTitle>
           <CardDescription>
-            Sankalp stores your progress locally — no account, nothing to sign up for.
-            Pick a study plan and you&rsquo;re in.
+            Pick a role and a study plan and you&rsquo;re in. Your progress will
+            sync to your account so it follows you across devices.
           </CardDescription>
         </CardHeader>
         <CardContent>
