@@ -35,6 +35,15 @@ jobs:
       - name: Full gate (tsc, validate-packs, flashcards sync, credit-audit, smoke, visual)
         run: npm run check
         shell: bash
+        env:
+          # Supabase client requires these even under E2E_AUTH_BYPASS — the
+          # createBrowserClient constructor throws on missing URL / key, and
+          # the bypass only short-circuits middleware behavior. Both keys
+          # are designed to ship in the browser bundle (RLS is the real
+          # security boundary), but we store them as repo secrets to keep
+          # the workflow file environment-agnostic.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
       - name: Upload Playwright report on failure
         if: failure()
         uses: actions/upload-artifact@v4
