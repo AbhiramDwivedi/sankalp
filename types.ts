@@ -323,6 +323,18 @@ export interface StudentProfile {
 // ---------------------------------------------------------------------------
 export type StudentLinkStatus = 'pending' | 'accepted' | 'revoked';
 
+/**
+ * Discriminator on `student_links.kind` (added in migration 0004).
+ *   'student'   — adult → student invite. The historical default; the row
+ *                 attaches an adult to a single student profile.
+ *   'co_parent' — parent → parent invite. On acceptance a SECURITY DEFINER
+ *                 function fans out one fresh `kind='student'` row per
+ *                 child the inviter currently has accepted, addressed
+ *                 from the co-parent → that child. The original co_parent
+ *                 row stays around as a record of the relationship.
+ */
+export type StudentLinkKind = 'student' | 'co_parent';
+
 export interface StudentLink {
   id: string;
   adultProfileId: string;
@@ -336,6 +348,12 @@ export interface StudentLink {
   acceptedAt: string | null;
   revokedAt: string | null;
   revokedBy: 'adult' | 'student' | null;
+  /**
+   * Defaults to 'student' for legacy rows written before migration 0004
+   * (which added the column with a server-side default). Always populated
+   * on rows read from the API after that migration is applied.
+   */
+  kind: StudentLinkKind;
 }
 
 /**
