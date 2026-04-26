@@ -34,6 +34,7 @@ import { CAPSTONES } from '@/content/capstones'
 import { studyPlanForLevel } from '@/content/studyPlans'
 import { useProfile } from '@/lib/profile-context'
 import { BandLevelDial } from '@/components/BandLevelDial'
+import { describeExamCountdown } from '@/lib/examDate'
 import {
   listAdultLinks,
   loadAcceptedStudents,
@@ -159,6 +160,7 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
     xp: number
     streak: number
     progressPct: number
+    examDateLabel: string // pre-computed countdown string (e.g. "in 87d", "passed", "—")
     profileId?: string // present only for real linked students
   }
 
@@ -181,6 +183,7 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
     const totalItems = totalPacks + totalCaps
     const doneItems = demo.completedTopicIds.length + demo.completedCapstoneIds.length
     const progressPct = totalItems ? Math.round((doneItems / totalItems) * 100) : 0
+    const demoCountdown = describeExamCountdown(profile.examDate)
     rows = [
       {
         id: 'demo',
@@ -190,6 +193,7 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
         xp,
         streak,
         progressPct,
+        examDateLabel: examLabelFor(demoCountdown),
       },
     ]
   } else if (students) {
@@ -201,6 +205,7 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
         (s.completedTopicIds || []).length + (s.completedCapstoneIds || []).length
       const progressPct = totalItems ? Math.round((doneItems / totalItems) * 100) : 0
       const band = s.currentBand ?? bandFromProficiency(s.currentLevel)
+      const countdown = describeExamCountdown(s.examDate)
       return {
         id: link.id,
         name: s.name || link.invitedEmail,
@@ -209,6 +214,7 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
         xp,
         streak,
         progressPct,
+        examDateLabel: examLabelFor(countdown),
         profileId: s.id,
       }
     })
@@ -350,6 +356,7 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
                         <th className="py-2 pr-4">Streak</th>
                         <th className="py-2 pr-4">XP</th>
                         <th className="py-2 pr-4">Progress</th>
+                        <th className="py-2 pr-4">Exam</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -384,6 +391,9 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
                                 {row.progressPct}%
                               </span>
                             </div>
+                          </td>
+                          <td className="py-3 pr-4 text-xs text-muted-foreground whitespace-nowrap">
+                            {row.examDateLabel}
                           </td>
                         </tr>
                       ))}
@@ -502,6 +512,17 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
       </div>
     </div>
   )
+}
+
+// Compact exam-date label for the roster table — full label is too noisy in
+// a dense table cell, so we surface a short countdown ("87d", "today",
+// "passed") and let the teacher click into Settings if they need to edit.
+function examLabelFor(c: ReturnType<typeof describeExamCountdown>): string {
+  if (c.kind === 'unset') return '—'
+  if (c.kind === 'past') return 'passed'
+  if (c.kind === 'today') return 'today'
+  if (c.days === null) return '—'
+  return `${c.days}d`
 }
 
 function StatCard({

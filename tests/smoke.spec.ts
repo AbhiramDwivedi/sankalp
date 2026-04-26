@@ -1,5 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 
+// TODO: cover exam date input + pacing nudge
+
 /**
  * Smoke suite — Next.js 16 App Router rewrite (Phase 4 of the Vite→Next.js
  * migration).
