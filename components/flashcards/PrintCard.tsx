@@ -16,7 +16,7 @@ import type { Flashcard } from '../../content/schema';
 interface PrintCardProps {
   card: Flashcard;
   face: 'front' | 'back';
-  /** Optional overlay index for duplex alignment verification. */
+  /** Optional overlay index for fold-alignment verification. */
   showIndex?: number;
 }
 
