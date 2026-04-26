@@ -148,8 +148,14 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
       return
     }
     if (created && created > 0) {
+      // `link.invitedEmail` on a co-parent row is the CO-PARENT's own email
+      // (i.e. the current user), not the inviter's. Use the
+      // inviter-supplied label when available; fall back to a generic
+      // phrase. We don't have direct access to the inviter's email from
+      // this row (RLS scopes it).
+      const inviterLabel = link.adultLabel?.trim() || 'the inviter'
       toast.success(
-        `Connected. You can now see ${created} child${created === 1 ? '' : 'ren'} shared by ${link.invitedEmail}.`,
+        `Connected. You can now see ${created} child${created === 1 ? '' : 'ren'} from ${inviterLabel}.`,
       )
     } else {
       // Could legitimately be 0 — inviter has no accepted children yet, or

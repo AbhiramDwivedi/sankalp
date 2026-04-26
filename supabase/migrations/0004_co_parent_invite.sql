@@ -26,6 +26,15 @@
 --   visibility on read, or (b) install a trigger that fans out on every
 --   inviter→student acceptance.
 --
+-- Cascading revoke:
+--   When the inviter revokes a co-parent invite (or removes an accepted
+--   co-parent), every fanned-out kind='student' row that originated from
+--   that invite is also revoked. The link from fanned-out row → originating
+--   invite is the `source_link_id` foreign-key column added in §1b below.
+--   The cascade itself runs through the SECURITY DEFINER fn
+--   `revoke_co_parent_invite` so the inviter — who is NOT the
+--   adult_user_id on the fanned-out rows — can still revoke them.
+--
 -- Reversibility: see the rollback block at the bottom of this file.
 
 -- ---------------------------------------------------------------------------
@@ -45,6 +54,25 @@ alter table public.student_links
 
 create index if not exists student_links_kind_idx
   on public.student_links(kind);
+
+-- ---------------------------------------------------------------------------
+-- 1b. Add `source_link_id` — populated ONLY on kind='student' rows that the
+--     fan-out function created from a kind='co_parent' invite. Null on every
+--     other row (direct parent→student invites, the co-parent invite row
+--     itself). This is the join key the cascading revoke uses; we don't
+--     pattern-match on adult_label any more (the human-readable
+--     "Shared by co-parent: ..." prefix is kept for display only).
+--
+--     ON DELETE SET NULL so that physically deleting a co-parent invite row
+--     leaves the fanned-out children orphaned-but-intact rather than
+--     vanishing them — we want explicit revoke, not silent disappearance.
+-- ---------------------------------------------------------------------------
+alter table public.student_links
+  add column if not exists source_link_id uuid
+    references public.student_links(id) on delete set null;
+
+create index if not exists student_links_source_link_idx
+  on public.student_links(source_link_id) where source_link_id is not null;
 
 -- ---------------------------------------------------------------------------
 -- 2. Rebuild the unique partial index so duplicate-pending-invite detection
@@ -288,6 +316,7 @@ begin
     status,
     adult_label,
     kind,
+    source_link_id,
     accepted_at
   )
   select
@@ -299,11 +328,17 @@ begin
     'accepted',
     -- Carry forward the inviter's label as a hint, prefixed so the co-parent
     -- can tell it came from the fan-out. Falls back to a generic label.
+    -- Display-only — `source_link_id` (next column) is the structural join
+    -- key used by the cascading revoke function.
     coalesce(
       'Shared by co-parent: ' || nullif(src.adult_label, ''),
       'Shared by co-parent'
     ),
     'student',
+    -- Pin the originating co-parent invite. revoke_co_parent_invite cascades
+    -- through this column to revoke every fanned-out child row when the
+    -- inviter revokes the parent invite.
+    v_link.id,
     now()
   from public.student_links src
   where src.adult_profile_id = v_link.adult_profile_id
@@ -345,10 +380,125 @@ revoke execute on function public.accept_co_parent_invite(uuid, uuid) from publi
 grant execute on function public.accept_co_parent_invite(uuid, uuid) to authenticated;
 
 -- ---------------------------------------------------------------------------
+-- 7. revoke_co_parent_invite — cascading revoke for co-parent invites.
+--
+--    Plain client-side UPDATE on the kind='co_parent' row would ONLY revoke
+--    the invite record; the fanned-out kind='student' rows are owned by the
+--    co-parent's auth user (adult_user_id = co-parent uid), so the inviter
+--    has no RLS write access to them and they would silently keep granting
+--    visibility into the children. That contradicts the UI's prompt
+--    ("they will lose access to your shared children's progress"), so the
+--    cascade has to run as SECURITY DEFINER.
+--
+--    Authorization model:
+--      - Caller must be authenticated.
+--      - The link row must exist, be kind='co_parent', and be owned by the
+--        caller (adult_user_id = auth.uid()). Owning the invite is the
+--        authority required to undo the access it granted.
+--      - We accept any current status (pending invites with no fan-out yet
+--        revoke trivially; accepted invites cascade to children;
+--        already-revoked rows still cascade defensively in case a prior
+--        partial revoke missed children).
+--
+--    Behavior:
+--      - Mark the kind='co_parent' invite row revoked.
+--      - UPDATE every kind='student' row whose source_link_id = the invite's
+--        id AND status = 'accepted' → status='revoked'. Returns the count
+--        for the caller's toast.
+--      - Both writes happen in a single fn invocation (PL/pgSQL gives us
+--        an implicit transaction within the fn body). On error neither
+--        commits.
+--
+--    `p_revoked_by` lets the caller stamp the audit column. The client
+--    always passes 'adult'; the parameter exists so a future
+--    "removed-by-system" path can pass something else without changing the
+--    fn signature.
+-- ---------------------------------------------------------------------------
+create or replace function public.revoke_co_parent_invite(
+  p_link_id    uuid,
+  p_revoked_by text default 'adult'
+)
+returns integer
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_link        public.student_links%rowtype;
+  v_caller_uid  uuid;
+  v_cascaded    integer := 0;
+begin
+  v_caller_uid := auth.uid();
+  if v_caller_uid is null then
+    raise exception 'Not authenticated' using errcode = '42501';
+  end if;
+
+  if p_revoked_by is null
+     or p_revoked_by not in ('adult','student') then
+    raise exception 'Invalid revoked_by value' using errcode = '22023';
+  end if;
+
+  -- Lock the invite row so we don't race with concurrent accept calls.
+  select * into v_link
+  from public.student_links
+  where id = p_link_id
+  for update;
+
+  if not found then
+    raise exception 'Invite not found' using errcode = '42704';
+  end if;
+
+  if v_link.kind <> 'co_parent' then
+    raise exception 'Not a co-parent invite' using errcode = '22023';
+  end if;
+
+  if v_link.adult_user_id <> v_caller_uid then
+    raise exception 'You do not own this invite' using errcode = '42501';
+  end if;
+
+  -- Mark the invite row revoked. Idempotent: re-revoking an already-revoked
+  -- row is a no-op on this update but still runs the cascade below in case
+  -- a previous attempt revoked the invite without the cascade (e.g. rows
+  -- created before this fn existed).
+  update public.student_links
+  set status     = 'revoked',
+      revoked_at = coalesce(revoked_at, now()),
+      revoked_by = coalesce(revoked_by, p_revoked_by)
+  where id = p_link_id;
+
+  -- Cascade to fanned-out child rows.
+  update public.student_links
+  set status     = 'revoked',
+      revoked_at = now(),
+      revoked_by = p_revoked_by
+  where source_link_id = p_link_id
+    and status = 'accepted';
+
+  get diagnostics v_cascaded = row_count;
+
+  return v_cascaded;
+end;
+$$;
+
+revoke execute on function public.revoke_co_parent_invite(uuid, text) from public;
+grant execute on function public.revoke_co_parent_invite(uuid, text) to authenticated;
+
+-- ---------------------------------------------------------------------------
 -- ROLLBACK (for reference — not auto-applied)
 -- ---------------------------------------------------------------------------
 -- To revert this migration manually:
 --
+--   -- 1. Revoke any access this feature granted before tearing the schema
+--   --    down. Cleans up both the co-parent invite rows and every
+--   --    fanned-out kind='student' row (identified by source_link_id).
+--   update public.student_links
+--      set status     = 'revoked',
+--          revoked_at = coalesce(revoked_at, now()),
+--          revoked_by = coalesce(revoked_by, 'adult')
+--    where source_link_id is not null
+--       or kind = 'co_parent';
+--
+--   drop function if exists public.revoke_co_parent_invite(uuid, text);
 --   drop function if exists public.accept_co_parent_invite(uuid, uuid);
 --   drop policy if exists "student_links_update_student" on public.student_links;
 --   create policy "student_links_update_student" on public.student_links
@@ -386,8 +536,10 @@ grant execute on function public.accept_co_parent_invite(uuid, uuid) to authenti
 --     on public.student_links(adult_profile_id, lower(invited_email))
 --     where status = 'pending';
 --   drop index if exists public.student_links_kind_idx;
+--   drop index if exists public.student_links_source_link_idx;
 --   alter table public.student_links drop constraint if exists student_links_kind_check;
 --   alter table public.student_links drop column if exists kind;
+--   alter table public.student_links drop column if exists source_link_id;
 --   -- Restore the original immutability trigger (without the kind check):
 --   create or replace function public.enforce_student_links_immutable_cols()
 --   returns trigger language plpgsql as $$

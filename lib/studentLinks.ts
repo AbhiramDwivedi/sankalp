@@ -459,6 +459,37 @@ export async function acceptCoParentInvite(args: {
 }
 
 /**
+ * Inviter (the parent who created a kind='co_parent' invite) revokes it.
+ * Goes through the SECURITY DEFINER fn `revoke_co_parent_invite` which:
+ *   1. Verifies the caller owns the co-parent invite row.
+ *   2. Marks the invite row revoked.
+ *   3. Cascades to every fanned-out kind='student' row (joined via
+ *      `source_link_id`) and revokes them too — so the co-parent
+ *      genuinely loses visibility into the children.
+ *
+ * Returns `{ cascaded }` — the count of child links that were also
+ * revoked, used to make the success toast specific
+ * ("Revoked. {N} child links also removed.").
+ *
+ * IMPORTANT: do NOT use `revokeLink()` for kind='co_parent' rows. That helper
+ * only updates the invite row itself and leaves the cascaded children with
+ * full visibility — which directly contradicts the UI's prompt.
+ */
+export async function revokeCoParentInvite(args: {
+  linkId: string
+  revokedBy?: 'adult' | 'student'
+}): Promise<{ cascaded?: number; error?: string }> {
+  const supabase = createClient()
+  const { data, error } = await supabase.rpc('revoke_co_parent_invite', {
+    p_link_id: args.linkId,
+    p_revoked_by: args.revokedBy ?? 'adult',
+  })
+  if (error) return { error: error.message }
+  const cascaded = typeof data === 'number' ? data : 0
+  return { cascaded }
+}
+
+/**
  * Co-parent invites visible to the current authenticated user, filtered to
  * pending kind='co_parent' rows addressed to their email. RLS already
  * scopes the SELECT (student_links_select_student matches by auth.email());

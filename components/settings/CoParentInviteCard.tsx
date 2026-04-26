@@ -30,7 +30,7 @@ import { Clock, Check, Trash2, Mail, UserPlus } from 'lucide-react'
 import {
   createCoParentInvite,
   listAdultLinks,
-  revokeLink,
+  revokeCoParentInvite,
 } from '@/lib/studentLinks'
 import type { StudentLink } from '@/types'
 
@@ -100,10 +100,27 @@ export function CoParentInviteCard({ adultProfileId, adultUserId }: Props) {
       : 'Cancel this pending co-parent invite?'
     if (!confirm(prompt)) return
     startTransition(async () => {
-      const { error } = await revokeLink({ linkId, revokedBy: 'adult' })
+      // Use the SECURITY DEFINER cascade — plain revokeLink only marks the
+      // invite row, leaving fanned-out child links with full read access.
+      const { error, cascaded } = await revokeCoParentInvite({
+        linkId,
+        revokedBy: 'adult',
+      })
       if (error) {
         toast.error(error)
         return
+      }
+      if (wasAccepted && cascaded && cascaded > 0) {
+        toast.success(
+          `Revoked. ${cascaded} child link${cascaded === 1 ? '' : 's'} also removed.`,
+        )
+      } else if (wasAccepted) {
+        // Edge case: invite was accepted but cascaded=0 (e.g. the inviter
+        // had no children at the time of fan-out, or the cascaded rows were
+        // already revoked individually).
+        toast.success('Co-parent removed.')
+      } else {
+        toast.success('Pending invite cancelled.')
       }
       refresh()
     })
