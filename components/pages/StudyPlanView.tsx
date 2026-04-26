@@ -49,12 +49,16 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
           <div>
             <Badge tone="amber" size="xs" className="!bg-white !text-orange-700 !border-white mb-3">
-              Your plan
+              Your plan · auto-picked from your level
             </Badge>
             <h2 className="text-4xl md:text-5xl font-black">{currentPlan.titleEnglish}</h2>
             <p className="font-hindi-display text-3xl mt-1 opacity-90">{currentPlan.titleHindi}</p>
             <p className="mt-4 text-lg font-medium italic max-w-2xl leading-relaxed opacity-95">
               {currentPlan.headline}
+            </p>
+            <p className="mt-3 text-sm opacity-80 max-w-2xl">
+              The system picked this plan from the level you set during onboarding. Change your level
+              in Settings and the plan re-sequences automatically — you don&rsquo;t have to pick a plan.
             </p>
           </div>
           <div className="flex flex-col gap-3">
@@ -85,31 +89,52 @@ export const StudyPlanView: React.FC<StudyPlanViewProps> = ({
         </div>
       </section>
 
-      {/* Switch plan */}
-      <section className="space-y-4">
-        <h3 className="text-sm font-black uppercase tracking-widest text-slate-500">
-          Not the right fit? Pick a different plan
-        </h3>
-        <div className="grid md:grid-cols-3 gap-4">
-          {STUDY_PLANS.map((p) => (
-            <button
-              key={p.id}
-              onClick={() => onSelectPlan(p.id)}
-              className={`text-left p-6 rounded-3xl border-2 transition-all ${
-                p.id === currentPlan.id
-                  ? 'bg-orange-50 border-orange-400 shadow-lg'
-                  : 'bg-white border-slate-100 hover:border-orange-300 hover:-translate-y-1'
-              }`}
-            >
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-                {p.forLevels.join(' · ')}
+      {/* Pacing options — disclosed by default. The plan above is the
+          "set by your level" recommendation; this section is for power
+          users (or for the dashboard "exam sooner than plan" nudge that
+          links here) to override the cadence without changing their
+          level. We use a <details> so it works without JavaScript and
+          plays nicely with print. */}
+      <section className="space-y-4 print:hidden">
+        <details className="group rounded-3xl border-2 border-slate-100 bg-white open:border-orange-200 open:shadow-md">
+          <summary className="cursor-pointer list-none p-5 flex items-center justify-between gap-3">
+            <div>
+              <p className="text-sm font-black uppercase tracking-widest text-slate-500">
+                Pacing options
               </p>
-              <p className="font-black text-lg text-slate-900 mt-2">{p.titleEnglish}</p>
-              <p className="text-sm text-slate-500 italic mt-1 leading-relaxed">{p.headline}</p>
-              <p className="text-xs font-black text-orange-700 mt-3">{p.durationWeeks} weeks</p>
-            </button>
-          ))}
-        </div>
+              <p className="text-xs text-slate-500 mt-1 italic">
+                The plan above is auto-picked from your level. Most people stay with it.
+                Tap to see other paces if your exam is soon or you want to slow down.
+              </p>
+            </div>
+            <span
+              aria-hidden
+              className="text-xs font-black text-orange-700 group-open:rotate-180 transition-transform"
+            >
+              ▾
+            </span>
+          </summary>
+          <div className="px-5 pb-6 pt-1 grid md:grid-cols-3 gap-4">
+            {STUDY_PLANS.map((p) => (
+              <button
+                key={p.id}
+                onClick={() => onSelectPlan(p.id)}
+                className={`text-left p-6 rounded-3xl border-2 transition-all ${
+                  p.id === currentPlan.id
+                    ? 'bg-orange-50 border-orange-400 shadow-lg'
+                    : 'bg-white border-slate-100 hover:border-orange-300 hover:-translate-y-1'
+                }`}
+              >
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                  {p.forLevels.join(' · ')}
+                </p>
+                <p className="font-black text-lg text-slate-900 mt-2">{p.titleEnglish}</p>
+                <p className="text-sm text-slate-500 italic mt-1 leading-relaxed">{p.headline}</p>
+                <p className="text-xs font-black text-orange-700 mt-3">{p.durationWeeks} weeks</p>
+              </button>
+            ))}
+          </div>
+        </details>
       </section>
 
       {/* Weekly schedule */}

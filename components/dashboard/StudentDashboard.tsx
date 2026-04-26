@@ -22,6 +22,7 @@ import {
   Layers,
   ClipboardList,
   Mail,
+  AlertTriangle,
 } from 'lucide-react'
 import type { StudentProfile } from '@/types'
 import { BAND_META, bandForPack, bandFromProficiency } from '@/types'
@@ -36,6 +37,7 @@ import {
   planCursor,
 } from '@/content/studyPlans'
 import { AVANT_RUBRIC_SUMMARY } from '@/constants'
+import { describeExamCountdown, weeksUntilExam } from '@/lib/examDate'
 import { toast } from 'sonner'
 import { useProfile } from '@/lib/profile-context'
 import {
@@ -150,6 +152,19 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
   const band = profile.currentBand ?? bandFromProficiency(profile.currentLevel)
   const bandMeta = BAND_META[band]
 
+  // Exam-date countdown drives both the prominent dashboard tile (so the
+  // student sees "exam in N days" without digging into Settings) and the
+  // "exam sooner than plan" nudge below. We compute weeks-until once and
+  // compare against the plan's authored duration; we deliberately do NOT
+  // auto-switch — the nudge links into the pacing-options disclosure on
+  // /plan so the user stays in control.
+  const examCountdown = describeExamCountdown(profile.examDate)
+  const weeksLeft = weeksUntilExam(profile.examDate)
+  const planTooLong =
+    weeksLeft !== null &&
+    weeksLeft > 0 &&
+    plan.durationWeeks > weeksLeft + 2 // grace: 2-week buffer before nudging
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
@@ -162,7 +177,7 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
             {streakLabel} · {bandMeta.label}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span
             className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary px-3 py-1.5 text-sm font-medium"
             aria-label={`${streak} day streak`}
@@ -177,8 +192,54 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
             <Sparkles className="h-4 w-4" aria-hidden />
             {xp} XP
           </span>
+          {/* Exam date pill — sits next to streak/XP so the student sees
+              "exam in N days" at a glance. Tappable to /settings so they
+              can change the date if it's wrong. Falls back to a soft
+              "Exam date passed" pill when the date is in the past. */}
+          {examCountdown.kind !== 'unset' ? (
+            <Link
+              href="/settings"
+              aria-label={`${examCountdown.label}. Tap to edit.`}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                examCountdown.kind === 'past'
+                  ? 'bg-amber-100 text-amber-900 hover:bg-amber-200 dark:bg-amber-950/40 dark:text-amber-100'
+                  : examCountdown.kind === 'today'
+                    ? 'bg-primary text-primary-foreground hover:opacity-90'
+                    : 'bg-primary/10 text-primary hover:bg-primary/20'
+              }`}
+            >
+              <CalendarDays className="h-4 w-4" aria-hidden />
+              {examCountdown.label}
+            </Link>
+          ) : null}
         </div>
       </div>
+
+      {/* Pacing nudge — only when the exam is sooner than the current plan
+          (with a 2-week buffer). We do NOT auto-switch the plan; the user
+          opens /plan and uses the disclosed pacing-options picker. */}
+      {planTooLong ? (
+        <div
+          role="note"
+          className="mb-6 flex items-start justify-between gap-3 rounded-lg border border-amber-300/50 bg-amber-50 p-4 text-amber-900 dark:bg-amber-950/30 dark:text-amber-100"
+        >
+          <div className="flex items-start gap-3">
+            <AlertTriangle className="h-5 w-5 mt-0.5 shrink-0" aria-hidden />
+            <div className="text-sm">
+              <p className="font-medium">
+                Your exam is in {weeksLeft} week{weeksLeft === 1 ? '' : 's'} but{' '}
+                {plan.titleEnglish} is {plan.durationWeeks} weeks.
+              </p>
+              <p className="text-amber-900/80 dark:text-amber-100/80">
+                Consider switching to a faster pace so you finish before the test.
+              </p>
+            </div>
+          </div>
+          <Button asChild size="sm" variant="outline">
+            <Link href="/plan">Pacing options</Link>
+          </Button>
+        </div>
+      ) : null}
 
       {pendingInvites > 0 ? (
         <div

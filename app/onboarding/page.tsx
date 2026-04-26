@@ -108,6 +108,12 @@ function OnboardingRouteInner() {
   const [childName, setChildName] = useState<string>('')
   const [band, setBand] = useState<Band>('foundations')
   const [alreadyMessage, setAlreadyMessage] = useState<string>('')
+  // Exam date is optional in onboarding: we pre-fill the level-recommended
+  // default and let the user nudge it on StepConfirm. Stored as a YYYY-MM-DD
+  // string so the native <input type="date"> binds cleanly. Re-derived from
+  // the band when the band changes (and the user has not edited it manually).
+  const [examDate, setExamDate] = useState<string>('')
+  const [examDateTouched, setExamDateTouched] = useState<boolean>(false)
 
   // Onboarding carries the 3-band picker as the primary proficiency input.
   // The concrete ProficiencyLevel is derived for plan selection + legacy
@@ -136,6 +142,14 @@ function OnboardingRouteInner() {
   }, [hydrated, initialRole, profiles, switchProfile, router])
 
   const matchedPlan = useMemo(() => studyPlanForLevel(level), [level])
+
+  // Re-derive the recommended exam date when the band/level changes — but
+  // only when the user has not manually edited the field. Once they touch
+  // the date input we treat their value as authoritative.
+  useEffect(() => {
+    if (examDateTouched) return
+    setExamDate(calculateRecommendedDate(level))
+  }, [level, examDateTouched])
 
   if (alreadyMessage) {
     return (
@@ -245,7 +259,10 @@ function OnboardingRouteInner() {
     if (!role) return
     const trimmedName = name.trim()
     const trimmedChildName = childName.trim()
-    const examDate = calculateRecommendedDate(level)
+    // Prefer the user's edited exam date; fall back to the level-recommended
+    // default if the field is somehow empty. examDate stays a required field
+    // on StudentProfile, so we always commit a value.
+    const finalExamDate = examDate || calculateRecommendedDate(level)
     const planId = matchedPlan.id
 
     const id =
@@ -262,7 +279,7 @@ function OnboardingRouteInner() {
         currentLevel: level,
         currentBand: band,
         startDate: new Date().toISOString(),
-        examDate,
+        examDate: finalExamDate,
         role: 'student',
         completedTopicIds: [],
         completedCapstoneIds: [],
@@ -292,7 +309,7 @@ function OnboardingRouteInner() {
         currentLevel: level,
         currentBand: band,
         startDate: new Date().toISOString(),
-        examDate,
+        examDate: finalExamDate,
         role,
         demoStudent: demo,
         completedTopicIds: [],
@@ -379,6 +396,12 @@ function OnboardingRouteInner() {
                 level={level}
                 planTitle={matchedPlan.titleEnglish}
                 planHeadline={matchedPlan.headline}
+                examDate={examDate}
+                recommendedExamDate={calculateRecommendedDate(level)}
+                onExamDateChange={(next) => {
+                  setExamDate(next)
+                  setExamDateTouched(true)
+                }}
               />
             )}
 
@@ -567,6 +590,9 @@ function StepConfirm({
   level,
   planTitle,
   planHeadline,
+  examDate,
+  recommendedExamDate,
+  onExamDateChange,
 }: {
   role: Role
   name: string
@@ -575,6 +601,9 @@ function StepConfirm({
   level: ProficiencyLevel
   planTitle: string
   planHeadline: string
+  examDate: string
+  recommendedExamDate: string
+  onExamDateChange: (next: string) => void
 }) {
   const meta = ROLE_META[role]
   const Icon = meta.icon
@@ -611,6 +640,26 @@ function StepConfirm({
             <p className="text-xs text-muted-foreground mt-1 italic">{planHeadline}</p>
           </div>
         </div>
+      </div>
+      {/* Optional exam-date row. Pre-filled with the level-recommended
+          default; the user can shift it without leaving the confirm step.
+          We don't add a separate onboarding step for this — it's a single
+          line of friction, not its own decision point. */}
+      <div className="space-y-2">
+        <Label htmlFor="onboarding-exam-date">
+          Exam date{' '}
+          <span className="text-xs text-muted-foreground font-normal">(optional)</span>
+        </Label>
+        <Input
+          id="onboarding-exam-date"
+          type="date"
+          value={examDate}
+          onChange={(e) => onExamDateChange(e.target.value)}
+        />
+        <p className="text-xs text-muted-foreground">
+          When do you take the STAMP test? Default:{' '}
+          {recommendedExamDate} — change any time from Settings.
+        </p>
       </div>
       {role !== 'student' && (
         <p className="text-sm text-muted-foreground">

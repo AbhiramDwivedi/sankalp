@@ -45,6 +45,8 @@ import {
 } from '@/types'
 import { studyPlanForLevel } from '@/content/studyPlans'
 import { BandLevelDial } from '@/components/BandLevelDial'
+import { calculateRecommendedDate } from '@/constants'
+import { formatExamDate, parseExamDate } from '@/lib/examDate'
 import { LinkedStudentsCard } from '@/components/settings/LinkedStudentsCard'
 import { LinkedAdultsCard } from '@/components/settings/LinkedAdultsCard'
 import { CoParentInviteCard } from '@/components/settings/CoParentInviteCard'
@@ -96,6 +98,19 @@ export default function SettingsPage() {
     const trimmed = nameDraft.trim()
     if (!trimmed || trimmed === profile.name) return
     setProfile((p) => ({ ...p, name: trimmed }))
+  }
+
+  // Exam-date editor lives here (not a separate Card) so the active-profile
+  // section reads like one panel: name, then exam date. We commit on change
+  // because the native date input is already a deliberate "pick + commit"
+  // gesture — a separate Save button would feel redundant. Invalid input
+  // (browser-rejected dates) is silently ignored; the field stays bound to
+  // the existing value.
+  const handleExamDateCommit = (next: string) => {
+    if (!next) return
+    if (!parseExamDate(next)) return
+    if (next === profile.examDate) return
+    setProfile((p) => ({ ...p, examDate: next }))
   }
 
   const handleToggleAi = (next: boolean) => {
@@ -244,7 +259,7 @@ export default function SettingsPage() {
         <Card>
           <CardHeader>
             <CardTitle>Active profile</CardTitle>
-            <CardDescription>The name that shows on your dashboard.</CardDescription>
+            <CardDescription>The name and exam date that drive your dashboard.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
@@ -255,6 +270,24 @@ export default function SettingsPage() {
                 onChange={(e) => setNameDraft(e.target.value)}
                 onBlur={handleNameCommit}
               />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="exam-date">Exam date</Label>
+              <Input
+                id="exam-date"
+                type="date"
+                value={profile.examDate || ''}
+                onChange={(e) => handleExamDateCommit(e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground">
+                When you take the STAMP test. Drives the dashboard countdown and
+                the pacing-options nudge.
+                {' '}
+                <span className="text-muted-foreground/80">
+                  Recommended for your level:{' '}
+                  {formatExamDate(calculateRecommendedDate(profile.currentLevel)) ?? '—'}
+                </span>
+              </p>
             </div>
           </CardContent>
         </Card>

@@ -39,6 +39,7 @@ import {
   planCursor,
 } from '@/content/studyPlans'
 import { AVANT_RUBRIC_SUMMARY } from '@/constants'
+import { describeExamCountdown } from '@/lib/examDate'
 import {
   acceptCoParentInvite,
   listAdultLinks,
@@ -244,6 +245,7 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
         completedCapstoneIds={demo.completedCapstoneIds}
         flashcardsMastered={demo.flashcardsMastered}
         selectedStudyPlanId={demo.selectedStudyPlanId}
+        examDate={profile.examDate}
         totalPacks={totalPacks}
         totalCaps={totalCaps}
         onBandChange={handleDemoBandChange}
@@ -413,6 +415,7 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
         completedCapstoneIds={child.completedCapstoneIds || []}
         flashcardsMastered={child.flashcardsMastered}
         selectedStudyPlanId={child.selectedStudyPlanId}
+        examDate={child.examDate}
         totalPacks={totalPacks}
         totalCaps={totalCaps}
         editorTitle={`Adjust ${(child.name.split(/\s+/)[0] || child.name)}'s level`}
@@ -437,6 +440,7 @@ interface ChildViewProps {
   completedCapstoneIds: string[]
   flashcardsMastered: string[] | undefined
   selectedStudyPlanId: string | undefined
+  examDate: string | undefined
   totalPacks: number
   totalCaps: number
   editorTitle: string
@@ -458,6 +462,7 @@ function ChildView({
   completedCapstoneIds,
   flashcardsMastered,
   selectedStudyPlanId,
+  examDate,
   totalPacks,
   totalCaps,
   editorTitle,
@@ -466,6 +471,7 @@ function ChildView({
   applyLabel,
   onBandChange,
 }: ChildViewProps) {
+  const examCountdown = describeExamCountdown(examDate)
   const streak = computeStreak(activityDates)
   const streakLabel = lastActivityLabel(activityDates)
   const xp = computeXp({
@@ -578,12 +584,27 @@ function ChildView({
                   value={`${completedTopicIds.length}`}
                   hint={`of ${totalPacks}`}
                 />
-                <MiniStat
-                  icon={CalendarDays}
-                  label="Overall"
-                  value={`${progressPct}%`}
-                  hint="library + capstones"
-                />
+                {examCountdown.kind !== 'unset' ? (
+                  <MiniStat
+                    icon={CalendarDays}
+                    label="Exam date"
+                    value={
+                      examCountdown.kind === 'past'
+                        ? 'Passed'
+                        : examCountdown.kind === 'today'
+                          ? 'Today'
+                          : `${examCountdown.days}d`
+                    }
+                    hint={examCountdown.date ?? undefined}
+                  />
+                ) : (
+                  <MiniStat
+                    icon={CalendarDays}
+                    label="Overall"
+                    value={`${progressPct}%`}
+                    hint="library + capstones"
+                  />
+                )}
               </div>
               <div>
                 <div className="flex items-center justify-between text-sm mb-1">
