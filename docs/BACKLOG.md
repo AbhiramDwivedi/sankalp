@@ -335,3 +335,34 @@ All messages bilingual where natural ("शाबाश!" as optional leader, not
 - Gamification beyond celebrations (risk of cheapening the product)
 
 Add these to the backlog only if explicitly requested.
+
+---
+
+## Follow-ups from shipped work
+
+### [ ] G.1 — Apply gender-aware rendering to remaining packs + capstones
+
+Priority: **medium** (correctness for ~50% of users — female speakers see
+default-male verb forms on all non-anchor content).
+
+Scope: extend the `<G>` / `hindiMale` / `hindiFemale` mechanism (introduced
+with the student-gender setting; see `content/HOUSE_STYLE.md` "Gendered
+first-person content") to the remaining content surfaces:
+
+- 7 capstones (C02, C03, C04, C06, C07, C08, C09) — `EssayVersion.hindi`
+  → add `hindiMale` / `hindiFemale` overrides for speaker-as-self verbs
+  and adjectives. Use C01/C05/C10 as the reference shape.
+- 23 topic packs — `TopicPack.modelEssays[].novice` and
+  `.intermediateMid` are also string-typed Hindi. The picker can be
+  extended to ModelEssay (parallel `intermediateMidMale`/Female fields)
+  or these can adopt the `<G>` token approach if rewritten as JSX.
+- Pack `anchor.hindi`, `modelTexts[].hindi`: only adapt where the
+  speaker's gender is the speaker's own (skip third-person passages,
+  letters from other characters, menus, etc.).
+
+Done-when: every speaker-as-self gendered verb has a male+female form;
+credit-audit and validators still pass on the canonical `hindi` field;
+docs updated; a Hindi-speaking reviewer signs off on the variants.
+
+Out of scope: speaking-prompt audio, AI evaluator prompt tuning, parent /
+teacher demoStudent gender (intentionally male in v1).

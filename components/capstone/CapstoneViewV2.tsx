@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import type { Capstone, EssayVersion } from '../../content/schema';
 import type { MockExamResult, StudentProfile } from '../../types';
+import { useProfile } from '../../lib/profile-context';
+import { pickGenderedHindi } from '../gender/Gendered';
 import { TOPIC_PACKS_BY_ID } from '../../content';
 import { tokensFor } from '../ui/themeTokens';
 import { Badge } from '../ui/Badge';
@@ -602,7 +604,9 @@ const TierTabs: React.FC<{
 
 const VersionBody: React.FC<{ version: EssayVersion }> = ({ version }) => {
   const meta = TIER_META[version.label];
-  const paragraphs = version.hindi.split('\n\n');
+  const { profile } = useProfile();
+  const hindiText = pickGenderedHindi(version, profile?.gender);
+  const paragraphs = hindiText.split('\n\n');
   const englishParas = version.english.split('\n\n');
   return (
     <article className="bg-white rounded-[2rem] border-2 border-slate-100 p-8 md:p-10 shadow-sm print:shadow-none print:break-inside-avoid">

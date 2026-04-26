@@ -13,6 +13,7 @@ import { DevanagariText } from '../ui/DevanagariText';
 import { Badge } from '../ui/Badge';
 import { evaluateWriting } from '../../geminiService';
 import { CURRICULUM } from '../../content/curriculum';
+import { pickGenderedHindi } from '../gender/Gendered';
 
 // -----------------------------------------------------------------------------
 // MockExamMode - a full-screen timed writing sitting for mock-flagged capstones.
@@ -66,7 +67,7 @@ function formatClock(totalSeconds: number): string {
 
 export const MockExamMode: React.FC<MockExamModeProps> = ({
   capstone,
-  profile: _profile,
+  profile,
   aiEnabled,
   onExit,
 }) => {
@@ -284,6 +285,7 @@ export const MockExamMode: React.FC<MockExamModeProps> = ({
           {phase === 'done' && result && (
             <ResultPanel
               capstone={capstone}
+              profile={profile}
               result={result}
               timedOut={timedOut}
               aiEnabled={aiEnabled}
@@ -351,6 +353,7 @@ const GradingPanel: React.FC = () => (
 
 const ResultPanel: React.FC<{
   capstone: Capstone;
+  profile: StudentProfile;
   result: MockExamResult;
   timedOut: boolean;
   aiEnabled: boolean;
@@ -360,6 +363,7 @@ const ResultPanel: React.FC<{
   onFinish: () => void;
 }> = ({
   capstone,
+  profile,
   result,
   timedOut,
   aiEnabled,
@@ -432,7 +436,7 @@ const ResultPanel: React.FC<{
       )}
 
       {/* Side-by-side tier comparison */}
-      <TierComparison versions={capstone.versions} />
+      <TierComparison versions={capstone.versions} profile={profile} />
 
       <div className="flex justify-end">
         <button
@@ -552,7 +556,10 @@ const TIER_LABELS: Record<EssayVersion['label'], { title: string; tone: string }
   push: { title: 'Push', tone: 'bg-indigo-600' },
 };
 
-const TierComparison: React.FC<{ versions: Capstone['versions'] }> = ({ versions }) => (
+const TierComparison: React.FC<{
+  versions: Capstone['versions'];
+  profile: StudentProfile;
+}> = ({ versions, profile }) => (
   <section className="space-y-3" data-testid="mock-exam-tier-comparison">
     <div>
       <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
@@ -588,7 +595,7 @@ const TierComparison: React.FC<{ versions: Capstone['versions'] }> = ({ versions
               weight="medium"
               className="text-slate-800 leading-[1.9]"
             >
-              {v.hindi}
+              {pickGenderedHindi(v, profile.gender)}
             </DevanagariText>
           </article>
         );

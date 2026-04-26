@@ -129,6 +129,56 @@ export const pack: TopicPack = {
 };
 ```
 
+## Gendered first-person content
+
+Hindi grammar agrees with the speaker's gender for verbs, adjectives, and
+participles ("मैं गया" vs "मैं गई"). Sankalp profiles carry an optional
+`gender` field — `undefined` is treated as **male** (the documented default).
+Today only the three anchor capstones (C01, C05, C10) carry gendered overrides;
+new content can opt in two ways.
+
+### `<G m="..." f="..." />` — JSX surfaces
+
+For any JSX-rendered string where the speaker is "I" and the form changes
+with gender, use the `<G>` primitive from `components/gender/Gendered.tsx`.
+It reads the active student profile via `useProfile()` and falls back to
+`m` for any non-female value (including `undefined`).
+
+```tsx
+import { G } from '@/components/gender/Gendered'
+
+<p>मैं घर बहुत खुश होकर <G m="गया" f="गई" />।</p>
+```
+
+`<G>` is a Client Component; the surrounding tree must already be client
+(packs and capstones are).
+
+### `hindiMale` / `hindiFemale` — string-typed schema content
+
+Capstone `EssayVersion` (and any future string-typed Hindi content) accepts
+optional `hindiMale` and `hindiFemale` overrides. The renderer picks the
+right form via `pickGenderedHindi(version, profile?.gender)`:
+
+- `gender === 'female'` → `hindiFemale ?? hindi`
+- otherwise → `hindiMale ?? hindi`
+
+The canonical `hindi` field is unchanged — validators and the credit-audit
+script keep reading it, so connector / tense / word-count gates stay stable
+when authors add gendered overrides. See C01/C05/C10 for the pattern.
+
+### When NOT to add an override
+
+Many `मैं` sentences are gender-neutral and need no override:
+
+- Copulas: `मैं खुश हूँ` (हूँ doesn't agree with gender).
+- Transitive perfectives with `मैंने`: the verb agrees with the **direct
+  object**, not the speaker (`मैंने थाली खाई` — खाई agrees with थाली).
+- Impersonal/dative constructions: `मुझे ... पसंद है`, `मुझे लगता है`.
+- First-person plural `हम` and `हमने`: gender-neutral.
+
+When in doubt, leave the canonical form alone and add a `// TODO:
+gender-aware` comment. Better to under-adapt than mis-adapt.
+
 ## Forbidden
 
 - AI-generated idioms. Use only real, widely-known muhavare.
