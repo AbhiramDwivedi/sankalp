@@ -86,7 +86,7 @@ export function LinkedStudentsCard({
     const trimmed = email.trim()
     if (!trimmed) return
     startTransition(async () => {
-      const { error } = await createInvite({
+      const { error, emailSent } = await createInvite({
         adultProfileId,
         adultUserId,
         invitedEmail: trimmed,
@@ -96,9 +96,17 @@ export function LinkedStudentsCard({
         toast.error(error)
         return
       }
-      toast.success(
-        `Invite created. Tell them to sign in with ${trimmed} to accept.`,
-      )
+      // Successful row insert. Distinguish the "email actually went out" path
+      // from the soft-fail (most often: user already has an account, so
+      // `inviteUserByEmail` errors). Both flows are valid — just different
+      // copy so the inviter knows what to tell the student next.
+      if (emailSent) {
+        toast.success(`Invite emailed to ${trimmed}.`)
+      } else {
+        toast.success(
+          `Invite created. ${trimmed} can sign in to Sankalp and accept it from Settings.`,
+        )
+      }
       setEmail('')
       setLabel('')
       refresh()

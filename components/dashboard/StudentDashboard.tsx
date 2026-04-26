@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import {
   Card,
   CardContent,
@@ -20,6 +21,7 @@ import {
   CalendarDays,
   Layers,
   ClipboardList,
+  Mail,
 } from 'lucide-react'
 import type { StudentProfile } from '@/types'
 import { BAND_META, bandForPack, bandFromProficiency } from '@/types'
@@ -34,6 +36,12 @@ import {
   planCursor,
 } from '@/content/studyPlans'
 import { AVANT_RUBRIC_SUMMARY } from '@/constants'
+import { toast } from 'sonner'
+import { useProfile } from '@/lib/profile-context'
+import {
+  acceptPendingInvitesForCurrentUser,
+  listStudentInvites,
+} from '@/lib/studentLinks'
 
 // -----------------------------------------------------------------------------
 // StudentDashboard — Phase 3 dispatch target for role === 'student'.
@@ -42,6 +50,38 @@ import { AVANT_RUBRIC_SUMMARY } from '@/constants'
 // -----------------------------------------------------------------------------
 
 export default function StudentDashboard({ profile }: { profile: StudentProfile }) {
+  const { authUser } = useProfile()
+  const [pendingInvites, setPendingInvites] = useState(0)
+
+  // The student already proved they own the invited email by signing in,
+  // so the manual Accept step on /settings is friction for the common case.
+  // We auto-accept any pending invites addressed to their email and attach
+  // them to this student profile, then refresh the count for the banner. If
+  // auto-accept fails (network blip, RLS edge case), the banner falls back
+  // to the manual Accept flow on /settings. Skipped when there's no real
+  // auth session (E2E bypass path).
+  useEffect(() => {
+    if (!authUser) return
+    let cancelled = false
+    ;(async () => {
+      const result = await acceptPendingInvitesForCurrentUser(profile.id)
+      if (cancelled) return
+      if (result.accepted > 0) {
+        toast.success(
+          `Connected with ${result.accepted} ${
+            result.accepted === 1 ? 'adult' : 'adults'
+          } who invited you. Manage from Settings.`,
+        )
+      }
+      const links = await listStudentInvites()
+      if (cancelled) return
+      setPendingInvites(links.filter((l) => l.status === 'pending').length)
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [authUser, profile.id])
+
   const completedPacks = profile.completedTopicIds || []
   const completedCaps = profile.completedCapstoneIds || []
   const masteredCards = profile.flashcardsMastered || []
@@ -139,6 +179,28 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
           </span>
         </div>
       </div>
+
+      {pendingInvites > 0 ? (
+        <div
+          role="note"
+          className="mb-6 flex items-start justify-between gap-3 rounded-lg border border-primary/30 bg-primary/5 p-4 text-foreground"
+        >
+          <div className="flex items-start gap-3">
+            <Mail className="h-5 w-5 mt-0.5 shrink-0 text-primary" aria-hidden />
+            <div className="text-sm">
+              <p className="font-medium">
+                {pendingInvites} pending invite{pendingInvites === 1 ? '' : 's'}
+              </p>
+              <p className="text-muted-foreground">
+                A parent or teacher wants to follow your progress. Accept or decline from Settings.
+              </p>
+            </div>
+          </div>
+          <Button asChild size="sm" variant="outline">
+            <Link href="/settings">Review</Link>
+          </Button>
+        </div>
+      ) : null}
 
       {cursor.isAllDone ? (
         <Card className="mb-6 border-primary/50 bg-primary/5">

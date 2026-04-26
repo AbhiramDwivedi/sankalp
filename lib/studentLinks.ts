@@ -7,6 +7,7 @@
 
 import { createClient } from '@/lib/supabase/client'
 import type { StudentLink, StudentLinkStatus, StudentProfile } from '@/types'
+import { migrateProfile } from '@/types'
 
 // Row shape returned by the Supabase client — snake_case columns.
 type StudentLinkRow = {
@@ -42,41 +43,71 @@ function rowToLink(row: StudentLinkRow): StudentLink {
 }
 
 /**
- * Adult creates a pending invite. The row starts with `status='pending'`
- * and no student ids — those fill in when the student accepts. Duplicate
- * pending invites from the same adult to the same email are rejected by
- * a unique partial index; the caller can treat that as "already invited".
+ * Adult creates a pending invite. Posts to the server route at
+ * `/api/student-links/invite`, which inserts the row using the caller's
+ * authed cookie session AND fires the Supabase Admin invite email so the
+ * student gets a magic link in their inbox. The route returns the link plus
+ * an `emailSent` flag — when the email failed (commonly: invitee already
+ * has an account), the row is still created and the student can accept
+ * manually from /settings on their next sign-in.
+ *
+ * Duplicate pending invites from the same adult to the same email are
+ * rejected by a unique partial index; the route translates that into a
+ * friendly error.
  */
+export type InviteEmailReason =
+  | 'sent'
+  | 'already_registered'
+  | 'service_unavailable'
+
 export async function createInvite(args: {
   adultProfileId: string
   adultUserId: string
   invitedEmail: string
   adultLabel?: string | null
-}): Promise<{ link?: StudentLink; error?: string }> {
-  const supabase = createClient()
+}): Promise<{
+  link?: StudentLink
+  emailSent?: boolean
+  emailReason?: InviteEmailReason
+  error?: string
+}> {
   const email = args.invitedEmail.trim()
   if (!email || !/@/.test(email)) {
     return { error: 'Enter a valid email.' }
   }
-  const { data, error } = await supabase
-    .from('student_links')
-    .insert({
-      adult_profile_id: args.adultProfileId,
-      adult_user_id: args.adultUserId,
-      invited_email: email,
-      adult_label: args.adultLabel ?? null,
+  let res: Response
+  try {
+    res = await fetch('/api/student-links/invite', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        adultProfileId: args.adultProfileId,
+        invitedEmail: email,
+        adultLabel: args.adultLabel ?? null,
+      }),
     })
-    .select('*')
-    .single()
-  if (error) {
-    // Unique-constraint violation on (adult, email) while pending — surface
-    // a friendlier message instead of the Postgres code.
-    if (error.code === '23505') {
-      return { error: 'You already have a pending invite to that address.' }
-    }
-    return { error: error.message }
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : 'Network error.' }
   }
-  return { link: rowToLink(data as StudentLinkRow) }
+  let json: {
+    link?: StudentLinkRow
+    emailSent?: boolean
+    emailReason?: InviteEmailReason
+    error?: string
+  }
+  try {
+    json = await res.json()
+  } catch {
+    return { error: `Server error (${res.status}).` }
+  }
+  if (!res.ok) {
+    return { error: json.error || `Server error (${res.status}).` }
+  }
+  return {
+    link: json.link ? rowToLink(json.link) : undefined,
+    emailSent: !!json.emailSent,
+    emailReason: json.emailReason,
+  }
 }
 
 /** All links the current adult knows about (pending / accepted / revoked). */
@@ -141,6 +172,57 @@ export async function acceptInvite(args: {
   return {}
 }
 
+/**
+ * Auto-accept every pending invite addressed to the current user's email.
+ * Used by the student dashboard the moment a signed-in student lands with a
+ * student profile in hand: the student already proved they own the invited
+ * email by signing in, so the manual Accept step on /settings is friction
+ * for the common case. The /settings card is still the recovery path if
+ * this call fails or if the user wants to revoke afterwards.
+ *
+ * Returns the count of links accepted (0 when there were none, 0 on error).
+ *
+ * Why we don't filter by email client-side: RLS on `student_links` already
+ * scopes the SELECT to rows whose `invited_email` matches `auth.email()`,
+ * so a plain `.eq('status','pending')` sees only the current user's
+ * pending invites.
+ */
+export async function acceptPendingInvitesForCurrentUser(
+  studentProfileId: string,
+): Promise<{ accepted: number; error?: string }> {
+  const supabase = createClient()
+  const { data: userData } = await supabase.auth.getUser()
+  const user = userData.user
+  if (!user) return { accepted: 0, error: 'Not signed in.' }
+
+  const { data: rows, error: fetchErr } = await supabase
+    .from('student_links')
+    .select('id')
+    .eq('status', 'pending')
+  if (fetchErr) return { accepted: 0, error: fetchErr.message }
+  if (!rows || rows.length === 0) return { accepted: 0 }
+
+  const ids = (rows as Array<{ id: string }>).map((r) => r.id)
+  // RLS WITH CHECK on student_links_update_student rejects rows where the
+  // profile isn't yet visible (first-onboarding race) or where the link was
+  // revoked between our SELECT and UPDATE. Those rejections are silent —
+  // the row is just left untouched, no Postgres error. So we can't trust
+  // ids.length as the accepted count; we have to read back the rows that
+  // actually changed via `.select('id')` on the update response.
+  const { data: updatedRows, error: updateErr } = await supabase
+    .from('student_links')
+    .update({
+      status: 'accepted',
+      student_profile_id: studentProfileId,
+      student_user_id: user.id,
+      accepted_at: new Date().toISOString(),
+    })
+    .in('id', ids)
+    .select('id')
+  if (updateErr) return { accepted: 0, error: updateErr.message }
+  return { accepted: (updatedRows as Array<{ id: string }> | null)?.length ?? 0 }
+}
+
 /** Either side revokes. `revokedBy` records who called it for audit. */
 export async function revokeLink(args: {
   linkId: string
@@ -202,6 +284,41 @@ export async function loadLinkedStudentProfile(
   // canonicalised shape; we keep this helper thin so the import surface
   // from this module stays obvious.
   return { ...(blob as unknown as StudentProfile), id: data.id }
+}
+
+/**
+ * Convenience: load every accepted-link student for an adult, with the
+ * student's full profile blob normalized through migrateProfile. Returns the
+ * link side-by-side with the loaded profile so callers can show the
+ * adult-set label, accepted-at date, and the live progress in one render
+ * pass. Used by the parent / teacher dashboards.
+ *
+ * Optional `adultProfileId` filter scopes results to a single adult profile —
+ * matters when one auth user owns both a parent and a teacher profile under
+ * the same email; without the filter both dashboards would show the same
+ * combined roster.
+ */
+export async function loadAcceptedStudents(args: {
+  adultUserId: string
+  adultProfileId?: string
+}): Promise<Array<{ link: StudentLink; profile: StudentProfile }>> {
+  const links = await listAdultLinks(args.adultUserId)
+  const accepted = links.filter(
+    (l) =>
+      l.status === 'accepted' &&
+      l.studentProfileId &&
+      (!args.adultProfileId || l.adultProfileId === args.adultProfileId),
+  )
+  const loaded = await Promise.all(
+    accepted.map(async (link) => {
+      const blob = await loadLinkedStudentProfile(link.studentProfileId!)
+      if (!blob) return null
+      return { link, profile: migrateProfile(blob) }
+    }),
+  )
+  return loaded.filter(
+    (r): r is { link: StudentLink; profile: StudentProfile } => r !== null,
+  )
 }
 
 /**
