@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import { useCallback, useEffect, useState } from 'react'
+import { toast } from 'sonner'
 import {
   Card,
   CardContent,
@@ -20,8 +22,10 @@ import {
   ClipboardList,
   Info,
   CalendarDays,
+  Mail,
+  UserPlus,
 } from 'lucide-react'
-import type { StudentProfile, Band } from '@/types'
+import type { StudentLink, StudentProfile, Band, ProficiencyLevel } from '@/types'
 import { BAND_META, bandFromProficiency, defaultProficiencyForBand } from '@/types'
 import { computeStreak, lastActivityLabel } from '@/lib/streak'
 import { useProfile } from '@/lib/profile-context'
@@ -35,20 +39,67 @@ import {
   planCursor,
 } from '@/content/studyPlans'
 import { AVANT_RUBRIC_SUMMARY } from '@/constants'
+import {
+  listAdultLinks,
+  loadAcceptedStudents,
+  updateLinkedStudentPath,
+} from '@/lib/studentLinks'
 
 // -----------------------------------------------------------------------------
-// ParentDashboard — Phase 3. Single-student view tuned for a parent glancing
-// in: where is my child on the ladder, what are they working on this week,
-// how do I read the exam output. Demo banner up top is explicit.
+// ParentDashboard — when signed in, reads accepted child links from
+// public.student_links. Renders the (first) linked child's progress + the
+// path-dial editor (writes through update_linked_student_path). Falls back
+// to the seeded demoStudent only when there is no auth session (E2E suite,
+// public-route preview).
 // -----------------------------------------------------------------------------
+
+type ChildEntry = { link: StudentLink; profile: StudentProfile }
 
 export default function ParentDashboard({ profile }: { profile: StudentProfile }) {
-  const { setProfile } = useProfile()
-  const demo = profile.demoStudent
+  const { authUser, setProfile } = useProfile()
   const totalPacks = TOPIC_PACKS.length
   const totalCaps = CAPSTONES.length
 
-  const handleChildBandChange = (nextBand: Band) => {
+  const [children, setChildren] = useState<ChildEntry[] | null>(null)
+  const [pendingCount, setPendingCount] = useState(0)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [updating, setUpdating] = useState(false)
+
+  const refresh = useCallback(async () => {
+    if (!authUser) {
+      setChildren([])
+      setPendingCount(0)
+      return
+    }
+    const [accepted, all] = await Promise.all([
+      loadAcceptedStudents({
+        adultUserId: authUser.id,
+        adultProfileId: profile.id,
+      }),
+      listAdultLinks(authUser.id),
+    ])
+    setChildren(accepted)
+    setPendingCount(
+      all.filter(
+        (l) => l.status === 'pending' && l.adultProfileId === profile.id,
+      ).length,
+    )
+    setSelectedId((prev) => {
+      if (prev && accepted.some((c) => c.profile.id === prev)) return prev
+      return accepted[0]?.profile.id ?? null
+    })
+  }, [authUser, profile.id])
+
+  useEffect(() => {
+    refresh()
+  }, [refresh])
+
+  const isAuthMode = !!authUser
+  const isLoading = isAuthMode && children === null
+
+  // Demo-mode fallback (E2E auth bypass / public preview). Same in-place
+  // mutation pattern as before.
+  const handleDemoBandChange = (nextBand: Band) => {
     const nextLevel = defaultProficiencyForBand(nextBand)
     const nextPlanId = studyPlanForLevel(nextLevel).id
     setProfile((p) => {
@@ -65,19 +116,159 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
     })
   }
 
-  if (!demo) {
+  const handleLinkedBandChange = async (
+    studentProfileId: string,
+    nextBand: Band,
+  ) => {
+    const nextLevel = defaultProficiencyForBand(nextBand)
+    const nextPlanId = studyPlanForLevel(nextLevel).id
+    setUpdating(true)
+    setChildren((prev) =>
+      prev
+        ? prev.map((row) =>
+            row.profile.id === studentProfileId
+              ? {
+                  ...row,
+                  profile: {
+                    ...row.profile,
+                    currentBand: nextBand,
+                    currentLevel: nextLevel,
+                    selectedStudyPlanId: nextPlanId,
+                  },
+                }
+              : row,
+          )
+        : prev,
+    )
+    const { error } = await updateLinkedStudentPath({
+      studentProfileId,
+      currentLevel: nextLevel,
+      currentBand: nextBand,
+      selectedStudyPlanId: nextPlanId,
+      examDate: null,
+    })
+    setUpdating(false)
+    if (error) {
+      toast.error(error)
+      refresh()
+      return
+    }
+    toast.success('Updated.')
+    refresh()
+  }
+
+  // ---- Demo-mode rendering (no signed-in user) --------------------------
+  if (!isAuthMode) {
+    const demo = profile.demoStudent
+    if (!demo) {
+      return (
+        <div className="container mx-auto px-4 py-12">
+          <Card className="max-w-xl mx-auto">
+            <CardHeader>
+              <CardTitle>Parent profile without a child</CardTitle>
+              <CardDescription>
+                No demo child was seeded. Delete and re-create this profile from Settings to fix.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild variant="outline">
+                <Link href="/settings">Go to settings</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      )
+    }
+    return (
+      <ChildView
+        parentName={profile.name}
+        bannerKind="demo"
+        pendingCount={0}
+        childName={demo.name}
+        currentLevel={demo.currentLevel}
+        currentBand={demo.currentBand ?? bandFromProficiency(demo.currentLevel)}
+        activityDates={demo.activityDates}
+        completedTopicIds={demo.completedTopicIds}
+        completedCapstoneIds={demo.completedCapstoneIds}
+        flashcardsMastered={demo.flashcardsMastered}
+        selectedStudyPlanId={demo.selectedStudyPlanId}
+        totalPacks={totalPacks}
+        totalCaps={totalCaps}
+        onBandChange={handleDemoBandChange}
+        applyLabel="Update child's level"
+        editorTitle={`Adjust ${(demo.name.split(/\s+/)[0] || demo.name)}'s level`}
+        editorDescription="If your child's real-world level is different from what you picked at onboarding, change it here. Completed lessons stay completed."
+        confirmDescription={`Move ${demo.name} to a new band? Upcoming weeks re-sequence; completed packs and capstones are untouched.`}
+      />
+    )
+  }
+
+  // ---- Real-data rendering ---------------------------------------------
+  if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-12">
-        <Card className="max-w-xl mx-auto">
+        <Card className="max-w-2xl mx-auto">
           <CardHeader>
-            <CardTitle>Parent profile without a child</CardTitle>
+            <CardTitle>Loading…</CardTitle>
+            <CardDescription>Reading your linked children.</CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
+    )
+  }
+
+  const list = children ?? []
+  const parentFirst = profile.name.split(/\s+/)[0] || profile.name
+
+  if (list.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-8 space-y-6">
+        {pendingCount > 0 ? (
+          <div
+            role="note"
+            className="flex items-start justify-between gap-3 rounded-lg border border-primary/30 bg-primary/5 p-4 text-foreground"
+          >
+            <div className="flex items-start gap-3">
+              <Mail className="h-5 w-5 mt-0.5 shrink-0 text-primary" aria-hidden />
+              <div className="text-sm">
+                <p className="font-medium">
+                  {pendingCount} pending invite{pendingCount === 1 ? '' : 's'}
+                </p>
+                <p className="text-muted-foreground">
+                  Tell your child to sign in with the email you sent the invite to,
+                  then accept it from their Settings.
+                </p>
+              </div>
+            </div>
+            <Button asChild size="sm" variant="outline">
+              <Link href="/settings">Manage</Link>
+            </Button>
+          </div>
+        ) : null}
+
+        <div>
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground">
+            Welcome, {parentFirst}!
+          </h1>
+          <p className="text-muted-foreground mt-1">
+            Connect a child to see their progress here.
+          </p>
+        </div>
+
+        <Card className="max-w-2xl">
+          <CardHeader>
+            <CardTitle>No connected children yet</CardTitle>
             <CardDescription>
-              No demo child was seeded. Delete and re-create this profile from Settings to fix.
+              Send an invite from Settings — your child accepts on their next sign-in
+              and you&rsquo;ll see their progress here.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline">
-              <Link href="/settings">Go to settings</Link>
+            <Button asChild>
+              <Link href="/settings">
+                <UserPlus className="mr-2 h-4 w-4" />
+                Invite a child
+              </Link>
             </Button>
           </CardContent>
         </Card>
@@ -85,23 +276,120 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
     )
   }
 
-  const streak = computeStreak(demo.activityDates)
-  const streakLabel = lastActivityLabel(demo.activityDates)
+  const selected =
+    list.find((c) => c.profile.id === selectedId) ?? list[0]
+  const child = selected.profile
+  const childBand = child.currentBand ?? bandFromProficiency(child.currentLevel)
+
+  return (
+    <div className="space-y-0">
+      {list.length > 1 ? (
+        <div className="container mx-auto px-4 pt-6">
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base">Choose a child</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-wrap gap-2">
+              {list.map((c) => {
+                const active = c.profile.id === selected.profile.id
+                return (
+                  <Button
+                    key={c.link.id}
+                    variant={active ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setSelectedId(c.profile.id)}
+                  >
+                    {c.profile.name || c.link.invitedEmail}
+                  </Button>
+                )
+              })}
+            </CardContent>
+          </Card>
+        </div>
+      ) : null}
+
+      <ChildView
+        parentName={profile.name}
+        bannerKind={pendingCount > 0 ? 'pending' : 'none'}
+        pendingCount={pendingCount}
+        childName={child.name}
+        currentLevel={child.currentLevel}
+        currentBand={childBand}
+        activityDates={child.activityDates}
+        completedTopicIds={child.completedTopicIds}
+        completedCapstoneIds={child.completedCapstoneIds || []}
+        flashcardsMastered={child.flashcardsMastered}
+        selectedStudyPlanId={child.selectedStudyPlanId}
+        totalPacks={totalPacks}
+        totalCaps={totalCaps}
+        editorTitle={`Adjust ${(child.name.split(/\s+/)[0] || child.name)}'s level`}
+        editorDescription="If your child's real-world level is different from what's set, change it here. Completed lessons stay completed."
+        confirmDescription={`Move ${child.name} to a new band? Upcoming weeks re-sequence; completed packs and capstones are untouched.`}
+        applyLabel={updating ? 'Saving…' : "Update child's level"}
+        onBandChange={(next) => handleLinkedBandChange(child.id, next)}
+      />
+    </div>
+  )
+}
+
+interface ChildViewProps {
+  parentName: string
+  bannerKind: 'demo' | 'pending' | 'none'
+  pendingCount: number
+  childName: string
+  currentLevel: ProficiencyLevel
+  currentBand: Band
+  activityDates: string[] | undefined
+  completedTopicIds: string[]
+  completedCapstoneIds: string[]
+  flashcardsMastered: string[] | undefined
+  selectedStudyPlanId: string | undefined
+  totalPacks: number
+  totalCaps: number
+  editorTitle: string
+  editorDescription: string
+  confirmDescription: string
+  applyLabel: string
+  onBandChange: (next: Band) => void
+}
+
+function ChildView({
+  parentName,
+  bannerKind,
+  pendingCount,
+  childName,
+  currentLevel,
+  currentBand,
+  activityDates,
+  completedTopicIds,
+  completedCapstoneIds,
+  flashcardsMastered,
+  selectedStudyPlanId,
+  totalPacks,
+  totalCaps,
+  editorTitle,
+  editorDescription,
+  confirmDescription,
+  applyLabel,
+  onBandChange,
+}: ChildViewProps) {
+  const streak = computeStreak(activityDates)
+  const streakLabel = lastActivityLabel(activityDates)
   const xp = computeXp({
-    completedTopicIds: demo.completedTopicIds,
-    completedCapstoneIds: demo.completedCapstoneIds,
-    flashcardsMastered: demo.flashcardsMastered,
+    completedTopicIds,
+    completedCapstoneIds,
+    flashcardsMastered: flashcardsMastered || [],
     evaluations: {},
     speakingRecordings: {},
   })
 
   const plan =
-    getStudyPlan(demo.selectedStudyPlanId) || studyPlanForLevel(demo.currentLevel)
+    getStudyPlan(selectedStudyPlanId) || studyPlanForLevel(currentLevel)
   const cursor = planCursor(
     plan,
-    demo.completedTopicIds,
-    demo.completedCapstoneIds,
-    demo.currentLevel as unknown as string,
+    completedTopicIds,
+    completedCapstoneIds,
+    currentLevel as unknown as string,
     [],
   )
   const currentWeek = plan.weeks.find((w) => w.weekIndex === cursor.currentWeekIndex)
@@ -111,41 +399,62 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
     : undefined
 
   const totalItems = totalPacks + totalCaps
-  const doneItems = demo.completedTopicIds.length + demo.completedCapstoneIds.length
+  const doneItems = completedTopicIds.length + completedCapstoneIds.length
   const progressPct = totalItems ? Math.round((doneItems / totalItems) * 100) : 0
 
-  const initials = (demo.name.trim().charAt(0) || 'S').toUpperCase()
-  const parentFirst = profile.name.split(/\s+/)[0] || profile.name
-  const demoBand = demo.currentBand ?? bandFromProficiency(demo.currentLevel)
-  const demoBandMeta = BAND_META[demoBand]
+  const initials = (childName.trim().charAt(0) || 'S').toUpperCase()
+  const parentFirst = parentName.split(/\s+/)[0] || parentName
+  const childBandMeta = BAND_META[currentBand]
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
-      {/* Demo banner */}
-      <div
-        role="note"
-        className="flex items-start gap-3 rounded-lg border border-amber-300/50 bg-amber-50 dark:bg-amber-950/30 p-4 text-amber-900 dark:text-amber-100"
-      >
-        <Info className="h-5 w-5 mt-0.5 shrink-0" aria-hidden />
-        <div className="text-sm">
-          <p className="font-medium">Demo mode</p>
-          <p className="text-amber-900/80 dark:text-amber-100/80">
-            This shows a seeded demo child at the level you picked during onboarding, so you can
-            see what the parent view looks like before your own child starts.
-          </p>
+      {bannerKind === 'demo' ? (
+        <div
+          role="note"
+          className="flex items-start gap-3 rounded-lg border border-amber-300/50 bg-amber-50 dark:bg-amber-950/30 p-4 text-amber-900 dark:text-amber-100"
+        >
+          <Info className="h-5 w-5 mt-0.5 shrink-0" aria-hidden />
+          <div className="text-sm">
+            <p className="font-medium">Demo mode</p>
+            <p className="text-amber-900/80 dark:text-amber-100/80">
+              This shows a seeded demo child at the level you picked during onboarding, so you can
+              see what the parent view looks like before your own child connects.
+            </p>
+          </div>
         </div>
-      </div>
+      ) : bannerKind === 'pending' ? (
+        <div
+          role="note"
+          className="flex items-start justify-between gap-3 rounded-lg border border-primary/30 bg-primary/5 p-4 text-foreground"
+        >
+          <div className="flex items-start gap-3">
+            <Mail className="h-5 w-5 mt-0.5 shrink-0 text-primary" aria-hidden />
+            <div className="text-sm">
+              <p className="font-medium">
+                {pendingCount} pending invite{pendingCount === 1 ? '' : 's'}
+              </p>
+              <p className="text-muted-foreground">
+                Tell each invited child to sign in with the email you sent the invite to,
+                then accept it from their Settings.
+              </p>
+            </div>
+          </div>
+          <Button asChild size="sm" variant="outline">
+            <Link href="/settings">Manage</Link>
+          </Button>
+        </div>
+      ) : null}
 
-      {/* Welcome */}
       <div>
         <h1 className="text-3xl md:text-4xl font-bold text-foreground">
           Welcome, {parentFirst}!
         </h1>
-        <p className="text-muted-foreground mt-1">Here's how {demo.name} is doing on Hindi.</p>
+        <p className="text-muted-foreground mt-1">
+          Here&rsquo;s how {childName} is doing on Hindi.
+        </p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
-        {/* Student card + This week */}
         <div className="lg:col-span-2 space-y-6">
           <Card>
             <CardHeader>
@@ -156,12 +465,12 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
-                  <CardTitle className="text-2xl">{demo.name}</CardTitle>
+                  <CardTitle className="text-2xl">{childName}</CardTitle>
                   <CardDescription className="flex items-center gap-2 mt-1 flex-wrap">
-                    <Badge variant="secondary" title={`STAMP: ${demo.currentLevel}`}>
-                      {demoBandMeta.label}
+                    <Badge variant="secondary" title={`STAMP: ${currentLevel}`}>
+                      {childBandMeta.label}
                     </Badge>
-                    <span className="text-xs text-muted-foreground">{demoBandMeta.stampRange}</span>
+                    <span className="text-xs text-muted-foreground">{childBandMeta.stampRange}</span>
                   </CardDescription>
                 </div>
               </div>
@@ -173,7 +482,7 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
                 <MiniStat
                   icon={BookOpen}
                   label="Packs done"
-                  value={`${demo.completedTopicIds.length}`}
+                  value={`${completedTopicIds.length}`}
                   hint={`of ${totalPacks}`}
                 />
                 <MiniStat
@@ -223,41 +532,40 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
               ) : null}
               {cursor.isAllDone ? (
                 <p className="text-sm text-muted-foreground italic">
-                  {demo.name} has finished the plan — they're ready for a timed mock exam.
+                  {childName} has finished the plan — they&rsquo;re ready for a timed mock exam.
                 </p>
               ) : null}
             </CardContent>
           </Card>
         </div>
 
-        {/* Level explainer + Links */}
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Understanding {demo.name.split(/\s+/)[0]}'s level</CardTitle>
+              <CardTitle>Understanding {childName.split(/\s+/)[0]}&rsquo;s level</CardTitle>
               <CardDescription>
-                {demoBandMeta.label} · {demoBandMeta.stampRange}
+                {childBandMeta.label} · {childBandMeta.stampRange}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3 text-sm text-muted-foreground">
-              <p>{demoBandMeta.description}</p>
+              <p>{childBandMeta.description}</p>
               <p>
                 The three bands — Foundations, Intermediate, and Skilled — map to the STAMP ladder.
                 The Intermediate band (Benchmark 5) is what earns 3 FCPS world language credits.
               </p>
               <p className="text-xs text-muted-foreground/80 italic">
-                STAMP target: {demo.currentLevel}. {AVANT_RUBRIC_SUMMARY[demo.currentLevel]}
+                STAMP target: {currentLevel}. {AVANT_RUBRIC_SUMMARY[currentLevel]}
               </p>
             </CardContent>
           </Card>
 
           <BandLevelDial
-            value={demoBand}
-            title={`Adjust ${demo.name.split(/\s+/)[0]}'s level`}
-            description="If your child's real-world level is different from what you picked at onboarding, change it here. Completed lessons stay completed."
-            confirmDescription={`Move ${demo.name} to a new band? Upcoming weeks re-sequence; completed packs and capstones are untouched.`}
-            applyLabel="Update child's level"
-            onConfirm={handleChildBandChange}
+            value={currentBand}
+            title={editorTitle}
+            description={editorDescription}
+            confirmDescription={confirmDescription}
+            applyLabel={applyLabel}
+            onConfirm={onBandChange}
             compact
           />
 
