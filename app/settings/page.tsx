@@ -20,6 +20,7 @@ import { Switch } from '@/components/ui/switch'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge.shadcn'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import {
   ShieldCheck,
   Info,
@@ -39,6 +40,7 @@ import {
   defaultProficiencyForBand,
   type Band,
   type ProfileRole,
+  type StudentGender,
   type StudentProfile,
 } from '@/types'
 import { studyPlanForLevel } from '@/content/studyPlans'
@@ -103,6 +105,10 @@ export default function SettingsPage() {
   const handleExport = () => {
     const exportedAt = downloadJsonExport(profile)
     setProfile((p) => ({ ...p, lastExportedAt: exportedAt }))
+  }
+
+  const handleGenderChange = (next: StudentGender) => {
+    setProfile((p) => ({ ...p, gender: next }))
   }
 
   const handleBandChange = (nextBand: Band) => {
@@ -252,6 +258,61 @@ export default function SettingsPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Gender (student profiles only) -------------------------------- */}
+        {(profile.role ?? 'student') === 'student' ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>Gender</CardTitle>
+              <CardDescription>
+                We use this to render Hindi grammar in the right form (verbs,
+                adjectives). Default is male. You can change this any time.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <RadioGroup
+                value={profile.gender ?? 'male'}
+                onValueChange={(v) => handleGenderChange(v as StudentGender)}
+                className="grid gap-3 sm:grid-cols-2"
+                aria-label="Select speaker gender for Hindi grammar"
+              >
+                {(['male', 'female'] as const).map((g) => {
+                  const active = (profile.gender ?? 'male') === g
+                  const label = g === 'male' ? 'Male' : 'Female'
+                  const example =
+                    g === 'male'
+                      ? 'मैं गया · मैं खुश हूँ · मैंने देखा'
+                      : 'मैं गई · मैं खुश हूँ · मैंने देखा'
+                  return (
+                    <Label
+                      key={g}
+                      htmlFor={`gender-${g}`}
+                      className={`flex items-start gap-2 rounded-lg border p-3 cursor-pointer transition-colors ${
+                        active
+                          ? 'border-primary ring-2 ring-primary/20 bg-primary/5'
+                          : 'border-border hover:border-primary/40'
+                      }`}
+                    >
+                      <RadioGroupItem
+                        value={g}
+                        id={`gender-${g}`}
+                        className="mt-1"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <span className="font-semibold text-foreground">
+                          {label}
+                        </span>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          {example}
+                        </p>
+                      </div>
+                    </Label>
+                  )
+                })}
+              </RadioGroup>
+            </CardContent>
+          </Card>
+        ) : null}
 
         {/* Level dial ---------------------------------------------------- */}
         <BandLevelDial

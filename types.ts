@@ -234,6 +234,18 @@ export interface SpeakingAttempt {
   recordedAt: string;
 }
 
+/**
+ * Speaker gender used to render Hindi grammar in the right form (verbs,
+ * adjectives, gendered participles). Optional — `undefined` is treated as
+ * `'male'` everywhere the renderer or `<G>` primitive consumes it. Settable
+ * from Settings; not collected during onboarding (avoiding flow churn).
+ *
+ * Today only the three anchor capstones (C01, C05, C10) carry gendered
+ * `hindiMale` overrides; everything else falls back to the authored `hindi`
+ * field. See content/HOUSE_STYLE.md "Gendered first-person content".
+ */
+export type StudentGender = 'male' | 'female';
+
 export interface StudentProfile {
   id: string;
   name: string;
@@ -245,6 +257,13 @@ export interface StudentProfile {
    * aligned value; `currentBand` is the label we show in UI.
    */
   currentBand: Band;
+  /**
+   * Optional speaker gender. Drives Hindi gendered-form rendering for
+   * student-role profiles. `undefined` is treated as `'male'`. Hidden in
+   * the Settings UI for parent / teacher profiles (their `demoStudent`
+   * doesn't carry a gender in v1).
+   */
+  gender?: StudentGender;
   startDate: string;
   examDate: string;
 
@@ -419,11 +438,14 @@ export function migrateProfile(raw: any): StudentProfile {
     ? raw.currentBand
     : bandFromProficiency(currentLevel);
   const demoStudent = migrateDemoStudent(raw.demoStudent);
+  const gender: StudentGender | undefined =
+    raw.gender === 'male' || raw.gender === 'female' ? raw.gender : undefined;
   const profile: StudentProfile = {
     id: raw.id,
     name: fixParentNameLegacy(raw.name, role, demoStudent),
     currentLevel,
     currentBand,
+    gender,
     startDate: raw.startDate,
     examDate: raw.examDate,
     role,

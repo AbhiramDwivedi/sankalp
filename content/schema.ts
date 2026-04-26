@@ -333,8 +333,30 @@ export interface CrossTopicRef {
 
 export interface EssayVersion {
   label: EssayVersionLabel;
+  /**
+   * Default Hindi text. Used by validators and the credit-audit script
+   * (token + word-count searches) and rendered to readers when no gendered
+   * override matches their profile. Existing capstones author this in a
+   * single voice (often female-coded) — `hindiMale` / `hindiFemale` layer
+   * gendered forms on top without disturbing the audit.
+   */
   hindi: string;
+  /**
+   * Optional male-speaker variant. Selected by `pickGenderedHindi()` when
+   * the active student profile's `gender` is `'male'` or `undefined`
+   * (default-male per spec). Falls back to `hindi` when absent.
+   */
+  hindiMale?: string;
+  /**
+   * Optional female-speaker variant. Selected by `pickGenderedHindi()`
+   * when the active student profile's `gender` is `'female'`. Falls back
+   * to `hindi` when absent.
+   */
+  hindiFemale?: string;
   transliteration: string;
+  /** Optional gendered transliterations, parallel to hindiMale/hindiFemale. */
+  transliterationMale?: string;
+  transliterationFemale?: string;
   english: string;
   wordCount: number;
   tensesUsed: Tense[];

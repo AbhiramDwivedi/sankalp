@@ -42,6 +42,28 @@ Every capstone exports one `pack: Capstone` object conforming to `content/schema
 - No Devanagari typos. Run validator before committing.
 - No annotations referencing non-existent paragraphs.
 
+## Gendered first-person variants (optional)
+
+`EssayVersion` accepts optional `hindiMale` / `hindiFemale` overrides
+(parallel `transliterationMale` / `transliterationFemale` for the
+phonetic line). The renderer picks the right form via
+`pickGenderedHindi(version, profile?.gender)` — `undefined` and `'male'`
+both resolve to `hindiMale ?? hindi`; `'female'` resolves to
+`hindiFemale ?? hindi`. The canonical `hindi` field is the audit fallback
+and stays unchanged when authors add gendered overrides.
+
+C01, C05, and C10 ship with `hindiMale` overrides (existing essays were
+authored from a female-coded perspective; the male variant only flips the
+speaker-as-self verbs and adjectives). When authoring a new capstone:
+
+- Pick a single voice for `hindi`. Stay consistent within the essay.
+- Add the matched `hindiMale` (and/or `hindiFemale`) ONLY for words that
+  truly change form. Most `मैं` sentences are gender-neutral — see
+  `content/HOUSE_STYLE.md` "Gendered first-person content" for the
+  checklist.
+- Annotations key off the canonical `hindi` text. Don't author annotations
+  against an override.
+
 ## How to test
 
 1. `npx tsc --noEmit` — clean.
