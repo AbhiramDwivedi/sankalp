@@ -58,6 +58,23 @@ export function weeksUntilExam(iso: string | undefined | null, now: Date = new D
 }
 
 /**
+ * Whole calendar weeks elapsed (floored) since `startDateIso`. Returns 0 when
+ * the start date is missing, malformed, or in the future. Local-midnight
+ * anchored to match the rest of this module — the dashboard pacing nudge uses
+ * this to subtract weeks-already-spent from the authored plan length so it
+ * compares "weeks of plan content left" against "weeks until exam", not raw
+ * `plan.durationWeeks`.
+ */
+export function weeksSince(startDateIso: string | undefined | null, now: Date = new Date()): number {
+  const start = parseExamDate(startDateIso)
+  if (!start) return 0
+  const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const diffMs = todayMidnight.getTime() - start.getTime()
+  if (diffMs <= 0) return 0
+  return Math.floor(diffMs / MS_PER_DAY / 7)
+}
+
+/**
  * "Nov 1, 2026" style label suitable for the dashboard tile + Settings hint.
  * Returns null when the date string is invalid.
  */

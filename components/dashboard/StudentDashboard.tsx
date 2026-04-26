@@ -37,7 +37,7 @@ import {
   planCursor,
 } from '@/content/studyPlans'
 import { AVANT_RUBRIC_SUMMARY } from '@/constants'
-import { describeExamCountdown, weeksUntilExam } from '@/lib/examDate'
+import { describeExamCountdown, weeksSince, weeksUntilExam } from '@/lib/examDate'
 import { toast } from 'sonner'
 import { useProfile } from '@/lib/profile-context'
 import {
@@ -155,15 +155,20 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
   // Exam-date countdown drives both the prominent dashboard tile (so the
   // student sees "exam in N days" without digging into Settings) and the
   // "exam sooner than plan" nudge below. We compute weeks-until once and
-  // compare against the plan's authored duration; we deliberately do NOT
-  // auto-switch — the nudge links into the pacing-options disclosure on
-  // /plan so the user stays in control.
+  // compare against the plan's *remaining* duration (authored length minus
+  // weeks already elapsed since profile.startDate) — otherwise a student 8
+  // weeks into a 10-week plan with 3 weeks left would see a false "plan too
+  // long" warning even though they only need 2 more weeks. We deliberately
+  // do NOT auto-switch — the nudge links into the pacing-options disclosure
+  // on /plan so the user stays in control.
   const examCountdown = describeExamCountdown(profile.examDate)
   const weeksLeft = weeksUntilExam(profile.examDate)
+  const weeksElapsed = weeksSince(profile.startDate)
+  const remainingPlanWeeks = Math.max(plan.durationWeeks - weeksElapsed, 0)
   const planTooLong =
     weeksLeft !== null &&
     weeksLeft > 0 &&
-    plan.durationWeeks > weeksLeft + 2 // grace: 2-week buffer before nudging
+    remainingPlanWeeks > weeksLeft + 2 // grace: 2-week buffer before nudging
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -227,8 +232,9 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
             <AlertTriangle className="h-5 w-5 mt-0.5 shrink-0" aria-hidden />
             <div className="text-sm">
               <p className="font-medium">
-                Your exam is in {weeksLeft} week{weeksLeft === 1 ? '' : 's'} but{' '}
-                {plan.titleEnglish} is {plan.durationWeeks} weeks.
+                You have ~{remainingPlanWeeks} week{remainingPlanWeeks === 1 ? '' : 's'} of{' '}
+                {plan.titleEnglish} content left, but only {weeksLeft} week
+                {weeksLeft === 1 ? '' : 's'} until your exam.
               </p>
               <p className="text-amber-900/80 dark:text-amber-100/80">
                 Consider switching to a faster pace so you finish before the test.

@@ -28,6 +28,7 @@ import {
 import type { Band, ProfileRole, StudentProfile } from '@/types'
 import { AVANT_RUBRIC_SUMMARY, calculateRecommendedDate } from '@/constants'
 import { studyPlanForLevel } from '@/content/studyPlans'
+import { formatExamDate } from '@/lib/examDate'
 import {
   GraduationCap,
   Users,
@@ -654,11 +655,13 @@ function StepConfirm({
           id="onboarding-exam-date"
           type="date"
           value={examDate}
+          min={new Date().toISOString().slice(0, 10)}
           onChange={(e) => onExamDateChange(e.target.value)}
         />
         <p className="text-xs text-muted-foreground">
           When do you take the STAMP test? Default:{' '}
-          {recommendedExamDate} — change any time from Settings.
+          {formatExamDate(recommendedExamDate) ?? recommendedExamDate} — change any time from
+          Settings.
         </p>
       </div>
       {role !== 'student' && (
