@@ -368,6 +368,31 @@ function migrateDemoStudent(raw: any): DemoStudent | undefined {
   };
 }
 
+/**
+ * Backwards-compat fix for the parent-greeting bug. Pre-fix, the onboarding
+ * flow only collected the child's name and stored `"{ChildName}'s family"`
+ * as `profile.name`, which made the dashboard greet "Welcome, Soham's!".
+ * This rewrites that pattern back to the generic label "Parent" so the
+ * greeting becomes "Welcome, Parent!" — not great, but at least correct.
+ * The user can fix it from Settings (the Name input there is editable).
+ *
+ * Idempotent: only triggers when the role is 'parent', the name ends with
+ * "'s family", AND the seeded demo student's name is the prefix. Anything
+ * else passes through untouched.
+ */
+function fixParentNameLegacy(
+  rawName: any,
+  role: ProfileRole,
+  demoStudent: DemoStudent | undefined,
+): any {
+  if (role !== 'parent') return rawName;
+  if (typeof rawName !== 'string') return rawName;
+  if (!demoStudent?.name) return rawName;
+  const expectedBad = `${demoStudent.name}'s family`;
+  if (rawName === expectedBad) return 'Parent';
+  return rawName;
+}
+
 export function migrateProfile(raw: any): StudentProfile {
   const role: ProfileRole =
     raw.role === 'teacher' || raw.role === 'parent' ? raw.role : 'student';
@@ -375,15 +400,16 @@ export function migrateProfile(raw: any): StudentProfile {
   const currentBand: Band = isBand(raw.currentBand)
     ? raw.currentBand
     : bandFromProficiency(currentLevel);
+  const demoStudent = migrateDemoStudent(raw.demoStudent);
   const profile: StudentProfile = {
     id: raw.id,
-    name: raw.name,
+    name: fixParentNameLegacy(raw.name, role, demoStudent),
     currentLevel,
     currentBand,
     startDate: raw.startDate,
     examDate: raw.examDate,
     role,
-    demoStudent: migrateDemoStudent(raw.demoStudent),
+    demoStudent,
     completedTopicIds: Array.isArray(raw.completedTopicIds) ? raw.completedTopicIds : [],
     inProgressTopicId: raw.inProgressTopicId,
     evaluations: raw.evaluations || {},

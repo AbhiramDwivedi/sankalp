@@ -98,7 +98,14 @@ function OnboardingRouteInner() {
 
   const [step, setStep] = useState<number>(initialRole ? 2 : 1)
   const [role, setRole] = useState<Role | ''>(initialRole)
+  // For student / teacher `name` is the user's own name. For parent `name`
+  // is the parent's own name and `childName` is the seeded demo-child label
+  // (and, post-fix, drives ChildView greetings on the dashboard). See the
+  // bug fix in handleStart() — pre-fix we built `"{ChildName}'s family"` and
+  // stored it as profile.name, which made the dashboard greet "Welcome,
+  // Soham's!". Now profile.name is always the adult's own name.
   const [name, setName] = useState<string>('')
+  const [childName, setChildName] = useState<string>('')
   const [band, setBand] = useState<Band>('foundations')
   const [alreadyMessage, setAlreadyMessage] = useState<string>('')
 
@@ -198,7 +205,7 @@ function OnboardingRouteInner() {
       case 1:
         return 'Choose your role'
       case 2:
-        return role === 'student' ? "What's your name?" : role === 'parent' ? "What's your child's name?" : 'Your name (teacher)'
+        return role === 'student' ? "What's your name?" : role === 'parent' ? 'Tell us about you and your child' : 'Your name (teacher)'
       case 3:
         return role === 'student' ? 'Where are you on the Hindi ladder?' : "Where is your student on the Hindi ladder?"
       default:
@@ -208,7 +215,15 @@ function OnboardingRouteInner() {
 
   const canAdvance = (() => {
     if (step === 1) return !!role
-    if (step === 2) return name.trim().length >= 1
+    if (step === 2) {
+      // Parent flow needs both the parent's own name AND the child's name —
+      // they drive `profile.name` (greeting) and `demoStudent.name`
+      // respectively. Other roles only need the single self-name.
+      if (role === 'parent') {
+        return name.trim().length >= 1 && childName.trim().length >= 1
+      }
+      return name.trim().length >= 1
+    }
     if (step === 3) return !!band
     return true
   })()
@@ -229,6 +244,7 @@ function OnboardingRouteInner() {
   function handleStart() {
     if (!role) return
     const trimmedName = name.trim()
+    const trimmedChildName = childName.trim()
     const examDate = calculateRecommendedDate(level)
     const planId = matchedPlan.id
 
@@ -259,16 +275,16 @@ function OnboardingRouteInner() {
         selectedStudyPlanId: planId,
       }
     } else {
-      // Teacher / Parent — `name` is the adult; seed a demo student. The
-      // demo student's own name is what the teacher/parent entered (for a
-      // parent "Aarav" feels right; for a teacher we fall back to a Hindi
-      // first name if they typed their own name).
+      // Teacher / Parent — `name` is always the adult's own name. For parent
+      // we now also collect a separate `childName` (StepName renders two
+      // inputs in the parent flow). The seeded demo student uses that
+      // child's name; teacher falls through to a random Hindi first name.
       const demoName =
         role === 'parent'
-          ? trimmedName || pickDefaultDemoName()
+          ? trimmedChildName || pickDefaultDemoName()
           : pickDefaultDemoName()
       const adultName =
-        role === 'parent' ? `${trimmedName || 'Parent'}'s family` : trimmedName || 'Teacher'
+        role === 'parent' ? trimmedName || 'Parent' : trimmedName || 'Teacher'
       const demo = seedDemoStudent(level, demoName)
       newProfile = {
         id,
@@ -333,7 +349,7 @@ function OnboardingRouteInner() {
                 <CardTitle className="text-2xl md:text-3xl">{stepTitle}</CardTitle>
                 <CardDescription>
                   {step === 1 && 'Pick the hat you wear when you open Sankalp.'}
-                  {step === 2 && role === 'parent' && "We'll use this to label the demo student's card."}
+                  {step === 2 && role === 'parent' && "Your name shows on your dashboard. The child's name labels the demo student card."}
                   {step === 2 && role === 'teacher' && 'Shows on your navbar; never leaves this device.'}
                   {step === 2 && role === 'student' && 'Shows on your dashboard and navbar.'}
                   {step === 3 && 'Three bands. Pick the one that fits today — you can switch from Settings later.'}
@@ -345,13 +361,20 @@ function OnboardingRouteInner() {
           <CardContent className="space-y-6">
             {step === 1 && <StepRole role={role} onChange={setRole} />}
             {step === 2 && (
-              <StepName role={role as Role} name={name} onChange={setName} />
+              <StepName
+                role={role as Role}
+                name={name}
+                childName={childName}
+                onChange={setName}
+                onChildChange={setChildName}
+              />
             )}
             {step === 3 && <StepBand band={band} onChange={setBand} />}
             {step === 4 && (
               <StepConfirm
                 role={role as Role}
                 name={name}
+                childName={childName}
                 band={band}
                 level={level}
                 planTitle={matchedPlan.titleEnglish}
@@ -430,10 +453,57 @@ function StepRole({ role, onChange }: { role: Role | ''; onChange: (r: Role) => 
   )
 }
 
-function StepName({ role, name, onChange }: { role: Role; name: string; onChange: (v: string) => void }) {
-  const label =
-    role === 'parent' ? "Child's name" : role === 'teacher' ? 'Your name' : 'Your name'
-  const placeholder = role === 'parent' ? 'e.g. Aarav' : role === 'teacher' ? 'e.g. Ms. Sharma' : 'e.g. Priya'
+function StepName({
+  role,
+  name,
+  childName,
+  onChange,
+  onChildChange,
+}: {
+  role: Role
+  name: string
+  childName: string
+  onChange: (v: string) => void
+  onChildChange: (v: string) => void
+}) {
+  // Parent flow collects two names in a single step: the parent's own name
+  // (drives the dashboard greeting "Welcome, {parentName}!") and the child's
+  // name (labels the demo-student card and any future linked-child entry).
+  // Pre-fix we only collected the child's name and stored "{Child}'s family"
+  // as profile.name, which made the dashboard greet "Welcome, Soham's!".
+  if (role === 'parent') {
+    return (
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="name">Your name</Label>
+          <Input
+            id="name"
+            autoFocus
+            value={name}
+            placeholder="e.g. Mrs. Sharma"
+            onChange={(e) => onChange(e.target.value)}
+          />
+          <p className="text-xs text-muted-foreground">
+            Shows in your dashboard greeting and the navbar.
+          </p>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="childName">Your child&rsquo;s name</Label>
+          <Input
+            id="childName"
+            value={childName}
+            placeholder="e.g. Aarav"
+            onChange={(e) => onChildChange(e.target.value)}
+          />
+          <p className="text-xs text-muted-foreground">
+            Labels the demo child card so the dashboard feels personal.
+          </p>
+        </div>
+      </div>
+    )
+  }
+  const label = role === 'teacher' ? 'Your name' : 'Your name'
+  const placeholder = role === 'teacher' ? 'e.g. Ms. Sharma' : 'e.g. Priya'
   return (
     <div className="space-y-2">
       <Label htmlFor="name">{label}</Label>
@@ -447,9 +517,7 @@ function StepName({ role, name, onChange }: { role: Role; name: string; onChange
       <p className="text-xs text-muted-foreground">
         {role === 'student'
           ? "We'll show this on your dashboard."
-          : role === 'parent'
-            ? "We'll label the demo child card with this name."
-            : 'Shows in the navbar. No email, no password.'}
+          : 'Shows in the navbar. No email, no password.'}
       </p>
     </div>
   )
@@ -494,6 +562,7 @@ function StepBand({ band, onChange }: { band: Band; onChange: (v: Band) => void 
 function StepConfirm({
   role,
   name,
+  childName,
   band,
   level,
   planTitle,
@@ -501,6 +570,7 @@ function StepConfirm({
 }: {
   role: Role
   name: string
+  childName: string
   band: Band
   level: ProficiencyLevel
   planTitle: string
@@ -509,11 +579,19 @@ function StepConfirm({
   const meta = ROLE_META[role]
   const Icon = meta.icon
   const bandMeta = BAND_META[band]
-  const shownName = name.trim() || (role === 'parent' ? 'Your child' : role === 'teacher' ? 'Teacher' : 'Student')
+  const trimmedName = name.trim()
+  const trimmedChildName = childName.trim()
+  // Parent confirmation card calls out both names so the user can see we
+  // captured them correctly. Other roles continue to show a single name.
+  const shownName =
+    role === 'parent'
+      ? `${trimmedName || 'Parent'} · Child: ${trimmedChildName || 'Your child'}`
+      : trimmedName ||
+        (role === 'teacher' ? 'Teacher' : 'Student')
   return (
     <div className="space-y-4">
       <div className="rounded-lg border border-border p-4 space-y-3 bg-muted/40">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <Icon className="h-5 w-5 text-primary" />
           <Badge variant="secondary">{meta.title}</Badge>
           <span className="text-sm text-muted-foreground">{shownName}</span>

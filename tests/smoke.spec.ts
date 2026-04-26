@@ -59,9 +59,14 @@ async function onboard(
   await page.goto(`${BASE}/onboarding?role=${role}`);
   // Step 2: name. shadcn CardTitle renders as <div>, so the "step title" is
   // plain text — we anchor on the Label associated with the input instead.
-  const nameInput = page.getByLabel(/your name|child's name/i).first();
+  // Parent flow renders TWO inputs (Your name / Your child's name); the
+  // smoke helper fills both with the same value so onboarding can advance.
+  const nameInput = page.getByLabel(/^your name$/i).first();
   await expect(nameInput).toBeVisible();
   await nameInput.fill(name);
+  if (role === 'parent') {
+    await page.getByLabel(/child.?s name/i).first().fill(name);
+  }
   await submitOnboardingStep(page);
   // Step 3: level. The Novice Low radio is pre-checked; we just advance.
   await expect(page.getByRole('radiogroup', { name: /proficiency level/i })).toBeVisible();
