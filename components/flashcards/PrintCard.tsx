@@ -9,14 +9,14 @@ import type { Flashcard } from '../../content/schema';
  * handlers. Fixed dimensions (3.5in × 2.5in — standard US index-card size)
  * so the browser's print engine cannot flex or shrink cards to fit.
  *
- * `showIndex` is a debug affordance for duplex-alignment verification; it is
+ * `showIndex` is a debug affordance for fold-alignment verification; it is
  * wired to a `?printtest=1` URL flag by PrintSheet and is OFF by default.
  */
 
 interface PrintCardProps {
   card: Flashcard;
   face: 'front' | 'back';
-  /** Optional overlay index for duplex alignment verification. */
+  /** Optional overlay index for fold-alignment verification. */
   showIndex?: number;
 }
 
@@ -137,8 +137,8 @@ export const PrintCard: React.FC<PrintCardProps> = ({ card, face, showIndex }) =
 };
 
 /**
- * Empty slot placeholder for partial final sheets. Keeps the 2×4 grid
- * dimensions intact so no card shifts position.
+ * Empty slot placeholder for partial final pages. Keeps the 4-row fold
+ * grid dimensions intact so no card shifts position.
  */
 export const PrintCardBlank: React.FC = () => (
   <div

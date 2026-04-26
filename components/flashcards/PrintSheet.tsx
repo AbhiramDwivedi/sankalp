@@ -3,25 +3,37 @@ import type { Deck, Flashcard } from '../../content/schema';
 import { PrintCard, PrintCardBlank } from './PrintCard';
 
 /**
- * 8-up duplex-aligned flashcard print layout.
+ * 4-up single-fold flashcard print layout (no duplex required).
  *
- * Layout math (US letter, 0.4in margins — see `@page` rule in index.html):
+ * Geometry (US letter portrait, 0.4in margins via the `@page flashcard` rule
+ * in app/globals.css):
  *   printable area = 7.7in × 10.2in
- *   cards          = 2 cols × 4 rows of 3.5in × 2.5in = 7.0in × 10.0in
- *   gutters        = 0.35in column gap, 0.05in row gap  (fits in 7.7×10.2)
+ *   left half      = 0in–3.85in   (card FRONTS, 4 stacked vertically)
+ *   right half     = 3.85in–7.7in (card BACKS, mirrored — see below)
+ *   each card      = 3.5in × 2.5in (4 rows × 2.5in = 10in fits in 10.2in)
  *
- * Each sheet produces TWO printed pages:
- *   page A — FrontSheet: 8 card fronts in reading order [0,1,2,3,4,5,6,7]
- *   page B — BackSheet:  same 8 cards but each row's columns REVERSED
- *                        so indices become [1,0, 3,2, 5,4, 7,6]
+ * Workflow for the user:
+ *   1. Print one-sided. (Each printed sheet contains 4 cards.)
+ *   2. Fold the page in half along the vertical centerline, with the PRINTED
+ *      side facing OUT. The blank back of the paper goes to the inside of
+ *      the fold — so both outer faces of the folded sheet show ink.
+ *   3. Cut along the 3 horizontal gutters between rows → 4 standalone
+ *      double-sided cards. No duplex printer, no alignment dance.
  *
- * When the printer duplexes on the LONG edge (standard "flip horizontally"),
- * the paper flips left↔right, which puts card N's back directly behind its
- * front. Validated visually via the ?printtest=1 index overlay.
+ * Why the back content is horizontally mirrored (`transform: scaleX(-1)`):
+ *   When you fold a sheet along a vertical centerline with print facing out,
+ *   the right half rotates 180° around the vertical axis to land on the back
+ *   face of the folded card. From the viewer's perspective on that back face,
+ *   anything printed there would otherwise appear mirrored. We pre-mirror the
+ *   back face on the printed page so it reads correctly after the fold.
  *
- * A partial final sheet (e.g. 13 cards → first sheet full, second sheet has
- * 5 cards) keeps the 2×4 grid and fills the empty cells with blank slots,
- * so no surviving card shifts position.
+ * Vertical alignment is direct: card N's front sits on row N of the left half;
+ * card N's back sits on row N of the right half. After folding, back N lands
+ * directly behind front N.
+ *
+ * Partial final pages (e.g. a 13-card deck → 3 full pages of 4 + 1 page with
+ * 1 card) keep the 4-row grid and fill empty rows with blank slots so no
+ * surviving card shifts position.
  *
  * The DeckRunner renders on-screen; PrintSheet is gated on `print:block` and
  * only appears when the browser is in print media. Screen flip interaction
@@ -33,8 +45,7 @@ interface PrintSheetProps {
   deck: Deck;
 }
 
-const CARDS_PER_SHEET = 8;
-const COLS = 2;
+const CARDS_PER_PAGE = 4;
 
 function chunk<T>(arr: readonly T[], size: number): T[][] {
   const out: T[][] = [];
@@ -42,7 +53,7 @@ function chunk<T>(arr: readonly T[], size: number): T[][] {
   return out;
 }
 
-/** Detect the `?printtest=1` URL flag for duplex-alignment debugging. */
+/** Detect the `?printtest=1` URL flag for fold-alignment debugging. */
 function usePrintTestFlag(): boolean {
   if (typeof window === 'undefined') return false;
   try {
@@ -52,145 +63,114 @@ function usePrintTestFlag(): boolean {
   }
 }
 
-interface SheetProps {
+interface PageProps {
   deck: Deck;
   cards: Flashcard[];
-  sheetIndex: number; // 0-based
-  face: 'front' | 'back';
+  pageIndex: number; // 0-based
   globalStart: number; // absolute card index of cards[0] within the deck
   showIndex: boolean;
 }
 
-const SheetHeader: React.FC<{ deck: Deck; sheetIndex: number; face: 'front' | 'back' }> = ({
-  deck,
-  sheetIndex,
-  face,
-}) => (
+const PageHeader: React.FC<{ deck: Deck; pageIndex: number }> = ({ deck, pageIndex }) => (
   <div
     style={{
-      fontSize: '7pt',
+      fontSize: '6.5pt',
       fontWeight: 900,
       letterSpacing: '0.18em',
       textTransform: 'uppercase',
       color: '#94a3b8',
       textAlign: 'center',
-      marginBottom: '0.12in',
+      marginBottom: '0.06in',
+      lineHeight: 1.1,
     }}
   >
-    {deck.title} · sheet {sheetIndex + 1} · {face}
+    {deck.title} · sheet {pageIndex + 1} · fold along centerline
   </div>
 );
 
-const SheetGrid: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: `repeat(${COLS}, 3.5in)`,
-      gridAutoRows: '2.5in',
-      columnGap: '0.35in',
-      rowGap: '0.05in',
-      justifyContent: 'center',
-    }}
-  >
-    {children}
-  </div>
-);
+/**
+ * One printed page = a 2-column grid (left = fronts, right = mirrored backs)
+ * of 4 rows. Each row holds one card front + its back.
+ */
+const FoldPage: React.FC<PageProps> = ({ deck, cards, pageIndex, globalStart, showIndex }) => {
+  const rows: React.ReactNode[] = [];
+  for (let row = 0; row < CARDS_PER_PAGE; row++) {
+    const card = cards[row];
+    const idx = globalStart + row;
 
-const FrontSheet: React.FC<SheetProps> = ({ deck, cards, sheetIndex, globalStart, showIndex }) => {
-  const cells: React.ReactNode[] = [];
-  for (let i = 0; i < CARDS_PER_SHEET; i++) {
-    const card = cards[i];
-    if (card) {
-      cells.push(
-        <PrintCard
-          key={`f-${card.id}`}
-          card={card}
-          face="front"
-          showIndex={showIndex ? globalStart + i : undefined}
-        />,
-      );
-    } else {
-      cells.push(<PrintCardBlank key={`f-blank-${i}`} />);
-    }
+    const frontCell = card ? (
+      <PrintCard card={card} face="front" showIndex={showIndex ? idx : undefined} />
+    ) : (
+      <PrintCardBlank />
+    );
+
+    // Back cell is horizontally mirrored so it reads correctly after the
+    // fold flips the right half around the vertical axis.
+    const backCell = card ? (
+      <div style={{ transform: 'scaleX(-1)', transformOrigin: 'center' }}>
+        <PrintCard card={card} face="back" showIndex={showIndex ? idx : undefined} />
+      </div>
+    ) : (
+      <PrintCardBlank />
+    );
+
+    rows.push(
+      <React.Fragment key={`r-${row}`}>
+        {frontCell}
+        {backCell}
+      </React.Fragment>,
+    );
   }
+
   return (
     <div
       style={{
         pageBreakAfter: 'always',
         breakAfter: 'page',
-        // Size the page container so Chromium doesn't paginate mid-grid.
-        minHeight: '10.2in',
       }}
     >
-      <SheetHeader deck={deck} sheetIndex={sheetIndex} face="front" />
-      <SheetGrid>{cells}</SheetGrid>
-    </div>
-  );
-};
-
-const BackSheet: React.FC<SheetProps> = ({ deck, cards, sheetIndex, globalStart, showIndex }) => {
-  // Mirror columns per row: [a,b, c,d, e,f, g,h] -> [b,a, d,c, f,e, h,g].
-  const cells: React.ReactNode[] = [];
-  for (let row = 0; row < CARDS_PER_SHEET / COLS; row++) {
-    for (let col = 0; col < COLS; col++) {
-      const mirroredCol = COLS - 1 - col;
-      const idx = row * COLS + mirroredCol;
-      const card = cards[idx];
-      if (card) {
-        cells.push(
-          <PrintCard
-            key={`b-${card.id}`}
-            card={card}
-            face="back"
-            showIndex={showIndex ? globalStart + idx : undefined}
-          />,
-        );
-      } else {
-        cells.push(<PrintCardBlank key={`b-blank-${row}-${col}`} />);
-      }
-    }
-  }
-  return (
-    <div
-      style={{
-        pageBreakAfter: 'always',
-        breakAfter: 'page',
-        minHeight: '10.2in',
-      }}
-    >
-      <SheetHeader deck={deck} sheetIndex={sheetIndex} face="back" />
-      <SheetGrid>{cells}</SheetGrid>
+      <PageHeader deck={deck} pageIndex={pageIndex} />
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '3.5in 3.5in',
+          gridAutoRows: '2.5in',
+          // Wide column gap = the fold gutter. Page printable width is 7.7in,
+          // 2 cards × 3.5in = 7in, leaving 0.7in for the centerline gutter.
+          columnGap: '0.7in',
+          rowGap: '0in',
+          justifyContent: 'center',
+          // Subtle dashed centerline so the user sees where to fold.
+          backgroundImage:
+            'linear-gradient(to bottom, #cbd5e1 50%, transparent 50%)',
+          backgroundSize: '1px 6px',
+          backgroundRepeat: 'repeat-y',
+          backgroundPosition: 'center top',
+        }}
+      >
+        {rows}
+      </div>
     </div>
   );
 };
 
 export const PrintSheet: React.FC<PrintSheetProps> = ({ deck }) => {
-  const sheets = chunk<Flashcard>(deck.cards, CARDS_PER_SHEET);
+  const pages = chunk<Flashcard>(deck.cards, CARDS_PER_PAGE);
   const showIndex = usePrintTestFlag();
 
   return (
     <div className="print-only hidden print:block flashcard-print-root">
-      {sheets.map((sheetCards, sheetIdx) => {
-        const globalStart = sheetIdx * CARDS_PER_SHEET;
+      {pages.map((pageCards, pageIdx) => {
+        const globalStart = pageIdx * CARDS_PER_PAGE;
         return (
-          <React.Fragment key={sheetIdx}>
-            <FrontSheet
-              deck={deck}
-              cards={sheetCards}
-              sheetIndex={sheetIdx}
-              globalStart={globalStart}
-              face="front"
-              showIndex={showIndex}
-            />
-            <BackSheet
-              deck={deck}
-              cards={sheetCards}
-              sheetIndex={sheetIdx}
-              globalStart={globalStart}
-              face="back"
-              showIndex={showIndex}
-            />
-          </React.Fragment>
+          <FoldPage
+            key={pageIdx}
+            deck={deck}
+            cards={pageCards}
+            pageIndex={pageIdx}
+            globalStart={globalStart}
+            showIndex={showIndex}
+          />
         );
       })}
     </div>
