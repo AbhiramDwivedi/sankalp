@@ -45,6 +45,7 @@ import { studyPlanForLevel } from '@/content/studyPlans'
 import { BandLevelDial } from '@/components/BandLevelDial'
 import { LinkedStudentsCard } from '@/components/settings/LinkedStudentsCard'
 import { LinkedAdultsCard } from '@/components/settings/LinkedAdultsCard'
+import { CoParentInviteCard } from '@/components/settings/CoParentInviteCard'
 
 const ROLE_ICON: Record<ProfileRole, React.ComponentType<{ className?: string }>> = {
   student: GraduationCap,
@@ -156,6 +157,12 @@ export default function SettingsPage() {
             adultProfileId={profile.id}
             adultUserId={authUser.id}
             relationshipWord={profile.role === 'parent' ? 'children' : 'students'}
+          />
+        ) : null}
+        {authUser && profile.role === 'parent' ? (
+          <CoParentInviteCard
+            adultProfileId={profile.id}
+            adultUserId={authUser.id}
           />
         ) : null}
         {authUser && (profile.role ?? 'student') === 'student' ? (

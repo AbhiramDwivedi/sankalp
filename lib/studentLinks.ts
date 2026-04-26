@@ -6,7 +6,12 @@
 // users can only see / create / update / revoke rows they are party to.
 
 import { createClient } from '@/lib/supabase/client'
-import type { StudentLink, StudentLinkStatus, StudentProfile } from '@/types'
+import type {
+  StudentLink,
+  StudentLinkKind,
+  StudentLinkStatus,
+  StudentProfile,
+} from '@/types'
 import { migrateProfile } from '@/types'
 
 // Row shape returned by the Supabase client — snake_case columns.
@@ -23,6 +28,10 @@ type StudentLinkRow = {
   accepted_at: string | null
   revoked_at: string | null
   revoked_by: 'adult' | 'student' | null
+  // Added in migration 0004. Older rows default to 'student' at the DB level;
+  // tolerate undefined here for safety in case a stale read predates the
+  // migration on a self-hosted Supabase.
+  kind?: StudentLinkKind | null
 }
 
 function rowToLink(row: StudentLinkRow): StudentLink {
@@ -39,6 +48,7 @@ function rowToLink(row: StudentLinkRow): StudentLink {
     acceptedAt: row.accepted_at,
     revokedAt: row.revoked_at,
     revokedBy: row.revoked_by,
+    kind: row.kind === 'co_parent' ? 'co_parent' : 'student',
   }
 }
 
@@ -195,10 +205,17 @@ export async function acceptPendingInvitesForCurrentUser(
   const user = userData.user
   if (!user) return { accepted: 0, error: 'Not signed in.' }
 
+  // Only auto-accept kind='student' invites here. kind='co_parent' invites
+  // need the SECURITY DEFINER fan-out function (acceptCoParentInvite) and
+  // require the recipient to first onboard a parent profile, so the
+  // dashboard banner walks them through it explicitly. Filtering here
+  // keeps a co-parent who happens to also have a student profile from
+  // accidentally attaching their co-parent invite to their student profile.
   const { data: rows, error: fetchErr } = await supabase
     .from('student_links')
     .select('id')
     .eq('status', 'pending')
+    .eq('kind', 'student')
   if (fetchErr) return { accepted: 0, error: fetchErr.message }
   if (!rows || rows.length === 0) return { accepted: 0 }
 
@@ -306,6 +323,7 @@ export async function loadAcceptedStudents(args: {
   const accepted = links.filter(
     (l) =>
       l.status === 'accepted' &&
+      l.kind === 'student' &&
       l.studentProfileId &&
       (!args.adultProfileId || l.adultProfileId === args.adultProfileId),
   )
@@ -345,4 +363,150 @@ export async function updateLinkedStudentPath(args: {
   })
   if (error) return { error: error.message }
   return {}
+}
+
+// ---------------------------------------------------------------------------
+// Co-parent invites — parent → parent linking with fan-out at acceptance.
+//
+// Wire-up notes:
+//   - createCoParentInvite() POSTs to a dedicated route
+//     (/api/student-links/co-parent-invite) that mirrors the student-invite
+//     route but stamps `kind='co_parent'` on the row and gates the inviter's
+//     profile role to 'parent' only (not 'parent' OR 'teacher').
+//   - acceptCoParentInvite() calls the SECURITY DEFINER fn
+//     `accept_co_parent_invite(link_id, co_parent_profile_id)` from migration
+//     0004, which authenticates the caller, fans out one
+//     `kind='student'` accepted link per child the inviter currently has,
+//     and marks the original co-parent invite row accepted.
+//   - kind='co_parent' rows are filtered out of acceptPendingInvitesForCurrentUser
+//     above so the student-side auto-accept doesn't try to attach them to
+//     a student profile.
+// ---------------------------------------------------------------------------
+
+export async function createCoParentInvite(args: {
+  adultProfileId: string
+  invitedEmail: string
+  adultLabel?: string | null
+}): Promise<{
+  link?: StudentLink
+  emailSent?: boolean
+  emailReason?: InviteEmailReason
+  error?: string
+}> {
+  const email = args.invitedEmail.trim()
+  if (!email || !/@/.test(email)) {
+    return { error: 'Enter a valid email.' }
+  }
+  let res: Response
+  try {
+    res = await fetch('/api/student-links/co-parent-invite', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        adultProfileId: args.adultProfileId,
+        invitedEmail: email,
+        adultLabel: args.adultLabel ?? null,
+      }),
+    })
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : 'Network error.' }
+  }
+  let json: {
+    link?: StudentLinkRow
+    emailSent?: boolean
+    emailReason?: InviteEmailReason
+    error?: string
+  }
+  try {
+    json = await res.json()
+  } catch {
+    return { error: `Server error (${res.status}).` }
+  }
+  if (!res.ok) {
+    return { error: json.error || `Server error (${res.status}).` }
+  }
+  return {
+    link: json.link ? rowToLink(json.link) : undefined,
+    emailSent: !!json.emailSent,
+    emailReason: json.emailReason,
+  }
+}
+
+/**
+ * Accept a kind='co_parent' invite and trigger the server-side fan-out.
+ *
+ * Returns the count of new student links created. 0 is a valid success
+ * outcome (e.g. the inviter has no accepted children yet, or the co-parent
+ * already had links to all the inviter's children).
+ *
+ * The caller passes their own parent profile id (the one they want the
+ * fan-out attached to). The SECURITY DEFINER function verifies they own
+ * that profile AND it has role='parent' before fanning out.
+ */
+export async function acceptCoParentInvite(args: {
+  linkId: string
+  coParentProfileId: string
+}): Promise<{ created?: number; error?: string }> {
+  const supabase = createClient()
+  const { data, error } = await supabase.rpc('accept_co_parent_invite', {
+    p_link_id: args.linkId,
+    p_co_parent_profile_id: args.coParentProfileId,
+  })
+  if (error) return { error: error.message }
+  // The fn returns an integer; supabase-js types it as `unknown` after rpc.
+  const created = typeof data === 'number' ? data : 0
+  return { created }
+}
+
+/**
+ * Inviter (the parent who created a kind='co_parent' invite) revokes it.
+ * Goes through the SECURITY DEFINER fn `revoke_co_parent_invite` which:
+ *   1. Verifies the caller owns the co-parent invite row.
+ *   2. Marks the invite row revoked.
+ *   3. Cascades to every fanned-out kind='student' row (joined via
+ *      `source_link_id`) and revokes them too — so the co-parent
+ *      genuinely loses visibility into the children.
+ *
+ * Returns `{ cascaded }` — the count of child links that were also
+ * revoked, used to make the success toast specific
+ * ("Revoked. {N} child links also removed.").
+ *
+ * IMPORTANT: do NOT use `revokeLink()` for kind='co_parent' rows. That helper
+ * only updates the invite row itself and leaves the cascaded children with
+ * full visibility — which directly contradicts the UI's prompt.
+ */
+export async function revokeCoParentInvite(args: {
+  linkId: string
+  revokedBy?: 'adult' | 'student'
+}): Promise<{ cascaded?: number; error?: string }> {
+  const supabase = createClient()
+  const { data, error } = await supabase.rpc('revoke_co_parent_invite', {
+    p_link_id: args.linkId,
+    p_revoked_by: args.revokedBy ?? 'adult',
+  })
+  if (error) return { error: error.message }
+  const cascaded = typeof data === 'number' ? data : 0
+  return { cascaded }
+}
+
+/**
+ * Co-parent invites visible to the current authenticated user, filtered to
+ * pending kind='co_parent' rows addressed to their email. RLS already
+ * scopes the SELECT (student_links_select_student matches by auth.email());
+ * we filter client-side because the same RLS that lets the user see student
+ * invites also surfaces their co-parent invites here.
+ */
+export async function listPendingCoParentInvitesForCurrentUser(): Promise<StudentLink[]> {
+  const supabase = createClient()
+  const { data, error } = await supabase
+    .from('student_links')
+    .select('*')
+    .eq('status', 'pending')
+    .eq('kind', 'co_parent')
+    .order('created_at', { ascending: false })
+  if (error) {
+    console.error('[studentLinks] listPendingCoParentInvitesForCurrentUser', error)
+    return []
+  }
+  return (data as StudentLinkRow[]).map(rowToLink)
 }

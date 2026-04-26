@@ -40,7 +40,9 @@ import {
 } from '@/content/studyPlans'
 import { AVANT_RUBRIC_SUMMARY } from '@/constants'
 import {
+  acceptCoParentInvite,
   listAdultLinks,
+  listPendingCoParentInvitesForCurrentUser,
   loadAcceptedStudents,
   updateLinkedStudentPath,
 } from '@/lib/studentLinks'
@@ -62,6 +64,12 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
 
   const [children, setChildren] = useState<ChildEntry[] | null>(null)
   const [pendingCount, setPendingCount] = useState(0)
+  // Pending co-parent invites addressed to THIS auth user's email. Surfaced
+  // as an accept-able banner below the dashboard greeting; clicking Accept
+  // calls the SECURITY DEFINER fn which fans out the inviter's accepted
+  // children to a fresh set of accepted student_links owned by this profile.
+  const [coParentInvites, setCoParentInvites] = useState<StudentLink[]>([])
+  const [acceptingCoParent, setAcceptingCoParent] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [updating, setUpdating] = useState(false)
 
@@ -69,21 +77,27 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
     if (!authUser) {
       setChildren([])
       setPendingCount(0)
+      setCoParentInvites([])
       return
     }
-    const [accepted, all] = await Promise.all([
+    const [accepted, all, coParent] = await Promise.all([
       loadAcceptedStudents({
         adultUserId: authUser.id,
         adultProfileId: profile.id,
       }),
       listAdultLinks(authUser.id),
+      listPendingCoParentInvitesForCurrentUser(),
     ])
     setChildren(accepted)
     setPendingCount(
       all.filter(
-        (l) => l.status === 'pending' && l.adultProfileId === profile.id,
+        (l) =>
+          l.status === 'pending' &&
+          l.kind === 'student' &&
+          l.adultProfileId === profile.id,
       ).length,
     )
+    setCoParentInvites(coParent)
     setSelectedId((prev) => {
       if (prev && accepted.some((c) => c.profile.id === prev)) return prev
       return accepted[0]?.profile.id ?? null
@@ -114,6 +128,44 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
         },
       }
     })
+  }
+
+  const handleAcceptCoParent = async (link: StudentLink) => {
+    if (profile.role !== 'parent') {
+      toast.error(
+        'Switch to a parent profile (or create one) before accepting a co-parent invite.',
+      )
+      return
+    }
+    setAcceptingCoParent(true)
+    const { error, created } = await acceptCoParentInvite({
+      linkId: link.id,
+      coParentProfileId: profile.id,
+    })
+    setAcceptingCoParent(false)
+    if (error) {
+      toast.error(error)
+      return
+    }
+    if (created && created > 0) {
+      // `link.invitedEmail` on a co-parent row is the CO-PARENT's own email
+      // (i.e. the current user), not the inviter's. Use the
+      // inviter-supplied label when available; fall back to a generic
+      // phrase. We don't have direct access to the inviter's email from
+      // this row (RLS scopes it).
+      const inviterLabel = link.adultLabel?.trim() || 'the inviter'
+      toast.success(
+        `Connected. You can now see ${created} child${created === 1 ? '' : 'ren'} from ${inviterLabel}.`,
+      )
+    } else {
+      // Could legitimately be 0 — inviter has no accepted children yet, or
+      // all of them are already linked to this co-parent through some other
+      // path. Tell the user it succeeded but there's nothing new to see.
+      toast.success(
+        'Connected. No new children to show — the inviter has not connected any children yet, or you are already linked to all of them.',
+      )
+    }
+    refresh()
   }
 
   const handleLinkedBandChange = async (
@@ -220,9 +272,47 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
   const list = children ?? []
   const parentFirst = profile.name.split(/\s+/)[0] || profile.name
 
+  // Co-parent invite banner — rendered above both the empty state and the
+  // populated dashboard so a co-parent who signs in for the first time sees
+  // the accept CTA regardless of whether they have any children connected
+  // already.
+  const coParentBanner = coParentInvites.length > 0 ? (
+    <div className="space-y-2">
+      {coParentInvites.map((link) => (
+        <div
+          key={link.id}
+          role="note"
+          className="flex items-start justify-between gap-3 rounded-lg border border-primary/30 bg-primary/5 p-4 text-foreground"
+        >
+          <div className="flex items-start gap-3">
+            <UserPlus className="h-5 w-5 mt-0.5 shrink-0 text-primary" aria-hidden />
+            <div className="text-sm">
+              <p className="font-medium">
+                Co-parent invite{link.adultLabel ? ` from ${link.adultLabel}` : ''}
+              </p>
+              <p className="text-muted-foreground">
+                Accept to share visibility into the children they have already
+                connected. You will see them under your dashboard immediately.
+                Children added later will not be auto-shared.
+              </p>
+            </div>
+          </div>
+          <Button
+            size="sm"
+            onClick={() => handleAcceptCoParent(link)}
+            disabled={acceptingCoParent}
+          >
+            {acceptingCoParent ? 'Accepting…' : 'Accept'}
+          </Button>
+        </div>
+      ))}
+    </div>
+  ) : null
+
   if (list.length === 0) {
     return (
       <div className="container mx-auto px-4 py-8 space-y-6">
+        {coParentBanner}
         {pendingCount > 0 ? (
           <div
             role="note"
@@ -283,6 +373,9 @@ export default function ParentDashboard({ profile }: { profile: StudentProfile }
 
   return (
     <div className="space-y-0">
+      {coParentBanner ? (
+        <div className="container mx-auto px-4 pt-6">{coParentBanner}</div>
+      ) : null}
       {list.length > 1 ? (
         <div className="container mx-auto px-4 pt-6">
           <Card>

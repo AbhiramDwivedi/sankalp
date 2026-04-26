@@ -292,4 +292,11 @@ test.describe('Settings', () => {
     // The active profile name is the value of the Name input.
     await expect(page.getByLabel(/^name$/i)).toHaveValue('Settings Tester');
   });
+
+  // NOTE: a /settings smoke for the CoParentInviteCard was considered but the
+  // card is gated on `authUser && profile.role === 'parent'`. Under
+  // E2E_AUTH_BYPASS there is no real Supabase session, so authUser is null
+  // and the card never mounts — there's no way to assert its heading from
+  // this suite. The end-to-end invite + accept + cascading-revoke flow needs
+  // Supabase fixtures and is tracked outside this smoke spec.
 });
