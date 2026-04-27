@@ -99,7 +99,12 @@ export const DeckRunner: React.FC<DeckRunnerProps> = ({
   const deckSeenPercent = Math.round((seenIds.filter((id) => order.some((c) => c.id === id)).length / order.length) * 100);
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-300">
+    // `no-print` hides the entire on-screen DeckRunner UI (header, current
+    // card, navigation buttons, rating buttons) in print media. Without it
+    // the runner takes ~10in of vertical space at the top of the printout,
+    // so the actual cut-sheet layout (PrintSheet) only starts on page 2 and
+    // page 1 reads as blank-with-some-faint-cards.
+    <div className="space-y-6 animate-in fade-in duration-300 no-print">
       {progress && (
         <OverlayProgress
           position={progress.position}

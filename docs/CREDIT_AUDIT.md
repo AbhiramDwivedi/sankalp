@@ -1,6 +1,6 @@
 # Credit Audit — FCPS Hindi courseware
 
-**Generated**: 2026-04-26
+**Generated**: 2026-04-27
 **Rubric source**: Avant STAMP 2S/WS (Writing + Speaking) · FCPS Credit by Exam
 **Target**: STAMP Benchmark 5 (Intermediate Mid) → **3 FCPS credits**
 **Verdict**: `GUARANTEED`
