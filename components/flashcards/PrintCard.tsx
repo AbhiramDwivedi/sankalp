@@ -9,18 +9,24 @@ import type { Flashcard } from '../../content/schema';
  * handlers. Fixed dimensions (3.5in × 2.5in — standard US index-card size)
  * so the browser's print engine cannot flex or shrink cards to fit.
  *
- * `showIndex` is a debug affordance for fold-alignment verification; it is
- * wired to a `?printtest=1` URL flag by PrintSheet and is OFF by default.
+ * `pairLabel` is a small, always-on identifier (e.g. "1F" / "1B") rendered
+ * in the cell's top-right corner. It lets a student re-pair the front and
+ * back of the same card after cutting the page into strips. Cheap insurance
+ * for a workflow where pages may be cut into 8 cells before the student
+ * decides to glue.
  */
 
 interface PrintCardProps {
   card: Flashcard;
   face: 'front' | 'back';
-  /** Optional overlay index for fold-alignment verification. */
-  showIndex?: number;
+  /**
+   * Optional human-friendly pair identifier (e.g. "1F" / "1B"). Rendered
+   * top-right so a stack of cut strips can be sorted back into pairs.
+   */
+  pairLabel?: string;
 }
 
-export const PrintCard: React.FC<PrintCardProps> = ({ card, face, showIndex }) => {
+export const PrintCard: React.FC<PrintCardProps> = ({ card, face, pairLabel }) => {
   const content = face === 'front' ? card.front : card.back;
 
   return (
@@ -28,7 +34,7 @@ export const PrintCard: React.FC<PrintCardProps> = ({ card, face, showIndex }) =
       className="print-card"
       data-card-id={card.id}
       data-card-face={face}
-      data-card-index={showIndex}
+      data-card-pair={pairLabel}
       style={{
         width: '3.5in',
         height: '2.5in',
@@ -63,8 +69,16 @@ export const PrintCard: React.FC<PrintCardProps> = ({ card, face, showIndex }) =
         <span>
           {card.kind} · {card.priority}
         </span>
-        {typeof showIndex === 'number' && (
-          <span style={{ color: '#dc2626', fontSize: '12pt' }}>#{showIndex}</span>
+        {pairLabel && (
+          <span
+            style={{
+              color: '#64748b',
+              fontSize: '7pt',
+              letterSpacing: '0.08em',
+            }}
+          >
+            {pairLabel}
+          </span>
         )}
       </div>
 
@@ -137,8 +151,8 @@ export const PrintCard: React.FC<PrintCardProps> = ({ card, face, showIndex }) =
 };
 
 /**
- * Empty slot placeholder for partial final pages. Keeps the 4-row fold
- * grid dimensions intact so no card shifts position.
+ * Empty slot placeholder for partial final pages. Keeps the 4-row grid
+ * dimensions intact so no card shifts position.
  */
 export const PrintCardBlank: React.FC = () => (
   <div
