@@ -25,7 +25,6 @@ import {
   Flame,
   Sparkles,
   Settings,
-  UserPlus,
   Check,
   GraduationCap,
   Users,
@@ -217,18 +216,14 @@ export function Navbar() {
                       })}
                     </>
                   ) : null}
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href="/onboarding" className="cursor-pointer">
-                      <UserPlus className="mr-2 h-4 w-4" />
-                      Add profile
-                    </Link>
-                  </DropdownMenuItem>
                   {isAuthed ? (
-                    <DropdownMenuItem onSelect={handleSignOut} className="cursor-pointer">
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Sign out
-                    </DropdownMenuItem>
+                    <>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onSelect={handleSignOut} className="cursor-pointer">
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Sign out
+                      </DropdownMenuItem>
+                    </>
                   ) : null}
                 </DropdownMenuContent>
               </DropdownMenu>
