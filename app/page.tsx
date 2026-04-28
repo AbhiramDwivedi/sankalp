@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge.shadcn'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { LandingCtaRow } from '@/components/landing-cta-row'
+import { LandingGate } from '@/components/landing-gate'
 import {
   BookOpen,
   GraduationCap,
@@ -140,6 +141,7 @@ const userTypes: { icon: React.ComponentType<{ className?: string }>; title: str
 
 export default function HomePage() {
   return (
+    <LandingGate>
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
@@ -364,5 +366,6 @@ export default function HomePage() {
 
       <Footer />
     </div>
+    </LandingGate>
   )
 }
