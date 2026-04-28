@@ -2,8 +2,9 @@
 // ------------------------------------------------------------------
 // Renders every committed PNG favicon / app-icon from a single
 // canonical recipe: the Devanagari brand mark "सं" centred on a
-// rounded saffron square (#d97706, the app's primary colour). The
-// mark mirrors the in-app navbar logo (`components/navbar.tsx`).
+// saffron circle (#d97706, the app's primary colour). The shape
+// mirrors the in-app navbar logo (`components/navbar.tsx`, which
+// uses `rounded-full` on a 36×36 swatch with the same glyph).
 //
 // Outputs (all in `public/`):
 //   - icon-light-32x32.png   (browser tab, light scheme)
@@ -11,7 +12,7 @@
 //                             white-on-orange reads on either theme)
 //   - apple-icon.png         (180x180, iOS touch icon)
 //   - icon-192.png           (PWA manifest)
-//   - icon-512.png           (PWA manifest, maskable)
+//   - icon-512.png           (PWA manifest)
 //
 // `public/icon.svg` is hand-authored; this script only writes PNGs.
 // Headless Chromium (Playwright, already a devDep) does the raster
@@ -52,18 +53,20 @@ type IconRecipe = {
   size: number;
   /** Flat fill or gradient. Flat reads better at small sizes. */
   surface: 'flat' | 'gradient';
-  /** Corner radius as a fraction of `size`. */
+  /** Corner radius as a fraction of `size`. 0.5 = full circle. */
   radiusRatio: number;
   /** Glyph height as a fraction of `size`. */
   glyphRatio: number;
 };
 
+// All icons render as full circles (radiusRatio = 0.5) to match the
+// in-app navbar logo (`rounded-full` on a 36×36 orange swatch).
 const RECIPES: IconRecipe[] = [
-  { file: 'icon-light-32x32.png', size: 32, surface: 'flat', radiusRatio: 0.22, glyphRatio: 0.72 },
-  { file: 'icon-dark-32x32.png', size: 32, surface: 'flat', radiusRatio: 0.22, glyphRatio: 0.72 },
-  { file: 'apple-icon.png', size: 180, surface: 'gradient', radiusRatio: 0.22, glyphRatio: 0.62 },
-  { file: 'icon-192.png', size: 192, surface: 'gradient', radiusRatio: 0.2, glyphRatio: 0.62 },
-  { file: 'icon-512.png', size: 512, surface: 'gradient', radiusRatio: 0.18, glyphRatio: 0.62 },
+  { file: 'icon-light-32x32.png', size: 32, surface: 'flat', radiusRatio: 0.5, glyphRatio: 0.72 },
+  { file: 'icon-dark-32x32.png', size: 32, surface: 'flat', radiusRatio: 0.5, glyphRatio: 0.72 },
+  { file: 'apple-icon.png', size: 180, surface: 'gradient', radiusRatio: 0.5, glyphRatio: 0.62 },
+  { file: 'icon-192.png', size: 192, surface: 'gradient', radiusRatio: 0.5, glyphRatio: 0.62 },
+  { file: 'icon-512.png', size: 512, surface: 'gradient', radiusRatio: 0.5, glyphRatio: 0.62 },
 ];
 
 function background(surface: IconRecipe['surface']): string {
