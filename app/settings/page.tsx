@@ -27,7 +27,6 @@ import {
   ClipboardList,
   Download,
   FileText,
-  UserPlus,
   Trash2,
   Check,
   GraduationCap,
@@ -195,7 +194,7 @@ export default function SettingsPage() {
           <CardHeader>
             <CardTitle>Your profiles</CardTitle>
             <CardDescription>
-              One active profile drives the dashboard. Switch to see a different view, or add a new one.
+              One active profile drives the dashboard. Switch between profiles to see a different view.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -246,12 +245,6 @@ export default function SettingsPage() {
                 </div>
               )
             })}
-            <Button asChild variant="outline" className="w-full sm:w-auto">
-              <Link href="/onboarding">
-                <UserPlus className="mr-2 h-4 w-4" />
-                Create new profile
-              </Link>
-            </Button>
           </CardContent>
         </Card>
 
