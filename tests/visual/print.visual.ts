@@ -53,6 +53,17 @@ async function onboard(page: Page, name = 'Visual Tester') {
   await submitOnboardingStep(page);
   await page.getByRole('button', { name: /^start$/i }).click();
   await page.waitForURL(`${BASE}/dashboard`);
+  // Wait for the dashboard to fully settle before the test issues its next
+  // navigation. Without this, the dashboard's RSC fetch + Turbopack chunk
+  // compilation can still be in flight when `page.goto(...)` fires next, and
+  // chromium aborts the new nav with `net::ERR_ABORTED; maybe frame was
+  // detached?`. Asserting on a stable dashboard hallmark forces the catalog
+  // page navigation to wait until hydration is complete. The "Welcome" line
+  // is rendered by every role's dashboard once `profile` is in hand.
+  await expect(page.getByRole('heading', { level: 1, name: /welcome/i })).toBeVisible({
+    timeout: 15_000,
+  });
+  await page.waitForLoadState('networkidle');
 }
 
 /**
