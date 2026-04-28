@@ -115,6 +115,11 @@ function OnboardingRouteInner() {
   // the band when the band changes (and the user has not edited it manually).
   const [examDate, setExamDate] = useState<string>('')
   const [examDateTouched, setExamDateTouched] = useState<boolean>(false)
+  // Tracks the in-flight saveAllProfiles call so the Start button can disable
+  // itself and prevent double-submit. We await the upsert (so dashboard's
+  // auto-accept sees the profile row) which adds a measurable delay; without
+  // the disabled state a user could click twice and queue two profile inserts.
+  const [starting, setStarting] = useState<boolean>(false)
 
   // Onboarding carries the 3-band picker as the primary proficiency input.
   // The concrete ProficiencyLevel is derived for plan selection + legacy
@@ -246,7 +251,7 @@ function OnboardingRouteInner() {
   function goNext() {
     if (!canAdvance) return
     if (step < 4) setStep(step + 1)
-    else handleStart()
+    else if (!starting) handleStart()
   }
 
   function goBack() {
@@ -256,7 +261,7 @@ function OnboardingRouteInner() {
     setStep(step - 1)
   }
 
-  function handleStart() {
+  async function handleStart() {
     if (!role) return
     const trimmedName = name.trim()
     const trimmedChildName = childName.trim()
@@ -325,9 +330,21 @@ function OnboardingRouteInner() {
       }
     }
 
-    saveAllProfiles([...profiles, newProfile])
-    switchProfile(newProfile.id)
-    router.push('/dashboard')
+    // Await the Supabase upsert before navigating so the dashboard's
+    // auto-accept-pending-invites effect (which fires immediately on mount)
+    // sees the new profile row in `public.profiles`. Without the await, the
+    // student_links UPDATE policy's WITH CHECK silently rejects the row
+    // (the student_profile_id we're attaching isn't yet visible under
+    // owner_user_id = auth.uid()), the invite stays pending, and the parent
+    // never sees acceptance. See lib/profile-context.tsx for the full note.
+    setStarting(true)
+    try {
+      await saveAllProfiles([...profiles, newProfile])
+      switchProfile(newProfile.id)
+      router.push('/dashboard')
+    } finally {
+      setStarting(false)
+    }
   }
 
   return (
@@ -415,8 +432,12 @@ function OnboardingRouteInner() {
               ) : (
                 <span />
               )}
-              <Button onClick={goNext} disabled={!canAdvance} type="button">
-                {step === 4 ? 'Start' : 'Continue'}
+              <Button
+                onClick={goNext}
+                disabled={!canAdvance || (step === 4 && starting)}
+                type="button"
+              >
+                {step === 4 ? (starting ? 'Starting…' : 'Start') : 'Continue'}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
