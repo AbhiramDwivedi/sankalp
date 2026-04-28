@@ -56,7 +56,17 @@ interface ProfileContextValue {
     updater: StudentProfile | ((prev: StudentProfile) => StudentProfile),
   ) => void
   switchProfile: (id: string | null) => void
-  saveAllProfiles: (next: StudentProfile[]) => void
+  /**
+   * Persist the full profile list. Returns a Promise that resolves once the
+   * Supabase upsert has acknowledged (or immediately for unsigned-in
+   * localStorage writes). Callers that need ordering against subsequent
+   * Supabase reads — notably the onboarding → /dashboard auto-accept path —
+   * MUST await this; otherwise the dashboard may try to attach an invite to
+   * a profile id Supabase hasn't seen yet, fail RLS WITH CHECK silently, and
+   * leave the invite in `pending`. Fire-and-forget callers (rename, delete)
+   * can ignore the return value.
+   */
+  saveAllProfiles: (next: StudentProfile[]) => Promise<void>
   /** True when the signed-in user has 0 remote profiles but local legacy
    *  profiles still exist on this device. The onboarding route renders a
    *  prompt gated on this. */
@@ -283,51 +293,56 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const saveAllProfiles = useCallback<ProfileContextValue['saveAllProfiles']>(
-    (next) => {
+    async (next) => {
       // Optimistic update first so onboarding transitions feel instant.
-      setProfiles((prev) => {
-        // Diff to know which rows to delete remotely.
-        const nextIds = new Set(next.map((p) => p.id))
-        const removed = prev.filter((p) => !nextIds.has(p.id))
+      // Diff against the in-flight `profiles` snapshot (closed over by this
+      // callback) to know which rows to delete remotely. We previously did
+      // this inside a setProfiles updater so we always saw the freshest
+      // state, but that prevented us from awaiting the upsert — and the
+      // onboarding → /dashboard race depends on that await landing before
+      // the dashboard's auto-accept fires its UPDATE through RLS.
+      const nextIds = new Set(next.map((p) => p.id))
+      const removed = profiles.filter((p) => !nextIds.has(p.id))
+      setProfiles(next)
 
-        if (authUser) {
-          const rows = next.map((p) => ({
-            id: p.id,
-            owner_user_id: authUser.id,
-            data: profileToData(p),
-          }))
-          // Upsert every row (insert new, overwrite existing).
-          supabase
-            .from('profiles')
-            .upsert(rows, { onConflict: 'id' })
-            .then(({ error }) => {
-              if (error) {
-                console.error('[profile-context] upsert failed', error)
-                toast.error("Couldn't sync profiles. Please refresh.")
-              }
-            })
-          if (removed.length > 0) {
-            supabase
-              .from('profiles')
-              .delete()
-              .in(
-                'id',
-                removed.map((p) => p.id),
-              )
-              .then(({ error }) => {
-                if (error) {
-                  console.error('[profile-context] delete failed', error)
-                }
-              })
-          }
-        } else {
-          writeLegacyProfiles(next)
+      if (!authUser) {
+        writeLegacyProfiles(next)
+        return
+      }
+
+      const rows = next.map((p) => ({
+        id: p.id,
+        owner_user_id: authUser.id,
+        data: profileToData(p),
+      }))
+
+      // Await the upsert so callers can sequence subsequent Supabase work
+      // (e.g. /dashboard's acceptPendingInvitesForCurrentUser, whose RLS
+      // WITH CHECK requires the new student profile to be visible). The
+      // optimistic local state is already updated above, so the await only
+      // delays cross-tab Supabase ordering, not the UI.
+      const { error: upsertErr } = await supabase
+        .from('profiles')
+        .upsert(rows, { onConflict: 'id' })
+      if (upsertErr) {
+        console.error('[profile-context] upsert failed', upsertErr)
+        toast.error("Couldn't sync profiles. Please refresh.")
+      }
+
+      if (removed.length > 0) {
+        const { error: delErr } = await supabase
+          .from('profiles')
+          .delete()
+          .in(
+            'id',
+            removed.map((p) => p.id),
+          )
+        if (delErr) {
+          console.error('[profile-context] delete failed', delErr)
         }
-
-        return next
-      })
+      }
     },
-    [authUser, supabase],
+    [authUser, profiles, supabase],
   )
 
   // -- Migration -----------------------------------------------------------
@@ -422,7 +437,7 @@ export function useProfile(): ProfileContextValue {
       activeId: null,
       setProfile: () => {},
       switchProfile: () => {},
-      saveAllProfiles: () => {},
+      saveAllProfiles: async () => {},
       hasPendingLocalMigration: false,
       pendingLocalProfiles: [],
       adoptLocalProfiles: async () => {},

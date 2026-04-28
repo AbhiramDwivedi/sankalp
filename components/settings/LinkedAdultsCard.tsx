@@ -23,6 +23,7 @@ import { Badge } from '@/components/ui/badge.shadcn'
 import { Check, X, Trash2, Users, BookOpen, GraduationCap } from 'lucide-react'
 import {
   acceptInvite,
+  acceptPendingInvitesForCurrentUser,
   listStudentInvites,
   loadLinkedProfileSummary,
   revokeLink,
@@ -39,7 +40,7 @@ const ROLE_ICON = {
 type AdultSummary = { name: string; role: 'parent' | 'teacher' | 'student' }
 
 export function LinkedAdultsCard() {
-  const { activeId } = useProfile()
+  const { activeId, profile } = useProfile()
   const [links, setLinks] = useState<StudentLink[] | null>(null)
   const [adults, setAdults] = useState<Record<string, AdultSummary>>({})
   const [pending, startTransition] = useTransition()
@@ -68,9 +69,31 @@ export function LinkedAdultsCard() {
     }
   }, [])
 
+  // Belt-and-braces auto-accept on settings mount. The dashboard already
+  // tries to auto-accept on first load, but if its run lost a race with the
+  // post-onboarding profile upsert (RLS WITH CHECK silently rejected the
+  // UPDATE because the profile row wasn't yet visible), the invite stays
+  // pending and the parent never sees acceptance. Re-running here gives the
+  // user a no-click path to fix it just by clicking the dashboard banner's
+  // "Review" link, and is a no-op when nothing's pending. The settings page
+  // only mounts this card when the active profile is role='student', so we
+  // can attach to profile.id without re-checking the role here.
+  // Depend on profile.id (not the whole profile object) so per-keystroke
+  // profile mutations elsewhere don't re-trigger the network call.
+  const studentProfileId = profile?.id ?? null
   useEffect(() => {
-    refresh()
-  }, [refresh])
+    let cancelled = false
+    ;(async () => {
+      if (studentProfileId) {
+        await acceptPendingInvitesForCurrentUser(studentProfileId)
+        if (cancelled) return
+      }
+      refresh()
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [refresh, studentProfileId])
 
   const handleAccept = (link: StudentLink) => {
     if (!activeId) {
