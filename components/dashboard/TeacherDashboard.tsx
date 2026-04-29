@@ -409,7 +409,7 @@ export default function TeacherDashboard({ profile }: { profile: StudentProfile 
               <CardHeader>
                 <CardTitle>Band distribution</CardTitle>
                 <CardDescription>
-                  Where your roster sits across Foundations / Intermediate / Skilled.
+                  Where your roster sits across Starter / Foundations / Intermediate.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">

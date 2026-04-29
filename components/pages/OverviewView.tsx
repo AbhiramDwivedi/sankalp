@@ -53,7 +53,7 @@ function themesForBand(band: Band): TopicTheme[] {
   const seen = new Set<TopicTheme>()
   const ordered: TopicTheme[] = []
   for (const p of TOPIC_PACKS) {
-    if (bandForPack(p.level) !== band) continue
+    if (bandForPack(p) !== band) continue
     if (seen.has(p.topicTheme)) continue
     seen.add(p.topicTheme)
     ordered.push(p.topicTheme)
@@ -62,15 +62,15 @@ function themesForBand(band: Band): TopicTheme[] {
 }
 
 const bandAccent: Record<Band, string> = {
+  starter: 'border-orange-300/60 bg-orange-50/50',
   foundations: 'border-amber-300/60 bg-amber-50/50',
   intermediate: 'border-primary/40 bg-primary/5 ring-1 ring-primary/20',
-  skilled: 'border-emerald-300/60 bg-emerald-50/50',
 }
 
 const bandCaption: Record<Band, string> = {
-  foundations: 'Where most learners start',
+  starter: 'First words and phrases · STAMP 1–2',
+  foundations: 'Sentences and strings · earns 1–2 credits',
   intermediate: 'The 3-FCPS-credit target · STAMP Benchmark 5',
-  skilled: 'Honors stretch · past the credit gate',
 }
 
 export function OverviewView() {
@@ -78,7 +78,7 @@ export function OverviewView() {
   const mockExams = useMemo(() => CAPSTONES.filter((c) => c.isMockExam), [])
   const perLessonDecks = DECKS.filter((d) => d.kind === 'pack-review').length
   const crossCuttingDecks = DECKS.length - perLessonDecks
-  const bands: Band[] = ['foundations', 'intermediate', 'skilled']
+  const bands: Band[] = ['starter', 'foundations', 'intermediate']
 
   // Final CTA target: a returning profile goes back to dashboard; a fresh
   // visitor goes home to pick a role.

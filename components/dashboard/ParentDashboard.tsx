@@ -664,7 +664,7 @@ function ChildView({
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <p>{childBandMeta.description}</p>
               <p>
-                The three bands — Foundations, Intermediate, and Skilled — map to the STAMP ladder.
+                The three bands — Starter, Foundations, and Intermediate — map to the STAMP ladder.
                 The Intermediate band (Benchmark 5) is what earns 3 FCPS world language credits.
               </p>
               <p className="text-xs text-muted-foreground/80 italic">

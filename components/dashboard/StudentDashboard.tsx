@@ -322,7 +322,7 @@ export default function StudentDashboard({ profile }: { profile: StudentProfile 
                       {nextPack.titleHindi}
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
-                      {BAND_META[bandForPack(nextPack.level)].label} · {currentWeek?.focus}
+                      {BAND_META[bandForPack(nextPack)].label} · {currentWeek?.focus}
                     </p>
                   </div>
                   <Button asChild>
