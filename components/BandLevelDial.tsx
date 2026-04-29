@@ -28,7 +28,7 @@ import { BAND_META, BAND_ORDER, type Band } from '@/types'
 // BandLevelDial — shared level-picker UI used by Settings (student) and by
 // Teacher / Parent dashboards (to dial the demo student's level).
 //
-// Phase A contract: 3 bands only — Foundations / Intermediate / Skilled. The
+// Phase A contract: 3 bands only — Starter / Foundations / Intermediate. The
 // dial does NOT expose the full 6-value ProficiencyLevel. Consumers handle
 // the ProficiencyLevel/plan re-derivation in their onConfirm handler.
 //

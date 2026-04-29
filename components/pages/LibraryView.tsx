@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Sparkles, CheckCircle2, Circle, BookOpen, Info, ChevronDown } from 'lucide-react';
-import type { Level, TopicPack } from '../../content/schema';
+import type { TopicPack } from '../../content/schema';
 import { TOPIC_THEME_META } from '../../content/schema';
-import { TOPIC_PACKS_BY_LEVEL } from '../../content';
+import { TOPIC_PACKS } from '../../content';
 import {
   getStudyPlan,
   studyPlanForLevel,
@@ -31,9 +31,12 @@ import { CURRICULUM } from '../../content/curriculum';
 // LibraryView — 3-band collapsible catalog.
 //
 // Phase B rebuild. Previously a flat grid with Level filter pills; now three
-// stacked sections (Foundations / Intermediate / Skilled). The student's
+// stacked sections (Starter / Foundations / Intermediate). The student's
 // current band is pre-expanded and highlighted with a "Your level" pill;
-// other bands are collapsed, count visible, one click to expand.
+// other bands are collapsed, count visible, one click to expand. Pack→band
+// routing reads each pack's `positionOnArc` (via bandForPack); we no longer
+// group by the legacy `level: 1|2|3` numeric, which doesn't line up with
+// the credit-relevant Starter/Foundations/Intermediate split.
 //
 // The per-card theme chip (TOPIC_THEME_META) is the Phase B breadcrumb
 // between a pack and its cross-level siblings — see ThemeSiblingStrip on
@@ -61,42 +64,50 @@ interface LibraryViewProps {
 }
 
 interface BandSectionMeta {
-  level: Level;
   title: string;
   subtitle: string;
   tone: string;
 }
 
 const BAND_SECTIONS: Record<Band, BandSectionMeta> = {
-  foundations: {
-    level: 1,
-    title: `${BAND_META.foundations.label} — ${CURRICULUM.creditMapping.issuer} Year 1`,
+  starter: {
+    title: `${BAND_META.starter.label} — first words and phrases`,
     subtitle:
-      'Words, phrases, and simple sentences on familiar topics. The groundwork every intermediate essay rests on.',
+      'Memorized words, polite chunks, and short lists. The vocabulary base every later sentence rests on.',
     tone: 'text-orange-700',
   },
-  intermediate: {
-    level: 2,
-    title: `${BAND_META.intermediate.label} — ${CURRICULUM.creditMapping.issuer} Year 2`,
+  foundations: {
+    title: `${BAND_META.foundations.label} — sentences and strings`,
     subtitle:
-      'Connected sentences with past and future time frames. This is the band that earns the 3-credit award.',
-    tone: 'text-emerald-700',
+      `Simple sentences building toward strings of related ideas. Earns 1–2 ${CURRICULUM.creditMapping.issuer} credits along the way.`,
+    tone: 'text-amber-700',
   },
-  skilled: {
-    level: 3,
-    title: `${BAND_META.skilled.label} — honors stretch`,
+  intermediate: {
+    title: `${BAND_META.intermediate.label} — connected paragraphs`,
     subtitle:
-      'Narrative and opinion register, complex discourse. Past the 3-credit gate; polishing for higher benchmarks.',
-    tone: 'text-indigo-700',
+      'Connected sentences with past and future time frames. This is the band that earns the full 3-credit award.',
+    tone: 'text-emerald-700',
   },
 };
 
 /** Guess the student's band from their 6-value proficiency string, only used
  *  as a fallback when `currentBand` wasn't passed. */
 function bandFromLegacyLevelString(level: string | undefined): Band {
-  if (!level) return 'foundations';
+  if (!level) return 'starter';
   return bandFromProficiency(level as ProficiencyLevel);
 }
+
+/** Group all packs by their target band (via positionOnArc). Stable: derived
+ *  from TOPIC_PACKS at module load and reused across renders. */
+const PACKS_BY_BAND: Record<Band, TopicPack[]> = (() => {
+  const acc: Record<Band, TopicPack[]> = {
+    starter: [],
+    foundations: [],
+    intermediate: [],
+  };
+  for (const pack of TOPIC_PACKS) acc[bandForPack(pack)].push(pack);
+  return acc;
+})();
 
 export const LibraryView: React.FC<LibraryViewProps> = ({
   completedIds,
@@ -126,18 +137,15 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
   // Per-band open state. Default: student's band open, others collapsed.
   // Session-only — deliberately not persisted.
   const [openState, setOpenState] = useState<Record<Band, boolean>>(() => ({
+    starter: activeBand === 'starter',
     foundations: activeBand === 'foundations',
     intermediate: activeBand === 'intermediate',
-    skilled: activeBand === 'skilled',
   }));
 
   const setBandOpen = (band: Band, open: boolean) =>
     setOpenState((s) => ({ ...s, [band]: open }));
 
-  const totalPacks =
-    TOPIC_PACKS_BY_LEVEL[1].length +
-    TOPIC_PACKS_BY_LEVEL[2].length +
-    TOPIC_PACKS_BY_LEVEL[3].length;
+  const totalPacks = TOPIC_PACKS.length;
   const completedCount = completedIds.length;
   const progressPct = totalPacks ? Math.round((completedCount / totalPacks) * 100) : 0;
 
@@ -195,7 +203,7 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
 
       {BAND_ORDER.map((band) => {
         const meta = BAND_SECTIONS[band];
-        const packs = TOPIC_PACKS_BY_LEVEL[meta.level];
+        const packs = PACKS_BY_BAND[band];
         const isActive = band === activeBand;
         const isOpen = openState[band];
         const completedInBand = packs.filter((p) => completedIds.includes(p.id)).length;
@@ -283,7 +291,7 @@ interface TopicCardProps {
 
 const TopicCard: React.FC<TopicCardProps> = ({ pack, completed, outOfPlan, onClick }) => {
   const tokens = tokensFor(pack.themeGroup);
-  const band = bandForPack(pack.level);
+  const band = bandForPack(pack);
   const themeMeta = TOPIC_THEME_META[pack.topicTheme];
   return (
     <button

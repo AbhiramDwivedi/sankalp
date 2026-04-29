@@ -37,7 +37,7 @@ const features: { icon: React.ComponentType<{ className?: string }>; title: stri
     icon: BookOpen,
     title: '26 Topic Packs',
     description:
-      'Hand-authored Hindi lessons across the Foundations, Intermediate, and Skilled bands. Each pack: vocabulary, grammar, connectors, cultural insight, model essays, and a self-check rubric.',
+      'Hand-authored Hindi lessons across the Starter, Foundations, and Intermediate bands. Each pack: vocabulary, grammar, connectors, cultural insight, model essays, and a self-check rubric.',
   },
   {
     icon: Target,
@@ -83,35 +83,35 @@ const proficiencyLevels: {
     stamp: 1,
     description: 'Isolated words',
     topics: ['Greetings', 'Family', 'Numbers', 'Colors'],
-    levelBand: 'Foundations · pre-pack',
+    levelBand: 'Starter · entry',
   },
   {
     label: 'Novice Mid',
     stamp: 2,
     description: 'Basic phrases',
     topics: ['School', 'Weather', 'Time', 'Simple phrases'],
-    levelBand: 'Foundations · entry',
+    levelBand: 'Starter packs',
   },
   {
     label: 'Novice High',
     stamp: 3,
     description: 'Simple sentences',
     topics: ['Daily routine', 'Food', 'Simple conversations', 'Descriptions'],
-    levelBand: 'Foundations packs',
+    levelBand: 'Foundations · entry · 1 credit',
   },
   {
     label: 'Intermediate Low',
     stamp: 4,
     description: 'Strings of sentences',
     topics: ['Past tense', 'Future plans', 'Shopping', 'Health'],
-    levelBand: 'Intermediate packs',
+    levelBand: 'Foundations packs · 2 credits',
   },
   {
     label: 'Intermediate Mid',
     stamp: 5,
     description: 'Connected paragraphs · 3 FCPS credits',
     topics: ['Travel', 'Opinions', 'Cultural discussions', 'Storytelling'],
-    levelBand: 'Skilled stretch + capstones',
+    levelBand: 'Intermediate packs + capstones · 3 credits 🎯',
   },
 ]
 

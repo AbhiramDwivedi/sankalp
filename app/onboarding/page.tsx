@@ -107,7 +107,12 @@ function OnboardingRouteInner() {
   // Soham's!". Now profile.name is always the adult's own name.
   const [name, setName] = useState<string>('')
   const [childName, setChildName] = useState<string>('')
-  const [band, setBand] = useState<Band>('foundations')
+  // Start at the lowest band: a brand-new visitor without context defaults
+  // to the absolute-beginner Foundation Plan (36 wk). Anyone above that
+  // self-corrects on the band step. Changing this away from 'starter' would
+  // silently route true beginners into a 24-week bridge plan that assumes
+  // they already write simple sentences.
+  const [band, setBand] = useState<Band>('starter')
   const [alreadyMessage, setAlreadyMessage] = useState<string>('')
   // Exam date is optional in onboarding: we pre-fill the level-recommended
   // default and let the user nudge it on StepConfirm. Stored as a YYYY-MM-DD

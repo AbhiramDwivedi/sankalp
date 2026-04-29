@@ -44,7 +44,7 @@ export const ThemeSiblingStrip: React.FC<ThemeSiblingStripProps> = ({
       <ul className="flex flex-wrap items-center gap-x-1.5 gap-y-1.5">
         {siblings.map((s, i) => {
           const isCurrent = s.id === pack.id;
-          const band = bandForPack(s.level);
+          const band = bandForPack(s);
           const label = `${s.titleEnglish} (${BAND_META[band].label})`;
           return (
             <li key={s.id} className="flex items-center gap-1.5">

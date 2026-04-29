@@ -35,7 +35,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
       <div className="relative z-10 p-12 md:p-16 min-h-[360px] flex flex-col justify-between">
         <div className="flex items-center gap-3 flex-wrap">
           <Badge tone="amber" size="xs">
-            {BAND_META[bandForPack(pack.level)].label} · {tokens.label}
+            {BAND_META[bandForPack(pack)].label} · {tokens.label}
           </Badge>
           <div className="inline-flex items-center gap-1 rounded-full bg-white/15 border border-white/20 backdrop-blur-sm no-print">
             <button

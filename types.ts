@@ -10,20 +10,28 @@ export enum ProficiencyLevel {
 
 // ---------------------------------------------------------------------------
 // Band — user-facing 3-value coarse classification layered on top of the
-// 6-value `ProficiencyLevel` enum. The enum stays the STAMP-aligned internal
-// representation (drives plan selection, capstone tier matching, rubric
-// display). The band is what we show to a student ("where I am"), what we
-// tag each pack with ("which bucket does this sit in"), and what the level
-// dial on Settings / Teacher / Parent lets a user pick.
+// 6-value `ProficiencyLevel` enum. Every band is credit-relevant; we don't
+// surface a post-credit "Skilled" tier because Benchmark 5 caps the FCPS
+// award at 3 credits and anything above is decorative.
 //
-//   foundations  — NOVICE_LOW / NOVICE_MID / NOVICE_HIGH    — L1 packs
-//   intermediate — INTERMEDIATE_LOW / INTERMEDIATE_MID      — L2 packs
-//   skilled      — INTERMEDIATE_HIGH                        — L3 stretch
+//   starter       — NOVICE_LOW / NOVICE_MID                  — STAMP 1–2  — 0 cr
+//                   "Starter" packs (positionOnArc='foundations'): 7 packs.
+//   foundations   — NOVICE_HIGH / INTERMEDIATE_LOW           — STAMP 3–4  — 1–2 cr
+//                   "Building" packs (positionOnArc='building'): 12 packs.
+//   intermediate  — INTERMEDIATE_MID / INTERMEDIATE_HIGH     — STAMP 5+   — 3 cr
+//                   "Pushing-to-IM" packs (positionOnArc='pushing-to-IM'): 7 packs.
+//
+// Note the deliberate name overload: `Band 'foundations'` and the
+// `PositionOnArc 'foundations'` literal exist in different namespaces. The
+// pack-arc tag is a content-author concept (where in the difficulty arc
+// this pack sits); the band is a UI concept (which row it shows under).
+// They were aligned 1:1 before this rewrite and are now offset by one —
+// `positionOnArc:'foundations'` packs surface under the `starter` band.
 // ---------------------------------------------------------------------------
 
-export type Band = 'foundations' | 'intermediate' | 'skilled';
+export type Band = 'starter' | 'foundations' | 'intermediate';
 
-export const BAND_ORDER: Band[] = ['foundations', 'intermediate', 'skilled'];
+export const BAND_ORDER: Band[] = ['starter', 'foundations', 'intermediate'];
 
 export interface BandMeta {
   label: string;
@@ -32,23 +40,23 @@ export interface BandMeta {
 }
 
 export const BAND_META: Record<Band, BandMeta> = {
+  starter: {
+    label: 'Starter',
+    stampRange: 'STAMP 1–2',
+    description:
+      'Words, memorized phrases, and short lists on the most familiar topics. Build the vocabulary base every later sentence rests on.',
+  },
   foundations: {
     label: 'Foundations',
     stampRange: 'STAMP 3–4',
     description:
-      'Words, phrases, simple sentences on familiar topics. Build the vocabulary and structure that intermediate writing rests on.',
+      'Simple sentences and strings of related ideas. The bridge from memorized chunks to connected paragraph writing — earns 1–2 FCPS credits.',
   },
   intermediate: {
     label: 'Intermediate',
     stampRange: 'STAMP 5',
     description:
-      'Connected sentences, past and future time frames, paragraph writing. This is the target band for the FCPS 3-credit award.',
-  },
-  skilled: {
-    label: 'Skilled',
-    stampRange: 'STAMP 6+',
-    description:
-      'Narrative and opinion register, complex discourse, honors-level stretch. Past the 3-credit gate; polishing for higher benchmarks.',
+      'Connected sentences, past and future time frames, paragraph writing. The target band — earns the full 3 FCPS credits.',
   },
 };
 
@@ -57,39 +65,64 @@ export function bandFromProficiency(level: ProficiencyLevel): Band {
   switch (level) {
     case ProficiencyLevel.NOVICE_LOW:
     case ProficiencyLevel.NOVICE_MID:
+      return 'starter';
     case ProficiencyLevel.NOVICE_HIGH:
-      return 'foundations';
     case ProficiencyLevel.INTERMEDIATE_LOW:
-    case ProficiencyLevel.INTERMEDIATE_MID:
-      return 'intermediate';
-    case ProficiencyLevel.INTERMEDIATE_HIGH:
-      return 'skilled';
-    default:
       return 'foundations';
+    case ProficiencyLevel.INTERMEDIATE_MID:
+    case ProficiencyLevel.INTERMEDIATE_HIGH:
+      return 'intermediate';
+    default:
+      return 'starter';
   }
 }
 
-/** Map a pack's `level: 1 | 2 | 3` to its display band. */
-export function bandForPack(level: 1 | 2 | 3): Band {
-  if (level === 1) return 'foundations';
-  if (level === 2) return 'intermediate';
-  return 'skilled';
+/**
+ * Map a pack's content-author tag to its display band. We read
+ * `rationale.positionOnArc` rather than the legacy `level: 1|2|3` because
+ * L1 packs span both Starter and Foundations once the arc tag was
+ * introduced (e.g. L1-08 Interests is `building`, not `foundations`). The
+ * arc tag is the authoritative difficulty signal.
+ */
+export function bandForPack(pack: {
+  rationale: { positionOnArc: 'foundations' | 'building' | 'pushing-to-IM' };
+}): Band {
+  switch (pack.rationale.positionOnArc) {
+    case 'foundations':
+      return 'starter';
+    case 'building':
+      return 'foundations';
+    case 'pushing-to-IM':
+      return 'intermediate';
+    default: {
+      // Exhaustiveness sentinel — if a new PositionOnArc value is added to
+      // content/schema.ts, this fails loudly at runtime instead of silently
+      // returning undefined. The unused `_exhaustive` binding gives TS a
+      // chance to flag the switch as non-exhaustive at compile time too.
+      const _exhaustive: never = pack.rationale.positionOnArc;
+      throw new Error(`Unhandled positionOnArc: ${String(_exhaustive)}`);
+    }
+  }
 }
 
 /**
  * When a user picks a band from the level dial we need a concrete
  * ProficiencyLevel to drive plan selection. These are the "entry point" of
- * each band — the plan is the most relevant to someone just stepping into
- * the band rather than finishing it.
+ * each band — the plan most relevant to someone just stepping into the
+ * band rather than finishing it.
+ *
+ *   starter      → Novice Low      → Foundation Plan (36 wk)
+ *   foundations  → Novice High     → Intermediate Bridge (24 wk)
+ *   intermediate → Intermediate Low → Push Plan (24 wk, climbs to IM)
  */
 export function defaultProficiencyForBand(band: Band): ProficiencyLevel {
   switch (band) {
+    case 'starter':
+      return ProficiencyLevel.NOVICE_LOW;
     case 'foundations':
-      return ProficiencyLevel.NOVICE_MID;
+      return ProficiencyLevel.NOVICE_HIGH;
     case 'intermediate':
       return ProficiencyLevel.INTERMEDIATE_LOW;
-    case 'skilled':
-      return ProficiencyLevel.INTERMEDIATE_MID;
   }
 }
 
@@ -380,15 +413,36 @@ export interface StudentLink {
  * new static-content code paths. Idempotent.
  */
 function isBand(v: unknown): v is Band {
-  return v === 'foundations' || v === 'intermediate' || v === 'skilled';
+  return v === 'starter' || v === 'foundations' || v === 'intermediate';
+}
+
+/**
+ * Resolve a stored band value into the current Band union. Two legacy
+ * cases existed before the credit-relevant rewrite:
+ *   - `'skilled'`     — was post-credit honors tier; folds into 'intermediate'.
+ *   - `'foundations'` — was the bottom band (NL/NM/NH); semantics shifted to
+ *                       NH/IL. We can't reliably know the old vs. new meaning
+ *                       from the literal alone, so we recompute from the
+ *                       authoritative `currentLevel` value rather than
+ *                       trusting the stored band literal.
+ */
+function resolveBand(rawBand: unknown, currentLevel: ProficiencyLevel): Band {
+  if (rawBand === 'skilled') return 'intermediate';
+  if (isBand(rawBand)) {
+    // For 'foundations' specifically, recompute from currentLevel — a
+    // user who picked 'foundations' under the old definition (NL/NM/NH)
+    // could now belong in 'starter'. Trust the precise level over the
+    // stored band.
+    if (rawBand === 'foundations') return bandFromProficiency(currentLevel);
+    return rawBand;
+  }
+  return bandFromProficiency(currentLevel);
 }
 
 function migrateDemoStudent(raw: any): DemoStudent | undefined {
   if (!raw || typeof raw !== 'object') return undefined;
   const currentLevel = raw.currentLevel as ProficiencyLevel;
-  const currentBand: Band = isBand(raw.currentBand)
-    ? raw.currentBand
-    : bandFromProficiency(currentLevel);
+  const currentBand: Band = resolveBand(raw.currentBand, currentLevel);
   return {
     name: typeof raw.name === 'string' ? raw.name : 'Student',
     currentLevel,
@@ -434,9 +488,7 @@ export function migrateProfile(raw: any): StudentProfile {
   const role: ProfileRole =
     raw.role === 'teacher' || raw.role === 'parent' ? raw.role : 'student';
   const currentLevel = raw.currentLevel as ProficiencyLevel;
-  const currentBand: Band = isBand(raw.currentBand)
-    ? raw.currentBand
-    : bandFromProficiency(currentLevel);
+  const currentBand: Band = resolveBand(raw.currentBand, currentLevel);
   const demoStudent = migrateDemoStudent(raw.demoStudent);
   const gender: StudentGender | undefined =
     raw.gender === 'male' || raw.gender === 'female' ? raw.gender : undefined;
